@@ -30,6 +30,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class HangHoa extends JInternalFrame {
 
+	private static final long serialVersionUID = 7158581259856675232L;
+	
 	private JPanel contentPane;
 	private JTextField txtTimKiem;
 	JPanel panel = new JPanel();

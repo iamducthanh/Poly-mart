@@ -23,9 +23,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class LoginJFrame extends JFrame {
-	
+
 	private static final long serialVersionUID = 2723825969344724367L;
-	
+
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
@@ -59,7 +59,7 @@ public class LoginJFrame extends JFrame {
 	Action loginAction = new AbstractAction() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 		}
 	};
 	private JButton btnCancel;
@@ -169,22 +169,22 @@ public class LoginJFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		
+
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setContentAreaFilled(false);
 		btnCancel.setBorder(new LineBorder(Color.WHITE));
 		btnCancel.setBackground(Color.BLACK);
 		btnCancel.setBounds(328, 269, 288, 45);
 		contentPane.add(btnCancel);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\udpm\\Image\\login.jpg"));
 		lblNewLabel.setBounds(-20, -20, 650, 350);
 		lblNewLabel.setBackground(Color.black);
 		contentPane.add(lblNewLabel);
-		
+
 	}
-	
+
 	public void login() throws SQLException {
 
 	}

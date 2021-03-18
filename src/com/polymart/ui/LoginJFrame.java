@@ -22,13 +22,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-
-@SuppressWarnings("serial")
-public class Login extends JFrame {
+public class LoginJFrame extends JFrame {
+	
+	private static final long serialVersionUID = 2723825969344724367L;
+	
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
-	static Login frame = new Login();
+	static LoginJFrame frame = new LoginJFrame();
 	String change = "Change password";
 	JButton btnLogin = new JButton("Đăng nhập");
 	StringBuilder error = new StringBuilder();
@@ -63,7 +64,7 @@ public class Login extends JFrame {
 	};
 	private JButton btnCancel;
 
-	public Login() {
+	public LoginJFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\udpm\\Image\\fpt.png"));
 		setTitle("Ä?Äƒng nháº­p");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

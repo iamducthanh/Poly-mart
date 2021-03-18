@@ -1,17 +1,17 @@
 package com.polymart.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
-import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class ui extends JFrame {
+public class UIJFrame extends JFrame {
 
+	private static final long serialVersionUID = -7040355333605938091L;
+	
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -22,7 +22,7 @@ public class ui extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ui frame = new ui();
+					UIJFrame frame = new UIJFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +34,7 @@ public class ui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ui() {
+	public UIJFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

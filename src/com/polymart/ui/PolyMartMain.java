@@ -30,6 +30,8 @@ import javax.swing.JPanel;
 
 public class PolyMartMain extends JFrame {
 
+	private static final long serialVersionUID = 6825346390245174222L;
+	
 	private JPanel contentPane;
 	JDesktopPane desktopPane = new JDesktopPane();
 	URI uri;
@@ -187,7 +189,7 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
-			HangHoa hangHoa = new HangHoa();
+			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
 			desktopPane.add(hangHoa);
 			hangHoa.initTopDanhMuc();
 			hangHoa.initCenterDanhMuc();

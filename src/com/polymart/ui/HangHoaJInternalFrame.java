@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class HangHoa extends JInternalFrame {
+public class HangHoaJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = 7158581259856675232L;
 	
@@ -46,7 +46,7 @@ public class HangHoa extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HangHoa frame = new HangHoa();
+					HangHoaJInternalFrame frame = new HangHoaJInternalFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,7 +58,7 @@ public class HangHoa extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HangHoa() {
+	public HangHoaJInternalFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Hàng hóa - Danh mục");
 		setBounds(100, 100, 1041, 639);

@@ -21,8 +21,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class NhanVien extends JFrame {
+public class NhanVienJFrame extends JFrame {
 
+	private static final long serialVersionUID = 8877220848205141217L;
+	
 	private JPanel contentPane;
 	private JTextField txtTimKiem;
 	private JTable table;
@@ -37,7 +39,7 @@ public class NhanVien extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhanVien frame = new NhanVien();
+					NhanVienJFrame frame = new NhanVienJFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +52,7 @@ public class NhanVien extends JFrame {
 	 * Create the frame.
 	 */
 	JPanel panel = new JPanel();
-	public NhanVien() {
+	public NhanVienJFrame() {
 		setFocusable(true);
 		setTitle("Nhân viên");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

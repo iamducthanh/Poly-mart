@@ -22,14 +22,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class LoginJFrame extends JFrame {
 
-	private static final long serialVersionUID = 2723825969344724367L;
-
+@SuppressWarnings("serial")
+public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
-	static LoginJFrame frame = new LoginJFrame();
+	static Login frame = new Login();
 	String change = "Change password";
 	JButton btnLogin = new JButton("Đăng nhập");
 	StringBuilder error = new StringBuilder();
@@ -59,13 +58,13 @@ public class LoginJFrame extends JFrame {
 	Action loginAction = new AbstractAction() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
+			
 		}
 	};
 	private JButton btnCancel;
 
-	public LoginJFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\udpm\\Image\\fpt.png"));
+	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\images\\fpt.png"));
 		setTitle("Ä?Äƒng nháº­p");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 682, 384);
@@ -120,7 +119,7 @@ public class LoginJFrame extends JFrame {
 		contentPane.add(btnLogin);
 
 		JLabel lblUser = new JLabel("");
-		lblUser.setIcon(new ImageIcon("C:\\udpm\\Image\\ong.png"));
+		lblUser.setIcon(new ImageIcon("C:\\images\\ong.png"));
 		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);
 
@@ -169,22 +168,22 @@ public class LoginJFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-
+		
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setContentAreaFilled(false);
 		btnCancel.setBorder(new LineBorder(Color.WHITE));
 		btnCancel.setBackground(Color.BLACK);
 		btnCancel.setBounds(328, 269, 288, 45);
 		contentPane.add(btnCancel);
-
+		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\udpm\\Image\\login.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\images\\login.jpg"));
 		lblNewLabel.setBounds(-20, -20, 650, 350);
 		lblNewLabel.setBackground(Color.black);
 		contentPane.add(lblNewLabel);
-
+		
 	}
-
+	
 	public void login() throws SQLException {
 
 	}

@@ -10,6 +10,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,13 +21,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class NhanVienJFrame extends JFrame {
+public class NhanVien extends JFrame {
 
-	private static final long serialVersionUID = 8877220848205141217L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7184061226380381253L;
 	private JPanel contentPane;
 	private JTextField txtTimKiem;
 	private JTable table;
@@ -39,7 +45,7 @@ public class NhanVienJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhanVienJFrame frame = new NhanVienJFrame();
+					NhanVien frame = new NhanVien();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +58,7 @@ public class NhanVienJFrame extends JFrame {
 	 * Create the frame.
 	 */
 	JPanel panel = new JPanel();
-	public NhanVienJFrame() {
+	public NhanVien() {
 		setFocusable(true);
 		setTitle("Nhân viên");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,17 +126,55 @@ public class NhanVienJFrame extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		model.addColumn("☐");
-		model.addColumn("Mã hàng");
-		model.addColumn("Tên hàng");
-		model.addColumn("GIá bán");
-		model.addColumn("Giá vốn");
-		model.addColumn("Tồn kho");
-		model.addColumn("KH đặt hàng");
-		model.addColumn("Dự kiếm hết hàng");
+		model.addColumn("Mã nhân viên");
+		model.addColumn("Tên nhân viên");
+		model.addColumn("Mã chấm công");
+		model.addColumn("Phòng ban");
+		model.addColumn("Chức danh");
+		model.addColumn("Số điện thoại");
+		model.addColumn("Nợ lương nhân viên");
 		table.setModel(model);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		contentPane.add(lblNewLabel, BorderLayout.WEST);
+		JPanel panelLeft = new JPanel();
+		contentPane.add(panelLeft, BorderLayout.WEST);
+		
+		JComboBox cbbPhongBan = new JComboBox();
+		cbbPhongBan.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
+		
+		JLabel lblNewLabel = new JLabel("Phòng ban");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JLabel lblChcDanh = new JLabel("Chức danh");
+		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		JComboBox cbbChucDanh = new JComboBox();
+		cbbChucDanh.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
+		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
+		gl_panelLeft.setHorizontalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+							.addComponent(cbbPhongBan, 0, 159, Short.MAX_VALUE))
+						.addComponent(lblChcDanh, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cbbChucDanh, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		gl_panelLeft.setVerticalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(cbbPhongBan, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblChcDanh, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(cbbChucDanh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(465, Short.MAX_VALUE))
+		);
+		panelLeft.setLayout(gl_panelLeft);
 	}
-
 }

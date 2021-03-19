@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -58,7 +59,7 @@ public class PolyMartMain extends JFrame {
 	 */
 	public PolyMartMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(0, 0, 4500, 3000);
+	//	setBounds(100, 100, 1920, 639);
 		
 //		
 //		contentPane = new JPanel();
@@ -66,15 +67,14 @@ public class PolyMartMain extends JFrame {
 //		setContentPane(contentPane);
 //		contentPane.setLayout(new BorderLayout(0, 0));
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
 		editMenu();
 	}
 	
 	public void editMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-		int width = gd.getDisplayMode().getWidth();
-		menuBar.setPreferredSize(new Dimension(width,40));
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = (int) dimension.getWidth();		
+//		menuBar.setPreferredSize(new Dimension(width,40));
 		//menuBar.setBackground(new Color(0, 191, 255));
 		setJMenuBar(menuBar);
 		
@@ -135,8 +135,8 @@ public class PolyMartMain extends JFrame {
 		mnBaoCao.setIcon(new ImageIcon("C:\\images\\baocao.png"));
 		menuBar.add(mnBaoCao);
 		 
-		int wLine = (int) (width - (width/100*47));
-		this.setFont(new Font("Consolas", Font.PLAIN, 14));
+		int wLine = (int) (width - (width/100*(100-53)));
+		this.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Font f = this.getFont();
 		FontMetrics fm = this.getFontMetrics(f);
 

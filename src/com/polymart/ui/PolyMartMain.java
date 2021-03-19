@@ -25,14 +25,14 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 
 public class PolyMartMain extends JFrame {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 6825346390245174222L;
-	
-	private JPanel contentPane;
 	JDesktopPane desktopPane = new JDesktopPane();
 	URI uri;
 
@@ -79,63 +79,63 @@ public class PolyMartMain extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnTongQuan = new JMenu("Tổng quan");
-		mnTongQuan.setIcon(new ImageIcon("C:\\PolySmart\\tongquan.png"));
+		mnTongQuan.setIcon(new ImageIcon("C:\\images\\tongquan.png"));
 		mnTongQuan.setBackground(new Color(0, 191, 255));
 		menuBar.add(mnTongQuan);
 		
 		JMenu mnHangHoa = new JMenu("Hàng hóa");
-		mnHangHoa.setIcon(new ImageIcon("C:\\PolySmart\\hanghoa.png"));
+		mnHangHoa.setIcon(new ImageIcon("C:\\images\\hanghoa.png"));
 		menuBar.add(mnHangHoa);
 		
 		JMenuItem mntmDanhMuc = new JMenuItem("Danh mục");
-		mntmDanhMuc.setIcon(new ImageIcon("C:\\PolySmart\\danhmuc.png"));
+		mntmDanhMuc.setIcon(new ImageIcon("C:\\images\\danhmuc.png"));
 		mnHangHoa.add(mntmDanhMuc);
 		
 		JMenuItem mntmThietLapGia = new JMenuItem("Thiết lập giá");
-		mntmThietLapGia.setIcon(new ImageIcon("C:\\PolySmart\\setgia.png"));
+		mntmThietLapGia.setIcon(new ImageIcon("C:\\images\\setgia.png"));
 		mnHangHoa.add(mntmThietLapGia);
 		
 		JMenuItem mntmKiemKho = new JMenuItem("Kiểm kho");
-		mntmKiemKho.setIcon(new ImageIcon("C:\\PolySmart\\kiemkho.png"));
+		mntmKiemKho.setIcon(new ImageIcon("C:\\images\\kiemkho.png"));
 		mnHangHoa.add(mntmKiemKho);
 		
 		JMenu mnGiaoDich = new JMenu("Giao dịch");
-		mnGiaoDich.setIcon(new ImageIcon("C:\\PolySmart\\giaodich.png"));
+		mnGiaoDich.setIcon(new ImageIcon("C:\\images\\giaodich.png"));
 		menuBar.add(mnGiaoDich);
 		
 		JMenu mnDoiTac = new JMenu("Đối tác");
-		mnDoiTac.setIcon(new ImageIcon("C:\\PolySmart\\doitac.png"));
+		mnDoiTac.setIcon(new ImageIcon("C:\\images\\doitac.png"));
 		menuBar.add(mnDoiTac);
 		
 		JMenu mnNhanVien = new JMenu("Nhân viên");
-		mnNhanVien.setIcon(new ImageIcon("C:\\PolySmart\\nhanvien.png"));
+		mnNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien.png"));
 		menuBar.add(mnNhanVien);
 		
 		JMenuItem mntmNhanVien = new JMenuItem("Nhân viên");
-		mntmNhanVien.setIcon(new ImageIcon("C:\\PolySmart\\nhanvien.png"));
+		mntmNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien.png"));
 		mnNhanVien.add(mntmNhanVien);
 		
 		JMenuItem mntmChamCong = new JMenuItem("Chấm công");
-		mntmChamCong.setIcon(new ImageIcon("C:\\PolySmart\\chamcong.png"));
+		mntmChamCong.setIcon(new ImageIcon("C:\\images\\chamcong.png"));
 		mnNhanVien.add(mntmChamCong);
 		
 		JMenuItem mntmBangTinhLuong = new JMenuItem("Bảng tính lương");
-		mntmBangTinhLuong.setIcon(new ImageIcon("C:\\PolySmart\\tinhluong.png"));
+		mntmBangTinhLuong.setIcon(new ImageIcon("C:\\images\\tinhluong.png"));
 		mnNhanVien.add(mntmBangTinhLuong);
 		
 		JMenuItem mntmHoaHong = new JMenuItem("Thiết lập hoa hồng");
-		mntmHoaHong.setIcon(new ImageIcon("C:\\PolySmart\\laixuat.png"));
+		mntmHoaHong.setIcon(new ImageIcon("C:\\images\\laixuat.png"));
 		mnNhanVien.add(mntmHoaHong);
 		
 		JMenu mnSoQuy = new JMenu("Sổ quỹ");
-		mnSoQuy.setIcon(new ImageIcon("C:\\PolySmart\\soquy.png"));
+		mnSoQuy.setIcon(new ImageIcon("C:\\images\\soquy.png"));
 		menuBar.add(mnSoQuy);
 		
 		JMenu mnBaoCao = new JMenu("Báo cáo");
-		mnBaoCao.setIcon(new ImageIcon("C:\\PolySmart\\baocao.png"));
+		mnBaoCao.setIcon(new ImageIcon("C:\\images\\baocao.png"));
 		menuBar.add(mnBaoCao);
-		
-		int wLine = width - 700 - 100;
+		 
+		int wLine = (int) (width - (width/100*47));
 		this.setFont(new Font("Consolas", Font.PLAIN, 14));
 		Font f = this.getFont();
 		FontMetrics fm = this.getFontMetrics(f);
@@ -148,12 +148,12 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(lblNewLabel);
 		
 		JMenu mnFacebook = new JMenu("Facebook");
-		mnFacebook.setIcon(new ImageIcon("C:\\PolySmart\\facebook.png"));
+		mnFacebook.setIcon(new ImageIcon("C:\\images\\facebook.png"));
 		mnFacebook.setBackground(new Color(30, 144, 255));
 		menuBar.add(mnFacebook);
 		
 		JMenu mnBanHang = new JMenu("Bán hàng");
-		mnBanHang.setIcon(new ImageIcon("C:\\PolySmart\\banhang.png"));
+		mnBanHang.setIcon(new ImageIcon("C:\\images\\banhang.png"));
 		mnBanHang.setBackground(new Color(30, 144, 255));
 		
 		menuBar.add(mnBanHang);
@@ -189,11 +189,11 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
-			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
-			desktopPane.add(hangHoa);
-			hangHoa.initTopDanhMuc();
-			hangHoa.initCenterDanhMuc();
-			hangHoa.setVisible(true);
+// 			HangHoa hangHoa = new HangHoa();
+// 			desktopPane.add(hangHoa);
+// 			hangHoa.initTopDanhMuc();
+// 			hangHoa.initCenterDanhMuc();
+// 			hangHoa.setVisible(true);
 		}
 	};
 	

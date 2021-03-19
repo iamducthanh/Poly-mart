@@ -16,6 +16,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,7 +26,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class NhanVien extends JFrame {
+public class NhanVienJFrame extends JInternalFrame {
 
 	/**
 	 * 
@@ -45,7 +46,7 @@ public class NhanVien extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhanVien frame = new NhanVien();
+					NhanVienJFrame frame = new NhanVienJFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,9 +59,9 @@ public class NhanVien extends JFrame {
 	 * Create the frame.
 	 */
 	JPanel panel = new JPanel();
-	public NhanVien() {
+	public NhanVienJFrame() {
 		setFocusable(true);
-		setTitle("Nhân viên");
+		setTitle("NhÃ¢n viÃªn");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
 		contentPane = new JPanel();
@@ -71,8 +72,8 @@ public class NhanVien extends JFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		initTopNhanVien();
-		initCenterNhanVien();
+//		initTopNhanVien();
+//		initCenterNhanVien();
 	}
 	
 	public void initTopNhanVien() {

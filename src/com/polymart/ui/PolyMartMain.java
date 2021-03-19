@@ -181,6 +181,7 @@ public class PolyMartMain extends JFrame {
 		
 		
 		mntmDanhMuc.addActionListener(openDanhMuc);
+		mntmNhanVien.addActionListener(openNhanVien);
 	}
 	
 	
@@ -189,11 +190,24 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
-// 			HangHoa hangHoa = new HangHoa();
-// 			desktopPane.add(hangHoa);
-// 			hangHoa.initTopDanhMuc();
-// 			hangHoa.initCenterDanhMuc();
-// 			hangHoa.setVisible(true);
+ 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
+ 			desktopPane.add(hangHoa);
+ 			hangHoa.initTopDanhMuc();
+ 			hangHoa.initCenterDanhMuc();
+ 			hangHoa.setVisible(true);
+		}
+	};
+	
+	ActionListener openNhanVien = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+ 			NhanVienJFrame nhanVien = new NhanVienJFrame();
+ 			desktopPane.add(nhanVien);
+ 			nhanVien.initTopNhanVien();
+ 			nhanVien.initCenterNhanVien();
+ 			nhanVien.setVisible(true);
 		}
 	};
 	

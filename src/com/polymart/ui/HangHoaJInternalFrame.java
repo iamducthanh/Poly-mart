@@ -233,11 +233,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		buttonGroup3.add(radio2);
 		
 		JLabel lblNewLabel_7 = new JLabel("Liên kết kênh bán     ▼");
-		lblNewLabel_7.setFont(new Font("Consolas", Font.PLAIN, 14));
+		lblNewLabel_7.setFont(new Font("Consolas", Font.BOLD, 14));
 		lblNewLabel_7.setVisible(false);
 		JLabel lblNewLabel_7t1 = new JLabel("Liên kết kênh bán     ▲");
 		lblNewLabel_7t1.setFont(new Font("Consolas", Font.BOLD, 14));
-		hangHoaJPanel.add(lblNewLabel_7t1);
+		hangHoaJPanel.add(lblNewLabel_7);
 		hangHoaJPanel.add(lblNewLabel_7t1);
 		
 		JPanel panel_5 = new JPanel();

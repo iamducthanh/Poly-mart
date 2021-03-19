@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -29,19 +30,26 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class HangHoaJInternalFrame extends JFrame {
+public class HangHoaJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = 7158581259856675232L;
 
 	private JPanel contentPane;
 	private JPanel panelOption;
 	private JTextField txtTimKiem;
+	private JTextField txtTimNhomHang;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
 	JPanel hangHoaJPanel = new JPanel();
+	JPanel setGiaPanel = new JPanel();
+	JFrame optionSetGiaFrame = new JFrame();
+
+
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
 	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -66,6 +74,11 @@ public class HangHoaJInternalFrame extends JFrame {
 	JCheckBox chkTonKho = new JCheckBox("Tồn kho");
 	JCheckBox chkThuongHieu = new JCheckBox("Thương hiệu");
 	JCheckBox chkTrangThai = new JCheckBox("Trạng thái");
+	
+	JCheckBox chkSetGiaMaHang = new JCheckBox("Mã hàng");
+	JCheckBox chkSetGiaTenHang = new JCheckBox("Tên hàng");
+	JCheckBox chkSetGiaGiaVon = new JCheckBox("Giá vốn");
+	JCheckBox chkSetGiaGiaNhapCuoi = new JCheckBox("Giá nhập cuối");
 
 	/**
 	 * Launch the application.
@@ -103,11 +116,12 @@ public class HangHoaJInternalFrame extends JFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+	//	setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 //		initTopDanhMuc();
 //		initCenterDanhMuc();
-		initTopThietLapGia();
+	//	initTopThietLapGia();
+	//	initCenterThietLapGia();
 
 	}
 
@@ -152,7 +166,7 @@ public class HangHoaJInternalFrame extends JFrame {
 		panel1.add(btnNewButton_1);
 		
 		optionDanhMucFrame.setSize(344, 264);
-		optionDanhMucFrame.setLocation(width - 344, height - (height/100*86));
+		optionDanhMucFrame.setLocation(width - 360, height - (height/100*86));
 		panelOption = new JPanel();
 		panelOption.setLayout(null);
 		panelOption.setBackground(Color.white) ;
@@ -506,12 +520,109 @@ public class HangHoaJInternalFrame extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 
-		JButton btnImport = new JButton("Xuất file");
-		btnImport.setIcon(new ImageIcon(""));
+		JButton btnImport = new JButton("Xuất file ");
+		btnImport.setIcon(new ImageIcon("C:\\images\\export.png"));
 		panel1.add(btnImport);
 
-		JComboBox optionSetGia = new JComboBox();
-		optionSetGia.addItem("≡");
-		panel1.add(optionSetGia);
+		JComboBox cbbOptionSetGia = new JComboBox();
+		cbbOptionSetGia.addItem("≡");
+		panel1.add(cbbOptionSetGia);
+		
+		optionSetGiaFrame.setSize(150, 140);
+		optionSetGiaFrame.setLocation(width - 160, height - (height/100*86));
+		panelOption = new JPanel();
+		panelOption.setLayout(null);
+		panelOption.setBackground(Color.white) ;
+		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
+		optionSetGiaFrame.add(panelOption);
+		optionSetGiaFrame.setUndecorated(true);
+		uiCommon uiCommon = new uiCommon(panelOption);
+		
+		uiCommon.addCheckBox(chkSetGiaMaHang, 15, 12, 99);
+		uiCommon.addCheckBox(chkSetGiaTenHang, 15, 43, 99);
+		uiCommon.addCheckBox(chkSetGiaGiaVon, 15, 69, 99);
+		uiCommon.addCheckBox(chkSetGiaGiaNhapCuoi, 15, 95, 140);
+
+		
+		cbbOptionSetGia.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				optionSetGiaFrame.setVisible(true);
+			}
+		});
+		
+		cbbOptionSetGia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				optionSetGiaFrame.setVisible(true);
+
+			}
+		});
+		
+		optionSetGiaFrame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				optionSetGiaFrame.setVisible(false);
+
+			}
+		});
+	}
+	
+	public void initCenterThietLapGia() {
+		setGiaPanel.setLayout(new BoxLayout(setGiaPanel, BoxLayout.Y_AXIS));
+		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
+		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+        JLabel lblNewLabel_4 = new JLabel("Bảng giá");
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bảng giá chung"}));
+		
+		JLabel lblNewLabel_4_1 = new JLabel("Nhóm hàng");
+		
+		txtTimNhomHang = new JTextField();
+		txtTimNhomHang.setText("Tìm kiếm nhóm hàng");
+		txtTimNhomHang.setColumns(10);
+		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
+		gl_hangHoaJPanel.setHorizontalGroup(
+			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(comboBox, 0, 150, Short.MAX_VALUE)
+						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTimNhomHang))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_hangHoaJPanel.setVerticalGroup(
+			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel_4)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_4_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+
+					.addContainerGap(112, Short.MAX_VALUE))
+		);
+		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
+		panel.add(panel1, BorderLayout.EAST);
+		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		txtTimNhomHang.setBorder(null);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		model.addColumn("Mã hàng");
+		model.addColumn("Tên hàng");
+		model.addColumn("Giá vốn");
+		model.addColumn("Giá nhập cuối");
+		model.addColumn("Giá chung");
+		table.setModel(model);
 	}
 }

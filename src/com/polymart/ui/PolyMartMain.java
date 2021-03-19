@@ -182,8 +182,21 @@ public class PolyMartMain extends JFrame {
 		
 		mntmDanhMuc.addActionListener(openDanhMuc);
 		mntmNhanVien.addActionListener(openNhanVien);
+		mntmThietLapGia.addActionListener(openThietLapGia);
 	}
-	
+	ActionListener openThietLapGia = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			close();
+ 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
+ 			desktopPane.add(hangHoa);
+ 			hangHoa.initTopThietLapGia();
+ 			hangHoa.initCenterThietLapGia();
+ 			hangHoa.setVisible(true);
+		}
+	};
 	
 	ActionListener openDanhMuc = new ActionListener() {
 

@@ -134,8 +134,20 @@ public class PolyMartMain extends JFrame {
 		JMenu mnBaoCao = new JMenu("Báo cáo");
 		mnBaoCao.setIcon(new ImageIcon("C:\\images\\baocao.png"));
 		menuBar.add(mnBaoCao);
+		
+		JMenu mnCaNhan = new JMenu("Cá nhân");
+		mnCaNhan.setIcon(new ImageIcon("C:\\images\\user.png"));
+		menuBar.add(mnCaNhan);
+		
+		JMenuItem mntmCaNhan = new JMenuItem("Cá nhân");
+		mntmCaNhan.setIcon(new ImageIcon("C:\\images\\user.png"));
+		mnCaNhan.add(mntmCaNhan);
+		
+		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
+		mntmDangXuat.setIcon(new ImageIcon("C:\\images\\logout.png"));
+		mnCaNhan.add(mntmDangXuat);
 		 
-		int wLine = (int) (width - (width/100*(100-53)));
+		int wLine = (int) (width - (width/100*(100-42)));
 		this.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Font f = this.getFont();
 		FontMetrics fm = this.getFontMetrics(f);
@@ -183,6 +195,7 @@ public class PolyMartMain extends JFrame {
 		mntmDanhMuc.addActionListener(openDanhMuc);
 		mntmNhanVien.addActionListener(openNhanVien);
 		mntmThietLapGia.addActionListener(openThietLapGia);
+		mntmKiemKho.addActionListener(openKiemKho);
 	}
 	ActionListener openThietLapGia = new ActionListener() {
 		
@@ -207,6 +220,19 @@ public class PolyMartMain extends JFrame {
  			desktopPane.add(hangHoa);
  			hangHoa.initTopDanhMuc();
  			hangHoa.initCenterDanhMuc();
+ 			hangHoa.setVisible(true);
+		}
+	};
+	
+	ActionListener openKiemKho = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+ 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
+ 			desktopPane.add(hangHoa);
+ 			hangHoa.initTopKiemKho();
+ 			hangHoa.initCenterKiemKho();
  			hangHoa.setVisible(true);
 		}
 	};

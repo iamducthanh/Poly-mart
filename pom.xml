@@ -8,16 +8,28 @@
 
 	<properties>
 		<sqlserver.version>8.4.1.jre14</sqlserver.version>
+		<jasper.version>6.0.53</jasper.version>
+		<jcalendar.version>1.4</jcalendar.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<version>${sqlserver.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>jasper</artifactId>
+			<version>${jasper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.toedter</groupId>
+			<artifactId>jcalendar</artifactId>
+			<version>${jcalendar.version}</version>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>

@@ -87,9 +87,9 @@ public class PolyMartMain extends JFrame {
 		mnHangHoa.setIcon(new ImageIcon("C:\\images\\hanghoa.png"));
 		menuBar.add(mnHangHoa);
 		
-		JMenuItem mntmDanhMuc = new JMenuItem("Danh mục");
-		mntmDanhMuc.setIcon(new ImageIcon("C:\\images\\danhmuc.png"));
-		mnHangHoa.add(mntmDanhMuc);
+		JMenuItem mntmHangHoa = new JMenuItem("Hàng hóa");
+		mntmHangHoa.setIcon(new ImageIcon("C:\\images\\danhmuc.png"));
+		mnHangHoa.add(mntmHangHoa);
 		
 		JMenuItem mntmThietLapGia = new JMenuItem("Thiết lập giá");
 		mntmThietLapGia.setIcon(new ImageIcon("C:\\images\\setgia.png"));
@@ -99,13 +99,28 @@ public class PolyMartMain extends JFrame {
 		mntmKiemKho.setIcon(new ImageIcon("C:\\images\\kiemkho.png"));
 		mnHangHoa.add(mntmKiemKho);
 		
+		JMenuItem mntmNguonHang = new JMenuItem("Nguồn hàng");
+		mnHangHoa.add(mntmNguonHang);
+		
 		JMenu mnGiaoDich = new JMenu("Giao dịch");
 		mnGiaoDich.setIcon(new ImageIcon("C:\\images\\giaodich.png"));
 		menuBar.add(mnGiaoDich);
 		
-		JMenu mnDoiTac = new JMenu("Đối tác");
-		mnDoiTac.setIcon(new ImageIcon("C:\\images\\doitac.png"));
+		JMenuItem mntmHoaDonNhap = new JMenuItem("Hóa đơn nhập");
+		mnGiaoDich.add(mntmHoaDonNhap);
+		
+		JMenuItem mntmHoaDonThanhToan = new JMenuItem("Hóa đơn thanh toán");
+		mnGiaoDich.add(mntmHoaDonThanhToan);
+		
+		JMenuItem mntmHoaDonTraHang = new JMenuItem("Hóa đơn trả hàng");
+		mnGiaoDich.add(mntmHoaDonTraHang);
+		
+		JMenu mnDoiTac = new JMenu("Báo cáo");
+		mnDoiTac.setIcon(new ImageIcon("C:\\images\\baocao.png"));
 		menuBar.add(mnDoiTac);
+		
+		JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
+		mnDoiTac.add(mntmChiTieu);
 		
 		JMenu mnNhanVien = new JMenu("Nhân viên");
 		mnNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien.png"));
@@ -127,13 +142,9 @@ public class PolyMartMain extends JFrame {
 		mntmHoaHong.setIcon(new ImageIcon("C:\\images\\laixuat.png"));
 		mnNhanVien.add(mntmHoaHong);
 		
-		JMenu mnSoQuy = new JMenu("Sổ quỹ");
-		mnSoQuy.setIcon(new ImageIcon("C:\\images\\soquy.png"));
-		menuBar.add(mnSoQuy);
-		
-		JMenu mnBaoCao = new JMenu("Báo cáo");
-		mnBaoCao.setIcon(new ImageIcon("C:\\images\\baocao.png"));
-		menuBar.add(mnBaoCao);
+		JMenu mnKhachHang = new JMenu("Khách hàng");
+		mnKhachHang.setIcon(new ImageIcon("C:\\images\\doitac.png"));
+		menuBar.add(mnKhachHang);
 		
 		JMenu mnCaNhan = new JMenu("Cá nhân");
 		mnCaNhan.setIcon(new ImageIcon("C:\\images\\user.png"));
@@ -192,10 +203,14 @@ public class PolyMartMain extends JFrame {
 		});
 		
 		
-		mntmDanhMuc.addActionListener(openDanhMuc);
+		mntmHangHoa.addActionListener(openDanhMuc);
 		mntmNhanVien.addActionListener(openNhanVien);
 		mntmThietLapGia.addActionListener(openThietLapGia);
 		mntmKiemKho.addActionListener(openKiemKho);
+		mntmNguonHang.addActionListener(openNguonHang);
+		mntmChamCong.addActionListener(openChamCong);
+		mntmChiTieu.addActionListener(openChiTieu);
+		
 	}
 	ActionListener openThietLapGia = new ActionListener() {
 		
@@ -218,8 +233,8 @@ public class PolyMartMain extends JFrame {
 			close();
  			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
  			desktopPane.add(hangHoa);
- 			hangHoa.initTopDanhMuc();
- 			hangHoa.initCenterDanhMuc();
+ 			hangHoa.initTopHangHoa();
+ 			hangHoa.initCenterHangHoa();
  			hangHoa.setVisible(true);
 		}
 	};
@@ -250,7 +265,45 @@ public class PolyMartMain extends JFrame {
 		}
 	};
 	
+	ActionListener openNguonHang = new ActionListener() {
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+ 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
+ 			desktopPane.add(hangHoa);
+ 			hangHoa.initNguonHang();
+ 			hangHoa.setVisible(true);
+		}
+	};
+	
+	ActionListener openChamCong = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			close();
+ 			NhanVienJFrame nhanVien = new NhanVienJFrame();
+ 			desktopPane.add(nhanVien);
+ 			nhanVien.initTopChamCong();
+ 			nhanVien.initCenterChamCong();
+ 			nhanVien.setVisible(true);
+		}
+	};
+	
+	ActionListener openChiTieu = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			close();
+			BaoCaoJFrame baoCao = new BaoCaoJFrame();
+			desktopPane.add(baoCao);
+			baoCao.initTopChiTieu();
+			baoCao.initCenterChiTieu();
+			baoCao.setVisible(true);
+		}
+	};
 	
 	public void close() {
 		try {

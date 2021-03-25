@@ -46,6 +46,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	private JTextField txtTimKiem;
 	private JTextField txtTimNhomHang;
 	private JTextField txtTimKiemKho;
+	
+	//textfiled nguồn hàng
+	private JTextField txtTimNguonHang;
+	private JTextField txtTenNguonHang;
+	private JTextField txtSDTNguonHang;
+	private JTextField txtDiaChiNguonHang;
+	
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
 	JPanel hangHoaJPanel = new JPanel();
@@ -61,6 +68,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	int width = (int) dimension.getWidth();
 	int height = (int) dimension.getHeight();
 	
+	// combobox hàng hóa
 	JCheckBox chkHinhAnh = new JCheckBox("Hình ảnh");
 	JCheckBox chkMaHang = new JCheckBox("Mã hàng");
 	JCheckBox chkMaVach = new JCheckBox("Mã vạch");
@@ -79,11 +87,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JCheckBox chkThuongHieu = new JCheckBox("Thương hiệu");
 	JCheckBox chkTrangThai = new JCheckBox("Trạng thái");
 	
+	//combobox thiết lập giá
 	JCheckBox chkSetGiaMaHang = new JCheckBox("Mã hàng");
 	JCheckBox chkSetGiaTenHang = new JCheckBox("Tên hàng");
 	JCheckBox chkSetGiaGiaVon = new JCheckBox("Giá vốn");
 	JCheckBox chkSetGiaGiaNhapCuoi = new JCheckBox("Giá nhập cuối");
 	
+	//combobox kiểm kho
 	JCheckBox chkPhieuTam = new JCheckBox("Phiếu tạm");
 	JCheckBox chkCanBangKho = new JCheckBox("Đã cân bằng kho");
 	JCheckBox chkDaHuy = new JCheckBox("Đã hủy");
@@ -126,7 +136,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	 */
 	public HangHoaJInternalFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Hàng hóa - Danh mục");
 	//	setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
@@ -143,17 +152,19 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 	//	setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-//		initTopDanhMuc();
-//		initCenterDanhMuc();
+	//	initTopHangHoa();
+	//	initCenterHangHoa();
 	//	initTopThietLapGia();
 	//	initCenterThietLapGia();
 //		initTopKiemKho();
 //		initCenterKiemKho();
+		
+//		initNguonHang();
 
 	}
 
-	public void initTopDanhMuc() {
-
+	public void initTopHangHoa() {
+		setTitle("Hàng hóa - Hàng hóa");
 		JLabel lblNewLabel = new JLabel("Hàng hóa                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
@@ -181,16 +192,18 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		JLabel lblNewLabel_1 = new JLabel("                                     ");
 		panel1.add(lblNewLabel_1);
 
-		JComboBox<Object> comboBox = new JComboBox<Object>();
-		comboBox.setModel(new DefaultComboBoxModel<Object>(
-				new String[] { "Thêm mới", "Thêm hàng hóa", "Thêm dịch vụ", "Thêm combo - đóng gói" }));
-		panel1.add(comboBox);
+//		JComboBox<Object> comboBox = new JComboBox<Object>();
+//		comboBox.setModel(new DefaultComboBoxModel<Object>(
+//				new String[] { "Thêm mới", "Thêm hàng hóa", "Thêm dịch vụ", "Thêm combo - đóng gói" }));
+//		panel1.add(comboBox);
+		JButton btnThemHang = new JButton("+ Thêm mới");
+		panel1.add(btnThemHang);
 
 		JButton btnImport = new JButton("Import");
 		panel1.add(btnImport);
 
-		JButton btnNewButton_1 = new JButton("Export");
-		panel1.add(btnNewButton_1);
+		JButton btnExport = new JButton("Export");
+		panel1.add(btnExport);
 		
 		optionDanhMucFrame.setSize(344, 264);
 		optionDanhMucFrame.setLocation(width - 360, height - (height/100*86));
@@ -246,9 +259,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 			}
 		});
 		
+		btnThemHang.addActionListener(themSanPham);
+		
 	}
 
-	public void initCenterDanhMuc() {
+	public void initCenterHangHoa() {
 		hangHoaJPanel.setLayout(new BoxLayout(hangHoaJPanel, BoxLayout.Y_AXIS));
 		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
 		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
@@ -523,11 +538,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		model.addColumn("☐");
 		model.addColumn("Mã hàng");
 		model.addColumn("Tên hàng");
+		model.addColumn("Loại");
 		model.addColumn("GIá bán");
 		model.addColumn("Giá vốn");
-		model.addColumn("Tồn kho");
-		model.addColumn("KH đặt hàng");
-		model.addColumn("Dự kiếm hết hàng");
+		model.addColumn("Giảm giá");
+		model.addColumn("Size");
+		model.addColumn("Màu sắc");
 		table.setModel(model);
 
 		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -539,10 +555,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		table.getColumnModel().getColumn(5).setPreferredWidth(120);
 		table.getColumnModel().getColumn(6).setPreferredWidth(100);
 		table.getColumnModel().getColumn(7).setPreferredWidth(130);
+		table.getColumnModel().getColumn(8).setPreferredWidth(130);
 
 	}
 
 	public void initTopThietLapGia() {
+		setTitle("Hàng hóa - Thiết lập giá");
+
 		JLabel lblNewLabel = new JLabel("Bảng giá chung                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
@@ -654,6 +673,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	}
 
 	public void initTopKiemKho() {
+		setTitle("Hàng hóa - Kiểm kho");
+
 		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
@@ -816,6 +837,116 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		table.getColumnModel().getColumn(8).setPreferredWidth(130);
 		table.getColumnModel().getColumn(9).setPreferredWidth(130);
 	}
+	
+	public void initNguonHang() {
+		setTitle("Hàng hóa - Nguồn hàng");
+		JPanel panelNguonHang = new JPanel();
+		panelNguonHang.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelNguonHang.setBounds(100, 100, 751, 629);
+		setContentPane(panelNguonHang);
+		panelNguonHang.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Nguồn hàng");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel.setBounds(10, 34, 159, 26);
+		panelNguonHang.add(lblNewLabel);
+		
+		txtTimNguonHang = new JTextField();
+		txtTimNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtTimNguonHang.setText(" Tìm theo tên, số điện thoại");
+		txtTimNguonHang.setBounds(163, 34, 438, 30);
+		panelNguonHang.add(txtTimNguonHang);
+		txtTimNguonHang.setColumns(10);
+		
+		JButton btnTimNguonHang = new JButton("Tìm");
+		btnTimNguonHang.setBounds(611, 39, 89, 25);
+		panelNguonHang.add(btnTimNguonHang);
+		
+		JLabel lblNewLabel_1 = new JLabel("Tên nguồn hàng");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_1.setBounds(23, 107, 130, 30);
+		panelNguonHang.add(lblNewLabel_1);
+		
+		txtTenNguonHang = new JTextField();
+		txtTenNguonHang.setBounds(163, 109, 350, 30);
+		panelNguonHang.add(txtTenNguonHang);
+		txtTenNguonHang.setColumns(10);
+		
+		txtSDTNguonHang = new JTextField();
+		txtSDTNguonHang.setText(" ");
+		txtSDTNguonHang.setColumns(10);
+		txtSDTNguonHang.setBounds(163, 150, 350, 30);
+		panelNguonHang.add(txtSDTNguonHang);
+		
+		txtDiaChiNguonHang = new JTextField();
+		txtDiaChiNguonHang.setText(" ");
+		txtDiaChiNguonHang.setColumns(10);
+		txtDiaChiNguonHang.setBounds(163, 191, 350, 30);
+		panelNguonHang.add(txtDiaChiNguonHang);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại");
+		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_1_1.setBounds(23, 148, 130, 30);
+		panelNguonHang.add(lblNewLabel_1_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("Địa chỉ");
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_1_2.setBounds(23, 191, 130, 30);
+		panelNguonHang.add(lblNewLabel_1_2);
+		
+		JButton btnThemNguonHang = new JButton("Thêm");
+		btnThemNguonHang.setBounds(611, 113, 89, 25);
+		panelNguonHang.add(btnThemNguonHang);
+		
+		JButton btnCapNhatNguonHang = new JButton("Cập nhật");
+		btnCapNhatNguonHang.setBounds(611, 154, 89, 25);
+		panelNguonHang.add(btnCapNhatNguonHang);
+		
+		JButton btnXoaNguonHang = new JButton("Xóa");
+		btnXoaNguonHang.setBounds(611, 195, 89, 25);
+		panelNguonHang.add(btnXoaNguonHang);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 249, 717, 343);
+		panelNguonHang.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"T\u00EAn ngu\u1ED3n h\u00E0ng", "Địa chỉ", "Số điện thoại"
+			}
+		));
+		scrollPane.setViewportView(table);
+		
+		
+		txtTimNguonHang.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTimNguonHang.getText().equals(" Tìm theo tên, số điện thoại")) {
+					txtTimNguonHang.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTimNguonHang.getText().equals("")) {
+					txtTimNguonHang.setText(" Tìm theo tên, số điện thoại");
+				}
+			}
+		});
+	}
+	
+	ActionListener themSanPham = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			ThemHangHoaFrame themHangHoaFrame = new ThemHangHoaFrame();
+			themHangHoaFrame.setVisible(true);
+		}
+	};
 
 
 }

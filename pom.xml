@@ -8,16 +8,28 @@
 
 	<properties>
 		<sqlserver.version>8.4.1.jre14</sqlserver.version>
+		<jasperreports.version>6.16.0</jasperreports.version>
+		<jcalendar.version>1.4</jcalendar.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<version>${sqlserver.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.toedter</groupId>
+			<artifactId>jcalendar</artifactId>
+			<version>${jcalendar.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${jasperreports.version}</version>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>

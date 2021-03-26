@@ -28,7 +28,7 @@ import com.toedter.calendar.JCalendar;
 public class BaoCaoJFrame extends JInternalFrame {
 
 	//test xung dot
-	public JPanel aaaa123;
+	public JPanel aaaa1123;
 	// thêm dòng
 	
 	private JPanel contentPane;

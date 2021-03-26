@@ -29,6 +29,9 @@ import com.toedter.calendar.JCalendar;
 
 public class BaoCaoJFrame extends JInternalFrame {
 
+	//test xung dot
+	public JPanel aaaa;
+	
 	private JPanel contentPane;
 	DefaultTableModel model = new DefaultTableModel();
 	JPanel nhanVienJPanel = new JPanel();

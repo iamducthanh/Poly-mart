@@ -7,9 +7,9 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -136,11 +136,6 @@ public class ChiTietNhanVien extends JFrame {
 		lblGiVn_5.setBounds(546, 204, 112, 25);
 		panel.add(lblGiVn_5);
 		
-		JLabel lblGiVn_6 = new JLabel("Chi nhánh");
-		lblGiVn_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGiVn_6.setBounds(34, 419, 112, 25);
-		panel.add(lblGiVn_6);
-		
 		JLabel lblGiVn_7 = new JLabel("Mật khẩu");
 		lblGiVn_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblGiVn_7.setBounds(34, 230, 112, 25);
@@ -238,13 +233,13 @@ public class ChiTietNhanVien extends JFrame {
 		rdoNu.setBounds(225, 139, 111, 25);
 		panel.add(rdoNu);
 		
-		JComboBox<Object> cbbChiNhanh = new JComboBox<Object>();
-		cbbChiNhanh.setBounds(142, 421, 374, 25);
-		panel.add(cbbChiNhanh);
-		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("C:\\images\\login.jpg"));
 		lblNewLabel.setBounds(350, 45, 166, 210);
 		panel.add(lblNewLabel);
+		
+		ButtonGroup buttonGroup = new ButtonGroup();
+		buttonGroup.add(rdoNam);
+		buttonGroup.add(rdoNu);
 	}
 }

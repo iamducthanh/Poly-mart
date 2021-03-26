@@ -2,11 +2,9 @@ package com.polymart.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -16,9 +14,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -30,12 +25,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import com.toedter.calendar.JDateChooser;
 
 public class HangHoaJInternalFrame extends JInternalFrame {
 
@@ -44,14 +35,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	private JPanel contentPane;
 	private JPanel panelOption;
 	private JTextField txtTimKiem;
-	private JTextField txtTimNhomHang;
-	private JTextField txtTimKiemKho;
-	
-	//textfiled nguồn hàng
-	private JTextField txtTimNguonHang;
-	private JTextField txtTenNguonHang;
-	private JTextField txtSDTNguonHang;
-	private JTextField txtDiaChiNguonHang;
 	
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -64,9 +47,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
-	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	int width = (int) dimension.getWidth();
-	int height = (int) dimension.getHeight();
 	
 	// combobox hàng hóa
 	JCheckBox chkHinhAnh = new JCheckBox("Hình ảnh");
@@ -87,32 +67,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JCheckBox chkThuongHieu = new JCheckBox("Thương hiệu");
 	JCheckBox chkTrangThai = new JCheckBox("Trạng thái");
 	
-	//combobox thiết lập giá
-	JCheckBox chkSetGiaMaHang = new JCheckBox("Mã hàng");
-	JCheckBox chkSetGiaTenHang = new JCheckBox("Tên hàng");
-	JCheckBox chkSetGiaGiaVon = new JCheckBox("Giá vốn");
-	JCheckBox chkSetGiaGiaNhapCuoi = new JCheckBox("Giá nhập cuối");
 	
-	//combobox kiểm kho
-	JCheckBox chkPhieuTam = new JCheckBox("Phiếu tạm");
-	JCheckBox chkCanBangKho = new JCheckBox("Đã cân bằng kho");
-	JCheckBox chkDaHuy = new JCheckBox("Đã hủy");
-	
-	JCheckBox chkMaKiemKho = new JCheckBox("Mã kiểm kho");
-	JCheckBox chkThoiGian = new JCheckBox("Thời gian");
-	JCheckBox chkNguoiTao = new JCheckBox("Người tạo");
-	JCheckBox chkNguoiCanBang = new JCheckBox("Nguời cân bằng");
-	JCheckBox chkNgayCanBang = new JCheckBox("Ngày cân bằng");
-	JCheckBox chkSLThucTe = new JCheckBox("Số lượng thực tế");
-	JCheckBox chkTongThucTe = new JCheckBox("Tổng thực tế");
-	JCheckBox chkTongChenhLech = new JCheckBox("Tổng chênh lệch");
-	JCheckBox chkTongGiaTriLech = new JCheckBox("Tổng giá trị lệch");
-	JCheckBox chkSLLechTang = new JCheckBox("Số lượng lệch tăng");
-	JCheckBox chkTongGiaTriTang = new JCheckBox("Tổng giá trị tăng");
-	JCheckBox chkSLLechGiam = new JCheckBox("Số lượng lệch giảm");
-	JCheckBox chkTongGiaTriGiam = new JCheckBox("Tổng giá trị giảm");
-	JCheckBox chkGhiChu = new JCheckBox("Ghi chú");
-	JCheckBox chkTrangThaiKK = new JCheckBox("Trạng thái");
 
 	/**
 	 * 
@@ -206,7 +161,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		panel1.add(btnExport);
 		
 		optionDanhMucFrame.setSize(344, 264);
-		optionDanhMucFrame.setLocation(width - 360, height - (height/100*86));
+		optionDanhMucFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height/100*86));
 		panelOption = new JPanel();
 		panelOption.setLayout(null);
 		panelOption.setBackground(Color.white) ;
@@ -559,384 +514,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 	}
 
-	public void initTopThietLapGia() {
-		setTitle("Hàng hóa - Thiết lập giá");
-
-		JLabel lblNewLabel = new JLabel("Bảng giá chung                       ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblNewLabel, BorderLayout.WEST);
-
-		JButton btnImport = new JButton("Xuất file ");
-		btnImport.setIcon(new ImageIcon("C:\\images\\export.png"));
-		panel1.add(btnImport);
-
-		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();
-		cbbOptionSetGia.addItem("≡");
-		panel1.add(cbbOptionSetGia);
-		
-		optionSetGiaFrame.setSize(150, 140);
-		optionSetGiaFrame.setLocation(width - 160, height - (height/100*86));
-		panelOption = new JPanel();
-		panelOption.setLayout(null);
-		panelOption.setBackground(Color.white) ;
-		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
-		optionSetGiaFrame.add(panelOption);
-		optionSetGiaFrame.setUndecorated(true);
-		uiCommon uiCommon = new uiCommon(panelOption);
-		
-		uiCommon.addCheckBox(chkSetGiaMaHang, 15, 12, 99);
-		uiCommon.addCheckBox(chkSetGiaTenHang, 15, 43, 99);
-		uiCommon.addCheckBox(chkSetGiaGiaVon, 15, 69, 99);
-		uiCommon.addCheckBox(chkSetGiaGiaNhapCuoi, 15, 95, 140);
-
-		
-		cbbOptionSetGia.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				optionSetGiaFrame.setVisible(true);
-			}
-		});
-		
-		cbbOptionSetGia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				optionSetGiaFrame.setVisible(true);
-
-			}
-		});
-		
-		optionSetGiaFrame.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				optionSetGiaFrame.setVisible(false);
-
-			}
-		});
-	}
-	
-	public void initCenterThietLapGia() {
-		setGiaPanel.setLayout(new BoxLayout(setGiaPanel, BoxLayout.Y_AXIS));
-		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
-		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-        JLabel lblNewLabel_4 = new JLabel("Bảng giá");
-		
-		JComboBox<Object> comboBox = new JComboBox<Object>();
-		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bảng giá chung"}));
-		
-		JLabel lblNewLabel_4_1 = new JLabel("Nhóm hàng");
-		
-		txtTimNhomHang = new JTextField();
-		txtTimNhomHang.setText("Tìm kiếm nhóm hàng");
-		txtTimNhomHang.setColumns(10);
-		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-		gl_hangHoaJPanel.setHorizontalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(comboBox, 0, 150, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtTimNhomHang))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_hangHoaJPanel.setVerticalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_4)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel_4_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-
-					.addContainerGap(112, Short.MAX_VALUE))
-		);
-		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
-		panel.add(panel1, BorderLayout.EAST);
-		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		txtTimNhomHang.setBorder(null);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã hàng");
-		model.addColumn("Tên hàng");
-		model.addColumn("Giá vốn");
-		model.addColumn("Giá nhập cuối");
-		model.addColumn("Giá chung");
-		table.setModel(model);
-	}
-
-	public void initTopKiemKho() {
-		setTitle("Hàng hóa - Kiểm kho");
-
-		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho                       ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblNewLabel, BorderLayout.WEST);
-		
-		txtTimKiemKho = new JTextField();
-		txtTimKiemKho.setText(" TÌm theo mã phiếu kiểm");
-		panel.add(txtTimKiemKho, BorderLayout.CENTER);
-		txtTimKiemKho.setColumns(10);
-		txtTimKiemKho.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimKiemKho.getText().equals(" TÌm theo mã phiếu kiểm")) {
-					txtTimKiemKho.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimKiemKho.getText().equals("")) {
-					txtTimKiemKho.setText(" TÌm theo mã phiếu kiểm");
-				}
-			}
-		});
-		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
-		panel1.add(lblNewLabel_1);
-		
-		JButton btnKiemKho = new JButton("+ Kiểm kho ");
-		panel1.add(btnKiemKho);
-		JButton btnImport = new JButton("→ Xuất file ");
-		panel1.add(btnImport);
-
-		optionKiemKhoFrame.setSize(344, 234);
-		optionKiemKhoFrame.setLocation(width - 360, height - (height/100*86));
-		panelOption = new JPanel();
-		panelOption.setLayout(null);
-		panelOption.setBackground(Color.white) ;
-		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
-		uiCommon uiCommon = new uiCommon(panelOption);
-		
-		uiCommon.addCheckBox(chkMaKiemKho, 10, 7, 150);
-		uiCommon.addCheckBox(chkThoiGian, 10, 33, 150);
-		uiCommon.addCheckBox(chkNguoiTao, 10, 59, 150);
-		uiCommon.addCheckBox(chkNguoiCanBang, 10, 85, 150);
-		uiCommon.addCheckBox(chkNgayCanBang, 10, 111, 150);
-		
-		uiCommon.addCheckBox(chkSLThucTe, 10, 137, 150);
-		uiCommon.addCheckBox(chkTongThucTe, 10, 163, 150);
-		uiCommon.addCheckBox(chkTongChenhLech, 10, 189, 150);
-		
-		uiCommon.addCheckBox(chkTongGiaTriLech, 160, 7, 178);
-		uiCommon.addCheckBox(chkSLLechTang, 160, 163, 178);
-		uiCommon.addCheckBox(chkTongGiaTriTang, 160, 137, 178);
-		uiCommon.addCheckBox(chkSLLechGiam, 160, 111, 178);
-		uiCommon.addCheckBox(chkTongGiaTriGiam, 160, 85, 178);
-		uiCommon.addCheckBox(chkGhiChu, 160, 59, 99);
-		uiCommon.addCheckBox(chkTrangThaiKK, 160, 33, 99);
-
-		
-		optionKiemKhoFrame.add(panelOption);
-		optionKiemKhoFrame.setUndecorated(true);
-
-		JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
-		cbbOptionKiemKho.addItem("≡");
-		panel1.add(cbbOptionKiemKho);
-		cbbOptionKiemKho.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				optionKiemKhoFrame.setVisible(true);
-			}
-		});
-		
-		cbbOptionKiemKho.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				optionKiemKhoFrame.setVisible(true);
-
-			}
-		});
-		
-		optionKiemKhoFrame.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				optionKiemKhoFrame.setVisible(false);
-
-			}
-		});
-		
-	}
-
-	public void initCenterKiemKho() {
-		JScrollPane scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		JLabel lblNewLabel_9 = new JLabel("Thời gian");
-		
-		JDateChooser dateChooser = new JDateChooser();
-		
-		JLabel lblNewLabel_10 = new JLabel("Trạng thái                                   ▼");		
-		JPanel left = new JPanel();
-		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-		gl_hangHoaJPanel.setHorizontalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_hangHoaJPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(left, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-						.addComponent(dateChooser, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_9, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_10, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 177, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_hangHoaJPanel.setVerticalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNewLabel_9)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblNewLabel_10)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(left, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(39, Short.MAX_VALUE))
-		);
-		left.setLayout(null);
-		
-		chkPhieuTam.setBounds(6, 7, 99, 23);
-		left.add(chkPhieuTam);
-		
-		chkCanBangKho.setBounds(6, 33, 139, 23);
-		left.add(chkCanBangKho);
-		
-		chkDaHuy.setBounds(6, 59, 99, 23);
-		left.add(chkDaHuy);
-		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
-		panel.add(panel1, BorderLayout.EAST);
-		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("☐");
-		model.addColumn("Mã kiểm kho");
-		model.addColumn("Thời gian");
-		model.addColumn("Ngày cân bằng");
-		model.addColumn("SL thực tế");
-		model.addColumn("Tổng thực tế");
-		model.addColumn("Tổng chênh lệch");
-		model.addColumn("Số lượng lệch tăng");
-		model.addColumn("Số lượng lệch giảm");
-		model.addColumn("Ghi chú");
-		table.setModel(model);
-
-		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-		table.getColumnModel().getColumn(1).setPreferredWidth(120);
-		table.getColumnModel().getColumn(2).setPreferredWidth(150);
-		table.getColumnModel().getColumn(3).setPreferredWidth(120);
-		table.getColumnModel().getColumn(4).setPreferredWidth(120);
-		table.getColumnModel().getColumn(5).setPreferredWidth(120);
-		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-		table.getColumnModel().getColumn(7).setPreferredWidth(130);
-		table.getColumnModel().getColumn(8).setPreferredWidth(130);
-		table.getColumnModel().getColumn(9).setPreferredWidth(130);
-	}
-	
-	public void initNguonHang() {
-		setTitle("Hàng hóa - Nguồn hàng");
-		JPanel panelNguonHang = new JPanel();
-		panelNguonHang.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelNguonHang.setBounds(100, 100, 751, 629);
-		setContentPane(panelNguonHang);
-		panelNguonHang.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Nguồn hàng");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(10, 34, 159, 26);
-		panelNguonHang.add(lblNewLabel);
-		
-		txtTimNguonHang = new JTextField();
-		txtTimNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtTimNguonHang.setText(" Tìm theo tên, số điện thoại");
-		txtTimNguonHang.setBounds(163, 34, 438, 30);
-		panelNguonHang.add(txtTimNguonHang);
-		txtTimNguonHang.setColumns(10);
-		
-		JButton btnTimNguonHang = new JButton("Tìm");
-		btnTimNguonHang.setBounds(611, 39, 89, 25);
-		panelNguonHang.add(btnTimNguonHang);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tên nguồn hàng");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(23, 107, 130, 30);
-		panelNguonHang.add(lblNewLabel_1);
-		
-		txtTenNguonHang = new JTextField();
-		txtTenNguonHang.setBounds(163, 109, 350, 30);
-		panelNguonHang.add(txtTenNguonHang);
-		txtTenNguonHang.setColumns(10);
-		
-		txtSDTNguonHang = new JTextField();
-		txtSDTNguonHang.setText(" ");
-		txtSDTNguonHang.setColumns(10);
-		txtSDTNguonHang.setBounds(163, 150, 350, 30);
-		panelNguonHang.add(txtSDTNguonHang);
-		
-		txtDiaChiNguonHang = new JTextField();
-		txtDiaChiNguonHang.setText(" ");
-		txtDiaChiNguonHang.setColumns(10);
-		txtDiaChiNguonHang.setBounds(163, 191, 350, 30);
-		panelNguonHang.add(txtDiaChiNguonHang);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(23, 148, 130, 30);
-		panelNguonHang.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_1_2 = new JLabel("Địa chỉ");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_2.setBounds(23, 191, 130, 30);
-		panelNguonHang.add(lblNewLabel_1_2);
-		
-		JButton btnThemNguonHang = new JButton("Thêm");
-		btnThemNguonHang.setBounds(611, 113, 89, 25);
-		panelNguonHang.add(btnThemNguonHang);
-		
-		JButton btnCapNhatNguonHang = new JButton("Cập nhật");
-		btnCapNhatNguonHang.setBounds(611, 154, 89, 25);
-		panelNguonHang.add(btnCapNhatNguonHang);
-		
-		JButton btnXoaNguonHang = new JButton("Xóa");
-		btnXoaNguonHang.setBounds(611, 195, 89, 25);
-		panelNguonHang.add(btnXoaNguonHang);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 249, 717, 343);
-		panelNguonHang.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"T\u00EAn ngu\u1ED3n h\u00E0ng", "Địa chỉ", "Số điện thoại"
-			}
-		));
-		scrollPane.setViewportView(table);
-		
-		
-		txtTimNguonHang.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimNguonHang.getText().equals(" Tìm theo tên, số điện thoại")) {
-					txtTimNguonHang.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimNguonHang.getText().equals("")) {
-					txtTimNguonHang.setText(" Tìm theo tên, số điện thoại");
-				}
-			}
-		});
-	}
 	
 	ActionListener themSanPham = new ActionListener() {
 		

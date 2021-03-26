@@ -96,6 +96,7 @@ public class PolyMartMain extends JFrame {
 		mnHangHoa.add(mntmKiemKho);
 		
 		JMenuItem mntmNguonHang = new JMenuItem("Nguồn hàng");
+		mntmNguonHang.setIcon(new ImageIcon("C:\\images\\nguonhang.png"));
 		mnHangHoa.add(mntmNguonHang);
 		
 		JMenu mnGiaoDich = new JMenu("Giao dịch");
@@ -103,12 +104,15 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(mnGiaoDich);
 		
 		JMenuItem mntmHoaDonNhap = new JMenuItem("Hóa đơn nhập");
+		mntmHoaDonNhap.setIcon(new ImageIcon("C:\\images\\hdnhap.png"));
 		mnGiaoDich.add(mntmHoaDonNhap);
 		
 		JMenuItem mntmHoaDonThanhToan = new JMenuItem("Hóa đơn thanh toán");
+		mntmHoaDonThanhToan.setIcon(new ImageIcon("C:\\images\\hdxuat.png"));
 		mnGiaoDich.add(mntmHoaDonThanhToan);
 		
 		JMenuItem mntmHoaDonTraHang = new JMenuItem("Hóa đơn trả hàng");
+		mntmHoaDonTraHang.setIcon(new ImageIcon("C:\\images\\hdtrahang.png"));
 		mnGiaoDich.add(mntmHoaDonTraHang);
 		
 		JMenu mnDoiTac = new JMenu("Báo cáo");
@@ -116,10 +120,11 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(mnDoiTac);
 		
 		JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
+		mntmChiTieu.setIcon(new ImageIcon("C:\\images\\chitieu.png"));
 		mnDoiTac.add(mntmChiTieu);
 		
 		JMenu mnNhanVien = new JMenu("Nhân viên");
-		mnNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien.png"));
+		mnNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien1.png"));
 		menuBar.add(mnNhanVien);
 		
 		JMenuItem mntmNhanVien = new JMenuItem("Nhân viên");
@@ -206,6 +211,7 @@ public class PolyMartMain extends JFrame {
 		mntmNguonHang.addActionListener(openNguonHang);
 		mntmChamCong.addActionListener(openChamCong);
 		mntmChiTieu.addActionListener(openChiTieu);
+		mntmHoaDonNhap.addActionListener(openNhapHang);
 		
 	}
 	ActionListener openThietLapGia = new ActionListener() {
@@ -214,11 +220,11 @@ public class PolyMartMain extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			close();
- 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
- 			desktopPane.add(hangHoa);
- 			hangHoa.initTopThietLapGia();
- 			hangHoa.initCenterThietLapGia();
- 			hangHoa.setVisible(true);
+ 			ThietLapGiaJInternalFrame thietLapGia = new ThietLapGiaJInternalFrame();
+ 			desktopPane.add(thietLapGia);
+ 			thietLapGia.initTopThietLapGia();
+ 			thietLapGia.initCenterThietLapGia();
+ 			thietLapGia.setVisible(true);
 		}
 	};
 	
@@ -240,11 +246,11 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
- 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
- 			desktopPane.add(hangHoa);
- 			hangHoa.initTopKiemKho();
- 			hangHoa.initCenterKiemKho();
- 			hangHoa.setVisible(true);
+ 			KiemKhoJInternalFrame kiemKho = new KiemKhoJInternalFrame();
+ 			desktopPane.add(kiemKho);
+ 			kiemKho.initTopKiemKho();
+ 			kiemKho.initCenterKiemKho();
+ 			kiemKho.setVisible(true);
 		}
 	};
 	
@@ -253,7 +259,7 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
- 			NhanVienJFrame nhanVien = new NhanVienJFrame();
+ 			NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
  			desktopPane.add(nhanVien);
  			nhanVien.initTopNhanVien();
  			nhanVien.initCenterNhanVien();
@@ -266,10 +272,10 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
- 			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
- 			desktopPane.add(hangHoa);
- 			hangHoa.initNguonHang();
- 			hangHoa.setVisible(true);
+ 			NguonHangJInternalFrame nguonHang = new NguonHangJInternalFrame();
+ 			desktopPane.add(nguonHang);
+ 			nguonHang.initNguonHang();
+ 			nguonHang.setVisible(true);
 		}
 	};
 	
@@ -279,11 +285,11 @@ public class PolyMartMain extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			close();
- 			NhanVienJFrame nhanVien = new NhanVienJFrame();
- 			desktopPane.add(nhanVien);
- 			nhanVien.initTopChamCong();
- 			nhanVien.initCenterChamCong();
- 			nhanVien.setVisible(true);
+ 			ChamCongJInternalFrame chamCong = new ChamCongJInternalFrame();
+ 			desktopPane.add(chamCong);
+ 			chamCong.initTopChamCong();
+ 			chamCong.initCenterChamCong();
+ 			chamCong.setVisible(true);
 		}
 	};
 	
@@ -298,6 +304,19 @@ public class PolyMartMain extends JFrame {
 			baoCao.initTopChiTieu();
 			baoCao.initCenterChiTieu();
 			baoCao.setVisible(true);
+		}
+	};
+	
+	ActionListener openNhapHang = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+ 			NhapHangJInternalFrame nhapHang = new NhapHangJInternalFrame();
+ 			desktopPane.add(nhapHang);
+ 			nhapHang.initTopNhapHang();
+ 			nhapHang.initCenterNhapHang();
+ 			nhapHang.setVisible(true);
 		}
 	};
 	

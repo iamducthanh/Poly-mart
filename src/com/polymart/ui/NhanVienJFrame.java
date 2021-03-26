@@ -31,6 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import com.toedter.calendar.JCalendar;
 
 public class NhanVienJFrame extends JInternalFrame {
 
@@ -50,7 +51,7 @@ public class NhanVienJFrame extends JInternalFrame {
 	JFrame optionNhanVienFrame = new JFrame();
 	
 	JCheckBox chkMaNV = new JCheckBox("Mã nhân viên");
-	JCheckBox chkTenNV = new JCheckBox("Mã hàng");
+	JCheckBox chkTenNV = new JCheckBox("Tên nhân viên");
 	JCheckBox chkMaChamCong = new JCheckBox("Mã chấm công");
 	JCheckBox chkNgaySinh = new JCheckBox("Ngày sinh");
 	JCheckBox chkGioiTinh = new JCheckBox("Giới tính");
@@ -89,7 +90,6 @@ public class NhanVienJFrame extends JInternalFrame {
 	JPanel panel = new JPanel();
 	public NhanVienJFrame() {
 		setFocusable(true);
-		setTitle("Nhân viên");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
 		contentPane = new JPanel();
@@ -103,11 +103,15 @@ public class NhanVienJFrame extends JInternalFrame {
 	//	setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		
-//		initTopNhanVien();
-//		initCenterNhanVien();
+	//	initTopNhanVien();
+	//	initCenterNhanVien();
+	//	initTopChamCong();
+//		initCenterChamCong();
 	}
 	
 	public void initTopNhanVien() {
+		setTitle("Nhân viên - Nhân viên");
+
 		JLabel lblNhanVien = new JLabel("Nhân viên                       ");
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNhanVien, BorderLayout.WEST);
@@ -136,11 +140,13 @@ public class NhanVienJFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel_1 = new JLabel("                                     ");
+		JLabel lblNewLabel_1 = new JLabel(String.format("%50s", " "));
 		panel1.add(lblNewLabel_1);
 		
-		JButton btnNewButton_1 = new JButton("+ Nhân viên");
-		panel1.add(btnNewButton_1);
+		JButton btnThemNV = new JButton("+ Thêm nhân viên");
+		panel1.add(btnThemNV);
+		JButton btnXoaNV = new JButton("- Xóa nhân viên");
+		panel1.add(btnXoaNV);
 		
 		JComboBox<String> comboBox1 = new JComboBox<String>();
 		comboBox1.addItem("≡");
@@ -152,7 +158,7 @@ public class NhanVienJFrame extends JInternalFrame {
 		panelOption.setLayout(null);
 		panelOption.setBackground(Color.white) ;
 		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
-		optionNhanVienFrame.add(panelOption);
+		optionNhanVienFrame.getContentPane().add(panelOption);
 		optionNhanVienFrame.setUndecorated(true);
 		uiCommon uiCommon = new uiCommon(panelOption);
 		
@@ -202,7 +208,7 @@ public class NhanVienJFrame extends JInternalFrame {
 	
 	public void initCenterNhanVien() {
 		nhanVienJPanel.setLayout(new BoxLayout(nhanVienJPanel, BoxLayout.Y_AXIS));
-		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
+		JLabel lblNewLabel_2 = new JLabel("Nhân viên             ▼");
 		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -213,10 +219,17 @@ public class NhanVienJFrame extends JInternalFrame {
 		model.addColumn("Mã nhân viên");
 		model.addColumn("Tên nhân viên");
 		model.addColumn("Mã chấm công");
-		model.addColumn("Phòng ban");
-		model.addColumn("Chức danh");
+		model.addColumn("Năm sinh");
+		model.addColumn("Quê quán");
 		model.addColumn("Số điện thoại");
-		model.addColumn("Nợ lương nhân viên");
+		model.addColumn("Chức vụ");
+		model.addColumn("Chi nhánh");
+		model.addColumn("Mật khẩu");
+		model.addColumn("Email");
+		model.addColumn("Giới tính");
+		model.addColumn("Mức lương");
+		
+		
 		table.setModel(model);
 		
 		JPanel panelLeft = new JPanel();
@@ -225,10 +238,12 @@ public class NhanVienJFrame extends JInternalFrame {
 		JComboBox cbbPhongBan = new JComboBox();
 		cbbPhongBan.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
 		
-		JLabel lblNewLabel = new JLabel("Phòng ban");
+		JLabel lblNewLabel = new JLabel("Chi nhánh");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+
 		
-		JLabel lblChcDanh = new JLabel("Chức danh");
+		JLabel lblChcDanh = new JLabel("Chức vụ");
 		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JComboBox cbbChucDanh = new JComboBox();
@@ -260,5 +275,96 @@ public class NhanVienJFrame extends JInternalFrame {
 					.addContainerGap(465, Short.MAX_VALUE))
 		);
 		panelLeft.setLayout(gl_panelLeft);
+	}
+
+	public void initTopChamCong() {
+		setTitle("Nhân viên - Chấm công");
+		JLabel lblNhanVien = new JLabel("Chấm công                        ");
+		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
+		panel.add(lblNhanVien, BorderLayout.WEST);
+		
+		txtTimKiem = new JTextField();
+		txtTimKiem.setText(" TÌm theo mã nhân viên");
+		panel.add(txtTimKiem, BorderLayout.CENTER);
+		txtTimKiem.setColumns(10);
+		txtTimKiem.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
+					txtTimKiem.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTimKiem.getText().equals("")) {
+					txtTimKiem.setText(" TÌm theo mã nhân viên");
+				}
+			}
+		});
+		
+		JPanel panel1 = new JPanel();
+		panel.add(panel1, BorderLayout.EAST);
+		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
+		panel1.add(lblNewLabel_1);
+		
+		
+	}
+
+	public void initCenterChamCong() {
+		nhanVienJPanel.setLayout(new BoxLayout(nhanVienJPanel, BoxLayout.Y_AXIS));
+		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
+		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		model.addColumn("Mã nhân viên");
+		model.addColumn("Tên nhân viên");
+		model.addColumn("Ngày");
+		model.addColumn("Thứ");
+		model.addColumn("Thời gian làm");
+		
+		
+		table.setModel(model);
+		
+		JPanel panelLeft = new JPanel();
+		contentPane.add(panelLeft, BorderLayout.WEST);
+		
+		JCalendar dateChamCong = new JCalendar();
+		
+		JButton btnNewButton = new JButton("Tìm");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(dateChamCong.getDate());
+			}
+		});
+		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
+		gl_panelLeft.setHorizontalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addGap(5)
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnNewButton)
+					.addContainerGap(149, Short.MAX_VALUE))
+		);
+		gl_panelLeft.setVerticalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addGap(5)
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnNewButton)
+					.addContainerGap(424, Short.MAX_VALUE))
+		);
+		panelLeft.setLayout(gl_panelLeft);
+		
+		JComboBox cbbPhongBan = new JComboBox();
+		cbbPhongBan.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
 	}
 }

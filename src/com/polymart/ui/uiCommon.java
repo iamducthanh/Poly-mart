@@ -18,9 +18,5 @@ public class uiCommon {
 		checkBox.setBounds(x, y, w, 23);
 		panelOption.add(checkBox);
 	}
-	
-	public void u() {
-		
-	}
 
 }

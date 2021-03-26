@@ -22,9 +22,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-
-@SuppressWarnings("serial")
 public class LoginJFrame extends JFrame {
+
+	private static final long serialVersionUID = 2723825969344724367L;
+	
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
@@ -56,6 +57,9 @@ public class LoginJFrame extends JFrame {
 	 * Create the frame.
 	 */
 	Action loginAction = new AbstractAction() {
+		
+		private static final long serialVersionUID = 1251236672384365634L;
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			

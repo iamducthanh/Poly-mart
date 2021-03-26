@@ -10,10 +10,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -21,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,7 +27,6 @@ import com.toedter.calendar.JCalendar;
 
 public class BaoCaoJFrame extends JInternalFrame {
 
-	//test xung dot
 	public JPanel bbbb;
 	
 	private JPanel contentPane;

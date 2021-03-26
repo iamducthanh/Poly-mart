@@ -30,6 +30,7 @@ public class BaoCaoJFrame extends JInternalFrame {
 	//test xung dot
 	public JPanel aaaa1123;
 	// thêm dòng
+	public JPanel bbbb;
 	
 	private JPanel contentPane;
 	DefaultTableModel model = new DefaultTableModel();

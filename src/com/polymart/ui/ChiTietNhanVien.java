@@ -1,30 +1,32 @@
 package com.polymart.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JTextField;
-import java.awt.SystemColor;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import java.awt.Color;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 public class ChiTietNhanVien extends JFrame {
 
+	private static final long serialVersionUID = 2409713466527766453L;
+	
 	private JPanel contentPane;
 	private JTextField txtMaNV;
 	private JTextField txtMaChamCong;
@@ -236,7 +238,7 @@ public class ChiTietNhanVien extends JFrame {
 		rdoNu.setBounds(225, 139, 111, 25);
 		panel.add(rdoNu);
 		
-		JComboBox cbbChiNhanh = new JComboBox();
+		JComboBox<Object> cbbChiNhanh = new JComboBox<Object>();
 		cbbChiNhanh.setBounds(142, 421, 374, 25);
 		panel.add(cbbChiNhanh);
 		

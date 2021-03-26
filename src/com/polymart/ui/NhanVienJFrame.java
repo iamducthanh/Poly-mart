@@ -35,10 +35,8 @@ import com.toedter.calendar.JCalendar;
 
 public class NhanVienJFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7184061226380381253L;
+	
 	private JPanel contentPane;
 	private JTextField txtTimKiem;
 	private JTable table;
@@ -235,8 +233,8 @@ public class NhanVienJFrame extends JInternalFrame {
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);
 		
-		JComboBox cbbPhongBan = new JComboBox();
-		cbbPhongBan.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
+		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
+		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tất cả"}));
 		
 		JLabel lblNewLabel = new JLabel("Chi nhánh");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -246,8 +244,8 @@ public class NhanVienJFrame extends JInternalFrame {
 		JLabel lblChcDanh = new JLabel("Chức vụ");
 		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JComboBox cbbChucDanh = new JComboBox();
-		cbbChucDanh.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
+		JComboBox<Object> cbbChucDanh = new JComboBox<Object>();
+		cbbChucDanh.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tất cả"}));
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
@@ -364,7 +362,7 @@ public class NhanVienJFrame extends JInternalFrame {
 		);
 		panelLeft.setLayout(gl_panelLeft);
 		
-		JComboBox cbbPhongBan = new JComboBox();
-		cbbPhongBan.setModel(new DefaultComboBoxModel(new String[] {"Tất cả"}));
+		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
+		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tất cả"}));
 	}
 }

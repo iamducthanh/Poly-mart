@@ -570,7 +570,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		btnImport.setIcon(new ImageIcon("C:\\images\\export.png"));
 		panel1.add(btnImport);
 
-		JComboBox cbbOptionSetGia = new JComboBox();
+		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();
 		cbbOptionSetGia.addItem("≡");
 		panel1.add(cbbOptionSetGia);
 		
@@ -623,8 +623,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		
         JLabel lblNewLabel_4 = new JLabel("Bảng giá");
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bảng giá chung"}));
+		JComboBox<Object> comboBox = new JComboBox<Object>();
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bảng giá chung"}));
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Nhóm hàng");
 		

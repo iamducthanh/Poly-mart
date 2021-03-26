@@ -27,6 +27,8 @@ import com.toedter.calendar.JCalendar;
 
 public class BaoCaoJFrame extends JInternalFrame {
 
+	private static final long serialVersionUID = 5684359871253902201L;
+	
 	private JPanel contentPane;
 	DefaultTableModel model = new DefaultTableModel();
 	JPanel nhanVienJPanel = new JPanel();

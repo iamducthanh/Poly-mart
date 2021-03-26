@@ -18,23 +18,21 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import com.toedter.calendar.JDateChooser;
 
 public class DD extends JFrame {
 
@@ -546,7 +544,7 @@ public class DD extends JFrame {
 		btnImport.setIcon(new ImageIcon("C:\\images\\export.png"));
 		panel1.add(btnImport);
 
-		JComboBox cbbOptionSetGia = new JComboBox();
+		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();
 		cbbOptionSetGia.addItem("≡");
 		panel1.add(cbbOptionSetGia);
 		
@@ -599,8 +597,8 @@ public class DD extends JFrame {
 		
         JLabel lblNewLabel_4 = new JLabel("Bảng giá");
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bảng giá chung"}));
+		JComboBox<Object> comboBox = new JComboBox<Object>();
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bảng giá chung"}));
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Nhóm hàng");
 		
@@ -685,7 +683,7 @@ public class DD extends JFrame {
 		JButton btnImport = new JButton("→ Xuất file ");
 		panel1.add(btnImport);
 
-		JComboBox cbbOptionSetGia = new JComboBox();
+		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();
 		cbbOptionSetGia.addItem("≡");
 		panel1.add(cbbOptionSetGia);
 	}

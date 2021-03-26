@@ -1,32 +1,31 @@
 package com.polymart.ui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JMenuBar;
-import java.awt.event.ActionListener;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
-import javax.swing.JMenu;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.SystemColor;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class ThemHangHoaFrame extends JFrame {
 
+	private static final long serialVersionUID = -2914525596895096982L;
+	
 	private JPanel contentPane;
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
@@ -222,9 +221,9 @@ public class ThemHangHoaFrame extends JFrame {
 		txtMauSac.setBounds(771, 47, 171, 25);
 		contentPane.add(txtMauSac);
 		
-		JComboBox cbbSize = new JComboBox();
+		JComboBox<Object> cbbSize = new JComboBox<Object>();
 		cbbSize.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		cbbSize.setModel(new DefaultComboBoxModel(new String[] {"S", "M", "L", "XL", "XXL", "Free size"}));
+		cbbSize.setModel(new DefaultComboBoxModel<Object>(new String[] {"S", "M", "L", "XL", "XXL", "Free size"}));
 		cbbSize.setBounds(771, 13, 171, 25);
 		contentPane.add(cbbSize);
 		

@@ -186,9 +186,8 @@ public class PolyMartMain extends JFrame {
 		desktopPane.setLayout(new CardLayout(0, 0));
 		try {
 			uri = new URI("http://facebook.com/iamducthanh");
-		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
 		
 		mnFacebook.addMouseListener(new MouseAdapter() {
@@ -197,12 +196,10 @@ public class PolyMartMain extends JFrame {
 				try {
 					Desktop.getDesktop().browse(uri);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		
 		
 		mntmHangHoa.addActionListener(openDanhMuc);
 		mntmNhanVien.addActionListener(openNhanVien);
@@ -215,10 +212,8 @@ public class PolyMartMain extends JFrame {
 		
 	}
 	ActionListener openThietLapGia = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			close();
  			ThietLapGiaJInternalFrame thietLapGia = new ThietLapGiaJInternalFrame();
  			desktopPane.add(thietLapGia);
@@ -229,7 +224,6 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openDanhMuc = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
@@ -242,7 +236,6 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openKiemKho = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
@@ -255,7 +248,6 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openNhanVien = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
@@ -268,7 +260,6 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openNguonHang = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
@@ -280,10 +271,8 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openChamCong = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			close();
  			ChamCongJInternalFrame chamCong = new ChamCongJInternalFrame();
  			desktopPane.add(chamCong);
@@ -294,7 +283,6 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openChiTieu = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -308,7 +296,6 @@ public class PolyMartMain extends JFrame {
 	};
 	
 	ActionListener openNhapHang = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
@@ -324,7 +311,7 @@ public class PolyMartMain extends JFrame {
 		try {
 			desktopPane.getAllFrames()[0].setVisible(false);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

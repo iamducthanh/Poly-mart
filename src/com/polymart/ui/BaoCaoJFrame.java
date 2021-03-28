@@ -58,6 +58,7 @@ public class BaoCaoJFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public BaoCaoJFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);

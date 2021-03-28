@@ -76,6 +76,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ThietLapGiaJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//	setBounds(100, 100, 1920, 639);
 		setFocusable(true);

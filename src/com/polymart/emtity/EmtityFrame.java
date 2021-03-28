@@ -6,8 +6,6 @@ import com.polymart.ui.DD;
 import com.polymart.ui.LoginJFrame;
 import com.polymart.ui.PolyMartMain;
 import com.polymart.ui.ThemHangHoaFrame;
-import com.polymart.ui.ThietLapGiaJInternalFrame;
-import com.polymart.ui.uiCommon;
 
 public class EmtityFrame {
 	public static BaoCaoJInternalFrame frameBaoCao = new BaoCaoJInternalFrame();

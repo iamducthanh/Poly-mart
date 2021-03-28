@@ -252,6 +252,7 @@ public class PolyMartMain extends JFrame {
 			thietLapGia.initTopThietLapGia();
 			thietLapGia.initCenterThietLapGia();
 			thietLapGia.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Thiếp lập giá sản phẩm");
 		}
 	};
 
@@ -264,6 +265,7 @@ public class PolyMartMain extends JFrame {
 			hangHoa.initTopHangHoa();
 			hangHoa.initCenterHangHoa();
 			hangHoa.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Danh mục hàng hóa");
 		}
 	};
 
@@ -276,6 +278,7 @@ public class PolyMartMain extends JFrame {
 			kiemKho.initTopKiemKho();
 			kiemKho.initCenterKiemKho();
 			kiemKho.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Kiểm kho");
 		}
 	};
 
@@ -288,6 +291,7 @@ public class PolyMartMain extends JFrame {
 			nhanVien.initTopNhanVien();
 			nhanVien.initCenterNhanVien();
 			nhanVien.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Quản lý nhân viên");
 		}
 	};
 
@@ -299,6 +303,7 @@ public class PolyMartMain extends JFrame {
 			desktopPane.add(nguonHang);
 			nguonHang.initNguonHang();
 			nguonHang.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Quản lý nguồn hàng");
 		}
 	};
 
@@ -311,6 +316,7 @@ public class PolyMartMain extends JFrame {
 			chamCong.initTopChamCong();
 			chamCong.initCenterChamCong();
 			chamCong.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Kiểm tra chấm công");
 		}
 	};
 
@@ -324,6 +330,7 @@ public class PolyMartMain extends JFrame {
 			baoCao.initTopChiTieu();
 			baoCao.initCenterChiTieu();
 			baoCao.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Báo cáo - Chi tiêu");
 		}
 	};
 
@@ -336,6 +343,7 @@ public class PolyMartMain extends JFrame {
 			nhapHang.initTopNhapHang();
 			nhapHang.initCenterNhapHang();
 			nhapHang.setVisible(true);
+			EmtityFrame.framePolyMartMain.setTitle("Quản lý nhập hàng");
 		}
 	};
 	

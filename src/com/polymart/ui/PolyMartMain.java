@@ -328,7 +328,7 @@ public class PolyMartMain extends JFrame {
 
 	public void close() {
 		try {
-			desktopPane.getAllFrames()[0].setVisible(false);
+			desktopPane.removeAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

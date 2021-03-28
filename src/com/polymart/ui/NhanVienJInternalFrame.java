@@ -200,15 +200,15 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		btnThemNV.addActionListener(chiTietNhanVien);
 
-		//Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
-		table.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
-				if (mouseEvent.getClickCount() == 2) {
-					ChiTietNhanVien chiTietNhanVien = new ChiTietNhanVien();
-					chiTietNhanVien.setVisible(true);
-				}
-			}
-		});
+//		//Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
+//		table.addMouseListener(new MouseAdapter() {
+//			public void mousePressed(MouseEvent mouseEvent) {
+//				if (mouseEvent.getClickCount() == 2) {
+//					ChiTietNhanVien chiTietNhanVien = new ChiTietNhanVien();
+//					chiTietNhanVien.setVisible(true);
+//				}
+//			}
+//		});
 
 	}
 

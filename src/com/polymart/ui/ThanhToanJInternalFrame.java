@@ -64,10 +64,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	private JTextField txtGiamGia;
 	private JTextField txtTongTien;
 	JPanel contentNhaPanel;
-	
-	
-	private JTextField txtMaSP;
-	private JTextField txtNguoiNhap;
 
 
 

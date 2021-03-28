@@ -16,7 +16,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -25,7 +24,9 @@ import javax.swing.border.LineBorder;
 
 import com.polymart.controller.QuanLyNhanVien;
 import com.polymart.controller.QuanLyNhanVienImpl;
-import com.polymart.emtity.*;
+import com.polymart.emtity.EmtityFrame;
+import com.polymart.emtity.EmtityLogin;
+import com.polymart.emtity.EmtityMessage;
 import com.polymart.model.NhanVienModel;
 
 public class LoginJFrame extends JFrame {

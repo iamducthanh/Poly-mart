@@ -25,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
 
+import com.polymart.emtity.*;
+
 public class BaoCaoJFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = 5684359871253902201L;
@@ -44,8 +46,7 @@ public class BaoCaoJFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BaoCaoJFrame frame = new BaoCaoJFrame();
-					frame.setVisible(true);
+					EmtityFrame.frameBaoCao.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

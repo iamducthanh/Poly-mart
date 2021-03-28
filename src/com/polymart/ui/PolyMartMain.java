@@ -25,15 +25,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.polymart.emtity.EmtityLogin;
-import com.polymart.emtity.EmtityMessage;
+import com.polymart.emtity.*;
 
 public class PolyMartMain extends JFrame {
 
 	private static final long serialVersionUID = 6825346390245174222L;
 
 	JDesktopPane desktopPane = new JDesktopPane();
-	static PolyMartMain framePolyMartMain = new PolyMartMain();
 	URI uri;
 
 	/**
@@ -43,8 +41,8 @@ public class PolyMartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					framePolyMartMain.setVisible(true);
-					framePolyMartMain.setTitle("Poly mart");
+					EmtityFrame.framePolyMartMain.setVisible(true);
+					EmtityFrame.framePolyMartMain.setTitle("Poly mart");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -313,9 +311,9 @@ public class PolyMartMain extends JFrame {
 	ActionListener logoutAccount = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (EmtityMessage.confirm(framePolyMartMain, "Đồng ý đăng xuất tài khoản?")) {
+			if (EmtityMessage.confirm(EmtityFrame.framePolyMartMain, "Đồng ý đăng xuất tài khoản?")) {
 				new LoginJFrame().setVisible(true);
-				framePolyMartMain.setVisible(false);
+				EmtityFrame.framePolyMartMain.setVisible(false);
 			}
 		}
 	};

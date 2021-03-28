@@ -19,6 +19,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 
+import com.polymart.emtity.*;
+
 public class DD extends JFrame {
 
 	JPanel contentPane;
@@ -39,9 +41,7 @@ public class DD extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DD frame = new DD();
-					frame.setVisible(true);
-					
+					EmtityFrame.frameDd.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -208,7 +208,7 @@ public class LoginJFrame extends JFrame {
 			if (nhanVienModel == null) {
 				EmtityMessage.msgThongBao(frame, "Đăng nhập thất bại");
 			} else {
-				PolyMartMain.framePolyMartMain.setVisible(true);
+				EmtityFrame.framePolyMartMain.setVisible(true);
 				frame.setVisible(false);
 			}
 		}

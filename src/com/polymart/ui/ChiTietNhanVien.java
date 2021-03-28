@@ -23,6 +23,8 @@ import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import com.polymart.emtity.*;
+
 public class ChiTietNhanVien extends JFrame {
 
 	private static final long serialVersionUID = 2409713466527766453L;
@@ -45,8 +47,7 @@ public class ChiTietNhanVien extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChiTietNhanVien frame = new ChiTietNhanVien();
-					frame.setVisible(true);
+					EmtityFrame.frameChiTietNhanVien.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

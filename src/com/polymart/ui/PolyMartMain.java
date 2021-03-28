@@ -312,7 +312,7 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (EmtityMessage.confirm(EmtityFrame.framePolyMartMain, "Đồng ý đăng xuất tài khoản?")) {
-				new LoginJFrame().setVisible(true);
+				EmtityFrame.frameLogin.setVisible(true);
 				EmtityFrame.framePolyMartMain.setVisible(false);
 			}
 		}

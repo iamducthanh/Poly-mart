@@ -16,4 +16,14 @@ public class EmtityFrame {
 	public static LoginJFrame frameLogin = new LoginJFrame();
 	public static PolyMartMain framePolyMartMain = new PolyMartMain();
 	public static ThemHangHoaFrame frameHangHoa = new ThemHangHoaFrame();
+
+	public static void resetFrame() {
+		frameBaoCao = new BaoCaoJFrame();
+		frameChiTietNhanVien = new ChiTietNhanVien();
+		frameDd = new DD();
+		frameLogin = new LoginJFrame();
+		framePolyMartMain = new PolyMartMain();
+		frameHangHoa = new ThemHangHoaFrame();
+	}
+
 }

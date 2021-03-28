@@ -35,7 +35,6 @@ public class LoginJFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
-	static LoginJFrame frame = new LoginJFrame();
 	String change = "Change password";
 	JButton btnLogin = new JButton("Đăng nhập");
 	StringBuilder error = new StringBuilder();
@@ -49,9 +48,9 @@ public class LoginJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame.setVisible(true);
-					frame.setTitle("Đăng nhập");
-					frame.setLocationRelativeTo(null);
+					EmtityFrame.frameLogin.setVisible(true);
+					EmtityFrame.frameLogin.setTitle("Đăng nhập");
+					EmtityFrame.frameLogin.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -201,15 +200,18 @@ public class LoginJFrame extends JFrame {
 		sp.append(EmtityLogin.checkUsername(getUsername)).append("\n");
 		sp.append(EmtityLogin.checkPassword(getPassword)).append("\n");
 		if (sp.length() == 0) {
-			EmtityMessage.msgThongBao(frame, sp.toString());
+			EmtityMessage.msgThongBao(EmtityFrame.frameLogin, sp.toString());
 		} else {
 			QuanLyNhanVienImpl quanLyNhanVienImpl = new QuanLyNhanVien();
 			NhanVienModel nhanVienModel = quanLyNhanVienImpl.getLogin(getUsername, getPassword);
 			if (nhanVienModel == null) {
-				EmtityMessage.msgThongBao(frame, "Đăng nhập thất bại");
+				EmtityMessage.msgThongBao(EmtityFrame.frameLogin, "Đăng nhập thất bại");
 			} else {
+				textUsername.setText(" Username");
+				textPassword.setText(" Password");
+				EmtityFrame.frameLogin.setVisible(false);
+				EmtityFrame.resetFrame();
 				EmtityFrame.framePolyMartMain.setVisible(true);
-				frame.setVisible(false);
 			}
 		}
 	}

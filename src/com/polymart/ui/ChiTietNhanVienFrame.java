@@ -25,7 +25,7 @@ import com.toedter.calendar.JDateChooser;
 
 import com.polymart.emtity.*;
 
-public class ChiTietNhanVien extends JFrame {
+public class ChiTietNhanVienFrame extends JFrame {
 
 	private static final long serialVersionUID = 2409713466527766453L;
 	
@@ -58,9 +58,9 @@ public class ChiTietNhanVien extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ChiTietNhanVien() {
+	public ChiTietNhanVienFrame() {
 		setTitle("Chi tiết nhân viên");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 799, 607);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.activeCaption);

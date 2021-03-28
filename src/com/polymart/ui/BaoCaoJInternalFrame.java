@@ -27,7 +27,7 @@ import com.toedter.calendar.JCalendar;
 
 import com.polymart.emtity.*;
 
-public class BaoCaoJFrame extends JInternalFrame {
+public class BaoCaoJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = 5684359871253902201L;
 	
@@ -57,7 +57,8 @@ public class BaoCaoJFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BaoCaoJFrame() {
+	public BaoCaoJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);

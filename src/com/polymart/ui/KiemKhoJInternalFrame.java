@@ -89,6 +89,7 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public KiemKhoJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//	setBounds(100, 100, 1920, 639);
 		setFocusable(true);
@@ -111,7 +112,7 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 	public void initTopKiemKho() {
 		setTitle("Hàng hóa - Kiểm kho");
 
-		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho                       ");
+		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho            ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 		

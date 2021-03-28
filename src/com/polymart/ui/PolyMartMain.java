@@ -56,7 +56,6 @@ public class PolyMartMain extends JFrame {
 	public PolyMartMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// setBounds(100, 100, 1920, 639);
-
 //		
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -146,6 +145,10 @@ public class PolyMartMain extends JFrame {
 		JMenu mnKhachHang = new JMenu("Khách hàng");
 		mnKhachHang.setIcon(new ImageIcon("C:\\images\\doitac.png"));
 		menuBar.add(mnKhachHang);
+		
+		JMenuItem mntmKhachHang = new JMenuItem("Khách hàng");
+		mntmKhachHang.setIcon(new ImageIcon("C:\\images\\khachhang.png"));
+		mnKhachHang.add(mntmKhachHang);
 
 		JMenu mnCaNhan = new JMenu("Cá nhân");
 		mnCaNhan.setIcon(new ImageIcon("C:\\images\\user.png"));
@@ -158,6 +161,10 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
 		mntmDangXuat.setIcon(new ImageIcon("C:\\images\\logout.png"));
 		mnCaNhan.add(mntmDangXuat);
+		
+		JMenuItem mntmDoiMK = new JMenuItem("Đổi mật khẩu");
+		mntmDoiMK.setIcon(new ImageIcon("C:\\images\\changepassicon.png"));
+		mnCaNhan.add(mntmDoiMK);
 
 		int wLine = (int) (width - (width / 100 * (100 - 42)));
 		this.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -210,7 +217,31 @@ public class PolyMartMain extends JFrame {
 		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
+		mntmDoiMK.addActionListener(doiMatKhau);
+		mntmKhachHang.addActionListener(openKhachHang);
+		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 	}
+	
+	ActionListener openKhachHang = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+			KhachHangJInternalFrame khachHangJInternalFrame = new KhachHangJInternalFrame();
+			desktopPane.add(khachHangJInternalFrame);
+			khachHangJInternalFrame.setVisible(true);
+		}
+	};
+	
+	ActionListener doiMatKhau = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			ChangePassFrame changePassFrame = new ChangePassFrame();
+			changePassFrame.setVisible(true);
+			changePassFrame.setLocationRelativeTo(null);
+		}
+	};
 
 	ActionListener openThietLapGia = new ActionListener() {
 		@Override
@@ -288,7 +319,7 @@ public class PolyMartMain extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			close();
-			BaoCaoJFrame baoCao = new BaoCaoJFrame();
+			BaoCaoJInternalFrame baoCao = new BaoCaoJInternalFrame();
 			desktopPane.add(baoCao);
 			baoCao.initTopChiTieu();
 			baoCao.initCenterChiTieu();
@@ -307,6 +338,18 @@ public class PolyMartMain extends JFrame {
 			nhapHang.setVisible(true);
 		}
 	};
+	
+	ActionListener openThanhToan = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+			ThanhToanJInternalFrame thanhToan = new ThanhToanJInternalFrame();
+			desktopPane.add(thanhToan);
+			thanhToan.initTopThanhToan();
+			thanhToan.initCenterThanhToan();
+			thanhToan.setVisible(true);
+		}
+	};
 
 	ActionListener logoutAccount = new ActionListener() {
 		@Override
@@ -319,11 +362,13 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void close() {
-		try {
-			desktopPane.getAllFrames()[0].setVisible(false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			int size = desktopPane.getAllFrames().length;
+			if(size != 0) {
+				for(int i=0;i<size;i++) {
+					desktopPane.getAllFrames()[i].setVisible(false);
+				}
+			}
+
 	}
 
 }

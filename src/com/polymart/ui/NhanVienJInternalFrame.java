@@ -86,6 +86,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	JPanel panel = new JPanel();
 
 	public NhanVienJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
@@ -199,15 +200,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		btnThemNV.addActionListener(chiTietNhanVien);
 
-		//Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
-		table.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
-				if (mouseEvent.getClickCount() == 2) {
-					ChiTietNhanVien chiTietNhanVien = new ChiTietNhanVien();
-					chiTietNhanVien.setVisible(true);
-				}
-			}
-		});
 
 	}
 
@@ -271,6 +263,16 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(465, Short.MAX_VALUE)));
 		panelLeft.setLayout(gl_panelLeft);
+		
+		//Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
+		table.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				if (mouseEvent.getClickCount() == 2) {
+					ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();
+					chiTietNhanVien.setVisible(true);
+				}
+			}
+		});
 
 	}
 
@@ -279,7 +281,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			ChiTietNhanVien chiTietNhanVien = new ChiTietNhanVien();
+			ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();
 			chiTietNhanVien.setVisible(true);
 		}
 	};

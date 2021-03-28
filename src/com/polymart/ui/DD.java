@@ -18,21 +18,29 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-import com.polymart.emtity.*;
+import com.polymart.entity.*;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JCheckBox;
 
 public class DD extends JFrame {
 
-	JPanel contentPane;
-	private JTextField txtSoLuong;
-	private JTextField txtMaSP;
-	private JTextField txtNguoiNhap;
+	JPanel contentNhaPanel;
+	private JTextField txtMaNhanVien;
+	private JTextField txtMaKhachHang;
+	private JTextField txtDiaDIem;
 	private JTextField txtMaPhieu;
 	private JLabel lblSLng;
 	private JLabel lblMSnPhm;
 	private JLabel lblNgiNhp;
 	private JLabel lblNgunHng;
 	private JLabel lblGhiCh;
+	private JTextField txtSoLuong;
+	private JTextField txtGiamGia;
+	private JTextField txtTongTien;
 
 	/**
 	 * Launch the application.
@@ -41,7 +49,7 @@ public class DD extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmtityFrame.frameDd.setVisible(true);
+					EntityFrame.frameDd.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,8 +62,8 @@ public class DD extends JFrame {
 	 */
 	public DD() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setTitle("Thêm phiết nhập hàng");
-		setBounds(100, 100, 633, 543);
+		setTitle("Thêm phiếu thanh toán");
+		setBounds(100, 100, 633, 626);
 		setFocusable(true);
 		setLocationRelativeTo(null);
 		JMenuBar menuBar = new JMenuBar();
@@ -66,24 +74,24 @@ public class DD extends JFrame {
 		
 		JMenu mnLuu = new JMenu("Lưu");
 		menuBar.add(mnLuu);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentNhaPanel = new JPanel();
+		contentNhaPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentNhaPanel);
+		contentNhaPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin phi\u1EBFu nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
-		panel.setBounds(10, 11, 595, 411);
-		contentPane.add(panel);
+		panel.setBounds(10, 11, 595, 510);
+		contentNhaPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Mã phiếu: ", JLabel.RIGHT);
-		lblNewLabel.setBounds(0, 31, 125, 25);
+		lblNewLabel.setBounds(10, 31, 125, 25);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		lblMSnPhm = new JLabel("Mã sản phẩm: ", JLabel.RIGHT);
-		lblMSnPhm.setBounds(0, 78, 125, 25);
+		lblMSnPhm = new JLabel("Mã khách hàng: ", JLabel.RIGHT);
+		lblMSnPhm.setBounds(10, 67, 125, 25);
 		panel.add(lblMSnPhm);
 		lblMSnPhm.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
@@ -93,62 +101,109 @@ public class DD extends JFrame {
 		txtMaPhieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMaPhieu.setColumns(10);
 		
-		txtMaSP = new JTextField();
-		txtMaSP.setBounds(154, 78, 300, 25);
-		panel.add(txtMaSP);
-		txtMaSP.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtMaSP.setColumns(10);
+		txtMaKhachHang = new JTextField();
+		txtMaKhachHang.setBounds(154, 67, 300, 25);
+		panel.add(txtMaKhachHang);
+		txtMaKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtMaKhachHang.setColumns(10);
 		
-		txtSoLuong = new JTextField();
-		txtSoLuong.setBounds(154, 124, 300, 25);
-		panel.add(txtSoLuong);
-		txtSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSoLuong.setColumns(10);
+		txtMaNhanVien = new JTextField();
+		txtMaNhanVien.setBounds(154, 103, 300, 25);
+		panel.add(txtMaNhanVien);
+		txtMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtMaNhanVien.setColumns(10);
 		
-		txtNguoiNhap = new JTextField();
-		txtNguoiNhap.setBounds(154, 169, 300, 25);
-		panel.add(txtNguoiNhap);
-		txtNguoiNhap.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtNguoiNhap.setColumns(10);
+		txtDiaDIem = new JTextField();
+		txtDiaDIem.setBounds(154, 139, 300, 25);
+		panel.add(txtDiaDIem);
+		txtDiaDIem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtDiaDIem.setColumns(10);
 		
-		JComboBox cbbNguonHang = new JComboBox();
-		cbbNguonHang.setBounds(154, 212, 419, 25);
-		panel.add(cbbNguonHang);
-		
-		lblSLng = new JLabel("Số lượng: ", JLabel.RIGHT);
-		lblSLng.setBounds(0, 124, 125, 25);
+		lblSLng = new JLabel("Mã nhân viên: ", JLabel.RIGHT);
+		lblSLng.setBounds(10, 103, 125, 25);
 		panel.add(lblSLng);
 		lblSLng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		lblNgiNhp = new JLabel("Người nhập: ", JLabel.RIGHT);
-		lblNgiNhp.setBounds(0, 169, 125, 25);
+		lblNgiNhp = new JLabel("Địa điểm: ", JLabel.RIGHT);
+		lblNgiNhp.setBounds(10, 139, 125, 25);
 		panel.add(lblNgiNhp);
 		lblNgiNhp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		lblNgunHng = new JLabel("Nguồn hàng: ", JLabel.RIGHT);
-		lblNgunHng.setBounds(0, 210, 125, 25);
+		lblNgunHng = new JLabel("Ngày thanh toán: ", JLabel.RIGHT);
+		lblNgunHng.setBounds(10, 283, 125, 25);
 		panel.add(lblNgunHng);
 		lblNgunHng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		lblGhiCh = new JLabel("Ghi chú: ", JLabel.RIGHT);
-		lblGhiCh.setBounds(0, 256, 125, 25);
+		lblGhiCh = new JLabel("Số lượng: ", JLabel.RIGHT);
+		lblGhiCh.setBounds(10, 175, 125, 25);
 		panel.add(lblGhiCh);
 		lblGhiCh.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(154, 256, 419, 131);
+		scrollPane.setBounds(154, 355, 419, 131);
 		panel.add(scrollPane);
 		
 		JTextArea txtGhiChu = new JTextArea();
 		scrollPane.setViewportView(txtGhiChu);
 		
+		JLabel lblGimGi = new JLabel("Giảm giá: ", SwingConstants.RIGHT);
+		lblGimGi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGimGi.setBounds(10, 211, 125, 25);
+		panel.add(lblGimGi);
+		
+		JLabel lblTngTin = new JLabel("Tổng tiền: ", SwingConstants.RIGHT);
+		lblTngTin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTngTin.setBounds(10, 247, 125, 25);
+		panel.add(lblTngTin);
+		
+		JLabel lblTrngThi = new JLabel("Trạng thái: ", SwingConstants.RIGHT);
+		lblTrngThi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTrngThi.setBounds(10, 319, 125, 25);
+		panel.add(lblTrngThi);
+		
+		JLabel lblGhiCh_1 = new JLabel("Ghi chú: ", SwingConstants.RIGHT);
+		lblGhiCh_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGhiCh_1.setBounds(10, 354, 125, 25);
+		panel.add(lblGhiCh_1);
+		
+		txtSoLuong = new JTextField();
+		txtSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSoLuong.setColumns(10);
+		txtSoLuong.setBounds(154, 175, 300, 25);
+		panel.add(txtSoLuong);
+		
+		txtGiamGia = new JTextField();
+		txtGiamGia.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtGiamGia.setColumns(10);
+		txtGiamGia.setBounds(154, 211, 300, 25);
+		panel.add(txtGiamGia);
+		
+		txtTongTien = new JTextField();
+		txtTongTien.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtTongTien.setColumns(10);
+		txtTongTien.setBounds(154, 247, 300, 25);
+		panel.add(txtTongTien);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(154, 283, 300, 25);
+		panel.add(dateChooser);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Đã thanh toán");
+		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		chckbxNewCheckBox.setBounds(154, 321, 151, 25);
+		panel.add(chckbxNewCheckBox);
+		
 		JButton btnThoat = new JButton("Thoát");
-		btnThoat.setBounds(516, 443, 89, 23);
-		contentPane.add(btnThoat);
+		btnThoat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnThoat.setBounds(516, 532, 89, 23);
+		contentNhaPanel.add(btnThoat);
 		
 		JButton btnLuu = new JButton("Lưu");
-		btnLuu.setBounds(417, 443, 89, 23);
-		contentPane.add(btnLuu);
+		btnLuu.setBounds(417, 532, 89, 23);
+		contentNhaPanel.add(btnLuu);
 
 		
 	}

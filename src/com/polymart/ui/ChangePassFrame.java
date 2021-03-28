@@ -3,12 +3,10 @@ package com.polymart.ui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.sql.SQLException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -17,27 +15,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.controller.QuanLyNhanVien;
-import com.polymart.controller.QuanLyNhanVienImpl;
-import com.polymart.entity.EntityFrame;
-import com.polymart.entity.EntityLogin;
-import com.polymart.entity.EntityMessage;
-import com.polymart.model.NhanVienModel;
 
-public class LoginJFrame extends JFrame {
-
-	private static final long serialVersionUID = 2723825969344724367L;
-
-	private JPanel contentPane;
-	private JTextField textUsername;
-	private JPasswordField textPassword;
+@SuppressWarnings("serial")
+public class ChangePassFrame extends JFrame {
+	static JTextField textUsername;
+	private JTextField textPassword;
+	static ChangePassFrame frame = new ChangePassFrame();
 	String change = "Change password";
-	JButton btnLogin = new JButton("Đăng nhập");
+	JButton btnLogin = new JButton("Đổi mật khẩu");
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
 	public static String vaiTro;
@@ -49,9 +38,9 @@ public class LoginJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntityFrame.frameLogin.setVisible(true);
-					EntityFrame.frameLogin.setTitle("Đăng nhập");
-					EntityFrame.frameLogin.setLocationRelativeTo(null);
+					frame.setVisible(true);
+					frame.setTitle("Đổi mật khẩu");
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,77 +51,56 @@ public class LoginJFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	Action loginAction = new AbstractAction() {
-
-		private static final long serialVersionUID = 1251236672384365634L;
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	};
 	private JButton btnCancel;
+	private JTextField textComfirm;
 
-	public LoginJFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\images\\fpt.png"));
-		setTitle("Đăng nhập");
+	public ChangePassFrame() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 682, 384);
-		contentPane = new JPanel();
+		setBounds(100, 100, 682, 420);
+		JPanel contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setFocusable(true);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		setLocationRelativeTo(null);
 
 		textUsername = new JTextField(" Username");
+		textUsername.setEditable(false);
 		textUsername.setForeground(Color.black);
 		textUsername.setBackground(Color.white);
 		textUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textUsername.setColumns(10);
 		textUsername.setBorder(new LineBorder(Color.WHITE));
-		textUsername.setBounds(342, 77, 257, 35);
+		textUsername.setBounds(360, 76, 268, 27);
 
 		contentPane.add(textUsername);
 
-		textPassword = new JPasswordField();
+		textPassword = new JTextField();
 		textPassword.setForeground(Color.black);
 		textPassword.setBackground(Color.white);
-		textPassword.setText(" Password");
+		textPassword.setText(" New Password");
 		textPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textPassword.setColumns(10);
 		textPassword.setBorder(new LineBorder(Color.WHITE));
-		textPassword.setBounds(342, 138, 257, 35);
+		textPassword.setBounds(360, 136, 257, 27);
 		contentPane.add(textPassword);
 
-		JLabel lblLogin = new JLabel("XIN CHÀO!");
-		lblLogin.setForeground(Color.BLACK);
+		JLabel lblLogin = new JLabel("ĐỔI MẬT KHẨU");
+		lblLogin.setForeground(Color.BLUE);
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 19));
-		lblLogin.setBounds(413, 26, 203, 40);
+		lblLogin.setBounds(417, 11, 187, 40);
 		contentPane.add(lblLogin);
-		btnLogin.setIcon(null);
 
 		btnLogin.setForeground(Color.WHITE);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					login();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				change();
 			}
 		});
-		btnLogin.setBorder(new LineBorder(Color.WHITE));
+		btnLogin.setBorder(null);
 		btnLogin.setBackground(Color.BLACK);
-		btnLogin.setBounds(328, 208, 288, 45);
+		btnLogin.setBounds(360, 264, 268, 40);
 		contentPane.add(btnLogin);
-
-		JLabel lblUser = new JLabel("");
-		lblUser.setIcon(new ImageIcon("C:\\images\\ong.png"));
-		lblUser.setBounds(34, 0, 237, 340);
-		contentPane.add(lblUser);
 
 		textUsername.addFocusListener(new FocusAdapter() {
 			@Override
@@ -151,70 +119,88 @@ public class LoginJFrame extends JFrame {
 		});
 
 		textPassword.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (textPassword.getText().equals(" Password")) {
+				if (textPassword.getText().equals(" New Password")) {
 					textPassword.setText("");
 				}
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (textPassword.getText().equals("")) {
-					textPassword.setText(" Password");
+					textPassword.setText(" New Password");
 				}
 			}
 		});
 
 		textUsername.addActionListener(loginAction);
 		textPassword.addActionListener(loginAction);
-//
+
+
 		btnLogin.setContentAreaFilled(false);
-//
-		btnCancel = new JButton("Kết thúc");
+
+		btnCancel = new JButton("Hủy");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				ChangePassFrame.this.dispose();
 			}
 		});
 
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setContentAreaFilled(false);
-		btnCancel.setBorder(new LineBorder(Color.WHITE));
+		btnCancel.setBorder(null);
 		btnCancel.setBackground(Color.BLACK);
-		btnCancel.setBounds(328, 269, 288, 45);
+		btnCancel.setBounds(360, 325, 268, 40);
 		contentPane.add(btnCancel);
 
+		textComfirm = new JTextField(" Comfirm password");
+		textComfirm.setForeground(Color.BLACK);
+		textComfirm.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		textComfirm.setColumns(10);
+		textComfirm.setBorder(new LineBorder(Color.WHITE));
+		textComfirm.setBackground(Color.WHITE);
+		textComfirm.setBounds(360, 196, 268, 27);
+		contentPane.add(textComfirm);
+
+		textComfirm.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (textComfirm.getText().equals(" Comfirm password")) {
+					textComfirm.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (textComfirm.getText().equals("")) {
+					textComfirm.setText(" Comfirm password");
+				}
+			}
+		});
+		
+		JLabel lblUser = new JLabel("");
+		lblUser.setIcon(new ImageIcon("C:\\images\\ong.png"));
+		lblUser.setBounds(38, 43, 237, 340);
+		contentPane.add(lblUser);
+		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\images\\login.jpg"));
-		lblNewLabel.setBounds(-20, -20, 650, 350);
+		lblNewLabel.setIcon(new ImageIcon("C:\\images\\changepass.jpg"));
+		lblNewLabel.setBounds(0, -20, 650, 420);
 		lblNewLabel.setBackground(Color.black);
 		contentPane.add(lblNewLabel);
+		
 
 	}
 
-	public void login() throws SQLException {
-		String getUsername = textUsername.getText();
-		String getPassword = new String(textPassword.getText());
-		StringBuilder sp = new StringBuilder();
-		sp.append(EntityLogin.checkUsername(getUsername)).append("\n");
-		sp.append(EntityLogin.checkPassword(getPassword)).append("\n");
-		if (sp.length() == 0) {
-			EntityMessage.msgThongBao(EntityFrame.frameLogin, sp.toString());
-		} else {
-			QuanLyNhanVienImpl quanLyNhanVienImpl = new QuanLyNhanVien();
-			NhanVienModel nhanVienModel = quanLyNhanVienImpl.getLogin(getUsername, getPassword);
-			if (nhanVienModel == null) {
-				EntityMessage.msgThongBao(EntityFrame.frameLogin, "Đăng nhập thất bại");
-			} else {
-				textUsername.setText(" Username");
-				textPassword.setText(" Password");
-				EntityFrame.frameLogin.setVisible(false);
-				EntityFrame.resetFrame();
-				EntityFrame.framePolyMartMain.setVisible(true);
-			}
+	Action loginAction = new AbstractAction() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
 		}
+	};
+
+	public void change() {
+
 	}
 }

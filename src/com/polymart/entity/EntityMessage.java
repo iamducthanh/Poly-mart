@@ -1,10 +1,10 @@
-package com.polymart.emtity;
+package com.polymart.entity;
 
 import java.awt.Component;
 
 import javax.swing.JOptionPane;
 
-public class EmtityMessage {
+public class EntityMessage {
 
 	private static String title = "Phần mềm quản lý bán hàng";
 

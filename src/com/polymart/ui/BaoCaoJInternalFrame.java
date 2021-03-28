@@ -23,11 +23,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.*;
 import com.toedter.calendar.JCalendar;
 
-import com.polymart.emtity.*;
-
-public class BaoCaoJFrame extends JInternalFrame {
+public class BaoCaoJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = 5684359871253902201L;
 	
@@ -46,7 +45,7 @@ public class BaoCaoJFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmtityFrame.frameBaoCao.setVisible(true);
+					EntityFrame.frameBaoCao.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,7 +56,7 @@ public class BaoCaoJFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BaoCaoJFrame() {
+	public BaoCaoJInternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

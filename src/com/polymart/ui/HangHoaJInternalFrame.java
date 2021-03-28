@@ -94,6 +94,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//	setBounds(100, 100, 1920, 639);
 		setFocusable(true);
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -120,6 +121,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	}
 
 	public void initTopHangHoa() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setTitle("Hàng hóa - Hàng hóa");
 		JLabel lblNewLabel = new JLabel("Hàng hóa                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));

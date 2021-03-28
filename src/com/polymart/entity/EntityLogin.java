@@ -1,6 +1,6 @@
-package com.polymart.emtity;
+package com.polymart.entity;
 
-public class EmtityLogin {
+public class EntityLogin {
 	public static String checkUsername(String inputUsername) {
 		if(inputUsername.isBlank() || inputUsername.isEmpty()) {
 			return "Tên đăng nhập không được để trống";

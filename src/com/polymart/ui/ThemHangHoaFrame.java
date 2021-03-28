@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.emtity.EmtityFrame;
+import com.polymart.entity.EntityFrame;
 
 public class ThemHangHoaFrame extends JFrame {
 
@@ -54,7 +54,7 @@ public class ThemHangHoaFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmtityFrame.frameHangHoa.setVisible(true);
+					EntityFrame.frameHangHoa.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

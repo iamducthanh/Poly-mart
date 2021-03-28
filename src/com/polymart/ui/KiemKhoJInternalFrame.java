@@ -112,7 +112,7 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 	public void initTopKiemKho() {
 		setTitle("Hàng hóa - Kiểm kho");
 
-		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho                       ");
+		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho            ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 		

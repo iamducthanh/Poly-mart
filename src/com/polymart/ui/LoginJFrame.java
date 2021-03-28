@@ -16,16 +16,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import com.polymart.controller.QuanLyNhanVien;
+import com.polymart.controller.QuanLyNhanVienImpl;
+import com.polymart.emtity.*;
+import com.polymart.model.NhanVienModel;
+
 public class LoginJFrame extends JFrame {
 
 	private static final long serialVersionUID = 2723825969344724367L;
-	
+
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
@@ -57,12 +63,12 @@ public class LoginJFrame extends JFrame {
 	 * Create the frame.
 	 */
 	Action loginAction = new AbstractAction() {
-		
+
 		private static final long serialVersionUID = 1251236672384365634L;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 		}
 	};
 	private JButton btnCancel;
@@ -172,23 +178,39 @@ public class LoginJFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		
+
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setContentAreaFilled(false);
 		btnCancel.setBorder(new LineBorder(Color.WHITE));
 		btnCancel.setBackground(Color.BLACK);
 		btnCancel.setBounds(328, 269, 288, 45);
 		contentPane.add(btnCancel);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("C:\\images\\login.jpg"));
 		lblNewLabel.setBounds(-20, -20, 650, 350);
 		lblNewLabel.setBackground(Color.black);
 		contentPane.add(lblNewLabel);
-		
-	}
-	
-	public void login() throws SQLException {
 
+	}
+
+	public void login() throws SQLException {
+		String getUsername = textUsername.getText();
+		String getPassword = new String(textPassword.getText());
+		StringBuilder sp = new StringBuilder();
+		sp.append(EmtityLogin.checkUsername(getUsername)).append("\n");
+		sp.append(EmtityLogin.checkPassword(getPassword)).append("\n");
+		if (sp.length() == 0) {
+			EmtityMessage.msgThongBao(frame, sp.toString());
+		} else {
+			QuanLyNhanVienImpl quanLyNhanVienImpl = new QuanLyNhanVien();
+			NhanVienModel nhanVienModel = quanLyNhanVienImpl.getLogin(getUsername, getPassword);
+			if (nhanVienModel == null) {
+				EmtityMessage.msgThongBao(frame, "Đăng nhập thất bại");
+			} else {
+				PolyMartMain.framePolyMartMain.setVisible(true);
+				frame.setVisible(false);
+			}
+		}
 	}
 }

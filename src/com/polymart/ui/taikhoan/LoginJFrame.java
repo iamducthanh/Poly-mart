@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.taikhoan;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.entity.EntityAthur;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -37,11 +36,11 @@ public class LoginJFrame extends JFrame {
 	private JTextField textUsername;
 	private JPasswordField textPassword;
 	String change = "Change password";
-	JButton btnLogin = new JButton("Ä�Äƒng nháº­p");
+	JButton btnLogin = new JButton("Đăng nhập");
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
 	public static String vaiTro;
-	private INhanVien quanLyNhanVien = new NhanVienImpl();
+	private INhanVien nhanVien = new NhanVienImpl();
 
 	/**
 	 * Launch the application.
@@ -51,7 +50,7 @@ public class LoginJFrame extends JFrame {
 			public void run() {
 				try {
 					EntityFrame.LOGIN.setVisible(true);
-					EntityFrame.LOGIN.setTitle("Ä�Äƒng nháº­p");
+					EntityFrame.LOGIN.setTitle("Đăng nhập");
 					EntityFrame.LOGIN.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -75,8 +74,8 @@ public class LoginJFrame extends JFrame {
 	private JButton btnCancel;
 
 	public LoginJFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\images\\fpt.png"));
-		setTitle("Ä�Äƒng nháº­p");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+		setTitle("Đăng nhập");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 682, 384);
 		contentPane = new JPanel();
@@ -107,7 +106,7 @@ public class LoginJFrame extends JFrame {
 		textPassword.setBounds(342, 138, 257, 35);
 		contentPane.add(textPassword);
 
-		JLabel lblLogin = new JLabel("XIN CHĂ€O!");
+		JLabel lblLogin = new JLabel("XIN CHÀO!");
 		lblLogin.setForeground(Color.BLACK);
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblLogin.setBounds(413, 26, 203, 40);
@@ -130,7 +129,7 @@ public class LoginJFrame extends JFrame {
 		contentPane.add(btnLogin);
 
 		JLabel lblUser = new JLabel("");
-		lblUser.setIcon(new ImageIcon("C:\\images\\ong.png"));
+		lblUser.setIcon(new ImageIcon("images\\ong.png"));
 		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);
 
@@ -151,18 +150,16 @@ public class LoginJFrame extends JFrame {
 		});
 
 		textPassword.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (textPassword.getText().equals(" Password")) {
+				if (String.valueOf(textPassword.getPassword()).equals(" Password")) {
 					textPassword.setText("");
 				}
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (textPassword.getText().equals("")) {
+				if (String.valueOf(textPassword.getPassword()).equals("")) {
 					textPassword.setText(" Password");
 				}
 			}
@@ -173,7 +170,7 @@ public class LoginJFrame extends JFrame {
 //
 		btnLogin.setContentAreaFilled(false);
 //
-		btnCancel = new JButton("Káº¿t thĂºc");
+		btnCancel = new JButton("Kết thúc");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -188,7 +185,7 @@ public class LoginJFrame extends JFrame {
 		contentPane.add(btnCancel);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\images\\login.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("images\\login.jpg"));
 		lblNewLabel.setBounds(-20, -20, 650, 350);
 		lblNewLabel.setBackground(Color.black);
 		contentPane.add(lblNewLabel);
@@ -197,18 +194,19 @@ public class LoginJFrame extends JFrame {
 
 	public void login() throws SQLException {
 		String username = textUsername.getText();
+
 		String password = String.valueOf(textPassword.getPassword());
 		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
-			if ((EntityAthur._nhanVienModelLogin = quanLyNhanVien.findNhanVien(Long.parseLong(username),
-					password)) != null) {
-				textUsername.setText(" Username");
-				textPassword.setText(" Password");
+
+			if (nhanVien.findNhanVien(Long.valueOf(username), password) != null) {
+				textUsername.setText(username);
+				textPassword.setText(password);
 				EntityFrame.LOGIN.setVisible(false);
 				EntityFrame.POLYMARTMAIN.setVisible(true);
 				EntityFrame.resetFrame();
 			} else {
-				EntityMessage.show(this,
-						"Nhân viên không tồn tại!\nVui lòng kiểm tra lại tài khoản hoặc mật khẩu đăng nhập");
+
+				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
 			}
 		}
 	}

@@ -1,11 +1,11 @@
 package com.polymart.entity;
 
-import com.polymart.ui.BaoCaoJInternalFrame;
-import com.polymart.ui.ChiTietNhanVienFrame;
 import com.polymart.ui.DD;
-import com.polymart.ui.LoginJFrame;
 import com.polymart.ui.PolyMartMain;
-import com.polymart.ui.ThemHangHoaFrame;
+import com.polymart.ui.baocao.BaoCaoJInternalFrame;
+import com.polymart.ui.hanghoa.ThemHangHoaFrame;
+import com.polymart.ui.nhanvien.ChiTietNhanVienFrame;
+import com.polymart.ui.taikhoan.LoginJFrame;
 
 public class EntityFrame {
 	public static BaoCaoJInternalFrame BAOCAO = new BaoCaoJInternalFrame();

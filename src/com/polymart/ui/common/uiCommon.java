@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.common;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 public class uiCommon {
 	private JPanel panelOption;
 	static Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	static int width = (int) dimension.getWidth();
-	static int height = (int) dimension.getHeight();
+	public static int width = (int) dimension.getWidth();
+	public static int height = (int) dimension.getHeight();
 
 	public uiCommon(JPanel panelOption) {
 		super();

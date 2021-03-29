@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.nhanvien;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,6 +31,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.polymart.ui.common.uiCommon;
 
 public class NhanVienJInternalFrame extends JInternalFrame {
 

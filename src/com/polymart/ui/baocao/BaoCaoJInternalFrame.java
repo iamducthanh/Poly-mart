@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.baocao;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,10 +10,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -21,27 +20,22 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.*;
 import com.toedter.calendar.JCalendar;
 
-public class ChamCongJInternalFrame extends JInternalFrame {
+public class BaoCaoJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1619911861884761168L;
+	private static final long serialVersionUID = 5684359871253902201L;
+	
 	private JPanel contentPane;
-	private DefaultTableModel model = new DefaultTableModel();
-	private JTextField txtTimKiem;
-	private JPanel panel = new JPanel();
-	private JPanel nhanVienJPanel = new JPanel();
+	DefaultTableModel model = new DefaultTableModel();
+	JPanel nhanVienJPanel = new JPanel();
 	private JTable table;
-
-
-
+	JPanel panel = new JPanel();
+	private JTextField txtTimKiem;
 
 
 	/**
@@ -51,8 +45,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChamCongJInternalFrame frame = new ChamCongJInternalFrame();
-					frame.setVisible(true);
+					EntityFrame.BAOCAO.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,7 +56,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ChamCongJInternalFrame() {
+	public BaoCaoJInternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,13 +69,13 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-	//	initTopChamCong();
-	//	initCenterChamCong();
+	//	initTopChiTieu();
+	//	initCenterChiTieu();
 	}
 	
-	public void initTopChamCong() {
-		setTitle("Nhân viên - Chấm công");
-		JLabel lblNhanVien = new JLabel("Chấm công                        ");
+	public void initTopChiTieu() {
+		setTitle("Báo cáo - Chi tiêu");
+		JLabel lblNhanVien = new JLabel("Chi tiêu                              ");
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNhanVien, BorderLayout.WEST);
 		
@@ -116,20 +109,18 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		
 	}
 
-	public void initCenterChamCong() {
+	public void initCenterChiTieu() {
 		nhanVienJPanel.setLayout(new BoxLayout(nhanVienJPanel, BoxLayout.Y_AXIS));
-		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
-		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		model.addColumn("Mã nhân viên");
-		model.addColumn("Tên nhân viên");
-		model.addColumn("Ngày");
-		model.addColumn("Thứ");
-		model.addColumn("Thời gian làm");
+		model.addColumn("Mục đích chi tiêu");
+		model.addColumn("Ngày chi tiêu");
+		model.addColumn("Số tiền");
+		model.addColumn("Ghi chú");
 		
 		
 		table.setModel(model);
@@ -166,9 +157,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					.addContainerGap(424, Short.MAX_VALUE))
 		);
 		panelLeft.setLayout(gl_panelLeft);
-		
-		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
-		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tất cả"}));
 	}
 
 }

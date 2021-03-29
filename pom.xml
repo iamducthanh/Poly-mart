@@ -10,6 +10,7 @@
 		<sqlserver.version>8.4.1.jre14</sqlserver.version>
 		<jasperreports.version>6.16.0</jasperreports.version>
 		<jcalendar.version>1.4</jcalendar.version>
+		<swingx-all.version>1.6.3</swingx-all.version>
 	</properties>
 
 	<dependencies>
@@ -28,6 +29,12 @@
 			<artifactId>jasperreports</artifactId>
 			<version>${jasperreports.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.swinglabs.swingx</groupId>
+			<artifactId>swingx-all</artifactId>
+			<version>${swingx-all.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

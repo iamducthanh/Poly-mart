@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.hanghoa;
 
 import java.awt.EventQueue;
 import java.awt.Font;

@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.hanghoa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,6 +30,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.polymart.ui.common.uiCommon;
 
 public class ThietLapGiaJInternalFrame extends JInternalFrame {
 
@@ -104,7 +106,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		panel.add(lblNewLabel, BorderLayout.WEST);
 
 		JButton btnImport = new JButton("Xuất file ");
-		btnImport.setIcon(new ImageIcon("C:\\images\\export.png"));
+		btnImport.setIcon(new ImageIcon("images\\export.png"));
 		panel1.add(btnImport);
 
 		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();

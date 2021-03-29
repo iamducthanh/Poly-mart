@@ -74,7 +74,7 @@ public class PolyMartMain extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnTongQuan = new JMenu("Tổng quan");
-		mnTongQuan.setIcon(new ImageIcon("C:\\images\\tongquan.png"));
+		mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
 		mnTongQuan.setBackground(new Color(0, 191, 255));
 		menuBar.add(mnTongQuan);
 
@@ -83,87 +83,87 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(mnHangHoa);
 
 		JMenuItem mntmHangHoa = new JMenuItem("Hàng hóa");
-		mntmHangHoa.setIcon(new ImageIcon("C:\\images\\danhmuc.png"));
+		mntmHangHoa.setIcon(new ImageIcon("images\\danhmuc.png"));
 		mnHangHoa.add(mntmHangHoa);
 
 		JMenuItem mntmThietLapGia = new JMenuItem("Thiết lập giá");
-		mntmThietLapGia.setIcon(new ImageIcon("C:\\images\\setgia.png"));
+		mntmThietLapGia.setIcon(new ImageIcon("images\\setgia.png"));
 		mnHangHoa.add(mntmThietLapGia);
 
 		JMenuItem mntmKiemKho = new JMenuItem("Kiểm kho");
-		mntmKiemKho.setIcon(new ImageIcon("C:\\images\\kiemkho.png"));
+		mntmKiemKho.setIcon(new ImageIcon("images\\kiemkho.png"));
 		mnHangHoa.add(mntmKiemKho);
 
 		JMenuItem mntmNguonHang = new JMenuItem("Nguồn hàng");
-		mntmNguonHang.setIcon(new ImageIcon("C:\\images\\nguonhang.png"));
+		mntmNguonHang.setIcon(new ImageIcon("images\\nguonhang.png"));
 		mnHangHoa.add(mntmNguonHang);
 
 		JMenu mnGiaoDich = new JMenu("Giao dịch");
-		mnGiaoDich.setIcon(new ImageIcon("C:\\images\\giaodich.png"));
+		mnGiaoDich.setIcon(new ImageIcon("images\\giaodich.png"));
 		menuBar.add(mnGiaoDich);
 
 		JMenuItem mntmHoaDonNhap = new JMenuItem("Hóa đơn nhập");
-		mntmHoaDonNhap.setIcon(new ImageIcon("C:\\images\\hdnhap.png"));
+		mntmHoaDonNhap.setIcon(new ImageIcon("images\\hdnhap.png"));
 		mnGiaoDich.add(mntmHoaDonNhap);
 
 		JMenuItem mntmHoaDonThanhToan = new JMenuItem("Hóa đơn thanh toán");
-		mntmHoaDonThanhToan.setIcon(new ImageIcon("C:\\images\\hdxuat.png"));
+		mntmHoaDonThanhToan.setIcon(new ImageIcon("images\\hdxuat.png"));
 		mnGiaoDich.add(mntmHoaDonThanhToan);
 
 		JMenuItem mntmHoaDonTraHang = new JMenuItem("Hóa đơn trả hàng");
-		mntmHoaDonTraHang.setIcon(new ImageIcon("C:\\images\\hdtrahang.png"));
+		mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
 		mnGiaoDich.add(mntmHoaDonTraHang);
 
 		JMenu mnDoiTac = new JMenu("Báo cáo");
-		mnDoiTac.setIcon(new ImageIcon("C:\\images\\baocao.png"));
+		mnDoiTac.setIcon(new ImageIcon("images\\baocao.png"));
 		menuBar.add(mnDoiTac);
 
 		JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
-		mntmChiTieu.setIcon(new ImageIcon("C:\\images\\chitieu.png"));
+		mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
 		mnDoiTac.add(mntmChiTieu);
 
 		JMenu mnNhanVien = new JMenu("Nhân viên");
-		mnNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien1.png"));
+		mnNhanVien.setIcon(new ImageIcon("images\\nhanvien1.png"));
 		menuBar.add(mnNhanVien);
 
 		JMenuItem mntmNhanVien = new JMenuItem("Nhân viên");
-		mntmNhanVien.setIcon(new ImageIcon("C:\\images\\nhanvien.png"));
+		mntmNhanVien.setIcon(new ImageIcon("images\\nhanvien.png"));
 		mnNhanVien.add(mntmNhanVien);
 
 		JMenuItem mntmChamCong = new JMenuItem("Chấm công");
-		mntmChamCong.setIcon(new ImageIcon("C:\\images\\chamcong.png"));
+		mntmChamCong.setIcon(new ImageIcon("images\\chamcong.png"));
 		mnNhanVien.add(mntmChamCong);
 
 		JMenuItem mntmBangTinhLuong = new JMenuItem("Bảng tính lương");
-		mntmBangTinhLuong.setIcon(new ImageIcon("C:\\images\\tinhluong.png"));
+		mntmBangTinhLuong.setIcon(new ImageIcon("images\\tinhluong.png"));
 		mnNhanVien.add(mntmBangTinhLuong);
 
 		JMenuItem mntmHoaHong = new JMenuItem("Thiết lập hoa hồng");
-		mntmHoaHong.setIcon(new ImageIcon("C:\\images\\laixuat.png"));
+		mntmHoaHong.setIcon(new ImageIcon("images\\laixuat.png"));
 		mnNhanVien.add(mntmHoaHong);
 
 		JMenu mnKhachHang = new JMenu("Khách hàng");
-		mnKhachHang.setIcon(new ImageIcon("C:\\images\\doitac.png"));
+		mnKhachHang.setIcon(new ImageIcon("images\\doitac.png"));
 		menuBar.add(mnKhachHang);
 		
 		JMenuItem mntmKhachHang = new JMenuItem("Khách hàng");
-		mntmKhachHang.setIcon(new ImageIcon("C:\\images\\khachhang.png"));
+		mntmKhachHang.setIcon(new ImageIcon("images\\khachhang.png"));
 		mnKhachHang.add(mntmKhachHang);
 
 		JMenu mnCaNhan = new JMenu("Cá nhân");
-		mnCaNhan.setIcon(new ImageIcon("C:\\images\\user.png"));
+		mnCaNhan.setIcon(new ImageIcon("images\\user.png"));
 		menuBar.add(mnCaNhan);
 
 		JMenuItem mntmCaNhan = new JMenuItem("Cá nhân");
-		mntmCaNhan.setIcon(new ImageIcon("C:\\images\\user.png"));
+		mntmCaNhan.setIcon(new ImageIcon("images\\user.png"));
 		mnCaNhan.add(mntmCaNhan);
 
 		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
-		mntmDangXuat.setIcon(new ImageIcon("C:\\images\\logout.png"));
+		mntmDangXuat.setIcon(new ImageIcon("images\\logout.png"));
 		mnCaNhan.add(mntmDangXuat);
 		
 		JMenuItem mntmDoiMK = new JMenuItem("Đổi mật khẩu");
-		mntmDoiMK.setIcon(new ImageIcon("C:\\images\\changepassicon.png"));
+		mntmDoiMK.setIcon(new ImageIcon("images\\changepassicon.png"));
 		mnCaNhan.add(mntmDoiMK);
 
 		int wLine = (int) (width - (width / 100 * (100 - 42)));
@@ -179,12 +179,12 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(lblNewLabel);
 
 		JMenu mnFacebook = new JMenu("Facebook");
-		mnFacebook.setIcon(new ImageIcon("C:\\images\\facebook.png"));
+		mnFacebook.setIcon(new ImageIcon("images\\facebook.png"));
 		mnFacebook.setBackground(new Color(30, 144, 255));
 		menuBar.add(mnFacebook);
 
 		JMenu mnBanHang = new JMenu("Bán hàng");
-		mnBanHang.setIcon(new ImageIcon("C:\\images\\banhang.png"));
+		mnBanHang.setIcon(new ImageIcon("images\\banhang.png"));
 		mnBanHang.setBackground(new Color(30, 144, 255));
 
 		menuBar.add(mnBanHang);

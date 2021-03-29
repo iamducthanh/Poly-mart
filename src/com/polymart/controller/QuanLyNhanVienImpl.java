@@ -7,27 +7,36 @@ import com.polymart.model.NhanVienModel;
 
 public class QuanLyNhanVienImpl implements QuanLyNhanVien {
 
-	List<NhanVienModel> _lstNhanVien;
+	private NhanVienModel user;
+	private List<NhanVienModel> listNhanVien;
 
 	public QuanLyNhanVienImpl() {
-		_lstNhanVien = new ArrayList<NhanVienModel>();
+		listNhanVien = new ArrayList<NhanVienModel>(); // SQL
 		NhanVienModel nhanVienModel = new NhanVienModel();
-		nhanVienModel.setId(Long.valueOf(12345678));
-		nhanVienModel.setMatKhau("12345678");
-		_lstNhanVien.add(nhanVienModel);
+		nhanVienModel.setId(Long.valueOf(123));
+		nhanVienModel.setMatKhau("123");
+
+		listNhanVien.add(nhanVienModel);
 	}
 
 	@Override
-	public NhanVienModel getLogin(String username, String password) {
-		if (username.isBlank() || username.isEmpty() || password.isBlank() || password.isEmpty()) {
-			return null;
-		}
-		for (NhanVienModel x : _lstNhanVien) {
-			if (Long.parseLong(username) == x.getId() && x.getMatKhau().equals(password)) {
-				return x;
-			}
-		}
-		return null;
+	public void setLogin(String username, String password) {
+		user.setId(Long.parseLong(username));
+		user.setMatKhau(password);
 	}
 
+	@Override
+	public NhanVienModel getLogin() {
+		return user;
+	}
+
+	@Override
+	public boolean isContainsNhanVien(String username, String password) {
+		for (NhanVienModel x : listNhanVien) {
+			if (Long.parseLong(username) == x.getId() && x.getMatKhau().equals(password)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -8,21 +8,21 @@ import com.polymart.ui.PolyMartMain;
 import com.polymart.ui.ThemHangHoaFrame;
 
 public class EntityFrame {
-	public static BaoCaoJInternalFrame frameBaoCao = new BaoCaoJInternalFrame();
-	public static ChiTietNhanVienFrame frameChiTietNhanVien = new ChiTietNhanVienFrame();
-	public static DD frameDd = new DD();
-	public static LoginJFrame frameLogin = new LoginJFrame();
-	public static PolyMartMain framePolyMartMain = new PolyMartMain();
-	public static ThemHangHoaFrame frameThemHangHoa = new ThemHangHoaFrame();
+	public static BaoCaoJInternalFrame BAOCAO = new BaoCaoJInternalFrame();
+	public static ChiTietNhanVienFrame CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+	public static DD DD = new DD();
+	public static LoginJFrame LOGIN = new LoginJFrame();
+	public static PolyMartMain POLYMARTMAIN = new PolyMartMain();
+	public static ThemHangHoaFrame HANGHOA = new ThemHangHoaFrame();
 
 	// form reset lại tất cả các form khi đăng xuất đăng nhập lại
 	public static void resetFrame() {
-		frameBaoCao = new BaoCaoJInternalFrame();
-		frameChiTietNhanVien = new ChiTietNhanVienFrame();
-		frameDd = new DD();
-		frameLogin = new LoginJFrame();
-		framePolyMartMain = new PolyMartMain();
-		frameThemHangHoa = new ThemHangHoaFrame();
+		BAOCAO = new BaoCaoJInternalFrame();
+		CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+		DD = new DD();
+		LOGIN = new LoginJFrame();
+		POLYMARTMAIN = new PolyMartMain();
+		HANGHOA = new ThemHangHoaFrame();
 	}
 
 }

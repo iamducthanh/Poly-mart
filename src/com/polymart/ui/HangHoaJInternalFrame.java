@@ -521,7 +521,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			EntityFrame.frameThemHangHoa.setVisible(!EntityFrame.frameThemHangHoa.isVisible());
+			EntityFrame.HANGHOA.setVisible(!EntityFrame.HANGHOA.isVisible());
 		}
 	};
 

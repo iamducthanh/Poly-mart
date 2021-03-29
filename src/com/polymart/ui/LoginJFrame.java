@@ -24,11 +24,9 @@ import javax.swing.border.LineBorder;
 
 import com.polymart.controller.QuanLyNhanVienImpl;
 import com.polymart.controller.QuanLyNhanVien;
-import com.polymart.entity.EntityAthur;
 import com.polymart.entity.EntityFrame;
-import com.polymart.entity.EntityLogin;
 import com.polymart.entity.EntityMessage;
-import com.polymart.model.NhanVienModel;
+import com.polymart.entity.EntityValidate;
 
 public class LoginJFrame extends JFrame {
 
@@ -38,10 +36,11 @@ public class LoginJFrame extends JFrame {
 	private JTextField textUsername;
 	private JPasswordField textPassword;
 	String change = "Change password";
-	JButton btnLogin = new JButton("Đăng nhập");
+	JButton btnLogin = new JButton("Ä�Äƒng nháº­p");
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
 	public static String vaiTro;
+	private QuanLyNhanVien quanLyNhanVien = new QuanLyNhanVienImpl();
 
 	/**
 	 * Launch the application.
@@ -50,9 +49,9 @@ public class LoginJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntityFrame.frameLogin.setVisible(true);
-					EntityFrame.frameLogin.setTitle("Đăng nhập");
-					EntityFrame.frameLogin.setLocationRelativeTo(null);
+					EntityFrame.LOGIN.setVisible(true);
+					EntityFrame.LOGIN.setTitle("Ä�Äƒng nháº­p");
+					EntityFrame.LOGIN.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,7 +75,7 @@ public class LoginJFrame extends JFrame {
 
 	public LoginJFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\images\\fpt.png"));
-		setTitle("Đăng nhập");
+		setTitle("Ä�Äƒng nháº­p");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 682, 384);
 		contentPane = new JPanel();
@@ -107,7 +106,7 @@ public class LoginJFrame extends JFrame {
 		textPassword.setBounds(342, 138, 257, 35);
 		contentPane.add(textPassword);
 
-		JLabel lblLogin = new JLabel("XIN CHÀO!");
+		JLabel lblLogin = new JLabel("XIN CHĂ€O!");
 		lblLogin.setForeground(Color.BLACK);
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 19));
 		lblLogin.setBounds(413, 26, 203, 40);
@@ -120,7 +119,6 @@ public class LoginJFrame extends JFrame {
 				try {
 					login();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -174,7 +172,7 @@ public class LoginJFrame extends JFrame {
 //
 		btnLogin.setContentAreaFilled(false);
 //
-		btnCancel = new JButton("Kết thúc");
+		btnCancel = new JButton("Káº¿t thĂºc");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -197,25 +195,18 @@ public class LoginJFrame extends JFrame {
 	}
 
 	public void login() throws SQLException {
-		String getUsername = textUsername.getText();
-		String getPassword = new String(textPassword.getText());
-		StringBuilder sp = new StringBuilder();
-		sp.append(EntityLogin.checkUsernameLogin(getUsername)).append("\n");
-		sp.append(EntityLogin.checkPasswordLogin(getPassword)).append("\n");
-		if (sp.length() == 0) {
-			EntityMessage.msgThongBao(EntityFrame.frameLogin, sp.toString());
-		} else {
-			QuanLyNhanVien quanLyNhanVienImpl = new QuanLyNhanVienImpl();
-			NhanVienModel nhanVienModel = quanLyNhanVienImpl.getLogin(getUsername, getPassword);
-			if (nhanVienModel == null) {
-				EntityMessage.msgThongBao(EntityFrame.frameLogin, "Đăng nhập thất bại");
-			} else {
+		String username = textUsername.getText();
+		String password = String.valueOf(textPassword.getPassword());
+		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
+			if (quanLyNhanVien.isContainsNhanVien(username, password)) {
+				quanLyNhanVien.setLogin(username, password);
 				textUsername.setText(" Username");
 				textPassword.setText(" Password");
-				EntityAthur._nhanVienModelLogin = nhanVienModel;
-				EntityFrame.frameLogin.setVisible(false);
+				EntityFrame.LOGIN.setVisible(false);
+				EntityFrame.POLYMARTMAIN.setVisible(true);
 				EntityFrame.resetFrame();
-				EntityFrame.framePolyMartMain.setVisible(true);
+			} else {
+				EntityMessage.show(this, "NhĂ¢n viĂªn khĂ´ng tá»“n táº¡i!\nVui lĂ²ng kiá»ƒm tra láº¡i tĂªn Ä‘Äƒng nháº­p vĂ  máº­t kháº©u");
 			}
 		}
 	}

@@ -15,7 +15,7 @@ public class NhanVienModel extends AbstractModel {
 	private String anhDaiDien;
 
 	public NhanVienModel() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public NhanVienModel(String hoTen, Date ngaySinh, String diaChi, String sdt, String chucVu, String matKhau,

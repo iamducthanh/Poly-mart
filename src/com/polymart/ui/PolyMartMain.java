@@ -370,6 +370,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void close() {
+
 		try {
 			desktopPane.removeAll();
 		} catch (Exception e) {

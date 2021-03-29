@@ -18,10 +18,6 @@ public class EntityValidate {
 			EntityMessage.show(EntityFrame.LOGIN, "Mật khẩu không được để trống");
 			return false;
 		}
-		if (password.length() < 8 || password.length() > 50) {
-			EntityMessage.show(EntityFrame.LOGIN, "Mật khẩu phải có độ dài từ 8 - 50 ký tự");
-			return false;
-		}
 		return true;
 	}
 }

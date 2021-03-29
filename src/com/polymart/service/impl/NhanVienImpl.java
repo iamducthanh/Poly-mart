@@ -18,8 +18,8 @@ public class NhanVienImpl implements INhanVien {
 
 	private static void initNhanVien() {
 		NhanVienModel nhanVien = new NhanVienModel();
-		nhanVien.setId(Long.valueOf(12345678));
-		nhanVien.setMatKhau("12345678");
+		nhanVien.setId(Long.valueOf(123));
+		nhanVien.setMatKhau("123");
 		nhanVien.setChucVu(SecurityConfig.VAITRO_QUANLY);
 		mapNhanVien.put(nhanVien.getId(), nhanVien);
 	}

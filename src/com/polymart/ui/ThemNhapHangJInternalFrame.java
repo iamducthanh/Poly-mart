@@ -1,35 +1,32 @@
 package com.polymart.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
-import com.polymart.entity.EntityFrame;
-
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.Font;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
-import java.awt.Color;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
 
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 

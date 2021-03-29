@@ -18,19 +18,9 @@ public class NhanVienModel extends AbstractModel {
 		
 	}
 
-	public NhanVienModel(String hoTen, Date ngaySinh, String diaChi, String sdt, String chucVu, String matKhau,
-			String email, Boolean gioiTinh, Long luong, String anhDaiDien) {
-		super();
-		this.hoTen = hoTen;
-		this.ngaySinh = ngaySinh;
-		this.diaChi = diaChi;
-		this.sdt = sdt;
+	public NhanVienModel(String chucVu, String matKhau) {
 		this.chucVu = chucVu;
 		this.matKhau = matKhau;
-		this.email = email;
-		this.gioiTinh = gioiTinh;
-		this.luong = luong;
-		this.anhDaiDien = anhDaiDien;
 	}
 
 	public String getHoTen() {

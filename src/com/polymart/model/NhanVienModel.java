@@ -3,104 +3,118 @@ package com.polymart.model;
 import java.util.Date;
 
 public class NhanVienModel extends AbstractModel {
-	private String hoTen;
-	private Date ngaySinh;
-	private String diaChi;
-	private String sdt;
-	private String chucVu;
-	private String matKhau;
-	private String email;
-	private Boolean gioiTinh;
-	private Long luong;
-	private String anhDaiDien;
+    private String hoTen;
+    private Date ngaySinh;
+    private String diaChi;
+    private String sdt;
+    private String chucVu;
+    private String matKhau;
+    private String email;
+    private Boolean gioiTinh;
+    private Long luong;
+    private String anhDaiDien;
 
-	public NhanVienModel() {
-		
-	}
+    public NhanVienModel() {
 
-	public NhanVienModel(String chucVu, String matKhau) {
-		this.chucVu = chucVu;
-		this.matKhau = matKhau;
-	}
+    }
 
-	public String getHoTen() {
-		return hoTen;
-	}
+    public NhanVienModel(String hoTen, Date ngaySinh, String diaChi, String sdt, String chucVu, String matKhau,
+                         String email, Boolean gioiTinh, Long luong, String anhDaiDien) {
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.chucVu = chucVu;
+        this.matKhau = matKhau;
+        this.email = email;
+        this.gioiTinh = gioiTinh;
+        this.luong = luong;
+        this.anhDaiDien = anhDaiDien;
+    }
 
-	public void setHoTen(String hoTen) {
-		this.hoTen = hoTen;
-	}
+    public NhanVienModel(String chucVu, String matKhau) {
+        this.chucVu = chucVu;
+        this.matKhau = matKhau;
+    }
 
-	public Date getNgaySinh() {
-		return ngaySinh;
-	}
+    public String getHoTen() {
+        return hoTen;
+    }
 
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
-	}
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
+    }
 
-	public String getDiaChi() {
-		return diaChi;
-	}
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
 
-	public void setDiaChi(String diaChi) {
-		this.diaChi = diaChi;
-	}
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
 
-	public String getSdt() {
-		return sdt;
-	}
+    public String getDiaChi() {
+        return diaChi;
+    }
 
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
-	}
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
 
-	public String getChucVu() {
-		return chucVu;
-	}
+    public String getSdt() {
+        return sdt;
+    }
 
-	public void setChucVu(String chucVu) {
-		this.chucVu = chucVu;
-	}
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
 
-	public String getMatKhau() {
-		return matKhau;
-	}
+    public String getChucVu() {
+        return chucVu;
+    }
 
-	public void setMatKhau(String matKhau) {
-		this.matKhau = matKhau;
-	}
+    public void setChucVu(String chucVu) {
+        this.chucVu = chucVu;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getMatKhau() {
+        return matKhau;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
 
-	public boolean isGioiTinh() {
-		return gioiTinh;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setGioiTinh(boolean gioiTinh) {
-		this.gioiTinh = gioiTinh;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public long getLuong() {
-		return luong;
-	}
+    public boolean isGioiTinh() {
+        return gioiTinh;
+    }
 
-	public void setLuong(long luong) {
-		this.luong = luong;
-	}
+    public void setGioiTinh(boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
 
-	public String getAnhDaiDien() {
-		return anhDaiDien;
-	}
+    public long getLuong() {
+        return luong;
+    }
 
-	public void setAnhDaiDien(String anhDaiDien) {
-		this.anhDaiDien = anhDaiDien;
-	}
+    public void setLuong(long luong) {
+        this.luong = luong;
+    }
+
+    public String getAnhDaiDien() {
+        return anhDaiDien;
+    }
+
+    public void setAnhDaiDien(String anhDaiDien) {
+        this.anhDaiDien = anhDaiDien;
+    }
 
 }

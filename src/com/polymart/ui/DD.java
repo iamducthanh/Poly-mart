@@ -45,8 +45,8 @@ public class DD extends JFrame {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Tìm kiếm theo mã sản phẩm", "JAVA", "C", "C++", "PHP", "RUBY", "JAVASCRIPT", "ONION", "PYTHON", "SQL"}));
+		JComboBox<Object> comboBox = new JComboBox<Object>();
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tìm kiếm theo mã sản phẩm", "JAVA", "C", "C++", "PHP", "RUBY", "JAVASCRIPT", "ONION", "PYTHON", "SQL"}));
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		comboBox.setBounds(77, 133, 474, 36);
 		getContentPane().add(comboBox);

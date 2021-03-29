@@ -25,7 +25,7 @@ public class EntityValidate {
     public static String checkOldPasswordChange(String oldPassword) {
         if (oldPassword.length() == 0)
             return "Chưa nhập mật khẩu cũ";
-        if (oldPassword.equals(EntityAthur.USER.getMatKhau()))
+        if (oldPassword.equals(EntityAuthor.USER.getMatKhau()))
             return "";
         return "Mật khẩu cũ không chính xác";
     }

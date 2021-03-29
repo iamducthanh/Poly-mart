@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.entity.EntityAthur;
+import com.polymart.entity.EntityAuthor;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -199,7 +199,7 @@ public class LoginJFrame extends JFrame {
         String username = textUsername.getText();
         String password = String.valueOf(textPassword.getPassword());
         if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
-            if ((EntityAthur.USER = quanLyNhanVien.findNhanVien(Long.parseLong(username),
+            if ((EntityAuthor.USER = quanLyNhanVien.findNhanVien(Long.parseLong(username),
                     password)) != null) {
                 textUsername.setText(" Username");
                 textPassword.setText(" Password");

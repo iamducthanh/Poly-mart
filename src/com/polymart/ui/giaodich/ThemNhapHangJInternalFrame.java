@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.giaodich;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -67,6 +67,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ThemNhapHangJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 639);
 		

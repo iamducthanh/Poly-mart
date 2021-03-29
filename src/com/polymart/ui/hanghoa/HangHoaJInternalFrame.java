@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.hanghoa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +27,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.polymart.ui.common.uiCommon;
 
 public class HangHoaJInternalFrame extends JInternalFrame {
 

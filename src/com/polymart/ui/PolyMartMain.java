@@ -26,12 +26,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import com.polymart.entity.*;
+import com.polymart.ui.baocao.BaoCaoJInternalFrame;
+import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
+import com.polymart.ui.hanghoa.HangHoaJInternalFrame;
+import com.polymart.ui.hanghoa.KiemKhoJInternalFrame;
+import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
+import com.polymart.ui.hanghoa.NhapHangJInternalFrame;
+import com.polymart.ui.hanghoa.ThietLapGiaJInternalFrame;
+import com.polymart.ui.khachhang.KhachHangJInternalFrame;
+import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
+import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
+import com.polymart.ui.taikhoan.ChangePassFrame;
 
 public class PolyMartMain extends JFrame {
 
 	private static final long serialVersionUID = 6825346390245174222L;
 
-	JDesktopPane desktopPane = new JDesktopPane();
+	public JDesktopPane desktopPane = new JDesktopPane();
 	URI uri;
 
 	/**

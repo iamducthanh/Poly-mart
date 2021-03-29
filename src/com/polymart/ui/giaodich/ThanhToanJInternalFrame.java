@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.giaodich;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,6 +32,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class ThanhToanJInternalFrame extends JInternalFrame {

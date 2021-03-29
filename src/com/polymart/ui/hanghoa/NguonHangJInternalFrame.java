@@ -1,4 +1,4 @@
-package com.polymart.ui;
+package com.polymart.ui.hanghoa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

@@ -22,11 +22,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.controller.INhanVien;
-import com.polymart.controller.impl.NhanVienImpl;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
+import com.polymart.service.INhanVien;
+import com.polymart.service.impl.NhanVienImpl;
 
 public class LoginJFrame extends JFrame {
 

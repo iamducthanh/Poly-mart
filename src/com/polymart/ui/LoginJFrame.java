@@ -22,8 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.controller.QuanLyNhanVien;
-import com.polymart.controller.QuanLyNhanVienImpl;
+import com.polymart.controller.INhanVien;
+import com.polymart.controller.impl.NhanVienImpl;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -40,7 +40,7 @@ public class LoginJFrame extends JFrame {
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
 	public static String vaiTro;
-	private QuanLyNhanVien quanLyNhanVien = new QuanLyNhanVienImpl();
+	private INhanVien nhanVien = new NhanVienImpl();
 
 	/**
 	 * Launch the application.
@@ -195,19 +195,17 @@ public class LoginJFrame extends JFrame {
 	}
 
 	public void login() throws SQLException {
-
 		String username = textUsername.getText();
 		String password = String.valueOf(textPassword.getPassword());
 		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
-			if (quanLyNhanVien.isContainsNhanVien(username, password)) {
-				quanLyNhanVien.setLogin(username, password);
+			if (nhanVien.findNhanVien(Long.valueOf(username), password) != null) {
 				textUsername.setText(username);
 				textPassword.setText(password);
 				EntityFrame.LOGIN.setVisible(false);
 				EntityFrame.POLYMARTMAIN.setVisible(true);
 				EntityFrame.resetFrame();
 			} else {
-				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại tên đăng nhập và mật khẩu");
+				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
 			}
 		}
 	}

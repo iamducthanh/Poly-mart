@@ -3,11 +3,11 @@ package com.polymart.entity;
 public class EntityValidate {
 	public static boolean checkUsername(String username) {
 		if(username.isBlank()) {
-			EntityMessage.show(EntityFrame.LOGIN, "Tên đăng nhập không được để trống");
+			EntityMessage.show(EntityFrame.LOGIN, "Mã đăng nhập không được để trống");
 			return false;
 		}
 		if (!username.matches("\\d+")) { // regex contains only digits
-			EntityMessage.show(EntityFrame.LOGIN, "Tên đăng nhập chỉ chứa ký tự số");
+			EntityMessage.show(EntityFrame.LOGIN, "Mã đăng nhập chỉ chứa ký tự số");
 			return false;
 		}
 		return true;

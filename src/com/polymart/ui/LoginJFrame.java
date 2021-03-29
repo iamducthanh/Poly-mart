@@ -150,18 +150,16 @@ public class LoginJFrame extends JFrame {
 		});
 
 		textPassword.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (textPassword.getText().equals(" Password")) {
+				if (String.valueOf(textPassword.getPassword()).equals(" Password")) {
 					textPassword.setText("");
 				}
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (textPassword.getText().equals("")) {
+				if (String.valueOf(textPassword.getPassword()).equals("")) {
 					textPassword.setText(" Password");
 				}
 			}

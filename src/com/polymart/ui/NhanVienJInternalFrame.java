@@ -200,7 +200,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		btnThemNV.addActionListener(chiTietNhanVien);
 
-
 	}
 
 	public void initCenterNhanVien() {

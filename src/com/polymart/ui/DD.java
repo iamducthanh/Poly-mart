@@ -1,33 +1,33 @@
 package com.polymart.ui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JComboBox;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import javax.swing.JButton;
-
-import com.polymart.emtity.*;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import com.polymart.entity.EntityFrame;
 import com.toedter.calendar.JDateChooser;
-import javax.swing.JCheckBox;
 
 public class DD extends JFrame {
 
+	private static final long serialVersionUID = 7385962312915868189L;
+	
 	JPanel contentNhaPanel;
 	private JTextField txtMaNhanVien;
 	private JTextField txtMaKhachHang;
@@ -49,7 +49,7 @@ public class DD extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmtityFrame.frameDd.setVisible(true);
+					EntityFrame.DD.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

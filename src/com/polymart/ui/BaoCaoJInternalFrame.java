@@ -23,9 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.*;
 import com.toedter.calendar.JCalendar;
-
-import com.polymart.emtity.*;
 
 public class BaoCaoJInternalFrame extends JInternalFrame {
 
@@ -46,7 +45,7 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmtityFrame.frameBaoCao.setVisible(true);
+					EntityFrame.BAOCAO.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

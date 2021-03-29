@@ -197,7 +197,7 @@ public class LoginJFrame extends JFrame {
 
 	public void login() throws SQLException {
 		String getUsername = textUsername.getText();
-		String getPassword = new String(textPassword.getText());
+		String getPassword = new String(textPassword.getPassword().toString());
 		StringBuilder sp = new StringBuilder();
 		sp.append(EmtityLogin.checkUsername(getUsername)).append("\n");
 		sp.append(EmtityLogin.checkPassword(getPassword)).append("\n");

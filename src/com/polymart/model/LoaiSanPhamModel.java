@@ -1,15 +1,22 @@
 package com.polymart.model;
 
-public class LoaiSanPhamModel extends AbstractModel{
-	private String tenLoaiSP;
+public class LoaiSanPhamModel extends AbstractModel {
+    private String tenLoaiSP;
 
-	String getTenLoaiSP() {
-		return tenLoaiSP;
-	}
+    public LoaiSanPhamModel() {
+    }
 
-	void setTenLoaiSP(String tenLoaiSP) {
-		this.tenLoaiSP = tenLoaiSP;
-	}
-	
-	
+    public LoaiSanPhamModel(String tenLoaiSP) {
+        this.tenLoaiSP = tenLoaiSP;
+    }
+
+    String getTenLoaiSP() {
+        return tenLoaiSP;
+    }
+
+    void setTenLoaiSP(String tenLoaiSP) {
+        this.tenLoaiSP = tenLoaiSP;
+    }
+
+
 }

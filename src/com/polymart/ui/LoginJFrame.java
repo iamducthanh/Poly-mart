@@ -22,11 +22,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.controller.INhanVien;
-import com.polymart.controller.impl.NhanVienImpl;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
+import com.polymart.service.INhanVien;
+import com.polymart.service.impl.NhanVienImpl;
 
 public class LoginJFrame extends JFrame {
 
@@ -150,18 +150,16 @@ public class LoginJFrame extends JFrame {
 		});
 
 		textPassword.addFocusListener(new FocusAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (textPassword.getText().equals(" Password")) {
+				if (String.valueOf(textPassword.getPassword()).equals(" Password")) {
 					textPassword.setText("");
 				}
 			}
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (textPassword.getText().equals("")) {
+				if (String.valueOf(textPassword.getPassword()).equals("")) {
 					textPassword.setText(" Password");
 				}
 			}

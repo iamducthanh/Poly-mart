@@ -1,11 +1,11 @@
-package com.polymart.controller.impl;
+package com.polymart.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.polymart.config.SecurityConfig;
-import com.polymart.controller.INhanVien;
 import com.polymart.model.NhanVienModel;
+import com.polymart.service.INhanVien;
 
 public class NhanVienImpl implements INhanVien {
 
@@ -18,8 +18,8 @@ public class NhanVienImpl implements INhanVien {
 
 	private static void initNhanVien() {
 		NhanVienModel nhanVien = new NhanVienModel();
-		nhanVien.setId(Long.valueOf(12345678));
-		nhanVien.setMatKhau("12345678");
+		nhanVien.setId(Long.valueOf(123));
+		nhanVien.setMatKhau("123");
 		nhanVien.setChucVu(SecurityConfig.VAITRO_QUANLY);
 		mapNhanVien.put(nhanVien.getId(), nhanVien);
 	}

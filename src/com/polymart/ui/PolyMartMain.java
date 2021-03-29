@@ -301,7 +301,6 @@ public class PolyMartMain extends JFrame {
 			close();
 			NguonHangJInternalFrame nguonHang = new NguonHangJInternalFrame();
 			desktopPane.add(nguonHang);
-			nguonHang.initNguonHang();
 			nguonHang.setVisible(true);
 			EntityFrame.POLYMARTMAIN.setTitle("Quản lý nguồn hàng");
 		}

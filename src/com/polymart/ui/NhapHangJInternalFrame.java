@@ -17,17 +17,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
@@ -49,17 +44,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	private JPanel panelOption;
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
-	
-	//component nhap hanh chi tiet
-	private JTextField txtSoLuong;
-	private JTextField txtMaSP;
-	private JTextField txtNguoiNhap;
-	private JTextField txtMaPhieu;
-	private JLabel lblSLng;
-	private JLabel lblMSnPhm;
-	private JLabel lblNgiNhp;
-	private JLabel lblNgunHng;
-	private JLabel lblGhiCh;
 
 
 	/**

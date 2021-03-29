@@ -1,12 +1,15 @@
 package com.polymart.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -15,7 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class NguonHangJInternalFrame extends JInternalFrame {
@@ -25,15 +30,16 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 3314858072598500922L;
 	private JPanel contentPane;
-	//textfiled nguồn hàng
-	private JTextField txtTimNguonHang;
-	private JTextField txtTenNguonHang;
-	private JTextField txtSDTNguonHang;
-	private JTextField txtDiaChiNguonHang;
+
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
 	JPanel hangHoaJPanel = new JPanel();
-	private JTable table;
+	private JTextField txtTim;
+	private JTable table_1;
+	private JTextField txtNguonHang;
+	private JTextField txtSoDT;
+	private JTextField txtDiaChi;
+	DefaultTableModel model = new DefaultTableModel();
 
 
 	/**
@@ -64,115 +70,172 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setBounds(68, 120, 96, 20);
-		panel.setLayout(new BorderLayout(0, 0));
-
-		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
-		panel.add(panel1, BorderLayout.EAST);
-		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-	//	initNguonHang();
-	}
-	
-	public void initNguonHang() {
-		setTitle("Hàng hóa - Nguồn hàng");
-		JPanel panelNguonHang = new JPanel();
-		panelNguonHang.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelNguonHang.setBounds(100, 100, 751, 629);
-		setContentPane(panelNguonHang);
-		panelNguonHang.setLayout(null);
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("Nguồn hàng");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(10, 34, 159, 26);
-		panelNguonHang.add(lblNewLabel);
+		JLabel lblNewLabel = new JLabel("   Nguồn hàng         ");
+		lblNewLabel.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 18));
 		
-		txtTimNguonHang = new JTextField();
-		txtTimNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtTimNguonHang.setText(" Tìm theo tên, số điện thoại");
-		txtTimNguonHang.setBounds(163, 34, 438, 30);
-		panelNguonHang.add(txtTimNguonHang);
-		txtTimNguonHang.setColumns(10);
+		txtTim = new JTextField();
+		txtTim.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+		txtTim.setText(" Tìm theo tên, số điện thoại");
+		txtTim.setColumns(10);
 		
-		JButton btnTimNguonHang = new JButton("Tìm");
-		btnTimNguonHang.setBounds(611, 39, 89, 25);
-		panelNguonHang.add(btnTimNguonHang);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tên nguồn hàng");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(23, 107, 130, 30);
-		panelNguonHang.add(lblNewLabel_1);
-		
-		txtTenNguonHang = new JTextField();
-		txtTenNguonHang.setBounds(163, 109, 350, 30);
-		panelNguonHang.add(txtTenNguonHang);
-		txtTenNguonHang.setColumns(10);
-		
-		txtSDTNguonHang = new JTextField();
-		txtSDTNguonHang.setText(" ");
-		txtSDTNguonHang.setColumns(10);
-		txtSDTNguonHang.setBounds(163, 150, 350, 30);
-		panelNguonHang.add(txtSDTNguonHang);
-		
-		txtDiaChiNguonHang = new JTextField();
-		txtDiaChiNguonHang.setText(" ");
-		txtDiaChiNguonHang.setColumns(10);
-		txtDiaChiNguonHang.setBounds(163, 191, 350, 30);
-		panelNguonHang.add(txtDiaChiNguonHang);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Số điện thoại");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(23, 148, 130, 30);
-		panelNguonHang.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_1_2 = new JLabel("Địa chỉ");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_2.setBounds(23, 191, 130, 30);
-		panelNguonHang.add(lblNewLabel_1_2);
-		
-		JButton btnThemNguonHang = new JButton("Thêm");
-		btnThemNguonHang.setBounds(611, 113, 89, 25);
-		panelNguonHang.add(btnThemNguonHang);
-		
-		JButton btnCapNhatNguonHang = new JButton("Cập nhật");
-		btnCapNhatNguonHang.setBounds(611, 154, 89, 25);
-		panelNguonHang.add(btnCapNhatNguonHang);
-		
-		JButton btnXoaNguonHang = new JButton("Xóa");
-		btnXoaNguonHang.setBounds(611, 195, 89, 25);
-		panelNguonHang.add(btnXoaNguonHang);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 249, 717, 343);
-		panelNguonHang.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"T\u00EAn ngu\u1ED3n h\u00E0ng", "Địa chỉ", "Số điện thoại"
+		JButton btnTim = new JButton("Tìm");
+		btnTim.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
-		));
-		scrollPane.setViewportView(table);
+		});
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblNewLabel)
+					.addGap(5)
+					.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+					.addGap(365))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(5)
+							.addComponent(lblNewLabel))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(6)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel_1.setLayout(gl_panel_1);
 		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.EAST);
 		
-		txtTimNguonHang.addFocusListener(new FocusAdapter() {
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new TitledBorder(null, "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		
+		JButton btnXoa = new JButton("Xóa");
+		
+		JButton btnCapNhat = new JButton("Cập nhật");
+		
+		JButton btnThem = new JButton("Thêm");
+		
+		JButton btnToMi = new JButton("Tạo mới");
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(11, Short.MAX_VALUE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap(73, Short.MAX_VALUE)
+					.addComponent(btnToMi, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
+					.addGap(50)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnToMi, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(246, Short.MAX_VALUE))
+		);
+		
+		JLabel lblNewLabel_2 = new JLabel("Tên nguồn hàng");
+		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
+		
+		txtNguonHang = new JTextField();
+		txtNguonHang.setColumns(10);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Số điện thoại");
+		lblNewLabel_2_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
+		
+		txtSoDT = new JTextField();
+		txtSoDT.setColumns(10);
+		
+		JLabel lblNewLabel_2_1_1 = new JLabel("Địa chỉ");
+		lblNewLabel_2_1_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
+		
+		txtDiaChi = new JTextField();
+		txtDiaChi.setColumns(10);
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtNguonHang, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtSoDT, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(23, Short.MAX_VALUE))
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(29)
+					.addComponent(lblNewLabel_2)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txtNguonHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txtSoDT, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(124, Short.MAX_VALUE))
+		);
+		panel_3.setLayout(gl_panel_3);
+		panel_2.setLayout(gl_panel_2);
+		
+		txtTim.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (txtTimNguonHang.getText().equals(" Tìm theo tên, số điện thoại")) {
-					txtTimNguonHang.setText("");
+				if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
+					txtTim.setText("");
 				}
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (txtTimNguonHang.getText().equals("")) {
-					txtTimNguonHang.setText(" Tìm theo tên, số điện thoại");
+				if (txtTim.getText().equals("")) {
+					txtTim.setText(" Tìm theo tên, số điện thoại");
 				}
 			}
 		});
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		table_1 = new JTable();
+		scrollPane.setViewportView(table_1);
+		model.addColumn("Tên nguồn hàng");
+		model.addColumn("Địa chỉ");
+		model.addColumn("Số điện thoại");
+		table_1.setModel(model);
 	}
+	
 
 }

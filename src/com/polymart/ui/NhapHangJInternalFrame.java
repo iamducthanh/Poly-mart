@@ -30,6 +30,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFrame;
 import com.toedter.calendar.JDateChooser;
 
 public class NhapHangJInternalFrame extends JInternalFrame {
@@ -216,113 +217,13 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		
 	}
 
-	public void initFrameThem() {
-		JFrame themPhieuNhapFrame = new JFrame();
-		themPhieuNhapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		themPhieuNhapFrame.setTitle("Thêm phiếu nhập hàng");
-		themPhieuNhapFrame.setBounds(100, 100, 633, 543);
-		themPhieuNhapFrame.setFocusable(true);
-		themPhieuNhapFrame.setLocationRelativeTo(null);
-		JMenuBar menuBar = new JMenuBar();
-		themPhieuNhapFrame.setJMenuBar(menuBar);
-		
-		JMenu mnThoat = new JMenu("Thoát");
-		menuBar.add(mnThoat);
-		
-		JMenu mnLuu = new JMenu("Lưu");
-		menuBar.add(mnLuu);
-		
-		JPanel contentNhaPanel = new JPanel();
-		contentNhaPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		themPhieuNhapFrame.setContentPane(contentNhaPanel);
-		contentNhaPanel.setLayout(null);
-		
-		JPanel panelThemPhieu = new JPanel();
-		panelThemPhieu.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin phi\u1EBFu nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
-		panelThemPhieu.setBounds(10, 11, 595, 411);
-		contentNhaPanel.add(panelThemPhieu);
-		panelThemPhieu.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Mã phiếu: ", JLabel.RIGHT);
-		lblNewLabel.setBounds(0, 31, 125, 25);
-		panelThemPhieu.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		lblMSnPhm = new JLabel("Mã sản phẩm: ", JLabel.RIGHT);
-		lblMSnPhm.setBounds(0, 78, 125, 25);
-		panelThemPhieu.add(lblMSnPhm);
-		lblMSnPhm.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		txtMaPhieu = new JTextField();
-		txtMaPhieu.setBounds(154, 31, 300, 25);
-		panelThemPhieu.add(txtMaPhieu);
-		txtMaPhieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtMaPhieu.setColumns(10);
-		
-		txtMaSP = new JTextField();
-		txtMaSP.setBounds(154, 78, 300, 25);
-		panelThemPhieu.add(txtMaSP);
-		txtMaSP.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtMaSP.setColumns(10);
-		
-		txtSoLuong = new JTextField();
-		txtSoLuong.setBounds(154, 124, 300, 25);
-		panelThemPhieu.add(txtSoLuong);
-		txtSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSoLuong.setColumns(10);
-		
-		txtNguoiNhap = new JTextField();
-		txtNguoiNhap.setBounds(154, 169, 300, 25);
-		panelThemPhieu.add(txtNguoiNhap);
-		txtNguoiNhap.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtNguoiNhap.setColumns(10);
-		
-		JComboBox<Object> cbbNguonHang = new JComboBox<Object>();
-		cbbNguonHang.setBounds(154, 212, 419, 25);
-		panelThemPhieu.add(cbbNguonHang);
-		
-		lblSLng = new JLabel("Số lượng: ", JLabel.RIGHT);
-		lblSLng.setBounds(0, 124, 125, 25);
-		panelThemPhieu.add(lblSLng);
-		lblSLng.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		lblNgiNhp = new JLabel("Người nhập: ", JLabel.RIGHT);
-		lblNgiNhp.setBounds(0, 169, 125, 25);
-		panelThemPhieu.add(lblNgiNhp);
-		lblNgiNhp.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		lblNgunHng = new JLabel("Nguồn hàng: ", JLabel.RIGHT);
-		lblNgunHng.setBounds(0, 210, 125, 25);
-		panelThemPhieu.add(lblNgunHng);
-		lblNgunHng.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		lblGhiCh = new JLabel("Ghi chú: ", JLabel.RIGHT);
-		lblGhiCh.setBounds(0, 256, 125, 25);
-		panelThemPhieu.add(lblGhiCh);
-		lblGhiCh.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(154, 256, 419, 131);
-		panelThemPhieu.add(scrollPane);
-		
-		JTextArea txtGhiChu = new JTextArea();
-		scrollPane.setViewportView(txtGhiChu);
-		
-		JButton btnThoat = new JButton("Thoát");
-		btnThoat.setBounds(516, 443, 89, 23);
-		contentNhaPanel.add(btnThoat);
-		
-		JButton btnLuu = new JButton("Lưu");
-		btnLuu.setBounds(417, 443, 89, 23);
-		contentNhaPanel.add(btnLuu);
-		themPhieuNhapFrame.setVisible(true);
-	}
-
 	ActionListener openThemPhieuNhapHang = new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			initFrameThem();
+			ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame();
+			EntityFrame.POLYMARTMAIN.desktopPane.add(themNhapHangJInternalFrame);
+			themNhapHangJInternalFrame.setVisible(true);
 			
 		}
 	};

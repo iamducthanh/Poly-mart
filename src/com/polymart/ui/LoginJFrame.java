@@ -74,7 +74,7 @@ public class LoginJFrame extends JFrame {
 	private JButton btnCancel;
 
 	public LoginJFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\images\\fpt.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Đăng nhập");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 682, 384);
@@ -129,7 +129,7 @@ public class LoginJFrame extends JFrame {
 		contentPane.add(btnLogin);
 
 		JLabel lblUser = new JLabel("");
-		lblUser.setIcon(new ImageIcon("C:\\images\\ong.png"));
+		lblUser.setIcon(new ImageIcon("images\\ong.png"));
 		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);
 
@@ -187,7 +187,7 @@ public class LoginJFrame extends JFrame {
 		contentPane.add(btnCancel);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\images\\login.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("images\\login.jpg"));
 		lblNewLabel.setBounds(-20, -20, 650, 350);
 		lblNewLabel.setBackground(Color.black);
 		contentPane.add(lblNewLabel);
@@ -196,8 +196,10 @@ public class LoginJFrame extends JFrame {
 
 	public void login() throws SQLException {
 		String username = textUsername.getText();
+
 		String password = String.valueOf(textPassword.getPassword());
 		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
+
 			if (nhanVien.findNhanVien(Long.valueOf(username), password) != null) {
 				textUsername.setText(username);
 				textPassword.setText(password);
@@ -205,6 +207,7 @@ public class LoginJFrame extends JFrame {
 				EntityFrame.POLYMARTMAIN.setVisible(true);
 				EntityFrame.resetFrame();
 			} else {
+
 				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
 			}
 		}

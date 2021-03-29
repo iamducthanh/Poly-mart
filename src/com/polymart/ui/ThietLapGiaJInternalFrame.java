@@ -104,7 +104,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		panel.add(lblNewLabel, BorderLayout.WEST);
 
 		JButton btnImport = new JButton("Xuất file ");
-		btnImport.setIcon(new ImageIcon("C:\\images\\export.png"));
+		btnImport.setIcon(new ImageIcon("images\\export.png"));
 		panel1.add(btnImport);
 
 		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();

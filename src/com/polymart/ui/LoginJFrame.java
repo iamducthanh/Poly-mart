@@ -196,7 +196,7 @@ public class LoginJFrame extends JFrame {
 
 	public void login() throws SQLException {
 		String username = textUsername.getText();
-		String password = textPassword.getPassword().toString();
+		String password = String.valueOf(textPassword.getPassword());
 		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
 			if (quanLyNhanVien.isContainsNhanVien(username, password)) {
 				quanLyNhanVien.setLogin(username, password);

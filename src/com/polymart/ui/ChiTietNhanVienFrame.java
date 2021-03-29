@@ -46,7 +46,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntityFrame.frameChiTietNhanVien.setVisible(true);
+					EntityFrame.CHITIETNHANVIEN.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

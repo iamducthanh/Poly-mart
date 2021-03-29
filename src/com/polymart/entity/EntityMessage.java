@@ -8,7 +8,7 @@ public class EntityMessage {
 
 	private static String title = "Phần mềm quản lý bán hàng";
 
-	public static void msgThongBao(Component component, String text) {
+	public static void show(Component component, String text) {
 		JOptionPane.showMessageDialog(component, text, title, JOptionPane.INFORMATION_MESSAGE);
 	}
 

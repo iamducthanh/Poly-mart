@@ -25,9 +25,8 @@ import javax.swing.border.LineBorder;
 import com.polymart.controller.QuanLyNhanVien;
 import com.polymart.controller.QuanLyNhanVienImpl;
 import com.polymart.entity.EntityFrame;
-import com.polymart.entity.EntityLogin;
 import com.polymart.entity.EntityMessage;
-import com.polymart.model.NhanVienModel;
+import com.polymart.entity.EntityValidate;
 
 public class LoginJFrame extends JFrame {
 
@@ -41,6 +40,7 @@ public class LoginJFrame extends JFrame {
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
 	public static String vaiTro;
+	private QuanLyNhanVien quanLyNhanVien = new QuanLyNhanVienImpl();
 
 	/**
 	 * Launch the application.
@@ -49,9 +49,9 @@ public class LoginJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntityFrame.frameLogin.setVisible(true);
-					EntityFrame.frameLogin.setTitle("Đăng nhập");
-					EntityFrame.frameLogin.setLocationRelativeTo(null);
+					EntityFrame.LOGIN.setVisible(true);
+					EntityFrame.LOGIN.setTitle("Đăng nhập");
+					EntityFrame.LOGIN.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -119,7 +119,6 @@ public class LoginJFrame extends JFrame {
 				try {
 					login();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -196,24 +195,18 @@ public class LoginJFrame extends JFrame {
 	}
 
 	public void login() throws SQLException {
-		String getUsername = textUsername.getText();
-		String getPassword = new String(textPassword.getText());
-		StringBuilder sp = new StringBuilder();
-		sp.append(EntityLogin.checkUsername(getUsername)).append("\n");
-		sp.append(EntityLogin.checkPassword(getPassword)).append("\n");
-		if (sp.length() == 0) {
-			EntityMessage.msgThongBao(EntityFrame.frameLogin, sp.toString());
-		} else {
-			QuanLyNhanVienImpl quanLyNhanVienImpl = new QuanLyNhanVien();
-			NhanVienModel nhanVienModel = quanLyNhanVienImpl.getLogin(getUsername, getPassword);
-			if (nhanVienModel == null) {
-				EntityMessage.msgThongBao(EntityFrame.frameLogin, "Đăng nhập thất bại");
-			} else {
-				textUsername.setText(" Username");
-				textPassword.setText(" Password");
-				EntityFrame.frameLogin.setVisible(false);
+		String username = textUsername.getText();
+		String password = textPassword.getPassword().toString();
+		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
+			if (quanLyNhanVien.isContainsNhanVien(username, password)) {
+				quanLyNhanVien.setLogin(username, password);
+				textUsername.setText(username);
+				textPassword.setText(password);
+				EntityFrame.LOGIN.setVisible(false);
+				EntityFrame.POLYMARTMAIN.setVisible(true);
 				EntityFrame.resetFrame();
-				EntityFrame.framePolyMartMain.setVisible(true);
+			} else {
+				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại tên đăng nhập và mật khẩu");
 			}
 		}
 	}

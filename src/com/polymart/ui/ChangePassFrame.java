@@ -29,7 +29,6 @@ public class ChangePassFrame extends JFrame {
 	JButton btnLogin = new JButton("Đổi mật khẩu");
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
-	public static String vaiTro;
 
 	/**
 	 * Launch the application.
@@ -201,6 +200,6 @@ public class ChangePassFrame extends JFrame {
 	};
 
 	public void change() {
-
+		
 	}
 }

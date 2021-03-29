@@ -22,8 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.controller.QuanLyNhanVien;
 import com.polymart.controller.QuanLyNhanVienImpl;
+import com.polymart.controller.QuanLyNhanVien;
+import com.polymart.entity.EntityAthur;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityLogin;
 import com.polymart.entity.EntityMessage;
@@ -199,18 +200,19 @@ public class LoginJFrame extends JFrame {
 		String getUsername = textUsername.getText();
 		String getPassword = new String(textPassword.getText());
 		StringBuilder sp = new StringBuilder();
-		sp.append(EntityLogin.checkUsername(getUsername)).append("\n");
-		sp.append(EntityLogin.checkPassword(getPassword)).append("\n");
+		sp.append(EntityLogin.checkUsernameLogin(getUsername)).append("\n");
+		sp.append(EntityLogin.checkPasswordLogin(getPassword)).append("\n");
 		if (sp.length() == 0) {
 			EntityMessage.msgThongBao(EntityFrame.frameLogin, sp.toString());
 		} else {
-			QuanLyNhanVienImpl quanLyNhanVienImpl = new QuanLyNhanVien();
+			QuanLyNhanVien quanLyNhanVienImpl = new QuanLyNhanVienImpl();
 			NhanVienModel nhanVienModel = quanLyNhanVienImpl.getLogin(getUsername, getPassword);
 			if (nhanVienModel == null) {
 				EntityMessage.msgThongBao(EntityFrame.frameLogin, "Đăng nhập thất bại");
 			} else {
 				textUsername.setText(" Username");
 				textPassword.setText(" Password");
+				EntityAthur._nhanVienModelLogin = nhanVienModel;
 				EntityFrame.frameLogin.setVisible(false);
 				EntityFrame.resetFrame();
 				EntityFrame.framePolyMartMain.setVisible(true);

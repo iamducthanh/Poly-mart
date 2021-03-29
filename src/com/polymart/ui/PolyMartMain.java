@@ -41,8 +41,8 @@ public class PolyMartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					EntityFrame.framePolyMartMain.setTitle(EntityMessage.title);
 					EntityFrame.framePolyMartMain.setVisible(true);
-					EntityFrame.framePolyMartMain.setTitle("Poly mart");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -145,7 +145,7 @@ public class PolyMartMain extends JFrame {
 		JMenu mnKhachHang = new JMenu("Khách hàng");
 		mnKhachHang.setIcon(new ImageIcon("C:\\images\\doitac.png"));
 		menuBar.add(mnKhachHang);
-		
+
 		JMenuItem mntmKhachHang = new JMenuItem("Khách hàng");
 		mntmKhachHang.setIcon(new ImageIcon("C:\\images\\khachhang.png"));
 		mnKhachHang.add(mntmKhachHang);
@@ -161,7 +161,7 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
 		mntmDangXuat.setIcon(new ImageIcon("C:\\images\\logout.png"));
 		mnCaNhan.add(mntmDangXuat);
-		
+
 		JMenuItem mntmDoiMK = new JMenuItem("Đổi mật khẩu");
 		mntmDoiMK.setIcon(new ImageIcon("C:\\images\\changepassicon.png"));
 		mnCaNhan.add(mntmDoiMK);
@@ -221,9 +221,9 @@ public class PolyMartMain extends JFrame {
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 	}
-	
+
 	ActionListener openKhachHang = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			close();
@@ -232,9 +232,9 @@ public class PolyMartMain extends JFrame {
 			khachHangJInternalFrame.setVisible(true);
 		}
 	};
-	
+
 	ActionListener doiMatKhau = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ChangePassFrame changePassFrame = new ChangePassFrame();
@@ -346,7 +346,7 @@ public class PolyMartMain extends JFrame {
 			EntityFrame.framePolyMartMain.setTitle("Quản lý nhập hàng");
 		}
 	};
-	
+
 	ActionListener openThanhToan = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -363,6 +363,7 @@ public class PolyMartMain extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (EntityMessage.confirm(EntityFrame.framePolyMartMain, "Đồng ý đăng xuất tài khoản?")) {
+				EntityAthur._nhanVienModelLogin = null;
 				EntityFrame.frameLogin.setVisible(true);
 				EntityFrame.framePolyMartMain.setVisible(false);
 			}

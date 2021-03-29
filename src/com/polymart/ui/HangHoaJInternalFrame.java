@@ -28,6 +28,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFrame;
+
 public class HangHoaJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = 7158581259856675232L;
@@ -35,7 +37,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	private JPanel contentPane;
 	private JPanel panelOption;
 	private JTextField txtTimKiem;
-	
+
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
 	JPanel hangHoaJPanel = new JPanel();
@@ -44,10 +46,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JFrame optionDanhMucFrame = new JFrame();
 	JFrame optionKiemKhoFrame = new JFrame();
 
-
 	private JTable table;
 	DefaultTableModel model = new DefaultTableModel();
-	
+
 	// combobox hàng hóa
 	JCheckBox chkHinhAnh = new JCheckBox("Hình ảnh");
 	JCheckBox chkMaHang = new JCheckBox("Mã hàng");
@@ -66,8 +67,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JCheckBox chkTonKho = new JCheckBox("Tồn kho");
 	JCheckBox chkThuongHieu = new JCheckBox("Thương hiệu");
 	JCheckBox chkTrangThai = new JCheckBox("Trạng thái");
-	
-	
 
 	/**
 	 * 
@@ -90,11 +89,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public HangHoaJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	setBounds(100, 100, 1920, 639);
+		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -107,21 +106,21 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-	//	setExtendedState(JFrame.MAXIMIZED_BOTH);
+		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-	//	initTopHangHoa();
-	//	initCenterHangHoa();
-	//	initTopThietLapGia();
-	//	initCenterThietLapGia();
+		// initTopHangHoa();
+		// initCenterHangHoa();
+		// initTopThietLapGia();
+		// initCenterThietLapGia();
 //		initTopKiemKho();
 //		initCenterKiemKho();
-		
+
 //		initNguonHang();
 
 	}
 
 	public void initTopHangHoa() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setTitle("Hàng hóa - Hàng hóa");
 		JLabel lblNewLabel = new JLabel("Hàng hóa                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -162,15 +161,15 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 		JButton btnExport = new JButton("Export");
 		panel1.add(btnExport);
-		
+
 		optionDanhMucFrame.setSize(344, 264);
-		optionDanhMucFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height/100*86));
+		optionDanhMucFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
 		panelOption = new JPanel();
 		panelOption.setLayout(null);
-		panelOption.setBackground(Color.white) ;
+		panelOption.setBackground(Color.white);
 		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
 		uiCommon uiCommon = new uiCommon(panelOption);
-		
+
 		uiCommon.addCheckBox(chkHinhAnh, 10, 7, 99);
 		uiCommon.addCheckBox(chkMaHang, 10, 33, 99);
 		uiCommon.addCheckBox(chkMaVach, 10, 59, 99);
@@ -188,7 +187,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		uiCommon.addCheckBox(chkTonKho, 141, 33, 99);
 		uiCommon.addCheckBox(chkThuongHieu, 141, 7, 144);
 		uiCommon.addCheckBox(chkTrangThai, 141, 189, 99);
-		
+
 		optionDanhMucFrame.add(panelOption);
 		optionDanhMucFrame.setUndecorated(true);
 
@@ -201,14 +200,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 				optionDanhMucFrame.setVisible(true);
 			}
 		});
-		
+
 		optionDanhMuc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				optionDanhMucFrame.setVisible(true);
 
 			}
 		});
-		
+
 		optionDanhMucFrame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -216,9 +215,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 			}
 		});
-		
+
 		btnThemHang.addActionListener(themSanPham);
-		
+
 	}
 
 	public void initCenterHangHoa() {
@@ -463,7 +462,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblNewLabel_7.setVisible(false);
 				lblNewLabel_7t1.setVisible(true);
-				panel_5.setVisible(false); 
+				panel_5.setVisible(false);
 
 			}
 		});
@@ -517,16 +516,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 	}
 
-	
 	ActionListener themSanPham = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			ThemHangHoaFrame themHangHoaFrame = new ThemHangHoaFrame();
-			themHangHoaFrame.setVisible(true);
+			EntityFrame.frameThemHangHoa.setVisible(!EntityFrame.frameThemHangHoa.isVisible());
 		}
 	};
-
 
 }

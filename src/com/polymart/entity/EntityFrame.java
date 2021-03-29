@@ -13,15 +13,16 @@ public class EntityFrame {
 	public static DD frameDd = new DD();
 	public static LoginJFrame frameLogin = new LoginJFrame();
 	public static PolyMartMain framePolyMartMain = new PolyMartMain();
-	public static ThemHangHoaFrame frameHangHoa = new ThemHangHoaFrame();
+	public static ThemHangHoaFrame frameThemHangHoa = new ThemHangHoaFrame();
 
+	// form reset lại tất cả các form khi đăng xuất đăng nhập lại
 	public static void resetFrame() {
 		frameBaoCao = new BaoCaoJInternalFrame();
 		frameChiTietNhanVien = new ChiTietNhanVienFrame();
 		frameDd = new DD();
 		frameLogin = new LoginJFrame();
 		framePolyMartMain = new PolyMartMain();
-		frameHangHoa = new ThemHangHoaFrame();
+		frameThemHangHoa = new ThemHangHoaFrame();
 	}
 
 }

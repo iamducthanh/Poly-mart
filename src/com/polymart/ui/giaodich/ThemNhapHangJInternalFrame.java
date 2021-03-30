@@ -30,15 +30,13 @@ import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.polymart.model.NguonHangModel;
-import com.polymart.service.INguonHang;
-import com.polymart.service.impl.NguonHangImpl;
+import com.polymart.service.INguonHangService;
+import com.polymart.service.impl.NguonHangService;
 
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4001431086652454768L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -49,7 +47,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 	private JTextField txtTenSP;
 	private JTextField txtSoLuong;
 	private JTextField txtDonGia;
-    private INguonHang iNguonHang = new NguonHangImpl();
+    private INguonHangService nguonHangService = new NguonHangService();
 
 
 
@@ -290,7 +288,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		modelThemNhapHang.addColumn("Thành tiền");
 		tableThemNhapHang.setModel(modelThemNhapHang);
 		
-        setCbbNguonHang(iNguonHang.getListNguonHang(), cbbNguonHang);
+        setCbbNguonHang(nguonHangService.getListNguonHang(), cbbNguonHang);
 
 	}
 	
@@ -298,7 +296,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		this.setVisible(false);
 	}
 	
-    private void setCbbNguonHang(List<NguonHangModel> lstNguonHang, JComboBox cbbNguonHang) {
+    private void setCbbNguonHang(List<NguonHangModel> lstNguonHang, JComboBox<Object> cbbNguonHang) {
         if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
             cbbNguonHang.removeAll();
             lstNguonHang.forEach(x -> {

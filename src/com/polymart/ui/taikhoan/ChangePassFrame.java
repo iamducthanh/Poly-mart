@@ -21,8 +21,8 @@ import javax.swing.border.LineBorder;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityValidate;
-import com.polymart.service.INhanVien;
-import com.polymart.service.impl.NhanVienImpl;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.NhanVienService;
 
 
 @SuppressWarnings("serial")
@@ -35,7 +35,7 @@ public class ChangePassFrame extends JFrame {
     StringBuilder error = new StringBuilder();
     boolean check = false;
 
-    private INhanVien iNhanVien = new NhanVienImpl();
+    private INhanVienService nhanVienService = new NhanVienService();
 
     /**
      * Launch the application.
@@ -210,7 +210,7 @@ public class ChangePassFrame extends JFrame {
         if (EntityValidate.checkOldPasswordChange(oldPassword)
                 && EntityValidate.checkNewPasswordChange(newPassword)
                 && EntityValidate.checkConfirmNewPasswordChange(confirmNewPassword)) {
-            if (iNhanVien.changePassword(EntityAuthorization.USER.getId(), newPassword)) {
+            if (nhanVienService.changePassword(EntityAuthorization.USER.getId(), newPassword)) {
                 EntityAuthorization.USER.setMatKhau(newPassword);
                 this.setVisible(false);
             }

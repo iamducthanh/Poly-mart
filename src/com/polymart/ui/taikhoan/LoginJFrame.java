@@ -25,8 +25,8 @@ import javax.swing.border.LineBorder;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.service.INhanVien;
-import com.polymart.service.impl.NhanVienImpl;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.NhanVienService;
 
 public class LoginJFrame extends JFrame {
 
@@ -40,7 +40,7 @@ public class LoginJFrame extends JFrame {
     StringBuilder error = new StringBuilder();
     boolean check = false;
     public static String vaiTro;
-    private INhanVien nhanVien = new NhanVienImpl();
+    private INhanVienService nhanVienService = new NhanVienService();
 
     /**
      * Launch the application.
@@ -198,7 +198,7 @@ public class LoginJFrame extends JFrame {
         String password = String.valueOf(textPassword.getPassword());
         if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
 
-            if (nhanVien.findNhanVien(Long.valueOf(username), password) != null) {
+            if (nhanVienService.findNhanVien(Long.valueOf(username), password) != null) {
                 textUsername.setText(username);
                 textPassword.setText(password);
                 EntityFrame.LOGIN.setVisible(false);

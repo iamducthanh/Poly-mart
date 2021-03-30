@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class EntityMessage {
 
     // tiêu đề của phần mềm
-    public static String TITLE = "Phần mềm quản lý bán hàng";
+    public static String TITLE = "Thông báo";
 
     public static void show(Component component, String text) {
         JOptionPane.showMessageDialog(component, text, TITLE, JOptionPane.INFORMATION_MESSAGE);

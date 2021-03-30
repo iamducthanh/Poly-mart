@@ -5,9 +5,9 @@ import java.util.Map;
 
 import com.polymart.config.SecurityConfig;
 import com.polymart.model.NhanVienModel;
-import com.polymart.service.INhanVien;
+import com.polymart.service.INhanVienService;
 
-public class NhanVienImpl implements INhanVien {
+public class NhanVienService implements INhanVienService {
 
     private static Map<Long, NhanVienModel> mapNhanVien = new HashMap<Long, NhanVienModel>();    //Nạp dữ liệu từ SQL
 

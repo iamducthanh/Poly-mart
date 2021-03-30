@@ -1,6 +1,6 @@
 package com.polymart.service.impl;
 
-import com.polymart.service.IKhachHang;
+import com.polymart.service.IKhachHangService;
 
-public class KhachHangImpl implements IKhachHang {
+public class KhachHangService implements IKhachHangService {
 }

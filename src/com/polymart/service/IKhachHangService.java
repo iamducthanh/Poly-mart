@@ -1,4 +1,4 @@
 package com.polymart.service;
 
-public interface IKhachHang {
+public interface IKhachHangService {
 }

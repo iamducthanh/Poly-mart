@@ -29,7 +29,7 @@ public class EntityValidate {
             EntityMessage.show(EntityFrame.LOGIN, "Chưa nhập mật khẩu cũ");
             return false;
         }
-        if (oldPassword.equals(EntityAuthor.USER.getMatKhau()))
+        if (oldPassword.equals(EntityAuthorization.USER.getMatKhau()))
             return true;
         EntityMessage.show(EntityFrame.LOGIN, "Mật khẩu cũ không chính xác");
         return false;

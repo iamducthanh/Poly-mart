@@ -3,7 +3,7 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class ChiTietSanPhamModel extends AbstractModel {
-    private Long idSanPham;
+    private Integer idSanPham;
     private String mauSac;
     private String size;
     private Integer soLuong;
@@ -16,8 +16,8 @@ public class ChiTietSanPhamModel extends AbstractModel {
     public ChiTietSanPhamModel() {
     }
 
-    public ChiTietSanPhamModel(Long idSanPham, String mauSac, String size, Integer soLuong, Long giaBan, Long giaVon,
-                               Long giaGiam, Timestamp ngayCapNhat, Boolean status) {
+    public ChiTietSanPhamModel(Integer idSanPham, String mauSac, String size, Integer soLuong, Long giaBan, Long giaVon,
+    		Long giaGiam, Timestamp ngayCapNhat, Boolean status) {
         this.idSanPham = idSanPham;
         this.mauSac = mauSac;
         this.size = size;
@@ -29,11 +29,11 @@ public class ChiTietSanPhamModel extends AbstractModel {
         this.status = status;
     }
 
-    public Long getIdSanPham() {
+    public Integer getIdSanPham() {
         return idSanPham;
     }
 
-    public void setIdSanPham(Long idSanPham) {
+    public void setIdSanPham(Integer idSanPham) {
         this.idSanPham = idSanPham;
     }
 

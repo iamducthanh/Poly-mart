@@ -6,14 +6,14 @@ public class ChiTieuModel {
     private String mucDichChiTieu;
     private Long soTien;
     private String ghiChu;
-    private Long idNhanVien;
+    private Integer idNhanVien;
     private Timestamp ngayChiTieu;
 
     public ChiTieuModel() {
         super();
     }
 
-    public ChiTieuModel(String mucDichChiTieu, Long soTien, String ghiChu, Long idNhanVien, Timestamp ngayChiTieu) {
+    public ChiTieuModel(String mucDichChiTieu, Long soTien, String ghiChu, Integer idNhanVien, Timestamp ngayChiTieu) {
         super();
         this.mucDichChiTieu = mucDichChiTieu;
         this.soTien = soTien;
@@ -46,11 +46,11 @@ public class ChiTieuModel {
         this.ghiChu = ghiChu;
     }
 
-    public Long getIdNhanVien() {
+    public Integer getIdNhanVien() {
         return idNhanVien;
     }
 
-    public void setIdNhanVien(Long idNhanVien) {
+    public void setIdNhanVien(Integer idNhanVien) {
         this.idNhanVien = idNhanVien;
     }
 

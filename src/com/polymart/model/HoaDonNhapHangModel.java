@@ -3,34 +3,34 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class HoaDonNhapHangModel extends AbstractModel {
-    private Long idNhanVienNhap;
-    private Long idNguonHang;
+    private Integer idNhanVienNhap;
+    private Integer idNguonHang;
     private Timestamp ngayNhap;
     private String ghiChu;
 
     public HoaDonNhapHangModel() {
     }
 
-    public HoaDonNhapHangModel(Long idNhanVienNhap, Long idNguonHang, Timestamp ngayNhap, String ghiChu) {
+    public HoaDonNhapHangModel(Integer idNhanVienNhap, Integer idNguonHang, Timestamp ngayNhap, String ghiChu) {
         this.idNhanVienNhap = idNhanVienNhap;
         this.idNguonHang = idNguonHang;
         this.ngayNhap = ngayNhap;
         this.ghiChu = ghiChu;
     }
 
-    public Long getIdNhanVienNhap() {
+    public Integer getIdNhanVienNhap() {
         return idNhanVienNhap;
     }
 
-    public void setIdNhanVienNhap(Long idNhanVienNhap) {
+    public void setIdNhanVienNhap(Integer idNhanVienNhap) {
         this.idNhanVienNhap = idNhanVienNhap;
     }
 
-    public Long getIdNguonHang() {
+    public Integer getIdNguonHang() {
         return idNguonHang;
     }
 
-    public void setIdNguonHang(Long idNguonHang) {
+    public void setIdNguonHang(Integer idNguonHang) {
         this.idNguonHang = idNguonHang;
     }
 

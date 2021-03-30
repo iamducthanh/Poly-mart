@@ -1,32 +1,32 @@
 package com.polymart.model;
 
 public class ChiTietHoaDonTraHangModel {
-    private Long idHoaDonTraHang;
-    private Long idHoaDonThanhToanChiTiet;
+    private Integer idHoaDonTraHang;
+    private Integer idHoaDonThanhToanChiTiet;
     private Integer soLuong;
 
     public ChiTietHoaDonTraHangModel() {
     }
 
-    public ChiTietHoaDonTraHangModel(Long idHoaDonTraHang, Long idHoaDonThanhToanChiTiet, Integer soLuong) {
+    public ChiTietHoaDonTraHangModel(Integer idHoaDonTraHang, Integer idHoaDonThanhToanChiTiet, Integer soLuong) {
         this.idHoaDonTraHang = idHoaDonTraHang;
         this.idHoaDonThanhToanChiTiet = idHoaDonThanhToanChiTiet;
         this.soLuong = soLuong;
     }
 
-    public Long getIdHoaDonTraHang() {
+    public Integer getIdHoaDonTraHang() {
         return idHoaDonTraHang;
     }
 
-    public void setIdHoaDonTraHang(Long idHoaDonTraHang) {
+    public void setIdHoaDonTraHang(Integer idHoaDonTraHang) {
         this.idHoaDonTraHang = idHoaDonTraHang;
     }
 
-    public Long getIdHoaDonThanhToanChiTiet() {
+    public Integer getIdHoaDonThanhToanChiTiet() {
         return idHoaDonThanhToanChiTiet;
     }
 
-    public void setIdHoaDonThanhToanChiTiet(Long idHoaDonThanhToanChiTiet) {
+    public void setIdHoaDonThanhToanChiTiet(Integer idHoaDonThanhToanChiTiet) {
         this.idHoaDonThanhToanChiTiet = idHoaDonThanhToanChiTiet;
     }
 

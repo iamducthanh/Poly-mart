@@ -101,11 +101,11 @@ public class NhanVienModel extends AbstractModel {
         this.gioiTinh = gioiTinh;
     }
 
-    public long getLuong() {
+    public Long getLuong() {
         return luong;
     }
 
-    public void setLuong(long luong) {
+    public void setLuong(Long luong) {
         this.luong = luong;
     }
 

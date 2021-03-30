@@ -1,6 +1,7 @@
 package com.polymart.ui.taikhoan;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -28,6 +29,8 @@ import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginJFrame extends JFrame {
 
@@ -124,6 +127,16 @@ public class LoginJFrame extends JFrame {
 		lblLogin.setFont(new Font("Ink Free", Font.BOLD, 22));
 		lblLogin.setBounds(413, 26, 203, 40);
 		contentPane.add(lblLogin);
+		btnLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
 		btnLogin.setIcon(null);
 
 		btnLogin.setForeground(Color.WHITE);
@@ -180,6 +193,16 @@ public class LoginJFrame extends JFrame {
 		btnLogin.setContentAreaFilled(false);
 //
 		btnCancel = new JButton("Kết thúc");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);

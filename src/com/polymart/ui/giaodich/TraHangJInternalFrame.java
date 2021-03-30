@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,21 +23,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityFrame;
+import com.polymart.ui.PolyMartMain;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class TraHangJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4824323272953818563L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -203,7 +201,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame();
-			EntityFrame.POLYMARTMAIN.desktopPane.add(themHoaDonTraHang);
+			new PolyMartMain().desktopPane.add(themHoaDonTraHang);
 			themHoaDonTraHang.setVisible(true);
 			
 		}

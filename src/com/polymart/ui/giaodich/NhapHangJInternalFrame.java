@@ -27,16 +27,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityFrame;
+import com.polymart.ui.PolyMartMain;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class NhapHangJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7230782299903914961L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -47,8 +45,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	private JPanel panelOption;
 	private JTable tableNhapHang;
 	DefaultTableModel modelNhapHang = new DefaultTableModel();
-
-
 
 	/**
 	 * Launch the application.
@@ -200,18 +196,14 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 			}
 		});
 
-
-		
 	}
 
 	ActionListener openThemPhieuNhapHang = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame();
-			EntityFrame.POLYMARTMAIN.desktopPane.add(themNhapHangJInternalFrame);
+			new PolyMartMain().desktopPane.add(themNhapHangJInternalFrame);
 			themNhapHangJInternalFrame.setVisible(true);
-			
 		}
 	};
 	

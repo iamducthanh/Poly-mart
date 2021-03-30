@@ -34,16 +34,14 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityFrame;
+import com.polymart.ui.PolyMartMain;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class ThanhToanJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7230782299903914961L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -68,9 +66,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	private JTextField txtGiamGia;
 	private JTextField txtTongTien;
 	JPanel contentNhaPanel;
-
-
-
 
 	/**
 	 * Launch the application.
@@ -393,7 +388,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame();
-			EntityFrame.POLYMARTMAIN.desktopPane.add(themHoaDonThanhToan);
+			new PolyMartMain().desktopPane.add(themHoaDonThanhToan);
 			themHoaDonThanhToan.setVisible(true);
 			
 		}

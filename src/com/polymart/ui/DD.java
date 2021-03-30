@@ -1,17 +1,14 @@
 package com.polymart.ui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
-import com.polymart.entity.EntityFrame;
-
-import javax.swing.JComboBox;
-import java.awt.Font;
-import javax.swing.DefaultComboBoxModel;
 
 public class DD extends JFrame {
 
@@ -27,7 +24,7 @@ public class DD extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    EntityFrame.DD.setVisible(true);
+                    new DD().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

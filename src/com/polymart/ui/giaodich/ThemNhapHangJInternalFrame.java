@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -28,6 +29,10 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
+import com.polymart.model.NguonHangModel;
+import com.polymart.service.INguonHang;
+import com.polymart.service.impl.NguonHangImpl;
+
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
 	/**
@@ -44,6 +49,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 	private JTextField txtTenSP;
 	private JTextField txtSoLuong;
 	private JTextField txtDonGia;
+    private INguonHang iNguonHang = new NguonHangImpl();
+
 
 
 
@@ -108,9 +115,9 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.EAST);
 		
-		JComboBox<Object> comboBox_1 = new JComboBox<Object>();
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBox_1.setModel(new DefaultComboBoxModel<Object>(new String[] {"Chọn nguồn hàng"}));
+		JComboBox<Object> cbbNguonHang = new JComboBox<Object>();
+		cbbNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		cbbNguonHang.setModel(new DefaultComboBoxModel<Object>(new String[] {"Chọn nguồn hàng"}));
 		
 		JButton btnLuuTam = new JButton("Lưu tạm");
 		btnLuuTam.addActionListener(new ActionListener() {
@@ -152,7 +159,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 						.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
 						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
 							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cbbNguonHang, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel_2.createSequentialGroup()
 									.addGap(125)
 									.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
@@ -176,7 +183,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(cbbNguonHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -282,9 +289,21 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		modelThemNhapHang.addColumn("Đơn giá");
 		modelThemNhapHang.addColumn("Thành tiền");
 		tableThemNhapHang.setModel(modelThemNhapHang);
+		
+        setCbbNguonHang(iNguonHang.getListNguonHang(), cbbNguonHang);
+
 	}
 	
 	public void close() {
 		this.setVisible(false);
 	}
+	
+    private void setCbbNguonHang(List<NguonHangModel> lstNguonHang, JComboBox cbbNguonHang) {
+        if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
+            cbbNguonHang.removeAll();
+            lstNguonHang.forEach(x -> {
+                cbbNguonHang.addItem(x.getTenNguonHang());
+            });
+        }
+    }
 }

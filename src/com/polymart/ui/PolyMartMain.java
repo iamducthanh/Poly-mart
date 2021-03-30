@@ -384,15 +384,16 @@ public class PolyMartMain extends JFrame {
 		}
 	};
 
-	ActionListener logoutAccount = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (EntityMessage.confirm(EntityFrame.POLYMARTMAIN, "Đồng ý đăng xuất tài khoản?")) {
-				EntityFrame.LOGIN.setVisible(true);
-				EntityFrame.POLYMARTMAIN.setVisible(false);
-			}
-		}
-	};
+    ActionListener logoutAccount = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (EntityMessage.confirm(EntityFrame.POLYMARTMAIN, "Đồng ý đăng xuất tài khoản?")) {
+            	EntityAuthorization.USER = null;
+                EntityFrame.LOGIN.setVisible(true);
+                EntityFrame.POLYMARTMAIN.setVisible(false);
+            }
+        }
+    };
 
 	public void close() {
 

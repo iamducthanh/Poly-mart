@@ -49,6 +49,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	DefaultTableModel modelNhapHang = new DefaultTableModel();
 
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -199,6 +200,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 			}
 		});
 
+
 		
 	}
 
@@ -212,4 +214,5 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 			
 		}
 	};
+	
 }

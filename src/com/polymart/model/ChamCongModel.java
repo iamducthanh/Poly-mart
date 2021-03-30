@@ -3,22 +3,22 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class ChamCongModel {
-    private Long idNhanVien;
+    private Integer idNhanVien;
     private Timestamp ngayChamCong;
 
     public ChamCongModel() {
     }
 
-    public ChamCongModel(Long idNhanVien, Timestamp ngayChamCong) {
+    public ChamCongModel(Integer idNhanVien, Timestamp ngayChamCong) {
         this.idNhanVien = idNhanVien;
         this.ngayChamCong = ngayChamCong;
     }
 
-    public Long getIdNhanVien() {
+    public Integer getIdNhanVien() {
         return idNhanVien;
     }
 
-    public void setIdNhanVien(Long idNhanVien) {
+    public void setIdNhanVien(Integer idNhanVien) {
         this.idNhanVien = idNhanVien;
     }
 

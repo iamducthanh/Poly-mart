@@ -1,5 +1,10 @@
 package com.polymart.ui;
 
+import com.polymart.entity.EntityAuthor;
+import com.polymart.entity.EntityValidate;
+import com.polymart.service.INhanVien;
+import com.polymart.service.impl.NhanVienImpl;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -18,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.html.parser.Entity;
 
 
 @SuppressWarnings("serial")
@@ -29,6 +35,8 @@ public class ChangePassFrame extends JFrame {
     JButton btnLogin = new JButton("Đổi mật khẩu");
     StringBuilder error = new StringBuilder();
     boolean check = false;
+
+    private INhanVien iNhanVien = new NhanVienImpl();
 
     /**
      * Launch the application.
@@ -93,7 +101,7 @@ public class ChangePassFrame extends JFrame {
         btnLogin.setForeground(Color.WHITE);
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                change();
+//                change();
             }
         });
         btnLogin.setBorder(null);
@@ -199,7 +207,14 @@ public class ChangePassFrame extends JFrame {
         }
     };
 
-    public void change() {
-
+    public void change(String oldPassword, String newPassword, String confirmNewPassword) {
+        if (EntityValidate.checkOldPasswordChange(oldPassword)
+                && EntityValidate.checkNewPasswordChange(newPassword)
+                && EntityValidate.checkConfirmNewPasswordChange(confirmNewPassword)) {
+            if (iNhanVien.changePassword(EntityAuthor.USER.getId(), newPassword)) {
+                EntityAuthor.USER.setMatKhau(newPassword);
+                this.setVisible(false);
+            }
+        }
     }
 }

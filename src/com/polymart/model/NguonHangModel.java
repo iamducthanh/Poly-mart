@@ -14,27 +14,27 @@ public class NguonHangModel extends AbstractModel {
         this.sdt = sdt;
     }
 
-    String getTenNguonHang() {
+    public String getTenNguonHang() {
         return tenNguonHang;
     }
 
-    void setTenNguonHang(String tenNguonHang) {
+    public void setTenNguonHang(String tenNguonHang) {
         this.tenNguonHang = tenNguonHang;
     }
 
-    String getDiaChi() {
+    public String getDiaChi() {
         return diaChi;
     }
 
-    void setDiaChi(String diaChi) {
+    public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
 
-    String getSdt() {
+    public String getSdt() {
         return sdt;
     }
 
-    void setSdt(String sdt) {
+    public void setSdt(String sdt) {
         this.sdt = sdt;
     }
 

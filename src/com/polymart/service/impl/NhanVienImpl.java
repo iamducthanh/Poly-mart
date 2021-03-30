@@ -31,4 +31,14 @@ public class NhanVienImpl implements INhanVien {
         }
         return null;
     }
+
+    @Override
+    public boolean changePassword(Long id, String newPassword) {
+        NhanVienModel nhanVien = mapNhanVien.get(id);
+        if (nhanVien != null) {
+            mapNhanVien.get(id).setMatKhau(newPassword);
+            return true;
+        }
+        return false;
+    }
 }

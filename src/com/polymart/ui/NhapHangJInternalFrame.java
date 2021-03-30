@@ -9,27 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.List;
 
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.model.NguonHangModel;
+import com.polymart.service.INguonHang;
+import com.polymart.service.impl.NguonHangImpl;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -60,6 +52,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private JLabel lblNgiNhp;
     private JLabel lblNgunHng;
     private JLabel lblGhiCh;
+
+    //
+    private INguonHang iNguonHang = new NguonHangImpl();
 
     /**
      * Launch the application.
@@ -310,6 +305,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         btnLuu.setBounds(417, 443, 89, 23);
         contentNhaPanel.add(btnLuu);
         themPhieuNhapFrame.setVisible(true);
+
+
+        // gọi hàm add item cbb nguồn hàng
+        setCbbNguonHang(iNguonHang.getListNguonHang(), cbbNguonHang);
+
     }
 
     ActionListener openThemPhieuNhapHang = new ActionListener() {
@@ -320,4 +320,14 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
         }
     };
+
+    // thêm item combobox nguồn hàng
+    private void setCbbNguonHang(List<NguonHangModel> lstNguonHang, JComboBox cbbNguonHang) {
+        if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
+            cbbNguonHang.removeAll();
+            lstNguonHang.forEach(x -> {
+                cbbNguonHang.addItem(x.getTenNguonHang());
+            });
+        }
+    }
 }

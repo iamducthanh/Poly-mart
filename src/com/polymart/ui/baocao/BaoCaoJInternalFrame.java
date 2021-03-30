@@ -45,7 +45,7 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    EntityFrame.BAOCAO.setVisible(true);
+                    new BaoCaoJInternalFrame().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

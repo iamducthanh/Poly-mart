@@ -54,7 +54,7 @@ public class ThemHangHoaFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    EntityFrame.HANGHOA.setVisible(true);
+                    EntityFrame.THEMHANGHOA.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -1,12 +1,16 @@
 package com.polymart.service;
 
+import java.util.List;
+
 import com.polymart.model.NhanVienModel;
 
 public interface INhanVienService {
 
     // hàm tìm kiếm người dùng theo Username và password
-    NhanVienModel findNhanVien(Long id, String password);
+    NhanVienModel findNhanVienByIdAndPassword(Integer id, String password);
+    
+    List<NhanVienModel> findAll();
 
-    boolean changePassword(Long id, String newPassword);
+	boolean changePassword(Integer id, String newPassword);
 
 }

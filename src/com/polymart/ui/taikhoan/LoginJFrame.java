@@ -198,7 +198,7 @@ public class LoginJFrame extends JFrame {
         String password = String.valueOf(textPassword.getPassword());
         if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
 
-            if (nhanVienService.findNhanVien(Integer.valueOf(username), password) != null) {
+            if (nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password) != null) {
                 textUsername.setText(username);
                 textPassword.setText(password);
                 EntityFrame.LOGIN.setVisible(false);

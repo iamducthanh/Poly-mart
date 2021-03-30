@@ -1,7 +1,5 @@
 package com.polymart.entity;
 
-import javax.swing.text.html.parser.Entity;
-
 public class EntityValidate {
     public static boolean checkUsername(String username) {
         if (username.isBlank()) {

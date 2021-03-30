@@ -1,35 +1,50 @@
 package com.polymart.model;
 
-public class KhachHangModel extends AbstractModel{
+public class KhachHangModel extends AbstractModel {
 	private String hoTen;
 	private String sdt;
 	private String diaChi;
 	private Integer tichDiem;
-	
-	String getHoTen() {
-		return hoTen;
+
+	public KhachHangModel() {
 	}
-	void setHoTen(String hoTen) {
+
+	public KhachHangModel(String hoTen, String sdt, String diaChi, Integer tichDiem) {
 		this.hoTen = hoTen;
-	}
-	String getSdt() {
-		return sdt;
-	}
-	void setSdt(String sdt) {
 		this.sdt = sdt;
-	}
-	String getDiaChi() {
-		return diaChi;
-	}
-	void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
-	}
-	Integer getTichDiem() {
-		return tichDiem;
-	}
-	void setTichDiem(Integer tichDiem) {
 		this.tichDiem = tichDiem;
 	}
-	
-	
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+
+	public String getSdt() {
+		return sdt;
+	}
+
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
+	}
+
+	public String getDiaChi() {
+		return diaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+
+	public Integer getTichDiem() {
+		return tichDiem;
+	}
+
+	public void setTichDiem(Integer tichDiem) {
+		this.tichDiem = tichDiem;
+	}
 }

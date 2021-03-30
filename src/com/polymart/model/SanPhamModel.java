@@ -1,21 +1,31 @@
 package com.polymart.model;
 
-public class SanPhamModel extends AbstractModel{
-	private Long idLoaiSP;
+public class SanPhamModel extends AbstractModel {
+	private Integer idLoaiSP;
 	private String tenSP;
-	
-	Long getIdLoaiSP() {
-		return idLoaiSP;
+
+	public SanPhamModel() {
 	}
-	void setIdLoaiSP(Long idLoaiSP) {
+
+	public SanPhamModel(Integer idLoaiSP, String tenSP) {
 		this.idLoaiSP = idLoaiSP;
-	}
-	String getTenSP() {
-		return tenSP;
-	}
-	void setTenSP(String tenSP) {
 		this.tenSP = tenSP;
 	}
-	
-	
+
+	public Integer getIdLoaiSP() {
+		return idLoaiSP;
+	}
+
+	public void setIdLoaiSP(Integer idLoaiSP) {
+		this.idLoaiSP = idLoaiSP;
+	}
+
+	public String getTenSP() {
+		return tenSP;
+	}
+
+	public void setTenSP(String tenSP) {
+		this.tenSP = tenSP;
+	}
+
 }

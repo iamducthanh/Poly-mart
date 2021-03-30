@@ -38,77 +38,77 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 	private JTextField txtTimKiem;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EntityFrame.BAOCAO.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new BaoCaoJInternalFrame().setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public BaoCaoJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
-		setFocusable(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1062, 662);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-	//	initTopChiTieu();
-	//	initCenterChiTieu();
-	}
-	
-	public void initTopChiTieu() {
-		setTitle("Báo cáo - Chi tiêu");
-		JLabel lblNhanVien = new JLabel("Chi tiêu                              ");
-		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblNhanVien, BorderLayout.WEST);
-		
-		txtTimKiem = new JTextField();
-		txtTimKiem.setText(" TÌm theo mã nhân viên");
-		panel.add(txtTimKiem, BorderLayout.CENTER);
-		txtTimKiem.setColumns(10);
-		txtTimKiem.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
-					txtTimKiem.setText("");
-				}
-			}
+    /**
+     * Create the frame.
+     */
+    public BaoCaoJInternalFrame() {
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        setFocusable(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1062, 662);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
 
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimKiem.getText().equals("")) {
-					txtTimKiem.setText(" TÌm theo mã nhân viên");
-				}
-			}
-		});
-		
-		JPanel panel1 = new JPanel();
-		panel.add(panel1, BorderLayout.EAST);
-		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
-		panel1.add(lblNewLabel_1);
-		
-		
-	}
+        contentPane.add(panel, BorderLayout.NORTH);
+        panel.setLayout(new BorderLayout(0, 0));
 
+        //	initTopChiTieu();
+        //	initCenterChiTieu();
+    }
+
+    public void initTopChiTieu() {
+        setTitle("Báo cáo - Chi tiêu");
+        JLabel lblNhanVien = new JLabel("Chi tiêu                              ");
+        lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
+        panel.add(lblNhanVien, BorderLayout.WEST);
+
+        txtTimKiem = new JTextField();
+        txtTimKiem.setText(" TÌm theo mã nhân viên");
+        panel.add(txtTimKiem, BorderLayout.CENTER);
+        txtTimKiem.setColumns(10);
+        txtTimKiem.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
+                    txtTimKiem.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimKiem.getText().equals("")) {
+                    txtTimKiem.setText(" TÌm theo mã nhân viên");
+                }
+            }
+        });
+
+        JPanel panel1 = new JPanel();
+        panel.add(panel1, BorderLayout.EAST);
+        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+        JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
+        panel1.add(lblNewLabel_1);
+
+
+    }
+    
 	public void initCenterChiTieu() {
 		nhanVienJPanel.setLayout(new BoxLayout(nhanVienJPanel, BoxLayout.Y_AXIS));
 		JScrollPane scrollPane = new JScrollPane();

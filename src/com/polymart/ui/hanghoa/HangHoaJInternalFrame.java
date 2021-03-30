@@ -47,8 +47,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JFrame optionKiemKhoFrame = new JFrame();
 
 
-	private JTable table;
-	DefaultTableModel model = new DefaultTableModel();
+	private JTable tableHangHoa;
+	DefaultTableModel modelHangHoa = new DefaultTableModel();
 	
 	// combobox hàng hóa
 	JCheckBox chkHinhAnh = new JCheckBox("Hình ảnh");
@@ -493,29 +493,29 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("☐");
-		model.addColumn("Mã hàng");
-		model.addColumn("Tên hàng");
-		model.addColumn("Loại");
-		model.addColumn("GIá bán");
-		model.addColumn("Giá vốn");
-		model.addColumn("Giảm giá");
-		model.addColumn("Size");
-		model.addColumn("Màu sắc");
-		table.setModel(model);
+		tableHangHoa = new JTable();
+		scrollPane.setViewportView(tableHangHoa);
+		modelHangHoa.addColumn("☐");
+		modelHangHoa.addColumn("Mã hàng");
+		modelHangHoa.addColumn("Tên hàng");
+		modelHangHoa.addColumn("Loại");
+		modelHangHoa.addColumn("GIá bán");
+		modelHangHoa.addColumn("Giá vốn");
+		modelHangHoa.addColumn("Giảm giá");
+		modelHangHoa.addColumn("Size");
+		modelHangHoa.addColumn("Màu sắc");
+		tableHangHoa.setModel(modelHangHoa);
 
 		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-		table.getColumnModel().getColumn(1).setPreferredWidth(120);
-		table.getColumnModel().getColumn(2).setPreferredWidth(350);
-		table.getColumnModel().getColumn(3).setPreferredWidth(120);
-		table.getColumnModel().getColumn(4).setPreferredWidth(120);
-		table.getColumnModel().getColumn(5).setPreferredWidth(120);
-		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-		table.getColumnModel().getColumn(7).setPreferredWidth(130);
-		table.getColumnModel().getColumn(8).setPreferredWidth(130);
+		tableHangHoa.getColumnModel().getColumn(0).setPreferredWidth(50);
+		tableHangHoa.getColumnModel().getColumn(1).setPreferredWidth(120);
+		tableHangHoa.getColumnModel().getColumn(2).setPreferredWidth(350);
+		tableHangHoa.getColumnModel().getColumn(3).setPreferredWidth(120);
+		tableHangHoa.getColumnModel().getColumn(4).setPreferredWidth(120);
+		tableHangHoa.getColumnModel().getColumn(5).setPreferredWidth(120);
+		tableHangHoa.getColumnModel().getColumn(6).setPreferredWidth(100);
+		tableHangHoa.getColumnModel().getColumn(7).setPreferredWidth(130);
+		tableHangHoa.getColumnModel().getColumn(8).setPreferredWidth(130);
 
 	}
 

@@ -1,4 +1,4 @@
-package com.polymart.ui.hanghoa;
+package com.polymart.ui.giaodich;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,21 +22,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.ui.common.uiCommon;
-import com.polymart.ui.giaodich.ThemNhapHangJInternalFrame;
 import com.toedter.calendar.JDateChooser;
 
-public class NhapHangJInternalFrame extends JInternalFrame {
+public class TraHangJInternalFrame extends JInternalFrame {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7230782299903914961L;
+	private static final long serialVersionUID = -4824323272953818563L;
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -44,9 +45,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	private JTextField txtTimPhieuNhap;
 	JFrame optionKiemKhoFrame = new JFrame();
 	private JPanel panelOption;
-	private JTable table;
-	DefaultTableModel model = new DefaultTableModel();
-
+	private JTable tableTraHang;
+	DefaultTableModel modelTraHang = new DefaultTableModel();
 
 	/**
 	 * Launch the application.
@@ -55,7 +55,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhapHangJInternalFrame frame = new NhapHangJInternalFrame();
+					TraHangJInternalFrame frame = new TraHangJInternalFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +67,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NhapHangJInternalFrame() {
+	public TraHangJInternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//	setBounds(100, 100, 1920, 639);
@@ -84,15 +84,13 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-	//	initTopNhapHang();
-	//	initCenterNhapHang();
-		//initFrameThem();
+//		initTopNhapHang();
+//		initCenterNhapHang();
 	}
 	
-	public void initTopNhapHang() {
-		setTitle("Hàng hóa - Kiểm kho");
+	public void initTopTraHang() {
 
-		JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng                       ");
+		JLabel lblNewLabel = new JLabel("Hóa đơn trả hàng                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 		
@@ -120,6 +118,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		
 		JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
 		panel1.add(btnThemPhieuNhap);
+		JButton btnXoa = new JButton("- Xoá ");
+		panel1.add(btnXoa);
 		JButton btnExport = new JButton("→ Xuất file ");
 		panel1.add(btnExport);
 
@@ -137,11 +137,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		cbbOptionKiemKho.addItem("≡");
 		panel1.add(cbbOptionKiemKho);
 
-		btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
+		btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
 		
 	}
 	
-	public void initCenterNhapHang() {
+	public void initCenterTraHang() {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		JLabel lblNewLabel_9 = new JLabel("Thời gian");
@@ -176,41 +176,37 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã phiếu");
-		model.addColumn("Ngày");
-		model.addColumn("Giá");
-		model.addColumn("Số lượng");
-		model.addColumn("Mã sản phẩm");
-		model.addColumn("Người nhập");
-		model.addColumn("Nguồn hàng");
-		model.addColumn("Ghi chú");
-		table.setModel(model);
-
-		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-//		table.getColumnModel().getColumn(1).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(2).setPreferredWidth(150);
-//		table.getColumnModel().getColumn(3).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(4).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(5).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-//		table.getColumnModel().getColumn(7).setPreferredWidth(130);
-//		table.getColumnModel().getColumn(8).setPreferredWidth(130);
-//		table.getColumnModel().getColumn(9).setPreferredWidth(130);
+		tableTraHang = new JTable();
+		scrollPane.setViewportView(tableTraHang);
+		modelTraHang.addColumn("Mã hóa đơn");
+		modelTraHang.addColumn("Thời gian");
+		modelTraHang.addColumn("Khách hàng");
+		modelTraHang.addColumn("Tổng tiền hoàn trả");
+		modelTraHang.addColumn("Ghi chú");
+		tableTraHang.setModel(modelTraHang);
 		
+		//Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
+		tableTraHang.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				if (mouseEvent.getClickCount() == 2) {
+					ChiTietHoaDonTraHang chiTietHoaDonTraHang = new ChiTietHoaDonTraHang();
+					chiTietHoaDonTraHang.setVisible(true);
+				}
+			}
+		});
+
 		
 	}
-
-	ActionListener openThemPhieuNhapHang = new ActionListener() {
+	
+	ActionListener openThemHoaDonTraHang = new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame();
-			EntityFrame.POLYMARTMAIN.desktopPane.add(themNhapHangJInternalFrame);
-			themNhapHangJInternalFrame.setVisible(true);
+			ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame();
+			EntityFrame.POLYMARTMAIN.desktopPane.add(themHoaDonTraHang);
+			themHoaDonTraHang.setVisible(true);
 			
 		}
 	};
+
 }

@@ -31,9 +31,9 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = 5684359871253902201L;
 	
 	private JPanel contentPane;
-	DefaultTableModel model = new DefaultTableModel();
+	DefaultTableModel modelChiTieu = new DefaultTableModel();
 	JPanel nhanVienJPanel = new JPanel();
-	private JTable table;
+	private JTable tableChiTieu;
 	JPanel panel = new JPanel();
 	private JTextField txtTimKiem;
 
@@ -114,16 +114,16 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã nhân viên");
-		model.addColumn("Mục đích chi tiêu");
-		model.addColumn("Ngày chi tiêu");
-		model.addColumn("Số tiền");
-		model.addColumn("Ghi chú");
+		tableChiTieu = new JTable();
+		scrollPane.setViewportView(tableChiTieu);
+		modelChiTieu.addColumn("Mã nhân viên");
+		modelChiTieu.addColumn("Mục đích chi tiêu");
+		modelChiTieu.addColumn("Ngày chi tiêu");
+		modelChiTieu.addColumn("Số tiền");
+		modelChiTieu.addColumn("Ghi chú");
 		
 		
-		table.setModel(model);
+		tableChiTieu.setModel(modelChiTieu);
 		
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);

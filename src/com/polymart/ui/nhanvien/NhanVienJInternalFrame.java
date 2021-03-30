@@ -40,8 +40,8 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField txtTimKiem;
-	private JTable table;
-	DefaultTableModel model = new DefaultTableModel();
+	private JTable tableNhanVien;
+	DefaultTableModel modelNhanVien = new DefaultTableModel();
 	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	int width = (int) dimension.getWidth();
 	int height = (int) dimension.getHeight();
@@ -211,23 +211,23 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("☐");
-		model.addColumn("Mã nhân viên");
-		model.addColumn("Tên nhân viên");
-		model.addColumn("Mã chấm công");
-		model.addColumn("Ngày sinh");
-		model.addColumn("Quê quán");
-		model.addColumn("Số điện thoại");
-		model.addColumn("Chức vụ");
-		model.addColumn("Chi nhánh");
-		model.addColumn("Mật khẩu");
-		model.addColumn("Email");
-		model.addColumn("Giới tính");
-		model.addColumn("Mức lương");
+		tableNhanVien = new JTable();
+		scrollPane.setViewportView(tableNhanVien);
+		modelNhanVien.addColumn("☐");
+		modelNhanVien.addColumn("Mã nhân viên");
+		modelNhanVien.addColumn("Tên nhân viên");
+		modelNhanVien.addColumn("Mã chấm công");
+		modelNhanVien.addColumn("Ngày sinh");
+		modelNhanVien.addColumn("Quê quán");
+		modelNhanVien.addColumn("Số điện thoại");
+		modelNhanVien.addColumn("Chức vụ");
+		modelNhanVien.addColumn("Chi nhánh");
+		modelNhanVien.addColumn("Mật khẩu");
+		modelNhanVien.addColumn("Email");
+		modelNhanVien.addColumn("Giới tính");
+		modelNhanVien.addColumn("Mức lương");
 
-		table.setModel(model);
+		tableNhanVien.setModel(modelNhanVien);
 
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);
@@ -237,7 +237,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		JLabel lblNewLabel = new JLabel("Chi nhánh");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		tableNhanVien.getColumnModel().getColumn(0).setPreferredWidth(30);
 
 		JLabel lblChcDanh = new JLabel("Chức vụ");
 		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -266,7 +266,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		panelLeft.setLayout(gl_panelLeft);
 		
 		//Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
-		table.addMouseListener(new MouseAdapter() {
+		tableNhanVien.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
 					ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();

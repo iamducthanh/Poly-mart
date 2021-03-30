@@ -34,11 +34,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1619911861884761168L;
 	private JPanel contentPane;
-	private DefaultTableModel model = new DefaultTableModel();
+	private DefaultTableModel modelChamCong = new DefaultTableModel();
 	private JTextField txtTimKiem;
 	private JPanel panel = new JPanel();
 	private JPanel nhanVienJPanel = new JPanel();
-	private JTable table;
+	private JTable tableChamCong;
 
 
 
@@ -123,16 +123,16 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã nhân viên");
-		model.addColumn("Tên nhân viên");
-		model.addColumn("Ngày");
-		model.addColumn("Thứ");
-		model.addColumn("Thời gian làm");
+		tableChamCong = new JTable();
+		scrollPane.setViewportView(tableChamCong);
+		modelChamCong.addColumn("Mã nhân viên");
+		modelChamCong.addColumn("Tên nhân viên");
+		modelChamCong.addColumn("Ngày");
+		modelChamCong.addColumn("Thứ");
+		modelChamCong.addColumn("Thời gian làm");
 		
 		
-		table.setModel(model);
+		tableChamCong.setModel(modelChamCong);
 		
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);

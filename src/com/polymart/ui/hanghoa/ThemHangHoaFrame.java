@@ -29,8 +29,8 @@ public class ThemHangHoaFrame extends JFrame {
 	private static final long serialVersionUID = -2914525596895096982L;
 	
 	private JPanel contentPane;
-	private JTable table;
-	DefaultTableModel model = new DefaultTableModel();
+	private JTable tableThemHangHoa;
+	DefaultTableModel modelThemHangHoa = new DefaultTableModel();
 	private JTextField txtMaSP;
 	private JLabel lblTnSnPhm;
 	private JLabel lblLoi;
@@ -121,17 +121,17 @@ public class ThemHangHoaFrame extends JFrame {
 		panel.add(btnXoa);
 
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã sản phẩm");
-		model.addColumn("Tên sản phẩm");
-		model.addColumn("Loại");
-		model.addColumn("Giá vốn");
-		model.addColumn("Giá bán");
-		model.addColumn("Giá giảm");
-		model.addColumn("Màu sắc");
-		model.addColumn("Size");
-		table.setModel(model);
+		tableThemHangHoa = new JTable();
+		scrollPane.setViewportView(tableThemHangHoa);
+		modelThemHangHoa.addColumn("Mã sản phẩm");
+		modelThemHangHoa.addColumn("Tên sản phẩm");
+		modelThemHangHoa.addColumn("Loại");
+		modelThemHangHoa.addColumn("Giá vốn");
+		modelThemHangHoa.addColumn("Giá bán");
+		modelThemHangHoa.addColumn("Giá giảm");
+		modelThemHangHoa.addColumn("Màu sắc");
+		modelThemHangHoa.addColumn("Size");
+		tableThemHangHoa.setModel(modelThemHangHoa);
 		
 		JLabel lblNewLabel = new JLabel("Mã sản phẩm");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));

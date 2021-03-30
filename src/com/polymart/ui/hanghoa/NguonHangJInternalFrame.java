@@ -35,11 +35,11 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	JPanel panel1 = new JPanel();
 	JPanel hangHoaJPanel = new JPanel();
 	private JTextField txtTim;
-	private JTable table_1;
+	private JTable tableNguonHang;
 	private JTextField txtNguonHang;
 	private JTextField txtSoDT;
 	private JTextField txtDiaChi;
-	DefaultTableModel model = new DefaultTableModel();
+	DefaultTableModel modelNguonHang = new DefaultTableModel();
 
 
 	/**
@@ -229,12 +229,12 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		table_1 = new JTable();
-		scrollPane.setViewportView(table_1);
-		model.addColumn("Tên nguồn hàng");
-		model.addColumn("Địa chỉ");
-		model.addColumn("Số điện thoại");
-		table_1.setModel(model);
+		tableNguonHang = new JTable();
+		scrollPane.setViewportView(tableNguonHang);
+		modelNguonHang.addColumn("Tên nguồn hàng");
+		modelNguonHang.addColumn("Địa chỉ");
+		modelNguonHang.addColumn("Số điện thoại");
+		tableNguonHang.setModel(modelNguonHang);
 	}
 	
 

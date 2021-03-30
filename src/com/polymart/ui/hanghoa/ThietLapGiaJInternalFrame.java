@@ -40,8 +40,8 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = -1811994452109007906L;
 	private JPanel contentPane;
-	private JTable table;
-	private DefaultTableModel model = new DefaultTableModel();
+	private JTable tableThietLapGia;
+	private DefaultTableModel modelThietLapGia = new DefaultTableModel();
 	private JPanel panel = new JPanel();
 	private JPanel panel1 = new JPanel();
 	private JPanel hangHoaJPanel = new JPanel();
@@ -201,14 +201,14 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		txtTimNhomHang.setBorder(null);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã hàng");
-		model.addColumn("Tên hàng");
-		model.addColumn("Giá vốn");
-		model.addColumn("Giá nhập cuối");
-		model.addColumn("Giá chung");
-		table.setModel(model);
+		tableThietLapGia = new JTable();
+		scrollPane.setViewportView(tableThietLapGia);
+		modelThietLapGia.addColumn("Mã hàng");
+		modelThietLapGia.addColumn("Tên hàng");
+		modelThietLapGia.addColumn("Giá vốn");
+		modelThietLapGia.addColumn("Giá nhập cuối");
+		modelThietLapGia.addColumn("Giá chung");
+		tableThietLapGia.setModel(modelThietLapGia);
 		
 		txtTimNhomHang.addFocusListener(new FocusAdapter() {
 			@Override

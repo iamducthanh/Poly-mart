@@ -27,11 +27,12 @@ import javax.swing.JMenuItem;
 
 import com.polymart.entity.*;
 import com.polymart.ui.baocao.BaoCaoJInternalFrame;
+import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
+import com.polymart.ui.giaodich.TraHangJInternalFrame;
 import com.polymart.ui.hanghoa.HangHoaJInternalFrame;
 import com.polymart.ui.hanghoa.KiemKhoJInternalFrame;
 import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
-import com.polymart.ui.hanghoa.NhapHangJInternalFrame;
 import com.polymart.ui.hanghoa.ThietLapGiaJInternalFrame;
 import com.polymart.ui.khachhang.KhachHangJInternalFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
@@ -231,7 +232,21 @@ public class PolyMartMain extends JFrame {
 		mntmDoiMK.addActionListener(doiMatKhau);
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
+		mntmHoaDonTraHang.addActionListener(openTraHang);
 	}
+	
+	ActionListener openTraHang = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			close();
+			TraHangJInternalFrame traHangJInternalFrame = new TraHangJInternalFrame();
+			desktopPane.add(traHangJInternalFrame);
+			traHangJInternalFrame.initTopTraHang();
+			traHangJInternalFrame.initCenterTraHang();
+			traHangJInternalFrame.setVisible(true);
+		}
+	};
 	
 	ActionListener openKhachHang = new ActionListener() {
 		

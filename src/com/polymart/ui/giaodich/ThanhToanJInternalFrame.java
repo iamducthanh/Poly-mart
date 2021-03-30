@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -32,6 +34,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFrame;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -49,8 +52,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	private JTextField txtTimPhieuNhap;
 	JFrame optionKiemKhoFrame = new JFrame();
 	private JPanel panelOption;
-	private JTable table;
-	DefaultTableModel model = new DefaultTableModel();
+	private JTable tableThanhToan;
+	DefaultTableModel modelThanhToan = new DefaultTableModel();
 	
 	private JTextField txtMaNhanVien;
 	private JTextField txtMaKhachHang;
@@ -139,6 +142,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		
 		JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
 		panel1.add(btnThemPhieuNhap);
+		JButton btnXoa = new JButton("- Xoá ");
+		panel1.add(btnXoa);
 		JButton btnExport = new JButton("→ Xuất file ");
 		panel1.add(btnExport);
 
@@ -156,7 +161,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		cbbOptionKiemKho.addItem("≡");
 		panel1.add(cbbOptionKiemKho);
 
-		btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
+		btnThemPhieuNhap.addActionListener(openThemHoaDonThanhToan);
 		
 	}
 	
@@ -195,21 +200,18 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		model.addColumn("Mã phiếu");
-		model.addColumn("Ngày tạo");
-		model.addColumn("Mã khách hàng");
-		model.addColumn("Mã nhân viên");
-		model.addColumn("Địa điểm");
-		model.addColumn("Ngày thanh toán");
-		model.addColumn("Ghi chú");
-		model.addColumn("Số lượng");
-		model.addColumn("Giảm giá");
-		model.addColumn("Tổng tiền");
-		model.addColumn("Trạng thái");
+		tableThanhToan = new JTable();
+		scrollPane.setViewportView(tableThanhToan);
+		modelThanhToan.addColumn("Mã hóa đơn");
+		modelThanhToan.addColumn("Ngày tạo");
+		modelThanhToan.addColumn("Mã khách hàng");
+		modelThanhToan.addColumn("Mã nhân viên");
+		modelThanhToan.addColumn("Địa điểm");
+		modelThanhToan.addColumn("Tổng tiền");
+		modelThanhToan.addColumn("Trạng thái");
+		modelThanhToan.addColumn("Ghi chú");
 
-		table.setModel(model);
+		tableThanhToan.setModel(modelThanhToan);
 
 		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		table.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -373,14 +375,26 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		btnLuu.setBounds(417, 532, 89, 23);
 		contentNhaPanel.add(btnLuu);
 		themPhieuNhapFrame.setVisible(true);
+		
+		//Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
+		tableThanhToan.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				if (mouseEvent.getClickCount() == 2) {
+					ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan();
+					chiTietHoaDonThanhToan.setVisible(true);
+				}
+			}
+		});
 
 	}
 
-	ActionListener openThemPhieuNhapHang = new ActionListener() {
+	ActionListener openThemHoaDonThanhToan = new ActionListener() {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			initFrameThem();
+			ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame();
+			EntityFrame.POLYMARTMAIN.desktopPane.add(themHoaDonThanhToan);
+			themHoaDonThanhToan.setVisible(true);
 			
 		}
 	};

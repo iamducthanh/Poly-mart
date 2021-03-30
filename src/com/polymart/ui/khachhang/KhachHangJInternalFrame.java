@@ -36,9 +36,9 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 	private JTextField txtTenKhachHang;
 	private JTextField txtSoDienThoai;
 	private JTextField txtTim;
-	private JTable table_1;
+	private JTable tableKhachHang;
 	
-	private DefaultTableModel model = new DefaultTableModel();
+	private DefaultTableModel modelKhachHang = new DefaultTableModel();
 	private JTextField txtTichDiem;
 	
 
@@ -257,14 +257,14 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		table_1 = new JTable();
-		scrollPane.setViewportView(table_1);
-		model.addColumn("Tên khách hàng");
-		model.addColumn("Số điện thoại");
-		model.addColumn("Địa chỉ");
-		model.addColumn("Tích điểm");
+		tableKhachHang = new JTable();
+		scrollPane.setViewportView(tableKhachHang);
+		modelKhachHang.addColumn("Tên khách hàng");
+		modelKhachHang.addColumn("Số điện thoại");
+		modelKhachHang.addColumn("Địa chỉ");
+		modelKhachHang.addColumn("Tích điểm");
 
-		table_1.setModel(model);
+		tableKhachHang.setModel(modelKhachHang);
 		
 	}
 }

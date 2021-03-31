@@ -90,6 +90,7 @@ public class ChiTietNhanVienFrame extends JFrame {
         JButton btnNewButton = new JButton("Lưu");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	addNhanVien();
             }
         });
         btnNewButton.setBounds(687, 508, 89, 23);
@@ -242,4 +243,8 @@ public class ChiTietNhanVienFrame extends JFrame {
         buttonGroup.add(rdoNam);
         buttonGroup.add(rdoNu);
     }
+
+	protected void addNhanVien() {
+		
+	}
 }

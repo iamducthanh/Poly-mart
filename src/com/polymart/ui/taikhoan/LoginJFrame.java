@@ -116,25 +116,14 @@ public class LoginJFrame extends JFrame {
         lblLogin.setFont(new Font("Ink Free", Font.BOLD, 22));
         lblLogin.setBounds(413, 26, 203, 40);
         contentPane.add(lblLogin);
-        btnLogin.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
+        
 
-<<<<<<< HEAD
+
 		JLabel lblUser = new JLabel("");
 		lblUser.setIcon(new ImageIcon("images\\ong.png"));
 		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);
-=======
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            }
-        });
         btnLogin.setIcon(null);
->>>>>>> branch 'master' of https://github.com/iamducthanh/Poly-mart
 
         btnLogin.setForeground(Color.WHITE);
         btnLogin.addActionListener(new ActionListener() {
@@ -147,10 +136,6 @@ public class LoginJFrame extends JFrame {
         btnLogin.setBounds(328, 208, 288, 45);
         contentPane.add(btnLogin);
 
-        JLabel lblUser = new JLabel("10001");
-        lblUser.setIcon(new ImageIcon("images\\ong.png"));
-        lblUser.setBounds(34, 0, 237, 340);
-        contentPane.add(lblUser);
 
         textUsername.addFocusListener(new FocusAdapter() {
             @Override

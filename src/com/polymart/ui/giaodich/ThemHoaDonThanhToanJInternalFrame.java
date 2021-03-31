@@ -97,7 +97,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 		
 		JComboBox<Object> cbbTimSanPham = new JComboBox<Object>();
 		cbbTimSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		cbbTimSanPham.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tìm theo mã sản phẩm                                   ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
+		cbbTimSanPham.setModel(new DefaultComboBoxModel(new String[] {"Tìm theo mã sản phẩm                                                                  ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
 		panel_1.add(cbbTimSanPham);
 		
 		AutoCompleteDecorator.decorate(cbbTimSanPham);
@@ -110,15 +110,6 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 		JComboBox<Object> cbbKhachHang = new JComboBox<Object>();
 		cbbKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cbbKhachHang.setModel(new DefaultComboBoxModel<Object>(new String[] {"Chọn khách hàng"}));
-		
-		JButton btnLuuTam = new JButton("Lưu tạm");
-		btnLuuTam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//Sau khi ấn lưu tạm sẽ thêm vào bảng bên trái và tính lại thành tiền
-				
-			}
-		});
 		
 		JButton btnHoanThanh = new JButton("Hoàn thành");
 		btnHoanThanh.addActionListener(new ActionListener() {
@@ -144,56 +135,51 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_2.createSequentialGroup()
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_2.createSequentialGroup()
+								.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+								.addContainerGap())
+							.addGroup(gl_panel_2.createSequentialGroup()
+								.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+								.addContainerGap())
+							.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
 								.addComponent(cbbKhachHang, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel_2.createSequentialGroup()
-									.addGap(125)
-									.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(btnHoanThanh)))
-							.addContainerGap())
+								.addContainerGap())
+							.addGroup(gl_panel_2.createSequentialGroup()
+								.addComponent(lblNewLabel_1_1_1_1_2, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap(122, Short.MAX_VALUE)))
 						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-							.addComponent(lblNewLabel_1_1_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(lblNewLabel_1_1_1_1_2, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(122, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-							.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-							.addContainerGap())))
+							.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_1_1_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnHoanThanh))
+							.addGap(21))))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addComponent(cbbKhachHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 316, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewLabel_1_1_1_1_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
 					.addComponent(lblNewLabel_1_1_1_1_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewLabel_2)
 					.addGap(18)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		
-		JTextArea txtGhiChu = new JTextArea();
-		scrollPane_1.setViewportView(txtGhiChu);
+		JTextArea textArea = new JTextArea();
+		scrollPane_1.setViewportView(textArea);
 		
 		JLabel lblNewLabel_1 = new JLabel("Mã sản phẩm");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -227,35 +213,56 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 		lblNewLabel_1_1_1_1_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JSpinField spinField = new JSpinField();
-		spinField.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JButton btnLuuTam = new JButton("Lưu tạm");
+		btnLuuTam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Sau khi ấn lưu tạm sẽ thêm vào bảng bên trái và tính lại thành tiền
+				
+			}
+		});
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(txtGiamGia, GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_3.createSequentialGroup()
 									.addGap(10)
 									.addComponent(txtMaSP, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel_3.createSequentialGroup()
 									.addGap(10)
-									.addComponent(txtTenSP, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-								.addGroup(gl_panel_3.createSequentialGroup()
-									.addGap(10)
-									.addComponent(txtDonGia, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-								.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-									.addGap(10)
-									.addComponent(txtGiamGia, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-								.addComponent(lblNewLabel_1_1_1_1_3, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(txtTenSP, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))))
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addGap(20)
-							.addComponent(spinField, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)))
+							.addComponent(spinField, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(txtDonGia, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1_1_1_1_3, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+							.addGap(212)
+							.addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_panel_3.setVerticalGroup(
@@ -265,7 +272,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtMaSP, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(11)
 					.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtTenSP, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
@@ -273,15 +280,16 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 					.addGap(4)
 					.addComponent(spinField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtDonGia, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblNewLabel_1_1_1_1_3, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtGiamGia, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+					.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 		);
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);

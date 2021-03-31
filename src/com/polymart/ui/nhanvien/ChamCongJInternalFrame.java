@@ -81,7 +81,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 	//	initTopChamCong();
-		initCenterChamCong();
+	//	initCenterChamCong();
 	}
 	
 	public void initTopChamCong() {

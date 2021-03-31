@@ -35,6 +35,7 @@ import com.polymart.ui.hanghoa.KiemKhoJInternalFrame;
 import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
 import com.polymart.ui.hanghoa.ThietLapGiaJInternalFrame;
 import com.polymart.ui.khachhang.KhachHangJInternalFrame;
+import com.polymart.ui.nhanvien.BangLuongJIternalFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
@@ -229,6 +230,7 @@ public class PolyMartMain extends JFrame {
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
+		mntmBangTinhLuong.addActionListener(openBangLuong);
 	}
 
 	ActionListener openTraHang = new ActionListener() {
@@ -425,6 +427,19 @@ public class PolyMartMain extends JFrame {
 			this.setVisible(false);
 			EntityFrame.resetFrame();
 		}
+	}
+	
+	ActionListener openBangLuong = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openBangLuong();
+		}
+	};
+	
+	public void openBangLuong() {
+		close();
+		BangLuongJIternalFrame bangLuong = new BangLuongJIternalFrame();
+		desktopPane.add(bangLuong);
+		bangLuong.setVisible(true);
 	}
 
 	public void close() {

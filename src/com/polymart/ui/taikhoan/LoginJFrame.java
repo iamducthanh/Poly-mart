@@ -11,9 +11,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,13 +24,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import com.polymart.ui.PolyMartMain;
 
 public class LoginJFrame extends JFrame {
 
@@ -44,6 +44,8 @@ public class LoginJFrame extends JFrame {
 	StringBuilder error = new StringBuilder();
 	boolean check = false;
 	public static String vaiTro;
+	private JButton btnCancel;
+	
 	private INhanVienService nhanVienService = new NhanVienService();
 
 	/**
@@ -53,6 +55,7 @@ public class LoginJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					EntityFrame.LOGIN = new LoginJFrame();
 					EntityFrame.LOGIN.setVisible(true);
 					EntityFrame.LOGIN.setTitle("Đăng nhập");
 					EntityFrame.LOGIN.setLocationRelativeTo(null);
@@ -62,20 +65,6 @@ public class LoginJFrame extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
-	Action loginAction = new AbstractAction() {
-
-		private static final long serialVersionUID = 1251236672384365634L;
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	};
-	private JButton btnCancel;
 
 	public LoginJFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
@@ -187,11 +176,8 @@ public class LoginJFrame extends JFrame {
 			}
 		});
 
-		textUsername.addActionListener(loginAction);
-		textPassword.addActionListener(loginAction);
-//
 		btnLogin.setContentAreaFilled(false);
-//
+
 		btnCancel = new JButton("Kết thúc");
 		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -232,18 +218,16 @@ public class LoginJFrame extends JFrame {
 
 	public void login() {
 		String username = textUsername.getText();
-
 		String password = String.valueOf(textPassword.getPassword());
 		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
-
-			if (nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password) != null) {
+			EntityAuthorization.USER = nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password);
+			if (EntityAuthorization.USER != null) {
 				textUsername.setText(username);
 				textPassword.setText(password);
 				EntityFrame.LOGIN.setVisible(false);
+				EntityFrame.POLYMARTMAIN = new PolyMartMain();
 				EntityFrame.POLYMARTMAIN.setVisible(true);
-				EntityFrame.resetFrame();
 			} else {
-
 				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
 			}
 		}

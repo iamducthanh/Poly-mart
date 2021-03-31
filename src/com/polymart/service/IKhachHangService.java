@@ -1,4 +1,6 @@
 package com.polymart.service;
 
-public interface IKhachHangService {
+import com.polymart.model.KhachHangModel;
+
+public interface IKhachHangService extends GenericService<KhachHangModel> {
 }

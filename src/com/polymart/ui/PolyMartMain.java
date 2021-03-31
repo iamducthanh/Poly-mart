@@ -68,10 +68,14 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\eclipse-workspace\\Poly-mart\\images\\fpt.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+		setTitle(EntityMessage.TITLE);
+		if(EntityAuthorization.USER!=null){
 		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		editMenu();
 	}

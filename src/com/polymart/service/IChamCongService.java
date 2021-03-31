@@ -1,4 +1,6 @@
 package com.polymart.service;
 
-public interface IChamCongService {
+import com.polymart.model.ChamCongModel;
+
+public interface IChamCongService extends GenericService<ChamCongModel> {
 }

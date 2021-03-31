@@ -1,4 +1,6 @@
 package com.polymart.service;
 
-public interface ILoaiSanPhamService {
+import com.polymart.model.LoaiSanPhamModel;
+
+public interface ILoaiSanPhamService extends GenericService<LoaiSanPhamModel> {
 }

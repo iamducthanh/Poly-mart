@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import com.polymart.entity.*;
 import com.toedter.calendar.JDateChooser;
 
 public class ChiTietNhanVienFrame extends JFrame {
@@ -45,7 +46,7 @@ public class ChiTietNhanVienFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new ChiTietNhanVienFrame().setVisible(true);
+                    EntityFrame.CHITIETNHANVIEN.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

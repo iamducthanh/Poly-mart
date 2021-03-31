@@ -11,8 +11,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -26,12 +24,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
-import com.polymart.ui.PolyMartMain;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginJFrame extends JFrame {
 
@@ -40,8 +39,11 @@ public class LoginJFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUsername;
 	private JPasswordField textPassword;
+	String change = "Change password";
 	JButton btnLogin = new JButton("Đăng nhập");
-
+	StringBuilder error = new StringBuilder();
+	boolean check = false;
+	public static String vaiTro;
 	private INhanVienService nhanVienService = new NhanVienService();
 
 	/**
@@ -51,7 +53,9 @@ public class LoginJFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new LoginJFrame().setVisible(true);
+					EntityFrame.LOGIN.setVisible(true);
+					EntityFrame.LOGIN.setTitle("Đăng nhập");
+					EntityFrame.LOGIN.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,8 +78,6 @@ public class LoginJFrame extends JFrame {
 	private JButton btnCancel;
 
 	public LoginJFrame() {
-		setTitle("Đăng nhập");
-		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Đăng nhập");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -108,7 +110,7 @@ public class LoginJFrame extends JFrame {
 		textPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				loginKeyPressed(e);
+				login();
 			}
 		});
 		textPassword.setForeground(Color.black);
@@ -130,7 +132,6 @@ public class LoginJFrame extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
-
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -188,16 +189,15 @@ public class LoginJFrame extends JFrame {
 
 		textUsername.addActionListener(loginAction);
 		textPassword.addActionListener(loginAction);
-
+//
 		btnLogin.setContentAreaFilled(false);
-
+//
 		btnCancel = new JButton("Kết thúc");
 		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				setCursor(new Cursor(Cursor.HAND_CURSOR));
 			}
-
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -232,18 +232,20 @@ public class LoginJFrame extends JFrame {
 
 	public void login() {
 		String username = textUsername.getText();
+
 		String password = String.valueOf(textPassword.getPassword());
-		if (EntityValidate.checkUsername(username, this) && EntityValidate.checkPassword(password, this)) {
-			EntityAuthorization.USER = nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password);
-			if (EntityAuthorization.USER != null) {
-				this.setVisible(false);
-				new PolyMartMain().setVisible(true);
+		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
+
+			if (nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password) != null) {
+				textUsername.setText(username);
+				textPassword.setText(password);
+				EntityFrame.LOGIN.setVisible(false);
+				EntityFrame.POLYMARTMAIN.setVisible(true);
+				EntityFrame.resetFrame();
 			} else {
+
 				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
-				textUsername.requestFocus();
 			}
-		} else {
-			textUsername.requestFocus();
 		}
 	}
 }

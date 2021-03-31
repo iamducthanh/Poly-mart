@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFrame;
+
 public class ThemHangHoaFrame extends JFrame {
 
 	private static final long serialVersionUID = -2914525596895096982L;
@@ -52,7 +54,7 @@ public class ThemHangHoaFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new ThemHangHoaFrame().setVisible(true);
+					EntityFrame.THEMHANGHOA.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

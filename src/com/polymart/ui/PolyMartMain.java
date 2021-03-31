@@ -54,7 +54,8 @@ public class PolyMartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new PolyMartMain().setVisible(true);
+					EntityFrame.POLYMARTMAIN = new PolyMartMain();
+					EntityFrame.POLYMARTMAIN.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,7 +67,7 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\eclipse-workspace\\Poly-mart\\images\\fpt.png"));
 		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +81,7 @@ public class PolyMartMain extends JFrame {
 		int width = (int) dimension.getWidth();
 		setJMenuBar(menuBar);
 
-		JMenu mnTongQuan = new JMenu("Tổng quan");
+		JMenu mnTongQuan = new JMenu("Thống kê");
 		mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
 		mnTongQuan.setBackground(new Color(0, 191, 255));
 		menuBar.add(mnTongQuan);
@@ -421,12 +422,12 @@ public class PolyMartMain extends JFrame {
 		if (EntityMessage.confirm(this, "Đồng ý đăng xuất tài khoản?")) {
 			EntityAuthorization.USER = null;
 			new LoginJFrame().setVisible(true);
-			setVisible(false);
+			this.setVisible(false);
+			EntityFrame.resetFrame();
 		}
 	}
 
 	public void close() {
-
 		try {
 			desktopPane.removeAll();
 		} catch (Exception e) {

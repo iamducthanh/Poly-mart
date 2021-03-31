@@ -207,9 +207,9 @@ public class ChangePassFrame extends JFrame {
     };
 
     public void change(String oldPassword, String newPassword, String confirmNewPassword) {
-        if (EntityValidate.checkOldPasswordChange(oldPassword)
-                && EntityValidate.checkNewPasswordChange(newPassword)
-                && EntityValidate.checkConfirmNewPasswordChange(confirmNewPassword)) {
+        if (EntityValidate.checkOldPasswordChange(this, oldPassword)
+                && EntityValidate.checkNewPasswordChange(this, newPassword)
+                && EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
             if (nhanVienService.changePassword(EntityAuthorization.USER.getId(), newPassword)) {
                 EntityAuthorization.USER.setMatKhau(newPassword);
                 this.setVisible(false);

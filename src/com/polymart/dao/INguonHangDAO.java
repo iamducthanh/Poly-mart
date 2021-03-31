@@ -7,4 +7,6 @@ import java.util.List;
 public interface INguonHangDAO extends GenericDAO<NguonHangModel> {
 
     List<NguonHangModel> findAll();
+    
+    List<NguonHangModel> findByName(String name);
 }

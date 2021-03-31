@@ -32,6 +32,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
+import java.awt.SystemColor;
 
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
@@ -102,6 +103,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		panel_1.add(lblNewLabel);
 		
 		JComboBox<Object> cbbTimSanPham = new JComboBox<Object>();
+		cbbTimSanPham.setBackground(SystemColor.control);
 		cbbTimSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cbbTimSanPham.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tìm theo mã sản phẩm                                   ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
 		panel_1.add(cbbTimSanPham);

@@ -38,6 +38,7 @@ import com.polymart.ui.khachhang.KhachHangJInternalFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
+import com.polymart.ui.taikhoan.LoginJFrame;
 
 public class PolyMartMain extends JFrame {
 
@@ -53,8 +54,7 @@ public class PolyMartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntityFrame.POLYMARTMAIN.setVisible(true);
-					EntityFrame.POLYMARTMAIN.setTitle("Poly mart");
+					new PolyMartMain().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,6 +66,9 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
+		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
+				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// setBounds(100, 100, 1920, 639);
 //		
@@ -157,7 +160,7 @@ public class PolyMartMain extends JFrame {
 		JMenu mnKhachHang = new JMenu("Khách hàng");
 		mnKhachHang.setIcon(new ImageIcon("images\\doitac.png"));
 		menuBar.add(mnKhachHang);
-		
+
 		JMenuItem mntmKhachHang = new JMenuItem("Khách hàng");
 		mntmKhachHang.setIcon(new ImageIcon("images\\khachhang.png"));
 		mnKhachHang.add(mntmKhachHang);
@@ -173,7 +176,7 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
 		mntmDangXuat.setIcon(new ImageIcon("images\\logout.png"));
 		mnCaNhan.add(mntmDangXuat);
-		
+
 		JMenuItem mntmDoiMK = new JMenuItem("Đổi mật khẩu");
 		mntmDoiMK.setIcon(new ImageIcon("images\\changepassicon.png"));
 		mnCaNhan.add(mntmDoiMK);
@@ -234,166 +237,201 @@ public class PolyMartMain extends JFrame {
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
 	}
-	
+
 	ActionListener openTraHang = new ActionListener() {
-		
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			close();
-			TraHangJInternalFrame traHangJInternalFrame = new TraHangJInternalFrame();
-			desktopPane.add(traHangJInternalFrame);
-			traHangJInternalFrame.initTopTraHang();
-			traHangJInternalFrame.initCenterTraHang();
-			traHangJInternalFrame.setVisible(true);
+			openTraHang();
 		}
 	};
-	
+
+	public void openTraHang() {
+		close();
+		TraHangJInternalFrame traHangJInternalFrame = new TraHangJInternalFrame();
+		desktopPane.add(traHangJInternalFrame);
+		traHangJInternalFrame.initTopTraHang();
+		traHangJInternalFrame.initCenterTraHang();
+		traHangJInternalFrame.setVisible(true);
+	}
+
 	ActionListener openKhachHang = new ActionListener() {
-		
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			close();
-			KhachHangJInternalFrame khachHangJInternalFrame = new KhachHangJInternalFrame();
-			desktopPane.add(khachHangJInternalFrame);
-			khachHangJInternalFrame.setVisible(true);
+			openKhachHang();
 		}
 	};
 	
+	public void openKhachHang() {
+		close();
+		KhachHangJInternalFrame khachHangJInternalFrame = new KhachHangJInternalFrame();
+		desktopPane.add(khachHangJInternalFrame);
+		khachHangJInternalFrame.setVisible(true);
+	}
+
 	ActionListener doiMatKhau = new ActionListener() {
-		
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			ChangePassFrame changePassFrame = new ChangePassFrame();
-			changePassFrame.setVisible(true);
-			changePassFrame.setLocationRelativeTo(null);
+			doiMatKhau();
 		}
 	};
+	
+	public void doiMatKhau() {
+		ChangePassFrame changePassFrame = new ChangePassFrame();
+		changePassFrame.setVisible(true);
+		changePassFrame.setLocationRelativeTo(null);
+	}
 
 	ActionListener openThietLapGia = new ActionListener() {
-		@Override
 		public void actionPerformed(ActionEvent e) {
-			close();
-			ThietLapGiaJInternalFrame thietLapGia = new ThietLapGiaJInternalFrame();
-			desktopPane.add(thietLapGia);
-			thietLapGia.initTopThietLapGia();
-			thietLapGia.initCenterThietLapGia();
-			thietLapGia.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Thiếp lập giá sản phẩm");
-		}
-	};
-
-	ActionListener openDanhMuc = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			close();
-			HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
-			desktopPane.add(hangHoa);
-			hangHoa.initTopHangHoa();
-			hangHoa.initCenterHangHoa();
-			hangHoa.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Danh mục hàng hóa");
-		}
-	};
-
-	ActionListener openKiemKho = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			close();
-			KiemKhoJInternalFrame kiemKho = new KiemKhoJInternalFrame();
-			desktopPane.add(kiemKho);
-			kiemKho.initTopKiemKho();
-			kiemKho.initCenterKiemKho();
-			kiemKho.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Kiểm kho");
-		}
-	};
-
-	ActionListener openNhanVien = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			close();
-			NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
-			desktopPane.add(nhanVien);
-			nhanVien.initTopNhanVien();
-			nhanVien.initCenterNhanVien();
-			nhanVien.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Quản lý nhân viên");
-		}
-	};
-
-	ActionListener openNguonHang = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			close();
-			NguonHangJInternalFrame nguonHang = new NguonHangJInternalFrame();
-			desktopPane.add(nguonHang);
-			nguonHang.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Quản lý nguồn hàng");
-		}
-	};
-
-	ActionListener openChamCong = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			close();
-			ChamCongJInternalFrame chamCong = new ChamCongJInternalFrame();
-			desktopPane.add(chamCong);
-			chamCong.initTopChamCong();
-			chamCong.initCenterChamCong();
-			chamCong.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Kiểm tra chấm công");
-		}
-	};
-
-	ActionListener openChiTieu = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			close();
-			BaoCaoJInternalFrame baoCao = new BaoCaoJInternalFrame();
-			desktopPane.add(baoCao);
-			baoCao.initTopChiTieu();
-			baoCao.initCenterChiTieu();
-			baoCao.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Báo cáo - Chi tiêu");
-		}
-	};
-
-	ActionListener openNhapHang = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			close();
-			NhapHangJInternalFrame nhapHang = new NhapHangJInternalFrame();
-			desktopPane.add(nhapHang);
-			nhapHang.initTopNhapHang();
-			nhapHang.initCenterNhapHang();
-			nhapHang.setVisible(true);
-			EntityFrame.POLYMARTMAIN.setTitle("Quản lý nhập hàng");
+			openThietLapGia();
 		}
 	};
 	
-	ActionListener openThanhToan = new ActionListener() {
-		@Override
+	public void openThietLapGia() {
+		close();
+		ThietLapGiaJInternalFrame thietLapGia = new ThietLapGiaJInternalFrame();
+		desktopPane.add(thietLapGia);
+		thietLapGia.initTopThietLapGia();
+		thietLapGia.initCenterThietLapGia();
+		thietLapGia.setVisible(true);
+		setTitle("Thiếp lập giá sản phẩm");
+	}
+
+	ActionListener openDanhMuc = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			close();
-			ThanhToanJInternalFrame thanhToan = new ThanhToanJInternalFrame();
-			desktopPane.add(thanhToan);
-			thanhToan.initTopThanhToan();
-			thanhToan.initCenterThanhToan();
-			thanhToan.setVisible(true);
+			openDanhMuc();
+		}
+	};
+	
+	public void openDanhMuc() {
+		close();
+		HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
+		desktopPane.add(hangHoa);
+		hangHoa.initTopHangHoa();
+		hangHoa.initCenterHangHoa();
+		hangHoa.setVisible(true);
+		setTitle("Danh mục hàng hóa");
+	}
+
+	ActionListener openKiemKho = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openKiemKho();
+		}
+	};
+	
+	public void openKiemKho() {
+		close();
+		KiemKhoJInternalFrame kiemKho = new KiemKhoJInternalFrame();
+		desktopPane.add(kiemKho);
+		kiemKho.initTopKiemKho();
+		kiemKho.initCenterKiemKho();
+		kiemKho.setVisible(true);
+		setTitle("Kiểm kho");
+	}
+
+	ActionListener openNhanVien = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openNhanVien();
+		}
+	};
+	
+	public void openNhanVien() {
+		close();
+		NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
+		desktopPane.add(nhanVien);
+		nhanVien.initTopNhanVien();
+		nhanVien.initCenterNhanVien();
+		nhanVien.setVisible(true);
+		setTitle("Quản lý nhân viên");
+	}
+
+	ActionListener openNguonHang = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openNguonHang();
+		}
+	};
+	
+	public void openNguonHang() {
+		close();
+		NguonHangJInternalFrame nguonHang = new NguonHangJInternalFrame();
+		desktopPane.add(nguonHang);
+		nguonHang.setVisible(true);
+		setTitle("Quản lý nguồn hàng");
+	}
+
+	ActionListener openChamCong = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openChamCong();
+		}
+	};
+	
+	public void openChamCong() {
+		close();
+		ChamCongJInternalFrame chamCong = new ChamCongJInternalFrame();
+		desktopPane.add(chamCong);
+		chamCong.initTopChamCong();
+		chamCong.initCenterChamCong();
+		chamCong.setVisible(true);
+		setTitle("Kiểm tra chấm công");
+	}
+
+	ActionListener openChiTieu = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openChiTieu();
+		}
+	};
+	
+	public void openChiTieu() {
+		close();
+		BaoCaoJInternalFrame baoCao = new BaoCaoJInternalFrame();
+		desktopPane.add(baoCao);
+		baoCao.initTopChiTieu();
+		baoCao.initCenterChiTieu();
+		baoCao.setVisible(true);
+		setTitle("Báo cáo - Chi tiêu");
+	}
+
+	ActionListener openNhapHang = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openNhapHang();
+		}
+	};
+	
+	public void openNhapHang() {
+		close();
+		NhapHangJInternalFrame nhapHang = new NhapHangJInternalFrame();
+		desktopPane.add(nhapHang);
+		nhapHang.initTopNhapHang();
+		nhapHang.initCenterNhapHang();
+		nhapHang.setVisible(true);
+		setTitle("Quản lý nhập hàng");
+	}
+
+	ActionListener openThanhToan = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openHangHoa();
+		}
+	};
+	
+	public void openHangHoa() {
+		close();
+		ThanhToanJInternalFrame thanhToan = new ThanhToanJInternalFrame();
+		desktopPane.add(thanhToan);
+		thanhToan.initTopThanhToan();
+		thanhToan.initCenterThanhToan();
+		thanhToan.setVisible(true);
+	}
+
+	ActionListener logoutAccount = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			loginClicked();
 		}
 	};
 
-    ActionListener logoutAccount = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (EntityMessage.confirm(EntityFrame.POLYMARTMAIN, "Đồng ý đăng xuất tài khoản?")) {
-            	EntityAuthorization.USER = null;
-                EntityFrame.LOGIN.setVisible(true);
-                EntityFrame.POLYMARTMAIN.setVisible(false);
-            }
-        }
-    };
+	public void loginClicked() {
+		if (EntityMessage.confirm(this, "Đồng ý đăng xuất tài khoản?")) {
+			EntityAuthorization.USER = null;
+			new LoginJFrame().setVisible(true);
+			setVisible(false);
+		}
+	}
 
 	public void close() {
 

@@ -97,7 +97,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 		
 		JComboBox<Object> cbbTimSanPham = new JComboBox<Object>();
 		cbbTimSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		cbbTimSanPham.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tìm theo mã sản phẩm                                   ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
+		cbbTimSanPham.setModel(new DefaultComboBoxModel(new String[] {"Tìm theo mã sản phẩm                                                        ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
 		panel_1.add(cbbTimSanPham);
 		
 		AutoCompleteDecorator.decorate(cbbTimSanPham);
@@ -110,15 +110,6 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 		JComboBox<Object> cbbKhachHang = new JComboBox<Object>();
 		cbbKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cbbKhachHang.setModel(new DefaultComboBoxModel<Object>(new String[] {"Chọn khách hàng"}));
-		
-		JButton btnLuuTam = new JButton("Lưu tạm");
-		btnLuuTam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//Sau khi ấn lưu tạm sẽ thêm vào bảng bên trái và tính lại thành tiền
-				
-			}
-		});
 		
 		JButton btnHoanThanh = new JButton("Hoàn thành");
 		btnHoanThanh.addActionListener(new ActionListener() {
@@ -144,30 +135,28 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_2.createSequentialGroup()
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
 						.addGroup(gl_panel_2.createSequentialGroup()
 							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 								.addComponent(cbbKhachHang, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel_2.createSequentialGroup()
-									.addGap(125)
-									.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGap(224)
 									.addComponent(btnHoanThanh)))
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+						.addGroup(gl_panel_2.createSequentialGroup()
 							.addComponent(lblNewLabel_1_1_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+						.addGroup(gl_panel_2.createSequentialGroup()
 							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(gl_panel_2.createSequentialGroup()
 							.addComponent(lblNewLabel_1_1_1_1_2, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(122, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+						.addGroup(gl_panel_2.createSequentialGroup()
 							.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
 							.addContainerGap())))
 		);
@@ -181,14 +170,12 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_1_1_1_1_2, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
 					.addComponent(lblNewLabel_1_1_1_1_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNewLabel_2)
 					.addGap(18)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		
@@ -221,6 +208,15 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 		
 		JSpinField spinField = new JSpinField();
 		spinField.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JButton btnLuuTam = new JButton("Lưu tạm");
+		btnLuuTam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Sau khi ấn lưu tạm sẽ thêm vào bảng bên trái và tính lại thành tiền
+				
+			}
+		});
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -252,7 +248,10 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 								.addGroup(gl_panel_3.createSequentialGroup()
 									.addGap(10)
 									.addComponent(txtMaSP, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+							.addContainerGap(212, Short.MAX_VALUE)
+							.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_panel_3.setVerticalGroup(
@@ -274,7 +273,9 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtDonGia, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(63, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);

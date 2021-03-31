@@ -228,8 +228,8 @@ public class LoginJFrame extends JFrame {
 //				textUsername.setText(username);
 //				textPassword.setText(password);
                 this.setVisible(false);
-                PolyMartMain polyMartMain = new PolyMartMain();
-                polyMartMain.setVisible(true);
+                EntityFrame.POLYMARTMAIN = new PolyMartMain();
+                EntityFrame.POLYMARTMAIN.setVisible(true);
             } else {
                 EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
             }

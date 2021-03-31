@@ -12,5 +12,12 @@ public interface INhanVienService {
     List<NhanVienModel> findAll();
 
 	boolean changePassword(Integer id, String newPassword);
+	
+	NhanVienModel save(NhanVienModel nhanVienModel);
+	
+	NhanVienModel update(NhanVienModel newNhanVienModel);
+	
+	void delete(Integer[] ids);
 
+	NhanVienModel findOne(Integer id);
 }

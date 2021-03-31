@@ -28,8 +28,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
-import com.polymart.service.INguonHangService;
-import com.polymart.service.impl.NguonHangService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -49,9 +47,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private JPanel panelOption;
     private JTable tableNhapHang;
     DefaultTableModel modelNhapHang = new DefaultTableModel();
-
-    private INguonHangService nguonHangService = new NguonHangService();
-
     /**
      * Launch the application.
      */

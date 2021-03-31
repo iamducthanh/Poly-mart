@@ -139,7 +139,7 @@ public class LoginJFrame extends JFrame {
 		btnLogin.setBounds(328, 208, 288, 45);
 		contentPane.add(btnLogin);
 
-		JLabel lblUser = new JLabel("10001");
+		JLabel lblUser = new JLabel("");
 		lblUser.setIcon(new ImageIcon("images\\ong.png"));
 		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);

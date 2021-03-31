@@ -66,6 +66,7 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\eclipse-workspace\\Poly-mart\\images\\fpt.png"));
 		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,7 +80,7 @@ public class PolyMartMain extends JFrame {
 		int width = (int) dimension.getWidth();
 		setJMenuBar(menuBar);
 
-		JMenu mnTongQuan = new JMenu("Tổng quan");
+		JMenu mnTongQuan = new JMenu("Thống kê");
 		mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
 		mnTongQuan.setBackground(new Color(0, 191, 255));
 		menuBar.add(mnTongQuan);

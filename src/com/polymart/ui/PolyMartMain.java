@@ -66,16 +66,10 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
+
 		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// setBounds(100, 100, 1920, 639);
-//		
-//		contentPane = new JPanel();
-//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		setContentPane(contentPane);
-//		contentPane.setLayout(new BorderLayout(0, 0));
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		editMenu();
 	}
@@ -84,8 +78,6 @@ public class PolyMartMain extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int) dimension.getWidth();
-//		menuBar.setPreferredSize(new Dimension(width,40));
-		// menuBar.setBackground(new Color(0, 191, 255));
 		setJMenuBar(menuBar);
 
 		JMenu mnTongQuan = new JMenu("Tổng quan");
@@ -258,7 +250,7 @@ public class PolyMartMain extends JFrame {
 			openKhachHang();
 		}
 	};
-	
+
 	public void openKhachHang() {
 		close();
 		KhachHangJInternalFrame khachHangJInternalFrame = new KhachHangJInternalFrame();
@@ -271,7 +263,7 @@ public class PolyMartMain extends JFrame {
 			doiMatKhau();
 		}
 	};
-	
+
 	public void doiMatKhau() {
 		ChangePassFrame changePassFrame = new ChangePassFrame();
 		changePassFrame.setVisible(true);
@@ -283,7 +275,7 @@ public class PolyMartMain extends JFrame {
 			openThietLapGia();
 		}
 	};
-	
+
 	public void openThietLapGia() {
 		close();
 		ThietLapGiaJInternalFrame thietLapGia = new ThietLapGiaJInternalFrame();
@@ -299,7 +291,7 @@ public class PolyMartMain extends JFrame {
 			openDanhMuc();
 		}
 	};
-	
+
 	public void openDanhMuc() {
 		close();
 		HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
@@ -315,7 +307,7 @@ public class PolyMartMain extends JFrame {
 			openKiemKho();
 		}
 	};
-	
+
 	public void openKiemKho() {
 		close();
 		KiemKhoJInternalFrame kiemKho = new KiemKhoJInternalFrame();
@@ -331,7 +323,7 @@ public class PolyMartMain extends JFrame {
 			openNhanVien();
 		}
 	};
-	
+
 	public void openNhanVien() {
 		close();
 		NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
@@ -347,7 +339,7 @@ public class PolyMartMain extends JFrame {
 			openNguonHang();
 		}
 	};
-	
+
 	public void openNguonHang() {
 		close();
 		NguonHangJInternalFrame nguonHang = new NguonHangJInternalFrame();
@@ -361,7 +353,7 @@ public class PolyMartMain extends JFrame {
 			openChamCong();
 		}
 	};
-	
+
 	public void openChamCong() {
 		close();
 		ChamCongJInternalFrame chamCong = new ChamCongJInternalFrame();
@@ -377,7 +369,7 @@ public class PolyMartMain extends JFrame {
 			openChiTieu();
 		}
 	};
-	
+
 	public void openChiTieu() {
 		close();
 		BaoCaoJInternalFrame baoCao = new BaoCaoJInternalFrame();
@@ -393,7 +385,7 @@ public class PolyMartMain extends JFrame {
 			openNhapHang();
 		}
 	};
-	
+
 	public void openNhapHang() {
 		close();
 		NhapHangJInternalFrame nhapHang = new NhapHangJInternalFrame();
@@ -409,7 +401,7 @@ public class PolyMartMain extends JFrame {
 			openHangHoa();
 		}
 	};
-	
+
 	public void openHangHoa() {
 		close();
 		ThanhToanJInternalFrame thanhToan = new ThanhToanJInternalFrame();

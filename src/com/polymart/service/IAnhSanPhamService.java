@@ -1,4 +1,6 @@
 package com.polymart.service;
 
-public interface IAnhSanPhamService {
+import com.polymart.model.AnhSanPhamModel;
+
+public interface IAnhSanPhamService extends GenericService<AnhSanPhamModel> {
 }

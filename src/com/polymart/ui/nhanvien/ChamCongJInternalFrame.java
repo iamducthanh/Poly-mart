@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -26,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
 
@@ -35,10 +37,12 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = 1619911861884761168L;
 	private JPanel contentPane;
 	private DefaultTableModel modelChamCong = new DefaultTableModel();
+	private DefaultTableModel modelNhanVienChamCong = new DefaultTableModel();
 	private JTextField txtTimKiem;
 	private JPanel panel = new JPanel();
 	private JPanel nhanVienJPanel = new JPanel();
 	private JTable tableChamCong;
+	private JTable tableNhanVienChamCong;
 
 
 
@@ -86,26 +90,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNhanVien, BorderLayout.WEST);
 		
-		txtTimKiem = new JTextField();
-		txtTimKiem.setText(" TÌm theo mã nhân viên");
-		panel.add(txtTimKiem, BorderLayout.CENTER);
-		txtTimKiem.setColumns(10);
-		txtTimKiem.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
-					txtTimKiem.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimKiem.getText().equals("")) {
-					txtTimKiem.setText(" TÌm theo mã nhân viên");
-				}
-			}
-		});
-		
 		JPanel panel1 = new JPanel();
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -139,36 +123,79 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		
 		JCalendar dateChamCong = new JCalendar();
 		
-		JButton btnNewButton = new JButton("Tìm");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnTimTheoNgay = new JButton("Tìm");
+		btnTimTheoNgay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(dateChamCong.getDate());
 			}
 		});
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		
+		txtTimKiem = new JTextField();
+		txtTimKiem.setText(" TÌm theo mã nhân viên");
+		txtTimKiem.setColumns(10);
+		txtTimKiem.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
+					txtTimKiem.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTimKiem.getText().equals("")) {
+					txtTimKiem.setText(" TÌm theo mã nhân viên");
+				}
+			}
+		});
+		
+		JButton btnTimMaNV = new JButton("TÌm kiếm");
+		
+		JButton btnChamCong = new JButton("Chấm công");
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addGap(5)
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnNewButton)
-					.addContainerGap(149, Short.MAX_VALUE))
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelLeft.createSequentialGroup()
+							.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnTimMaNV))
+						.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnTimTheoNgay, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
 		);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addGap(5)
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnTimTheoNgay)
+					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnTimMaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addComponent(btnNewButton)
-					.addContainerGap(424, Short.MAX_VALUE))
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnChamCong)
+					.addGap(39))
 		);
+		
+		tableNhanVienChamCong = new JTable();
+		scrollPane_1.setViewportView(tableNhanVienChamCong);
 		panelLeft.setLayout(gl_panelLeft);
+		modelNhanVienChamCong.addColumn("Mã nhân viên");
+		modelNhanVienChamCong.addColumn("Tên nhân viên");
+		tableNhanVienChamCong.setModel(modelNhanVienChamCong);
 		
 		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
 		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tất cả"}));
 	}
-
 }

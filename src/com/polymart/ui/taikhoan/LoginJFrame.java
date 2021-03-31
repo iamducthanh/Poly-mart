@@ -142,8 +142,8 @@ public class LoginJFrame extends JFrame {
 
 
         JLabel lblUser = new JLabel("");
-        lblUser.setIcon(new ImageIcon("images\\ong.png"));
-        lblUser.setBounds(34, 0, 237, 340);
+        lblUser.setIcon(new ImageIcon("images\\logoLO.png"));
+        lblUser.setBounds(20, 0, 279, 340);
         contentPane.add(lblUser);
 
         textUsername.addFocusListener(new FocusAdapter() {

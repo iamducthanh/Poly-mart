@@ -35,6 +35,7 @@ import com.polymart.ui.hanghoa.KiemKhoJInternalFrame;
 import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
 import com.polymart.ui.hanghoa.ThietLapGiaJInternalFrame;
 import com.polymart.ui.khachhang.KhachHangJInternalFrame;
+import com.polymart.ui.nhanvien.BangLuongJIternalFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
@@ -67,10 +68,14 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\eclipse-workspace\\Poly-mart\\images\\fpt.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+		setTitle(EntityMessage.TITLE);
+		if(EntityAuthorization.USER!=null){
 		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		editMenu();
 	}
@@ -229,6 +234,7 @@ public class PolyMartMain extends JFrame {
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
+		mntmBangTinhLuong.addActionListener(openBangLuong);
 	}
 
 	ActionListener openTraHang = new ActionListener() {
@@ -425,6 +431,19 @@ public class PolyMartMain extends JFrame {
 			this.setVisible(false);
 			EntityFrame.resetFrame();
 		}
+	}
+	
+	ActionListener openBangLuong = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openBangLuong();
+		}
+	};
+	
+	public void openBangLuong() {
+		close();
+		BangLuongJIternalFrame bangLuong = new BangLuongJIternalFrame();
+		desktopPane.add(bangLuong);
+		bangLuong.setVisible(true);
 	}
 
 	public void close() {

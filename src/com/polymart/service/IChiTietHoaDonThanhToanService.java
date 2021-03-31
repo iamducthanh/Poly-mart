@@ -1,4 +1,6 @@
 package com.polymart.service;
 
-public interface IChiTietHoaDonThanhToanService {
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
+
+public interface IChiTietHoaDonThanhToanService extends GenericService<ChiTietHoaDonThanhToanModel> {
 }

@@ -186,8 +186,8 @@ public class ChangePassFrame extends JFrame {
         });
 
         JLabel lblUser = new JLabel("");
-        lblUser.setIcon(new ImageIcon("C:\\images\\ong.png"));
-        lblUser.setBounds(38, 43, 237, 340);
+        lblUser.setIcon(new ImageIcon("images\\logoLO.png"));
+        lblUser.setBounds(38, 32, 268, 340);
         contentPane.add(lblUser);
 
         JLabel lblNewLabel = new JLabel("");

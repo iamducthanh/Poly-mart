@@ -1,4 +1,6 @@
 package com.polymart.service;
 
-public interface IHoaDonNhapHangService {
+import com.polymart.model.HoaDonNhapHangModel;
+
+public interface IHoaDonNhapHangService extends GenericService<HoaDonNhapHangModel> {
 }

@@ -40,6 +40,11 @@ public class NhanVienService implements INhanVienService {
 	}
 
     @Override
+    public NhanVienModel findById(String id) {
+        return null;
+    }
+
+    @Override
     public boolean changePassword(Integer id, String newPassword) {
         NhanVienModel nhanVien = mapNhanVien.get(id);
         if (nhanVien != null) {

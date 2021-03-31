@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -297,11 +298,13 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 	}
 	
     private void setCbbNguonHang(List<NguonHangModel> lstNguonHang, JComboBox<Object> cbbNguonHang) {
-        if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
-            cbbNguonHang.removeAll();
-            lstNguonHang.forEach(x -> {
-                cbbNguonHang.addItem(x.getTenNguonHang());
+		if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
+			cbbNguonHang.removeAll();
+			List<String> tenNguonHang = lstNguonHang.stream().map(e->e.getTenNguonHang()).collect(Collectors.toList());
+			tenNguonHang.stream().forEach(System.out::println);
+			tenNguonHang.forEach(x -> {
+                cbbNguonHang.addItem(x);
             });
-        }
+		}
     }
 }

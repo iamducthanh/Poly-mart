@@ -116,13 +116,17 @@ public class LoginJFrame extends JFrame {
         lblLogin.setFont(new Font("Ink Free", Font.BOLD, 22));
         lblLogin.setBounds(413, 26, 203, 40);
         contentPane.add(lblLogin);
-        
+        btnLogin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
 
-
-		JLabel lblUser = new JLabel("");
-		lblUser.setIcon(new ImageIcon("images\\ong.png"));
-		lblUser.setBounds(34, 0, 237, 340);
-		contentPane.add(lblUser);
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+        });
         btnLogin.setIcon(null);
 
         btnLogin.setForeground(Color.WHITE);
@@ -137,18 +141,23 @@ public class LoginJFrame extends JFrame {
         contentPane.add(btnLogin);
 
 
+        JLabel lblUser = new JLabel("");
+        lblUser.setIcon(new ImageIcon("images\\ong.png"));
+        lblUser.setBounds(34, 0, 237, 340);
+        contentPane.add(lblUser);
+
         textUsername.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (textUsername.getText().equals("10001")) {
-                    textUsername.setText("10001");
+                if (textUsername.getText().equals(" Username")) {
+                    textUsername.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (textUsername.getText().equals("10001")) {
-                    textUsername.setText("10001");
+                if (textUsername.getText().equals("")) {
+                    textUsername.setText(" Username");
                 }
             }
         });
@@ -156,15 +165,15 @@ public class LoginJFrame extends JFrame {
         textPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (String.valueOf(textPassword.getPassword()).equals("12345678")) {
-                    textPassword.setText("12345678");
+                if (String.valueOf(textPassword.getPassword()).equals(" Password")) {
+                    textPassword.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (String.valueOf(textPassword.getPassword()).equals("12345678")) {
-                    textPassword.setText("12345678");
+                if (String.valueOf(textPassword.getPassword()).equals("")) {
+                    textPassword.setText(" Password");
                 }
             }
         });

@@ -11,8 +11,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -30,7 +28,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
-import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
 import com.polymart.ui.common.uiCommon;
@@ -53,7 +50,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private JTable tableNhapHang;
     DefaultTableModel modelNhapHang = new DefaultTableModel();
 
-    private INguonHangService iNguonHangService = new NguonHangService();
+    private INguonHangService nguonHangService = new NguonHangService();
 
     /**
      * Launch the application.

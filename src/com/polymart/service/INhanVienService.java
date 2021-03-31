@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.polymart.model.NhanVienModel;
 
-public interface INhanVienService extends GenericService<NhanVienModel> {
+public interface INhanVienService{
+	
+	List<NhanVienModel> findAll();
 
     // hàm tìm kiếm người dùng theo Username và password
     NhanVienModel findNhanVienByIdAndPassword(Integer id, String password);
@@ -18,4 +20,6 @@ public interface INhanVienService extends GenericService<NhanVienModel> {
 	void delete(Integer[] ids);
 
 	NhanVienModel findOne(Integer id);
+	
+	List<NhanVienModel> filterByIdAndName(String idOrName);
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface INguonHangDAO extends GenericDAO<NguonHangModel> {
 
-    List<NguonHangModel> fillAll();
+    List<NguonHangModel> findAll();
 }

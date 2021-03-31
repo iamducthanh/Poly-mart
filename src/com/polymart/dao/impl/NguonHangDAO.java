@@ -9,7 +9,7 @@ import java.util.List;
 public class NguonHangDAO extends AbstractDAO<NguonHangModel> implements INguonHangDAO {
 
     @Override
-    public List<NguonHangModel> fillAll() {
+    public List<NguonHangModel> findAll() {
         String sql = "SELECT * FROM NGUONHANG";
         return query(sql, new NguonHangMapper());
     }

@@ -1,10 +1,23 @@
 package com.polymart.mapper;
 
-import java.sql.ResultSet;
+import com.polymart.model.ChiTietHoaDonNhapHangModel;
 
-public class ChiTietHoaDonNhapHangMapper implements RowMapper<ChiTietHoaDonNhapHangMapper>{
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class ChiTietHoaDonNhapHangMapper implements RowMapper<ChiTietHoaDonNhapHangModel> {
     @Override
-    public ChiTietHoaDonNhapHangMapper mapRow(ResultSet rs) {
-        return null;
+    public ChiTietHoaDonNhapHangModel mapRow(ResultSet rs) {
+        try {
+            ChiTietHoaDonNhapHangModel hoaDonNhapHangModel = new ChiTietHoaDonNhapHangModel();
+            hoaDonNhapHangModel.setIdHoaDonNhapHang(rs.getInt("IDHOADONNHAPHANG"));
+            hoaDonNhapHangModel.setIdChiTietSanPham(rs.getInt("IDCHITIETSANPHAM"));
+            hoaDonNhapHangModel.setGiaNhap(rs.getLong("GIANHAP"));
+            hoaDonNhapHangModel.setSoLuong(rs.getInt("SOLUONG"));
+            return hoaDonNhapHangModel;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.polymart.model.NhanVienModel;
 
-public interface INhanVienDAO extends GenericDAO<NhanVienModel>{
+public interface INhanVienDAO extends GenericDAO<NhanVienModel> {
 	List<NhanVienModel> findAll();
+
+	Integer save(NhanVienModel nhanVienModel);
 }

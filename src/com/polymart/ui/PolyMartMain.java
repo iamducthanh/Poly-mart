@@ -66,7 +66,6 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
-
 		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

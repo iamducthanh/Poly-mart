@@ -1,22 +1,32 @@
 package com.polymart.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.polymart.dao.INguonHangDAO;
+import com.polymart.dao.impl.NguonHangDAO;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class NguonHangService implements INguonHangService {
 
-    private List<NguonHangModel> lstNguonHang = null;
+    private static INguonHangDAO nguonHangDAO = new NguonHangDAO();
+    private static Map<Integer, NguonHangModel> mapNhanVien = new HashMap<Integer, NguonHangModel>();    //Nạp dữ liệu từ SQL
 
-    public NguonHangService() {
-        lstNguonHang = new ArrayList<NguonHangModel>();
-
+    static {
+        initNhanVien();
     }
 
-    @Override
-    public List<NguonHangModel> getListNguonHang() {
-        return lstNguonHang;
+    private static void initNhanVien() {
+    	for (NguonHangModel nguonHang : nguonHangDAO.findAll()) {
+			mapNhanVien.put(nguonHang.getId(), nguonHang);
+		}
     }
+
+	@Override
+	public List<NguonHangModel> findAll() {
+		return new ArrayList<>(mapNhanVien.values());
+	}
 }

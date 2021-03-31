@@ -79,7 +79,7 @@ public class LoginJFrame extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 
-		textUsername = new JTextField(" Username");
+		textUsername = new JTextField("10001");
 		textUsername.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -104,7 +104,7 @@ public class LoginJFrame extends JFrame {
 		});
 		textPassword.setForeground(Color.black);
 		textPassword.setBackground(Color.white);
-		textPassword.setText(" Password");
+		textPassword.setText("12345678");
 		textPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textPassword.setColumns(10);
 		textPassword.setBorder(new LineBorder(Color.WHITE));
@@ -139,7 +139,7 @@ public class LoginJFrame extends JFrame {
 		btnLogin.setBounds(328, 208, 288, 45);
 		contentPane.add(btnLogin);
 
-		JLabel lblUser = new JLabel("");
+		JLabel lblUser = new JLabel("10001");
 		lblUser.setIcon(new ImageIcon("images\\ong.png"));
 		lblUser.setBounds(34, 0, 237, 340);
 		contentPane.add(lblUser);
@@ -147,15 +147,15 @@ public class LoginJFrame extends JFrame {
 		textUsername.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (textUsername.getText().equals(" Username")) {
-					textUsername.setText("");
+				if (textUsername.getText().equals("10001")) {
+					textUsername.setText("10001");
 				}
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (textUsername.getText().equals("")) {
-					textUsername.setText(" Username");
+				if (textUsername.getText().equals("10001")) {
+					textUsername.setText("10001");
 				}
 			}
 		});
@@ -163,15 +163,15 @@ public class LoginJFrame extends JFrame {
 		textPassword.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (String.valueOf(textPassword.getPassword()).equals(" Password")) {
-					textPassword.setText("");
+				if (String.valueOf(textPassword.getPassword()).equals("12345678")) {
+					textPassword.setText("12345678");
 				}
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (String.valueOf(textPassword.getPassword()).equals("")) {
-					textPassword.setText(" Password");
+				if (String.valueOf(textPassword.getPassword()).equals("12345678")) {
+					textPassword.setText("12345678");
 				}
 			}
 		});
@@ -222,8 +222,8 @@ public class LoginJFrame extends JFrame {
 		if (EntityValidate.checkUsername(username) && EntityValidate.checkPassword(password)) {
 			EntityAuthorization.USER = nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password);
 			if (EntityAuthorization.USER != null) {
-				textUsername.setText(username);
-				textPassword.setText(password);
+//				textUsername.setText(username);
+//				textPassword.setText(password);
 				EntityFrame.LOGIN.setVisible(false);
 				EntityFrame.POLYMARTMAIN = new PolyMartMain();
 				EntityFrame.POLYMARTMAIN.setVisible(true);

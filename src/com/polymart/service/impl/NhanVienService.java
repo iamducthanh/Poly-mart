@@ -53,4 +53,29 @@ public class NhanVienService implements INhanVienService {
         }
         return false;
     }
+
+	@Override
+	public NhanVienModel save(NhanVienModel newNhanVienModel) {
+		Integer newNhanVienId = nhanVienDAO.save(newNhanVienModel);
+		return nhanVienDAO.findOne(newNhanVienId);
+	}
+	
+	@Override
+	public NhanVienModel update(NhanVienModel updateNhanVienModel) {
+		nhanVienDAO.update(updateNhanVienModel);
+		return nhanVienDAO.findOne(updateNhanVienModel.getId());
+	}
+
+	@Override
+	public void delete(Integer[] ids) {
+		for (Integer id : ids) {
+			nhanVienDAO.delete(id);
+		}
+	}
+
+	@Override
+	public NhanVienModel findOne(Integer id) {
+		return nhanVienDAO.findOne(id);
+	}
+
 }

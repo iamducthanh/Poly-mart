@@ -116,13 +116,13 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		panel.add(lblNhanVien, BorderLayout.WEST);
 
 		txtTimKiem = new JTextField();
-		txtTimKiem.setText(" TÌm theo mã, tên nhân viên");
+		txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
 		panel.add(txtTimKiem, BorderLayout.CENTER);
 		txtTimKiem.setColumns(10);
 		txtTimKiem.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (txtTimKiem.getText().equals(" TÌm theo mã, tên nhân viên")) {
+				if (txtTimKiem.getText().equals(" Tìm theo mã, tên nhân viên")) {
 					txtTimKiem.setText("");
 				}
 			}

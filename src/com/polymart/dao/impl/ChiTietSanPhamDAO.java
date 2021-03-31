@@ -9,10 +9,4 @@ import java.util.List;
 
 public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implements IChiTietSanPhamDAO {
 
-    @Override
-    public List<ChiTietSanPhamModel> findAll() {
-        String sql = "SELECT * FROM NGUONHANG";
-        return query(sql, new NguonHangMapper());
-    }
-
 }

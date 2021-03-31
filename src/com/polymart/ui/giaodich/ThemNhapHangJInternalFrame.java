@@ -312,7 +312,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     }
 
     // hàm đổ dữ liệu tên sản phẩm lên combobox
-    private void setCbbChonSanPham(List<ChiTietSanPhamModel> lstChiTietSanPhamModels,
+    private void setCbbTimSanPham(List<ChiTietSanPhamModel> lstChiTietSanPhamModels,
                                    JComboBox cbbChonSanPham) {
         cbbChonSanPham.setModel(new DefaultComboBoxModel((lstChiTietSanPhamModels.stream()
                 .map(e -> e.getId() + " - " + e.getIdSanPham()).collect(Collectors.toList()).toArray())));

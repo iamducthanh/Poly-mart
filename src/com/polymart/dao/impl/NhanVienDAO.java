@@ -49,4 +49,10 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 		List<NhanVienModel> listNhanVien = query(sql, new NhanVienMapper(), id);
 		return listNhanVien.isEmpty() ? null : listNhanVien.get(0);
 	}
+
+	@Override
+	public List<NhanVienModel> filterByIdAndName(String idOrName) {
+		String sql = "SELECT*FROM NHANVIEN WHERE ID LIKE '%?%' OR HOTEN LIKE N'%?%'";
+		return query(sql, new NhanVienMapper(), idOrName, idOrName);
+	}
 }

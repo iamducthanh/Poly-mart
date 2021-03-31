@@ -10,5 +10,5 @@ public interface GenericDAO<T> {
     void update(String sql, Object... parameters);
 
     //insert câu lệnh sql với tham số truyền vào parameters, trả về mã id
-    Long insert(String sql, Object... parameters);
+    Integer insert(String sql, Object... parameters);
 }

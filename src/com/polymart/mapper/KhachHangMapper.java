@@ -11,7 +11,7 @@ public class KhachHangMapper implements RowMapper<KhachHangModel> {
 	public KhachHangModel mapRow(ResultSet rs) {
 		try {
 			KhachHangModel khachHang = new KhachHangModel();
-			khachHang.setId(rs.getLong("ID"));
+			khachHang.setId(rs.getInt("ID"));
 			khachHang.setHoTen(rs.getString("HOTEN"));
 			khachHang.setSdt(rs.getString("SODIENTHOAI"));
 			khachHang.setDiaChi(rs.getString("DIACHI"));

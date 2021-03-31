@@ -18,11 +18,12 @@ public class AbstractDAO<T> implements GenericDAO<T> {
     public Connection getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;database=;integratedSecurity=true";    //add databaseName
+            String url = "jdbc:sqlserver://localhost:1433;database=POLYMART_v1;integratedSecurity=true";    //add databaseName using window authentication
             String user = "";
             String password = "";
             return DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
+        	e.printStackTrace();
             return null;
         }
     }
@@ -63,6 +64,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
             }
             return results;
         } catch (SQLException e) {
+        	e.printStackTrace();
             return null;
         } finally {
             try {

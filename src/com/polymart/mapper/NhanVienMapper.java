@@ -11,7 +11,7 @@ public class NhanVienMapper implements RowMapper<NhanVienModel> {
 	public NhanVienModel mapRow(ResultSet rs) {
 		try {
 			NhanVienModel nhanVien = new NhanVienModel();
-			nhanVien.setId(rs.getLong("ID"));
+			nhanVien.setId(rs.getInt("ID"));
 			nhanVien.setHoTen(rs.getString("HOTEN"));
 			nhanVien.setNgaySinh(rs.getDate("NGAYSINH"));
 			nhanVien.setGioiTinh(rs.getBoolean("GIOITINH"));

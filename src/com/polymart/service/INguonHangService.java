@@ -4,6 +4,6 @@ import com.polymart.model.NguonHangModel;
 
 import java.util.List;
 
-public interface INguonHang {
+public interface INguonHangService {
     List<NguonHangModel> getListNguonHang();
 }

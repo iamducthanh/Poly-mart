@@ -1,16 +1,16 @@
 package com.polymart.service.impl;
 
 import com.polymart.model.NguonHangModel;
-import com.polymart.service.INguonHang;
+import com.polymart.service.INguonHangService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NguonHangImpl implements INguonHang {
+public class NguonHangService implements INguonHangService {
 
     private List<NguonHangModel> lstNguonHang = null;
 
-    public NguonHangImpl() {
+    public NguonHangService() {
         lstNguonHang = new ArrayList<NguonHangModel>();
 
     }

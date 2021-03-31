@@ -28,14 +28,14 @@ import com.toedter.calendar.JCalendar;
 
 public class BaoCaoJInternalFrame extends JInternalFrame {
 
-    private static final long serialVersionUID = 5684359871253902201L;
-
-    private JPanel contentPane;
-    DefaultTableModel model = new DefaultTableModel();
-    JPanel nhanVienJPanel = new JPanel();
-    private JTable table;
-    JPanel panel = new JPanel();
-    private JTextField txtTimKiem;
+	private static final long serialVersionUID = 5684359871253902201L;
+	
+	private JPanel contentPane;
+	DefaultTableModel modelChiTieu = new DefaultTableModel();
+	JPanel nhanVienJPanel = new JPanel();
+	private JTable tableChiTieu;
+	JPanel panel = new JPanel();
+	private JTextField txtTimKiem;
 
 
     /**
@@ -108,55 +108,55 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 
 
     }
-
-    public void initCenterChiTieu() {
-        nhanVienJPanel.setLayout(new BoxLayout(nhanVienJPanel, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane();
-        contentPane.add(scrollPane, BorderLayout.CENTER);
-
-        table = new JTable();
-        scrollPane.setViewportView(table);
-        model.addColumn("Mã nhân viên");
-        model.addColumn("Mục đích chi tiêu");
-        model.addColumn("Ngày chi tiêu");
-        model.addColumn("Số tiền");
-        model.addColumn("Ghi chú");
-
-
-        table.setModel(model);
-
-        JPanel panelLeft = new JPanel();
-        contentPane.add(panelLeft, BorderLayout.WEST);
-
-        JCalendar dateChamCong = new JCalendar();
-
-        JButton btnNewButton = new JButton("Tìm");
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(dateChamCong.getDate());
-            }
-        });
-        GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
-        gl_panelLeft.setHorizontalGroup(
-                gl_panelLeft.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panelLeft.createSequentialGroup()
-                                .addGap(5)
-                                .addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGroup(gl_panelLeft.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnNewButton)
-                                .addContainerGap(149, Short.MAX_VALUE))
-        );
-        gl_panelLeft.setVerticalGroup(
-                gl_panelLeft.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panelLeft.createSequentialGroup()
-                                .addGap(5)
-                                .addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18)
-                                .addComponent(btnNewButton)
-                                .addContainerGap(424, Short.MAX_VALUE))
-        );
-        panelLeft.setLayout(gl_panelLeft);
-    }
+    
+	public void initCenterChiTieu() {
+		nhanVienJPanel.setLayout(new BoxLayout(nhanVienJPanel, BoxLayout.Y_AXIS));
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		tableChiTieu = new JTable();
+		scrollPane.setViewportView(tableChiTieu);
+		modelChiTieu.addColumn("Mã nhân viên");
+		modelChiTieu.addColumn("Mục đích chi tiêu");
+		modelChiTieu.addColumn("Ngày chi tiêu");
+		modelChiTieu.addColumn("Số tiền");
+		modelChiTieu.addColumn("Ghi chú");
+		
+		
+		tableChiTieu.setModel(modelChiTieu);
+		
+		JPanel panelLeft = new JPanel();
+		contentPane.add(panelLeft, BorderLayout.WEST);
+		
+		JCalendar dateChamCong = new JCalendar();
+		
+		JButton btnNewButton = new JButton("Tìm");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(dateChamCong.getDate());
+			}
+		});
+		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
+		gl_panelLeft.setHorizontalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addGap(5)
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnNewButton)
+					.addContainerGap(149, Short.MAX_VALUE))
+		);
+		gl_panelLeft.setVerticalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addGap(5)
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnNewButton)
+					.addContainerGap(424, Short.MAX_VALUE))
+		);
+		panelLeft.setLayout(gl_panelLeft);
+	}
 
 }

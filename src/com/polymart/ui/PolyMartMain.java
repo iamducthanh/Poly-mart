@@ -54,7 +54,8 @@ public class PolyMartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new PolyMartMain().setVisible(true);
+					EntityFrame.POLYMARTMAIN = new PolyMartMain();
+					EntityFrame.POLYMARTMAIN.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -421,12 +422,12 @@ public class PolyMartMain extends JFrame {
 		if (EntityMessage.confirm(this, "Đồng ý đăng xuất tài khoản?")) {
 			EntityAuthorization.USER = null;
 			new LoginJFrame().setVisible(true);
-			setVisible(false);
+			this.setVisible(false);
+			EntityFrame.resetFrame();
 		}
 	}
 
 	public void close() {
-
 		try {
 			desktopPane.removeAll();
 		} catch (Exception e) {

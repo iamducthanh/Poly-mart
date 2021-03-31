@@ -1,6 +1,6 @@
 package com.polymart.ui;
 
-import com.polymart.entity.EntityAuthor;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVien;
 import com.polymart.service.impl.NhanVienImpl;
@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.text.html.parser.Entity;
 
 
 @SuppressWarnings("serial")
@@ -211,8 +210,8 @@ public class ChangePassFrame extends JFrame {
         if (EntityValidate.checkOldPasswordChange(oldPassword)
                 && EntityValidate.checkNewPasswordChange(newPassword)
                 && EntityValidate.checkConfirmNewPasswordChange(confirmNewPassword)) {
-            if (iNhanVien.changePassword(EntityAuthor.USER.getId(), newPassword)) {
-                EntityAuthor.USER.setMatKhau(newPassword);
+            if (iNhanVien.changePassword(Long.valueOf(EntityAuthorization.USER.getId()), newPassword)) {
+                EntityAuthorization.USER.setMatKhau(newPassword);
                 this.setVisible(false);
             }
         }

@@ -110,7 +110,7 @@ public class LoginJFrame extends JFrame {
 		textPassword.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				login();
+				loginKeyPressed(e);
 			}
 		});
 		textPassword.setForeground(Color.black);

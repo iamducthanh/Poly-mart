@@ -102,15 +102,12 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		// initTopNhanVien();
-		// initCenterNhanVien();
-		// initTopChamCong();
-//		initCenterChamCong();
+	//	 initTopNhanVien();
+	//	 initCenterNhanVien();
+
 	}
 
 	public void initTopNhanVien() {
-		setTitle("Nhân viên - Nhân viên");
-
 		JLabel lblNhanVien = new JLabel("Nhân viên                       ");
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNhanVien, BorderLayout.WEST);
@@ -286,5 +283,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			chiTietNhanVien.setVisible(true);
 		}
 	};
+	
+	
 
 }

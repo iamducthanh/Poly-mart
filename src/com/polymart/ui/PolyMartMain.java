@@ -25,7 +25,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.polymart.entity.*;
+import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoJInternalFrame;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
@@ -75,7 +77,7 @@ public class PolyMartMain extends JFrame {
 				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
+	//	setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		editMenu();
 	}

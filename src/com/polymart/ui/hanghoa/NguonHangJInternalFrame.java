@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -22,6 +23,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.polymart.model.NguonHangModel;
+import com.polymart.service.impl.NguonHangService;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class NguonHangJInternalFrame extends JInternalFrame {
 
@@ -40,6 +47,8 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	private JTextField txtSoDT;
 	private JTextField txtDiaChi;
 	DefaultTableModel modelNguonHang = new DefaultTableModel();
+	
+	List<NguonHangModel> listNguonHang;
 
 
 	/**
@@ -163,18 +172,21 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 		
 		txtNguonHang = new JTextField();
+		txtNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNguonHang.setColumns(10);
 		
 		JLabel lblNewLabel_2_1 = new JLabel("Số điện thoại");
 		lblNewLabel_2_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 		
 		txtSoDT = new JTextField();
+		txtSoDT.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSoDT.setColumns(10);
 		
 		JLabel lblNewLabel_2_1_1 = new JLabel("Địa chỉ");
 		lblNewLabel_2_1_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 		
 		txtDiaChi = new JTextField();
+		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
@@ -235,6 +247,32 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		modelNguonHang.addColumn("Địa chỉ");
 		modelNguonHang.addColumn("Số điện thoại");
 		tableNguonHang.setModel(modelNguonHang);
+		
+		tableNguonHang.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = tableNguonHang.getSelectedRow();
+				display(row);
+			}
+		});
+		
+		loadNguonHangTable();
+	}
+	
+	void loadNguonHangTable() {
+		listNguonHang = new NguonHangService().findAll();
+		listNguonHang.forEach((nguonHang) -> {
+			modelNguonHang.addRow(new Object[] {nguonHang.getTenNguonHang(), nguonHang.getDiaChi(), nguonHang.getSdt()});
+		});
+		tableNguonHang.setModel(modelNguonHang);
+		display(0);
+	}
+	
+	void display(int row) {
+		tableNguonHang.setRowSelectionInterval(row, row);
+		txtNguonHang.setText(listNguonHang.get(row).getTenNguonHang());
+		txtDiaChi.setText(listNguonHang.get(row).getDiaChi());
+		txtSoDT.setText(listNguonHang.get(row).getSdt());
 	}
 	
 

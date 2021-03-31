@@ -191,7 +191,7 @@ public class ChangePassFrame extends JFrame {
         contentPane.add(lblUser);
 
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\images\\changepass.jpg"));
+        lblNewLabel.setIcon(new ImageIcon("images\\changepass.jpg"));
         lblNewLabel.setBounds(0, -20, 650, 420);
         lblNewLabel.setBackground(Color.black);
         contentPane.add(lblNewLabel);

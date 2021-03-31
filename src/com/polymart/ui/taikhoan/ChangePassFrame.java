@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
+import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 
@@ -181,8 +182,8 @@ public class ChangePassFrame extends JFrame {
                 && EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
             String oldPassword = EntityMessage.porm(this, "Nhập mật khẩu cũ:");
             if (EntityValidate.checkOldPasswordChange(this, oldPassword)) {
-                if (nhanVienService.changePassword(EntityAuthorization.USER.getId(), newPassword)) {
-                    EntityAuthorization.USER.setMatKhau(newPassword);
+                EntityAuthorization.USER.setMatKhau(newPassword);
+                if ((nhanVienService.update(EntityAuthorization.USER)) != null) {
                     EntityMessage.show(this, "Đổi mật khẩu thành công");
                     this.setVisible(false);
                 }

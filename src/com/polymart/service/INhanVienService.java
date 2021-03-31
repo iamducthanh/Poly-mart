@@ -10,8 +10,6 @@ public interface INhanVienService{
 
     // hàm tìm kiếm người dùng theo Username và password
     NhanVienModel findNhanVienByIdAndPassword(Integer id, String password);
-
-	boolean changePassword(Integer id, String newPassword);
 	
 	NhanVienModel save(NhanVienModel nhanVienModel);
 	

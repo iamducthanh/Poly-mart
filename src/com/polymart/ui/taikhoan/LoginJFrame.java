@@ -37,13 +37,9 @@ public class LoginJFrame extends JFrame {
     private static final long serialVersionUID = 2723825969344724367L;
 
     private JPanel contentPane;
-    private JTextField textUsername;
-    private JPasswordField textPassword;
-    String change = "Change password";
-    JButton btnLogin = new JButton("Đăng nhập");
-    StringBuilder error = new StringBuilder();
-    boolean check = false;
-    public static String vaiTro;
+    private JTextField txtUsername;
+    private JPasswordField txtPassword;
+    private JButton btnLogin = new JButton("Đăng nhập");
     private JButton btnCancel;
 
     private INhanVienService nhanVienService = new NhanVienService();
@@ -79,37 +75,37 @@ public class LoginJFrame extends JFrame {
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
 
-        textUsername = new JTextField("10001");
-        textUsername.addKeyListener(new KeyAdapter() {
+        txtUsername = new JTextField("10001");
+        txtUsername.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 loginKeyPressed(e);
             }
         });
-        textUsername.setForeground(Color.black);
-        textUsername.setBackground(Color.white);
-        textUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        textUsername.setColumns(10);
-        textUsername.setBorder(new LineBorder(Color.WHITE));
-        textUsername.setBounds(342, 77, 257, 35);
+        txtUsername.setForeground(Color.black);
+        txtUsername.setBackground(Color.white);
+        txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtUsername.setColumns(10);
+        txtUsername.setBorder(new LineBorder(Color.WHITE));
+        txtUsername.setBounds(342, 77, 257, 35);
 
-        contentPane.add(textUsername);
+        contentPane.add(txtUsername);
 
-        textPassword = new JPasswordField();
-        textPassword.addKeyListener(new KeyAdapter() {
+        txtPassword = new JPasswordField();
+        txtPassword.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 loginKeyPressed(e);
             }
         });
-        textPassword.setForeground(Color.black);
-        textPassword.setBackground(Color.white);
-        textPassword.setText("12345678");
-        textPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        textPassword.setColumns(10);
-        textPassword.setBorder(new LineBorder(Color.WHITE));
-        textPassword.setBounds(342, 138, 257, 35);
-        contentPane.add(textPassword);
+        txtPassword.setForeground(Color.black);
+        txtPassword.setBackground(Color.white);
+        txtPassword.setText("12345678");
+        txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtPassword.setColumns(10);
+        txtPassword.setBorder(new LineBorder(Color.WHITE));
+        txtPassword.setBounds(342, 138, 257, 35);
+        contentPane.add(txtPassword);
 
         JLabel lblLogin = new JLabel("XIN CHÀO!");
         lblLogin.setForeground(Color.BLACK);
@@ -146,34 +142,34 @@ public class LoginJFrame extends JFrame {
         lblUser.setBounds(20, 0, 279, 340);
         contentPane.add(lblUser);
 
-        textUsername.addFocusListener(new FocusAdapter() {
+        txtUsername.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (textUsername.getText().equals(" Username")) {
-                    textUsername.setText("");
+                if (txtUsername.getText().equals(" Username")) {
+                    txtUsername.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (textUsername.getText().equals("")) {
-                    textUsername.setText(" Username");
+                if (txtUsername.getText().equals("")) {
+                    txtUsername.setText(" Username");
                 }
             }
         });
 
-        textPassword.addFocusListener(new FocusAdapter() {
+        txtPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (String.valueOf(textPassword.getPassword()).equals(" Password")) {
-                    textPassword.setText("");
+                if (String.valueOf(txtPassword.getPassword()).equals(" Password")) {
+                    txtPassword.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (String.valueOf(textPassword.getPassword()).equals("")) {
-                    textPassword.setText(" Password");
+                if (String.valueOf(txtPassword.getPassword()).equals("")) {
+                    txtPassword.setText(" Password");
                 }
             }
         });
@@ -220,8 +216,8 @@ public class LoginJFrame extends JFrame {
     }
 
     public void login() {
-        String username = textUsername.getText();
-        String password = String.valueOf(textPassword.getPassword());
+        String username = txtUsername.getText();
+        String password = String.valueOf(txtPassword.getPassword());
         if (EntityValidate.checkUsername(this, username) && EntityValidate.checkPassword(this, password)) {
             EntityAuthorization.USER = nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password);
             if (EntityAuthorization.USER != null) {

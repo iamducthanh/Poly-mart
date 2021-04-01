@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class BaoCaoJInternalFrame extends JInternalFrame {
 
@@ -65,7 +66,6 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
 
 		initTopChiTieu();
 		initCenterChiTieu();
@@ -75,11 +75,9 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 		setTitle("Báo cáo - Chi tiêu");
 		JLabel lblNhanVien = new JLabel("Chi tiêu                              ");
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblNhanVien, BorderLayout.WEST);
 
 		txtTimKiem = new JTextField();
 		txtTimKiem.setText(" TÌm theo mã nhân viên");
-		panel.add(txtTimKiem, BorderLayout.CENTER);
 		txtTimKiem.setColumns(10);
 		txtTimKiem.addFocusListener(new FocusAdapter() {
 			@Override
@@ -98,14 +96,36 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 		});
 
 		JPanel panel1 = new JPanel();
-		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnTimKiem = new JButton("Tìm kiếm");
-		panel1.add(btnTimKiem);
 
 		JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
 		panel1.add(lblNewLabel_1);
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)
+					.addGap(51)
+					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 425, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnTimKiem)
+							.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		panel.setLayout(gl_panel);
 
 	}
 

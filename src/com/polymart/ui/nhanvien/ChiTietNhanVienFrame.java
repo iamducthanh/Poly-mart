@@ -39,7 +39,6 @@ public class ChiTietNhanVienFrame extends JFrame {
 	private static final long serialVersionUID = 2409713466527766453L;
 
 	private JPanel contentPane;
-	private JTextField txtMaNV;
 	private JTextField txtEmail;
 	private JTextField txtTenNV;
 	private JTextField txtSDT;
@@ -127,22 +126,9 @@ public class ChiTietNhanVienFrame extends JFrame {
 		btnToMi.setBounds(432, 589, 89, 23);
 		contentPane.add(btnToMi);
 
-		JLabel lblGiVn = new JLabel("Mã nhân viên");
-		lblGiVn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGiVn.setBounds(34, 45, 112, 25);
-		panel.add(lblGiVn);
-
-		txtMaNV = new JTextField();
-		txtMaNV.setEnabled(false);
-		txtMaNV.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtMaNV.setColumns(10);
-		txtMaNV.setBorder(null);
-		txtMaNV.setBounds(142, 45, 235, 25);
-		panel.add(txtMaNV);
-
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
 		lblTnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblTnNhnVin.setBounds(34, 183, 112, 25);
+		lblTnNhnVin.setBounds(34, 45, 112, 25);
 		panel.add(lblTnNhnVin);
 
 		JLabel lblNgySinh = new JLabel("Ngày sinh");
@@ -162,7 +148,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		JLabel lblGiVn_5 = new JLabel("Chức vụ");
 		lblGiVn_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGiVn_5.setBounds(34, 371, 112, 25);
+		lblGiVn_5.setBounds(34, 174, 112, 25);
 		panel.add(lblGiVn_5);
 
 		JLabel lblGiVn_7 = new JLabel("Mật khẩu");
@@ -172,7 +158,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		JLabel lblGiVn_8 = new JLabel("Email");
 		lblGiVn_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblGiVn_8.setBounds(34, 461, 112, 25);
+		lblGiVn_8.setBounds(34, 373, 112, 25);
 		panel.add(lblGiVn_8);
 
 		JLabel lblGiVn_9 = new JLabel("Giới tính");
@@ -194,14 +180,14 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEmail.setColumns(10);
 		txtEmail.setBorder(null);
-		txtEmail.setBounds(142, 461, 467, 25);
+		txtEmail.setBounds(142, 413, 467, 25);
 		panel.add(txtEmail);
 
 		txtTenNV = new JTextField();
 		txtTenNV.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtTenNV.setColumns(10);
 		txtTenNV.setBorder(null);
-		txtTenNV.setBounds(142, 183, 235, 25);
+		txtTenNV.setBounds(142, 45, 235, 25);
 		panel.add(txtTenNV);
 
 		txtSDT = new JTextField();
@@ -222,7 +208,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
 		txtDiaChi.setBorder(null);
-		txtDiaChi.setBounds(142, 413, 467, 25);
+		txtDiaChi.setBounds(142, 373, 467, 25);
 		panel.add(txtDiaChi);
 
 		txtMucLuong = new JTextField();
@@ -254,7 +240,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		buttonGroup.add(rdoNu);
 
 		comboBox = new JComboBox<Object>();
-		comboBox.setBounds(142, 373, 175, 25);
+		comboBox.setBounds(142, 174, 175, 25);
 		panel.add(comboBox);
 	}
 

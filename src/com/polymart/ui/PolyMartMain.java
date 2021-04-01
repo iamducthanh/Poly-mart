@@ -112,15 +112,15 @@ public class PolyMartMain extends JFrame {
 		mnGiaoDich.setIcon(new ImageIcon("images\\giaodich.png"));
 		menuBar.add(mnGiaoDich);
 
-		JMenuItem mntmHoaDonNhap = new JMenuItem("Hóa đơn nhập");
+		JMenuItem mntmHoaDonNhap = new JMenuItem("Nhập hàng");
 		mntmHoaDonNhap.setIcon(new ImageIcon("images\\hdnhap.png"));
 		mnGiaoDich.add(mntmHoaDonNhap);
 
-		JMenuItem mntmHoaDonThanhToan = new JMenuItem("Hóa đơn thanh toán");
+		JMenuItem mntmHoaDonThanhToan = new JMenuItem("Thanh toán bán hàng");
 		mntmHoaDonThanhToan.setIcon(new ImageIcon("images\\hdxuat.png"));
 		mnGiaoDich.add(mntmHoaDonThanhToan);
 
-		JMenuItem mntmHoaDonTraHang = new JMenuItem("Hóa đơn trả hàng");
+		JMenuItem mntmHoaDonTraHang = new JMenuItem("Trả hàng");
 		mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
 		mnGiaoDich.add(mntmHoaDonTraHang);
 

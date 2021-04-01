@@ -5,8 +5,6 @@ import java.util.List;
 import com.polymart.dao.INhanVienDAO;
 import com.polymart.mapper.NhanVienMapper;
 import com.polymart.model.NhanVienModel;
-import com.polymart.service.INhanVienService;
-import com.polymart.service.impl.NhanVienService;
 
 public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVienDAO {
 
@@ -53,18 +51,8 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 	}
 
 	@Override
-	public List<NhanVienModel> filterByIdAndName(String idOrName) {
+	public List<NhanVienModel> filter(String idOrName) {
 		String sql = "SELECT*FROM NHANVIEN WHERE ID LIKE ? OR HOTEN LIKE ?";
 		return query(sql, new NhanVienMapper(), "%" + idOrName + "%", "%" + idOrName + "%");
-	}
-
-	public static void main(String[] args) {
-		INhanVienService nv = new NhanVienService();
-		List<NhanVienModel> list = nv.filterByIdAndName("6");
-		if (list.isEmpty()) {
-			System.out.println("empty");
-		} else {
-			list.forEach(e -> System.out.println(e.getHoTen()));
-		}
 	}
 }

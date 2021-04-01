@@ -64,8 +64,8 @@ public class NhanVienService implements INhanVienService {
     }
 
     @Override
-    public List<NhanVienModel> filterByIdAndName(String idOrName) {
-        return nhanVienDAO.filterByIdAndName(idOrName);
+    public List<NhanVienModel> filter(String idOrName) {
+        return nhanVienDAO.filter(idOrName);
     }
 
 }

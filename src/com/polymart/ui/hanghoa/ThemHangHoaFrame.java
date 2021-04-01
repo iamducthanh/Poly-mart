@@ -109,7 +109,7 @@ public class ThemHangHoaFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnLuuSP.setBounds(935, 431, 122, 23);
+		btnLuuSP.setBounds(935, 427, 122, 30);
 		panel.add(btnLuuSP);
 		
 		JButton btnXoa = new JButton("Xóa");
@@ -117,7 +117,7 @@ public class ThemHangHoaFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnXoa.setBounds(835, 431, 89, 23);
+		btnXoa.setBounds(830, 427, 89, 30);
 		panel.add(btnXoa);
 
 		
@@ -135,105 +135,98 @@ public class ThemHangHoaFrame extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Mã sản phẩm");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(10, 11, 88, 25);
+		lblNewLabel.setBounds(10, 11, 88, 30);
 		contentPane.add(lblNewLabel);
 		
 		txtMaSP = new JTextField();
-		txtMaSP.setBorder(null);
 		txtMaSP.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtMaSP.setBounds(108, 11, 228, 25);
+		txtMaSP.setBounds(108, 11, 228, 30);
 		contentPane.add(txtMaSP);
 		txtMaSP.setColumns(10);
 		
 		lblTnSnPhm = new JLabel("Tên sản phẩm");
 		lblTnSnPhm.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTnSnPhm.setBounds(10, 47, 126, 25);
+		lblTnSnPhm.setBounds(10, 47, 126, 30);
 		contentPane.add(lblTnSnPhm);
 		
 		lblLoi = new JLabel("Loại");
 		lblLoi.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblLoi.setBounds(10, 83, 88, 25);
+		lblLoi.setBounds(10, 83, 88, 30);
 		contentPane.add(lblLoi);
 		
 		lblGiVn = new JLabel("Giá vốn");
 		lblGiVn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGiVn.setBounds(380, 11, 88, 25);
+		lblGiVn.setBounds(380, 11, 88, 30);
 		contentPane.add(lblGiVn);
 		
 		lblGiVn_1 = new JLabel("Giá bán");
 		lblGiVn_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGiVn_1.setBounds(380, 47, 88, 25);
+		lblGiVn_1.setBounds(380, 47, 88, 30);
 		contentPane.add(lblGiVn_1);
 		
 		lblGiBn = new JLabel("Giá giảm");
 		lblGiBn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGiBn.setBounds(380, 83, 88, 25);
+		lblGiBn.setBounds(380, 83, 88, 30);
 		contentPane.add(lblGiBn);
 		
 		txtTenSP = new JTextField();
 		txtTenSP.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtTenSP.setColumns(10);
-		txtTenSP.setBorder(null);
-		txtTenSP.setBounds(108, 47, 228, 25);
+		txtTenSP.setBounds(108, 47, 228, 30);
 		contentPane.add(txtTenSP);
 		
 		txtLoaiSP = new JTextField();
 		txtLoaiSP.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtLoaiSP.setColumns(10);
-		txtLoaiSP.setBorder(null);
-		txtLoaiSP.setBounds(108, 83, 228, 25);
+		txtLoaiSP.setBounds(108, 83, 228, 30);
 		contentPane.add(txtLoaiSP);
 		
 		txtGiaVon = new JTextField();
 		txtGiaVon.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtGiaVon.setColumns(10);
-		txtGiaVon.setBorder(null);
-		txtGiaVon.setBounds(465, 11, 171, 25);
+		txtGiaVon.setBounds(465, 11, 171, 30);
 		contentPane.add(txtGiaVon);
 		
 		txtGiaBan = new JTextField();
 		txtGiaBan.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtGiaBan.setColumns(10);
-		txtGiaBan.setBorder(null);
-		txtGiaBan.setBounds(465, 47, 171, 25);
+		txtGiaBan.setBounds(465, 47, 171, 30);
 		contentPane.add(txtGiaBan);
 		
 		txtGiaGiam = new JTextField();
 		txtGiaGiam.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtGiaGiam.setColumns(10);
-		txtGiaGiam.setBorder(null);
-		txtGiaGiam.setBounds(465, 83, 171, 25);
+		txtGiaGiam.setBounds(465, 83, 171, 30);
 		contentPane.add(txtGiaGiam);
 		
 		JLabel lblSize = new JLabel("Size");
 		lblSize.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSize.setBounds(690, 11, 88, 25);
+		lblSize.setBounds(690, 11, 88, 30);
 		contentPane.add(lblSize);
 		
 		JLabel lblGiVn_2_1 = new JLabel("Màu sắc");
 		lblGiVn_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGiVn_2_1.setBounds(690, 47, 88, 25);
+		lblGiVn_2_1.setBounds(690, 47, 88, 30);
 		contentPane.add(lblGiVn_2_1);
 		
 		txtMauSac = new JTextField();
 		txtMauSac.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMauSac.setColumns(10);
-		txtMauSac.setBorder(null);
-		txtMauSac.setBounds(771, 47, 171, 25);
+		txtMauSac.setBounds(771, 47, 171, 30);
 		contentPane.add(txtMauSac);
 		
 		JComboBox<Object> cbbSize = new JComboBox<Object>();
 		cbbSize.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cbbSize.setModel(new DefaultComboBoxModel<Object>(new String[] {"S", "M", "L", "XL", "XXL", "Free size"}));
-		cbbSize.setBounds(771, 13, 171, 25);
+		cbbSize.setBounds(771, 13, 171, 30);
 		contentPane.add(cbbSize);
 		
 		JButton btnThemSP = new JButton("+ Thêm");
-		btnThemSP.setBounds(981, 14, 89, 23);
+		btnThemSP.setBounds(981, 14, 89, 30);
 		contentPane.add(btnThemSP);
 		
 		JButton btnMoi = new JButton("Tạo mới");
-		btnMoi.setBounds(981, 50, 89, 23);
+		btnMoi.setBounds(981, 50, 89, 30);
 		contentPane.add(btnMoi);
 		
 	}

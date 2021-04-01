@@ -37,7 +37,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     private JTextField txtFind;
     private JTable tblHangHoa;
     private DefaultTableModel modelHangHoa;
-    private String columnHangHoa[] = {"Mã hàng", "Tên hàng", "Loại", "Giá bán", "Giá vốn", "Giảm giá", "Size", "Màu sắc"};
+    private String columnHangHoa[] = {"Mã sản phẩm", "Tên sản phẩm", "Loại","Số lượng", "Giá bán", "Giá vốn", "Giảm giá", "Size", "Màu sắc"};
 
     private JPanel pnlTop = new JPanel();
     private JPanel pnlNavibar;

@@ -31,7 +31,9 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.SanPhamService;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.polymart.model.NguonHangModel;
@@ -54,6 +56,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
     private INguonHangService iNguonHangService = new NguonHangService();
     private IChiTietSanPhamService iChiTietSanPhamService = new ChiTietSanPhamService();
+    private ISanPhamService iSanPhamService = new SanPhamService();
 
     /**
      * Launch the application.

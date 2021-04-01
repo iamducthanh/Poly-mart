@@ -300,6 +300,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         // đổ dữ liệu vào combobox tìm sản phẩm
         if (!iChiTietSanPhamService.findAll().isEmpty()) {
             setCbbTimSanPham(iChiTietSanPhamService.findAll(), cbbTimSanPham);
+            getChiTietSanPham(iChiTietSanPhamService.findAll(), cbbTimSanPham, txtMaSP, txtTenSP, txtDonGia);
             // tạo sự kiện click combobox tìm kiêm sản phẩm
             cbbTimSanPham.addActionListener(new ActionListener() {
                 @Override
@@ -307,6 +308,26 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                     getChiTietSanPham(iChiTietSanPhamService.findAll(), cbbTimSanPham, txtMaSP, txtTenSP, txtDonGia);
                 }
             });
+        }
+
+        // sự kiện khi bâm nút thêm sản phảm vào hóa đơn và show lên table
+        btnLuuTam.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLuuTam(txtMaSP, txtTenSP, txtSoLuong, txtDonGia);
+            }
+        });
+    }
+
+    // hàm sự kiện nút lưu tạm
+    private void evtBtnLuuTam(JTextField txtMaSP, JTextField txtTenSP, JTextField txtSoLuong, JTextField txtDonGia) {
+        String getSoLuong = txtSoLuong.getText();
+        if (EntityValidate.checkIntDuong(this, getSoLuong)) {
+            modelThemNhapHang.addRow(new Object[]{
+                    txtMaSP.getText(), txtTenSP.getText(), txtSoLuong.getText(), txtDonGia.getText(),
+                    Integer.parseInt(txtSoLuong.getText()) * Long.parseLong(txtDonGia.getText())
+            });
+            txtSoLuong.setText("");
         }
     }
 
@@ -340,17 +361,6 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             txtMaSP.setText(lstChiTietSanPhamModels.get(index).getId().toString());
             txtTenSP.setText(iSanPhamService.findNameByID(lstChiTietSanPhamModels.get(index).getIdSanPham()));
             txtDonGia.setText(lstChiTietSanPhamModels.get(index).getGiaBan().toString());
-        }
-    }
-
-    // sự kiện khi bâm nút thêm sản phảm vào hóa đơn và show lên table
-    private void themSanPham(JComboBox cbbChonSanPham, JTextField txtSoLuong) {
-        String getSoLuong = txtSoLuong.getText();
-        if (EntityValidate.checkIntDuong(this, getSoLuong)) {
-            int getCbcIndexSanPham = cbbChonSanPham.getSelectedIndex();
-            modelThemNhapHang.addRow(new Object[]{
-
-            });
         }
     }
 }

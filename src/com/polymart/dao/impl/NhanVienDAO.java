@@ -29,10 +29,10 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public void update(NhanVienModel nhanVienModel) {
-		StringBuilder sql = new StringBuilder("UPDATE NHANVIEN SET HOTEN = ?, ");
-		sql.append("NGAYSINH = ?, GIOITINH = ?, DIACHI = ?, SODIENTHOAI = ?, ");
-		sql.append("EMAIL = ?, CHUCVU = ?, MUCLUONG = ?, ANHDAIDIEN = ?, MATKHAU = ?");
-		sql.append("WHERE ID = ?");
+		StringBuilder sql = new StringBuilder("UPDATE NHANVIEN SET HOTEN = ?,");
+		sql.append(" NGAYSINH = ?, GIOITINH = ?, DIACHI = ?, SODIENTHOAI = ?,");
+		sql.append(" EMAIL = ?, CHUCVU = ?, MUCLUONG = ?, ANHDAIDIEN = ?, MATKHAU = ?");
+		sql.append(" WHERE ID = ?");
 		update(sql.toString(), nhanVienModel.getHoTen(), nhanVienModel.getNgaySinh(), nhanVienModel.isGioiTinh(),
 				nhanVienModel.getDiaChi(), nhanVienModel.getSdt(), nhanVienModel.getEmail(), nhanVienModel.getChucVu(),
 				nhanVienModel.getLuong(), nhanVienModel.getAnhDaiDien(), nhanVienModel.getMatKhau(),

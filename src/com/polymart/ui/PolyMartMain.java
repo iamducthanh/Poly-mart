@@ -58,7 +58,6 @@ public class PolyMartMain extends JFrame {
 			public void run() {
 				try {
 					EntityFrame.POLYMARTMAIN = new PolyMartMain();
-					EntityFrame.POLYMARTMAIN.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,6 +69,7 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
+		setVisible(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle(EntityMessage.TITLE);
 		if(EntityAuthorization.USER!=null){
@@ -431,7 +431,6 @@ public class PolyMartMain extends JFrame {
 			EntityAuthorization.USER = null;
 			new LoginJFrame().setVisible(true);
 			this.setVisible(false);
-			EntityFrame.resetFrame();
 		}
 	}
 	

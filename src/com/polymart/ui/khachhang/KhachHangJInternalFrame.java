@@ -47,7 +47,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 	private JTextField txtSoDienThoai;
 	private JTextField txtTim;
 	private JTextField txtTichDiem;
-	private JTable tbKhachHang;
+	private JTable tblKhachHang;
 
 	private DefaultTableModel modelKhachHang = new DefaultTableModel();
 	private IKhachHangService khachHangService = new KhachHangService();
@@ -268,16 +268,16 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		tbKhachHang = new JTable();
-		scrollPane.setViewportView(tbKhachHang);
+		tblKhachHang = new JTable();
+		scrollPane.setViewportView(tblKhachHang);
 		modelKhachHang.addColumn("Tên khách hàng");
 		modelKhachHang.addColumn("Số điện thoại");
 		modelKhachHang.addColumn("Địa chỉ");
 		modelKhachHang.addColumn("Tích điểm");
-		tbKhachHang.setModel(modelKhachHang);
+		tblKhachHang.setModel(modelKhachHang);
 
 //		showTableKhachHang();
-		tbKhachHang.addMouseListener(new MouseAdapter() {
+		tblKhachHang.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				showDetail();
@@ -302,8 +302,6 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 	protected void findKhachHang() {
 		try {
 			list = khachHangService.filter(txtTim.getText());
-			list.forEach(e -> System.out.println(e.getHoTen()));
-			System.out.println("\n\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -316,7 +314,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		if (EntityValidate.checkName(this, txtTenKhachHang.getText())
 				&& EntityValidate.checkPhoneNumber(this, txtSoDienThoai.getText())) {
 			KhachHangModel khachHangModel = new KhachHangModel();
-			khachHangModel.setId(list.get(tbKhachHang.getSelectedRow()).getId());
+			khachHangModel.setId(list.get(tblKhachHang.getSelectedRow()).getId());
 			khachHangModel.setHoTen(txtTenKhachHang.getText());
 			khachHangModel.setSdt(txtSoDienThoai.getText());
 			khachHangModel.setDiaChi(txtDiaChi.getText());
@@ -334,9 +332,9 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 
 	protected void btnXoa() {
 		if (JOptionPane.showConfirmDialog(this,
-				"Xác nhận xoá khách hàng có tên:  " + list.get(tbKhachHang.getSelectedRow()).getHoTen(), "Xoá",
+				"Xác nhận xoá khách hàng có tên:  " + list.get(tblKhachHang.getSelectedRow()).getHoTen(), "Xoá",
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-			khachHangService.delete(new Integer[] { list.get(tbKhachHang.getSelectedRow()).getId() });
+			khachHangService.delete(new Integer[] { list.get(tblKhachHang.getSelectedRow()).getId() });
 
 			clear();
 			loadToTable();
@@ -345,7 +343,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 
 	// hiển thị thông tin khach hàng lên form khi được click vào bảng
 	private void showDetail() {
-		int row = tbKhachHang.getSelectedRow();
+		int row = tblKhachHang.getSelectedRow();
 		txtTenKhachHang.setText(modelKhachHang.getValueAt(row, 0).toString());
 		txtSoDienThoai.setText(modelKhachHang.getValueAt(row, 1).toString());
 		txtDiaChi.setText(modelKhachHang.getValueAt(row, 2).toString());

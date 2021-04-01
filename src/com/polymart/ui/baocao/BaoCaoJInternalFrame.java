@@ -100,6 +100,9 @@ public class BaoCaoJInternalFrame extends JInternalFrame {
 		JPanel panel1 = new JPanel();
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		panel1.add(btnTimKiem);
 
 		JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
 		panel1.add(lblNewLabel_1);

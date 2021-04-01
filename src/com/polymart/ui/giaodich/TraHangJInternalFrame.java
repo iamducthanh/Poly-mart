@@ -87,7 +87,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
 	}
 	
 	public void initTopTraHang() {
-		JLabel lblNewLabel = new JLabel("Hóa đơn trả hàng                       ");
+		JLabel lblNewLabel = new JLabel("Hóa đơn trả hàng            ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 		
@@ -110,6 +110,9 @@ public class TraHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		panel1.add(btnTimKiem);
 		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
 		panel1.add(lblNewLabel_1);
 		

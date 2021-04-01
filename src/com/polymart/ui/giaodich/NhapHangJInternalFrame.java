@@ -86,13 +86,12 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
 		initTopNhapHang();
 		initCenterNhapHang();
-		// initFrameThem();
 	}
 
 	public void initTopNhapHang() {
 		setTitle("Hàng hóa - Kiểm kho");
 
-		JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng                       ");
+		JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng      ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 
@@ -115,7 +114,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		panel1.add(btnTimKiem);
+		JLabel lblNewLabel_1 = new JLabel("                        ");
 		panel1.add(lblNewLabel_1);
 
 		JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");

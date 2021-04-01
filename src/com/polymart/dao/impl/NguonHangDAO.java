@@ -16,9 +16,8 @@ public class NguonHangDAO extends AbstractDAO<NguonHangModel> implements INguonH
 
 	@Override
 	public List<NguonHangModel> findByName(String name) {
-		String sql = "SELECT * FROM NGUONHANG WHERE ten LIKE ?";
-		String nameSQL = "N'%" + name + "%'";
-		System.out.println(nameSQL);
-		return query(sql, new NguonHangMapper(), nameSQL);
+		String sql = "select * from nguonHang where id = ?";
+		//String sql = "select * from nguonHang where ten like " + "'%" + name + "%'";
+		return query(sql, new NguonHangMapper(), name);
 	}
 }

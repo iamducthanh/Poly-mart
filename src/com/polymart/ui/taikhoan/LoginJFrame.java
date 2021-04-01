@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -51,6 +52,7 @@ public class LoginJFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
                     LoginJFrame loginJFrame = new LoginJFrame();
                     loginJFrame.setVisible(true);
                     loginJFrame.setTitle("Đăng nhập");
@@ -221,9 +223,7 @@ public class LoginJFrame extends JFrame {
         if (EntityValidate.checkUsername(this, username) && EntityValidate.checkPassword(this, password)) {
             EntityAuthorization.USER = nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password);
             if (EntityAuthorization.USER != null) {
-//				textUsername.setText(username);
-//				textPassword.setText(password);
-                this.setVisible(false);
+                setVisible(false);
                 EntityFrame.POLYMARTMAIN = new PolyMartMain();
                 EntityFrame.POLYMARTMAIN.setVisible(true);
             } else {

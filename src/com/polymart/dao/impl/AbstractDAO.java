@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.polymart.dao.GenericDAO;
@@ -36,15 +37,16 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 if (parameter instanceof Long) {
                     statement.setLong(index, (Long) parameter);
                 } else if (parameter instanceof String) {
-                    System.out.println("i " + i);
-                    System.out.println("giá trị: " + parameter);
-                    statement.setString(index, (String) parameter);
-                    System.out.println("i " + i);
+                    statement.setNString(index, (String) parameter);
                 } else if (parameter instanceof Integer) {
                     statement.setInt(index, (Integer) parameter);
                 } else if (parameter instanceof Timestamp) {
                     statement.setTimestamp(index, (Timestamp) parameter);
-                }
+                } else if (parameter instanceof Date) {
+                	statement.setDate(index, new java.sql.Date(((Date) parameter).getTime()));
+				} else if (parameter instanceof Boolean) {
+					statement.setBoolean(index, (Boolean) parameter);
+				}
             }
             return statement;
         } catch (SQLException e) {

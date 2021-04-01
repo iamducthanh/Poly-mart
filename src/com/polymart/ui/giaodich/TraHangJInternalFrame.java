@@ -33,10 +33,8 @@ import com.toedter.calendar.JDateChooser;
 
 public class TraHangJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4824323272953818563L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -84,12 +82,11 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-//		initTopNhapHang();
-//		initCenterNhapHang();
+		initTopTraHang();
+		initCenterTraHang();
 	}
 	
 	public void initTopTraHang() {
-
 		JLabel lblNewLabel = new JLabel("Hóa đơn trả hàng                       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
@@ -138,7 +135,6 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		panel1.add(cbbOptionKiemKho);
 
 		btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
-		
 	}
 	
 	public void initCenterTraHang() {
@@ -194,19 +190,14 @@ public class TraHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-
-		
 	}
 	
 	ActionListener openThemHoaDonTraHang = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame();
-			EntityFrame.POLYMARTMAIN.desktopPane.add(themHoaDonTraHang);
+			EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonTraHang);
 			themHoaDonTraHang.setVisible(true);
-			
 		}
 	};
-
 }

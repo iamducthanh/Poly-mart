@@ -14,29 +14,6 @@ public class NhanVienModel extends AbstractModel {
     private Long luong;
     private String anhDaiDien;
 
-    public NhanVienModel() {
-
-    }
-
-    public NhanVienModel(String hoTen, Date ngaySinh, String diaChi, String sdt, String chucVu, String matKhau,
-                         String email, Boolean gioiTinh, Long luong, String anhDaiDien) {
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.diaChi = diaChi;
-        this.sdt = sdt;
-        this.chucVu = chucVu;
-        this.matKhau = matKhau;
-        this.email = email;
-        this.gioiTinh = gioiTinh;
-        this.luong = luong;
-        this.anhDaiDien = anhDaiDien;
-    }
-
-    public NhanVienModel(String chucVu, String matKhau) {
-        this.chucVu = chucVu;
-        this.matKhau = matKhau;
-    }
-
     public String getHoTen() {
         return hoTen;
     }
@@ -117,4 +94,12 @@ public class NhanVienModel extends AbstractModel {
         this.anhDaiDien = anhDaiDien;
     }
 
+	@Override
+	public String toString() {
+		return "NhanVienModel [ID = " + "\nhoTen=" + hoTen + "\nngaySinh=" + ngaySinh + "\ndiaChi=" + diaChi + "\nSDT=" + sdt
+				+ "\nchucVu=" + chucVu + "\nmatKhau=" + matKhau + "\nemail=" + email + "\ngioiTinh=" + gioiTinh
+				+ "\nluong=" + luong + "\nanhDaiDien=" + anhDaiDien + "]";
+	}
+
+    
 }

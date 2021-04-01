@@ -101,14 +101,14 @@ public class ChangePassFrame extends JFrame {
         txtNewPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtNewPassword.getText().equals("password")) {
+                if (String.valueOf(txtNewPassword.getPassword()).equals("password")) {
                     txtNewPassword.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (txtNewPassword.getText().equals("")) {
+                if (String.valueOf(txtNewPassword.getPassword()).equals("")) {
                     txtNewPassword.setText("password");
                 }
             }
@@ -142,14 +142,14 @@ public class ChangePassFrame extends JFrame {
         txtComfirmNewPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtComfirmNewPassword.getText().equals("password")) {
+                if (String.valueOf(txtComfirmNewPassword.getPassword()).equals("password")) {
                     txtComfirmNewPassword.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (txtComfirmNewPassword.getText().equals("")) {
+                if (String.valueOf(txtComfirmNewPassword.getPassword()).equals("")) {
                     txtComfirmNewPassword.setText("password");
                 }
             }
@@ -169,8 +169,8 @@ public class ChangePassFrame extends JFrame {
         btnChangePassword.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String getNewPassword = new String(txtNewPassword.getText());
-                String getConfirmNewPassword = new String(txtComfirmNewPassword.getText());
+                String getNewPassword = String.valueOf(txtNewPassword.getPassword());
+                String getConfirmNewPassword = String.valueOf(txtComfirmNewPassword.getPassword());
                 change(getNewPassword, getConfirmNewPassword);
             }
         });

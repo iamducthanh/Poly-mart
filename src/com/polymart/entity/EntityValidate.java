@@ -86,7 +86,7 @@ public class EntityValidate {
             return false;
         }
         try {
-            if (Integer.parseInt(inputIntDuong) > 0) {
+            if (Integer.parseInt(inputIntDuong) > -1) {
                 return true;
             } else {
                 EntityMessage.show(component, inputIntDuong + " không phải một số nguyên dương.");
@@ -96,5 +96,48 @@ public class EntityValidate {
             EntityMessage.show(component, inputIntDuong + " không phải một số nguyên.");
             return false;
         }
+    }
+
+    // kiểm tra tên
+    public static boolean checkNameUser(Component component, String inputName) {
+        if (inputName.isBlank()) {
+            EntityMessage.show(component, "Vui lòng nhập họ và tên");
+            return false;
+        }
+        if (inputName.matches("\\p{Punct}")) {
+            EntityMessage.show(component, "Tên không được chứa các ký tự đặc biệt");
+            return false;
+        }
+        for (Character x : inputName.toCharArray()) {
+            if (x.toString().matches("[0-9]+")) {
+                EntityMessage.show(component, "Tên không được chứa số");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // kiểm tra tên khách ahfng
+    public static boolean checkNameVisit(Component component, String inputNameKhachHang) {
+        for (Character x : inputNameKhachHang.toCharArray()) {
+            if (x.toString().matches("[0-9]+")) {
+                EntityMessage.show(component, "Tên không được chứa số");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // kiểm tra số điện thoại
+    public static boolean checkPhoneNumber(Component component, String inputPhoneNumber) {
+        if (inputPhoneNumber.isBlank()) {
+            EntityMessage.show(component, "Số điện thoại không được để trống");
+            return false;
+        }
+        if (inputPhoneNumber.matches("^[0-9\\-\\+]{9,15}$")) {
+            return true;
+        }
+        EntityMessage.show(component, "Số điện thoại không đúng định dạng");
+        return false;
     }
 }

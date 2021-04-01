@@ -30,7 +30,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.SanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
@@ -136,11 +135,11 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         panel_3.setBorder(new TitledBorder(null, "Th\u00F4ng tin s\u1EA3n ph\u1EA9m", TitledBorder.LEADING,
                 TitledBorder.TOP, null, Color.BLACK));
 
-        JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Thành tiền", JLabel.RIGHT);
-        lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        JLabel lblThanhTien = new JLabel("Thành tiền", JLabel.RIGHT);
+        lblThanhTien.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
-        JLabel lblNewLabel_2 = new JLabel("10 củ", JLabel.RIGHT);
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 22));
+        JLabel lblTongTien = new JLabel("0.0", JLabel.RIGHT);
+        lblTongTien.setFont(new Font("Tahoma", Font.BOLD, 22));
 
         JLabel lblNewLabel_1_1_1_1_2 = new JLabel("Ghi chú");
         lblNewLabel_1_1_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -167,8 +166,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                                                         .addContainerGap())
                                                 .addGroup(gl_panel_2.createSequentialGroup()
                                                         .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-                                                                .addComponent(lblNewLabel_1_1_1_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblThanhTien, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lblTongTien, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE))
                                                         .addGap(19)))))
                         .addGroup(gl_panel_2.createSequentialGroup()
                                 .addGap(20)
@@ -186,9 +185,9 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                 .addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(lblNewLabel_1_1_1_1_1)
+                                .addComponent(lblThanhTien)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(lblNewLabel_2)
+                                .addComponent(lblTongTien)
                                 .addGap(28)
                                 .addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
@@ -314,19 +313,25 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         btnLuuTam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                evtBtnLuuTam(txtMaSP, txtTenSP, txtSoLuong, txtDonGia);
+                evtBtnLuuTam(txtMaSP, txtTenSP, txtSoLuong, txtDonGia, lblTongTien);
             }
         });
     }
 
     // hàm sự kiện nút lưu tạm
-    private void evtBtnLuuTam(JTextField txtMaSP, JTextField txtTenSP, JTextField txtSoLuong, JTextField txtDonGia) {
+    private void evtBtnLuuTam(JTextField txtMaSP, JTextField txtTenSP, JTextField txtSoLuong,
+                              JTextField txtDonGia, JLabel lblTongTien) {
         String getSoLuong = txtSoLuong.getText();
         if (EntityValidate.checkIntDuong(this, getSoLuong)) {
             modelThemNhapHang.addRow(new Object[]{
                     txtMaSP.getText(), txtTenSP.getText(), txtSoLuong.getText(), txtDonGia.getText(),
                     Integer.parseInt(txtSoLuong.getText()) * Long.parseLong(txtDonGia.getText())
             });
+            Double tongTien = 0.0;
+            for (int i = 0; i < modelThemNhapHang.getRowCount(); i++) {
+                tongTien += Double.parseDouble(modelThemNhapHang.getValueAt(i, 4).toString());
+            }
+            lblTongTien.setText(tongTien.toString());
             txtSoLuong.setText("");
         }
     }

@@ -24,6 +24,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.dao.impl.NguonHangDAO;
+import com.polymart.entity.EntityMessage;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.impl.NguonHangService;
 import java.awt.Font;
@@ -94,6 +96,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		JButton btnTim = new JButton("Tìm");
 		btnTim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				findByNameNguonHang();
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -256,11 +259,22 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 			}
 		});
 		
-		loadNguonHangTable();
+		listNguonHang = new NguonHangService().findAll();
+		loadNguonHangTable(listNguonHang);
 	}
 	
-	void loadNguonHangTable() {
-		listNguonHang = new NguonHangService().findAll();
+	void findByNameNguonHang() {
+		String name = txtTim.getText();
+		listNguonHang = new NguonHangService().findByName(name);
+		System.out.println(listNguonHang.size());
+		if(listNguonHang.size() <= 0) {
+            EntityMessage.show(this, "Không tìm thấy nguồn hàng nào có tên giống như vậy!");
+		} else {
+			loadNguonHangTable(listNguonHang);
+		}
+	}
+	
+	void loadNguonHangTable(List<NguonHangModel> listNguonHang) {
 		listNguonHang.forEach((nguonHang) -> {
 			modelNguonHang.addRow(new Object[] {nguonHang.getTenNguonHang(), nguonHang.getDiaChi(), nguonHang.getSdt()});
 		});
@@ -269,10 +283,12 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	}
 	
 	void display(int row) {
-		tableNguonHang.setRowSelectionInterval(row, row);
-		txtNguonHang.setText(listNguonHang.get(row).getTenNguonHang());
-		txtDiaChi.setText(listNguonHang.get(row).getDiaChi());
-		txtSoDT.setText(listNguonHang.get(row).getSdt());
+		if(row > -1) {
+			tableNguonHang.setRowSelectionInterval(row, row);
+			txtNguonHang.setText(listNguonHang.get(row).getTenNguonHang());
+			txtDiaChi.setText(listNguonHang.get(row).getDiaChi());
+			txtSoDT.setText(listNguonHang.get(row).getSdt());
+		}
 	}
 	
 

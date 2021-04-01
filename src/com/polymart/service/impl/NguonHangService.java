@@ -29,4 +29,9 @@ public class NguonHangService implements INguonHangService {
 	public List<NguonHangModel> findAll() {
 		return new ArrayList<>(mapNhanVien.values());
 	}
+
+	@Override
+	public List<NguonHangModel> findByName(String name) {
+		return new NguonHangDAO().findByName(name);
+	}
 }

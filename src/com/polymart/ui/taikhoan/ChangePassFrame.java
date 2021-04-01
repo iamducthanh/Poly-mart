@@ -8,32 +8,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
+import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 
 
 @SuppressWarnings("serial")
 public class ChangePassFrame extends JFrame {
-    static JTextField textUsername;
-    private JTextField textPassword;
-    static ChangePassFrame frame = new ChangePassFrame();
-    String change = "Change password";
-    JButton btnLogin = new JButton("Đổi mật khẩu");
-    StringBuilder error = new StringBuilder();
-    boolean check = false;
 
     private INhanVienService nhanVienService = new NhanVienService();
 
@@ -44,6 +32,7 @@ public class ChangePassFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    ChangePassFrame frame = new ChangePassFrame();
                     frame.setVisible(true);
                     frame.setTitle("Đổi mật khẩu");
                     frame.setLocationRelativeTo(null);
@@ -58,7 +47,10 @@ public class ChangePassFrame extends JFrame {
      * Create the frame.
      */
     private JButton btnCancel;
-    private JTextField textComfirm;
+    private JButton btnChangePassword = new JButton("Đổi mật khẩu");
+    private JLabel txtUsername;
+    private JPasswordField txtComfirmNewPassword;
+    private JPasswordField txtNewPassword;
 
     public ChangePassFrame() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,26 +62,24 @@ public class ChangePassFrame extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        textUsername = new JTextField(" Username");
-        textUsername.setEditable(false);
-        textUsername.setForeground(Color.black);
-        textUsername.setBackground(Color.white);
-        textUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        textUsername.setColumns(10);
-        textUsername.setBorder(new LineBorder(Color.WHITE));
-        textUsername.setBounds(360, 76, 268, 27);
+        txtUsername = new JLabel(EntityAuthorization.USER.getId().toString());
+        txtUsername.setForeground(Color.black);
+        txtUsername.setBackground(Color.white);
+        txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtUsername.setBorder(new LineBorder(Color.WHITE));
+        txtUsername.setBounds(360, 76, 268, 27);
 
-        contentPane.add(textUsername);
+        contentPane.add(txtUsername);
 
-        textPassword = new JTextField();
-        textPassword.setForeground(Color.black);
-        textPassword.setBackground(Color.white);
-        textPassword.setText(" New Password");
-        textPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        textPassword.setColumns(10);
-        textPassword.setBorder(new LineBorder(Color.WHITE));
-        textPassword.setBounds(360, 136, 257, 27);
-        contentPane.add(textPassword);
+        txtNewPassword = new JPasswordField();
+        txtNewPassword.setForeground(Color.black);
+        txtNewPassword.setBackground(Color.white);
+        txtNewPassword.setText("password");
+        txtNewPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtNewPassword.setColumns(10);
+        txtNewPassword.setBorder(new LineBorder(Color.WHITE));
+        txtNewPassword.setBounds(360, 136, 257, 27);
+        contentPane.add(txtNewPassword);
 
         JLabel lblLogin = new JLabel("ĐỔI MẬT KHẨU");
         lblLogin.setForeground(Color.BLUE);
@@ -97,54 +87,34 @@ public class ChangePassFrame extends JFrame {
         lblLogin.setBounds(417, 11, 187, 40);
         contentPane.add(lblLogin);
 
-        btnLogin.setForeground(Color.WHITE);
-        btnLogin.addActionListener(new ActionListener() {
+        btnChangePassword.setForeground(Color.WHITE);
+        btnChangePassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                change();
             }
         });
-        btnLogin.setBorder(null);
-        btnLogin.setBackground(Color.BLACK);
-        btnLogin.setBounds(360, 264, 268, 40);
-        contentPane.add(btnLogin);
+        btnChangePassword.setBorder(null);
+        btnChangePassword.setBackground(Color.BLACK);
+        btnChangePassword.setBounds(360, 264, 268, 40);
+        contentPane.add(btnChangePassword);
 
-        textUsername.addFocusListener(new FocusAdapter() {
+        txtNewPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (textUsername.getText().equals(" Username")) {
-                    textUsername.setText("");
+                if (txtNewPassword.getText().equals("password")) {
+                    txtNewPassword.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (textUsername.getText().equals("")) {
-                    textUsername.setText(" Username");
+                if (txtNewPassword.getText().equals("")) {
+                    txtNewPassword.setText("password");
                 }
             }
         });
 
-        textPassword.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (textPassword.getText().equals(" New Password")) {
-                    textPassword.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (textPassword.getText().equals("")) {
-                    textPassword.setText(" New Password");
-                }
-            }
-        });
-
-        textUsername.addActionListener(loginAction);
-        textPassword.addActionListener(loginAction);
-
-
-        btnLogin.setContentAreaFilled(false);
+        btnChangePassword.setContentAreaFilled(false);
 
         btnCancel = new JButton("Hủy");
         btnCancel.addActionListener(new ActionListener() {
@@ -160,27 +130,27 @@ public class ChangePassFrame extends JFrame {
         btnCancel.setBounds(360, 325, 268, 40);
         contentPane.add(btnCancel);
 
-        textComfirm = new JTextField(" Comfirm password");
-        textComfirm.setForeground(Color.BLACK);
-        textComfirm.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        textComfirm.setColumns(10);
-        textComfirm.setBorder(new LineBorder(Color.WHITE));
-        textComfirm.setBackground(Color.WHITE);
-        textComfirm.setBounds(360, 196, 268, 27);
-        contentPane.add(textComfirm);
+        txtComfirmNewPassword = new JPasswordField("password");
+        txtComfirmNewPassword.setForeground(Color.BLACK);
+        txtComfirmNewPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtComfirmNewPassword.setColumns(10);
+        txtComfirmNewPassword.setBorder(new LineBorder(Color.WHITE));
+        txtComfirmNewPassword.setBackground(Color.WHITE);
+        txtComfirmNewPassword.setBounds(360, 196, 268, 27);
+        contentPane.add(txtComfirmNewPassword);
 
-        textComfirm.addFocusListener(new FocusAdapter() {
+        txtComfirmNewPassword.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (textComfirm.getText().equals(" Comfirm password")) {
-                    textComfirm.setText("");
+                if (txtComfirmNewPassword.getText().equals("password")) {
+                    txtComfirmNewPassword.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (textComfirm.getText().equals("")) {
-                    textComfirm.setText(" Comfirm password");
+                if (txtComfirmNewPassword.getText().equals("")) {
+                    txtComfirmNewPassword.setText("password");
                 }
             }
         });
@@ -196,23 +166,27 @@ public class ChangePassFrame extends JFrame {
         lblNewLabel.setBackground(Color.black);
         contentPane.add(lblNewLabel);
 
+        btnChangePassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String getNewPassword = new String(txtNewPassword.getText());
+                String getConfirmNewPassword = new String(txtComfirmNewPassword.getText());
+                change(getNewPassword, getConfirmNewPassword);
+            }
+        });
 
     }
 
-    Action loginAction = new AbstractAction() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    };
-
-    public void change(String oldPassword, String newPassword, String confirmNewPassword) {
-        if (EntityValidate.checkOldPasswordChange(this, oldPassword)
-                && EntityValidate.checkNewPasswordChange(this, newPassword)
+    public void change(String newPassword, String confirmNewPassword) {
+        if (EntityValidate.checkNewPasswordChange(this, newPassword)
                 && EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
-            if (nhanVienService.changePassword(EntityAuthorization.USER.getId(), newPassword)) {
+            String oldPassword = EntityMessage.porm(this, "Nhập mật khẩu cũ:");
+            if (EntityValidate.checkOldPasswordChange(this, oldPassword)) {
                 EntityAuthorization.USER.setMatKhau(newPassword);
-                this.setVisible(false);
+                if ((nhanVienService.update(EntityAuthorization.USER)) != null) {
+                    EntityMessage.show(this, "Đổi mật khẩu thành công");
+                    this.setVisible(false);
+                }
             }
         }
     }

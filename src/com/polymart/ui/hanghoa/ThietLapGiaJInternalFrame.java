@@ -35,10 +35,8 @@ import com.polymart.ui.common.uiCommon;
 
 public class ThietLapGiaJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1811994452109007906L;
+	
 	private JPanel contentPane;
 	private JTable tableThietLapGia;
 	private DefaultTableModel modelThietLapGia = new DefaultTableModel();
@@ -49,7 +47,6 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 	private JPanel panelOption;
 	private JPanel setGiaPanel = new JPanel();
 	private JTextField txtTimNhomHang;
-
 
 	//combobox thiết lập giá
 	private JCheckBox chkSetGiaMaHang = new JCheckBox("Mã hàng");
@@ -80,7 +77,6 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 	public ThietLapGiaJInternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,8 +90,8 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-	//	initTopThietLapGia();
-	//	initCenterThietLapGia();
+		initTopThietLapGia();
+		initCenterThietLapGia();
 	}
 	
 	public void initTopThietLapGia() {
@@ -119,7 +115,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		panelOption.setLayout(null);
 		panelOption.setBackground(Color.white) ;
 		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
-		optionSetGiaFrame.add(panelOption);
+		optionSetGiaFrame.getContentPane().add(panelOption);
 		optionSetGiaFrame.setUndecorated(true);
 		uiCommon uiCommon = new uiCommon(panelOption);
 		

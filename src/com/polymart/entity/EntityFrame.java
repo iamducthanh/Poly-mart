@@ -8,12 +8,4 @@ public class EntityFrame {
     public static ChiTietNhanVienFrame CHITIETNHANVIEN = null;
     public static ThemHangHoaFrame THEMHANGHOA = null;
     public static PolyMartMain POLYMARTMAIN = null;
-
-    // form reset lại tất cả các form khi đăng xuất đăng nhập lại
-    public static void resetFrame() {
-        CHITIETNHANVIEN = new ChiTietNhanVienFrame();
-        POLYMARTMAIN = new PolyMartMain();
-        THEMHANGHOA = new ThemHangHoaFrame();
-    }
-
 }

@@ -13,17 +13,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
@@ -47,7 +50,7 @@ public class PolyMartMain extends JFrame {
 
 	private static final long serialVersionUID = 6825346390245174222L;
 
-	public JDesktopPane desktopPane = new JDesktopPane();
+	public JPanel pnlMain = new JPanel();
 	URI uri;
 
 	/**
@@ -57,8 +60,8 @@ public class PolyMartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					EntityFrame.POLYMARTMAIN = new PolyMartMain();
-					EntityFrame.POLYMARTMAIN.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,14 +73,15 @@ public class PolyMartMain extends JFrame {
 	 * Create the frame.
 	 */
 	public PolyMartMain() {
+		setVisible(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle(EntityMessage.TITLE);
-		if(EntityAuthorization.USER!=null){
-		setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
-				+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
+		if (EntityAuthorization.USER != null) {
+			setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
+					+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	setResizable(false);
+		setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		editMenu();
 	}
@@ -204,8 +208,8 @@ public class PolyMartMain extends JFrame {
 
 		menuBar.add(mnBanHang);
 
-		getContentPane().add(desktopPane, BorderLayout.CENTER);
-		desktopPane.setLayout(new CardLayout(0, 0));
+		getContentPane().add(pnlMain, BorderLayout.CENTER);
+		pnlMain.setLayout(new CardLayout(0, 0));
 		try {
 			uri = new URI("http://facebook.com/iamducthanh");
 		} catch (URISyntaxException e) {
@@ -246,12 +250,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openTraHang() {
-		close();
-		TraHangJInternalFrame traHangJInternalFrame = new TraHangJInternalFrame();
-		desktopPane.add(traHangJInternalFrame);
-		traHangJInternalFrame.initTopTraHang();
-		traHangJInternalFrame.initCenterTraHang();
-		traHangJInternalFrame.setVisible(true);
+		loadChild(new TraHangJInternalFrame());
 	}
 
 	ActionListener openKhachHang = new ActionListener() {
@@ -261,10 +260,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openKhachHang() {
-		close();
-		KhachHangJInternalFrame khachHangJInternalFrame = new KhachHangJInternalFrame();
-		desktopPane.add(khachHangJInternalFrame);
-		khachHangJInternalFrame.setVisible(true);
+		loadChild(new KhachHangJInternalFrame());
 	}
 
 	ActionListener doiMatKhau = new ActionListener() {
@@ -274,9 +270,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void doiMatKhau() {
-		ChangePassFrame changePassFrame = new ChangePassFrame();
-		changePassFrame.setVisible(true);
-		changePassFrame.setLocationRelativeTo(null);
+		new ChangePassFrame();
 	}
 
 	ActionListener openThietLapGia = new ActionListener() {
@@ -286,12 +280,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openThietLapGia() {
-		close();
-		ThietLapGiaJInternalFrame thietLapGia = new ThietLapGiaJInternalFrame();
-		desktopPane.add(thietLapGia);
-		thietLapGia.initTopThietLapGia();
-		thietLapGia.initCenterThietLapGia();
-		thietLapGia.setVisible(true);
+		loadChild(new ThietLapGiaJInternalFrame());
 		setTitle("Thiếp lập giá sản phẩm");
 	}
 
@@ -302,12 +291,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openDanhMuc() {
-		close();
-		HangHoaJInternalFrame hangHoa = new HangHoaJInternalFrame();
-		desktopPane.add(hangHoa);
-		hangHoa.initTopHangHoa();
-		hangHoa.initCenterHangHoa();
-		hangHoa.setVisible(true);
+		loadChild(new HangHoaJInternalFrame());
 		setTitle("Danh mục hàng hóa");
 	}
 
@@ -318,12 +302,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openKiemKho() {
-		close();
-		KiemKhoJInternalFrame kiemKho = new KiemKhoJInternalFrame();
-		desktopPane.add(kiemKho);
-		kiemKho.initTopKiemKho();
-		kiemKho.initCenterKiemKho();
-		kiemKho.setVisible(true);
+		loadChild(new KiemKhoJInternalFrame());
 		setTitle("Kiểm kho");
 	}
 
@@ -334,12 +313,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openNhanVien() {
-		close();
-		NhanVienJInternalFrame nhanVien = new NhanVienJInternalFrame();
-		desktopPane.add(nhanVien);
-		nhanVien.initTopNhanVien();
-		nhanVien.initCenterNhanVien();
-		nhanVien.setVisible(true);
+		loadChild(new NhanVienJInternalFrame());
 		setTitle("Quản lý nhân viên");
 	}
 
@@ -350,10 +324,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openNguonHang() {
-		close();
-		NguonHangJInternalFrame nguonHang = new NguonHangJInternalFrame();
-		desktopPane.add(nguonHang);
-		nguonHang.setVisible(true);
+		loadChild(new NguonHangJInternalFrame());
 		setTitle("Quản lý nguồn hàng");
 	}
 
@@ -364,12 +335,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openChamCong() {
-		close();
-		ChamCongJInternalFrame chamCong = new ChamCongJInternalFrame();
-		desktopPane.add(chamCong);
-		chamCong.initTopChamCong();
-		chamCong.initCenterChamCong();
-		chamCong.setVisible(true);
+		loadChild(new ChamCongJInternalFrame());
 		setTitle("Kiểm tra chấm công");
 	}
 
@@ -380,12 +346,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openChiTieu() {
-		close();
-		BaoCaoJInternalFrame baoCao = new BaoCaoJInternalFrame();
-		desktopPane.add(baoCao);
-		baoCao.initTopChiTieu();
-		baoCao.initCenterChiTieu();
-		baoCao.setVisible(true);
+		loadChild(new BaoCaoJInternalFrame());
 		setTitle("Báo cáo - Chi tiêu");
 	}
 
@@ -396,12 +357,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openNhapHang() {
-		close();
-		NhapHangJInternalFrame nhapHang = new NhapHangJInternalFrame();
-		desktopPane.add(nhapHang);
-		nhapHang.initTopNhapHang();
-		nhapHang.initCenterNhapHang();
-		nhapHang.setVisible(true);
+		loadChild(new NhapHangJInternalFrame());
 		setTitle("Quản lý nhập hàng");
 	}
 
@@ -412,12 +368,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openHangHoa() {
-		close();
-		ThanhToanJInternalFrame thanhToan = new ThanhToanJInternalFrame();
-		desktopPane.add(thanhToan);
-		thanhToan.initTopThanhToan();
-		thanhToan.initCenterThanhToan();
-		thanhToan.setVisible(true);
+		loadChild(new ThanhToanJInternalFrame());
 	}
 
 	ActionListener logoutAccount = new ActionListener() {
@@ -431,29 +382,30 @@ public class PolyMartMain extends JFrame {
 			EntityAuthorization.USER = null;
 			new LoginJFrame().setVisible(true);
 			this.setVisible(false);
-			EntityFrame.resetFrame();
 		}
 	}
-	
+
 	ActionListener openBangLuong = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			openBangLuong();
 		}
 	};
-	
+
 	public void openBangLuong() {
-		close();
-		BangLuongJIternalFrame bangLuong = new BangLuongJIternalFrame();
-		desktopPane.add(bangLuong);
-		bangLuong.setVisible(true);
+		loadChild(new BangLuongJIternalFrame());
 	}
 
-	public void close() {
+	//load JInternalFrame to Mainboard
+	private void loadChild(JInternalFrame frame) {
+		pnlMain.removeAll();
+
+		frame.setSize(pnlMain.getSize());
 		try {
-			desktopPane.removeAll();
-		} catch (Exception e) {
+			frame.setMaximum(true);
+		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
+		pnlMain.add(frame);
+		pnlMain.repaint();
 	}
-
 }

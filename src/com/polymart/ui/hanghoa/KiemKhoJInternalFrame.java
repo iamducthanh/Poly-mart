@@ -106,8 +106,8 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-	//	initTopKiemKho();
-	//	initCenterKiemKho();
+		initTopKiemKho();
+		initCenterKiemKho();
 	}
 	
 	public void initTopKiemKho() {
@@ -171,7 +171,7 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 		uiCommon.addCheckBox(chkTrangThaiKK, 160, 33, 99);
 
 		
-		optionKiemKhoFrame.add(panelOption);
+		optionKiemKhoFrame.getContentPane().add(panelOption);
 		optionKiemKhoFrame.setUndecorated(true);
 
 		JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
@@ -251,7 +251,6 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 
 		tableKiemKho = new JTable();
 		scrollPane.setViewportView(tableKiemKho);
-		model.addColumn("☐");
 		model.addColumn("Mã kiểm kho");
 		model.addColumn("Thời gian");
 		model.addColumn("Ngày cân bằng");
@@ -264,16 +263,15 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 		tableKiemKho.setModel(model);
 
 		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tableKiemKho.getColumnModel().getColumn(0).setPreferredWidth(50);
-		tableKiemKho.getColumnModel().getColumn(1).setPreferredWidth(120);
-		tableKiemKho.getColumnModel().getColumn(2).setPreferredWidth(150);
+		tableKiemKho.getColumnModel().getColumn(0).setPreferredWidth(120);
+		tableKiemKho.getColumnModel().getColumn(1).setPreferredWidth(150);
+		tableKiemKho.getColumnModel().getColumn(2).setPreferredWidth(120);
 		tableKiemKho.getColumnModel().getColumn(3).setPreferredWidth(120);
 		tableKiemKho.getColumnModel().getColumn(4).setPreferredWidth(120);
-		tableKiemKho.getColumnModel().getColumn(5).setPreferredWidth(120);
-		tableKiemKho.getColumnModel().getColumn(6).setPreferredWidth(100);
+		tableKiemKho.getColumnModel().getColumn(5).setPreferredWidth(100);
+		tableKiemKho.getColumnModel().getColumn(6).setPreferredWidth(130);
 		tableKiemKho.getColumnModel().getColumn(7).setPreferredWidth(130);
 		tableKiemKho.getColumnModel().getColumn(8).setPreferredWidth(130);
-		tableKiemKho.getColumnModel().getColumn(9).setPreferredWidth(130);
 	}
 
 }

@@ -32,6 +32,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.config.SecurityConfig;
 import com.polymart.ui.common.uiCommon;
 
 public class NhanVienJInternalFrame extends JInternalFrame {
@@ -41,30 +42,32 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private JPanel contentPane;
 	private JTextField txtTimKiem;
 	private JTable tableNhanVien;
-	DefaultTableModel modelNhanVien = new DefaultTableModel();
-	Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	int width = (int) dimension.getWidth();
-	int height = (int) dimension.getHeight();
-	JPanel nhanVienJPanel = new JPanel();
+	private DefaultTableModel modelNhanVien = new DefaultTableModel();
+	private Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	private int width = (int) dimension.getWidth();
+	private int height = (int) dimension.getHeight();
+	private JPanel nhanVienJPanel = new JPanel();
 	private JPanel panelOption;
-	JFrame optionNhanVienFrame = new JFrame();
+	private JPanel panel = new JPanel();
+	private JComboBox<Object> cboChucDanh;
 
-	JCheckBox chkMaNV = new JCheckBox("Mã nhân viên");
-	JCheckBox chkTenNV = new JCheckBox("Tên nhân viên");
-	JCheckBox chkMaChamCong = new JCheckBox("Mã chấm công");
-	JCheckBox chkNgaySinh = new JCheckBox("Ngày sinh");
-	JCheckBox chkGioiTinh = new JCheckBox("Giới tính");
-	JCheckBox chkCMND = new JCheckBox("Số CMND");
-	JCheckBox chkPhongBan = new JCheckBox("Phòng ban");
-	JCheckBox chkChucDanh = new JCheckBox("Chức danh");
-	JCheckBox chkGhiChu = new JCheckBox("Ghi chú");
-	JCheckBox chkDiaChi = new JCheckBox("Địa chỉ");
-	JCheckBox chkChiNhanhLamVc = new JCheckBox("Chi nhánh làm việc");
-	JCheckBox chkChiNhanhTraLuong = new JCheckBox("Chi nhánh trả lương");
-	JCheckBox chkFb = new JCheckBox("Facebook");
-	JCheckBox chkEmail = new JCheckBox("Email");
-	JCheckBox chkSDT = new JCheckBox("Số điện thoại");
-	JCheckBox chkNoLuong = new JCheckBox("Nợ lương nhân viên");
+	private JFrame optionNhanVienFrame = new JFrame();
+	private JCheckBox chkMaNV = new JCheckBox("Mã nhân viên");
+	private JCheckBox chkTenNV = new JCheckBox("Tên nhân viên");
+	private JCheckBox chkMaChamCong = new JCheckBox("Mã chấm công");
+	private JCheckBox chkNgaySinh = new JCheckBox("Ngày sinh");
+	private JCheckBox chkGioiTinh = new JCheckBox("Giới tính");
+	private JCheckBox chkCMND = new JCheckBox("Số CMND");
+	private JCheckBox chkPhongBan = new JCheckBox("Phòng ban");
+	private JCheckBox chkChucDanh = new JCheckBox("Chức danh");
+	private JCheckBox chkGhiChu = new JCheckBox("Ghi chú");
+	private JCheckBox chkDiaChi = new JCheckBox("Địa chỉ");
+	private JCheckBox chkChiNhanhLamVc = new JCheckBox("Chi nhánh làm việc");
+	private JCheckBox chkChiNhanhTraLuong = new JCheckBox("Chi nhánh trả lương");
+	private JCheckBox chkFb = new JCheckBox("Facebook");
+	private JCheckBox chkEmail = new JCheckBox("Email");
+	private JCheckBox chkSDT = new JCheckBox("Số điện thoại");
+	private JCheckBox chkNoLuong = new JCheckBox("Nợ lương nhân viên");
 
 	/**
 	 * Launch the application.
@@ -73,8 +76,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NhanVienJInternalFrame frame = new NhanVienJInternalFrame();
-					frame.setVisible(true);
+					new NhanVienJInternalFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -85,10 +87,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	JPanel panel = new JPanel();
 
 	public NhanVienJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
@@ -102,9 +103,11 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-		// initTopNhanVien();
-		// initCenterNhanVien();
 
+		initTopNhanVien();
+		initCenterNhanVien();
+
+		loadComboboxChucVu();
 	}
 
 	public void initTopNhanVien() {
@@ -127,7 +130,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (txtTimKiem.getText().equals("")) {
-					txtTimKiem.setText(" TÌm theo mã, tên nhân viên");
+					txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
 				}
 			}
 		});
@@ -138,9 +141,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		
 		JButton btnTimKiemNhanVien = new JButton("Tìm kiếm");
 		panel1.add(btnTimKiemNhanVien);
-
-		JLabel lblNewLabel_1 = new JLabel(String.format("%50s", " "));
-		panel1.add(lblNewLabel_1);
 
 		JButton btnThemNV = new JButton("+ Thêm nhân viên");
 		panel1.add(btnThemNV);
@@ -196,12 +196,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				optionNhanVienFrame.setVisible(false);
-
 			}
 		});
-
 		btnThemNV.addActionListener(chiTietNhanVien);
-
 	}
 
 	public void initCenterNhanVien() {
@@ -213,7 +210,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		tableNhanVien = new JTable();
 		scrollPane.setViewportView(tableNhanVien);
-		modelNhanVien.addColumn("☐");
 		modelNhanVien.addColumn("Mã nhân viên");
 		modelNhanVien.addColumn("Tên nhân viên");
 		modelNhanVien.addColumn("Mã chấm công");
@@ -231,41 +227,35 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);
-
-		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
-		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tất cả" }));
-
-		JLabel lblNewLabel = new JLabel("Chi nhánh");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tableNhanVien.getColumnModel().getColumn(0).setPreferredWidth(30);
 
 		JLabel lblChcDanh = new JLabel("Chức vụ");
-		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-		JComboBox<Object> cbbChucDanh = new JComboBox<Object>();
-		cbbChucDanh.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tất cả" }));
+		cboChucDanh = new JComboBox<Object>();
+		cboChucDanh.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tất cả" }));
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
-		gl_panelLeft.setHorizontalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING).addGroup(gl_panelLeft
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-								.addComponent(cbbPhongBan, 0, 159, Short.MAX_VALUE))
-						.addComponent(lblChcDanh, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cbbChucDanh, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addContainerGap()));
-		gl_panelLeft.setVerticalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap().addComponent(lblNewLabel)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(cbbPhongBan, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGap(18).addComponent(lblChcDanh, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(cbbChucDanh,
-								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(465, Short.MAX_VALUE)));
+		gl_panelLeft.setHorizontalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+						.addComponent(cboChucDanh, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblChcDanh, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		gl_panelLeft.setVerticalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addGap(14)
+					.addComponent(lblChcDanh, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(cboChucDanh, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(515, Short.MAX_VALUE))
+		);
 		panelLeft.setLayout(gl_panelLeft);
-		
-		//Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
+
+		// Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
 		tableNhanVien.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
@@ -278,12 +268,19 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	}
 
 	ActionListener chiTietNhanVien = new ActionListener() {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();
-			chiTietNhanVien.setVisible(true);
+			btnThemNhanVien();
 		}
 	};
+
+	protected void btnThemNhanVien() {
+		new ChiTietNhanVienFrame().setVisible(true);
+	}
+
+	private void loadComboboxChucVu() {
+		cboChucDanh.addItem(SecurityConfig.VAITRO_QUANLY);
+		cboChucDanh.addItem(SecurityConfig.VAITRO_BANHANG);
+		cboChucDanh.addItem(SecurityConfig.VAITRO_THUNGAN);
+	}
 }

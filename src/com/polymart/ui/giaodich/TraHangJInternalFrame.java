@@ -135,7 +135,6 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		panel1.add(cbbOptionKiemKho);
 
 		btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
-		
 	}
 	
 	public void initCenterTraHang() {
@@ -191,19 +190,14 @@ public class TraHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-
-		
 	}
 	
 	ActionListener openThemHoaDonTraHang = new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame();
 			EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonTraHang);
 			themHoaDonTraHang.setVisible(true);
-			
 		}
 	};
-
 }

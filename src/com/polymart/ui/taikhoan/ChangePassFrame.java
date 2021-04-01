@@ -54,8 +54,9 @@ public class ChangePassFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ChangePassFrame() {
-		setVisible(true);
 		setTitle("Đổi mật khẩu");
+		setVisible(true);
+		setLocationRelativeTo(null);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 682, 420);

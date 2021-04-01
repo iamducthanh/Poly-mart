@@ -206,7 +206,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		tableNhanVien = new JTable();
 		scrollPane.setViewportView(tableNhanVien);
-		modelNhanVien.addColumn("☐");
 		modelNhanVien.addColumn("Mã nhân viên");
 		modelNhanVien.addColumn("Tên nhân viên");
 		modelNhanVien.addColumn("Mã chấm công");

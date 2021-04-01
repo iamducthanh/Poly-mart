@@ -155,12 +155,12 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		JButton btnChamCong = new JButton("Chấm công");
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelLeft.createSequentialGroup()
+			gl_panelLeft.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
-						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panelLeft.createSequentialGroup()
 							.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -170,13 +170,13 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					.addContainerGap())
 		);
 		gl_panelLeft.setVerticalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+			gl_panelLeft.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addGap(5)
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addContainerGap()
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(btnTimTheoNgay)
-					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
 						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnTimMaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))

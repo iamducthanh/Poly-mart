@@ -270,9 +270,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void doiMatKhau() {
-		ChangePassFrame changePassFrame = new ChangePassFrame();
-		changePassFrame.setVisible(true);
-		changePassFrame.setLocationRelativeTo(null);
+		new ChangePassFrame();
 	}
 
 	ActionListener openThietLapGia = new ActionListener() {

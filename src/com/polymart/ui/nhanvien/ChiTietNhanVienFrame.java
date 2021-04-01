@@ -113,18 +113,18 @@ public class ChiTietNhanVienFrame extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnNewButton = new JButton("Lưu");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnSave = new JButton("Lưu");
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addNhanVien();
 			}
 		});
-		btnNewButton.setBounds(531, 589, 89, 23);
-		contentPane.add(btnNewButton);
+		btnSave.setBounds(531, 575, 50, 28);
+		contentPane.add(btnSave);
 
-		JButton btnToMi = new JButton("Tạo mới");
-		btnToMi.setBounds(432, 589, 89, 23);
-		contentPane.add(btnToMi);
+		JButton btnClear = new JButton("Làm mới");
+		btnClear.setBounds(432, 575, 78, 28);
+		contentPane.add(btnClear);
 
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
 		lblTnNhnVin.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -267,7 +267,9 @@ public class ChiTietNhanVienFrame extends JFrame {
 			nhanVienModel.setEmail(txtEmail.getText());
 			nhanVienModel.setAnhDaiDien(lblAnhDaiDien.getText());
 			if (nhanVienService.save(nhanVienModel) != null) {
-				EntityMessage.show(this, "Thêm mới nhân viên thành công");
+				EntityMessage.show(this, "Thêm mới thành công");
+				this.dispose();
+				EntityFrame.NHANVIENJINTERNALFRAME.loadToTable();
 			} else {
 				EntityMessage.show(this, "Thất bại");
 			}

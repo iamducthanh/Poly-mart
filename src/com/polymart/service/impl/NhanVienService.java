@@ -1,9 +1,6 @@
 package com.polymart.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.polymart.dao.INhanVienDAO;
 import com.polymart.dao.impl.NhanVienDAO;
@@ -12,60 +9,51 @@ import com.polymart.service.INhanVienService;
 
 public class NhanVienService implements INhanVienService {
 
-    private static INhanVienDAO nhanVienDAO = new NhanVienDAO();
-    private static Map<Integer, NhanVienModel> mapNhanVien = new HashMap<Integer, NhanVienModel>();    //Nạp dữ liệu từ SQL
+	private static INhanVienDAO nhanVienDAO = new NhanVienDAO();
+//    private static List<NhanVienModel> list;    //Nạp dữ liệu từ SQL
 
-    static {
-        initNhanVien();
-    }
+	@Override
+	public NhanVienModel findByIdAndPassword(Integer id, String password) {
+		List<NhanVienModel> list = nhanVienDAO.findByIdAndPassword(String.valueOf(id), password);
+		return list.isEmpty() ? null : list.get(0);
+	}
 
-    private static void initNhanVien() {
-        for (NhanVienModel nhanVien : nhanVienDAO.findAll()) {
-            mapNhanVien.put(nhanVien.getId(), nhanVien);
-        }
-    }
+	@Override
+	public List<NhanVienModel> findAll() {
+		return nhanVienDAO.findAll();
+	}
 
-    @Override
-    public NhanVienModel findNhanVienByIdAndPassword(Integer id, String password) {
-        NhanVienModel nhanVien = mapNhanVien.get(id);
-        if (nhanVien != null && nhanVien.getMatKhau().equals(password)) {
-            return nhanVien;
-        }
-        return null;
-    }
+	@Override
+	public NhanVienModel save(NhanVienModel newNhanVienModel) {
+		Integer newNhanVienId = nhanVienDAO.save(newNhanVienModel);
+		return nhanVienDAO.findOne(newNhanVienId);
+	}
 
-    @Override
-    public List<NhanVienModel> findAll() {
-        return new ArrayList<>(mapNhanVien.values());
-    }
+	@Override
+	public NhanVienModel update(NhanVienModel updateNhanVienModel) {
+		nhanVienDAO.update(updateNhanVienModel);
+		return nhanVienDAO.findOne(updateNhanVienModel.getId());
+	}
 
-    @Override
-    public NhanVienModel save(NhanVienModel newNhanVienModel) {
-        Integer newNhanVienId = nhanVienDAO.save(newNhanVienModel);
-        return nhanVienDAO.findOne(newNhanVienId);
-    }
+	@Override
+	public void delete(Integer[] ids) {
+		for (Integer id : ids) {
+			nhanVienDAO.delete(id);
+		}
+	}
 
-    @Override
-    public NhanVienModel update(NhanVienModel updateNhanVienModel) {
-        nhanVienDAO.update(updateNhanVienModel);
-        return nhanVienDAO.findOne(updateNhanVienModel.getId());
-    }
+	@Override
+	public NhanVienModel findOne(Integer id) {
+		return nhanVienDAO.findOne(id);
+	}
 
-    @Override
-    public void delete(Integer[] ids) {
-        for (Integer id : ids) {
-            nhanVienDAO.delete(id);
-        }
-    }
+	@Override
+	public List<NhanVienModel> filter(String idOrName) {
+		return nhanVienDAO.filter(idOrName);
+	}
 
-    @Override
-    public NhanVienModel findOne(Integer id) {
-        return nhanVienDAO.findOne(id);
-    }
-
-    @Override
-    public List<NhanVienModel> filter(String idOrName) {
-        return nhanVienDAO.filter(idOrName);
-    }
-
+	@Override
+	public List<NhanVienModel> filterByChucVu(String chucVu) {
+		return nhanVienDAO.filterByChucVu(chucVu);
+	}
 }

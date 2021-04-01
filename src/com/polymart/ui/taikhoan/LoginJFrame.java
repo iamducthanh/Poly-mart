@@ -221,7 +221,7 @@ public class LoginJFrame extends JFrame {
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
         if (EntityValidate.checkUsername(this, username) && EntityValidate.checkPassword(this, password)) {
-            EntityAuthorization.USER = nhanVienService.findNhanVienByIdAndPassword(Integer.valueOf(username), password);
+            EntityAuthorization.USER = nhanVienService.findByIdAndPassword(Integer.valueOf(username), password);
             if (EntityAuthorization.USER != null) {
                 setVisible(false);
                 EntityFrame.POLYMARTMAIN = new PolyMartMain();

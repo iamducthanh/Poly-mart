@@ -16,4 +16,8 @@ public interface INhanVienDAO {
 	NhanVienModel findOne(Integer id);
 
 	List<NhanVienModel> filter(String idOrName);
+
+	List<NhanVienModel> filterByChucVu(String chucVu);
+	
+	List<NhanVienModel> findByIdAndPassword(String id, String password);
 }

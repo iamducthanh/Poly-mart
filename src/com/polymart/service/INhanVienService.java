@@ -9,7 +9,7 @@ public interface INhanVienService{
 	List<NhanVienModel> findAll();
 
     // hàm tìm kiếm người dùng theo Username và password
-    NhanVienModel findNhanVienByIdAndPassword(Integer id, String password);
+    NhanVienModel findByIdAndPassword(Integer id, String password);
 	
 	NhanVienModel save(NhanVienModel nhanVienModel);
 	
@@ -20,4 +20,6 @@ public interface INhanVienService{
 	NhanVienModel findOne(Integer id);
 	
 	List<NhanVienModel> filter(String idOrName);
+	
+	List<NhanVienModel> filterByChucVu(String chucVu);
 }

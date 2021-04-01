@@ -265,7 +265,8 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openNhanVien() {
-		loadChild(new NhanVienJInternalFrame());
+		EntityFrame.NHANVIENJINTERNALFRAME = new NhanVienJInternalFrame();
+		loadChild(EntityFrame.NHANVIENJINTERNALFRAME);
 		setTitle("Quản lý nhân viên");
 	}
 

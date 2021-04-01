@@ -3,7 +3,6 @@ package com.polymart.ui.giaodich;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,25 +25,21 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.NguonHangModel;
 import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.INguonHangService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.SanPhamService;
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
-import com.polymart.model.NguonHangModel;
-import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
-
-import java.awt.SystemColor;
-import javax.swing.SwingConstants;
-import javax.swing.border.EtchedBorder;
+import com.polymart.service.impl.SanPhamService;
 
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
@@ -320,10 +315,11 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     }
 
     // hàm đổ dữ liệu tên sản phẩm lên combobox
-    private void setCbbTimSanPham(List<ChiTietSanPhamModel> lstChiTietSanPhamModels,
-                                  JComboBox cbbTimSanPham) {
-        cbbTimSanPham.setModel(new DefaultComboBoxModel((lstChiTietSanPhamModels.stream()
-                .map(e -> e.getId() + " - " + e.getIdSanPham()).collect(Collectors.toList()).toArray())));
+    private void setCbbTimSanPham(List<ChiTietSanPhamModel> lstChiTietSanPhamModels, JComboBox cbbTimSanPham) {
+        cbbTimSanPham.removeAllItems();
+        for (ChiTietSanPhamModel ctsp : lstChiTietSanPhamModels) {
+            cbbTimSanPham.addItem(ctsp.getId() + " - " + iSanPhamService.findNameByID(ctsp.getIdSanPham()));
+        }
     }
 
     // sự kiện khi bâm nút thêm sản phảm vào hóa đơn và show lên table

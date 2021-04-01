@@ -66,21 +66,35 @@ public class EntityValidate {
 
     // kiểm tra số nguyên
     public static boolean checkInt(Component component, String inputInt) {
-        try {
-            Integer.parseInt(inputInt);
-            return true;
-        } catch (Exception e) {
-            EntityMessage.show(component, inputInt + " không phải một số nguyên.");
+        if (inputInt.isBlank()) {
+            EntityMessage.show(component, "Vui lòng nhập số lượng");
             return false;
+        } else {
+            try {
+                Integer.parseInt(inputInt);
+                return true;
+            } catch (Exception e) {
+                EntityMessage.show(component, inputInt + " không phải một số nguyên.");
+                return false;
+            }
         }
     }
 
     // kiểm tra số nguyên dương
     public static boolean checkIntDuong(Component component, String inputIntDuong) {
         if (!checkInt(component, inputIntDuong)) {
-            return true;
+            return false;
         }
-        EntityMessage.show(component, inputIntDuong + " không phải một số nguyên dương.");
-        return false;
+        try {
+            if (Integer.parseInt(inputIntDuong) > 0) {
+                return true;
+            } else {
+                EntityMessage.show(component, inputIntDuong + " không phải một số nguyên dương.");
+                return false;
+            }
+        } catch (Exception e) {
+            EntityMessage.show(component, inputIntDuong + " không phải một số nguyên.");
+            return false;
+        }
     }
 }

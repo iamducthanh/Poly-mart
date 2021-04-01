@@ -6,6 +6,7 @@ import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.SanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,6 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public List<ChiTietSanPhamModel> findAll() {
-        return null;
+        return new ArrayList<>(mapChiTietSanPham.values());
     }
 }

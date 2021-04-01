@@ -109,7 +109,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	}
 	
 	public void initTopThanhToan() {
-		JLabel lblNewLabel = new JLabel("Hóa đơn thanh toán         ");
+		JLabel lblNewLabel = new JLabel("Hóa đơn thanh toán       ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 		
@@ -132,6 +132,9 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
+		
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		panel1.add(btnTimKiem);
 		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
 		panel1.add(lblNewLabel_1);
 		

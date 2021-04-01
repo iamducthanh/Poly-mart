@@ -172,10 +172,10 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(comboBox, 0, 150, Short.MAX_VALUE)
 						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtTimNhomHang))
+						.addComponent(txtTimNhomHang)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_hangHoaJPanel.setVerticalGroup(
@@ -189,8 +189,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_4_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-
-					.addContainerGap(112, Short.MAX_VALUE))
+					.addContainerGap(121, Short.MAX_VALUE))
 		);
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 		panel.add(panel1, BorderLayout.EAST);

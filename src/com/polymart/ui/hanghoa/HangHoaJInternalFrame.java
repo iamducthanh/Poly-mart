@@ -96,14 +96,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         contentPane.add(pnlNavibar, BorderLayout.WEST);
         pnlTop.setLayout(new BoxLayout(pnlTop, BoxLayout.X_AXIS));
 
-        Component horizontalStrut_1 = Box.createHorizontalStrut(50);
+        Component horizontalStrut_1 = Box.createHorizontalStrut(20);
         pnlTop.add(horizontalStrut_1);
         JLabel lblTitle = new JLabel("Hàng hóa");
-        lblTitle.setForeground(Color.BLUE);
         lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
         pnlTop.add(lblTitle);
 
-        Component horizontalStrut = Box.createHorizontalStrut(80);
+        Component horizontalStrut = Box.createHorizontalStrut(95);
         pnlTop.add(horizontalStrut);
 
         txtFind = new JTextField();
@@ -114,8 +113,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         Component horizontalGlue = Box.createHorizontalGlue();
         pnlTop.add(horizontalGlue);
+        
+        JButton btnTimKiem = new JButton("Tìm kiếm");
+        btnTimKiem.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        pnlTop.add(btnTimKiem);
 
-        Component horizontalStrut_2 = Box.createHorizontalStrut(30);
+        Component horizontalStrut_2 = Box.createHorizontalStrut(120);
         pnlTop.add(horizontalStrut_2);
 
         JButton btnThemHang = new JButton("+ Thêm mới");

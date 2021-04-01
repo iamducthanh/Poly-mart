@@ -227,7 +227,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);
-		tableNhanVien.getColumnModel().getColumn(0).setPreferredWidth(30);
 
 		JLabel lblChcDanh = new JLabel("Chức vụ");
 		lblChcDanh.setFont(new Font("Tahoma", Font.PLAIN, 15));

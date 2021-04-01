@@ -113,7 +113,7 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 	public void initTopKiemKho() {
 		setTitle("Hàng hóa - Kiểm kho");
 
-		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho            ");
+		JLabel lblNewLabel = new JLabel("Phiếu kiểm kho          ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
 		
@@ -136,6 +136,9 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
+		
+		JButton btnNewButton = new JButton("Tìm kiếm");
+		panel1.add(btnNewButton);
 		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
 		panel1.add(lblNewLabel_1);
 		

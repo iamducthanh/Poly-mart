@@ -176,47 +176,8 @@ public class PolyMartMain extends JFrame {
 		mntmDoiMK.setIcon(new ImageIcon("images\\changepassicon.png"));
 		mnCaNhan.add(mntmDoiMK);
 
-		int wLine = (int) (width - (width / 100 * (100 - 42)));
-		this.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		Font f = this.getFont();
-		FontMetrics fm = this.getFontMetrics(f);
-
-		int y = fm.stringWidth(" ");
-		int widthChuoi = wLine / y;
-		String pad = " ";
-
-		JLabel lblNewLabel = new JLabel(String.format("%" + widthChuoi + "s", pad));
-		menuBar.add(lblNewLabel);
-
-		JMenu mnFacebook = new JMenu("Facebook");
-		mnFacebook.setIcon(new ImageIcon("images\\facebook.png"));
-		mnFacebook.setBackground(new Color(30, 144, 255));
-		menuBar.add(mnFacebook);
-
-		JMenu mnBanHang = new JMenu("Bán hàng");
-		mnBanHang.setIcon(new ImageIcon("images\\banhang.png"));
-		mnBanHang.setBackground(new Color(30, 144, 255));
-
-		menuBar.add(mnBanHang);
-
 		getContentPane().add(pnlMain, BorderLayout.CENTER);
 		pnlMain.setLayout(new CardLayout(0, 0));
-		try {
-			uri = new URI("http://facebook.com/iamducthanh");
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-		mnFacebook.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					Desktop.getDesktop().browse(uri);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
 
 		mntmHangHoa.addActionListener(openDanhMuc);
 		mntmNhanVien.addActionListener(openNhanVien);

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -13,6 +12,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,12 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JCalendar;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
 
@@ -80,8 +79,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-	//	initTopChamCong();
-	//	initCenterChamCong();
+		initTopChamCong();
+		initCenterChamCong();
 	}
 	
 	public void initTopChamCong() {

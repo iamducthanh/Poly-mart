@@ -106,8 +106,8 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-	//	initTopKiemKho();
-	//	initCenterKiemKho();
+		initTopKiemKho();
+		initCenterKiemKho();
 	}
 	
 	public void initTopKiemKho() {

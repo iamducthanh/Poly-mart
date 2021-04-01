@@ -31,10 +31,8 @@ import com.toedter.components.JSpinField;
 
 public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2254544205302634680L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
@@ -97,7 +95,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 		
 		JComboBox<Object> cbbTimSanPham = new JComboBox<Object>();
 		cbbTimSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		cbbTimSanPham.setModel(new DefaultComboBoxModel(new String[] {"Tìm theo mã sản phẩm                                                                  ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
+		cbbTimSanPham.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tìm theo mã sản phẩm                                                                  ", "203497", "652353", "675423", "234543", "234569", "049345", "096853", "097565"}));
 		panel_1.add(cbbTimSanPham);
 		
 		AutoCompleteDecorator.decorate(cbbTimSanPham);

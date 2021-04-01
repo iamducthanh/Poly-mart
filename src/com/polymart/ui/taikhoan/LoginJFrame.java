@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -51,6 +52,7 @@ public class LoginJFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
                     LoginJFrame loginJFrame = new LoginJFrame();
                     loginJFrame.setVisible(true);
                     loginJFrame.setTitle("Đăng nhập");

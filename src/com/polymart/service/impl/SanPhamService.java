@@ -20,7 +20,7 @@ public class SanPhamService implements ISanPhamService {
     }
 
     private static void initSanPham() {
-        for (SanPhamModel sanPham: iSanPhamDAO.findAll()) {
+        for (SanPhamModel sanPham : iSanPhamDAO.findAll()) {
             mapSanPham.put(sanPham.getId(), sanPham);
         }
     }
@@ -28,5 +28,10 @@ public class SanPhamService implements ISanPhamService {
     @Override
     public List<SanPhamModel> findAll() {
         return new ArrayList<>(mapSanPham.values());
+    }
+
+    @Override
+    public String findNameByID(Integer id) {
+        return mapSanPham.get(id).getTenSP();
     }
 }

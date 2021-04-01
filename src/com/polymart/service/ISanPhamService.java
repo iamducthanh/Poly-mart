@@ -7,4 +7,7 @@ import java.util.List;
 public interface ISanPhamService {
 
     List<SanPhamModel> findAll();
+
+    String findNameByID(Integer id);
+
 }

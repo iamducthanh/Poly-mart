@@ -30,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.SanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
@@ -299,6 +300,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         // đổ dữ liệu lên combobox nguồn hàng
         setCbbNguonHang(iNguonHangService.findAll(), cbbNguonHang);
 
+        // đổ dữ liệu vào combobox tìm sản phẩm
+        setCbbTimSanPham(iChiTietSanPhamService.findAll(), iSanPhamService.findAll(), cbbTimSanPham);
     }
 
     public void close() {
@@ -317,9 +320,16 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
     // hàm đổ dữ liệu tên sản phẩm lên combobox
     private void setCbbTimSanPham(List<ChiTietSanPhamModel> lstChiTietSanPhamModels,
+                                  List<SanPhamModel> lstSanPhamModels,
                                   JComboBox cbbTimSanPham) {
-        cbbTimSanPham.setModel(new DefaultComboBoxModel((lstChiTietSanPhamModels.stream()
-                .map(e -> e.getId() + " - " + e.getIdSanPham()).collect(Collectors.toList()).toArray())));
+        cbbTimSanPham.removeAllItems();
+        for (SanPhamModel sp : lstSanPhamModels) {
+            for (ChiTietSanPhamModel ctsp : lstChiTietSanPhamModels) {
+                if (sp.getId().equals(ctsp.getIdSanPham())) {
+                    cbbTimSanPham.addItem(ctsp.getId() + " - " + sp.getTenSP());
+                }
+            }
+        }
     }
 
     // sự kiện khi bâm nút thêm sản phảm vào hóa đơn và show lên table

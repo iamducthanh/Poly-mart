@@ -16,10 +16,10 @@ public class SanPhamService implements ISanPhamService {
     private static Map<Integer, SanPhamModel> mapSanPham = new HashMap<Integer, SanPhamModel>();    //Nạp dữ liệu từ SQL
 
     static {
-        initChiTietSanPham();
+        initSanPham();
     }
 
-    private static void initChiTietSanPham() {
+    private static void initSanPham() {
         for (SanPhamModel sanPham: iSanPhamDAO.findAll()) {
             mapSanPham.put(sanPham.getId(), sanPham);
         }

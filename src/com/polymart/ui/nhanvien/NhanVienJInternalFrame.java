@@ -102,8 +102,8 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-	//	 initTopNhanVien();
-	//	 initCenterNhanVien();
+		 initTopNhanVien();
+		 initCenterNhanVien();
 
 	}
 
@@ -278,11 +278,14 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();
-			chiTietNhanVien.setVisible(true);
+			btnThemNhanVien();
 		}
 	};
+
+	protected void btnThemNhanVien() {
+		ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();
+		chiTietNhanVien.setVisible(true);
+	}
 	
 	
 

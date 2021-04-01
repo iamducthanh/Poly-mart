@@ -102,8 +102,8 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-	//	 initTopNhanVien();
-	//	 initCenterNhanVien();
+		// initTopNhanVien();
+		// initCenterNhanVien();
 
 	}
 
@@ -135,6 +135,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		JPanel panel1 = new JPanel();
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnTimKiemNhanVien = new JButton("Tìm kiếm");
+		panel1.add(btnTimKiemNhanVien);
 
 		JLabel lblNewLabel_1 = new JLabel(String.format("%50s", " "));
 		panel1.add(lblNewLabel_1);
@@ -283,7 +286,4 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			chiTietNhanVien.setVisible(true);
 		}
 	};
-	
-	
-
 }

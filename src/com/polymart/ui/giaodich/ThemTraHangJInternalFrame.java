@@ -37,9 +37,6 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = -1044582693223562703L;
 	private JPanel contentPane;
-	JPanel panel = new JPanel();
-	JPanel panel1 = new JPanel();
-	JPanel hangHoaJPanel = new JPanel();
 	private JTable tableThemTraHang;
 	DefaultTableModel modelThemTraHang = new DefaultTableModel();
 	private JTextField txtMaSP;

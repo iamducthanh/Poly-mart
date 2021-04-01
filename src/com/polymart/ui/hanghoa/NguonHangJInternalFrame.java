@@ -40,9 +40,6 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = 3314858072598500922L;
 	private JPanel contentPane;
 
-	JPanel panel = new JPanel();
-	JPanel panel1 = new JPanel();
-	JPanel hangHoaJPanel = new JPanel();
 	private JTextField txtTim;
 	private JTable tableNguonHang;
 	private JTextField txtNguonHang;

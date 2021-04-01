@@ -18,15 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
@@ -50,7 +42,7 @@ public class PolyMartMain extends JFrame {
 
 	private static final long serialVersionUID = 6825346390245174222L;
 
-	public JPanel pnlMain = new JPanel();
+	public JDesktopPane pnlMain = new JDesktopPane();
 	URI uri;
 
 	/**
@@ -81,7 +73,6 @@ public class PolyMartMain extends JFrame {
 					+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		editMenu();
 	}
@@ -396,9 +387,8 @@ public class PolyMartMain extends JFrame {
 	}
 
 	//load JInternalFrame to Mainboard
-	private void loadChild(JInternalFrame frame) {
+	public void loadChild(JInternalFrame frame) {
 		pnlMain.removeAll();
-
 		frame.setSize(pnlMain.getSize());
 		try {
 			frame.setMaximum(true);

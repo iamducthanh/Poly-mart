@@ -32,7 +32,7 @@ public class EntityValidate {
 
     // hàm kiểm tra mật khẩu cũ forrm đổi mật khẩu người dùng
     public static boolean checkOldPasswordChange(Component component, String oldPassword) {
-        if (oldPassword.length() == 0) {
+        if (oldPassword.isBlank()) {
             EntityMessage.show(component, "Chưa nhập mật khẩu cũ");
             return false;
         }

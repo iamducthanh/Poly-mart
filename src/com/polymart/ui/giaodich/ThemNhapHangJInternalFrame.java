@@ -334,7 +334,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 	// sự kiện khi bâm nút thêm sản phảm vào hóa đơn và show lên table
 	private void themSanPham(JComboBox cbbChonSanPham, JTextField txtSoLuong) {
 		String getSoLuong = txtSoLuong.getText();
-		if (EntityValidate.checkIntDuong(this, getSoLuong)) {
+		if (EntityValidate.checkPositiveNumber(this, getSoLuong)) {
 			int getCbcIndexSanPham = cbbChonSanPham.getSelectedIndex();
 			modelDSSanPham.addRow(new Object[] {
 

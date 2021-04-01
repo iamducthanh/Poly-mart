@@ -6,16 +6,6 @@ public class KhachHangModel extends AbstractModel {
 	private String diaChi;
 	private Integer tichDiem;
 
-	public KhachHangModel() {
-	}
-
-	public KhachHangModel(String hoTen, String sdt, String diaChi, Integer tichDiem) {
-		this.hoTen = hoTen;
-		this.sdt = sdt;
-		this.diaChi = diaChi;
-		this.tichDiem = tichDiem;
-	}
-
 	public String getHoTen() {
 		return hoTen;
 	}
@@ -47,4 +37,12 @@ public class KhachHangModel extends AbstractModel {
 	public void setTichDiem(Integer tichDiem) {
 		this.tichDiem = tichDiem;
 	}
+
+	@Override
+	public String toString() {
+		return "KhachHangModel [ma = " + getId() +", hoTen=" + hoTen + ", sdt=" + sdt + ", diaChi=" + diaChi + ", tichDiem=" + tichDiem
+				+ "]";
+	}
+	
+	
 }

@@ -9,45 +9,40 @@ import java.util.*;
 
 public class KhachHangService implements IKhachHangService {
 
-    private static IKhachHangDAO iKhachHangDao = new KhachHangDAO();
-    private static Map<Integer, KhachHangModel> mapKhachHang = new HashMap<Integer, KhachHangModel>();    //Nạp dữ liệu từ SQL
-
-    static {
-        initKhachHang();
-    }
-
-    private static void initKhachHang() {
-        for (KhachHangModel x : iKhachHangDao.findAll()) {
-            mapKhachHang.put(x.getId(), x);
-        }
-    }
+    private static IKhachHangDAO khachHangDAO = new KhachHangDAO();
+//    private static List<KhachHangModel> list;    //Nạp dữ liệu từ SQL
 
     @Override
     public List<KhachHangModel> findAll() {
-        return new ArrayList<>(mapKhachHang.values());
+        return khachHangDAO.findAll();
     }
 
     @Override
-    public List<KhachHangModel> findByNameOrPhoneNumber(String input) {
-        input = input.toLowerCase();
-        List<KhachHangModel> lstTimKiem = new ArrayList<>();
-        for (KhachHangModel x : mapKhachHang.values()) {
-            if (x.getHoTen() != null && !x.getHoTen().isBlank()) {
-                if (x.getHoTen().toLowerCase().contains(input)) {
-                    lstTimKiem.add(x);
-                }
-            }
-            if (x.getSdt() != null && !x.getSdt().isBlank()) {
-                if (x.getSdt().contains(input)) {
-                    lstTimKiem.add(x);
-                }
-            }
-        }
-        return lstTimKiem;
+    public List<KhachHangModel> filter(String nameOrPhone) {
+        return khachHangDAO.filter(nameOrPhone);
     }
 
     @Override
     public KhachHangModel save(KhachHangModel khachHangModel) {
-        return null;
+        Integer newKhachHangId = khachHangDAO.save(khachHangModel);
+        return khachHangDAO.findOne(newKhachHangId);
     }
+
+	@Override
+	public KhachHangModel update(KhachHangModel updatekhachHangModel) {
+		khachHangDAO.update(updatekhachHangModel);
+        return khachHangDAO.findOne(updatekhachHangModel.getId());
+	}
+
+	@Override
+	public void delete(Integer[] ids) {
+        for (Integer id : ids) {
+        	khachHangDAO.delete(id);
+        }
+	}
+
+	@Override
+	public KhachHangModel findOne(Integer id) {
+        return khachHangDAO.findOne(id);
+	}
 }

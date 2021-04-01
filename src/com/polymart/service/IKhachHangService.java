@@ -1,14 +1,20 @@
 package com.polymart.service;
 
-import com.polymart.model.KhachHangModel;
-
 import java.util.List;
+
+import com.polymart.model.KhachHangModel;
 
 public interface IKhachHangService {
     List<KhachHangModel> findAll();
 
-    List<KhachHangModel> findByNameOrPhoneNumber(String input);
-
     KhachHangModel save(KhachHangModel khachHangModel);
+	
+    KhachHangModel update(KhachHangModel khachHangModel);
+	
+	void delete(Integer[] ids);
+
+	KhachHangModel findOne(Integer id);
+
+    List<KhachHangModel> filter(String nameOrPhone);
 
 }

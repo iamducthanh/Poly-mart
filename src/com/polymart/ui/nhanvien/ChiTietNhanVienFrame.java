@@ -266,7 +266,6 @@ public class ChiTietNhanVienFrame extends JFrame {
 			nhanVienModel.setDiaChi(txtDiaChi.getText());
 			nhanVienModel.setEmail(txtEmail.getText());
 			nhanVienModel.setAnhDaiDien(lblAnhDaiDien.getText());
-			System.out.println(nhanVienModel.toString());
 			if (nhanVienService.save(nhanVienModel) != null) {
 				EntityMessage.show(this, "Thêm mới nhân viên thành công");
 			} else {

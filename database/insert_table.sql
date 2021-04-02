@@ -107,7 +107,7 @@ DROP TABLE KHACHHANG
     GO
 CREATE TABLE KHACHHANG (
                            ID INT IDENTITY (1,1),
-                           HOTEN NVARCHAR(50),
+                           HOTEN NVARCHAR(50) NOT NULL,
                            SODIENTHOAI VARCHAR(20) NOT NULL,
                            DIACHI NVARCHAR(200),
                            TICHDIEM INT DEFAULT 0,

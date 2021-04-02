@@ -10,7 +10,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -33,15 +32,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.NguonHangModel;
 import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.IHoaDonNhapHangService;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.HoaDonNhapHangService;
 import com.polymart.service.impl.NguonHangService;
 import com.polymart.service.impl.SanPhamService;
 
@@ -58,9 +53,9 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private JTextField txtSoLgNhap;
     private JTable tableDSNhapHang;
 
-    private INguonHangService iNguonHangService = new NguonHangService();
-    private IChiTietSanPhamService iChiTietSanPhamService = new ChiTietSanPhamService();
-    private ISanPhamService iSanPhamService = new SanPhamService();
+    private INguonHangService nguonHangService = new NguonHangService();
+    private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
+    private ISanPhamService sanPhamService = new SanPhamService();
 
     private List<ChiTietSanPhamModel> lstTietSanPham = new ArrayList<>();
     
@@ -153,6 +148,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
         txtSoLgNhap = new JTextField();
         txtSoLgNhap.setColumns(10);
+
 		JLabel lblNewLabel_1_1_1 = new JLabel("Số lượng nhập: ");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
@@ -317,7 +313,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         });
 
         // show dữ liệu lên table lúc khởi chạy chương trình
-        lstTietSanPham = iChiTietSanPhamService.findAll();
+        lstTietSanPham = chiTietSanPhamService.findAll();
         showTable(lstTietSanPham);
 
         // show dữ liệu lên bảng khi click nút tìm kiếm
@@ -337,7 +333,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     // sự kiện tìm kiếm sản phẩm theo tên sản phẩm hoặc mã sản phẩm
     private void evtSearchProduct(JTextField txtSearch) {
         String getInputSearch = txtSearch.getText();
-        lstTietSanPham = iChiTietSanPhamService.findByIdOrNameProduct(getInputSearch);
+        lstTietSanPham = chiTietSanPhamService.findByIdOrNameProduct(getInputSearch);
         if (lstTietSanPham != null && !lstTietSanPham.isEmpty()) {
             showTable(lstTietSanPham);
         } else {
@@ -352,7 +348,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         for (ChiTietSanPhamModel x : lst) {
             modelDSSanPham.addRow(new Object[]{
                     x.getId(),
-                    iSanPhamService.findNameByID(x.getIdSanPham()),
+                    sanPhamService.findNameByID(x.getIdSanPham()),
                     "Loại chỉnh sửa sau",
                     x.getGiaBan(), x.getSize(), x.getMauSac(), x.getSoLuong()
             });

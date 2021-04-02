@@ -1,14 +1,5 @@
 package com.polymart.ui.giaodich;
 
-import com.polymart.entity.EntityMessage;
-import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.IHoaDonNhapHangService;
-import com.polymart.service.ISanPhamService;
-import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.HoaDonNhapHangService;
-import com.polymart.service.impl.SanPhamService;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -17,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -260,6 +249,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
+
         );
 
         JTextArea txtGhiChu = new JTextArea();

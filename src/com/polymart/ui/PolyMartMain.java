@@ -3,12 +3,12 @@ package com.polymart.ui;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.ImageIcon;
@@ -23,7 +23,7 @@ import javax.swing.UIManager;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
-import com.polymart.ui.baocao.BaoCaoJInternalFrame;
+import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
@@ -37,6 +37,8 @@ import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
 import com.polymart.ui.taikhoan.LoginJFrame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PolyMartMain extends JFrame {
 
@@ -79,8 +81,6 @@ public class PolyMartMain extends JFrame {
 
 	public void editMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = (int) dimension.getWidth();
 		setJMenuBar(menuBar);
 
 		JMenu mnTongQuan = new JMenu("Thống kê");
@@ -163,7 +163,23 @@ public class PolyMartMain extends JFrame {
 		JMenu mnCaNhan = new JMenu("Cá nhân");
 		mnCaNhan.setIcon(new ImageIcon("images\\user.png"));
 		menuBar.add(mnCaNhan);
-
+		
+		JMenu mnBanHang = new JMenu("Bán hàng");
+		mnBanHang.setIcon(new ImageIcon("images\\banhang.png"));
+		menuBar.add(mnBanHang);
+		mnBanHang.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Runtime runtime = Runtime.getRuntime();
+				String url = "http://polymart.tk/";
+				try {
+					runtime.exec("rundll32 url.dll, FileProtocolHandler "+ url);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
 		JMenuItem mntmCaNhan = new JMenuItem("Cá nhân");
 		mntmCaNhan.setIcon(new ImageIcon("images\\user.png"));
 		mnCaNhan.add(mntmCaNhan);
@@ -299,7 +315,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openChiTieu() {
-		loadChild(new BaoCaoJInternalFrame());
+		loadChild(new BaoCaoChiTieuJInternalFrame());
 		setTitle("Báo cáo - Chi tiêu");
 	}
 

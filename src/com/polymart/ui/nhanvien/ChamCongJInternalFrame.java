@@ -8,6 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -26,6 +33,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityMessage;
+import com.polymart.model.NhanVienModel;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.NhanVienService;
 import com.toedter.calendar.JCalendar;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
@@ -42,7 +53,12 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private JPanel nhanVienJPanel = new JPanel();
 	private JTable tableChamCong;
 	private JTable tableNhanVienChamCong;
-
+	JButton btnChamCong = new JButton("Chấm công");
+	private int maNhanVien;
+	private String hoTen;
+	
+	private List<NhanVienModel> list;
+	private INhanVienService nhanVienService = new NhanVienService();
 
 
 
@@ -81,6 +97,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		
 		initTopChamCong();
 		initCenterChamCong();
+		 loadToTable();
 	}
 	
 	public void initTopChamCong() {
@@ -152,7 +169,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		
 		JButton btnTimMaNV = new JButton("TÌm kiếm");
 		
-		JButton btnChamCong = new JButton("Chấm công");
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.TRAILING)
@@ -193,8 +209,52 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		modelNhanVienChamCong.addColumn("Mã nhân viên");
 		modelNhanVienChamCong.addColumn("Tên nhân viên");
 		tableNhanVienChamCong.setModel(modelNhanVienChamCong);
+		tableNhanVienChamCong.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				int index = tableNhanVienChamCong.getSelectedRow();
+				maNhanVien = Integer.parseInt(String.valueOf(tableNhanVienChamCong.getValueAt(index, 0)));
+				hoTen = String.valueOf(tableNhanVienChamCong.getValueAt(index, 1));
+			}
+		});
+		btnChamCong.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				chamCong();
+				
+			}
+		});
 		
 		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
 		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] {"Tất cả"}));
+	}
+	protected void chamCong() {
+		Date now = new Date();
+		int day = now.getDay();
+		for(int i = 0; i < tableChamCong.getRowCount();i++) {
+			if(maNhanVien == Integer.parseInt(String.valueOf(tableChamCong.getValueAt(i, 0)))){
+				EntityMessage.show(null, "Nhân Viên Đã Được Chấm Công");
+				return;
+			}
+		}
+		modelChamCong.addRow(new Object[] {maNhanVien,hoTen,new SimpleDateFormat("dd-MM-yyy").format(now),day==0 ? "Chủ Nhật" : day+1
+				,new SimpleDateFormat("hh:mm aa").format(now) });
+	}
+
+	
+
+	public void loadToTable() {
+		try {
+			list = nhanVienService.findAll();
+			reloadTable();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void reloadTable() {
+		modelNhanVienChamCong.setRowCount(0);
+		for (NhanVienModel i : list) {
+			modelNhanVienChamCong.addRow(new Object[] { i.getId(),  i.getHoTen() });
+		}
 	}
 }

@@ -22,7 +22,7 @@ import javax.swing.UIManager;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
-import com.polymart.ui.baocao.BaoCaoJInternalFrame;
+import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
@@ -296,7 +296,7 @@ public class PolyMartMain extends JFrame {
 	};
 
 	public void openChiTieu() {
-		loadChild(new BaoCaoJInternalFrame());
+		loadChild(new BaoCaoChiTieuJInternalFrame());
 		setTitle("Báo cáo - Chi tiêu");
 	}
 

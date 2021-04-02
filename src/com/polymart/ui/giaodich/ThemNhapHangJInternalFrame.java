@@ -286,7 +286,6 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		modelDSSanPham.addColumn("Mã sản phẩm");
 		modelDSSanPham.addColumn("Tên sản phẩm");
 		modelDSSanPham.addColumn("Loại");
-		modelDSSanPham.addColumn("Đơn giá");
 		modelDSSanPham.addColumn("Size");
 		modelDSSanPham.addColumn("Màu sắc");
 		modelDSSanPham.addColumn("Số lượng tồn kho");
@@ -295,7 +294,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 		modelDSNhapHang.addColumn("Mã sản phẩm");
 		modelDSNhapHang.addColumn("Tên sản phẩm");
 		modelDSNhapHang.addColumn("Loại");
-		modelDSNhapHang.addColumn("Đơn giá");
+		modelDSNhapHang.addColumn("Giá nhập");
 		modelDSNhapHang.addColumn("Size");
 		modelDSNhapHang.addColumn("Màu sắc");
 		modelDSNhapHang.addColumn("Số lượng nhập");

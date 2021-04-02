@@ -8,4 +8,6 @@ public interface IChiTietSanPhamService {
 
     List<ChiTietSanPhamModel> findAll();
 
+    List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
+
 }

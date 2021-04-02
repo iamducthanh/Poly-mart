@@ -8,3 +8,5 @@ public class ImageHelper {
 		return reImage;
 	}
 }
+// sao cái này của t lại k lỗi nhỉ
+// k bik nữa pull về thấy lun

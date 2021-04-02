@@ -3,7 +3,6 @@ package com.polymart.ui;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -79,8 +78,6 @@ public class PolyMartMain extends JFrame {
 
 	public void editMenu() {
 		JMenuBar menuBar = new JMenuBar();
-		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		int width = (int) dimension.getWidth();
 		setJMenuBar(menuBar);
 
 		JMenu mnTongQuan = new JMenu("Thống kê");

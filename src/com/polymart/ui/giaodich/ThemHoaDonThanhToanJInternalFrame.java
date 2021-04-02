@@ -3,7 +3,6 @@ package com.polymart.ui.giaodich;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +11,7 @@ import java.awt.event.FocusEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,23 +22,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
-import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.INguonHangService;
-import com.polymart.service.ISanPhamService;
-import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.NguonHangService;
-import com.polymart.service.impl.SanPhamService;
-import com.toedter.components.JSpinField;
 
 public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
@@ -193,7 +182,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         
                 JComboBox<Object> cbbKhachHang = new JComboBox<Object>();
                 cbbKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-                cbbKhachHang.setModel(new DefaultComboBoxModel(new String[] {"Chọn khách hàng"}));
+                cbbKhachHang.setModel(new DefaultComboBoxModel<Object>(new String[] {"Chọn khách hàng"}));
                 
         
                 JLabel lblNewLabel_1_1 = new JLabel("Ghi chú");
@@ -208,11 +197,17 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         lblThanhTien.setFont(new Font("Tahoma", Font.BOLD, 20));
         
         JButton btnHoanThanh = new JButton("Hoàn thành");
+        
+        JButton btnXoa = new JButton("- Xóa");
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);
         gl_panel_2.setHorizontalGroup(
         	gl_panel_2.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel_2.createSequentialGroup()
-        			.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
+        		.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
+        			.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(gl_panel_2.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE))
         			.addGap(18)
         			.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
         				.addGroup(gl_panel_2.createSequentialGroup()
@@ -224,19 +219,19 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
         					.addContainerGap())
         				.addGroup(gl_panel_2.createSequentialGroup()
-        					.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap())
-        				.addGroup(gl_panel_2.createSequentialGroup()
         					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
         						.addComponent(lblThanhTien, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         						.addComponent(scrollPane_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+        					.addContainerGap())
+        				.addGroup(gl_panel_2.createSequentialGroup()
+        					.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
         					.addContainerGap())))
         );
         gl_panel_2.setVerticalGroup(
         	gl_panel_2.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_panel_2.createSequentialGroup()
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
+        			.addContainerGap()
+        			.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_panel_2.createSequentialGroup()
         					.addComponent(cbbKhachHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -247,10 +242,12 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         					.addComponent(lblNewLabel_1)
         					.addGap(18)
         					.addComponent(lblThanhTien, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap())
-        				.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)))
+        					.addPreferredGap(ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+        					.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_panel_2.createSequentialGroup()
+        					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
         );
         
         JTextArea txtGhiChu = new JTextArea();

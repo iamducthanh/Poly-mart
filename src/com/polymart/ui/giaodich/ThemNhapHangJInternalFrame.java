@@ -55,6 +55,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private ISanPhamService sanPhamService = new SanPhamService();
     private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
+    private IChiTietHoaDonNhapHangService chiTietHoaDonNhapHangService = new ChiTietHoaDonNhapHangService();
     private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
 
     private List<ChiTietSanPhamModel> lstTietSanPham = chiTietSanPhamService.findAll();
@@ -361,7 +362,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                evtBtnHoanThanh(tableDSNhapHang, cbbNguonHang, txtGhiChu);
+                evtBtnHoanThanh(cbbNguonHang, txtGhiChu);
             }
         });
 
@@ -442,16 +443,30 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     }
 
     // nút "Hoàn thành"
-    private void evtBtnHoanThanh(JTable tbDSNhapHang, JComboBox<Object> cbcNguonHang, JTextArea txaGhiChu) {
+    private void evtBtnHoanThanh(JComboBox<Object> cbcNguonHang, JTextArea txaGhiChu) {
         if (!lstChiTietHoaDonNhap.isEmpty()) {
             HoaDonNhapHangModel hoaDonNhapHangModel = new HoaDonNhapHangModel();
             hoaDonNhapHangModel.setIdNguonHang(lstNguonHang.get(cbcNguonHang.getSelectedIndex()).getId());
             hoaDonNhapHangModel.setIdNhanVienNhap(EntityAuthorization.USER.getId());
             hoaDonNhapHangModel.setGhiChu(txaGhiChu.getText());
-            if (hoaDonNhapHangService.save(hoaDonNhapHangModel, lstChiTietHoaDonNhap)) {
-                EntityMessage.show(this, "Thêm thành công");
-                this.setVisible(false);
-                nhapHangJInternalFrame.showTable(nhapHangJInternalFrame.getList());
+            hoaDonNhapHangModel = hoaDonNhapHangService.save(hoaDonNhapHangModel);
+            if (hoaDonNhapHangModel != null) {
+                int count = 0;
+                for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhap) {
+                    x.setIdHoaDonNhapHang(hoaDonNhapHangModel.getId());
+                    if (chiTietHoaDonNhapHangService.save(x)) {
+                        chiTietSanPhamService.updateNhapHang(x);
+                        count++;
+                    }
+                }
+                if (count > 0) {
+                    EntityMessage.show(this, "Thêm thành công");
+                    this.setVisible(false);
+                    nhapHangJInternalFrame.showTable(nhapHangJInternalFrame.getList());
+                } else {
+                    hoaDonNhapHangService.remove(hoaDonNhapHangModel);
+                    EntityMessage.show(this, "Thêm thất bại");
+                }
             } else {
                 EntityMessage.show(this, "Thêm thất bại");
             }

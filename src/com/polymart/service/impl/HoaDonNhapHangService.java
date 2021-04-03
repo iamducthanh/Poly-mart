@@ -1,8 +1,10 @@
 package com.polymart.service.impl;
 
 import com.polymart.dao.IChiTietHoaDonNhapHangDAO;
+import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.dao.IHoaDonNhapHangDAO;
 import com.polymart.dao.impl.ChiTietHoaDonNhapHangDAO;
+import com.polymart.dao.impl.ChiTietSanPhamDAO;
 import com.polymart.dao.impl.HoaDonNhapHangDAO;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.HoaDonNhapHangModel;
@@ -16,7 +18,6 @@ import java.util.Map;
 public class HoaDonNhapHangService implements IHoaDonNhapHangService {
 
     private static IHoaDonNhapHangDAO hoaDonNhapHangDAO = new HoaDonNhapHangDAO();
-    private static IChiTietHoaDonNhapHangDAO chiTietHoaDonNhapHangDAO = new ChiTietHoaDonNhapHangDAO();
     private static Map<Integer, HoaDonNhapHangModel> mapHoaDonNhapHang = new HashMap<Integer, HoaDonNhapHangModel>();
 
     static {
@@ -31,18 +32,14 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
     }
 
     @Override
-    public boolean save(HoaDonNhapHangModel hoaDonNhapHangModel,
-                        List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHangModel) {
-        if (hoaDonNhapHangModel != null &&
-                lstChiTietHoaDonNhapHangModel != null && !lstChiTietHoaDonNhapHangModel.isEmpty()) {
+    public HoaDonNhapHangModel save(HoaDonNhapHangModel hoaDonNhapHangModel) {
+        if (hoaDonNhapHangModel != null) {
             int id = hoaDonNhapHangDAO.save(hoaDonNhapHangModel);
             hoaDonNhapHangModel = hoaDonNhapHangDAO.findById(id);
-            if (hoaDonNhapHangModel != null) {
-                mapHoaDonNhapHang.put(id, hoaDonNhapHangModel);
-                return chiTietHoaDonNhapHangDAO.save(id, lstChiTietHoaDonNhapHangModel);
-            }
+            mapHoaDonNhapHang.put(id, hoaDonNhapHangModel);
+            return hoaDonNhapHangModel;
         }
-        return false;
+        return null;
     }
 
     @Override

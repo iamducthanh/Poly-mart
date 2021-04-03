@@ -102,18 +102,18 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     public void initTopNhapHang() {
         setTitle("Hàng hóa - Kiểm kho");
 
-        JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng      ");
+        JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng        ");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
         panel.add(lblNewLabel, BorderLayout.WEST);
 
         txtTimPhieuNhap = new JTextField();
-        txtTimPhieuNhap.setText(" TÌm theo mã phiếu nhập");
+        txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
         panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
         txtTimPhieuNhap.setColumns(10);
         txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtTimPhieuNhap.getText().equals(" TÌm theo mã phiếu nhập")) {
+                if (txtTimPhieuNhap.getText().equals("Tìm theo mã phiếu nhập")) {
                     txtTimPhieuNhap.setText("");
                 }
             }
@@ -121,7 +121,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtTimPhieuNhap.getText().equals("")) {
-                    txtTimPhieuNhap.setText(" TÌm theo mã phiếu nhập");
+                    txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
                 }
             }
         });
@@ -222,8 +222,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         // hiển thị danh sách hóa đơn len bảng
         getList();
         showTable(lstHoaDonNhapHang);
-
-
     }
 
     ActionListener openThemPhieuNhapHang = new ActionListener() {
@@ -258,14 +256,19 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     // tìm kiếm theo mã hóa đơn nhập
     private void evtBtnSearchById(JTextField txtInputId) {
         String getID = txtInputId.getText();
-        if (EntityValidate.checkIdNumber(this, getID)) {
-            HoaDonNhapHangModel hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
-            if (hoaDonNhapHangModel == null) {
-                EntityMessage.show(this, "Mã hóa đơn không tồn tại");
-            } else {
-                lstHoaDonNhapHang = new ArrayList<>();
-                lstHoaDonNhapHang.add(hoaDonNhapHangModel);
-                showTable(lstHoaDonNhapHang);
+        if (getID.equals("Tìm theo mã phiếu nhập")) {
+            lstHoaDonNhapHang = hoaDonNhapHangService.findAll();
+            showTable(lstHoaDonNhapHang);
+        } else {
+            if (EntityValidate.checkIdNumber(this, getID)) {
+                HoaDonNhapHangModel hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
+                if (hoaDonNhapHangModel == null) {
+                    EntityMessage.show(this, "Mã hóa đơn không tồn tại");
+                } else {
+                    lstHoaDonNhapHang = new ArrayList<>();
+                    lstHoaDonNhapHang.add(hoaDonNhapHangModel);
+                    showTable(lstHoaDonNhapHang);
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
@@ -209,6 +210,7 @@ public class PolyMartMain extends JFrame {
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
 		mntmBangTinhLuong.addActionListener(openBangLuong);
+		
 	}
 
 	ActionListener openTraHang = new ActionListener() {

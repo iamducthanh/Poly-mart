@@ -295,7 +295,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         modelDSSanPham.addColumn("Loại");
         modelDSSanPham.addColumn("Size");
         modelDSSanPham.addColumn("Màu sắc");
-        modelDSSanPham.addColumn("Số lượng tồn kho");
+        modelDSSanPham.addColumn("Số lượng trong kho");
         tableDSSanPham.setModel(modelDSSanPham);
 
         modelDSNhapHang.addColumn("Mã sản phẩm");

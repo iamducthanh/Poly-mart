@@ -1,20 +1,23 @@
 package com.polymart.ui.hanghoa;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 
 public class ChiTietSanPhamFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -183259936805942123L;
 	private JPanel contentPane;
 	private JTextField textField;
 

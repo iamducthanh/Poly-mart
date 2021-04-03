@@ -18,9 +18,6 @@ public class ChiTietHoaDonNhapHangDAO extends AbstractDAO<ChiTietHoaDonNhapHangM
             for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhapHangModels) {
                 int index = insert(sqlInsert, id, x.getIdChiTietSanPham(), x.getGiaNhap(), x.getSoLuong());
                 if (index > -1) {
-                    System.out.println("gia nhap * so luong " + x.getGiaNhap() * x.getSoLuong());
-                    System.out.println("soluong: " + x.getSoLuong());
-                    System.out.println("id ctsp: " + x.getIdChiTietSanPham());
                     update(sqlUpdate, x.getGiaNhap() * x.getSoLuong(), x.getSoLuong(), x.getSoLuong(),
                             x.getIdChiTietSanPham());
                     count++;

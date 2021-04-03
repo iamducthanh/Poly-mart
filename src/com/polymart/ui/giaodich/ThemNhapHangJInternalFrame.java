@@ -69,8 +69,10 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private List<NguonHangModel> lstNguonHang = nguonHangService.findAll();
     private List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = new ArrayList<>();
 
-    JButton btnLuuTam = new JButton("Lưu tạm");
+    private JButton btnLuuTam = new JButton("Lưu tạm");
     private JTextField txtGiaNhap;
+
+    private NhapHangJInternalFrame nhapHangJInternalFrame = null;
 
     /**
      * Launch the application.
@@ -91,7 +93,13 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     /**
      * Create the frame.
      */
+
     public ThemNhapHangJInternalFrame() {
+    	
+    }
+
+    public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
+        this.nhapHangJInternalFrame = nhapHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1920, 639);
@@ -422,7 +430,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     }
 
     // show nguồn hàng lên combobox
-    private void showNguonHang(JComboBox cbcNguonHang, List<NguonHangModel> lstNguonHang) {
+    private void showNguonHang(JComboBox<Object> cbcNguonHang, List<NguonHangModel> lstNguonHang) {
         cbcNguonHang.removeAllItems();
         if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
             for (NguonHangModel x : lstNguonHang) {
@@ -432,7 +440,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     }
 
     // nút "Hoàn thành"
-    private void evtBtnHoanThanh(JTable tbDSNhapHang, JComboBox cbcNguonHang, JTextArea txaGhiChu) {
+    private void evtBtnHoanThanh(JTable tbDSNhapHang, JComboBox<Object> cbcNguonHang, JTextArea txaGhiChu) {
         if (!lstChiTietHoaDonNhap.isEmpty()) {
             HoaDonNhapHangModel hoaDonNhapHangModel = new HoaDonNhapHangModel();
             hoaDonNhapHangModel.setIdNguonHang(lstNguonHang.get(cbcNguonHang.getSelectedIndex()).getId());
@@ -441,6 +449,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             if (hoaDonNhapHangService.save(hoaDonNhapHangModel, lstChiTietHoaDonNhap)) {
                 EntityMessage.show(this, "Thêm thành công");
                 this.setVisible(false);
+                nhapHangJInternalFrame.showTable();
             } else {
                 EntityMessage.show(this, "Thêm thất bại");
             }

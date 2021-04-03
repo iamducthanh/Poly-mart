@@ -89,7 +89,7 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(mnTongQuan);
 
 		JMenu mnHangHoa = new JMenu("Hàng hóa");
-		mnHangHoa.setIcon(new ImageIcon("C:\\images\\hanghoa.png"));
+		mnHangHoa.setIcon(new ImageIcon("images\\hanghoa.png"));
 		menuBar.add(mnHangHoa);
 
 		JMenuItem mntmHangHoa = new JMenuItem("Hàng hóa");

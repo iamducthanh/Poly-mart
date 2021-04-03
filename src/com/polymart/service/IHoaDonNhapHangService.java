@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface IHoaDonNhapHangService {
 
-    boolean save(HoaDonNhapHangModel hoaDonNhapHangModel,
+    List<HoaDonNhapHangModel> findAll();
+
+	boolean save(HoaDonNhapHangModel hoaDonNhapHangModel,
                  List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHangModel);
 
 }

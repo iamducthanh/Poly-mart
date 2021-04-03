@@ -16,6 +16,11 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
     private IChiTietHoaDonNhapHangDAO chiTietHoaDonNhapHangDAO = new ChiTietHoaDonNhapHangDAO();
 
     @Override
+    public List<HoaDonNhapHangModel> findAll() {
+        return hoaDonNhapHangDAO.findAll();
+    }
+
+    @Override
     public boolean save(HoaDonNhapHangModel hoaDonNhapHangModel,
                         List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHangModel) {
         if (hoaDonNhapHangModel != null &&

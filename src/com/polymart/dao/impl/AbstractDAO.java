@@ -166,6 +166,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 e2.printStackTrace();
             }
         }
-        return null;
+        return -1;
     }
 }

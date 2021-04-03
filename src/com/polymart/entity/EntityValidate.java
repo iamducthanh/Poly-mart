@@ -117,6 +117,20 @@ public class EntityValidate {
 		}
 		return true;
 	}
+	
+	// kiểm tra số tiền
+		public static boolean checkMoney(Component component, String money) {
+			String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
+			if (money.isBlank()) {
+				EntityMessage.show(component, "Số tiền không được để trống");
+				return false;
+			}
+			if (!money.matches(regex)) {
+				EntityMessage.show(component, "Số tiền không hợp lệ");
+				return false;
+			}
+			return true;
+		}
 
 	public static boolean checkNgaySinh(JDateChooser date) {
 		return date.getDate().after(new Date());

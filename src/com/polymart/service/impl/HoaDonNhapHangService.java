@@ -6,7 +6,6 @@ import com.polymart.dao.impl.ChiTietHoaDonNhapHangDAO;
 import com.polymart.dao.impl.HoaDonNhapHangDAO;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.HoaDonNhapHangModel;
-import com.polymart.model.LoaiSanPhamModel;
 import com.polymart.service.IHoaDonNhapHangService;
 
 import java.util.ArrayList;
@@ -50,14 +49,17 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
     public boolean remove(HoaDonNhapHangModel hoaDonNhapHangModel) {
         if (hoaDonNhapHangModel != null) {
             if (mapHoaDonNhapHang.get(hoaDonNhapHangModel.getId()) != null) {
-
+                if (hoaDonNhapHangDAO.remove(hoaDonNhapHangModel) > 0) {
+                    mapHoaDonNhapHang.remove(hoaDonNhapHangModel.getId());
+                    return true;
+                }
             }
         }
         return false;
     }
 
     @Override
-    public List<HoaDonNhapHangModel> findById(String id) {
-        return new ArrayList<>(mapHoaDonNhapHang.get(id));
+    public HoaDonNhapHangModel findById(Integer id) {
+        return mapHoaDonNhapHang.get(id);
     }
 }

@@ -154,10 +154,19 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
         btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
 
+        // tìm kiếm hóa đơn
         btnTimKiem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 evtBtnSearchById(txtTimPhieuNhap);
+            }
+        });
+
+        // xóa hóa đơn
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnXoa(tableNhapHang);
             }
         });
     }
@@ -214,8 +223,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         getList();
         showTable(lstHoaDonNhapHang);
 
-        // tìm kiếm mã hóa đơn
-
 
     }
 
@@ -235,7 +242,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
     // đổi dữ liệu từ service về list
     public List<HoaDonNhapHangModel> getList() {
-        return (lstHoaDonNhapHang = hoaDonNhapHangService.findAll());
+        return lstHoaDonNhapHang = hoaDonNhapHangService.findAll();
     }
 
     // hiển thị danh sách háo đơn lên bảng
@@ -252,21 +259,32 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private void evtBtnSearchById(JTextField txtInputId) {
         String getID = txtInputId.getText();
         if (EntityValidate.checkIdNumber(this, getID)) {
-            List<HoaDonNhapHangModel> lst = hoaDonNhapHangService.findById(getID);
-            if (lst.isEmpty()) {
+            HoaDonNhapHangModel hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
+            if (hoaDonNhapHangModel == null) {
                 EntityMessage.show(this, "Mã hóa đơn không tồn tại");
             } else {
-                showTable(lst);
+                lstHoaDonNhapHang = new ArrayList<>();
+                lstHoaDonNhapHang.add(hoaDonNhapHangModel);
+                showTable(lstHoaDonNhapHang);
             }
         }
     }
 
     // xóa một hàng trên table
     private void evtBtnXoa(JTable tbNhapHang) {
-        int row = tbNhapHang.getSelectedRow();
-        if (row > -1 && row < tbNhapHang.getRowCount()) {
-            HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
-            if(hoaDonNhapHangService.)
+        if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
+            int row = tbNhapHang.getSelectedRow();
+            if (row > -1 && row < tbNhapHang.getRowCount()) {
+                HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
+                if (hoaDonNhapHangService.remove(hoaDonNhapHangModel)) {
+                    EntityMessage.show(this, "Xóa thành công");
+                    modelNhapHang.removeRow(row);
+                } else {
+                    EntityMessage.show(this, "Xóa thất bại");
+                }
+            } else {
+                EntityMessage.show(this, "Vui lòng chọn 1 hàng");
+            }
         }
     }
 

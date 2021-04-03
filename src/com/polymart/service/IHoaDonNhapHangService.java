@@ -14,6 +14,6 @@ public interface IHoaDonNhapHangService {
 
     boolean remove(HoaDonNhapHangModel hoaDonNhapHangModel);
 
-    List<HoaDonNhapHangModel> findById(String id);
+    HoaDonNhapHangModel findById(Integer id);
 
 }

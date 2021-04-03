@@ -388,7 +388,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         for (ChiTietSanPhamModel x : lst) {
             sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
             modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamModel.getTenSP(),
-                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP().toString()),
+                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
                     x.getSize(), x.getMauSac(), x.getSoLuong()});
         }
     }
@@ -404,7 +404,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
                 modelDSNhapHang.addRow(new Object[]{chiTietSanPhamModel.getId(),
                         sanPhamModel.getTenSP(),
-                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP().toString()),
+                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
                         getMoney, chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
                 // tính tổng tiền của tất cả sản phẩm có trên table
                 Double tongTien = Double.parseDouble(lblTongTien.getText())

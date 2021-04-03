@@ -20,7 +20,7 @@ public class LoaiSanPhamService implements ILoaiSanPhamService {
     }
 
     @Override
-    public String findNameById(String id) {
+    public String findNameById(Integer id) {
         return mapLoaiSanPham.get(id) == null ? null : mapLoaiSanPham.get(id).getTenLoaiSP();
     }
 }

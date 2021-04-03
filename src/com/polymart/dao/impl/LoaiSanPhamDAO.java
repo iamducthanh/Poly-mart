@@ -8,7 +8,6 @@ import java.util.List;
 
 public class LoaiSanPhamDAO extends AbstractDAO<LoaiSanPhamModel> implements ILoaiSanPhamDAO {
 
-
     @Override
     public List<LoaiSanPhamModel> findAll() {
         String sql = "SELECT * FROM LOAISANPHAM";

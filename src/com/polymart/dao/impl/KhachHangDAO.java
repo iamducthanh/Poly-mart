@@ -5,11 +5,6 @@ import java.util.List;
 import com.polymart.dao.IKhachHangDAO;
 import com.polymart.mapper.KhachHangMapper;
 import com.polymart.model.KhachHangModel;
-import com.polymart.model.NhanVienModel;
-import com.polymart.service.IKhachHangService;
-import com.polymart.service.INhanVienService;
-import com.polymart.service.impl.KhachHangService;
-import com.polymart.service.impl.NhanVienService;
 
 public class KhachHangDAO extends AbstractDAO<KhachHangModel> implements IKhachHangDAO {
 	@Override

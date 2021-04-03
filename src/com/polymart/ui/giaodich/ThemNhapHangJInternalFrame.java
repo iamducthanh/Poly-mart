@@ -31,12 +31,19 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.HoaDonNhapHangModel;
+import com.polymart.model.NguonHangModel;
 import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.IHoaDonNhapHangService;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.HoaDonNhapHangService;
 import com.polymart.service.impl.NguonHangService;
 import com.polymart.service.impl.SanPhamService;
 
@@ -50,18 +57,22 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
     private JTextField txtTimKiem;
     private JTable tableDSSanPham;
-    private JTextField txtSoLgNhap;
+    private JTextField txtSoLuongNhap;
     private JTable tableDSNhapHang;
 
     private INguonHangService nguonHangService = new NguonHangService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private ISanPhamService sanPhamService = new SanPhamService();
+    private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
 
-    private List<ChiTietSanPhamModel> lstTietSanPham = new ArrayList<>();
-    
-    JButton btnLuuTam = new JButton("Lưu tạm");
-    JLabel lblNewLabel_1_1_1 = new JLabel("Số lượng nhập: ");
+    private List<ChiTietSanPhamModel> lstTietSanPham = chiTietSanPhamService.findAll();
+    private List<NguonHangModel> lstNguonHang = nguonHangService.findAll();
+    private List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = new ArrayList<>();
 
+    private JButton btnLuuTam = new JButton("Lưu tạm");
+    private JTextField txtGiaNhap;
+
+    private NhapHangJInternalFrame nhapHangJInternalFrame = null;
 
     /**
      * Launch the application.
@@ -82,12 +93,16 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     /**
      * Create the frame.
      */
+
     public ThemNhapHangJInternalFrame() {
+    	
+    }
+
+    public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
+        this.nhapHangJInternalFrame = nhapHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1920, 639);
-        
-        txtSoLgNhap = new JTextField();
 
         setFocusable(true);
         contentPane = new JPanel();
@@ -140,44 +155,48 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         contentPane.add(panel, BorderLayout.CENTER);
         panel.setLayout(new BorderLayout(0, 0));
 
-        JPanel panel_3 = new JPanel();
-        panel.add(panel_3, BorderLayout.NORTH);
-
         JPanel panel_4 = new JPanel();
         panel.add(panel_4, BorderLayout.SOUTH);
 
-        txtSoLgNhap = new JTextField();
-        txtSoLgNhap.setColumns(10);
+        txtSoLuongNhap = new JTextField();
+        txtSoLuongNhap.setColumns(10);
 
-		JLabel lblNewLabel_1_1_1 = new JLabel("Số lượng nhập: ");
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
-		gl_panel_4.setHorizontalGroup(
-			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtSoLgNhap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-					.addGap(952))
-		);
-		gl_panel_4.setVerticalGroup(
-			gl_panel_4.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtSoLgNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel_4.createSequentialGroup()
-							.addGap(2)
-							.addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		panel_4.setLayout(gl_panel_4);
+        JLabel lblSoLuongNhap = new JLabel("Số lượng nhập: ");
+        lblSoLuongNhap.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-        lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        JLabel lblGiaNhap = new JLabel("Giá nhập:");
+        lblGiaNhap.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+        txtGiaNhap = new JTextField();
+        txtGiaNhap.setText("0");
+        txtGiaNhap.setColumns(10);
+        GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+        gl_panel_4.setHorizontalGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panel_4.createSequentialGroup().addContainerGap()
+                        .addComponent(lblSoLuongNhap, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addComponent(txtSoLuongNhap, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                GroupLayout.PREFERRED_SIZE)
+                        .addGap(17).addComponent(lblGiaNhap).addGap(28)
+                        .addComponent(txtGiaNhap, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                        .addGap(41).addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                        .addGap(1261)));
+        gl_panel_4.setVerticalGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_4
+                .createSequentialGroup().addContainerGap()
+                .addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(lblGiaNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtGiaNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                        .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
+                                .addComponent(lblSoLuongNhap, GroupLayout.PREFERRED_SIZE, 30,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSoLuongNhap, GroupLayout.PREFERRED_SIZE, 30,
+                                        GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()));
+        panel_4.setLayout(gl_panel_4);
+
+        lblSoLuongNhap.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         JPanel panel_5 = new JPanel();
         panel_5.setBorder(new TitledBorder(
@@ -213,64 +232,61 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         JLabel lblNewLabel_1 = new JLabel("Thành tiền", JLabel.RIGHT);
         lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 
-        JLabel lblThanhTien = new JLabel("10 củ", SwingConstants.RIGHT);
-        lblThanhTien.setFont(new Font("Tahoma", Font.BOLD, 20));
-		JButton btnHoanThanh = new JButton("Hoàn thành");
-		
-		JButton btnXoa = new JButton("- Xóa");
-		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE))
-					.addGap(18)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addComponent(cbbNguonHang, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE))
-							.addGap(81))
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblThanhTien, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(scrollPane_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
-							.addContainerGap())
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_2.createSequentialGroup()
-									.addComponent(cbbNguonHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblNewLabel_1_1)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblNewLabel_1)
-									.addGap(18)
-									.addComponent(lblThanhTien, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-								.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addGap(5))
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addGap(6))))
-		);
+        JLabel lblTongTien = new JLabel("0.0", SwingConstants.RIGHT);
+        lblTongTien.setFont(new Font("Tahoma", Font.BOLD, 20));
+        JButton btnHoanThanh = new JButton("Hoàn thành");
+
+        JButton btnXoa = new JButton("- Xóa");
+        GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+        gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+                .addGroup(gl_panel_2.createSequentialGroup()
+                        .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+                                .addGroup(gl_panel_2.createSequentialGroup().addContainerGap().addComponent(
+                                        btnXoa, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE))
+                        .addGap(18)
+                        .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_2
+                                .createSequentialGroup()
+                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(cbbNguonHang, GroupLayout.PREFERRED_SIZE, 265,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 201,
+                                                GroupLayout.PREFERRED_SIZE))
+                                .addGap(81))
+                                .addGroup(gl_panel_2.createSequentialGroup()
+                                        .addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 122,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
+                                .addGroup(gl_panel_2.createSequentialGroup()
+                                        .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
+                                                .addComponent(lblTongTien, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
+                                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(scrollPane_2, Alignment.TRAILING,
+                                                        GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+                                        .addContainerGap())
+                                .addGroup(
+                                        gl_panel_2
+                                                .createSequentialGroup().addComponent(btnHoanThanh,
+                                                GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                                                .addContainerGap()))));
+        gl_panel_2.setVerticalGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_2
+                .createSequentialGroup().addContainerGap()
+                .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_2.createSequentialGroup()
+                        .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_2
+                                .createSequentialGroup()
+                                .addComponent(cbbNguonHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                        GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblNewLabel_1_1)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED).addComponent(lblNewLabel_1).addGap(18)
+                                .addComponent(lblTongTien, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(5))
+                        .addGroup(gl_panel_2.createSequentialGroup()
+                                .addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addGap(6)))));
 
         JTextArea txtGhiChu = new JTextArea();
         scrollPane_2.setViewportView(txtGhiChu);
@@ -281,7 +297,6 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         modelDSSanPham.addColumn("Mã sản phẩm");
         modelDSSanPham.addColumn("Tên sản phẩm");
         modelDSSanPham.addColumn("Loại");
-        modelDSSanPham.addColumn("Đơn giá");
         modelDSSanPham.addColumn("Size");
         modelDSSanPham.addColumn("Màu sắc");
         modelDSSanPham.addColumn("Số lượng trong kho");
@@ -290,7 +305,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         modelDSNhapHang.addColumn("Mã sản phẩm");
         modelDSNhapHang.addColumn("Tên sản phẩm");
         modelDSNhapHang.addColumn("Loại");
-        modelDSNhapHang.addColumn("Đơn giá");
+        modelDSNhapHang.addColumn("Giá nhập");
         modelDSNhapHang.addColumn("Size");
         modelDSNhapHang.addColumn("Màu sắc");
         modelDSNhapHang.addColumn("Số lượng nhập");
@@ -313,7 +328,6 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         });
 
         // show dữ liệu lên table lúc khởi chạy chương trình
-        lstTietSanPham = chiTietSanPhamService.findAll();
         showTable(lstTietSanPham);
 
         // show dữ liệu lên bảng khi click nút tìm kiếm
@@ -321,6 +335,37 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 evtSearchProduct(txtTimKiem);
+            }
+        });
+
+        // sự kiện lưu tạm sản phẩm vào bảng hàng nhập
+        btnLuuTam.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLuuTam(txtSoLuongNhap, txtGiaNhap, tableDSSanPham, lblTongTien);
+            }
+        });
+
+        // xóa một hàng trong bảng hàng nhập
+        btnXoa.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnDelete(tableDSNhapHang);
+
+            }
+        });
+
+        // hiển thị nguồn hàng vào combobox
+        showNguonHang(cbbNguonHang, lstNguonHang);
+
+        // nút hoàn thành
+        btnHoanThanh.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnHoanThanh(tableDSNhapHang, cbbNguonHang, txtGhiChu);
             }
         });
 
@@ -343,15 +388,73 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
     // hiển thị dữ liệu lên bảng
     private void showTable(List<ChiTietSanPhamModel> lst) {
-        System.out.println(lst.size());
         modelDSSanPham.setRowCount(0);
         for (ChiTietSanPhamModel x : lst) {
-            modelDSSanPham.addRow(new Object[]{
-                    x.getId(),
-                    sanPhamService.findNameByID(x.getIdSanPham()),
-                    "Loại chỉnh sửa sau",
-                    x.getGiaBan(), x.getSize(), x.getMauSac(), x.getSoLuong()
-            });
+            modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamService.findNameByID(x.getIdSanPham()),
+                    "Loại chỉnh sửa sau", x.getSize(), x.getMauSac(), x.getSoLuong()});
+        }
+    }
+
+    // lưu tạm sản phẩm vào hóa đơn nhập
+    private void evtBtnLuuTam(JTextField txtSoLuong, JTextField txtGiaNhap, JTable tbSanPham, JLabel lblTongTien) {
+        String getSoLuong = txtSoLuong.getText();
+        String getMoney = txtGiaNhap.getText();
+        if (EntityValidate.checkPositiveNumber(this, getSoLuong) && EntityValidate.checkMoney(this, getMoney)) {
+            int row = tbSanPham.getSelectedRow();
+            if (row > -1 && row < tbSanPham.getRowCount()) {
+                ChiTietSanPhamModel chiTietSanPhamModel = lstTietSanPham.get(row);
+                modelDSNhapHang.addRow(new Object[]{chiTietSanPhamModel.getId(),
+                        sanPhamService.findNameByID(chiTietSanPhamModel.getIdSanPham()), "Loại sửa sau", getMoney,
+                        chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
+                Double tongTien = Double.parseDouble(lblTongTien.getText())
+                        + (Double.parseDouble(getMoney) * Integer.parseInt(getSoLuong));
+                lblTongTien.setText(tongTien.toString());
+                ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel = new ChiTietHoaDonNhapHangModel();
+                chiTietHoaDonNhapHangModel.setGiaNhap(Long.valueOf(getMoney));
+                chiTietHoaDonNhapHangModel.setSoLuong(Integer.parseInt(getSoLuong));
+                chiTietHoaDonNhapHangModel.setIdChiTietSanPham(chiTietSanPhamModel.getId());
+                lstChiTietHoaDonNhap.add(chiTietHoaDonNhapHangModel);
+            }
+        }
+    }
+
+    // nút "Xóa" một hàng của bảng danh sách sản phẩm nhập
+    private void evtBtnDelete(JTable tbDSNhapHang) {
+        int row = tbDSNhapHang.getSelectedRow();
+        if (row > -1 && row < tbDSNhapHang.getRowCount()) {
+            modelDSNhapHang.removeRow(row);
+            lstChiTietHoaDonNhap.remove(row);
+        } else {
+            EntityMessage.show(this, "Vui lòng chọn 1 hàng");
+        }
+    }
+
+    // show nguồn hàng lên combobox
+    private void showNguonHang(JComboBox<Object> cbcNguonHang, List<NguonHangModel> lstNguonHang) {
+        cbcNguonHang.removeAllItems();
+        if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
+            for (NguonHangModel x : lstNguonHang) {
+                cbcNguonHang.addItem(x.getTenNguonHang());
+            }
+        }
+    }
+
+    // nút "Hoàn thành"
+    private void evtBtnHoanThanh(JTable tbDSNhapHang, JComboBox<Object> cbcNguonHang, JTextArea txaGhiChu) {
+        if (!lstChiTietHoaDonNhap.isEmpty()) {
+            HoaDonNhapHangModel hoaDonNhapHangModel = new HoaDonNhapHangModel();
+            hoaDonNhapHangModel.setIdNguonHang(lstNguonHang.get(cbcNguonHang.getSelectedIndex()).getId());
+            hoaDonNhapHangModel.setIdNhanVienNhap(EntityAuthorization.USER.getId());
+            hoaDonNhapHangModel.setGhiChu(txaGhiChu.getText());
+            if (hoaDonNhapHangService.save(hoaDonNhapHangModel, lstChiTietHoaDonNhap)) {
+                EntityMessage.show(this, "Thêm thành công");
+                this.setVisible(false);
+                nhapHangJInternalFrame.showTable();
+            } else {
+                EntityMessage.show(this, "Thêm thất bại");
+            }
+        } else {
+            EntityMessage.show(this, "Chưa thêm sản phẩm");
         }
     }
 }

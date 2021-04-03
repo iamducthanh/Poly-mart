@@ -19,7 +19,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
 	private static final long serialVersionUID = -1275654074282876688L;
 	private JPanel contentPane;
 	private JTable tableChiTietHoaDonNhap;
-	DefaultTableModel modelChiTietHoaDonNhap = new DefaultTableModel();
+ 	DefaultTableModel modelChiTietHoaDonNhap = new DefaultTableModel();
 
 	/**
 	 * Launch the application.
@@ -43,7 +43,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
 	 */
 	public ChiTietHoaDonNhapHangFrame() {
 		setTitle("Chi tiết hóa đơn nhập hàng");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 877, 594);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

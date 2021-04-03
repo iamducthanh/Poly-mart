@@ -11,6 +11,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -28,6 +30,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
+import com.polymart.model.HoaDonNhapHangModel;
+import com.polymart.service.IHoaDonNhapHangService;
+import com.polymart.service.impl.HoaDonNhapHangService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -38,15 +43,18 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = -7230782299903914961L;
 	private JPanel contentPane;
-	JPanel panel = new JPanel();
-	JPanel panel1 = new JPanel();
-	JPanel hangHoaJPanel = new JPanel();
+	private JPanel panel = new JPanel();
+	private JPanel panel1 = new JPanel();
+	private JPanel hangHoaJPanel = new JPanel();
 
 	private JTextField txtTimPhieuNhap;
-	JFrame optionKiemKhoFrame = new JFrame();
+	private JFrame optionKiemKhoFrame = new JFrame();
 	private JPanel panelOption;
 	private JTable tableNhapHang;
-	DefaultTableModel modelNhapHang = new DefaultTableModel();
+	private DefaultTableModel modelNhapHang = new DefaultTableModel();
+
+	private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
+	private List<HoaDonNhapHangModel> lstHoaDonNhapHang = null;
 
 	/**
 	 * Launch the application.
@@ -114,7 +122,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-		
+
 		JButton btnTimKiem = new JButton("Tìm kiếm");
 		panel1.add(btnTimKiem);
 		JLabel lblNewLabel_1 = new JLabel("                        ");
@@ -192,16 +200,34 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 			}
 		});
 
+		// hiển thị danh sách hóa đơn len bảng
+		showTable();
+
 	}
 
 	ActionListener openThemPhieuNhapHang = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame();
-			EntityFrame.POLYMARTMAIN.pnlMain.add(themNhapHangJInternalFrame);
-			themNhapHangJInternalFrame.setVisible(true);
+			setOpenThemPhieuNhapHang();
 		}
 	};
+
+	private void setOpenThemPhieuNhapHang() {
+		ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame(this);
+		EntityFrame.POLYMARTMAIN.pnlMain.add(themNhapHangJInternalFrame);
+		themNhapHangJInternalFrame.setVisible(true);
+	}
+
+	// hiển thị danh sách háo đơn lên bảng
+	public void showTable() {
+		lstHoaDonNhapHang = hoaDonNhapHangService.findAll();
+		modelNhapHang.setRowCount(0);
+		for (HoaDonNhapHangModel x : lstHoaDonNhapHang) {
+			modelNhapHang.addRow(new Object[] { x.getId(),
+					new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()), "Tổng tiền",
+					"Người nhập - " + x.getIdNhanVienNhap(), "nguồn hàng - " + x.getIdNguonHang(), x.getGhiChu() });
+		}
+	}
 
 }

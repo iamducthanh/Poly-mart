@@ -26,7 +26,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFrame;
 import com.polymart.ui.common.uiCommon;
+import com.polymart.ui.giaodich.ThemNhapHangJInternalFrame;
 
 public class HangHoaJInternalFrame extends JInternalFrame {
 
@@ -346,7 +348,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     ActionListener themSanPham = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            new ThemHangHoaFrame().setVisible(true);
+			ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame();
+			EntityFrame.POLYMARTMAIN.pnlMain.add(themHangHoaJInternalFrame);
+			themHangHoaJInternalFrame.setVisible(true);
         }
     };
 

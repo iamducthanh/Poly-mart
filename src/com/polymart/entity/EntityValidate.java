@@ -88,6 +88,25 @@ public class EntityValidate {
 		return true;
 	}
 
+	// kiểm mã hóa đơn
+	public static boolean checkIdNumber(Component component, String idNumber) {
+		String regex = "\\d+";
+		if (idNumber.isBlank()) {
+			EntityMessage.show(component, "Vui lòng nhập một số");
+			return false;
+		}
+		try {
+			if (!idNumber.matches(regex) || Integer.parseInt(idNumber) <= 0) {
+				EntityMessage.show(component, "Nhập số nguyên dương");
+				return false;
+			}
+		} catch (Exception e) {
+			EntityMessage.show(component, "Nhập số nguyên dương");
+			return false;
+		}
+		return true;
+	}
+
 	// check tên tiếng việt
 	public static boolean checkName(Component component, String name) {
 		if (name.isBlank()) {

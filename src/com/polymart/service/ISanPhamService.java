@@ -8,6 +8,6 @@ public interface ISanPhamService {
 
     List<SanPhamModel> findAll();
 
-    String findNameByID(Integer id);
+    SanPhamModel findByID(Integer id);
 
 }

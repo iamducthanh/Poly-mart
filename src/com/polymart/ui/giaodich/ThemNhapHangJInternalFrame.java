@@ -34,18 +34,9 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.HoaDonNhapHangModel;
-import com.polymart.model.NguonHangModel;
-import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.IHoaDonNhapHangService;
-import com.polymart.service.INguonHangService;
-import com.polymart.service.ISanPhamService;
-import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.HoaDonNhapHangService;
-import com.polymart.service.impl.NguonHangService;
-import com.polymart.service.impl.SanPhamService;
+import com.polymart.model.*;
+import com.polymart.service.*;
+import com.polymart.service.impl.*;
 
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
@@ -64,10 +55,15 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private ISanPhamService sanPhamService = new SanPhamService();
     private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
+    private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
 
     private List<ChiTietSanPhamModel> lstTietSanPham = chiTietSanPhamService.findAll();
     private List<NguonHangModel> lstNguonHang = nguonHangService.findAll();
     private List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = new ArrayList<>();
+
+    private ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel = null;
+    private ChiTietSanPhamModel chiTietSanPhamModel = null;
+    private SanPhamModel sanPhamModel = null;
 
     private JButton btnLuuTam = new JButton("Lưu tạm");
     private JTextField txtGiaNhap;
@@ -95,7 +91,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemNhapHangJInternalFrame() {
-    	
+
     }
 
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
@@ -123,7 +119,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         btnQuayLai.setBorder(null);
         btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
 
-        JLabel lblNewLabel = new JLabel("Nhập hàng           ");
+        JLabel lblNewLabel = new JLabel("Nhập hàng");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 
         txtTimKiem = new JTextField();
@@ -168,7 +164,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         lblGiaNhap.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
         txtGiaNhap = new JTextField();
-        txtGiaNhap.setText("0");
+        txtGiaNhap.setText("");
         txtGiaNhap.setColumns(10);
         GroupLayout gl_panel_4 = new GroupLayout(panel_4);
         gl_panel_4.setHorizontalGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
@@ -390,8 +386,10 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private void showTable(List<ChiTietSanPhamModel> lst) {
         modelDSSanPham.setRowCount(0);
         for (ChiTietSanPhamModel x : lst) {
-            modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamService.findNameByID(x.getIdSanPham()),
-                    "Loại chỉnh sửa sau", x.getSize(), x.getMauSac(), x.getSoLuong()});
+            sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
+            modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamModel.getTenSP(),
+                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP().toString()),
+                    x.getSize(), x.getMauSac(), x.getSoLuong()});
         }
     }
 
@@ -402,14 +400,18 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         if (EntityValidate.checkPositiveNumber(this, getSoLuong) && EntityValidate.checkMoney(this, getMoney)) {
             int row = tbSanPham.getSelectedRow();
             if (row > -1 && row < tbSanPham.getRowCount()) {
-                ChiTietSanPhamModel chiTietSanPhamModel = lstTietSanPham.get(row);
+                chiTietSanPhamModel = lstTietSanPham.get(row);
+                sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
                 modelDSNhapHang.addRow(new Object[]{chiTietSanPhamModel.getId(),
-                        sanPhamService.findNameByID(chiTietSanPhamModel.getIdSanPham()), "Loại sửa sau", getMoney,
-                        chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
+                        sanPhamModel.getTenSP(),
+                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP().toString()),
+                        getMoney, chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
+                // tính tổng tiền của tất cả sản phẩm có trên table
                 Double tongTien = Double.parseDouble(lblTongTien.getText())
                         + (Double.parseDouble(getMoney) * Integer.parseInt(getSoLuong));
                 lblTongTien.setText(tongTien.toString());
-                ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel = new ChiTietHoaDonNhapHangModel();
+                // taho đôi tượng chi tiest hóa đơn nhập hàng và add vào list
+                chiTietHoaDonNhapHangModel = new ChiTietHoaDonNhapHangModel();
                 chiTietHoaDonNhapHangModel.setGiaNhap(Long.valueOf(getMoney));
                 chiTietHoaDonNhapHangModel.setSoLuong(Integer.parseInt(getSoLuong));
                 chiTietHoaDonNhapHangModel.setIdChiTietSanPham(chiTietSanPhamModel.getId());
@@ -449,7 +451,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             if (hoaDonNhapHangService.save(hoaDonNhapHangModel, lstChiTietHoaDonNhap)) {
                 EntityMessage.show(this, "Thêm thành công");
                 this.setVisible(false);
-                nhapHangJInternalFrame.showTable();
+                nhapHangJInternalFrame.showTable(nhapHangJInternalFrame.getList());
             } else {
                 EntityMessage.show(this, "Thêm thất bại");
             }

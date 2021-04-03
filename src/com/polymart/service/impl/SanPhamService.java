@@ -31,7 +31,7 @@ public class SanPhamService implements ISanPhamService {
     }
 
     @Override
-    public String findNameByID(Integer id) {
-        return mapSanPham.get(id).getTenSP();
+    public SanPhamModel findByID(Integer id) {
+        return mapSanPham.get(id);
     }
 }

@@ -9,7 +9,11 @@ public interface IHoaDonNhapHangService {
 
     List<HoaDonNhapHangModel> findAll();
 
-	boolean save(HoaDonNhapHangModel hoaDonNhapHangModel,
+    boolean save(HoaDonNhapHangModel hoaDonNhapHangModel,
                  List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHangModel);
+
+    boolean remove(HoaDonNhapHangModel hoaDonNhapHangModel);
+
+    List<HoaDonNhapHangModel> findById(String id);
 
 }

@@ -10,4 +10,7 @@ public interface IHoaDonNhapHangDAO extends GenericDAO<HoaDonNhapHangModel> {
 
     Integer save(HoaDonNhapHangModel hoaDonNhapHangModel);
 
+    Integer remove(HoaDonNhapHangModel hoaDonNhapHangModel);
+
+    HoaDonNhapHangModel findById(Integer id);
 }

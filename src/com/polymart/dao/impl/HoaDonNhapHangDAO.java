@@ -8,19 +8,31 @@ import com.polymart.model.HoaDonNhapHangModel;
 
 public class HoaDonNhapHangDAO extends AbstractDAO<HoaDonNhapHangModel> implements IHoaDonNhapHangDAO {
 
-	@Override
+    @Override
 
-	public List<HoaDonNhapHangModel> findAll() {
-		String sql = "SELECT * FROM HOADONNHAPHANG";
-		return query(sql, new HoaDonNhapHangMapper());
-	}
+    public List<HoaDonNhapHangModel> findAll() {
+        String sql = "SELECT * FROM HOADONNHAPHANG";
+        return query(sql, new HoaDonNhapHangMapper());
+    }
 
-	@Override
-	public Integer save(HoaDonNhapHangModel hoaDonNhapHangModel) {
-		StringBuilder sql = new StringBuilder("INSERT INTO HOADONNHAPHANG (IDNHANVIEN, IDNGUONHANG, GHICHU)");
-		sql.append(" VALUES (?, ?, ?)");
-		int id = insert(sql.toString(), hoaDonNhapHangModel.getIdNhanVienNhap(), hoaDonNhapHangModel.getIdNguonHang(),
-				 hoaDonNhapHangModel.getGhiChu());
-		return id;
-	}
+    @Override
+    public Integer save(HoaDonNhapHangModel hoaDonNhapHangModel) {
+        StringBuilder sql = new StringBuilder("INSERT INTO HOADONNHAPHANG (IDNHANVIEN, IDNGUONHANG, GHICHU)");
+        sql.append(" VALUES (?, ?, ?)");
+        int id = insert(sql.toString(), hoaDonNhapHangModel.getIdNhanVienNhap(), hoaDonNhapHangModel.getIdNguonHang(),
+                hoaDonNhapHangModel.getGhiChu());
+        return id;
+    }
+
+    @Override
+    public Integer remove(HoaDonNhapHangModel hoaDonNhapHangModel) {
+        String sql = "";
+    }
+
+    @Override
+    public HoaDonNhapHangModel findById(Integer id) {
+        String sql = "SELECT * FROM HOADONNHAPHANG WHERE ID = ?";
+        List<HoaDonNhapHangModel> lst = query(sql, new HoaDonNhapHangMapper(), id);
+        return lst == null ? null : lst.get(0);
+    }
 }

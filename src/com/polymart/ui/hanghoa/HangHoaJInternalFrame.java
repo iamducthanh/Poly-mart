@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -108,10 +110,26 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         pnlTop.add(horizontalStrut);
 
         txtFind = new JTextField();
-        txtFind.setFont(new Font("SansSerif", Font.PLAIN, 17));
+        txtFind.setFont(new Font("SansSerif", Font.PLAIN, 14));
         txtFind.setText(" Tìm theo mã, tên hàng");
         txtFind.setColumns(10);
         pnlTop.add(txtFind);
+        
+        txtFind.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
+                	txtFind.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtFind.getText().equals("")) {
+                	txtFind.setText(" Tìm theo mã, tên hàng");
+                }
+            }
+        });
 
         Component horizontalGlue = Box.createHorizontalGlue();
         pnlTop.add(horizontalGlue);

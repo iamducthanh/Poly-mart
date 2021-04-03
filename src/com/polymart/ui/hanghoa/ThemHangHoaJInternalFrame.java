@@ -42,11 +42,11 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = -2914525596895096982L;
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_5;
+	private JTextField txtTenSP;
+	private JTextField txtLoai;
+	private JTextField txtGiaBan;
+	private JTextField txtGiaGiam;
+	private JTextField txtMauSac;
 	JPanel panelImage = new JPanel();
 
 	List<LabelImageModel> listLabelImg = new ArrayList<LabelImageModel>();
@@ -136,20 +136,20 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 				"  Chi ti\u1EBFt s\u1EA3n ph\u1EA9m  ", TitledBorder.LEADING, TitledBorder.TOP, null,
 				new Color(0, 0, 0)));
 
-		JButton btnNewButton = new JButton("Lưu tạm");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnLuuTam = new JButton("Lưu tạm");
+		btnLuuTam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnLuuTam();
 			}
 		});
 
-		JButton btnToMi = new JButton("Tạo mới");
+		JButton btnTaoMoi = new JButton("Tạo mới");
 		
 		JPanel panel_3 = new JPanel();
 		
-		JButton btnHonThnh = new JButton("Hoàn thành");
+		JButton btnHoanThanh = new JButton("Hoàn thành");
 		
-		JButton btnToMi_1_1 = new JButton("Xoá");
+		JButton btnXoa = new JButton("Xoá");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -160,10 +160,10 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnToMi, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-						.addComponent(btnHonThnh, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnToMi_1_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnTaoMoi, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+						.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
 					.addGap(20))
 		);
 		gl_panel.setVerticalGroup(
@@ -172,17 +172,17 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnToMi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnToMi_1_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnHonThnh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
 		);
 		panel_3.setLayout(new BorderLayout(0, 0));
@@ -196,24 +196,24 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 		JLabel lblNewLabel_1 = new JLabel("Tên sản phẩm: ", JLabel.RIGHT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textField = new JTextField();
-		textField.setColumns(10);
+		txtTenSP = new JTextField();
+		txtTenSP.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		txtLoai = new JTextField();
+		txtLoai.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		txtGiaBan = new JTextField();
+		txtGiaBan.setColumns(10);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		txtGiaGiam = new JTextField();
+		txtGiaGiam.setColumns(10);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		txtMauSac = new JTextField();
+		txtMauSac.setColumns(10);
 
-		JComboBox<Object> comboBox = new JComboBox<Object>();
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		comboBox.setModel(
+		JComboBox<Object> cbbSize = new JComboBox<Object>();
+		cbbSize.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cbbSize.setModel(
 				new DefaultComboBoxModel<Object>(new String[] { "S", "M", "L", "XL", "XXL", "XXXL", "FREE SIZE" }));
 
 		JLabel lblNewLabel_1_1 = new JLabel("Loại: ", JLabel.RIGHT);
@@ -257,12 +257,12 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
 							.addGap(40)
 							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-								.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-								.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(txtMauSac, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+								.addComponent(txtGiaGiam, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+								.addComponent(txtGiaBan, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+								.addComponent(txtLoai, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+								.addComponent(txtTenSP, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+								.addComponent(cbbSize, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
 							.addComponent(panelImage, GroupLayout.PREFERRED_SIZE, 665, GroupLayout.PREFERRED_SIZE))
 						.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
@@ -278,20 +278,20 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 							.addContainerGap()
 							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtTenSP, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_2.createSequentialGroup()
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtLoai, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtGiaBan, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtGiaGiam, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+									.addComponent(cbbSize, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 									.addGap(17)
 									.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtMauSac, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblNewLabel_1_5, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(gl_panel_2.createSequentialGroup()
 									.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)

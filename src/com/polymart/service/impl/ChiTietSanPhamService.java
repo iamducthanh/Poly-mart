@@ -41,4 +41,9 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
         chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
     }
+
+    @Override
+    public Integer getIdProductById(Integer id) {
+        return mapChiTietSanPham.get(id).getIdSanPham();
+    }
 }

@@ -10,6 +10,12 @@ public class ChiTietHoaDonNhapHangDAO extends AbstractDAO<ChiTietHoaDonNhapHangM
         implements IChiTietHoaDonNhapHangDAO {
 
     @Override
+    public List<ChiTietHoaDonNhapHangModel> findAll() {
+        String sql = "SELECT * FROM CHITIETHOADONNHAPHANG";
+        return query(sql, new ChiTietHoaDonNhapHangMapper());
+    }
+
+    @Override
     public boolean save(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
         if (chiTietHoaDonNhapHangModel != null) {
             String sqlInsert = "INSERT INTO CHITIETHOADONNHAPHANG (IDHOADONNHAPHANG, IDCHITIETSANPHAM, GIANHAP, SOLUONG)\n"

@@ -13,4 +13,6 @@ public interface IChiTietSanPhamService {
 
     void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
+    Integer getIdProductById(Integer id);
+
 }

@@ -6,19 +6,28 @@ import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.service.IChiTietHoaDonNhapHangService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChiTietHoaDonNhapHangService implements IChiTietHoaDonNhapHangService {
 
-    private IChiTietHoaDonNhapHangDAO chiTietHoaDonNhapHangDAO = new ChiTietHoaDonNhapHangDAO();
-//    private List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHangModels = new
+    private static IChiTietHoaDonNhapHangDAO chiTietHoaDonNhapHangDAO = new ChiTietHoaDonNhapHangDAO();
+    private static List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHangModels = chiTietHoaDonNhapHangDAO.findAll();
 
     @Override
     public List<ChiTietHoaDonNhapHangModel> findByIdHoaDonNhap(Integer idHoaDonNhap) {
-        return null;
+        int i = 0;
+        for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhapHangModels) {
+            System.out.println(++i + ": " + x.getIdHoaDonNhapHang() + " - " + idHoaDonNhap);
+        }
+        return lstChiTietHoaDonNhapHangModels.stream().filter(e -> e.getIdHoaDonNhapHang() == idHoaDonNhap).collect(Collectors.toList());
     }
 
     @Override
     public boolean save(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
-        return chiTietHoaDonNhapHangDAO.save(chiTietHoaDonNhapHangModel);
+        if (chiTietHoaDonNhapHangDAO.save(chiTietHoaDonNhapHangModel)) {
+            lstChiTietHoaDonNhapHangModels.add(chiTietHoaDonNhapHangModel);
+            return true;
+        }
+        return false;
     }
 }

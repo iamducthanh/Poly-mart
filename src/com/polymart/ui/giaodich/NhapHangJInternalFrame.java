@@ -33,8 +33,11 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
+import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.HoaDonNhapHangModel;
+import com.polymart.service.IChiTietHoaDonNhapHangService;
 import com.polymart.service.IHoaDonNhapHangService;
+import com.polymart.service.impl.ChiTietHoaDonNhapHangService;
 import com.polymart.service.impl.HoaDonNhapHangService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
@@ -54,9 +57,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private JFrame optionKiemKhoFrame = new JFrame();
     private JPanel panelOption;
     private JTable tableNhapHang;
-    private DefaultTableModel modelNhapHang = new DefaultTableModel();
+    private DefaultTableModel modelNhapHang;
 
     private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
+    private IChiTietHoaDonNhapHangService chiTietHoaDonNhapHangService = new ChiTietHoaDonNhapHangService();
     private List<HoaDonNhapHangModel> lstHoaDonNhapHang = null;
 
     /**
@@ -80,6 +84,12 @@ public class NhapHangJInternalFrame extends JInternalFrame {
      */
     public NhapHangJInternalFrame() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        modelNhapHang = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // setBounds(100, 100, 1920, 639);
         setFocusable(true);
@@ -213,8 +223,16 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         tableNhapHang.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 if (mouseEvent.getClickCount() == 2) {
-                    ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame();
-                    chiTietHoaDonNhapHang.setVisible(true);
+                    int row = tableNhapHang.getSelectedRow();
+                    if (row > -1 && row < tableNhapHang.getRowCount()) {
+                        HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
+                        System.out.println("id" + hoaDonNhapHangModel.getId());
+                        List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService.findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
+                        System.out.println("size " + lstChiTietHoaDonNhap.size());
+                        ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(lstChiTietHoaDonNhap,
+                                hoaDonNhapHangModel.getIdNguonHang());
+                        chiTietHoaDonNhapHang.setVisible(true);
+                    }
                 }
             }
         });

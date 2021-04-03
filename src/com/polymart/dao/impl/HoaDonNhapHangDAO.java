@@ -9,6 +9,7 @@ import com.polymart.model.HoaDonNhapHangModel;
 public class HoaDonNhapHangDAO extends AbstractDAO<HoaDonNhapHangModel> implements IHoaDonNhapHangDAO {
 
 	@Override
+
 	public List<HoaDonNhapHangModel> findAll() {
 		String sql = "SELECT * FROM HOADONNHAPHANG";
 		return query(sql, new HoaDonNhapHangMapper());

@@ -1,10 +1,9 @@
 package com.polymart.mapper;
 
-import com.polymart.model.LoaiSanPhamModel;
-import com.polymart.model.NguonHangModel;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.polymart.model.LoaiSanPhamModel;
 
 public class LoaiSanPhamMapper implements RowMapper<LoaiSanPhamModel> {
     @Override

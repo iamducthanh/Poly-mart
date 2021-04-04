@@ -9,11 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -173,8 +171,8 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 	        gl_panel_2.setHorizontalGroup(
 	        	gl_panel_2.createParallelGroup(Alignment.TRAILING)
 	        		.addGroup(gl_panel_2.createSequentialGroup()
-	        			.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 1537, Short.MAX_VALUE)
-	        			.addPreferredGap(ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+	        			.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+	        			.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	        			.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING, false)
 	        				.addGroup(gl_panel_2.createSequentialGroup()
 	        					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -202,7 +200,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 	        gl_panel_2.setVerticalGroup(
 	        	gl_panel_2.createParallelGroup(Alignment.TRAILING)
 	        		.addGroup(gl_panel_2.createSequentialGroup()
-	        			.addGap(71)
+	        			.addGap(3)
 	        			.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 	        				.addGroup(gl_panel_2.createSequentialGroup()
 	        					.addPreferredGap(ComponentPlacement.RELATED)

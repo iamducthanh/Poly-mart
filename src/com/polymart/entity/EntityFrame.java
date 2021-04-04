@@ -9,5 +9,5 @@ public class EntityFrame {
     public static ChiTietNhanVienFrame CHITIETNHANVIEN = null;
     public static ThemHangHoaJInternalFrame THEMHANGHOA = null;
     public static PolyMartMain POLYMARTMAIN = null;
-    public static NhanVienJInternalFrame NHANVIENJINTERNALFRAME = null;
+    public static NhanVienJInternalFrame NHANVIENJINTERNAL = null;
 }

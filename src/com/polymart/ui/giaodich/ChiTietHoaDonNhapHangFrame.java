@@ -59,7 +59,10 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
 
     public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, Integer idNguonHang) {
         modelChiTietHoaDonNhap = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = 7584408658853210846L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }

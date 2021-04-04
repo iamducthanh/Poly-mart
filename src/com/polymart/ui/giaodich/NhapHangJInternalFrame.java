@@ -88,7 +88,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     public NhapHangJInternalFrame() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelNhapHang = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = 8059662035043568002L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }

@@ -310,7 +310,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 		addListImage();
 
 		listLabelImg.forEach((anh) -> {
-			anh.getLblImage().setIcon(new ImageIcon("images\\\\imgThemAnh.jpg"));
+			anh.getLblImage().setIcon(new ImageIcon("images\\imgThemAnh.jpg"));
 			anh.getLblImage().addMouseListener(chonHinh);
 		});
 

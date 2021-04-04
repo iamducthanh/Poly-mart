@@ -2,15 +2,20 @@ package com.polymart.ui.hanghoa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -18,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,7 +35,12 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.NguonHangDAO;
 import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.KhachHangModel;
 import com.polymart.model.NguonHangModel;
+import com.polymart.service.IKhachHangService;
+import com.polymart.service.INguonHangService;
+import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.NguonHangService;
 
 public class NguonHangJInternalFrame extends JInternalFrame {
@@ -46,8 +57,8 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	private JTextField txtSoDT;
 	private JTextField txtDiaChi;
 	DefaultTableModel modelNguonHang = new DefaultTableModel();
-
-	List<NguonHangModel> listNguonHang;
+	private INguonHangService nguonHangService = new NguonHangService();
+	private List<NguonHangModel> listNguonHang;
 
 	/**
 	 * Launch the application.
@@ -88,11 +99,32 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		txtTim.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
 		txtTim.setText(" Tìm theo tên, số điện thoại");
 		txtTim.setColumns(10);
+		txtTim.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                findNguonHang();
+            }
+        });
+		txtTim.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
+                    txtTim.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTim.getText().equals("")) {
+                    txtTim.setText(" Tìm theo tên, số điện thoại");
+                }
+            }
+        });
 
 		JButton btnTim = new JButton("Tìm");
 		btnTim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				findByNameNguonHang();
+				
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -131,12 +163,29 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 				TitledBorder.TOP, null, Color.BLACK));
 
 		JButton btnXoa = new JButton("Xóa");
-
+		btnXoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnXoa();
+			}
+		});
 		JButton btnCapNhat = new JButton("Cập nhật");
-
+		btnCapNhat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnCapNhat();
+			}
+		});
 		JButton btnThem = new JButton("Thêm");
-
-		JButton btnToMi = new JButton("Tạo mới");
+		btnThem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnThem();
+			}
+		});
+		JButton btnMoi = new JButton("Tạo mới");
+		btnMoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clear();
+			}
+		});
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
@@ -146,7 +195,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 					.addContainerGap(11, Short.MAX_VALUE))
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap(73, Short.MAX_VALUE)
-					.addComponent(btnToMi, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -164,7 +213,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnToMi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(235, Short.MAX_VALUE))
 		);
 
@@ -256,39 +305,66 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 			}
 		});
 
-		listNguonHang = new NguonHangService().findAll();
-		loadNguonHangTable(listNguonHang);
+		listNguonHang = nguonHangService.findAll();
+		loadToTable();
 	}
-
-	void findByNameNguonHang() {
-		String name = txtTim.getText();
-		listNguonHang = new NguonHangDAO().findByName(name);
-		if (name.equals(" Tìm theo tên, số điện thoại")) {
-			modelNguonHang.setRowCount(0);
-			listNguonHang = new NguonHangService().findAll();
-			loadNguonHangTable(listNguonHang);
-			display(0);
-		} else {
-			if (listNguonHang.size() <= 0) {
-				EntityMessage.show(this, "Không tìm thấy nguồn hàng nào có tên giống như vậy!");
-			} else {
-				modelNguonHang.setRowCount(0);
-				loadNguonHangTable(listNguonHang);
-				display(0);
-				EntityMessage.show(this, "Đã tìm thấy!");
-			}
-		}
-	}
-
-	void loadNguonHangTable(List<NguonHangModel> listNguonHang) {
-		listNguonHang.forEach((nguonHang) -> {
-			modelNguonHang
-					.addRow(new Object[] { nguonHang.getTenNguonHang(), nguonHang.getDiaChi(), nguonHang.getSdt() });
-		});
-		tableNguonHang.setModel(modelNguonHang);
-		display(0);
-	}
-
+	protected void findNguonHang() {
+        try {
+            listNguonHang = nguonHangService.fillter(txtTim.getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        clear();
+        reloadTable();
+    }
+//	void findByNameNguonHang() {
+//		String name = txtTim.getText();
+//		listNguonHang = new NguonHangDAO().fillter(name);
+//		if (name.equals(" Tìm theo tên, số điện thoại")) {
+//			modelNguonHang.setRowCount(0);
+//			listNguonHang = new NguonHangService().findAll();
+//			loadNguonHangTable(listNguonHang);
+//			display(0);
+//		} else {
+//			if (listNguonHang.size() <= 0) {
+//				EntityMessage.show(this, "Không tìm thấy nguồn hàng nào có tên giống như vậy!");
+//			} else {
+//				modelNguonHang.setRowCount(0);
+//				loadNguonHangTable(listNguonHang);
+//				display(0);
+//				EntityMessage.show(this, "Đã tìm thấy!");
+//			}
+//		}
+//	}
+//
+//	void loadNguonHangTable(List<NguonHangModel> listNguonHang) {
+//		modelNguonHang.setRowCount(0);
+//		listNguonHang.forEach((nguonHang) -> {
+//			modelNguonHang
+//					.addRow(new Object[] { nguonHang.getTenNguonHang(), nguonHang.getDiaChi(), nguonHang.getSdt() });
+//		});
+//		tableNguonHang.setModel(modelNguonHang);
+//		display(0);
+//	}
+	// hiển thị danh sách khach hàng lên table
+    private void loadToTable() {
+        try {
+            listNguonHang = nguonHangService.findAll();
+            reloadTable();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void reloadTable() {
+        modelNguonHang.setRowCount(0);
+        for (NguonHangModel i : listNguonHang) {
+            modelNguonHang.addRow(new Object[]{
+                    i.getTenNguonHang(),
+                    i.getDiaChi(),
+                    i.getSdt()
+            });
+        }
+    }
 	void display(int row) {
 		if (row > -1) {
 			tableNguonHang.setRowSelectionInterval(row, row);
@@ -297,5 +373,61 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 			txtSoDT.setText(listNguonHang.get(row).getSdt());
 		}
 	}
-
+	// sự kiện xóa trắng form nút "Tạo mới"
+    private void clear() {
+        txtNguonHang.setText("");
+        txtDiaChi.setText("");
+        txtSoDT.setText("");
+  
+    }
+    // Xóa nguồn hàng đã chọn
+    protected void btnXoa() {
+        if (JOptionPane.showConfirmDialog(this,
+                "Xác nhận xoá nguồn hàng có tên:  " + listNguonHang.get(tableNguonHang.getSelectedRow()).getTenNguonHang(), "Xoá",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+            nguonHangService.delete(new Integer[]{listNguonHang.get(tableNguonHang.getSelectedRow()).getId()});
+            clear();
+            loadToTable();
+        }
+    }
+    private void btnThem() {
+        if (checkNull(this, txtNguonHang.getText())
+                && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
+            NguonHangModel nguonHangModel = new NguonHangModel();
+            nguonHangModel.setTenNguonHang(txtNguonHang.getText());
+            nguonHangModel.setSdt(txtSoDT.getText());
+            nguonHangModel.setDiaChi(txtDiaChi.getText());
+            if (nguonHangService.save(nguonHangModel) != null) {
+                EntityMessage.show(this, "Thêm thành công");
+            } else {
+                EntityMessage.show(this, "Thêm thất bại");
+            }
+            clear();
+            loadToTable();
+        }
+    }
+    protected void btnCapNhat() {
+        if (checkNull(this, txtNguonHang.getText())
+                && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
+            NguonHangModel nguonHangModel = new NguonHangModel();
+            nguonHangModel.setId(listNguonHang.get(tableNguonHang.getSelectedRow()).getId());
+            nguonHangModel.setTenNguonHang(txtNguonHang.getText());
+            nguonHangModel.setSdt(txtSoDT.getText());
+            nguonHangModel.setDiaChi(txtDiaChi.getText());
+            if (nguonHangService.update(nguonHangModel) != null) {
+                EntityMessage.show(this, "Cập nhật thành công");
+            } else {
+                EntityMessage.show(this, "Cập nhật thất bại");
+            }
+            clear();
+            loadToTable();
+        }
+    }
+    public boolean checkNull(Component component, String name) {
+    		if (name.isBlank()) {
+    			EntityMessage.show(component, "Họ tên không được để trống");
+    			return false;
+    		}
+    		return true;
+    	}
 }

@@ -1,6 +1,6 @@
 package com.polymart.service.impl;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,16 +27,34 @@ public class NguonHangService implements INguonHangService {
 
     @Override
     public List<NguonHangModel> findAll() {
-        return new ArrayList<>(mapNguonHang.values());
+    	return nguonHangDAO.findAll();
     }
 
     @Override
-    public List<NguonHangModel> findByName(String name) {
-        return new NguonHangDAO().findByName(name);
+	public List<NguonHangModel> fillter(String nameOrPhone) {
+		return new NguonHangDAO().fillter(nameOrPhone);
+	}
+	@Override
+    public NguonHangModel save(NguonHangModel nguonHangModel) {
+        Integer newNguonHangId = nguonHangDAO.save(nguonHangModel);
+        return nguonHangDAO.findOne(newNguonHangId);
     }
 
-    @Override
-    public String getNameById(Integer id) {
-        return mapNguonHang.get(id).getTenNguonHang();
-    }
+	@Override
+	public NguonHangModel update(NguonHangModel updatenguonHangModel) {
+		nguonHangDAO.update(updatenguonHangModel);
+        return nguonHangDAO.findOne(updatenguonHangModel.getId());
+	}
+
+	@Override
+	public void delete(Integer[] ids) {
+        for (Integer id : ids) {
+        	nguonHangDAO.delete(id);
+        }
+	}
+
+	@Override
+	public NguonHangModel findOne(Integer id) {
+        return nguonHangDAO.findOne(id);
+	}
 }

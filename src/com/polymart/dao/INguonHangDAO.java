@@ -6,7 +6,15 @@ import java.util.List;
 
 public interface INguonHangDAO extends GenericDAO<NguonHangModel> {
 
-    List<NguonHangModel> findAll();
+List<NguonHangModel> findAll();
     
-    List<NguonHangModel> findByName(String name);
+    Integer save(NguonHangModel nguonHangModel);
+
+	void update(NguonHangModel nguonHangModel);
+
+	void delete(Integer id);
+
+	NguonHangModel findOne(Integer id);
+
+	List<NguonHangModel> fillter(String nameOrPhone);
 }

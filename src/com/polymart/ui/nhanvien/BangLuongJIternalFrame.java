@@ -2,15 +2,6 @@ package com.polymart.ui.nhanvien;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -21,9 +12,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.polymart.dao.impl.ChamCongDAO;
@@ -32,15 +23,20 @@ import com.polymart.model.ChamCongModel;
 import com.polymart.model.NhanVienModel;
 import com.toedter.calendar.JMonthChooser;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class BangLuongJIternalFrame extends JInternalFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6467611389997317862L;
+	
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	private JTable tableBangLuong;
@@ -107,9 +103,9 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 		JComboBox cbbNam = new JComboBox();
 
+
 		JLabel lblThng = new JLabel("Tháng");
 		lblThng.setFont(new Font("Tahoma", Font.PLAIN, 15));
-
 		JComboBox cbbNam_1 = new JComboBox();
 
 		JButton btnNewButton_1 = new JButton("Xem lương");

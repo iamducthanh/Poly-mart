@@ -10,4 +10,6 @@ public interface IChiTietHoaDonNhapHangService {
 
     boolean save(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
+    void reloadData();
+
 }

@@ -30,7 +30,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.ui.common.uiCommon;
-import com.polymart.ui.giaodich.ThemNhapHangJInternalFrame;
 
 public class HangHoaJInternalFrame extends JInternalFrame {
 

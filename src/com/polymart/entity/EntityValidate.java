@@ -1,11 +1,10 @@
 package com.polymart.entity;
 
-import java.awt.*;
+import java.awt.Component;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.toedter.calendar.JDateChooser;
 
 public class EntityValidate {
 
@@ -41,10 +40,11 @@ public class EntityValidate {
 			EntityMessage.show(component, "Chưa nhập mật khẩu cũ");
 			return false;
 		}
-		if (oldPassword.equals(EntityAuthorization.USER.getMatKhau()))
-			return true;
-		EntityMessage.show(component, "Mật khẩu cũ không chính xác");
-		return false;
+		if (!oldPassword.equals(EntityAuthorization.USER.getMatKhau())) {
+			EntityMessage.show(component, "Mật khẩu cũ không chính xác");
+			return false;
+		}
+		return true;
 	}
 
 	// hàm kiểm tra mật khẩu mới form đổi mật khẩu
@@ -136,22 +136,52 @@ public class EntityValidate {
 		}
 		return true;
 	}
-	
-	// kiểm tra số tiền
-		public static boolean checkMoney(Component component, String money) {
-			String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
-			if (money.isBlank()) {
-				EntityMessage.show(component, "Số tiền không được để trống");
-				return false;
-			}
-			if (!money.matches(regex)) {
-				EntityMessage.show(component, "Số tiền không hợp lệ");
-				return false;
-			}
-			return true;
-		}
 
-	public static boolean checkNgaySinh(JDateChooser date) {
-		return date.getDate().after(new Date());
+	// kiểm tra số tiền
+	public static boolean checkMoney(Component component, String money) {
+		String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
+		if (money.isBlank()) {
+			EntityMessage.show(component, "Số tiền không được để trống");
+			return false;
+		}
+		if (!money.matches(regex)) {
+			EntityMessage.show(component, "Số tiền không hợp lệ");
+			return false;
+		}
+		return true;
+	}
+
+	// check birth of date > 18 years old
+	public static boolean checkNgaySinh(Component component, Date date) {
+		if (date == null) {
+			EntityMessage.show(component, "Ngày sinh trống");
+			return false;
+		}
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		int yearOfBirth = calendar.get(Calendar.YEAR);
+		calendar.setTime(new Date());
+		int yearNow = calendar.get(Calendar.YEAR);
+		if (yearNow - yearOfBirth <= 18) {
+			EntityMessage.show(component, "Ngày sinh phải trên 18 tuổi");
+			return false;
+
+		}
+		return true;
+
+	}
+
+	// validate email
+	public static boolean checkEmail(Component component, String email) {
+		String regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+		if (email.isBlank()) {
+			EntityMessage.show(component, "Email trống");
+			return false;
+		}
+		if (!email.matches(regexEmail)) {
+			EntityMessage.show(component, "Email không hợp lệ");
+			return false;
+		}
+		return true;
 	}
 }

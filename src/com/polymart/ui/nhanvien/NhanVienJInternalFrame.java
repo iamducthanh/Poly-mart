@@ -2,15 +2,19 @@ package com.polymart.ui.nhanvien;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -18,10 +22,12 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -38,14 +44,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.config.SecurityConfig;
+import com.polymart.entity.EntityFrame;
 import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.common.uiCommon;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 public class NhanVienJInternalFrame extends JInternalFrame {
 
@@ -184,9 +187,14 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		});
 		pnlFunction.add(btnXoaNV);
 
-		JComboBox<String> comboBox1 = new JComboBox<String>();
-		comboBox1.addItem("≡");
-		pnlFunction.add(comboBox1);
+		JButton btnMore = new JButton();
+		btnMore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				optionNhanVienFrame.setVisible(true);
+			}
+		});
+		btnMore.setText("≡");
+		pnlFunction.add(btnMore);
 
 		optionNhanVienFrame.setSize(319, 235);
 		optionNhanVienFrame.setLocation(width - 325, height - (height / 100 * 86));
@@ -215,20 +223,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		uiCommon.addCheckBox(chkSDT, 141, 7, 144);
 		uiCommon.addCheckBox(chkNoLuong, 141, 189, 144);
 
-		comboBox1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				optionNhanVienFrame.setVisible(true);
-			}
-		});
-
-		comboBox1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				optionNhanVienFrame.setVisible(true);
-
-			}
-		});
-
 		optionNhanVienFrame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -240,7 +234,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	protected void btnDelete() {
 		if (JOptionPane.showConfirmDialog(this,
-				"Xác nhận xoá nhân viên " + list.get(index).getHoTen() + " (ID:" + list.get(index).getId() + ")", "Xoá",
+				"Bạn có chắc muốn xoá ra khỏi hệ thống?\nNhân viên: " + list.get(index).getHoTen() + "\nID: " + list.get(index).getId(), "Xác nhận",
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
 			nhanVienService.delete(new Integer[] { list.get(index).getId() });
 
@@ -276,8 +270,12 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		model.addColumn("Địa chỉ");
 		model.addColumn("Số điện thoại");
 		model.addColumn("Email");
-
 		tblNhanVien.setModel(model);
+		tblNhanVien.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				tblClicked(mouseEvent);
+			}
+		});
 
 		JPanel panelLeft = new JPanel();
 		contentPane.add(panelLeft, BorderLayout.WEST);
@@ -306,14 +304,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(515, Short.MAX_VALUE)));
 		panelLeft.setLayout(gl_panelLeft);
-
-		// Click đúp vào 1 nhân viên sẽ show thông tin lên chitietnhanvien
-		tblNhanVien.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
-				tblClicked(mouseEvent);
-			}
-		});
-
 	}
 
 	protected void comboBoxSelected() {
@@ -329,9 +319,30 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		index = tblNhanVien.getSelectedRow();
 		btnXoaNV.setEnabled(true);
 		if (mouseEvent.getClickCount() == 2) {
-			ChiTietNhanVienFrame chiTietNhanVien = new ChiTietNhanVienFrame();
-			chiTietNhanVien.setVisible(true);
+			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+			EntityFrame.CHITIETNHANVIEN.setVisible(true);
+			showDetail();
 		}
+	}
+
+	private void showDetail() {
+		EntityFrame.CHITIETNHANVIEN.txtHoTen.setText(list.get(index).getHoTen());
+		EntityFrame.CHITIETNHANVIEN.txtNgaySinh.setDate(list.get(index).getNgaySinh());
+		if (list.get(index).isGioiTinh()) {
+			EntityFrame.CHITIETNHANVIEN.rdoNam.setSelected(true);
+		} else {
+			EntityFrame.CHITIETNHANVIEN.rdoNu.setSelected(true);
+		}
+		EntityFrame.CHITIETNHANVIEN.comboBox.setSelectedItem(list.get(index).getChucVu());
+		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setText(list.get(index).getMatKhau());
+		EntityFrame.CHITIETNHANVIEN.txtMucLuong.setText(list.get(index).getLuong().toString());
+		EntityFrame.CHITIETNHANVIEN.txtSDT.setText(list.get(index).getSdt());
+		EntityFrame.CHITIETNHANVIEN.txtEmail.setText(list.get(index).getEmail());
+		EntityFrame.CHITIETNHANVIEN.txtDiaChi.setText(list.get(index).getDiaChi());
+		
+		ImageIcon imageIcon = new ImageIcon(list.get(index).getAnhDaiDien());
+		Image image = imageIcon.getImage().getScaledInstance(164, 177, Image.SCALE_SMOOTH);
+		EntityFrame.CHITIETNHANVIEN.lblAnhDaiDien.setIcon(new ImageIcon(image));
 	}
 
 	ActionListener chiTietNhanVien = new ActionListener() {

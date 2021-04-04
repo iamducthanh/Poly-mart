@@ -26,7 +26,7 @@ public class HoaDonNhapHangDAO extends AbstractDAO<HoaDonNhapHangModel> implemen
 
     @Override
     public Integer remove(HoaDonNhapHangModel hoaDonNhapHangModel) {
-        String sql = "DELETE FROM HOADONNHAPHANG WHERE ID = ?";
+        String sql = "EXEC PROC_DELETE_HOADONNHAPHANG ?";
         return update(sql, hoaDonNhapHangModel.getId());
     }
 

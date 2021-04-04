@@ -10,25 +10,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     private static IChiTietSanPhamDAO chiTietSanPhamDAO = new ChiTietSanPhamDAO();
-    private static Map<Integer, ChiTietSanPhamModel> mapChiTietSanPham = new HashMap<Integer, ChiTietSanPhamModel>();    //Nạp dữ liệu từ SQL
-
-    static {
-        initChiTietSanPham();
-    }
-
-    private static void initChiTietSanPham() {
-        for (ChiTietSanPhamModel x : chiTietSanPhamDAO.findAll()) {
-            mapChiTietSanPham.put(x.getId(), x);
-        }
-    }
+    private static List<ChiTietSanPhamModel> lstChiTietSanPhamModels = chiTietSanPhamDAO.findAll();
 
     @Override
     public List<ChiTietSanPhamModel> findAll() {
-        return new ArrayList<>(mapChiTietSanPham.values());
+        return lstChiTietSanPhamModels;
     }
 
     // tìm kiếm theo mã hoặc tên sản phẩm
@@ -44,6 +36,13 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public Integer getIdProductById(Integer id) {
-        return mapChiTietSanPham.get(id).getIdSanPham();
+        List<ChiTietSanPhamModel> lstTim = lstChiTietSanPhamModels.stream().filter(e -> e.getId().toString().equals(id.toString()))
+                .collect(Collectors.toList());
+        return lstTim.isEmpty() ? -1 : lstTim.get(0).getIdSanPham();
+    }
+
+    @Override
+    public void reloadData() {
+        lstChiTietSanPhamModels = chiTietSanPhamDAO.findAll();
     }
 }

@@ -92,20 +92,26 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemNhapHangJInternalFrame() {
-
+    	
     }
 
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
         this.nhapHangJInternalFrame = nhapHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSNhapHang = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = 7830236206956859560L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         modelDSSanPham = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = -4855916871376159741L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -474,7 +480,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 if (count > 0) {
                     EntityMessage.show(this, "Thêm thành công");
                     this.setVisible(false);
-                    nhapHangJInternalFrame.showTable(nhapHangJInternalFrame.getList());
+                    nhapHangJInternalFrame.showTable(hoaDonNhapHangService.findAll());
+                    chiTietSanPhamService.reloadData();
                 } else {
                     hoaDonNhapHangService.remove(hoaDonNhapHangModel);
                     EntityMessage.show(this, "Thêm thất bại");

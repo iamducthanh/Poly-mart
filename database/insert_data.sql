@@ -386,10 +386,10 @@ VALUES (N'Tiển điện', 10002, 300000, N'tiền điện tháng 2'),
 (N'Tiền internet', 10002, 230000, N'tiền internet fpt tháng 2')
 
 INSERT INTO KHACHHANG (HOTEN, SODIENTHOAI, DIACHI, TICHDIEM)
-VALUES (NULL, '0345678912', N'', 0),
+VALUES (N'Đỗ Văn Duy', '0345678912', N'', 0),
 (N'Nguyễn Quang Ngọc', '0345678912', NULL, 0),
-(N'', '0345678912', N'Hoàn Kiếm', 100),
-(NULL, '0345678912', NULL, 10)
+(N'Bùi Việt Đức', '0345678912', N'Hoàn Kiếm', 100),
+(N'Nguyễn Đức Thành', '0345678912', NULL, 10)
 
 INSERT INTO NGUONHANG (TEN, SODIENTHOAI, DIACHI)
 VALUES (N'Nhà may kinh đô', '18008198', N'Nam Từ Liêm'),

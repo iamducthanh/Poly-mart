@@ -5,6 +5,7 @@ import java.util.List;
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.mapper.ChiTietSanPhamMapper;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 
 public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implements IChiTietSanPhamDAO {
@@ -38,5 +39,11 @@ public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implemen
         return update(sqlUpdate, chiTietHoaDonNhapHangModel.getGiaNhap() * chiTietHoaDonNhapHangModel.getSoLuong(),
                 chiTietHoaDonNhapHangModel.getSoLuong(), chiTietHoaDonNhapHangModel.getSoLuong(),
                 chiTietHoaDonNhapHangModel.getIdChiTietSanPham());
+    }
+
+    @Override
+    public Integer updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
+        String sqlUpdate = "UPDATE CHITIETSANPHAM SET SOLUONG = SOLUONG + ? WHERE ID = ?";
+        return update(sqlUpdate, chiTietHoaDonThanhToanModel.getSoLuong(), chiTietHoaDonThanhToanModel.getChiTietSanPham());
     }
 }

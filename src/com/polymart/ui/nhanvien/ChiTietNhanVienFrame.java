@@ -94,7 +94,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 684, 682);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.activeCaption);
+		contentPane.setBackground(SystemColor.control);
 		setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -113,7 +113,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.activeCaption);
+		panel.setBackground(SystemColor.control);
 		panel.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Chi ti\u1EBFt nh\u00E2n vi\u00EAn", TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -202,54 +202,48 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtDiaChi = new JTextField();
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
-		txtDiaChi.setBorder(null);
 		txtDiaChi.setBounds(142, 413, 467, 25);
 		panel.add(txtDiaChi);
 
 		txtHoTen = new JTextField();
 		txtHoTen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtHoTen.setColumns(10);
-		txtHoTen.setBorder(null);
 		txtHoTen.setBounds(142, 45, 235, 25);
 		panel.add(txtHoTen);
 
 		txtSDT = new JTextField();
 		txtSDT.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSDT.setColumns(10);
-		txtSDT.setBorder(null);
 		txtSDT.setBounds(142, 327, 235, 25);
 		panel.add(txtSDT);
 
 		txtMatKhau = new JTextField();
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMatKhau.setColumns(10);
-		txtMatKhau.setBorder(null);
 		txtMatKhau.setBounds(142, 230, 235, 25);
 		panel.add(txtMatKhau);
 
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEmail.setColumns(10);
-		txtEmail.setBorder(null);
 		txtEmail.setBounds(142, 373, 467, 25);
 		panel.add(txtEmail);
 
 		txtMucLuong = new JTextField();
 		txtMucLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMucLuong.setColumns(10);
-		txtMucLuong.setBorder(null);
 		txtMucLuong.setBounds(142, 280, 235, 25);
 		panel.add(txtMucLuong);
 
 		rdoNam = new JRadioButton("Nam");
 		rdoNam.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		rdoNam.setBackground(SystemColor.activeCaption);
+		rdoNam.setBackground(SystemColor.control);
 		rdoNam.setBounds(142, 139, 84, 25);
 		panel.add(rdoNam);
 
 		rdoNu = new JRadioButton("Nữ");
 		rdoNu.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		rdoNu.setBackground(SystemColor.activeCaption);
+		rdoNu.setBackground(SystemColor.control);
 		rdoNu.setBounds(225, 139, 111, 25);
 		panel.add(rdoNu);
 

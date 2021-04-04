@@ -35,6 +35,7 @@ import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
 import com.polymart.ui.hanghoa.ThietLapGiaJInternalFrame;
 import com.polymart.ui.khachhang.KhachHangJInternalFrame;
 import com.polymart.ui.nhanvien.BangLuongJIternalFrame;
+import com.polymart.ui.nhanvien.CaNhanFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
@@ -205,11 +206,12 @@ public class PolyMartMain extends JFrame {
 		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
-		mntmDoiMK.addActionListener(doiMatKhau);
+	//	mntmDoiMK.addActionListener(doiMatKhau);
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
 		mntmBangTinhLuong.addActionListener(openBangLuong);
+		mntmCaNhan.addActionListener(openCaNhan);
 		
 	}
 
@@ -304,6 +306,19 @@ public class PolyMartMain extends JFrame {
 			openChamCong();
 		}
 	};
+	
+	public void openCaNhan() {
+		CaNhanFrame caNhanFrame = new CaNhanFrame();
+		caNhanFrame.setLocationRelativeTo(null);
+		caNhanFrame.setVisible(true);
+	}
+
+	ActionListener openCaNhan = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openCaNhan();
+		}
+	};
+	
 
 	public void openChamCong() {
 		loadChild(new ChamCongJInternalFrame());

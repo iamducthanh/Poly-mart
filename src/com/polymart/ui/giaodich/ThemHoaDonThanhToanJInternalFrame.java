@@ -1,5 +1,8 @@
 package com.polymart.ui.giaodich;
 
+import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
 import com.polymart.model.*;
 import com.polymart.service.*;
 import com.polymart.service.impl.*;
@@ -47,7 +50,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private JTable tableDSSanPham;
     private JTextField txtSoLgBan;
     private JTable tableDSNhapHang;
-    private JTextField textField;
+    private JTextField txtGiaGiamThem;
 
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private ISanPhamService sanPhamService = new SanPhamService();
@@ -63,7 +66,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = null;
     private ChiTietSanPhamModel chiTietSanPhamModel = null;
     private SanPhamModel sanPhamModel = null;
-    
+    private JTextField textField;
 
 
     /**
@@ -170,45 +173,60 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
         JButton btnLuuTam = new JButton("Lưu tạm");
 
-        JLabel lblNewLabel_1_1_1 = new JLabel("Số lượng bán:");
-        lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        JLabel lblSoLuongBan = new JLabel("Số lượng bán:");
+        lblSoLuongBan.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-        JLabel lblNewLabel_1_1_1_1 = new JLabel("Giá giảm thêm:");
-        lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        JLabel lblGiaGiamThem = new JLabel("Giá giảm thêm:");
+        lblGiaGiamThem.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-        textField = new JTextField();
+        txtGiaGiamThem = new JTextField("0");
+        txtGiaGiamThem.setColumns(10);
+
+        JLabel lbliim = new JLabel("Đổi điểm");
+        lbliim.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+        textField = new JTextField("0");
         textField.setColumns(10);
         GroupLayout gl_panel_4 = new GroupLayout(panel_4);
         gl_panel_4.setHorizontalGroup(
                 gl_panel_4.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panel_4.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSoLuongBan, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                 .addComponent(txtSoLgBan, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18)
-                                .addComponent(lblNewLabel_1_1_1_1)
+                                .addComponent(lblGiaGiamThem)
+                                .addGap(34)
+                                .addComponent(txtGiaGiamThem, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18)
+                                .addComponent(lbliim, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
                                 .addGap(34)
                                 .addComponent(textField, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-                                .addGap(37)
+                                .addGap(50)
                                 .addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-                                .addGap(1236))
+                                .addGap(957))
         );
         gl_panel_4.setVerticalGroup(
-                gl_panel_4.createParallelGroup(Alignment.TRAILING)
+                gl_panel_4.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panel_4.createSequentialGroup()
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(lblNewLabel_1_1_1_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblGiaGiamThem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblSoLuongBan, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(txtSoLgBan, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())
-                        .addGroup(Alignment.LEADING, gl_panel_4.createSequentialGroup()
+                        .addGroup(gl_panel_4.createSequentialGroup()
                                 .addGap(13)
-                                .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(textField, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lbliim, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(gl_panel_4.createSequentialGroup()
+                                                .addGap(2)
+                                                .addComponent(textField, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
+                                                .addComponent(txtGiaGiamThem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())
         );
         panel_4.setLayout(gl_panel_4);
@@ -319,6 +337,8 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         modelDSThanhToan.addColumn("Tên sản phẩm");
         modelDSThanhToan.addColumn("Loại");
         modelDSThanhToan.addColumn("Đơn giá");
+        modelDSThanhToan.addColumn("Giá giảm");
+        modelDSThanhToan.addColumn("Giá giảm thêm");
         modelDSThanhToan.addColumn("Size");
         modelDSThanhToan.addColumn("Màu sắc");
         modelDSThanhToan.addColumn("Số lượng bán");
@@ -352,18 +372,18 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         btnLuuTam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                evtBtnAddProductToTable();
+                evtBtnAddProductToTable(txtSoLgBan, txtGiaGiamThem, tableDSSanPham, lblTongTien);
             }
         });
 
         // hiển thị danh sách khách hàng
-        evtShowVisit();
+        evtShowVisit(cbbKhachHang);
 
         // lưu hóa đơn
         btnHoanThanh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                evtBtnHoanThanh();
+                evtBtnHoanThanh(cbbKhachHang, txtGhiChu);
             }
         });
 
@@ -377,22 +397,99 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
     // chức năng tìm kiếm sản phẩm theo mã hoặc tên sản phẩm
     private void evtBtnSearchProductByIdOrName(JTextField txtInputSearch) {
-
+        String getInputSearch = txtInputSearch.getText();
+        if (getInputSearch.equalsIgnoreCase("Tìm theo tên hoặc mã sản phẩm")) {
+            lstTietSanPham = chiTietSanPhamService.findAll();
+            showTableProduct(lstTietSanPham);
+        } else {
+            lstTietSanPham = chiTietSanPhamService.findByIdOrNameProduct(getInputSearch);
+            if (lstTietSanPham != null && !lstTietSanPham.isEmpty()) {
+                showTableProduct(lstTietSanPham);
+            } else {
+                EntityMessage.show(this, "Không có sản phẩm nào cần tìm");
+            }
+        }
     }
 
     // chức năng lưu tạm sản phẩm và số lượng mua vào bảng danh sách thanh toán
-    private void evtBtnAddProductToTable() {
-
+    private void evtBtnAddProductToTable(JTextField txtSoLuong, JTextField txtGiaGiamThem, JTable tbSanPham, JLabel lblTongTien) {
+        String getSoLuong = txtSoLuong.getText();
+        String getMoney = txtGiaGiamThem.getText();
+        if (EntityValidate.checkPositiveNumber(this, getSoLuong) && EntityValidate.checkMoney(this, getMoney)) {
+            int row = tbSanPham.getSelectedRow();
+            if (row > -1 && row < tbSanPham.getRowCount()) {
+                chiTietSanPhamModel = lstTietSanPham.get(row);
+                try {
+                    if (Integer.parseInt(getSoLuong) <= chiTietSanPhamModel.getSoLuong()) {
+                        sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
+                        modelDSThanhToan.addRow(new Object[]{chiTietSanPhamModel.getId(),
+                                sanPhamModel.getTenSP(),
+                                loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()), chiTietSanPhamModel.getGiaBan(),
+                                chiTietSanPhamModel.getGiaGiam(), getMoney, chiTietSanPhamModel.getSize(),
+                                chiTietSanPhamModel.getMauSac(), getSoLuong});
+                        // tính tổng tiền của tất cả sản phẩm có trên table
+                        Double tongTien = (chiTietSanPhamModel.getGiaBan().doubleValue() * Integer.parseInt(getSoLuong))
+                                - (chiTietSanPhamModel.getGiaGiam().doubleValue() * Integer.parseInt(getSoLuong)) - Double.parseDouble(getMoney);
+                        lblTongTien.setText(tongTien.toString());
+                        // taho đôi tượng chi tiest hóa đơn nhập hàng và add vào list
+                        chiTietHoaDonThanhToanModel = new ChiTietHoaDonThanhToanModel();
+                        chiTietHoaDonThanhToanModel.setGiamGiaThem(Long.valueOf(getMoney));
+                        chiTietHoaDonThanhToanModel.setSoLuong(Integer.parseInt(getSoLuong));
+                        chiTietHoaDonThanhToanModel.setChiTietSanPham(chiTietSanPhamModel.getId());
+                        lstChiTietHoaDonThanhToanModels.add(chiTietHoaDonThanhToanModel);
+                    } else {
+                        EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    EntityMessage.show(this, "Số lượng phải là số nguyên dương");
+                }
+            } else {
+                EntityMessage.show(this, "Mời chọn 1 sản phẩm");
+            }
+        }
     }
 
     // hiển thị danh sach khách hàng
-    private void evtShowVisit() {
-
+    private void evtShowVisit(JComboBox cbcKhachHang) {
+        cbcKhachHang.removeAllItems();
+        for (KhachHangModel x : lstKhachHang) {
+            cbcKhachHang.addItem(x.getHoTen());
+        }
     }
 
     // hoàn thành hóa đơn và cập nhật dữ liệu liên quan
-    private void evtBtnHoanThanh() {
-
+    private void evtBtnHoanThanh(JComboBox<Object> cbcKhachHang, JTextArea txaGhiChu) {
+        if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
+            HoaDonThanhToanModel hoaDonThanhToanModel = new HoaDonThanhToanModel();
+            hoaDonThanhToanModel.setIdKhachHang(lstKhachHang.get(cbcKhachHang.getSelectedIndex()).getId());
+            hoaDonThanhToanModel.setIdNhanVien(EntityAuthorization.USER.getId());
+            hoaDonThanhToanModel.setGhiChu(txaGhiChu.getText());
+            hoaDonThanhToanModel = hoaDonThanhToanService.save(hoaDonThanhToanModel);
+            if (hoaDonThanhToanModel != null) {
+                int count = 0;
+                for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
+                    x.setHoaDonThanhToan(hoaDonThanhToanModel.getId());
+                    if (chiTietHoaDonThanhToanService.save(x)) {
+                        chiTietSanPhamService.updateThanhToan(x);
+                        count++;
+                    }
+                }
+                if (count > 0) {
+                    EntityMessage.show(this, "Thêm thành công");
+                    this.setVisible(false);
+//                    nhapHangJInternalFrame.showTable(hoaDonNhapHangService.findAll());
+                    chiTietSanPhamService.reloadData();
+                } else {
+                    hoaDonThanhToanService.remove(hoaDonThanhToanModel);
+                    EntityMessage.show(this, "Thêm thất bại");
+                }
+            } else {
+                EntityMessage.show(this, "Thêm thất bại");
+            }
+        } else {
+            EntityMessage.show(this, "Chưa thêm sản phẩm");
+        }
     }
 
     // hiển thị danh sách sản phẩm lên table
@@ -407,5 +504,4 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             }
         }
     }
-
 }

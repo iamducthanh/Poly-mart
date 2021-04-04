@@ -3,6 +3,7 @@ package com.polymart.service.impl;
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.dao.impl.ChiTietSanPhamDAO;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
 
@@ -32,6 +33,11 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     @Override
     public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
         chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
+    }
+
+    @Override
+    public void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
+        chiTietSanPhamDAO.updateThanhToan(chiTietHoaDonThanhToanModel);
     }
 
     @Override

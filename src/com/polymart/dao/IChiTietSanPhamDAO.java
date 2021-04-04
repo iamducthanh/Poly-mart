@@ -1,6 +1,7 @@
 package com.polymart.dao;
 
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface IChiTietSanPhamDAO extends GenericDAO<ChiTietSanPhamModel> {
     Integer updateSauKhiXoaHoaDonNhap(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
     Integer updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
+
+    Integer updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
 
 }

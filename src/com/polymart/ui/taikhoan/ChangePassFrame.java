@@ -57,7 +57,6 @@ public class ChangePassFrame extends JFrame {
 		setTitle("Đổi mật khẩu");
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 682, 420);
 		JPanel contentPane = new JPanel();

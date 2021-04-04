@@ -358,14 +358,15 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			listLuuChamCong.clear();
 		}
 		btnChamCong.setEnabled(false);
+		btnAdd.setEnabled(false);
 	}
 
 	// chấm công cho nhân viên
 	protected void chamCong() {
 		Date now = new Date();
-		calendar.setTime(now);
-		int day = calendar.get(Calendar.DATE);
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+		int day = now.getDay();
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+
 		for (int i = 0; i < tableChamCong.getRowCount(); i++) {
 			if (maNhanVien == Integer.parseInt(String.valueOf(tableChamCong.getValueAt(i, 0)))) {
 				EntityMessage.show(null, "Nhân Viên Đã Được Chấm Công");
@@ -374,7 +375,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		}
 		int i = 0;
 		try {
-			i = now.compareTo(sdf.parse("8:00:00"));
+			i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("8:00:00 AM"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -429,13 +430,14 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	// load bảng chấm công
 	private void loadTableChamCong() {
 		modelChamCong.setRowCount(0);
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
 		for (ChamCongModel chamCongModel : listChamCong) {
 			calendar.setTime(chamCongModel.getNgayChamCong());
-			int day = calendar.get(Calendar.DATE);
+			int day = chamCongModel.getNgayChamCong().getDay();
 			int i = 0;
+			String gioChamCong =sdf.format(chamCongModel.getNgayChamCong());
 			try {
-				i = chamCongModel.getNgayChamCong().compareTo(sdf.parse("8:00:00"));
+				i = sdf.parse(gioChamCong).compareTo(sdf.parse("8:00:00 AM"));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

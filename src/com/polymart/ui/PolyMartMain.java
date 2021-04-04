@@ -63,6 +63,7 @@ public class PolyMartMain extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */

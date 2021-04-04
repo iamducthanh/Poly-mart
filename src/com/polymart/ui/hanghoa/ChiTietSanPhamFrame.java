@@ -19,11 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ChiTietSanPhamFrame extends JFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -183259936805942123L;
+	
 	private JPanel contentPane;
 	private JTextField txtMaSP;
 	private JTextField txtTenSP;
@@ -162,7 +160,7 @@ public class ChiTietSanPhamFrame extends JFrame {
 		lblMuSc.setBounds(10, 354, 124, 25);
 		panel.add(lblMuSc);
 
-		JComboBox cbbSize = new JComboBox();
+		JComboBox<Object> cbbSize = new JComboBox<Object>();
 		cbbSize.setBounds(174, 314, 131, 25);
 		panel.add(cbbSize);
 

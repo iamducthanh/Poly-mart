@@ -12,11 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class ChiTietHoaDonTraHang extends JFrame {
-
-	/**
-	 *
-	 */
+	
 	private static final long serialVersionUID = 8080716429179868714L;
+	
 	private JPanel contentPane;
 	private JTable tableChiTietHoaDonTraHang;
 	private DefaultTableModel modelChiTietHoaDonTraHang;
@@ -43,6 +41,9 @@ public class ChiTietHoaDonTraHang extends JFrame {
 	 */
 	public ChiTietHoaDonTraHang() {
 		modelChiTietHoaDonTraHang = new DefaultTableModel() {
+			
+			private static final long serialVersionUID = -4228410111804596908L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

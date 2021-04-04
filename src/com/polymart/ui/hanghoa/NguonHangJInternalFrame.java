@@ -14,8 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,14 +31,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.dao.impl.NguonHangDAO;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.model.KhachHangModel;
 import com.polymart.model.NguonHangModel;
-import com.polymart.service.IKhachHangService;
 import com.polymart.service.INguonHangService;
-import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.NguonHangService;
 
 public class NguonHangJInternalFrame extends JInternalFrame {

@@ -14,10 +14,8 @@ import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,24 +31,29 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.HoaDonNhapHangModel;
-import com.polymart.service.*;
-import com.polymart.service.impl.*;
+import com.polymart.service.IChiTietHoaDonNhapHangService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.IHoaDonNhapHangService;
+import com.polymart.service.INguonHangService;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.ChiTietHoaDonNhapHangService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.HoaDonNhapHangService;
+import com.polymart.service.impl.NguonHangService;
+import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class NhapHangJInternalFrame extends JInternalFrame {
-
-	/**
-	 *
-	 */
+	
 	private static final long serialVersionUID = -7230782299903914961L;
+	
 	private JPanel contentPane;
 	private JPanel panel = new JPanel();
 	private JPanel panel1 = new JPanel();

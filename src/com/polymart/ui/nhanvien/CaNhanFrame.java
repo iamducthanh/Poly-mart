@@ -1,33 +1,31 @@
 package com.polymart.ui.nhanvien;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
 import com.polymart.ui.taikhoan.ChangePassFrame;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import java.awt.SystemColor;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class CaNhanFrame extends JFrame {
 
+	private static final long serialVersionUID = -5253025473588692845L;
+	
 	private JPanel contentPane;
 	private JTextField txtMaNhanVien;
 	private JTextField txtHoTen;

@@ -1,18 +1,14 @@
 package com.polymart.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.dao.impl.ChiTietSanPhamDAO;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class ChiTietSanPhamService implements IChiTietSanPhamService {
 

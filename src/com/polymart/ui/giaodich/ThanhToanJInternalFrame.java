@@ -43,10 +43,17 @@ import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.HoaDonNhapHangModel;
 import com.polymart.model.HoaDonThanhToanModel;
-import com.polymart.service.*;
-import com.polymart.service.impl.*;
+import com.polymart.service.IChiTietHoaDonThanhToanService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.IHoaDonThanhToanService;
+import com.polymart.service.IKhachHangService;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.HoaDonThanhToanService;
+import com.polymart.service.impl.KhachHangService;
+import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -108,6 +115,9 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	public ThanhToanJInternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		modelThanhToan = new DefaultTableModel() {
+			
+			private static final long serialVersionUID = -8747914044493540900L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

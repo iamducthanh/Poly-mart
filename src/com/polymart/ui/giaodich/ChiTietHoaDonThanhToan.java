@@ -1,15 +1,8 @@
 package com.polymart.ui.giaodich;
 
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.IKhachHangService;
-import com.polymart.service.ISanPhamService;
-import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.KhachHangService;
-import com.polymart.service.impl.SanPhamService;
-
-import java.awt.*;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.HeadlessException;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -20,12 +13,19 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class ChiTietHoaDonThanhToan extends JFrame {
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
+import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.IKhachHangService;
+import com.polymart.service.ISanPhamService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.KhachHangService;
+import com.polymart.service.impl.SanPhamService;
 
-	/**
-	 *
-	 */
+public class ChiTietHoaDonThanhToan extends JFrame {
+	
 	private static final long serialVersionUID = -1667093807201607235L;
+	
 	private JPanel contentPane;
 	private JTable tableChiTietHoaDonThanhToan;
 	private DefaultTableModel modelChiTietHoaDonThanhToan;
@@ -60,6 +60,9 @@ public class ChiTietHoaDonThanhToan extends JFrame {
 
 	public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang) {
 		modelChiTietHoaDonThanhToan = new DefaultTableModel() {
+			
+			private static final long serialVersionUID = 3913815213671293282L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;

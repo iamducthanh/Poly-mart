@@ -97,12 +97,18 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 		this.thanhToanJInternalFrame = thanhToanJInternalFrame;
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		modelDSThanhToan = new DefaultTableModel() {
+
+			private static final long serialVersionUID = 85061541709242169L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
 		modelDSSanPham = new DefaultTableModel() {
+			
+			private static final long serialVersionUID = -8294453440840014339L;
+
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -450,7 +456,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 	}
 
 	// hiển thị danh sach khách hàng
-	private void evtShowVisit(JComboBox cbcKhachHang) {
+	private void evtShowVisit(JComboBox<Object> cbcKhachHang) {
 		cbcKhachHang.removeAllItems();
 		for (KhachHangModel x : lstKhachHang) {
 			cbcKhachHang.addItem(x.getHoTen());

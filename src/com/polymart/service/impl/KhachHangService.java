@@ -10,7 +10,6 @@ import java.util.*;
 public class KhachHangService implements IKhachHangService {
 
 	private static IKhachHangDAO khachHangDAO = new KhachHangDAO();
-	private static List<KhachHangModel> list = khachHangDAO.findAll();
 
 	@Override
 	public List<KhachHangModel> findAll() {

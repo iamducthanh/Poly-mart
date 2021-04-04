@@ -3,13 +3,12 @@ package com.polymart.ui.nhanvien;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,16 +16,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-import com.polymart.dao.impl.ChamCongDAO;
-import com.polymart.entity.EntityMessage;
-import com.polymart.model.BangLuongModel;
-import com.polymart.model.ChamCongModel;
-import com.polymart.model.NhanVienModel;
-import com.polymart.service.impl.NhanVienService;
-import com.toedter.calendar.JMonthChooser;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -37,9 +26,13 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+
+import com.polymart.dao.impl.ChamCongDAO;
+import com.polymart.entity.EntityMessage;
+import com.polymart.model.BangLuongModel;
+import com.polymart.model.ChamCongModel;
+import com.polymart.model.NhanVienModel;
+import com.polymart.service.impl.NhanVienService;
 
 public class BangLuongJIternalFrame extends JInternalFrame {
 
@@ -49,11 +42,11 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	JPanel panel = new JPanel();
 	private JTable tableBangLuong;
 	DefaultTableModel modelBangLuong = new DefaultTableModel();
-	private List<ChamCongModel> listChamCong = new ArrayList();
-	private List<NhanVienModel> listNhanVien = new ArrayList();
-	private List<BangLuongModel> listBangLuong = new ArrayList();
-	JComboBox cboThang = new JComboBox();
-	JComboBox cboNam = new JComboBox();
+	private List<ChamCongModel> listChamCong = new ArrayList<ChamCongModel>();
+	private List<NhanVienModel> listNhanVien = new ArrayList<NhanVienModel>();
+	private List<BangLuongModel> listBangLuong = new ArrayList<BangLuongModel>();
+	JComboBox<Object> cboThang = new JComboBox<Object>();
+	JComboBox<String> cboNam = new JComboBox<String>();
 	JLabel lblBangLuong = new JLabel("  Bảng lương            ");
 
 	/**
@@ -139,7 +132,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 				timKiemLuongTheoThang();
 			}
 		});
-		cboThang.setModel(new DefaultComboBoxModel(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
+		cboThang.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
 				"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
 		panel_1.setLayout(gl_panel_1);
 
@@ -185,7 +178,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		for (String string : listNam) {
 			vector.add(string);
 		}
-		cboNam.setModel(new DefaultComboBoxModel(vector));
+		cboNam.setModel(new DefaultComboBoxModel<String>(vector));
 	}
 
 	private void moBangLuongThangGanNhat() {
@@ -213,7 +206,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 	private void loadListNhanVien() {
 		listNhanVien.clear();
-		List<NhanVienModel> list = new ArrayList();
+		List<NhanVienModel> list = new ArrayList<NhanVienModel>();
 		NhanVienService nhanVienService = new NhanVienService();
 		try {
 			list = nhanVienService.findAll();

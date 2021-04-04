@@ -2,6 +2,7 @@ package com.polymart.ui.nhanvien;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -12,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -19,11 +22,12 @@ import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -45,10 +49,6 @@ import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.common.uiCommon;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 public class NhanVienJInternalFrame extends JInternalFrame {
 
@@ -187,9 +187,14 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		});
 		pnlFunction.add(btnXoaNV);
 
-		JComboBox<String> comboBox1 = new JComboBox<String>();
-		comboBox1.addItem("≡");
-		pnlFunction.add(comboBox1);
+		JButton btnMore = new JButton();
+		btnMore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				optionNhanVienFrame.setVisible(true);
+			}
+		});
+		btnMore.setText("≡");
+		pnlFunction.add(btnMore);
 
 		optionNhanVienFrame.setSize(319, 235);
 		optionNhanVienFrame.setLocation(width - 325, height - (height / 100 * 86));
@@ -217,20 +222,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		uiCommon.addCheckBox(chkEmail, 141, 33, 99);
 		uiCommon.addCheckBox(chkSDT, 141, 7, 144);
 		uiCommon.addCheckBox(chkNoLuong, 141, 189, 144);
-
-		comboBox1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				optionNhanVienFrame.setVisible(true);
-			}
-		});
-
-		comboBox1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				optionNhanVienFrame.setVisible(true);
-
-			}
-		});
 
 		optionNhanVienFrame.addMouseListener(new MouseAdapter() {
 			@Override

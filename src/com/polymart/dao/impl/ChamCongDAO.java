@@ -1,5 +1,10 @@
 package com.polymart.dao.impl;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.polymart.dao.IChamCongDAO;
@@ -38,4 +43,20 @@ public class ChamCongDAO extends AbstractDAO<ChamCongModel> implements IChamCong
 		update(sql, id, nam, thang, ngay);
 	}
 
+	public List<String> findNam() {
+		List<String> listNam = new ArrayList<String>();
+		String sql = "select YEAR(NGAYCHAMCONG) as 'Nam' from CHAMCONG group by YEAR(NGAYCHAMCONG)";
+		try {
+			Connection con = getConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				listNam.add(String.valueOf(rs.getString("nam")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return listNam;
+	}
 }

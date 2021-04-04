@@ -6,6 +6,14 @@ public class BangLuongModel {
 	private int soNgayDiLam;
 	private int soNgayDiMuon;
 
+	private Long luong;
+	public Long getLuong() {
+		return luong;
+	}
+	public void setLuong(long luong) {
+		this.luong = luong;
+	}
+
 	public BangLuongModel() {
 	}
 

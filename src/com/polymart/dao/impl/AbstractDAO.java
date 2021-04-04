@@ -96,42 +96,41 @@ public class AbstractDAO<T> implements GenericDAO<T> {
 		return null;
 	}
 
-	@Override
-	public Integer update(String sql, Object... parameters) {
-		Connection connection = null;
-		PreparedStatement statement = null;
-		int count = -1;
-		try {
-			connection = getConnection();
-			connection.setAutoCommit(false);
-			statement = connection.prepareStatement(sql);
-			setParameter(statement, parameters);
-			count = statement.executeUpdate();
-			connection.commit();
-		} catch (SQLException e) {
-			if (connection != null) {
-				try {
-					e.printStackTrace();
-					connection.rollback();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-				if (statement != null) {
-					statement.close();
-				}
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-		}
-		System.out.println("count " + count);
-		return count;
-	}
+    @Override
+    public Integer update(String sql, Object... parameters) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        int count = -1;
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(sql);
+            setParameter(statement, parameters);
+            count = statement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    e.printStackTrace();
+                    connection.rollback();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
+        }
+        return count;
+    }
 
 	@Override
 	public Integer insert(String sql, Object... parameters) {

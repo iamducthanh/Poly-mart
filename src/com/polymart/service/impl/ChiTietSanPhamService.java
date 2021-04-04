@@ -2,9 +2,8 @@ package com.polymart.service.impl;
 
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.dao.impl.ChiTietSanPhamDAO;
-import com.polymart.mapper.ChiTietSanPhamMapper;
+import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.SanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
-    private static IChiTietSanPhamDAO iChiTietSanPhamDAO = new ChiTietSanPhamDAO();
+    private static IChiTietSanPhamDAO chiTietSanPhamDAO = new ChiTietSanPhamDAO();
     private static Map<Integer, ChiTietSanPhamModel> mapChiTietSanPham = new HashMap<Integer, ChiTietSanPhamModel>();    //Nạp dữ liệu từ SQL
 
     static {
@@ -22,7 +21,7 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     private static void initChiTietSanPham() {
-        for (ChiTietSanPhamModel x : iChiTietSanPhamDAO.findAll()) {
+        for (ChiTietSanPhamModel x : chiTietSanPhamDAO.findAll()) {
             mapChiTietSanPham.put(x.getId(), x);
         }
     }
@@ -35,6 +34,16 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     // tìm kiếm theo mã hoặc tên sản phẩm
     @Override
     public List<ChiTietSanPhamModel> findByIdOrNameProduct(String input) {
-        return iChiTietSanPhamDAO.findByIdOrNameProduct(input);
+        return chiTietSanPhamDAO.findByIdOrNameProduct(input);
+    }
+
+    @Override
+    public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
+        chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
+    }
+
+    @Override
+    public Integer getIdProductById(Integer id) {
+        return mapChiTietSanPham.get(id).getIdSanPham();
     }
 }

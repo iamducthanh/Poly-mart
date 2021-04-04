@@ -43,10 +43,10 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 } else if (parameter instanceof Timestamp) {
                     statement.setTimestamp(index, (Timestamp) parameter);
                 } else if (parameter instanceof Date) {
-                	statement.setDate(index, new java.sql.Date(((Date) parameter).getTime()));
-				} else if (parameter instanceof Boolean) {
-					statement.setBoolean(index, (Boolean) parameter);
-				}
+                    statement.setDate(index, new java.sql.Date(((Date) parameter).getTime()));
+                } else if (parameter instanceof Boolean) {
+                    statement.setBoolean(index, (Boolean) parameter);
+                }
             }
             return statement;
         } catch (SQLException e) {
@@ -93,19 +93,21 @@ public class AbstractDAO<T> implements GenericDAO<T> {
     }
 
     @Override
-    public void update(String sql, Object... parameters) {
+    public Integer update(String sql, Object... parameters) {
         Connection connection = null;
         PreparedStatement statement = null;
+        int count = -1;
         try {
             connection = getConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(sql);
             setParameter(statement, parameters);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
             if (connection != null) {
                 try {
+                    e.printStackTrace();
                     connection.rollback();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
@@ -123,6 +125,8 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 e2.printStackTrace();
             }
         }
+        System.out.println("count " + count);
+        return count;
     }
 
     @Override
@@ -146,6 +150,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
         } catch (SQLException e) {
             if (connection != null) {
                 try {
+                    e.printStackTrace();
                     connection.rollback();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
@@ -166,6 +171,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 e2.printStackTrace();
             }
         }
-        return null;
+        return -1;
     }
 }

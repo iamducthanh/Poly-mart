@@ -8,16 +8,6 @@ public class HoaDonNhapHangModel extends AbstractModel {
     private Timestamp ngayNhap;
     private String ghiChu;
 
-    public HoaDonNhapHangModel() {
-    }
-
-    public HoaDonNhapHangModel(Integer idNhanVienNhap, Integer idNguonHang, Timestamp ngayNhap, String ghiChu) {
-        this.idNhanVienNhap = idNhanVienNhap;
-        this.idNguonHang = idNguonHang;
-        this.ngayNhap = ngayNhap;
-        this.ghiChu = ghiChu;
-    }
-
     public Integer getIdNhanVienNhap() {
         return idNhanVienNhap;
     }
@@ -34,15 +24,15 @@ public class HoaDonNhapHangModel extends AbstractModel {
         this.idNguonHang = idNguonHang;
     }
 
-    public Timestamp getNgayNhap() {
-        return ngayNhap;
-    }
+	public Timestamp getNgayNhap() {
+		return ngayNhap;
+	}
 
-    public void setNgayNhap(Timestamp ngayNhap) {
-        this.ngayNhap = ngayNhap;
-    }
+	public void setNgayNhap(Timestamp ngayNhap) {
+		this.ngayNhap = ngayNhap;
+	}
 
-    public String getGhiChu() {
+	public String getGhiChu() {
         return ghiChu;
     }
 
@@ -50,5 +40,11 @@ public class HoaDonNhapHangModel extends AbstractModel {
         this.ghiChu = ghiChu;
     }
 
+	@Override
+	public String toString() {
+		return "HoaDonNhapHangModel [id = "+ getId() + "idNhanVienNhap=" + idNhanVienNhap + ", idNguonHang=" + idNguonHang + ", ngayNhap="
+				+ ngayNhap + ", ghiChu=" + ghiChu + "]";
+	}
 
+    
 }

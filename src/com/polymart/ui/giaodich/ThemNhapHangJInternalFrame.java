@@ -43,8 +43,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private static final long serialVersionUID = -4001431086652454768L;
 
     private JPanel contentPane;
-    private DefaultTableModel modelDSSanPham = new DefaultTableModel();
-    private DefaultTableModel modelDSNhapHang = new DefaultTableModel();
+    private DefaultTableModel modelDSSanPham;
+    private DefaultTableModel modelDSNhapHang;
 
     private JTextField txtTimKiem;
     private JTable tableDSSanPham;
@@ -98,6 +98,18 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
         this.nhapHangJInternalFrame = nhapHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        modelDSNhapHang = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        modelDSSanPham = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1920, 639);
 

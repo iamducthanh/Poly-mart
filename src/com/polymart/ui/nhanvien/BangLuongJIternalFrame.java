@@ -52,10 +52,9 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	private List<ChamCongModel> listChamCong = new ArrayList();
 	private List<NhanVienModel> listNhanVien = new ArrayList();
 	private List<BangLuongModel> listBangLuong = new ArrayList();
-	JButton btnTinhLuong = new JButton("Xem lương");
-	JLabel lblName = new JLabel("Danh Sách Lương");
 	JComboBox cboThang = new JComboBox();
 	JComboBox cboNam = new JComboBox();
+	JLabel lblBangLuong = new JLabel("  Bảng lương            ");
 
 	/**
 	 * Launch the application.
@@ -92,27 +91,26 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.WEST);
 
-		JLabel lblNhanVien = new JLabel("  Bảng lương            ");
-		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblBangLuong.setFont(new Font("Tahoma", Font.BOLD, 18));
 
 		JButton btnNewButton = new JButton("Lưu");
-
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addComponent(lblNhanVien).addGap(182)
-						.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblName).addContainerGap()));
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
 		panel.setLayout(gl_panel);
 
 		JLabel lblNewLabel = new JLabel("Năm");
@@ -122,30 +120,32 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		lblThng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup().addContainerGap(28, Short.MAX_VALUE)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup().addGap(10)
-										.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())
-								.addGroup(Alignment.TRAILING,
-										gl_panel_1.createSequentialGroup()
-												.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183,
-														GroupLayout.PREFERRED_SIZE)
-												.addContainerGap())))
-				.addGroup(gl_panel_1.createSequentialGroup().addContainerGap(28, Short.MAX_VALUE).addGroup(gl_panel_1
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING,
-								gl_panel_1.createSequentialGroup()
-										.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap())
-						.addGroup(gl_panel_1.createSequentialGroup().addGap(10)
-								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING).addComponent(btnTinhLuong)
-										.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158,
-												GroupLayout.PREFERRED_SIZE))
-								.addContainerGap()))));
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap(28, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+							.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+							.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(14)
+					.addComponent(lblNewLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(445, Short.MAX_VALUE))
+		);
 		cboThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				timKiemLuongTheoThang();
@@ -153,14 +153,6 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		});
 		cboThang.setModel(new DefaultComboBoxModel(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
 				"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
-		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup().addGap(14).addComponent(lblNewLabel)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(61)
-						.addComponent(btnTinhLuong).addContainerGap(352, Short.MAX_VALUE)));
 		panel_1.setLayout(gl_panel_1);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -191,6 +183,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 			EntityMessage.show(null, "Chưa Đến Tháng Tính Lương");
 			return;
 		}
+		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
 		loadListChamCong(nam, thang);
 		loadTbaleLuong();
 
@@ -213,8 +206,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		int thang = c.get(Calendar.MONTH);
 		loadListChamCong(String.valueOf(nam), String.valueOf(thang));
 		loadTbaleLuong();
-		lblName.setText("Danh Sách Lương Tháng " + String.valueOf(thang) + " Năm " + String.valueOf(nam));
-
+		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
 	}
 
 	private void loadListChamCong(String nam, String thang) {
@@ -233,21 +225,22 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 	private void loadListNhanVien() {
 		listNhanVien.clear();
+		List<NhanVienModel> list = new ArrayList();
 		NhanVienService nhanVienService = new NhanVienService();
 		try {
-			listNhanVien = nhanVienService.findAll();
+			list = nhanVienService.findAll();
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
-		for (NhanVienModel x : listNhanVien) {
+		for (NhanVienModel x : list) {
 			boolean check = true;
 			for (ChamCongModel chamCongModel : listChamCong) {
 				if (String.valueOf(chamCongModel.getIdNhanVien()).equals(String.valueOf(x.getId()))) {
 					check = false;
+					break;
 				}
 			}
-			if (check == true) {
-				listNhanVien.remove(x);
+			if (check == false) {
+				listNhanVien.add(x);
 			}
 		}
 

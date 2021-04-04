@@ -44,9 +44,9 @@ import com.polymart.service.impl.NhanVienService;
 import com.toedter.calendar.JCalendar;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 1619911861884761168L;
-	
+
 	private JPanel contentPane;
 	private DefaultTableModel modelChamCong = new DefaultTableModel();
 	private DefaultTableModel modelNhanVienChamCong = new DefaultTableModel();
@@ -56,8 +56,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private JTable tableChamCong;
 	private JTable tableNhanVienChamCong;
 	JButton btnChamCong = new JButton("Chấm công");
-	JButton btnAdd = new JButton("Lưu");
-	JButton btnXoa = new JButton("Xóa");
+	JButton btnAdd = new JButton("Lưu chấm công");
+	JButton btnXoa = new JButton("    -  Xóa     ");
 	JButton btnTimMaNV = new JButton("TÌm kiếm");
 	private int maNhanVien;
 	private String hoTen;
@@ -68,6 +68,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private List<ChamCongModel> listChamCong = new ArrayList<ChamCongModel>();
 	List<ChamCongModel> listLuuChamCong = new ArrayList<ChamCongModel>();
 	private INhanVienService nhanVienService = new NhanVienService();
+	private JPanel panel1;
 
 	/**
 	 * Launch the application.
@@ -115,7 +116,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNhanVien, BorderLayout.WEST);
 
-		JPanel panel1 = new JPanel();
+		panel1 = new JPanel();
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -183,20 +184,20 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				timKiemNhanVien();
 			}
 		});
-
+				panel1.add(btnXoa);
+				
+						btnXoa.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								xoaNhanVienChamCong();
+							}
+						});
+				panel1.add(btnAdd);
 		
-		btnXoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				xoaNhanVienChamCong();
-			}
-		});
-
-		
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				luuChamCong();
-			}
-		});
+				btnAdd.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						luuChamCong();
+					}
+				});
 
 		JButton btnTimTheoThang = new JButton("Tìm Theo Tháng");
 		btnTimTheoThang.addActionListener(new ActionListener() {
@@ -216,50 +217,47 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		});
 
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
-		gl_panelLeft.setHorizontalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING).addGroup(gl_panelLeft
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-						.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panelLeft.createSequentialGroup().addGroup(gl_panelLeft
-								.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_panelLeft.createSequentialGroup()
-										.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED))
-								.addGroup(gl_panelLeft.createSequentialGroup()
-										.addComponent(btnTimTheoNgay, GroupLayout.PREFERRED_SIZE, 73,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnTimTheoThang)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(btnXoa).addGap(35)))
-								.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING).addComponent(btnTimMaNV)
-										.addGroup(gl_panelLeft.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING)
-														.addComponent(btnMoChamCong).addComponent(btnAdd))))))
-				.addContainerGap()));
-		gl_panelLeft.setVerticalGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING).addGroup(gl_panelLeft
-				.createSequentialGroup()
-				.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap()
-								.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap().addComponent(btnMoChamCong)
-								.addGap(18)))
-				.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING).addComponent(btnTimTheoNgay)
-						.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE).addComponent(btnXoa)
-								.addComponent(btnTimTheoThang))
-						.addComponent(btnAdd))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
+		gl_panelLeft.setHorizontalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(gl_panelLeft.createSequentialGroup()
+								.addComponent(btnTimTheoNgay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnTimTheoThang)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnMoChamCong))
+							.addGroup(gl_panelLeft.createSequentialGroup()
+								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btnTimMaNV)))
+						.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		gl_panelLeft.setVerticalGroup(
+			gl_panelLeft.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnTimTheoNgay)
+						.addComponent(btnTimTheoThang)
+						.addComponent(btnMoChamCong))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
 						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnTimMaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-				.addGap(18).addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)
-				.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnChamCong).addGap(39)));
+					.addGap(18)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnChamCong)
+					.addGap(19))
+		);
 
 		tableNhanVienChamCong = new JTable();
 		scrollPane_1.setViewportView(tableNhanVienChamCong);
@@ -287,6 +285,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		JComboBox<Object> cbbPhongBan = new JComboBox<Object>();
 		cbbPhongBan.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tất cả" }));
 	}
+
 	// xóa nhân viên chấm công
 	protected void xoaNhanVienChamCong() {
 		boolean i = EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Xóa Không");
@@ -313,6 +312,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		modelChamCong.fireTableStructureChanged();
 		EntityMessage.show(null, "Delete Thành Công");
 	}
+
 	// mở bảng nhân viên chấm công hiện tại
 	protected void moChamCong() {
 		listChamCong.clear();
@@ -327,6 +327,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		btnXoa.setEnabled(true);
 		btnAdd.setEnabled(true);
 	}
+
 	// tìm kiếm nhân viên chấm công trong tháng
 	protected void timKiemNhanVien() {
 		listChamCong.clear();
@@ -337,14 +338,15 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listTimKiemChamCong = chamCongDao.filterMonth(nam, thang);
 		for (ChamCongModel chamCongModel : listTimKiemChamCong) {
-			if(txtTimKiem.getText().equals(String.valueOf(chamCongModel.getIdNhanVien()))) {
+			if (txtTimKiem.getText().equals(String.valueOf(chamCongModel.getIdNhanVien()))) {
 				listChamCong.add(chamCongModel);
 			}
 		}
 		loadTableChamCong();
 
 	}
-	// lưu chấm công 
+
+	// lưu chấm công
 	protected void luuChamCong() {
 		boolean i = EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Lưu ?");
 		if (i) {
@@ -357,6 +359,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		}
 		btnChamCong.setEnabled(false);
 	}
+
 	// chấm công cho nhân viên
 	protected void chamCong() {
 		Date now = new Date();
@@ -412,6 +415,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listChamCong = chamCongDao.filterDay(nam, thang, ngay);
 	}
+
 	// danh sách chấm công nhân viên tháng
 	private void loadListChamCongThang() {
 		listChamCong.clear();
@@ -421,6 +425,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listChamCong = chamCongDao.filterMonth(nam, thang);
 	}
+
 	// load bảng chấm công
 	private void loadTableChamCong() {
 		modelChamCong.setRowCount(0);
@@ -439,8 +444,5 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					day == 0 ? "Chủ Nhật" : day + 1, sdf.format(chamCongModel.getNgayChamCong()),
 					i == -1 ? "Đúng Giờ" : "Đi Muộn" });
 		}
-		btnChamCong.setEnabled(false);
-		btnXoa.setEnabled(false);
-		btnAdd.setEnabled(false);
 	}
 }

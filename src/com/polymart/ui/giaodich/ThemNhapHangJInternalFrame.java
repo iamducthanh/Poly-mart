@@ -92,7 +92,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemNhapHangJInternalFrame() {
-
+    	
     }
 
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {

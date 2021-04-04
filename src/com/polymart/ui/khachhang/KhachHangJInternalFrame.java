@@ -106,31 +106,38 @@ public class KhachHangJInternalFrame extends JInternalFrame {
                 findKhachHang();
             }
         });
-        txtTim.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        txtTim.setFont(new Font("Tahoma", Font.PLAIN, 14));
         txtTim.setText(" Tìm theo tên, số điện thoại khách hàng");
         txtTim.setColumns(10);
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-        gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(lblNewLabel).addGap(5)
-                        .addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
-                        .addGap(184)));
-        gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel_1.createSequentialGroup()
-                        .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                .addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(lblNewLabel))
-                                .addGroup(gl_panel_1.createSequentialGroup().addGap(6).addComponent(txtTim,
-                                        GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        gl_panel_1.setHorizontalGroup(
+        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_1.createSequentialGroup()
+        			.addGap(5)
+        			.addComponent(lblNewLabel)
+        			.addGap(5)
+        			.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
+        			.addGap(184))
+        );
+        gl_panel_1.setVerticalGroup(
+        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_1.createSequentialGroup()
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGap(5)
+        					.addComponent(lblNewLabel))
+        				.addGroup(gl_panel_1.createSequentialGroup()
+        					.addGap(6)
+        					.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         panel_1.setLayout(gl_panel_1);
 
         JPanel panel_2 = new JPanel();
         contentPane.add(panel_2, BorderLayout.EAST);
 
         JPanel panel_3 = new JPanel();
-        panel_3.setBorder(new TitledBorder(
-                new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-                "Chi ti\u1EBFt kh\u00E1ch h\u00E0ng", TitledBorder.LEADING, TitledBorder.TOP, null,
-                new Color(0, 0, 0)));
+        panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Chi ti\u1EBFt kh\u00E1ch h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
         JButton btnXoa = new JButton("Xóa");
         btnXoa.addActionListener(new ActionListener() {

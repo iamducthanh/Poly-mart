@@ -95,22 +95,18 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 		JButton btnNewButton = new JButton("Lưu");
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				gl_panel.createSequentialGroup()
+						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap()));
 		panel.setLayout(gl_panel);
 
 		JLabel lblNewLabel = new JLabel("Năm");
@@ -120,32 +116,24 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		lblThng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(28, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_1
+				.createSequentialGroup().addContainerGap(28, Short.MAX_VALUE)
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-							.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
+								.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-							.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-							.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(14)
-					.addComponent(lblNewLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(445, Short.MAX_VALUE))
-		);
+								.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap()));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup().addGap(14).addComponent(lblNewLabel)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(445, Short.MAX_VALUE)));
 		cboThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				timKiemLuongTheoThang();
@@ -178,12 +166,12 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		String thang = cboThang.getSelectedItem().toString().replace("Tháng ", "");
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
-		int moth =c.get(Calendar.MONTH);
-		if(Integer.parseInt(thang)>moth && Integer.parseInt(nam)>=year ) {
+		int moth = c.get(Calendar.MONTH);
+		if (Integer.parseInt(thang) > moth && Integer.parseInt(nam) >= year) {
 			EntityMessage.show(null, "Chưa Đến Tháng Tính Lương");
 			return;
 		}
-		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
+		lblBangLuong.setText("Bảng Lương Tháng " + thang + " Năm " + nam);
 		loadListChamCong(nam, thang);
 		loadTbaleLuong();
 
@@ -206,7 +194,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		int thang = c.get(Calendar.MONTH);
 		loadListChamCong(String.valueOf(nam), String.valueOf(thang));
 		loadTbaleLuong();
-		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
+		lblBangLuong.setText("Bảng Lương Tháng " + thang + " Năm " + nam);
 	}
 
 	private void loadListChamCong(String nam, String thang) {

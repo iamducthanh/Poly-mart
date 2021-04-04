@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface IHoaDonThanhToanService {
 
-    List<HoaDonThanhToanModel> findAll();
+	List<HoaDonThanhToanModel> findAll();
 
-    HoaDonThanhToanModel findById(int id);
+	HoaDonThanhToanModel findById(int id);
 
-    HoaDonThanhToanModel save(HoaDonThanhToanModel hoaDonThanhToanModel);
+	HoaDonThanhToanModel save(HoaDonThanhToanModel hoaDonThanhToanModel);
 
-    boolean remove(HoaDonThanhToanModel hoaDonThanhToanModel);
+	boolean remove(HoaDonThanhToanModel hoaDonThanhToanModel);
 
-    List<HoaDonThanhToanModel> filterByDate(Timestamp timestamp);
+	List<HoaDonThanhToanModel> filterByDate(Timestamp timestamp);
 
 }

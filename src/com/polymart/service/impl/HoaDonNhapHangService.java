@@ -1,5 +1,7 @@
 package com.polymart.service.impl;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,5 +49,13 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
     public HoaDonNhapHangModel findById(Integer id) {
         List<HoaDonNhapHangModel> lst = lstHoaDonNhapHangModels.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
         return lst.isEmpty() ? null : lst.get(0);
+    }
+
+    @Override
+    public List<HoaDonNhapHangModel> filterByDate(Timestamp timestamp) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        return lstHoaDonNhapHangModels.stream()
+                .filter(e -> simpleDateFormat.format(e.getNgayNhap()).equals(simpleDateFormat.format(timestamp)))
+                .collect(Collectors.toList());
     }
 }

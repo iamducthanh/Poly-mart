@@ -11,9 +11,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -29,6 +33,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
@@ -88,10 +93,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     public NhapHangJInternalFrame() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelNhapHang = new DefaultTableModel() {
-        	
-			private static final long serialVersionUID = 8059662035043568002L;
 
-			@Override
+            private static final long serialVersionUID = 8059662035043568002L;
+
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -192,7 +197,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         contentPane.add(scrollPane, BorderLayout.CENTER);
         JLabel lblNewLabel_9 = new JLabel("Thời gian");
 
-        JDateChooser dateChooser = new JDateChooser();
+        JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
@@ -246,6 +251,14 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         // hiển thị danh sách hóa đơn len bảng
         getList();
         showTable(lstHoaDonNhapHang);
+
+        // sự kiện lọc cho nút "Lọc"
+        btnLocTheoNgay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLoc(dateChooser);
+            }
+        });
     }
 
     ActionListener openThemPhieuNhapHang = new ActionListener() {
@@ -281,8 +294,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private void evtBtnSearchById(JTextField txtInputId) {
         String getID = txtInputId.getText();
         if (getID.equals("Tìm theo mã phiếu nhập")) {
-            lstHoaDonNhapHang = hoaDonNhapHangService.findAll();
-            showTable(lstHoaDonNhapHang);
+            showTable(getList());
         } else {
             if (EntityValidate.checkIdNumber(this, getID)) {
                 HoaDonNhapHangModel hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
@@ -314,7 +326,23 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             } else {
                 EntityMessage.show(this, "Vui lòng chọn 1 hàng");
             }
-            
+        }
+    }
+
+    // lọc theo ngày được chọn
+    private void evtBtnLoc(JDateChooser dateChooser) {
+        try {
+            Timestamp timestamp = new Timestamp(dateChooser.getCalendar().getTimeInMillis());
+            List<HoaDonNhapHangModel> lstLoc = hoaDonNhapHangService.filterByDate(timestamp);
+            if (lstLoc.isEmpty()) {
+                EntityMessage.show(this, "Không có hóa đơn nào trong ngày được chọn");
+                getList();
+            } else {
+                lstHoaDonNhapHang = lstLoc;
+            }
+            showTable(lstHoaDonNhapHang);
+        } catch (Exception e) {
+            EntityMessage.show(this, "Mời chọn ngày muốn tìm");
         }
     }
 

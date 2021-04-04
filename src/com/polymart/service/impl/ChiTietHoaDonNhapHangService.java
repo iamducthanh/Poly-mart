@@ -5,6 +5,7 @@ import com.polymart.dao.impl.ChiTietHoaDonNhapHangDAO;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.service.IChiTietHoaDonNhapHangService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +16,6 @@ public class ChiTietHoaDonNhapHangService implements IChiTietHoaDonNhapHangServi
 
     @Override
     public List<ChiTietHoaDonNhapHangModel> findByIdHoaDonNhap(Integer idHoaDonNhap) {
-        int i = 0;
-        for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhapHangModels) {
-            System.out.println(++i + ": " + x.getIdHoaDonNhapHang() + " - " + idHoaDonNhap);
-        }
         return lstChiTietHoaDonNhapHangModels.stream().filter(e -> e.getIdHoaDonNhapHang() == idHoaDonNhap).collect(Collectors.toList());
     }
 
@@ -29,5 +26,10 @@ public class ChiTietHoaDonNhapHangService implements IChiTietHoaDonNhapHangServi
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void reloadData() {
+        lstChiTietHoaDonNhapHangModels = chiTietHoaDonNhapHangDAO.findAll();
     }
 }

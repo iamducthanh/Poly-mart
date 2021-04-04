@@ -36,8 +36,10 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.HoaDonNhapHangModel;
 import com.polymart.service.IChiTietHoaDonNhapHangService;
+import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.IHoaDonNhapHangService;
 import com.polymart.service.impl.ChiTietHoaDonNhapHangService;
+import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.HoaDonNhapHangService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
@@ -61,6 +63,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
     private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
     private IChiTietHoaDonNhapHangService chiTietHoaDonNhapHangService = new ChiTietHoaDonNhapHangService();
+    private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private List<HoaDonNhapHangModel> lstHoaDonNhapHang = null;
 
     /**
@@ -300,6 +303,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                 if (hoaDonNhapHangService.remove(hoaDonNhapHangModel)) {
                     EntityMessage.show(this, "Xóa thành công");
                     modelNhapHang.removeRow(row);
+                    chiTietHoaDonNhapHangService.reloadData();
+                    chiTietSanPhamService.reloadData();
                 } else {
                     EntityMessage.show(this, "Xóa thất bại");
                 }

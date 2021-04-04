@@ -12,6 +12,7 @@ public class ChamCongMapper implements RowMapper<ChamCongModel> {
             ChamCongModel chamCongModel = new ChamCongModel();
             chamCongModel.setIdNhanVien(rs.getInt("IDNHANVIEN"));
             chamCongModel.setNgayChamCong(rs.getTimestamp("NGAYCHAMCONG"));
+            chamCongModel.setHoTen(rs.getString("HOTEN"));
             return chamCongModel;
         } catch (SQLException e) {
             e.printStackTrace();

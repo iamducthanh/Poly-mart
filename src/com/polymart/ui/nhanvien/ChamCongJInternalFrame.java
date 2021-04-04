@@ -266,7 +266,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				int index = tableNhanVienChamCong.getSelectedRow();
 				maNhanVien = Integer.parseInt(String.valueOf(tableNhanVienChamCong.getValueAt(index, 0)));
 				hoTen = String.valueOf(tableNhanVienChamCong.getValueAt(index, 1));
-				txtTimKiem.setText(String.valueOf(tableNhanVienChamCong.getValueAt(index, 0)));
 			}
 		});
 		btnChamCong.addActionListener(new ActionListener() {

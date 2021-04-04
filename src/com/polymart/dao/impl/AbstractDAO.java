@@ -125,7 +125,6 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 e2.printStackTrace();
             }
         }
-        System.out.println("count " + count);
         return count;
     }
 

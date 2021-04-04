@@ -1,13 +1,11 @@
 package com.polymart.dao.impl;
 
+import java.util.List;
+
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.mapper.ChiTietSanPhamMapper;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietHoaDonTraHangModel;
 import com.polymart.model.ChiTietSanPhamModel;
-
-import java.util.List;
 
 public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implements IChiTietSanPhamDAO {
 

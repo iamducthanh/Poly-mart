@@ -10,14 +10,12 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -29,7 +27,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -40,7 +37,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.ChamCongDAO;
 import com.polymart.entity.EntityMessage;
-import com.polymart.mapper.ChamCongMapper;
 import com.polymart.model.ChamCongModel;
 import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
@@ -48,11 +44,9 @@ import com.polymart.service.impl.NhanVienService;
 import com.toedter.calendar.JCalendar;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1619911861884761168L;
+	
 	private JPanel contentPane;
 	private DefaultTableModel modelChamCong = new DefaultTableModel();
 	private DefaultTableModel modelNhanVienChamCong = new DefaultTableModel();
@@ -68,9 +62,10 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private int maNhanVien;
 	private String hoTen;
 	JCalendar dateChamCong;
+	private Calendar calendar;
 
 	private List<NhanVienModel> listNhanVien;
-	private List<ChamCongModel> listChamCong = new ArrayList();
+	private List<ChamCongModel> listChamCong = new ArrayList<ChamCongModel>();
 	List<ChamCongModel> listLuuChamCong = new ArrayList<ChamCongModel>();
 	private INhanVienService nhanVienService = new NhanVienService();
 
@@ -94,10 +89,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ChamCongJInternalFrame() {
+		calendar = Calendar.getInstance();
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1062, 662);
+		setBounds(100, 100, 1169, 801);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -334,7 +330,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	// tìm kiếm nhân viên chấm công trong tháng
 	protected void timKiemNhanVien() {
 		listChamCong.clear();
-		List<ChamCongModel> listTimKiemChamCong = new ArrayList();
+		List<ChamCongModel> listTimKiemChamCong = new ArrayList<ChamCongModel>();
 		Calendar c = dateChamCong.getCalendar();
 		String nam = String.valueOf(c.get(Calendar.YEAR));
 		String thang = String.valueOf(c.get(Calendar.MONTH) + 1);
@@ -364,7 +360,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	// chấm công cho nhân viên
 	protected void chamCong() {
 		Date now = new Date();
-		int day = now.getDay();
+		calendar.setTime(now);
+		int day = calendar.get(Calendar.DATE);
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
 		for (int i = 0; i < tableChamCong.getRowCount(); i++) {
 			if (maNhanVien == Integer.parseInt(String.valueOf(tableChamCong.getValueAt(i, 0)))) {
@@ -429,7 +426,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		modelChamCong.setRowCount(0);
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
 		for (ChamCongModel chamCongModel : listChamCong) {
-			int day = chamCongModel.getNgayChamCong().getDay();
+			calendar.setTime(chamCongModel.getNgayChamCong());
+			int day = calendar.get(Calendar.DATE);
 			int i = 0;
 			try {
 				i = chamCongModel.getNgayChamCong().compareTo(sdf.parse("8:00:00"));
@@ -437,7 +435,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				e.printStackTrace();
 			}
 			modelChamCong.addRow(new Object[] { chamCongModel.getIdNhanVien(), chamCongModel.getHoTen(),
-					new SimpleDateFormat("yyyy-MM-dd").format(chamCongModel.getNgayChamCong()),
+					new SimpleDateFormat("dd-MM-yyyy").format(chamCongModel.getNgayChamCong()),
 					day == 0 ? "Chủ Nhật" : day + 1, sdf.format(chamCongModel.getNgayChamCong()),
 					i == -1 ? "Đúng Giờ" : "Đi Muộn" });
 		}

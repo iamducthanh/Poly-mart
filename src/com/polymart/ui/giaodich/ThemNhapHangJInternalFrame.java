@@ -99,13 +99,19 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         this.nhapHangJInternalFrame = nhapHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSNhapHang = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = 7830236206956859560L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         modelDSSanPham = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = -4855916871376159741L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }

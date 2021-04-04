@@ -314,6 +314,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             } else {
                 EntityMessage.show(this, "Vui lòng chọn 1 hàng");
             }
+            
         }
     }
 

@@ -18,7 +18,6 @@ public class NguonHangService implements INguonHangService {
 
     @Override
     public List<NguonHangModel> findAll() {
-
         return nguonHangDAO.findAll();
     }
 

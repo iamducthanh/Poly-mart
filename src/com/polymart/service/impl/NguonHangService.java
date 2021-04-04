@@ -19,15 +19,16 @@ public class NguonHangService implements INguonHangService {
     @Override
     public List<NguonHangModel> findAll() {
 
-    	return nguonHangDAO.findAll();
+        return nguonHangDAO.findAll();
     }
 
     @Override
 
-	public List<NguonHangModel> fillter(String nameOrPhone) {
-		return new NguonHangDAO().fillter(nameOrPhone);
-	}
-	@Override
+    public List<NguonHangModel> fillter(String nameOrPhone) {
+        return new NguonHangDAO().fillter(nameOrPhone);
+    }
+
+    @Override
     public NguonHangModel save(NguonHangModel nguonHangModel) {
         Integer newNguonHangId = nguonHangDAO.save(nguonHangModel);
         return nguonHangDAO.findOne(newNguonHangId);
@@ -35,25 +36,26 @@ public class NguonHangService implements INguonHangService {
     }
 
 
-	@Override
-	public NguonHangModel update(NguonHangModel updatenguonHangModel) {
-		nguonHangDAO.update(updatenguonHangModel);
+    @Override
+    public NguonHangModel update(NguonHangModel updatenguonHangModel) {
+        nguonHangDAO.update(updatenguonHangModel);
         return nguonHangDAO.findOne(updatenguonHangModel.getId());
-	}
+    }
 
-	@Override
-	public void delete(Integer[] ids) {
+    @Override
+    public void delete(Integer[] ids) {
         for (Integer id : ids) {
-        	nguonHangDAO.delete(id);
+            nguonHangDAO.delete(id);
         }
-	}
+    }
 
-	@Override
-	public NguonHangModel findOne(Integer id) {
+    @Override
+    public NguonHangModel findOne(Integer id) {
         return nguonHangDAO.findOne(id);
-	}
-	@Override
-	public String getNameById(Integer id) {
+    }
+
+    @Override
+    public String getNameById(Integer id) {
         List<NguonHangModel> lst = lstNguonHang.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
         return lst.isEmpty() ? null : lst.get(0).getTenNguonHang();
     }

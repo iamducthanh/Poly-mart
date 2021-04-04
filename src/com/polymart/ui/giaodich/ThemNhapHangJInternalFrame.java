@@ -92,26 +92,26 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemNhapHangJInternalFrame() {
-    	
+
     }
 
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
         this.nhapHangJInternalFrame = nhapHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSNhapHang = new DefaultTableModel() {
-        	
-			private static final long serialVersionUID = 7830236206956859560L;
 
-			@Override
+            private static final long serialVersionUID = 7830236206956859560L;
+
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         modelDSSanPham = new DefaultTableModel() {
-        	
-			private static final long serialVersionUID = -4855916871376159741L;
 
-			@Override
+            private static final long serialVersionUID = -4855916871376159741L;
+
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -329,7 +329,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         txtTimKiem.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtTimKiem.getText().equals(" Tìm theo tên hoặc mã sản phẩm")) {
+                if (txtTimKiem.getText().equals("Tìm theo tên hoặc mã sản phẩm")) {
                     txtTimKiem.setText("");
                 }
             }
@@ -337,7 +337,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtTimKiem.getText().equals("")) {
-                    txtTimKiem.setText(" Tìm theo tên hoặc mã sản phẩm");
+                    txtTimKiem.setText("Tìm theo tên hoặc mã sản phẩm");
                 }
             }
         });
@@ -393,11 +393,16 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     // sự kiện tìm kiếm sản phẩm theo tên sản phẩm hoặc mã sản phẩm
     private void evtSearchProduct(JTextField txtSearch) {
         String getInputSearch = txtSearch.getText();
-        lstTietSanPham = chiTietSanPhamService.findByIdOrNameProduct(getInputSearch);
-        if (lstTietSanPham != null && !lstTietSanPham.isEmpty()) {
+        if (getInputSearch.equalsIgnoreCase("Tìm theo tên hoặc mã sản phẩm")) {
+            lstTietSanPham = chiTietSanPhamService.findAll();
             showTable(lstTietSanPham);
         } else {
-            EntityMessage.show(this, "Không có sản phẩm nào cần tìm");
+            lstTietSanPham = chiTietSanPhamService.findByIdOrNameProduct(getInputSearch);
+            if (lstTietSanPham != null && !lstTietSanPham.isEmpty()) {
+                showTable(lstTietSanPham);
+            } else {
+                EntityMessage.show(this, "Không có sản phẩm nào cần tìm");
+            }
         }
     }
 

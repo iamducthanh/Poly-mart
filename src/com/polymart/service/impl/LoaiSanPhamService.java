@@ -5,22 +5,17 @@ import com.polymart.dao.impl.LoaiSanPhamDAO;
 import com.polymart.model.LoaiSanPhamModel;
 import com.polymart.service.ILoaiSanPhamService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoaiSanPhamService implements ILoaiSanPhamService {
 
     private static ILoaiSanPhamDAO loaiSanPhamDAO = new LoaiSanPhamDAO();
-    private static Map<Integer, LoaiSanPhamModel> mapLoaiSanPham = new HashMap<Integer, LoaiSanPhamModel>();
-
-    static {
-    	for (LoaiSanPhamModel x : loaiSanPhamDAO.findAll()) {
-            mapLoaiSanPham.put(x.getId(), x);
-        }
-    }
+    private static List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamDAO.findAll();
 
     @Override
     public String findNameById(Integer id) {
-        return mapLoaiSanPham.get(id) == null ? null : mapLoaiSanPham.get(id).getTenLoaiSP();
+        List<LoaiSanPhamModel> lst = lstLoaiSanPham.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
+        return lst.isEmpty() ? null : lst.get(0).getTenLoaiSP();
     }
 }

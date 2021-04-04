@@ -15,4 +15,6 @@ public interface IChiTietSanPhamService {
 
     Integer getIdProductById(Integer id);
 
+    void reloadData();
+
 }

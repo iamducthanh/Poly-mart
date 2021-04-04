@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.polymart.dao.IHoaDonNhapHangDAO;
 import com.polymart.dao.impl.HoaDonNhapHangDAO;
@@ -13,17 +14,11 @@ import com.polymart.service.IHoaDonNhapHangService;
 public class HoaDonNhapHangService implements IHoaDonNhapHangService {
 
     private static IHoaDonNhapHangDAO hoaDonNhapHangDAO = new HoaDonNhapHangDAO();
-    private static Map<Integer, HoaDonNhapHangModel> mapHoaDonNhapHang = new HashMap<Integer, HoaDonNhapHangModel>();
-
-    static {
-        for (HoaDonNhapHangModel x : hoaDonNhapHangDAO.findAll()) {
-            mapHoaDonNhapHang.put(x.getId(), x);
-        }
-    }
+    private static List<HoaDonNhapHangModel> lstHoaDonNhapHangModels = hoaDonNhapHangDAO.findAll();
 
     @Override
     public List<HoaDonNhapHangModel> findAll() {
-        return new ArrayList<>(mapHoaDonNhapHang.values());
+        return lstHoaDonNhapHangModels;
     }
 
     @Override
@@ -31,7 +26,7 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
         if (hoaDonNhapHangModel != null) {
             int id = hoaDonNhapHangDAO.save(hoaDonNhapHangModel);
             hoaDonNhapHangModel = hoaDonNhapHangDAO.findById(id);
-            mapHoaDonNhapHang.put(id, hoaDonNhapHangModel);
+            lstHoaDonNhapHangModels.add(hoaDonNhapHangModel);
             return hoaDonNhapHangModel;
         }
         return null;
@@ -40,11 +35,9 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
     @Override
     public boolean remove(HoaDonNhapHangModel hoaDonNhapHangModel) {
         if (hoaDonNhapHangModel != null) {
-            if (mapHoaDonNhapHang.get(hoaDonNhapHangModel.getId()) != null) {
-                if (hoaDonNhapHangDAO.remove(hoaDonNhapHangModel) > 0) {
-                    mapHoaDonNhapHang.remove(hoaDonNhapHangModel.getId());
-                    return true;
-                }
+            if (hoaDonNhapHangDAO.remove(hoaDonNhapHangModel) > 0) {
+                lstHoaDonNhapHangModels.remove(hoaDonNhapHangModel);
+                return true;
             }
         }
         return false;
@@ -52,6 +45,7 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
 
     @Override
     public HoaDonNhapHangModel findById(Integer id) {
-        return mapHoaDonNhapHang.get(id);
+        List<HoaDonNhapHangModel> lst = lstHoaDonNhapHangModels.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
+        return lst.isEmpty() ? null : lst.get(0);
     }
 }

@@ -2,14 +2,19 @@ package com.polymart.service;
 
 import com.polymart.model.HoaDonThanhToanModel;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface IHoaDonThanhToanService {
 
-	List<HoaDonThanhToanModel> findAll();
+    List<HoaDonThanhToanModel> findAll();
 
-	HoaDonThanhToanModel save(HoaDonThanhToanModel hoaDonThanhToanModel);
+    HoaDonThanhToanModel findById(int id);
 
-	boolean remove(HoaDonThanhToanModel hoaDonThanhToanModel);
+    HoaDonThanhToanModel save(HoaDonThanhToanModel hoaDonThanhToanModel);
+
+    boolean remove(HoaDonThanhToanModel hoaDonThanhToanModel);
+
+    List<HoaDonThanhToanModel> filterByDate(Timestamp timestamp);
 
 }

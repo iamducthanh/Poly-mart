@@ -16,39 +16,44 @@ import java.util.stream.Collectors;
 
 public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
-    private static IChiTietSanPhamDAO chiTietSanPhamDAO = new ChiTietSanPhamDAO();
-    private static List<ChiTietSanPhamModel> lstChiTietSanPhamModels = chiTietSanPhamDAO.findAll();
+	private static IChiTietSanPhamDAO chiTietSanPhamDAO = new ChiTietSanPhamDAO();
+	private static List<ChiTietSanPhamModel> lstChiTietSanPhamModels = chiTietSanPhamDAO.findAll();
 
-    @Override
-    public List<ChiTietSanPhamModel> findAll() {
-        return lstChiTietSanPhamModels;
-    }
+	@Override
+	public List<ChiTietSanPhamModel> findAll() {
+		return lstChiTietSanPhamModels;
+	}
 
-    // tìm kiếm theo mã hoặc tên sản phẩm
-    @Override
-    public List<ChiTietSanPhamModel> findByIdOrNameProduct(String input) {
-        return chiTietSanPhamDAO.findByIdOrNameProduct(input);
-    }
+	// tìm kiếm theo mã hoặc tên sản phẩm
+	@Override
+	public List<ChiTietSanPhamModel> findByIdOrNameProduct(String input) {
+		return chiTietSanPhamDAO.findByIdOrNameProduct(input);
+	}
 
-    @Override
-    public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
-        chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
-    }
+	@Override
+	public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
+		chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
+	}
 
-    @Override
-    public void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
-        chiTietSanPhamDAO.updateThanhToan(chiTietHoaDonThanhToanModel);
-    }
+	@Override
+	public void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
+		chiTietSanPhamDAO.updateThanhToan(chiTietHoaDonThanhToanModel);
+	}
 
-    @Override
-    public Integer getIdProductById(Integer id) {
-        List<ChiTietSanPhamModel> lstTim = lstChiTietSanPhamModels.stream().filter(e -> e.getId().toString().equals(id.toString()))
-                .collect(Collectors.toList());
-        return lstTim.isEmpty() ? -1 : lstTim.get(0).getIdSanPham();
-    }
+	@Override
+	public Integer getIdProductById(Integer id) {
+		List<ChiTietSanPhamModel> lstTim = lstChiTietSanPhamModels.stream().filter(e -> e.getId().equals(id))
+				.collect(Collectors.toList());
+		return lstTim.isEmpty() ? -1 : lstTim.get(0).getIdSanPham();
+	}
 
-    @Override
-    public void reloadData() {
-        lstChiTietSanPhamModels = chiTietSanPhamDAO.findAll();
-    }
+	@Override
+	public void reloadData() {
+		lstChiTietSanPhamModels = chiTietSanPhamDAO.findAll();
+	}
+
+	@Override
+	public ChiTietSanPhamModel getById(Integer id) {
+		return lstChiTietSanPhamModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0);
+	}
 }

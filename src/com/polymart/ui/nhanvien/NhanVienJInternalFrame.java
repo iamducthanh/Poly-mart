@@ -234,8 +234,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	protected void btnDelete() {
 		if (JOptionPane.showConfirmDialog(this,
-				"Bạn có chắc muốn xoá ra khỏi hệ thống?\nNhân viên: " + list.get(index).getHoTen() + "\nID: " + list.get(index).getId(), "Xác nhận",
-				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+				"Bạn có chắc muốn xoá ra khỏi hệ thống?\nNhân viên: " + list.get(index).getHoTen() + "\nID: "
+						+ list.get(index).getId(),
+				"Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
 			nhanVienService.delete(new Integer[] { list.get(index).getId() });
 
 			loadToTable();
@@ -339,7 +340,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		EntityFrame.CHITIETNHANVIEN.txtSDT.setText(list.get(index).getSdt());
 		EntityFrame.CHITIETNHANVIEN.txtEmail.setText(list.get(index).getEmail());
 		EntityFrame.CHITIETNHANVIEN.txtDiaChi.setText(list.get(index).getDiaChi());
-		
+
 		ImageIcon imageIcon = new ImageIcon(list.get(index).getAnhDaiDien());
 		Image image = imageIcon.getImage().getScaledInstance(164, 177, Image.SCALE_SMOOTH);
 		EntityFrame.CHITIETNHANVIEN.lblAnhDaiDien.setIcon(new ImageIcon(image));

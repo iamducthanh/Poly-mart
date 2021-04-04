@@ -2,10 +2,14 @@ package com.polymart.service;
 
 import com.polymart.model.HoaDonThanhToanModel;
 
+import java.util.List;
+
 public interface IHoaDonThanhToanService {
 
-    HoaDonThanhToanModel save(HoaDonThanhToanModel hoaDonThanhToanModel);
+	List<HoaDonThanhToanModel> findAll();
 
-    boolean remove(HoaDonThanhToanModel hoaDonThanhToanModel);
+	HoaDonThanhToanModel save(HoaDonThanhToanModel hoaDonThanhToanModel);
+
+	boolean remove(HoaDonThanhToanModel hoaDonThanhToanModel);
 
 }

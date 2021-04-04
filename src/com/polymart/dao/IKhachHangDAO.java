@@ -6,7 +6,7 @@ import com.polymart.model.KhachHangModel;
 
 public interface IKhachHangDAO extends GenericDAO<KhachHangModel> {
 
-    List<KhachHangModel> findAll();
+	List<KhachHangModel> findAll();
 
 	Integer save(KhachHangModel khachHangModel);
 

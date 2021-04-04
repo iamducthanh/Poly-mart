@@ -9,7 +9,8 @@ public class ChiTietHoaDonNhapHangModel {
 	public ChiTietHoaDonNhapHangModel() {
 	}
 
-	public ChiTietHoaDonNhapHangModel(Integer idHoaDonNhapHang, Integer idChiTietSanPham, Long giaNhap, Integer soLuong) {
+	public ChiTietHoaDonNhapHangModel(Integer idHoaDonNhapHang, Integer idChiTietSanPham, Long giaNhap,
+			Integer soLuong) {
 		this.idHoaDonNhapHang = idHoaDonNhapHang;
 		this.idChiTietSanPham = idChiTietSanPham;
 		this.giaNhap = giaNhap;

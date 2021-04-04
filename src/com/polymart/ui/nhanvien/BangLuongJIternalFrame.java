@@ -34,9 +34,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class BangLuongJIternalFrame extends JInternalFrame {
-	
+
 	private static final long serialVersionUID = 6467611389997317862L;
-	
+
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	private JTable tableBangLuong;
@@ -102,7 +102,6 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		JComboBox cbbNam = new JComboBox();
-
 
 		JLabel lblThng = new JLabel("Tháng");
 		lblThng.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -223,8 +222,9 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 	public void loadTbaleLuong() {
 		modelBangLuong.setRowCount(0);
-		for(BangLuongModel x : listBangLuong) {
-			modelBangLuong.addRow(new Object[] {x.getMaNhanVien(),x.getHoTen(),x.getSoNgayDiLam(),x.getSoNgayDiMuon()});
+		for (BangLuongModel x : listBangLuong) {
+			modelBangLuong
+					.addRow(new Object[] { x.getMaNhanVien(), x.getHoTen(), x.getSoNgayDiLam(), x.getSoNgayDiMuon() });
 		}
 	}
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ISanPhamService {
 
-    List<SanPhamModel> findAll();
+	List<SanPhamModel> findAll();
 
-    SanPhamModel findByID(Integer id);
+	SanPhamModel findByID(Integer id);
 
 }

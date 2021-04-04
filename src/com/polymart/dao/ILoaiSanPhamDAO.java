@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ILoaiSanPhamDAO extends GenericDAO<LoaiSanPhamModel> {
 
-    List<LoaiSanPhamModel> findAll();
+	List<LoaiSanPhamModel> findAll();
 
 }

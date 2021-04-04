@@ -8,16 +8,18 @@ import java.util.List;
 
 public interface IChiTietSanPhamService {
 
-    List<ChiTietSanPhamModel> findAll();
+	List<ChiTietSanPhamModel> findAll();
 
-    List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
+	List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
 
-    void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
+	void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
-    void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
+	void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
 
-    Integer getIdProductById(Integer id);
+	Integer getIdProductById(Integer id);
 
-    void reloadData();
+	void reloadData();
+
+	ChiTietSanPhamModel getById(Integer id);
 
 }

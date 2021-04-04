@@ -49,39 +49,39 @@ public class IChiTietHoaDon extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Chi tiết hóa đơn trả hàng");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setBounds(20, 11, 307, 39);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Mã hóa đơn trả hàng: ");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setBounds(30, 61, 170, 25);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JLabel lblMaHoaDon = new JLabel("Cái label này để hiển thị mã hóa đơn trả hàng");
 		lblMaHoaDon.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblMaHoaDon.setBounds(210, 61, 387, 25);
 		contentPane.add(lblMaHoaDon);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 155, 819, 391);
 		contentPane.add(scrollPane);
-		
+
 		tableChiTietHoaDonTraHang = new JTable();
 		scrollPane.setViewportView(tableChiTietHoaDonTraHang);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Khách hàng:");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1_1.setBounds(30, 96, 170, 25);
 		contentPane.add(lblNewLabel_1_1);
-		
+
 		JLabel lblCiLabelNy = new JLabel("Cái label này để hiển thị khách hàng");
 		lblCiLabelNy.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblCiLabelNy.setBounds(136, 97, 387, 25);
 		contentPane.add(lblCiLabelNy);
-		
+
 		modelChiTietHoaDonTraHang.addColumn("Mã sản phẩm");
 		modelChiTietHoaDonTraHang.addColumn("Tên sản phẩm");
 		modelChiTietHoaDonTraHang.addColumn("Số lượng");

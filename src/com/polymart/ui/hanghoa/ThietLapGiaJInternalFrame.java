@@ -36,7 +36,7 @@ import com.polymart.ui.common.uiCommon;
 public class ThietLapGiaJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = -1811994452109007906L;
-	
+
 	private JPanel contentPane;
 	private JTable tableThietLapGia;
 	private DefaultTableModel modelThietLapGia = new DefaultTableModel();
@@ -48,12 +48,11 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 	private JPanel setGiaPanel = new JPanel();
 	private JTextField txtTimNhomHang;
 
-	//combobox thiết lập giá
+	// combobox thiết lập giá
 	private JCheckBox chkSetGiaMaHang = new JCheckBox("Mã hàng");
 	private JCheckBox chkSetGiaTenHang = new JCheckBox("Tên hàng");
 	private JCheckBox chkSetGiaGiaVon = new JCheckBox("Giá vốn");
 	private JCheckBox chkSetGiaGiaNhapCuoi = new JCheckBox("Giá nhập cuối");
-
 
 	/**
 	 * Launch the application.
@@ -75,7 +74,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ThietLapGiaJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setFocusable(true);
 		contentPane = new JPanel();
@@ -89,11 +88,11 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		initTopThietLapGia();
 		initCenterThietLapGia();
 	}
-	
+
 	public void initTopThietLapGia() {
 		setTitle("Hàng hóa - Thiết lập giá");
 
@@ -108,37 +107,36 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();
 		cbbOptionSetGia.addItem("≡");
 		panel1.add(cbbOptionSetGia);
-		
+
 		optionSetGiaFrame.setSize(150, 140);
-		optionSetGiaFrame.setLocation(uiCommon.width - 160, uiCommon.height - (uiCommon.height/100*86));
+		optionSetGiaFrame.setLocation(uiCommon.width - 160, uiCommon.height - (uiCommon.height / 100 * 86));
 		panelOption = new JPanel();
 		panelOption.setLayout(null);
-		panelOption.setBackground(Color.white) ;
+		panelOption.setBackground(Color.white);
 		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
 		optionSetGiaFrame.getContentPane().add(panelOption);
 		optionSetGiaFrame.setUndecorated(true);
 		uiCommon uiCommon = new uiCommon(panelOption);
-		
+
 		uiCommon.addCheckBox(chkSetGiaMaHang, 15, 12, 99);
 		uiCommon.addCheckBox(chkSetGiaTenHang, 15, 43, 99);
 		uiCommon.addCheckBox(chkSetGiaGiaVon, 15, 69, 99);
 		uiCommon.addCheckBox(chkSetGiaGiaNhapCuoi, 15, 95, 140);
 
-		
 		cbbOptionSetGia.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				optionSetGiaFrame.setVisible(true);
 			}
 		});
-		
+
 		cbbOptionSetGia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				optionSetGiaFrame.setVisible(true);
 
 			}
 		});
-		
+
 		optionSetGiaFrame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -147,55 +145,48 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 			}
 		});
 	}
-	
+
 	public void initCenterThietLapGia() {
 		setGiaPanel.setLayout(new BoxLayout(setGiaPanel, BoxLayout.Y_AXIS));
 		JLabel lblNewLabel_2 = new JLabel("Loại hàng             ▼");
 		lblNewLabel_2.setFont(new Font("Consolas", Font.BOLD, 14));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-        JLabel lblNewLabel_4 = new JLabel("Bảng giá");
-		
+
+		JLabel lblNewLabel_4 = new JLabel("Bảng giá");
+
 		JComboBox<Object> comboBox = new JComboBox<Object>();
-		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bảng giá chung"}));
-		
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] { "Bảng giá chung" }));
+
 		JLabel lblNewLabel_4_1 = new JLabel("Nhóm hàng");
-		
+
 		txtTimNhomHang = new JTextField();
 		txtTimNhomHang.setText(" Tìm kiếm nhóm hàng");
 		txtTimNhomHang.setColumns(10);
 		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-		gl_hangHoaJPanel.setHorizontalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING, false)
+		gl_hangHoaJPanel.setHorizontalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap().addGroup(gl_hangHoaJPanel
+						.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtTimNhomHang)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_hangHoaJPanel.setVerticalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel_4)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel_4_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(121, Short.MAX_VALUE))
-		);
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_hangHoaJPanel.setVerticalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap().addComponent(lblNewLabel_4)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblNewLabel_4_1)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(121, Short.MAX_VALUE)));
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		txtTimNhomHang.setBorder(null);
-		
+
 		tableThietLapGia = new JTable();
 		scrollPane.setViewportView(tableThietLapGia);
 		modelThietLapGia.addColumn("Mã hàng");
@@ -204,7 +195,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		modelThietLapGia.addColumn("Giá nhập cuối");
 		modelThietLapGia.addColumn("Giá chung");
 		tableThietLapGia.setModel(modelThietLapGia);
-		
+
 		txtTimNhomHang.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {

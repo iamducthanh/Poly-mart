@@ -11,6 +11,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -35,182 +37,196 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
+import com.polymart.model.HoaDonThanhToanModel;
+import com.polymart.service.*;
+import com.polymart.service.impl.*;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class ThanhToanJInternalFrame extends JInternalFrame {
 
-    private static final long serialVersionUID = -7230782299903914961L;
+	private static final long serialVersionUID = -7230782299903914961L;
 
-    private JPanel contentPane;
-    private JPanel panel = new JPanel();
-    private JPanel panel1 = new JPanel();
-    private JPanel hangHoaJPanel = new JPanel();
+	private JPanel contentPane;
+	private JPanel panel = new JPanel();
+	private JPanel panel1 = new JPanel();
+	private JPanel hangHoaJPanel = new JPanel();
 
-    private JTextField txtTimPhieuNhap;
-    private JFrame optionKiemKhoFrame = new JFrame();
-    private JPanel panelOption;
-    private JTable tableThanhToan;
-    private DefaultTableModel modelThanhToan = new DefaultTableModel();
+	private JTextField txtTimPhieuNhap;
+	private JFrame optionKiemKhoFrame = new JFrame();
+	private JPanel panelOption;
+	private JTable tableThanhToan;
+	private DefaultTableModel modelThanhToan;
 
-    private JTextField txtMaNhanVien;
-    private JTextField txtMaKhachHang;
-    private JTextField txtDiaDIem;
-    private JTextField txtMaPhieu;
-    private JLabel lblSLng;
-    private JLabel lblMSnPhm;
-    private JLabel lblNgiNhp;
-    private JLabel lblNgunHng;
-    private JLabel lblGhiCh;
-    private JTextField txtSoLuong;
-    private JTextField txtGiamGia;
-    private JTextField txtTongTien;
+	private JTextField txtMaNhanVien;
+	private JTextField txtMaKhachHang;
+	private JTextField txtDiaDIem;
+	private JTextField txtMaPhieu;
+	private JLabel lblSLng;
+	private JLabel lblMSnPhm;
+	private JLabel lblNgiNhp;
+	private JLabel lblNgunHng;
+	private JLabel lblGhiCh;
+	private JTextField txtSoLuong;
+	private JTextField txtGiamGia;
+	private JTextField txtTongTien;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ThanhToanJInternalFrame frame = new ThanhToanJInternalFrame();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+	private IHoaDonThanhToanService hoaDonThanhToanService = new HoaDonThanhToanService();
+	private IChiTietHoaDonThanhToanService chiTietHoaDonThanhToanService = new ChiTietHoaDonThanhToanService();
+	private IKhachHangService khachHangService = new KhachHangService();
+	private INhanVienService nhanVienService = new NhanVienService();
+	private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
-    /**
-     * Create the frame.
-     */
-    public ThanhToanJInternalFrame() {
-        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //	setBounds(100, 100, 1920, 639);
-        setFocusable(true);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(0, 0));
-        contentPane.add(panel, BorderLayout.NORTH);
-        panel.setBounds(68, 120, 96, 20);
-        panel.setLayout(new BorderLayout(0, 0));
+	private List<HoaDonThanhToanModel> lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
 
-        contentPane.add(hangHoaJPanel, BorderLayout.WEST);
-        panel.add(panel1, BorderLayout.EAST);
-        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ThanhToanJInternalFrame frame = new ThanhToanJInternalFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-        initTopThanhToan();
-        initCenterThanhToan();
-        //	initFrameThem();
-    }
+	/**
+	 * Create the frame.
+	 */
+	public ThanhToanJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+		modelThanhToan = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setBounds(100, 100, 1920, 639);
+		setFocusable(true);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.add(panel, BorderLayout.NORTH);
+		panel.setBounds(68, 120, 96, 20);
+		panel.setLayout(new BorderLayout(0, 0));
 
-    public void initTopThanhToan() {
-        JLabel lblNewLabel = new JLabel("Hóa đơn thanh toán       ");
-        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-        panel.add(lblNewLabel, BorderLayout.WEST);
+		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
+		panel.add(panel1, BorderLayout.EAST);
+		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        txtTimPhieuNhap = new JTextField();
-        txtTimPhieuNhap.setText(" TÌm theo mã phiếu nhập");
-        panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
-        txtTimPhieuNhap.setColumns(10);
-        txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtTimPhieuNhap.getText().equals(" TÌm theo mã phiếu")) {
-                    txtTimPhieuNhap.setText("");
-                }
-            }
+		initTopThanhToan();
+		initCenterThanhToan();
+//        initFrameThem();
+	}
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtTimPhieuNhap.getText().equals("")) {
-                    txtTimPhieuNhap.setText(" TÌm theo mã phiếu");
-                }
-            }
-        });
+	public void initTopThanhToan() {
+		JLabel lblNewLabel = new JLabel("Hóa đơn thanh toán       ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		panel.add(lblNewLabel, BorderLayout.WEST);
 
-        JButton btnTimKiem = new JButton("Tìm kiếm");
-        panel1.add(btnTimKiem);
-        JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
-        panel1.add(lblNewLabel_1);
+		txtTimPhieuNhap = new JTextField();
+		txtTimPhieuNhap.setText(" TÌm theo mã phiếu nhập");
+		panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
+		txtTimPhieuNhap.setColumns(10);
+		txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTimPhieuNhap.getText().equals(" TÌm theo mã phiếu")) {
+					txtTimPhieuNhap.setText("");
+				}
+			}
 
-        JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
-        panel1.add(btnThemPhieuNhap);
-        JButton btnXoa = new JButton("- Xoá ");
-        panel1.add(btnXoa);
-        JButton btnExport = new JButton("→ Xuất file ");
-        panel1.add(btnExport);
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTimPhieuNhap.getText().equals("")) {
+					txtTimPhieuNhap.setText(" TÌm theo mã phiếu");
+				}
+			}
+		});
 
-        optionKiemKhoFrame.setSize(344, 234);
-        optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
-        panelOption = new JPanel();
-        panelOption.setLayout(null);
-        panelOption.setBackground(Color.white);
-        panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+		panel1.add(btnTimKiem);
+		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
+		panel1.add(lblNewLabel_1);
 
-        optionKiemKhoFrame.getContentPane().add(panelOption);
-        optionKiemKhoFrame.setUndecorated(true);
+		JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
+		panel1.add(btnThemPhieuNhap);
+		JButton btnXoa = new JButton("- Xoá ");
+		panel1.add(btnXoa);
+		JButton btnExport = new JButton("→ Xuất file ");
+		panel1.add(btnExport);
 
-        JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
-        cbbOptionKiemKho.addItem("≡");
-        panel1.add(cbbOptionKiemKho);
+		optionKiemKhoFrame.setSize(344, 234);
+		optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
+		panelOption = new JPanel();
+		panelOption.setLayout(null);
+		panelOption.setBackground(Color.white);
+		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
 
-        btnThemPhieuNhap.addActionListener(openThemHoaDonThanhToan);
+		optionKiemKhoFrame.getContentPane().add(panelOption);
+		optionKiemKhoFrame.setUndecorated(true);
 
-    }
+		JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
+		cbbOptionKiemKho.addItem("≡");
+		panel1.add(cbbOptionKiemKho);
 
-    public void initCenterThanhToan() {
-        JScrollPane scrollPane = new JScrollPane();
-        contentPane.add(scrollPane, BorderLayout.CENTER);
-        JLabel lblNewLabel_9 = new JLabel("Thời gian");
+		btnThemPhieuNhap.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setOpenThemHoaDonThanhToan();
+			}
+		});
 
-        JDateChooser dateChooser = new JDateChooser();
+	}
 
-        JButton btnLocTheoNgay = new JButton("Lọc");
-        GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-        gl_hangHoaJPanel.setHorizontalGroup(
-                gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnLocTheoNgay)
-                                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        gl_hangHoaJPanel.setVerticalGroup(
-                gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
-                                .addGap(5)
-                                .addComponent(lblNewLabel_9)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(btnLocTheoNgay)
-                                .addContainerGap(141, Short.MAX_VALUE))
-        );
+	public void initCenterThanhToan() {
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		JLabel lblNewLabel_9 = new JLabel("Thời gian");
 
-        hangHoaJPanel.setLayout(gl_hangHoaJPanel);
-        panel.add(panel1, BorderLayout.EAST);
-        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JDateChooser dateChooser = new JDateChooser();
 
-        tableThanhToan = new JTable();
-        scrollPane.setViewportView(tableThanhToan);
-        modelThanhToan.addColumn("Mã hóa đơn");
-        modelThanhToan.addColumn("Ngày tạo");
-        modelThanhToan.addColumn("Mã khách hàng");
-        modelThanhToan.addColumn("Mã nhân viên");
-        modelThanhToan.addColumn("Địa điểm");
-        modelThanhToan.addColumn("Tổng tiền");
-        modelThanhToan.addColumn("Trạng thái");
-        modelThanhToan.addColumn("Ghi chú");
+		JButton btnLocTheoNgay = new JButton("Lọc");
+		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
+		gl_hangHoaJPanel.setHorizontalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnLocTheoNgay)
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_hangHoaJPanel.setVerticalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addGap(5).addComponent(lblNewLabel_9)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnLocTheoNgay)
+						.addContainerGap(141, Short.MAX_VALUE)));
 
-        tableThanhToan.setModel(modelThanhToan);
+		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
+		panel.add(panel1, BorderLayout.EAST);
+		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        // table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tableThanhToan = new JTable();
+		scrollPane.setViewportView(tableThanhToan);
+		modelThanhToan.addColumn("Mã hóa đơn");
+		modelThanhToan.addColumn("Mã khách hàng");
+		modelThanhToan.addColumn("Mã nhân viên");
+		modelThanhToan.addColumn("Tổng tiền");
+		modelThanhToan.addColumn("Ngày tạo");
+		modelThanhToan.addColumn("Ghi chú");
+
+		tableThanhToan.setModel(modelThanhToan);
+
+		// table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 //		table.getColumnModel().getColumn(0).setPreferredWidth(50);
 //		table.getColumnModel().getColumn(1).setPreferredWidth(120);
 //		table.getColumnModel().getColumn(2).setPreferredWidth(150);
@@ -222,177 +238,208 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 //		table.getColumnModel().getColumn(8).setPreferredWidth(130);
 //		table.getColumnModel().getColumn(9).setPreferredWidth(130);
 
+		// Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
+		tableThanhToan.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent mouseEvent) {
+				if (mouseEvent.getClickCount() == 2) {
+					int row = tableThanhToan.getSelectedRow();
+					if (row > -1 && row < tableThanhToan.getRowCount()) {
+						HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
+						List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
+								.findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
+						ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan(
+								lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang());
+						chiTietHoaDonThanhToan.setVisible(true);
+					}
+				}
+			}
+		});
 
-    }
+		// hiển thị hóa đơn lên table
+		showTable(lstHoaDonThanhToanModels);
 
-    public void initFrameThem() {
-        JFrame themPhieuNhapFrame = new JFrame();
-        themPhieuNhapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        themPhieuNhapFrame.setTitle("Thêm phiếu thanh toán");
-        themPhieuNhapFrame.setBounds(100, 100, 633, 626);
-        themPhieuNhapFrame.setFocusable(true);
-        themPhieuNhapFrame.setLocationRelativeTo(null);
-        JMenuBar menuBar = new JMenuBar();
-        themPhieuNhapFrame.setJMenuBar(menuBar);
+	}
 
-        JMenu mnThoat = new JMenu("Thoát");
-        menuBar.add(mnThoat);
+	private void setOpenThemHoaDonThanhToan() {
+		ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame(this);
+		EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonThanhToan);
+		themHoaDonThanhToan.setVisible(true);
+	}
 
-        JMenu mnLuu = new JMenu("Lưu");
-        menuBar.add(mnLuu);
+	// hiển thị danh sách hóa dơn lên bảng
+	public void showTable(List<HoaDonThanhToanModel> lst) {
+		if (!lst.isEmpty()) {
+			modelThanhToan.setRowCount(0);
+			for (HoaDonThanhToanModel x : lst) {
+				List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
+						.findByIdHoaDonThanhToan(x.getId());
+				modelThanhToan.addRow(new Object[] { x.getId(), khachHangService.findOne(x.getIdKhachHang()).getHoTen(),
+						nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
+						lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
+								* (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan().doubleValue()
+										- chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam()
+												.doubleValue()))
+								.sum(),
+						new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()), x.getGhiChu() });
+			}
+		}
+	}
 
-        JPanel contentNhaPanel = new JPanel();
-        contentNhaPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        themPhieuNhapFrame.setContentPane(contentNhaPanel);
-        contentNhaPanel.setLayout(null);
+	// getdata list
+	public List<HoaDonThanhToanModel> getList() {
+		return lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
+	}
 
-        JPanel panel = new JPanel();
-        panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin phi\u1EBFu nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
-        panel.setBounds(10, 11, 595, 510);
-        contentNhaPanel.add(panel);
-        panel.setLayout(null);
+	public void initFrameThem() {
+		JFrame themPhieuNhapFrame = new JFrame();
+		themPhieuNhapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		themPhieuNhapFrame.setTitle("Thêm phiếu thanh toán");
+		themPhieuNhapFrame.setBounds(100, 100, 633, 626);
+		themPhieuNhapFrame.setFocusable(true);
+		themPhieuNhapFrame.setLocationRelativeTo(null);
+		JMenuBar menuBar = new JMenuBar();
+		themPhieuNhapFrame.setJMenuBar(menuBar);
 
-        JLabel lblNewLabel = new JLabel("Mã phiếu: ", JLabel.RIGHT);
-        lblNewLabel.setBounds(10, 31, 125, 25);
-        panel.add(lblNewLabel);
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JMenu mnThoat = new JMenu("Thoát");
+		menuBar.add(mnThoat);
 
-        lblMSnPhm = new JLabel("Mã khách hàng: ", JLabel.RIGHT);
-        lblMSnPhm.setBounds(10, 67, 125, 25);
-        panel.add(lblMSnPhm);
-        lblMSnPhm.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		JMenu mnLuu = new JMenu("Lưu");
+		menuBar.add(mnLuu);
 
-        txtMaPhieu = new JTextField();
-        txtMaPhieu.setBounds(154, 31, 300, 25);
-        panel.add(txtMaPhieu);
-        txtMaPhieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtMaPhieu.setColumns(10);
+		JPanel contentNhaPanel = new JPanel();
+		contentNhaPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		themPhieuNhapFrame.setContentPane(contentNhaPanel);
+		contentNhaPanel.setLayout(null);
 
-        txtMaKhachHang = new JTextField();
-        txtMaKhachHang.setBounds(154, 67, 300, 25);
-        panel.add(txtMaKhachHang);
-        txtMaKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtMaKhachHang.setColumns(10);
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Th\u00F4ng tin phi\u1EBFu nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+		panel.setBounds(10, 11, 595, 510);
+		contentNhaPanel.add(panel);
+		panel.setLayout(null);
 
-        txtMaNhanVien = new JTextField();
-        txtMaNhanVien.setBounds(154, 103, 300, 25);
-        panel.add(txtMaNhanVien);
-        txtMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtMaNhanVien.setColumns(10);
+		JLabel lblNewLabel = new JLabel("Mã phiếu: ", JLabel.RIGHT);
+		lblNewLabel.setBounds(10, 31, 125, 25);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        txtDiaDIem = new JTextField();
-        txtDiaDIem.setBounds(154, 139, 300, 25);
-        panel.add(txtDiaDIem);
-        txtDiaDIem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtDiaDIem.setColumns(10);
+		lblMSnPhm = new JLabel("Mã khách hàng: ", JLabel.RIGHT);
+		lblMSnPhm.setBounds(10, 67, 125, 25);
+		panel.add(lblMSnPhm);
+		lblMSnPhm.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        lblSLng = new JLabel("Mã nhân viên: ", JLabel.RIGHT);
-        lblSLng.setBounds(10, 103, 125, 25);
-        panel.add(lblSLng);
-        lblSLng.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtMaPhieu = new JTextField();
+		txtMaPhieu.setBounds(154, 31, 300, 25);
+		panel.add(txtMaPhieu);
+		txtMaPhieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtMaPhieu.setColumns(10);
 
-        lblNgiNhp = new JLabel("Địa điểm: ", JLabel.RIGHT);
-        lblNgiNhp.setBounds(10, 139, 125, 25);
-        panel.add(lblNgiNhp);
-        lblNgiNhp.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtMaKhachHang = new JTextField();
+		txtMaKhachHang.setBounds(154, 67, 300, 25);
+		panel.add(txtMaKhachHang);
+		txtMaKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtMaKhachHang.setColumns(10);
 
-        lblNgunHng = new JLabel("Ngày thanh toán: ", JLabel.RIGHT);
-        lblNgunHng.setBounds(10, 283, 125, 25);
-        panel.add(lblNgunHng);
-        lblNgunHng.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtMaNhanVien = new JTextField();
+		txtMaNhanVien.setBounds(154, 103, 300, 25);
+		panel.add(txtMaNhanVien);
+		txtMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtMaNhanVien.setColumns(10);
 
-        lblGhiCh = new JLabel("Số lượng: ", JLabel.RIGHT);
-        lblGhiCh.setBounds(10, 175, 125, 25);
-        panel.add(lblGhiCh);
-        lblGhiCh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtDiaDIem = new JTextField();
+		txtDiaDIem.setBounds(154, 139, 300, 25);
+		panel.add(txtDiaDIem);
+		txtDiaDIem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtDiaDIem.setColumns(10);
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(154, 355, 419, 131);
-        panel.add(scrollPane);
+		lblSLng = new JLabel("Mã nhân viên: ", JLabel.RIGHT);
+		lblSLng.setBounds(10, 103, 125, 25);
+		panel.add(lblSLng);
+		lblSLng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        JTextArea txtGhiChu = new JTextArea();
-        scrollPane.setViewportView(txtGhiChu);
+		lblNgiNhp = new JLabel("Địa điểm: ", JLabel.RIGHT);
+		lblNgiNhp.setBounds(10, 139, 125, 25);
+		panel.add(lblNgiNhp);
+		lblNgiNhp.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        JLabel lblGimGi = new JLabel("Giảm giá: ", SwingConstants.RIGHT);
-        lblGimGi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblGimGi.setBounds(10, 211, 125, 25);
-        panel.add(lblGimGi);
+		lblNgunHng = new JLabel("Ngày thanh toán: ", JLabel.RIGHT);
+		lblNgunHng.setBounds(10, 283, 125, 25);
+		panel.add(lblNgunHng);
+		lblNgunHng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        JLabel lblTngTin = new JLabel("Tổng tiền: ", SwingConstants.RIGHT);
-        lblTngTin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblTngTin.setBounds(10, 247, 125, 25);
-        panel.add(lblTngTin);
+		lblGhiCh = new JLabel("Số lượng: ", JLabel.RIGHT);
+		lblGhiCh.setBounds(10, 175, 125, 25);
+		panel.add(lblGhiCh);
+		lblGhiCh.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        JLabel lblTrngThi = new JLabel("Trạng thái: ", SwingConstants.RIGHT);
-        lblTrngThi.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblTrngThi.setBounds(10, 319, 125, 25);
-        panel.add(lblTrngThi);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(154, 355, 419, 131);
+		panel.add(scrollPane);
 
-        JLabel lblGhiCh_1 = new JLabel("Ghi chú: ", SwingConstants.RIGHT);
-        lblGhiCh_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblGhiCh_1.setBounds(10, 354, 125, 25);
-        panel.add(lblGhiCh_1);
+		JTextArea txtGhiChu = new JTextArea();
+		scrollPane.setViewportView(txtGhiChu);
 
-        txtSoLuong = new JTextField();
-        txtSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtSoLuong.setColumns(10);
-        txtSoLuong.setBounds(154, 175, 300, 25);
-        panel.add(txtSoLuong);
+		JLabel lblGimGi = new JLabel("Giảm giá: ", SwingConstants.RIGHT);
+		lblGimGi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGimGi.setBounds(10, 211, 125, 25);
+		panel.add(lblGimGi);
 
-        txtGiamGia = new JTextField();
-        txtGiamGia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtGiamGia.setColumns(10);
-        txtGiamGia.setBounds(154, 211, 300, 25);
-        panel.add(txtGiamGia);
+		JLabel lblTngTin = new JLabel("Tổng tiền: ", SwingConstants.RIGHT);
+		lblTngTin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTngTin.setBounds(10, 247, 125, 25);
+		panel.add(lblTngTin);
 
-        txtTongTien = new JTextField();
-        txtTongTien.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtTongTien.setColumns(10);
-        txtTongTien.setBounds(154, 247, 300, 25);
-        panel.add(txtTongTien);
+		JLabel lblTrngThi = new JLabel("Trạng thái: ", SwingConstants.RIGHT);
+		lblTrngThi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTrngThi.setBounds(10, 319, 125, 25);
+		panel.add(lblTrngThi);
 
-        JDateChooser dateChooser = new JDateChooser();
-        dateChooser.setBounds(154, 283, 300, 25);
-        panel.add(dateChooser);
+		JLabel lblGhiCh_1 = new JLabel("Ghi chú: ", SwingConstants.RIGHT);
+		lblGhiCh_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblGhiCh_1.setBounds(10, 354, 125, 25);
+		panel.add(lblGhiCh_1);
 
-        JCheckBox chckbxNewCheckBox = new JCheckBox("Đã thanh toán");
-        chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        chckbxNewCheckBox.setBounds(154, 321, 151, 25);
-        panel.add(chckbxNewCheckBox);
+		txtSoLuong = new JTextField();
+		txtSoLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSoLuong.setColumns(10);
+		txtSoLuong.setBounds(154, 175, 300, 25);
+		panel.add(txtSoLuong);
 
-        JButton btnThoat = new JButton("Thoát");
-        btnThoat.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        btnThoat.setBounds(516, 532, 89, 23);
-        contentNhaPanel.add(btnThoat);
+		txtGiamGia = new JTextField();
+		txtGiamGia.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtGiamGia.setColumns(10);
+		txtGiamGia.setBounds(154, 211, 300, 25);
+		panel.add(txtGiamGia);
 
-        JButton btnLuu = new JButton("Lưu");
-        btnLuu.setBounds(417, 532, 89, 23);
-        contentNhaPanel.add(btnLuu);
-        themPhieuNhapFrame.setVisible(true);
+		txtTongTien = new JTextField();
+		txtTongTien.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtTongTien.setColumns(10);
+		txtTongTien.setBounds(154, 247, 300, 25);
+		panel.add(txtTongTien);
 
-        //Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
-        tableThanhToan.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() == 2) {
-                    ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan();
-                    chiTietHoaDonThanhToan.setVisible(true);
-                }
-            }
-        });
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setBounds(154, 283, 300, 25);
+		panel.add(dateChooser);
 
-    }
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Đã thanh toán");
+		chckbxNewCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		chckbxNewCheckBox.setBounds(154, 321, 151, 25);
+		panel.add(chckbxNewCheckBox);
 
-    ActionListener openThemHoaDonThanhToan = new ActionListener() {
+		JButton btnThoat = new JButton("Thoát");
+		btnThoat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnThoat.setBounds(516, 532, 89, 23);
+		contentNhaPanel.add(btnThoat);
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame();
-            EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonThanhToan);
-            themHoaDonThanhToan.setVisible(true);
+		JButton btnLuu = new JButton("Lưu");
+		btnLuu.setBounds(417, 532, 89, 23);
+		contentNhaPanel.add(btnLuu);
+		themPhieuNhapFrame.setVisible(true);
 
-        }
-    };
+	}
+
 }

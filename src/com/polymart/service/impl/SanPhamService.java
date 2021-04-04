@@ -5,33 +5,22 @@ import com.polymart.dao.impl.SanPhamDAO;
 import com.polymart.model.SanPhamModel;
 import com.polymart.service.ISanPhamService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SanPhamService implements ISanPhamService {
 
-    private static ISanPhamDAO iSanPhamDAO = new SanPhamDAO();
-    private static Map<Integer, SanPhamModel> mapSanPham = new HashMap<Integer, SanPhamModel>();    //Nạp dữ liệu từ SQL
-
-    static {
-        initSanPham();
-    }
-
-    private static void initSanPham() {
-        for (SanPhamModel sanPham : iSanPhamDAO.findAll()) {
-            mapSanPham.put(sanPham.getId(), sanPham);
-        }
-    }
+    private static ISanPhamDAO sanPhamDAO = new SanPhamDAO();
+    private static List<SanPhamModel> lstSanPham = sanPhamDAO.findAll();
 
     @Override
     public List<SanPhamModel> findAll() {
-        return new ArrayList<>(mapSanPham.values());
+        return lstSanPham;
     }
 
     @Override
     public SanPhamModel findByID(Integer id) {
-        return mapSanPham.get(id);
+        List<SanPhamModel> lst = lstSanPham.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
+        return lst.isEmpty() ? null : lst.get(0);
     }
 }

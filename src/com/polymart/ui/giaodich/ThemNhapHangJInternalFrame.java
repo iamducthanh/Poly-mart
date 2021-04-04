@@ -92,7 +92,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemNhapHangJInternalFrame() {
-
+    	
     }
 
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
@@ -480,7 +480,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 if (count > 0) {
                     EntityMessage.show(this, "Thêm thành công");
                     this.setVisible(false);
-                    nhapHangJInternalFrame.showTable(nhapHangJInternalFrame.getList());
+                    nhapHangJInternalFrame.showTable(hoaDonNhapHangService.findAll());
+                    chiTietSanPhamService.reloadData();
                 } else {
                     hoaDonNhapHangService.remove(hoaDonNhapHangModel);
                     EntityMessage.show(this, "Thêm thất bại");

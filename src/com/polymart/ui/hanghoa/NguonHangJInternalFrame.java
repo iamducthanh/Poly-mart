@@ -391,8 +391,19 @@ public class NguonHangJInternalFrame extends JInternalFrame {
         }
     }
     private void btnThem() {
+    	int i=0;
         if (checkNull(this, txtNguonHang.getText())
                 && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
+        	for(NguonHangModel x: listNguonHang) {
+        	if(x.getTenNguonHang().equals(txtNguonHang.getText())&& x.getSdt().equals(txtSoDT.getText()) ) {
+        		i++;
+        	 }
+        	}
+        	if(i>0){
+        		JOptionPane.showMessageDialog(this, "Nguồn hàng đã tồn tại");
+        		return;
+        	}
+        		else {
             NguonHangModel nguonHangModel = new NguonHangModel();
             nguonHangModel.setTenNguonHang(txtNguonHang.getText());
             nguonHangModel.setSdt(txtSoDT.getText());
@@ -404,8 +415,9 @@ public class NguonHangJInternalFrame extends JInternalFrame {
             }
             clear();
             loadToTable();
+         }
         }
-    }
+      }
     protected void btnCapNhat() {
         if (checkNull(this, txtNguonHang.getText())
                 && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {

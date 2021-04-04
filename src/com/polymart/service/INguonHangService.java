@@ -17,5 +17,7 @@ public interface INguonHangService {
 	NguonHangModel findOne(Integer id);
 
     List<NguonHangModel> fillter(String nameOrPhone);
+    
+    String getNameById(Integer id);
 
 }

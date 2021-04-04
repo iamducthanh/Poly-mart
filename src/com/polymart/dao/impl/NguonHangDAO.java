@@ -44,4 +44,10 @@ public class NguonHangDAO extends AbstractDAO<NguonHangModel> implements INguonH
         List<NguonHangModel> list = query(sql, new NguonHangMapper(), id);
         return list.isEmpty() ? null : list.get(0);
 	}
+	@Override
+	public String getNameById(Integer id) {
+		String sql = "SELECT TEN FROM NGUONHANG WHERE ID = ?";
+		List<NguonHangModel> list = query(sql, new NguonHangMapper(), id);
+        return list.isEmpty() ? null : list.get(0).getTenNguonHang();
+	}
 }

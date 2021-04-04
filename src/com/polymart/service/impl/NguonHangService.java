@@ -18,15 +18,12 @@ public class NguonHangService implements INguonHangService {
 
     @Override
     public List<NguonHangModel> findAll() {
-<<<<<<< HEAD
+
     	return nguonHangDAO.findAll();
-=======
-        return lstNguonHang;
->>>>>>> branch 'master' of https://github.com/iamducthanh/Poly-mart.git
     }
 
     @Override
-<<<<<<< HEAD
+
 	public List<NguonHangModel> fillter(String nameOrPhone) {
 		return new NguonHangDAO().fillter(nameOrPhone);
 	}
@@ -34,13 +31,10 @@ public class NguonHangService implements INguonHangService {
     public NguonHangModel save(NguonHangModel nguonHangModel) {
         Integer newNguonHangId = nguonHangDAO.save(nguonHangModel);
         return nguonHangDAO.findOne(newNguonHangId);
-=======
-    public List<NguonHangModel> findByName(String name) {
-        return lstNguonHang.stream().filter(e -> e.getTenNguonHang().equalsIgnoreCase(name)).collect(Collectors.toList());
->>>>>>> branch 'master' of https://github.com/iamducthanh/Poly-mart.git
+
     }
 
-<<<<<<< HEAD
+
 	@Override
 	public NguonHangModel update(NguonHangModel updatenguonHangModel) {
 		nguonHangDAO.update(updatenguonHangModel);
@@ -58,11 +52,9 @@ public class NguonHangService implements INguonHangService {
 	public NguonHangModel findOne(Integer id) {
         return nguonHangDAO.findOne(id);
 	}
-=======
-    @Override
-    public String getNameById(Integer id) {
+	@Override
+	public String getNameById(Integer id) {
         List<NguonHangModel> lst = lstNguonHang.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
         return lst.isEmpty() ? null : lst.get(0).getTenNguonHang();
     }
->>>>>>> branch 'master' of https://github.com/iamducthanh/Poly-mart.git
 }

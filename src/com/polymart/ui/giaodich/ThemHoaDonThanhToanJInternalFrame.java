@@ -63,6 +63,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = null;
     private ChiTietSanPhamModel chiTietSanPhamModel = null;
     private SanPhamModel sanPhamModel = null;
+    
 
 
     /**

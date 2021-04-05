@@ -166,8 +166,8 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		modelBangLuong.addColumn("Số ngày Đi Làm Muộn");
 		modelBangLuong.addColumn("Tổng lương");
 		tableBangLuong.setModel(modelBangLuong);
-		moBangLuongThangGanNhat();
 		loadComboboxNam();
+		moBangLuongThangGanNhat();
 
 		// cbb Năm load từ dữ liệu ở bảng chấm công lên
 		// cbb Tháng load theo cbb Năm cũng trong bảng chấm công
@@ -207,6 +207,8 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadListChamCong(String.valueOf(nam), String.valueOf(thang));
 		loadTbaleLuong();
 		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
+		cboThang.setSelectedIndex(thang-1);
+		cboNam.setSelectedItem(String.valueOf(nam));
 	}
 
 	private void loadListChamCong(String nam, String thang) {

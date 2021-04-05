@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Toolkit;
 
 public class ChiTietHoaDonTraHang extends JFrame {
 
@@ -42,6 +43,7 @@ public class ChiTietHoaDonTraHang extends JFrame {
 	 * Create the frame.
 	 */
 	public ChiTietHoaDonTraHang() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Chi tiết hóa đơn trả hàng");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 877, 594);

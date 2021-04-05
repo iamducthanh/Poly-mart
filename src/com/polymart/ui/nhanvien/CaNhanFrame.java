@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CaNhanFrame extends JFrame {
 
@@ -64,6 +65,7 @@ public class CaNhanFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public CaNhanFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Thông tin cá nhân");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 594, 515);
@@ -239,7 +241,7 @@ public class CaNhanFrame extends JFrame {
 			ChangePassFrame changePassFrame = new ChangePassFrame();
 			changePassFrame.setLocationRelativeTo(null);
 		} else {
-			JOptionPane.showInputDialog(null, "Mật khẩu bạn nhập không chính xác!", new JPasswordField());
+			JOptionPane.showInputDialog(null, "Mật khẩu bạn nhập không chính xác!");
 		}
 	}
 

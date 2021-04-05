@@ -55,6 +55,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
      */
 
     public ChiTietHoaDonNhapHangFrame() throws HeadlessException {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
     }
 
     public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, Integer idNguonHang) {

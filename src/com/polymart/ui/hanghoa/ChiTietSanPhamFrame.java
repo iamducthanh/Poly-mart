@@ -17,6 +17,7 @@ import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ChiTietSanPhamFrame extends JFrame {
 
@@ -54,6 +55,7 @@ public class ChiTietSanPhamFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ChiTietSanPhamFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Chi tiết sản phẩm");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 799, 565);

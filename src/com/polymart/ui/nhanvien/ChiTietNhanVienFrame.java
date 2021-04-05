@@ -40,6 +40,7 @@ import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Toolkit;
 
 public class ChiTietNhanVienFrame extends JFrame {
 
@@ -80,6 +81,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	 * Create the application.
 	 */
 	public ChiTietNhanVienFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		fileChooser = new JFileChooser();
 		initialize();
 		loadComboboxChucVu().forEach(e -> comboBox.addItem(e));

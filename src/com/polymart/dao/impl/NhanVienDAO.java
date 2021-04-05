@@ -10,7 +10,7 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public List<NhanVienModel> findAll() {
-		String sql = "SELECT*FROM NHANVIEN";
+		String sql = "SELECT*FROM NHANVIEN where MATKHAU !=1";
 		return query(sql, new NhanVienMapper());
 	}
 
@@ -36,7 +36,10 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 				nhanVienModel.getLuong(), nhanVienModel.getAnhDaiDien(), nhanVienModel.getMatKhau(),
 				nhanVienModel.getId());
 	}
-
+	public void khoaTaiKhoanNhanVien(String id) {
+		String sql = "update NHANVIEN set MATKHAU ='1' where ID =?";
+		update(sql,id);
+	}
 	@Override
 	public void delete(Integer id) {
 		String sql = "DELETE NHANVIEN WHERE ID = ?";

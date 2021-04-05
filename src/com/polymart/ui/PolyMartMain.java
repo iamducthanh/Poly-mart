@@ -40,6 +40,7 @@ import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
 import com.polymart.ui.taikhoan.LoginJFrame;
+import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class PolyMartMain extends JFrame {
 
@@ -88,6 +89,12 @@ public class PolyMartMain extends JFrame {
 		mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
 		mnTongQuan.setBackground(new Color(0, 191, 255));
 		menuBar.add(mnTongQuan);
+		
+		JMenuItem mntmDoanhThu = new JMenuItem("Thống kê doanh thu");
+		mnTongQuan.add(mntmDoanhThu);
+		
+		JMenuItem mntnDoanhSo = new JMenuItem("Thống kê doanh số bán ra");
+		mnTongQuan.add(mntnDoanhSo);
 
 		JMenu mnHangHoa = new JMenu("Hàng hóa");
 		mnHangHoa.setIcon(new ImageIcon("images\\hanghoa.png"));
@@ -149,10 +156,6 @@ public class PolyMartMain extends JFrame {
 		mntmBangTinhLuong.setIcon(new ImageIcon("images\\tinhluong.png"));
 		mnNhanVien.add(mntmBangTinhLuong);
 
-		JMenuItem mntmHoaHong = new JMenuItem("Thiết lập hoa hồng");
-		mntmHoaHong.setIcon(new ImageIcon("images\\laixuat.png"));
-		mnNhanVien.add(mntmHoaHong);
-
 		JMenu mnKhachHang = new JMenu("Khách hàng");
 		mnKhachHang.setIcon(new ImageIcon("images\\doitac.png"));
 		menuBar.add(mnKhachHang);
@@ -206,6 +209,7 @@ public class PolyMartMain extends JFrame {
 		mntmHoaDonTraHang.addActionListener(openTraHang);
 		mntmBangTinhLuong.addActionListener(openBangLuong);
 		mntmCaNhan.addActionListener(openCaNhan);
+		mntmDoanhThu.addActionListener(openDoanhThu);
 
 	}
 
@@ -260,6 +264,17 @@ public class PolyMartMain extends JFrame {
 	public void openKiemKho() {
 		loadChild(new KiemKhoJInternalFrame());
 		setTitle("Kiểm kho");
+	}
+	
+	ActionListener openDoanhThu = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openDoanhThu();
+		}
+	};
+
+	public void openDoanhThu() {
+		loadChild(new ThongKeDoanhThuJInternalFrame());
+		setTitle("Thống kê doanh thu");
 	}
 
 	ActionListener openNhanVien = new ActionListener() {

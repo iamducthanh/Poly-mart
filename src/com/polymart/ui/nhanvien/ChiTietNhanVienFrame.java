@@ -116,10 +116,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.control);
-		panel.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Chi ti\u1EBFt nh\u00E2n vi\u00EAn", TitledBorder.LEADING, TitledBorder.TOP, null,
-				SystemColor.desktop));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt nh\u00E2n vi\u00EAn  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 647, 554);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -130,7 +127,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 				addNhanVien();
 			}
 		});
-		btnEdit.setBounds(531, 575, 50, 28);
+		btnEdit.setBounds(403, 584, 78, 28);
 		contentPane.add(btnEdit);
 
 		JButton btnClear = new JButton("Làm mới");
@@ -139,7 +136,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 				clear();
 			}
 		});
-		btnClear.setBounds(432, 575, 78, 28);
+		btnClear.setBounds(491, 584, 78, 28);
 		contentPane.add(btnClear);
 
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
@@ -270,8 +267,12 @@ public class ChiTietNhanVienFrame extends JFrame {
 		comboBox.setBounds(142, 174, 175, 25);
 		panel.add(comboBox);
 
-		JButton btnSave = new JButton("Lưu");
-		btnSave.setBounds(607, 577, 50, 28);
+		JButton btnSave = new JButton("Thoát");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSave.setBounds(579, 584, 78, 28);
 		contentPane.add(btnSave);
 	}
 

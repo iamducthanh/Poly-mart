@@ -200,13 +200,6 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		listChamCong = chamCongDao.filterMonth(nam, thang);
 	}
 
-	private void loadListChamCongThang() {
-		listChamCong.clear();
-		Calendar c = Calendar.getInstance();
-		String nam = String.valueOf(c.get(Calendar.YEAR));
-		String thang = String.valueOf(c.get(Calendar.MONTH));
-		loadListChamCong(nam, thang);
-	}
 
 	private void loadListNhanVien() {
 		listNhanVien.clear();

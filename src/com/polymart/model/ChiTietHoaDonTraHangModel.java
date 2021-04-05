@@ -5,15 +5,6 @@ public class ChiTietHoaDonTraHangModel {
 	private Integer idHoaDonThanhToanChiTiet;
 	private Integer soLuong;
 
-	public ChiTietHoaDonTraHangModel() {
-	}
-
-	public ChiTietHoaDonTraHangModel(Integer idHoaDonTraHang, Integer idHoaDonThanhToanChiTiet, Integer soLuong) {
-		this.idHoaDonTraHang = idHoaDonTraHang;
-		this.idHoaDonThanhToanChiTiet = idHoaDonThanhToanChiTiet;
-		this.soLuong = soLuong;
-	}
-
 	public Integer getIdHoaDonTraHang() {
 		return idHoaDonTraHang;
 	}

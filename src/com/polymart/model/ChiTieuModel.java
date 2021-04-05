@@ -9,19 +9,6 @@ public class ChiTieuModel {
 	private Integer idNhanVien;
 	private Timestamp ngayChiTieu;
 
-	public ChiTieuModel() {
-		super();
-	}
-
-	public ChiTieuModel(String mucDichChiTieu, Long soTien, String ghiChu, Integer idNhanVien, Timestamp ngayChiTieu) {
-		super();
-		this.mucDichChiTieu = mucDichChiTieu;
-		this.soTien = soTien;
-		this.ghiChu = ghiChu;
-		this.idNhanVien = idNhanVien;
-		this.ngayChiTieu = ngayChiTieu;
-	}
-
 	public String getMucDichChiTieu() {
 		return mucDichChiTieu;
 	}

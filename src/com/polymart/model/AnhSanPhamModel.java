@@ -4,14 +4,6 @@ public class AnhSanPhamModel {
 	private Integer idSanPham;
 	private String tenAnh;
 
-	public AnhSanPhamModel() {
-	}
-
-	public AnhSanPhamModel(Integer idSanPham, String tenAnh) {
-		this.idSanPham = idSanPham;
-		this.tenAnh = tenAnh;
-	}
-
 	public Integer getIdSanPham() {
 		return idSanPham;
 	}

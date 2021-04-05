@@ -4,14 +4,6 @@ public class SanPhamModel extends AbstractModel {
 	private Integer idLoaiSP;
 	private String tenSP;
 
-	public SanPhamModel() {
-	}
-
-	public SanPhamModel(Integer idLoaiSP, String tenSP) {
-		this.idLoaiSP = idLoaiSP;
-		this.tenSP = tenSP;
-	}
-
 	public Integer getIdLoaiSP() {
 		return idLoaiSP;
 	}

@@ -1,5 +1,6 @@
 package com.polymart.dao;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import com.polymart.mapper.RowMapper;
@@ -11,4 +12,7 @@ public interface GenericDAO<T> {
 
 	// insert câu lệnh sql với tham số truyền vào parameters, trả về mã id
 	Integer insert(String sql, Object... parameters);
+	
+	ResultSet queryBySql(String sql, Object... parameters);
+	
 }

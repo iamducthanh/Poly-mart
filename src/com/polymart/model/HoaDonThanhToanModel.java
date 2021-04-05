@@ -9,18 +9,6 @@ public class HoaDonThanhToanModel extends AbstractModel {
 	private Timestamp ngayThanhToan;
 	private String ghiChu;
 
-	public HoaDonThanhToanModel() {
-	}
-
-	public HoaDonThanhToanModel(Integer idKhachHang, Integer idNhanVien, Integer diemDaDoi, Timestamp ngayThanhToan,
-			String ghiChu) {
-		this.idKhachHang = idKhachHang;
-		this.idNhanVien = idNhanVien;
-		this.diemDaDoi = diemDaDoi;
-		this.ngayThanhToan = ngayThanhToan;
-		this.ghiChu = ghiChu;
-	}
-
 	public Integer getIdKhachHang() {
 		return idKhachHang;
 	}

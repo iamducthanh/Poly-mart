@@ -7,15 +7,6 @@ public class HoaDonTraHangModel extends AbstractModel {
 	private Timestamp ngayTraHang;
 	private String ghiChu;
 
-	public HoaDonTraHangModel() {
-	}
-
-	public HoaDonTraHangModel(Integer idNhanVien, Timestamp ngayTraHang, String ghiChu) {
-		this.idNhanVien = idNhanVien;
-		this.ngayTraHang = ngayTraHang;
-		this.ghiChu = ghiChu;
-	}
-
 	public Integer getIdNhanVien() {
 		return idNhanVien;
 	}

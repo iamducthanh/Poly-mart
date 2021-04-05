@@ -7,14 +7,16 @@ import com.polymart.model.ChiTietSanPhamModel;
 import java.util.List;
 
 public interface IChiTietSanPhamDAO extends GenericDAO<ChiTietSanPhamModel> {
-	List<ChiTietSanPhamModel> findAll();
+    List<ChiTietSanPhamModel> findAll();
 
-	List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
+    List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
 
-	Integer updateSauKhiXoaHoaDonNhap(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
+    Integer updateSauKhiXoaHoaDonNhap(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
-	Integer updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
+    Integer updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
-	Integer updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
+    Integer updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
+
+    Integer updateTraHang(int id, int soLuong);
 
 }

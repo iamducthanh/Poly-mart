@@ -1,11 +1,9 @@
 package com.polymart.ui.giaodich;
 
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietHoaDonTraHangModel;
-import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.HoaDonThanhToanModel;
+import com.polymart.model.*;
 import com.polymart.service.*;
 import com.polymart.service.impl.*;
 
@@ -65,6 +63,8 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
     private List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = null;
     private List<ChiTietHoaDonTraHangModel> lstChiTietHoaDonTraHangModels = new ArrayList<>();
 
+    private TraHangJInternalFrame traHangJInternalFrame;
+
     /**
      * Launch the application.
      */
@@ -84,7 +84,12 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
     /**
      * Create the frame.
      */
+
     public ThemTraHangJInternalFrame() {
+    }
+
+    public ThemTraHangJInternalFrame(TraHangJInternalFrame traHangJInternalFrame) {
+        this.traHangJInternalFrame = traHangJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDanhSachSanPham = new DefaultTableModel() {
             @Override
@@ -313,8 +318,52 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                 evtTimKiemHoaDonThanhToan(txtTimKiem, lblKhachHang, lblMaHoaDonThanhToan, lblTongTien);
             }
         });
+
+        btnHoanTra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveHoaDonTraHang(tableDanhSachTraHang, txaGhiChu);
+            }
+        });
     }
 
+    // lưu hóa đơn trả hàng
+    private void saveHoaDonTraHang(JTable tbTraHang, JTextArea txaGhiChu) {
+        if (tbTraHang.getRowCount() > 0) {
+            HoaDonTraHangModel hoaDonTraHangModel = new HoaDonTraHangModel();
+            hoaDonTraHangModel.setGhiChu(txaGhiChu.getText());
+            hoaDonTraHangModel.setIdNhanVien(EntityAuthorization.USER.getId());
+            hoaDonTraHangModel = hoaDonTraHangService.save(hoaDonTraHangModel);
+            if (hoaDonTraHangModel == null) {
+                EntityMessage.show(this, "Lưu thất bại");
+            } else {
+                int count = 0;
+                for (ChiTietHoaDonTraHangModel x : lstChiTietHoaDonTraHangModels) {
+                    x.setIdHoaDonTraHang(hoaDonTraHangModel.getId());
+                    if (chiTietHoaDonTraHangService.save(x)) {
+                        ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = chiTietHoaDonThanhToanService.findById(x.getIdHoaDonThanhToanChiTiet());
+                        chiTietHoaDonThanhToanModel.setSoLuong(chiTietHoaDonThanhToanModel.getSoLuong() - x.getSoLuong());
+                        chiTietHoaDonThanhToanService.update(chiTietHoaDonThanhToanModel);
+                        chiTietSanPhamService.updateTraHang(chiTietHoaDonThanhToanModel.getChiTietSanPham(), x.getSoLuong());
+                        count++;
+                    }
+                }
+                if (count > 0) {
+                    EntityMessage.show(this, "Thêm thành công");
+                    this.setVisible(false);
+                    traHangJInternalFrame.showTable(traHangJInternalFrame.getData());
+                    chiTietSanPhamService.reloadData();
+                } else {
+                    EntityMessage.show(this, "Thêm thất bại");
+                    hoaDonTraHangService.remove(hoaDonTraHangModel);
+                }
+            }
+        } else {
+            EntityMessage.show(this, "Thêm sản trả trước khi lưu");
+        }
+    }
+
+    // thêm sản phẩm trả hàng
     private void addProductToTableTraHang(JTable tbSanPham, JLabel lblTongTien) {
         if (modelDanhSachSanPham.getRowCount() >= 0) {
             int row = tbSanPham.getSelectedRow();

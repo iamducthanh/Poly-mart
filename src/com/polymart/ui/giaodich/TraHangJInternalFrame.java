@@ -52,6 +52,8 @@ public class TraHangJInternalFrame extends JInternalFrame {
 
     private IHoaDonTraHangService hoaDonTraHangService = new HoaDonTraHangService();
 
+    private List<HoaDonTraHangModel> lstHoaDonTraHangModels = hoaDonTraHangService.findAll();
+
     /**
      * Launch the application.
      */
@@ -204,19 +206,29 @@ public class TraHangJInternalFrame extends JInternalFrame {
     ActionListener openThemHoaDonTraHang = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame();
-            EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonTraHang);
-            themHoaDonTraHang.setVisible(true);
+            setOpenThemHoaDonTraHang();
         }
     };
 
+    // set sự kiện mở form thêm hóa đơn trả
+    private void setOpenThemHoaDonTraHang() {
+        ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame(this);
+        EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonTraHang);
+        themHoaDonTraHang.setVisible(true);
+    }
+
     // hiển thị danh sách hóa đơn trả hàng
-    private void showTable(List<HoaDonTraHangModel> lst) {
+    public void showTable(List<HoaDonTraHangModel> lst) {
         if (!lst.isEmpty()) {
             modelTraHang.setRowCount(0);
             for (HoaDonTraHangModel x : lst) {
                 return;
             }
         }
+    }
+
+    // getDataList
+    public List<HoaDonTraHangModel> getData() {
+        return lstHoaDonTraHangModels = hoaDonTraHangService.findAll();
     }
 }

@@ -64,7 +64,6 @@ public class PolyMartMain extends JFrame {
 		});
 	}
 
-	
 	/**
 	 * Create the frame.
 	 */
@@ -165,7 +164,7 @@ public class PolyMartMain extends JFrame {
 		JMenu mnCaNhan = new JMenu("Cá nhân");
 		mnCaNhan.setIcon(new ImageIcon("images\\user.png"));
 		menuBar.add(mnCaNhan);
-		
+
 		JMenu mnBanHang = new JMenu("Bán hàng");
 		mnBanHang.setIcon(new ImageIcon("images\\banhang.png"));
 		menuBar.add(mnBanHang);
@@ -174,14 +173,14 @@ public class PolyMartMain extends JFrame {
 				Runtime runtime = Runtime.getRuntime();
 				String url = "http://polymart.tk/";
 				try {
-					runtime.exec("rundll32 url.dll, FileProtocolHandler "+ url);
+					runtime.exec("rundll32 url.dll, FileProtocolHandler " + url);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		
+
 		JMenuItem mntmCaNhan = new JMenuItem("Cá nhân");
 		mntmCaNhan.setIcon(new ImageIcon("images\\user.png"));
 		mnCaNhan.add(mntmCaNhan);
@@ -189,10 +188,6 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
 		mntmDangXuat.setIcon(new ImageIcon("images\\logout.png"));
 		mnCaNhan.add(mntmDangXuat);
-
-		JMenuItem mntmDoiMK = new JMenuItem("Đổi mật khẩu");
-		mntmDoiMK.setIcon(new ImageIcon("images\\changepassicon.png"));
-		mnCaNhan.add(mntmDoiMK);
 
 		getContentPane().add(pnlMain, BorderLayout.CENTER);
 		pnlMain.setLayout(new CardLayout(0, 0));
@@ -206,13 +201,12 @@ public class PolyMartMain extends JFrame {
 		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
-	//	mntmDoiMK.addActionListener(doiMatKhau);
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
 		mntmBangTinhLuong.addActionListener(openBangLuong);
 		mntmCaNhan.addActionListener(openCaNhan);
-		
+
 	}
 
 	ActionListener openTraHang = new ActionListener() {
@@ -233,16 +227,6 @@ public class PolyMartMain extends JFrame {
 
 	public void openKhachHang() {
 		loadChild(new KhachHangJInternalFrame());
-	}
-
-	ActionListener doiMatKhau = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			doiMatKhau();
-		}
-	};
-
-	public void doiMatKhau() {
-		new ChangePassFrame();
 	}
 
 	ActionListener openThietLapGia = new ActionListener() {
@@ -306,7 +290,7 @@ public class PolyMartMain extends JFrame {
 			openChamCong();
 		}
 	};
-	
+
 	public void openCaNhan() {
 		CaNhanFrame caNhanFrame = new CaNhanFrame();
 		caNhanFrame.setLocationRelativeTo(null);
@@ -318,7 +302,6 @@ public class PolyMartMain extends JFrame {
 			openCaNhan();
 		}
 	};
-	
 
 	public void openChamCong() {
 		loadChild(new ChamCongJInternalFrame());
@@ -381,7 +364,7 @@ public class PolyMartMain extends JFrame {
 		loadChild(new BangLuongJIternalFrame());
 	}
 
-	//load JInternalFrame to Mainboard
+	// load JInternalFrame to Mainboard
 	public void loadChild(JInternalFrame frame) {
 		pnlMain.removeAll();
 		frame.setSize(pnlMain.getSize());

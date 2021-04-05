@@ -3,6 +3,7 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class ChiTieuModel {
+
 	private String MaCT;
 
 
@@ -13,11 +14,13 @@ public class ChiTieuModel {
     private Timestamp ngayChiTieu;
 
     public ChiTieuModel() {
-        super();
+    
     }
     public String getMaCT() {
 		return MaCT;
+
 	}
+
 
 	public void setMaCT(String maCT) {
 		MaCT = maCT;
@@ -31,44 +34,46 @@ public class ChiTieuModel {
         this.ngayChiTieu = ngayChiTieu;
     }
 
-    public String getMucDichChiTieu() {
-        return mucDichChiTieu;
-    }
 
-    public void setMucDichChiTieu(String mucDichChiTieu) {
-        this.mucDichChiTieu = mucDichChiTieu;
-    }
 
-    public Long getSoTien() {
-        return soTien;
-    }
+	public String getMucDichChiTieu() {
+		return mucDichChiTieu;
+	}
 
-    public void setSoTien(Long soTien) {
-        this.soTien = soTien;
-    }
+	public void setMucDichChiTieu(String mucDichChiTieu) {
+		this.mucDichChiTieu = mucDichChiTieu;
+	}
 
-    public String getGhiChu() {
-        return ghiChu;
-    }
+	public Long getSoTien() {
+		return soTien;
+	}
 
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
-    }
+	public void setSoTien(Long soTien) {
+		this.soTien = soTien;
+	}
 
-    public Integer getIdNhanVien() {
-        return idNhanVien;
-    }
+	public String getGhiChu() {
+		return ghiChu;
+	}
 
-    public void setIdNhanVien(Integer idNhanVien) {
-        this.idNhanVien = idNhanVien;
-    }
+	public void setGhiChu(String ghiChu) {
+		this.ghiChu = ghiChu;
+	}
 
-    public Timestamp getNgayChiTieu() {
-        return ngayChiTieu;
-    }
+	public Integer getIdNhanVien() {
+		return idNhanVien;
+	}
 
-    public void setNgayChiTieu(Timestamp ngayChiTieu) {
-        this.ngayChiTieu = ngayChiTieu;
-    }
+	public void setIdNhanVien(Integer idNhanVien) {
+		this.idNhanVien = idNhanVien;
+	}
+
+	public Timestamp getNgayChiTieu() {
+		return ngayChiTieu;
+	}
+
+	public void setNgayChiTieu(Timestamp ngayChiTieu) {
+		this.ngayChiTieu = ngayChiTieu;
+	}
 
 }

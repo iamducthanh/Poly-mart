@@ -50,13 +50,13 @@ public class ChamCongDAO extends AbstractDAO<ChamCongModel> implements IChamCong
 			Connection con = getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) {
+			while (rs.next()) {
 				listNam.add(String.valueOf(rs.getString("nam")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return listNam;
 	}
 }

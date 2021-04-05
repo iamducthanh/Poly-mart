@@ -18,6 +18,6 @@ public interface INhanVienDAO {
 	List<NhanVienModel> filter(String idOrName);
 
 	List<NhanVienModel> filterByChucVu(String chucVu);
-	
+
 	List<NhanVienModel> findByIdAndPassword(String id, String password);
 }

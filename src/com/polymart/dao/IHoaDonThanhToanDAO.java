@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface IHoaDonThanhToanDAO extends GenericDAO<HoaDonThanhToanModel> {
 
-    List<HoaDonThanhToanModel> findAll();
+	List<HoaDonThanhToanModel> findAll();
 
-    Integer save(HoaDonThanhToanModel hoaDonThanhToanModel);
+	HoaDonThanhToanModel findById(int id);
 
-    Integer remove(HoaDonThanhToanModel hoaDonThanhToanModel);
+	Integer save(HoaDonThanhToanModel hoaDonThanhToanModel);
+
+	Integer remove(HoaDonThanhToanModel hoaDonThanhToanModel);
 
 }

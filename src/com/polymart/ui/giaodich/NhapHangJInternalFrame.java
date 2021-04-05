@@ -14,10 +14,8 @@ import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,7 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
@@ -43,18 +40,20 @@ import com.polymart.model.HoaDonNhapHangModel;
 import com.polymart.service.IChiTietHoaDonNhapHangService;
 import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.IHoaDonNhapHangService;
+import com.polymart.service.INguonHangService;
+import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.ChiTietHoaDonNhapHangService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.HoaDonNhapHangService;
+import com.polymart.service.impl.NguonHangService;
+import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class NhapHangJInternalFrame extends JInternalFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -7230782299903914961L;
+
     private JPanel contentPane;
     private JPanel panel = new JPanel();
     private JPanel panel1 = new JPanel();
@@ -69,6 +68,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private IHoaDonNhapHangService hoaDonNhapHangService = new HoaDonNhapHangService();
     private IChiTietHoaDonNhapHangService chiTietHoaDonNhapHangService = new ChiTietHoaDonNhapHangService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
+    private INhanVienService nhanVienService = new NhanVienService();
+    private INguonHangService nguonHangService = new NguonHangService();
+
     private List<HoaDonNhapHangModel> lstHoaDonNhapHang = null;
 
     /**
@@ -237,11 +239,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                     int row = tableNhapHang.getSelectedRow();
                     if (row > -1 && row < tableNhapHang.getRowCount()) {
                         HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
-                        System.out.println("id" + hoaDonNhapHangModel.getId());
-                        List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService.findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
-                        System.out.println("size " + lstChiTietHoaDonNhap.size());
-                        ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(lstChiTietHoaDonNhap,
-                                hoaDonNhapHangModel.getIdNguonHang());
+                        List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
+                                .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
+                        ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(
+                                lstChiTietHoaDonNhap,
+                                nguonHangService.getNameById(hoaDonNhapHangModel.getIdNguonHang()));
                         chiTietHoaDonNhapHang.setVisible(true);
                     }
                 }
@@ -284,9 +286,14 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     public void showTable(List<HoaDonNhapHangModel> lst) {
         modelNhapHang.setRowCount(0);
         for (HoaDonNhapHangModel x : lst) {
-            modelNhapHang.addRow(new Object[]{x.getId(),
-                    new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()), "Tổng tiền",
-                    "Người nhập - " + x.getIdNhanVienNhap(), "nguồn hàng - " + x.getIdNguonHang(), x.getGhiChu()});
+            List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
+                    .findByIdHoaDonNhap(x.getId());
+            modelNhapHang.addRow(
+                    new Object[]{x.getId(), new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()),
+                            lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum(),
+                            x.getIdNhanVienNhap() + " - "
+                                    + nhanVienService.getNameNhanVien().get(x.getIdNhanVienNhap()),
+                            nguonHangService.getNameById(x.getIdNguonHang()), x.getGhiChu()});
         }
     }
 

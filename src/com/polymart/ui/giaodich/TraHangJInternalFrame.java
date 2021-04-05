@@ -34,12 +34,12 @@ import com.toedter.calendar.JDateChooser;
 public class TraHangJInternalFrame extends JInternalFrame {
 
 	private static final long serialVersionUID = -4824323272953818563L;
-	
+
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	JPanel panel1 = new JPanel();
 	JPanel hangHoaJPanel = new JPanel();
-	
+
 	private JTextField txtTimPhieuNhap;
 	JFrame optionKiemKhoFrame = new JFrame();
 	private JPanel panelOption;
@@ -66,9 +66,9 @@ public class TraHangJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public TraHangJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	setBounds(100, 100, 1920, 639);
+		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,16 +81,16 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		initTopTraHang();
 		initCenterTraHang();
 	}
-	
+
 	public void initTopTraHang() {
 		JLabel lblNewLabel = new JLabel("Hóa đơn trả hàng            ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		panel.add(lblNewLabel, BorderLayout.WEST);
-		
+
 		txtTimPhieuNhap = new JTextField();
 		txtTimPhieuNhap.setText(" TÌm theo mã phiếu nhập");
 		panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
@@ -110,12 +110,12 @@ public class TraHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-		
+
 		JButton btnTimKiem = new JButton("Tìm kiếm");
 		panel1.add(btnTimKiem);
 		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
 		panel1.add(lblNewLabel_1);
-		
+
 		JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
 		panel1.add(btnThemPhieuNhap);
 		JButton btnXoa = new JButton("- Xoá ");
@@ -124,12 +124,12 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		panel1.add(btnExport);
 
 		optionKiemKhoFrame.setSize(344, 234);
-		optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height/100*86));
+		optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
 		panelOption = new JPanel();
 		panelOption.setLayout(null);
-		panelOption.setBackground(Color.white) ;
+		panelOption.setBackground(Color.white);
 		panelOption.setBorder(new EmptyBorder(0, 0, 5, 5));
-		
+
 		optionKiemKhoFrame.getContentPane().add(panelOption);
 		optionKiemKhoFrame.setUndecorated(true);
 
@@ -139,38 +139,31 @@ public class TraHangJInternalFrame extends JInternalFrame {
 
 		btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
 	}
-	
+
 	public void initCenterTraHang() {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		JLabel lblNewLabel_9 = new JLabel("Thời gian");
-		
+
 		JDateChooser dateChooser = new JDateChooser();
-		
+
 		JButton btnLocTheoNgay = new JButton("Lọc");
 		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-		gl_hangHoaJPanel.setHorizontalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnLocTheoNgay)
-						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_hangHoaJPanel.setVerticalGroup(
-			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNewLabel_9)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnLocTheoNgay)
-					.addContainerGap(141, Short.MAX_VALUE))
-		);
-		
+		gl_hangHoaJPanel.setHorizontalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap()
+						.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnLocTheoNgay)
+								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_hangHoaJPanel.setVerticalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addGap(5).addComponent(lblNewLabel_9)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnLocTheoNgay)
+						.addContainerGap(141, Short.MAX_VALUE)));
+
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -183,8 +176,8 @@ public class TraHangJInternalFrame extends JInternalFrame {
 		modelTraHang.addColumn("Tổng tiền hoàn trả");
 		modelTraHang.addColumn("Ghi chú");
 		tableTraHang.setModel(modelTraHang);
-		
-		//Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
+
+		// Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
 		tableTraHang.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent mouseEvent) {
 				if (mouseEvent.getClickCount() == 2) {
@@ -194,7 +187,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
 			}
 		});
 	}
-	
+
 	ActionListener openThemHoaDonTraHang = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {

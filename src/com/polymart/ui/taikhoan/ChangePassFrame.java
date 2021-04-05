@@ -22,6 +22,7 @@ import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
+import java.awt.Toolkit;
 
 public class ChangePassFrame extends JFrame {
 
@@ -54,6 +55,7 @@ public class ChangePassFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ChangePassFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Đổi mật khẩu");
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -178,7 +180,8 @@ public class ChangePassFrame extends JFrame {
 	}
 
 	public void changePassword(String newPassword, String confirmNewPassword) {
-		if (EntityValidate.checkNewPasswordChange(this, newPassword) && EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
+		if (EntityValidate.checkNewPasswordChange(this, newPassword)
+				&& EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
 			String oldPassword = EntityMessage.porm(this, "Nhập mật khẩu cũ:");
 			if (EntityValidate.checkOldPasswordChange(this, oldPassword)) {
 				EntityAuthorization.USER.setMatKhau(newPassword);

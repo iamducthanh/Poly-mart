@@ -3,26 +3,26 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class HoaDonNhapHangModel extends AbstractModel {
-    private Integer idNhanVienNhap;
-    private Integer idNguonHang;
-    private Timestamp ngayNhap;
-    private String ghiChu;
+	private Integer idNhanVienNhap;
+	private Integer idNguonHang;
+	private Timestamp ngayNhap;
+	private String ghiChu;
 
-    public Integer getIdNhanVienNhap() {
-        return idNhanVienNhap;
-    }
+	public Integer getIdNhanVienNhap() {
+		return idNhanVienNhap;
+	}
 
-    public void setIdNhanVienNhap(Integer idNhanVienNhap) {
-        this.idNhanVienNhap = idNhanVienNhap;
-    }
+	public void setIdNhanVienNhap(Integer idNhanVienNhap) {
+		this.idNhanVienNhap = idNhanVienNhap;
+	}
 
-    public Integer getIdNguonHang() {
-        return idNguonHang;
-    }
+	public Integer getIdNguonHang() {
+		return idNguonHang;
+	}
 
-    public void setIdNguonHang(Integer idNguonHang) {
-        this.idNguonHang = idNguonHang;
-    }
+	public void setIdNguonHang(Integer idNguonHang) {
+		this.idNguonHang = idNguonHang;
+	}
 
 	public Timestamp getNgayNhap() {
 		return ngayNhap;
@@ -33,18 +33,17 @@ public class HoaDonNhapHangModel extends AbstractModel {
 	}
 
 	public String getGhiChu() {
-        return ghiChu;
-    }
+		return ghiChu;
+	}
 
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
-    }
+	public void setGhiChu(String ghiChu) {
+		this.ghiChu = ghiChu;
+	}
 
 	@Override
 	public String toString() {
-		return "HoaDonNhapHangModel [id = "+ getId() + "idNhanVienNhap=" + idNhanVienNhap + ", idNguonHang=" + idNguonHang + ", ngayNhap="
-				+ ngayNhap + ", ghiChu=" + ghiChu + "]";
+		return "HoaDonNhapHangModel [id = " + getId() + "idNhanVienNhap=" + idNhanVienNhap + ", idNguonHang="
+				+ idNguonHang + ", ngayNhap=" + ngayNhap + ", ghiChu=" + ghiChu + "]";
 	}
 
-    
 }

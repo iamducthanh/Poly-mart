@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class ChiTieuMapper implements RowMapper<ChiTieuModel> {
 
+
     @Override
     public ChiTieuModel mapRow(ResultSet rs) {
         try {
@@ -23,4 +24,5 @@ public class ChiTieuMapper implements RowMapper<ChiTieuModel> {
             return null;
         }
     }
+
 }

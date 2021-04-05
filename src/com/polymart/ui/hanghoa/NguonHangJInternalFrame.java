@@ -14,8 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,14 +31,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.dao.impl.NguonHangDAO;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.model.KhachHangModel;
 import com.polymart.model.NguonHangModel;
-import com.polymart.service.IKhachHangService;
 import com.polymart.service.INguonHangService;
-import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.NguonHangService;
 
 public class NguonHangJInternalFrame extends JInternalFrame {
@@ -100,59 +94,49 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		txtTim.setText(" Tìm theo tên, số điện thoại");
 		txtTim.setColumns(10);
 		txtTim.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                findNguonHang();
-            }
-        });
+			@Override
+			public void keyReleased(KeyEvent e) {
+				findNguonHang();
+			}
+		});
 		txtTim.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
-                    txtTim.setText("");
-                }
-            }
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
+					txtTim.setText("");
+				}
+			}
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtTim.getText().equals("")) {
-                    txtTim.setText(" Tìm theo tên, số điện thoại");
-                }
-            }
-        });
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTim.getText().equals("")) {
+					txtTim.setText(" Tìm theo tên, số điện thoại");
+				}
+			}
+		});
 
 		JButton btnTim = new JButton("Tìm");
 		btnTim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNewLabel)
-					.addGap(5)
-					.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-					.addGap(365))
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(5)
-							.addComponent(lblNewLabel))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(6)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(lblNewLabel).addGap(5)
+						.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE).addGap(365)));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup().addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(lblNewLabel))
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(6)
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 30,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnTim, GroupLayout.PREFERRED_SIZE, 30,
+												GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel_2 = new JPanel();
@@ -187,35 +171,28 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 			}
 		});
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_2.createSequentialGroup().addContainerGap()
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(11, Short.MAX_VALUE))
+				.addGroup(gl_panel_2.createSequentialGroup().addContainerGap(73, Short.MAX_VALUE)
+						.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		gl_panel_2.setVerticalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(11, Short.MAX_VALUE))
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap(73, Short.MAX_VALUE)
-					.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
-					.addGap(50)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(235, Short.MAX_VALUE))
-		);
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE).addGap(50)
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(235, Short.MAX_VALUE)));
 
 		JLabel lblNewLabel_2 = new JLabel("Tên nguồn hàng");
 		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
@@ -238,36 +215,28 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
-		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+		gl_panel_3.setHorizontalGroup(gl_panel_3.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_3
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtNguonHang, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtSoDT, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(23, Short.MAX_VALUE))
-		);
-		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(29)
-					.addComponent(lblNewLabel_2)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtNguonHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtSoDT, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(52, Short.MAX_VALUE))
-		);
+				.addContainerGap(23, Short.MAX_VALUE)));
+		gl_panel_3.setVerticalGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup().addGap(29).addComponent(lblNewLabel_2)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(txtNguonHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(txtSoDT, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(txtDiaChi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(52, Short.MAX_VALUE)));
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
 
@@ -308,15 +277,17 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		listNguonHang = nguonHangService.findAll();
 		loadToTable();
 	}
+
 	protected void findNguonHang() {
-        try {
-            listNguonHang = nguonHangService.fillter(txtTim.getText());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        clear();
-        reloadTable();
-    }
+		try {
+			listNguonHang = nguonHangService.fillter(txtTim.getText());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		clear();
+		reloadTable();
+	}
+
 //	void findByNameNguonHang() {
 //		String name = txtTim.getText();
 //		listNguonHang = new NguonHangDAO().fillter(name);
@@ -347,24 +318,22 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 //		display(0);
 //	}
 	// hiển thị danh sách khach hàng lên table
-    private void loadToTable() {
-        try {
-            listNguonHang = nguonHangService.findAll();
-            reloadTable();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void reloadTable() {
-        modelNguonHang.setRowCount(0);
-        for (NguonHangModel i : listNguonHang) {
-            modelNguonHang.addRow(new Object[]{
-                    i.getTenNguonHang(),
-                    i.getDiaChi(),
-                    i.getSdt()
-            });
-        }
-    }
+	private void loadToTable() {
+		try {
+			listNguonHang = nguonHangService.findAll();
+			reloadTable();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void reloadTable() {
+		modelNguonHang.setRowCount(0);
+		for (NguonHangModel i : listNguonHang) {
+			modelNguonHang.addRow(new Object[] { i.getTenNguonHang(), i.getDiaChi(), i.getSdt() });
+		}
+	}
+
 	void display(int row) {
 		if (row > -1) {
 			tableNguonHang.setRowSelectionInterval(row, row);
@@ -373,73 +342,76 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 			txtSoDT.setText(listNguonHang.get(row).getSdt());
 		}
 	}
+
 	// sự kiện xóa trắng form nút "Tạo mới"
-    private void clear() {
-        txtNguonHang.setText("");
-        txtDiaChi.setText("");
-        txtSoDT.setText("");
-  
-    }
-    // Xóa nguồn hàng đã chọn
-    protected void btnXoa() {
-        if (JOptionPane.showConfirmDialog(this,
-                "Xác nhận xoá nguồn hàng có tên:  " + listNguonHang.get(tableNguonHang.getSelectedRow()).getTenNguonHang(), "Xoá",
-                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-            nguonHangService.delete(new Integer[]{listNguonHang.get(tableNguonHang.getSelectedRow()).getId()});
-            clear();
-            loadToTable();
-        }
-    }
-    private void btnThem() {
-    	int i=0;
-        if (checkNull(this, txtNguonHang.getText())
-                && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
-        	for(NguonHangModel x: listNguonHang) {
-        	if(x.getTenNguonHang().equals(txtNguonHang.getText())&& x.getSdt().equals(txtSoDT.getText()) ) {
-        		i++;
-        	 }
-        	}
-        	if(i>0){
-        		JOptionPane.showMessageDialog(this, "Nguồn hàng đã tồn tại");
-        		return;
-        	}
-        		else {
-            NguonHangModel nguonHangModel = new NguonHangModel();
-            nguonHangModel.setTenNguonHang(txtNguonHang.getText());
-            nguonHangModel.setSdt(txtSoDT.getText());
-            nguonHangModel.setDiaChi(txtDiaChi.getText());
-            if (nguonHangService.save(nguonHangModel) != null) {
-                EntityMessage.show(this, "Thêm thành công");
-            } else {
-                EntityMessage.show(this, "Thêm thất bại");
-            }
-            clear();
-            loadToTable();
-         }
-        }
-      }
-    protected void btnCapNhat() {
-        if (checkNull(this, txtNguonHang.getText())
-                && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
-            NguonHangModel nguonHangModel = new NguonHangModel();
-            nguonHangModel.setId(listNguonHang.get(tableNguonHang.getSelectedRow()).getId());
-            nguonHangModel.setTenNguonHang(txtNguonHang.getText());
-            nguonHangModel.setSdt(txtSoDT.getText());
-            nguonHangModel.setDiaChi(txtDiaChi.getText());
-            if (nguonHangService.update(nguonHangModel) != null) {
-                EntityMessage.show(this, "Cập nhật thành công");
-            } else {
-                EntityMessage.show(this, "Cập nhật thất bại");
-            }
-            clear();
-            loadToTable();
-        }
-    }
-    public boolean checkNull(Component component, String name) {
-    		if (name.isBlank()) {
-    			EntityMessage.show(component, "Họ tên không được để trống");
-    			return false;
-    		}
-    		return true;
-    	}
+	private void clear() {
+		txtNguonHang.setText("");
+		txtDiaChi.setText("");
+		txtSoDT.setText("");
+
+	}
+
+	// Xóa nguồn hàng đã chọn
+	protected void btnXoa() {
+		if (JOptionPane.showConfirmDialog(this,
+				"Xác nhận xoá nguồn hàng có tên:  "
+						+ listNguonHang.get(tableNguonHang.getSelectedRow()).getTenNguonHang(),
+				"Xoá", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+			nguonHangService.delete(new Integer[] { listNguonHang.get(tableNguonHang.getSelectedRow()).getId() });
+			clear();
+			loadToTable();
+		}
+	}
+
+	private void btnThem() {
+		int i = 0;
+		if (checkNull(this, txtNguonHang.getText()) && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
+			for (NguonHangModel x : listNguonHang) {
+				if (x.getTenNguonHang().equals(txtNguonHang.getText()) && x.getSdt().equals(txtSoDT.getText())) {
+					i++;
+				}
+			}
+			if (i > 0) {
+				JOptionPane.showMessageDialog(this, "Nguồn hàng đã tồn tại");
+				return;
+			} else {
+				NguonHangModel nguonHangModel = new NguonHangModel();
+				nguonHangModel.setTenNguonHang(txtNguonHang.getText());
+				nguonHangModel.setSdt(txtSoDT.getText());
+				nguonHangModel.setDiaChi(txtDiaChi.getText());
+				if (nguonHangService.save(nguonHangModel) != null) {
+					EntityMessage.show(this, "Thêm thành công");
+				} else {
+					EntityMessage.show(this, "Thêm thất bại");
+				}
+				clear();
+				loadToTable();
+			}
+		}
+	}
+
+	protected void btnCapNhat() {
+		if (checkNull(this, txtNguonHang.getText()) && EntityValidate.checkPhoneNumber(this, txtSoDT.getText())) {
+			NguonHangModel nguonHangModel = new NguonHangModel();
+			nguonHangModel.setId(listNguonHang.get(tableNguonHang.getSelectedRow()).getId());
+			nguonHangModel.setTenNguonHang(txtNguonHang.getText());
+			nguonHangModel.setSdt(txtSoDT.getText());
+			nguonHangModel.setDiaChi(txtDiaChi.getText());
+			if (nguonHangService.update(nguonHangModel) != null) {
+				EntityMessage.show(this, "Cập nhật thành công");
+			} else {
+				EntityMessage.show(this, "Cập nhật thất bại");
+			}
+			clear();
+			loadToTable();
+		}
+	}
+
+	public boolean checkNull(Component component, String name) {
+		if (name.isBlank()) {
+			EntityMessage.show(component, "Họ tên không được để trống");
+			return false;
+		}
+		return true;
+	}
 }

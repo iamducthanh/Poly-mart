@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface IHoaDonNhapHangService {
 
-    List<HoaDonNhapHangModel> findAll();
+	List<HoaDonNhapHangModel> findAll();
 
-    HoaDonNhapHangModel save(HoaDonNhapHangModel hoaDonNhapHangModel);
+	HoaDonNhapHangModel save(HoaDonNhapHangModel hoaDonNhapHangModel);
 
-    boolean remove(HoaDonNhapHangModel hoaDonNhapHangModel);
+	boolean remove(HoaDonNhapHangModel hoaDonNhapHangModel);
 
-    HoaDonNhapHangModel findById(Integer id);
+	HoaDonNhapHangModel findById(Integer id);
 
-    List<HoaDonNhapHangModel> filterByDate(Timestamp timestamp);
+	List<HoaDonNhapHangModel> filterByDate(Timestamp timestamp);
 
 }

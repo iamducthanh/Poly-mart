@@ -3,13 +3,12 @@ package com.polymart.ui.nhanvien;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,16 +16,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-import com.polymart.dao.impl.ChamCongDAO;
-import com.polymart.entity.EntityMessage;
-import com.polymart.model.BangLuongModel;
-import com.polymart.model.ChamCongModel;
-import com.polymart.model.NhanVienModel;
-import com.polymart.service.impl.NhanVienService;
-import com.toedter.calendar.JMonthChooser;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -37,9 +26,13 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+
+import com.polymart.dao.impl.ChamCongDAO;
+import com.polymart.entity.EntityMessage;
+import com.polymart.model.BangLuongModel;
+import com.polymart.model.ChamCongModel;
+import com.polymart.model.NhanVienModel;
+import com.polymart.service.impl.NhanVienService;
 
 public class BangLuongJIternalFrame extends JInternalFrame {
 
@@ -49,11 +42,11 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	JPanel panel = new JPanel();
 	private JTable tableBangLuong;
 	DefaultTableModel modelBangLuong = new DefaultTableModel();
-	private List<ChamCongModel> listChamCong = new ArrayList();
-	private List<NhanVienModel> listNhanVien = new ArrayList();
-	private List<BangLuongModel> listBangLuong = new ArrayList();
-	JComboBox cboThang = new JComboBox();
-	JComboBox cboNam = new JComboBox();
+	private List<ChamCongModel> listChamCong = new ArrayList<ChamCongModel>();
+	private List<NhanVienModel> listNhanVien = new ArrayList<NhanVienModel>();
+	private List<BangLuongModel> listBangLuong = new ArrayList<BangLuongModel>();
+	JComboBox<Object> cboThang = new JComboBox<Object>();
+	JComboBox<String> cboNam = new JComboBox<String>();
 	JLabel lblBangLuong = new JLabel("  Bảng lương            ");
 
 	/**
@@ -95,22 +88,18 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 		JButton btnNewButton = new JButton("Lưu");
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				gl_panel.createSequentialGroup()
+						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap()));
 		panel.setLayout(gl_panel);
 
 		JLabel lblNewLabel = new JLabel("Năm");
@@ -120,38 +109,30 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		lblThng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(28, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel_1
+				.createSequentialGroup().addContainerGap(28, Short.MAX_VALUE)
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-							.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
+								.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-							.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-							.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(14)
-					.addComponent(lblNewLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(445, Short.MAX_VALUE))
-		);
+								.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap()));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup().addGap(14).addComponent(lblNewLabel)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(445, Short.MAX_VALUE)));
 		cboThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				timKiemLuongTheoThang();
 			}
 		});
-		cboThang.setModel(new DefaultComboBoxModel(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
+		cboThang.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
 				"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
 		panel_1.setLayout(gl_panel_1);
 
@@ -178,12 +159,12 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		String thang = cboThang.getSelectedItem().toString().replace("Tháng ", "");
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
-		int moth =c.get(Calendar.MONTH);
-		if(Integer.parseInt(thang)>moth && Integer.parseInt(nam)>=year ) {
+		int moth = c.get(Calendar.MONTH);
+		if (Integer.parseInt(thang) > moth && Integer.parseInt(nam) >= year) {
 			EntityMessage.show(null, "Chưa Đến Tháng Tính Lương");
 			return;
 		}
-		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
+		lblBangLuong.setText("Bảng Lương Tháng " + thang + " Năm " + nam);
 		loadListChamCong(nam, thang);
 		loadTbaleLuong();
 
@@ -197,7 +178,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		for (String string : listNam) {
 			vector.add(string);
 		}
-		cboNam.setModel(new DefaultComboBoxModel(vector));
+		cboNam.setModel(new DefaultComboBoxModel<String>(vector));
 	}
 
 	private void moBangLuongThangGanNhat() {
@@ -206,9 +187,11 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		int thang = c.get(Calendar.MONTH);
 		loadListChamCong(String.valueOf(nam), String.valueOf(thang));
 		loadTbaleLuong();
+
 		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
 		cboThang.setSelectedIndex(thang-1);
 		cboNam.setSelectedItem(String.valueOf(nam));
+
 	}
 
 	private void loadListChamCong(String nam, String thang) {
@@ -227,7 +210,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 	private void loadListNhanVien() {
 		listNhanVien.clear();
-		List<NhanVienModel> list = new ArrayList();
+		List<NhanVienModel> list = new ArrayList<NhanVienModel>();
 		NhanVienService nhanVienService = new NhanVienService();
 		try {
 			list = nhanVienService.findAll();

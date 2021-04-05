@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -21,11 +23,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -44,8 +44,6 @@ import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 import com.toedter.calendar.JCalendar;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
 
@@ -154,7 +152,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				loadListChamCongNgay();
 				loadTableChamCong();
-				txtTimKiem.setEnabled(false);;
+				txtTimKiem.setEnabled(false);
+				;
 			}
 		});
 
@@ -185,20 +184,20 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-				panel1.add(btnXoa);
-				
-						btnXoa.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								xoaNhanVienChamCong();
-							}
-						});
-				panel1.add(btnAdd);
-		
-				btnAdd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						luuChamCong();
-					}
-				});
+		panel1.add(btnXoa);
+
+		btnXoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				xoaNhanVienChamCong();
+			}
+		});
+		panel1.add(btnAdd);
+
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				luuChamCong();
+			}
+		});
 
 		JButton btnTimTheoThang = new JButton("Tìm Theo Tháng");
 		btnTimTheoThang.addActionListener(new ActionListener() {
@@ -221,39 +220,27 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		});
 
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
-		gl_panelLeft.setHorizontalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panelLeft.createSequentialGroup()
-							.addGap(10)
-							.addComponent(btnTimTheoThang)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnMoChamCong))
-						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		gl_panelLeft.setVerticalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnTimTheoThang)
-						.addComponent(btnMoChamCong))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnChamCong)
-					.addGap(19))
-		);
+		gl_panelLeft.setHorizontalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+								.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelLeft.createSequentialGroup().addGap(10).addComponent(btnTimTheoThang)
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnMoChamCong))
+								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap()));
+		gl_panelLeft.setVerticalGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap()
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE).addComponent(btnTimTheoThang)
+								.addComponent(btnMoChamCong))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnChamCong).addGap(19)));
 
 		tableNhanVienChamCong = new JTable();
 		scrollPane_1.setViewportView(tableNhanVienChamCong);
@@ -428,7 +415,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			calendar.setTime(chamCongModel.getNgayChamCong());
 			int day = chamCongModel.getNgayChamCong().getDay();
 			int i = 0;
-			String gioChamCong =sdf.format(chamCongModel.getNgayChamCong());
+			String gioChamCong = sdf.format(chamCongModel.getNgayChamCong());
 			try {
 				i = sdf.parse(gioChamCong).compareTo(sdf.parse("8:00:00 AM"));
 			} catch (ParseException e) {

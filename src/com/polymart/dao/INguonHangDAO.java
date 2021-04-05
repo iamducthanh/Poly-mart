@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface INguonHangDAO extends GenericDAO<NguonHangModel> {
 
-List<NguonHangModel> findAll();
-    
-    Integer save(NguonHangModel nguonHangModel);
+	List<NguonHangModel> findAll();
+
+	Integer save(NguonHangModel nguonHangModel);
 
 	void update(NguonHangModel nguonHangModel);
 
@@ -17,5 +17,6 @@ List<NguonHangModel> findAll();
 	NguonHangModel findOne(Integer id);
 
 	List<NguonHangModel> fillter(String nameOrPhone);
+
 	String getNameById(Integer id);
 }

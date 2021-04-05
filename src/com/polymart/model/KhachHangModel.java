@@ -40,9 +40,8 @@ public class KhachHangModel extends AbstractModel {
 
 	@Override
 	public String toString() {
-		return "KhachHangModel [ma = " + getId() +", hoTen=" + hoTen + ", sdt=" + sdt + ", diaChi=" + diaChi + ", tichDiem=" + tichDiem
-				+ "]";
+		return "KhachHangModel [ma = " + getId() + ", hoTen=" + hoTen + ", sdt=" + sdt + ", diaChi=" + diaChi
+				+ ", tichDiem=" + tichDiem + "]";
 	}
-	
-	
+
 }

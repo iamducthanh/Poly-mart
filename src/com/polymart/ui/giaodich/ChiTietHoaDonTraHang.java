@@ -10,16 +10,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Toolkit;
 
 public class ChiTietHoaDonTraHang extends JFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8080716429179868714L;
+	
 	private JPanel contentPane;
 	private JTable tableChiTietHoaDonTraHang;
-	DefaultTableModel modelChiTietHoaDonTraHang = new DefaultTableModel();
+	private DefaultTableModel modelChiTietHoaDonTraHang;
 
 	/**
 	 * Launch the application.
@@ -42,46 +41,55 @@ public class ChiTietHoaDonTraHang extends JFrame {
 	 * Create the frame.
 	 */
 	public ChiTietHoaDonTraHang() {
+		modelChiTietHoaDonTraHang = new DefaultTableModel() {
+			
+			private static final long serialVersionUID = -4228410111804596908L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		setTitle("Chi tiết hóa đơn trả hàng");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 877, 594);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Chi tiết hóa đơn trả hàng");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setBounds(20, 11, 307, 39);
 		contentPane.add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Mã hóa đơn trả hàng: ");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setBounds(30, 61, 170, 25);
 		contentPane.add(lblNewLabel_1);
-		
+
 		JLabel lblMaHoaDon = new JLabel("Cái label này để hiển thị mã hóa đơn trả hàng");
 		lblMaHoaDon.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblMaHoaDon.setBounds(210, 61, 387, 25);
 		contentPane.add(lblMaHoaDon);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 155, 819, 391);
 		contentPane.add(scrollPane);
-		
+
 		tableChiTietHoaDonTraHang = new JTable();
 		scrollPane.setViewportView(tableChiTietHoaDonTraHang);
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Khách hàng:");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1_1.setBounds(30, 96, 170, 25);
 		contentPane.add(lblNewLabel_1_1);
-		
+
 		JLabel lblCiLabelNy = new JLabel("Cái label này để hiển thị khách hàng");
 		lblCiLabelNy.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblCiLabelNy.setBounds(136, 97, 387, 25);
 		contentPane.add(lblCiLabelNy);
-		
+
 		modelChiTietHoaDonTraHang.addColumn("Mã sản phẩm");
 		modelChiTietHoaDonTraHang.addColumn("Tên sản phẩm");
 		modelChiTietHoaDonTraHang.addColumn("Số lượng");

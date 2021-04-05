@@ -180,7 +180,8 @@ public class ChangePassFrame extends JFrame {
 	}
 
 	public void changePassword(String newPassword, String confirmNewPassword) {
-		if (EntityValidate.checkNewPasswordChange(this, newPassword) && EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
+		if (EntityValidate.checkNewPasswordChange(this, newPassword)
+				&& EntityValidate.checkConfirmNewPasswordChange(this, confirmNewPassword)) {
 			String oldPassword = EntityMessage.porm(this, "Nhập mật khẩu cũ:");
 			if (EntityValidate.checkOldPasswordChange(this, oldPassword)) {
 				EntityAuthorization.USER.setMatKhau(newPassword);

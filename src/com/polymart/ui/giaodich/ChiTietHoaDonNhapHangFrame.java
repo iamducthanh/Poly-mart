@@ -1,14 +1,9 @@
 package com.polymart.ui.giaodich;
 
-import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.INguonHangService;
-import com.polymart.service.ISanPhamService;
-import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.NguonHangService;
-import com.polymart.service.impl.SanPhamService;
-
-import java.awt.*;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -19,17 +14,20 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.model.ChiTietHoaDonNhapHangModel;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.ISanPhamService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.SanPhamService;
+
 public class ChiTietHoaDonNhapHangFrame extends JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -1275654074282876688L;
+
     private JPanel contentPane;
     private JTable tableChiTietHoaDonNhap;
     private DefaultTableModel modelChiTietHoaDonNhap;
 
-    private INguonHangService nguonHangService = new NguonHangService();
     private ISanPhamService sanPhamService = new SanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
@@ -58,12 +56,12 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
     	setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
     }
 
-    public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, Integer idNguonHang) {
+    public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang) {
         modelChiTietHoaDonNhap = new DefaultTableModel() {
-        	
-			private static final long serialVersionUID = 7584408658853210846L;
 
-			@Override
+            private static final long serialVersionUID = 7584408658853210846L;
+
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -117,15 +115,12 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
 
         if (lstChiTietHoaDonNhapHang != null && !lstChiTietHoaDonNhapHang.isEmpty()) {
             lblMaHoaDon.setText(lstChiTietHoaDonNhapHang.get(0).getIdHoaDonNhapHang().toString());
-            lblTenNguonHang.setText(nguonHangService.getNameById(idNguonHang));
+            lblTenNguonHang.setText(nguonHang);
             for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhapHang) {
                 modelChiTietHoaDonNhap.addRow(new Object[]{
-                        x.getIdChiTietSanPham(),
-                        sanPhamService.findByID(chiTietSanPhamService.getIdProductById(x.getIdChiTietSanPham())).getTenSP(),
-                        x.getSoLuong(),
-                        x.getGiaNhap(),
-                        x.getSoLuong() * x.getSoLuong()
-                });
+                        x.getIdChiTietSanPham(), sanPhamService
+                        .findByID(chiTietSanPhamService.getIdProductById(x.getIdChiTietSanPham())).getTenSP(),
+                        x.getSoLuong(), x.getGiaNhap(), x.getGiaNhap() * x.getSoLuong()});
             }
         }
 

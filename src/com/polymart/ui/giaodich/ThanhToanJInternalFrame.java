@@ -11,6 +11,11 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -35,6 +40,20 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
+import com.polymart.model.HoaDonThanhToanModel;
+import com.polymart.service.IChiTietHoaDonThanhToanService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.IHoaDonThanhToanService;
+import com.polymart.service.IKhachHangService;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.HoaDonThanhToanService;
+import com.polymart.service.impl.KhachHangService;
+import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -47,11 +66,11 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     private JPanel panel1 = new JPanel();
     private JPanel hangHoaJPanel = new JPanel();
 
-    private JTextField txtTimPhieuNhap;
+    private JTextField txtTimHoaDon;
     private JFrame optionKiemKhoFrame = new JFrame();
     private JPanel panelOption;
     private JTable tableThanhToan;
-    private DefaultTableModel modelThanhToan = new DefaultTableModel();
+    private DefaultTableModel modelThanhToan;
 
     private JTextField txtMaNhanVien;
     private JTextField txtMaKhachHang;
@@ -65,6 +84,14 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     private JTextField txtSoLuong;
     private JTextField txtGiamGia;
     private JTextField txtTongTien;
+
+    private IHoaDonThanhToanService hoaDonThanhToanService = new HoaDonThanhToanService();
+    private IChiTietHoaDonThanhToanService chiTietHoaDonThanhToanService = new ChiTietHoaDonThanhToanService();
+    private IKhachHangService khachHangService = new KhachHangService();
+    private INhanVienService nhanVienService = new NhanVienService();
+    private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
+
+    private List<HoaDonThanhToanModel> lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
 
     /**
      * Launch the application.
@@ -87,8 +114,17 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
      */
     public ThanhToanJInternalFrame() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        modelThanhToan = new DefaultTableModel() {
+
+            private static final long serialVersionUID = -8747914044493540900L;
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //	setBounds(100, 100, 1920, 639);
+        // setBounds(100, 100, 1920, 639);
         setFocusable(true);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -104,7 +140,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
         initTopThanhToan();
         initCenterThanhToan();
-        //	initFrameThem();
+//        initFrameThem();
     }
 
     public void initTopThanhToan() {
@@ -112,22 +148,22 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
         panel.add(lblNewLabel, BorderLayout.WEST);
 
-        txtTimPhieuNhap = new JTextField();
-        txtTimPhieuNhap.setText(" TÌm theo mã phiếu nhập");
-        panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
-        txtTimPhieuNhap.setColumns(10);
-        txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
+        txtTimHoaDon = new JTextField();
+        txtTimHoaDon.setText("Tìm theo mã hóa đơn");
+        panel.add(txtTimHoaDon, BorderLayout.CENTER);
+        txtTimHoaDon.setColumns(10);
+        txtTimHoaDon.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtTimPhieuNhap.getText().equals(" TÌm theo mã phiếu")) {
-                    txtTimPhieuNhap.setText("");
+                if (txtTimHoaDon.getText().equals("Tìm theo mã hóa đơn")) {
+                    txtTimHoaDon.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (txtTimPhieuNhap.getText().equals("")) {
-                    txtTimPhieuNhap.setText(" TÌm theo mã phiếu");
+                if (txtTimHoaDon.getText().equals("")) {
+                    txtTimHoaDon.setText("Tìm theo mã hóa đơn");
                 }
             }
         });
@@ -158,7 +194,28 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         cbbOptionKiemKho.addItem("≡");
         panel1.add(cbbOptionKiemKho);
 
-        btnThemPhieuNhap.addActionListener(openThemHoaDonThanhToan);
+        btnThemPhieuNhap.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setOpenThemHoaDonThanhToan();
+            }
+        });
+
+        // tìm kiếm
+        btnTimKiem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnSearchById(txtTimHoaDon);
+            }
+        });
+
+        // xóa
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnXoa(tableThanhToan);
+            }
+        });
 
     }
 
@@ -167,31 +224,24 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         contentPane.add(scrollPane, BorderLayout.CENTER);
         JLabel lblNewLabel_9 = new JLabel("Thời gian");
 
-        JDateChooser dateChooser = new JDateChooser();
+        JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-        gl_hangHoaJPanel.setHorizontalGroup(
-                gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnLocTheoNgay)
-                                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        gl_hangHoaJPanel.setVerticalGroup(
-                gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
-                                .addGap(5)
-                                .addComponent(lblNewLabel_9)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
+        gl_hangHoaJPanel.setHorizontalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
+                .addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap()
+                        .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+                                .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnLocTheoNgay)
-                                .addContainerGap(141, Short.MAX_VALUE))
-        );
+                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        gl_hangHoaJPanel.setVerticalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_hangHoaJPanel.createSequentialGroup().addGap(5).addComponent(lblNewLabel_9)
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+                                GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnLocTheoNgay)
+                        .addContainerGap(141, Short.MAX_VALUE)));
 
         hangHoaJPanel.setLayout(gl_hangHoaJPanel);
         panel.add(panel1, BorderLayout.EAST);
@@ -200,12 +250,10 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         tableThanhToan = new JTable();
         scrollPane.setViewportView(tableThanhToan);
         modelThanhToan.addColumn("Mã hóa đơn");
-        modelThanhToan.addColumn("Ngày tạo");
         modelThanhToan.addColumn("Mã khách hàng");
         modelThanhToan.addColumn("Mã nhân viên");
-        modelThanhToan.addColumn("Địa điểm");
         modelThanhToan.addColumn("Tổng tiền");
-        modelThanhToan.addColumn("Trạng thái");
+        modelThanhToan.addColumn("Ngày tạo");
         modelThanhToan.addColumn("Ghi chú");
 
         tableThanhToan.setModel(modelThanhToan);
@@ -222,7 +270,118 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 //		table.getColumnModel().getColumn(8).setPreferredWidth(130);
 //		table.getColumnModel().getColumn(9).setPreferredWidth(130);
 
+        // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
+        tableThanhToan.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                if (mouseEvent.getClickCount() == 2) {
+                    int row = tableThanhToan.getSelectedRow();
+                    if (row > -1 && row < tableThanhToan.getRowCount()) {
+                        HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
+                        List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
+                                .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
+                        ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan(
+                                lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang());
+                        chiTietHoaDonThanhToan.setVisible(true);
+                    }
+                }
+            }
+        });
 
+        // hiển thị hóa đơn lên table
+        showTable(lstHoaDonThanhToanModels);
+
+        // lọc theo ngày
+        btnLocTheoNgay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLoc(dateChooser);
+            }
+        });
+
+    }
+
+    private void setOpenThemHoaDonThanhToan() {
+        ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame(this);
+        EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonThanhToan);
+        themHoaDonThanhToan.setVisible(true);
+    }
+
+    // hiển thị danh sách hóa dơn lên bảng
+    public void showTable(List<HoaDonThanhToanModel> lst) {
+        if (!lst.isEmpty()) {
+            modelThanhToan.setRowCount(0);
+            for (HoaDonThanhToanModel x : lst) {
+                List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
+                        .findByIdHoaDonThanhToan(x.getId());
+                modelThanhToan.addRow(new Object[]{x.getId(), khachHangService.findOne(x.getIdKhachHang()).getHoTen(),
+                        x.getIdNhanVien() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
+                        lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
+                                * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
+                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())).sum(),
+                        new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()), x.getGhiChu()});
+            }
+        }
+    }
+
+    // xóa một hàng trên table
+    private void evtBtnXoa(JTable tbNhapHang) {
+        if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
+            int row = tbNhapHang.getSelectedRow();
+            if (row > -1 && row < tbNhapHang.getRowCount()) {
+                HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
+                if (hoaDonThanhToanService.remove(hoaDonThanhToanModel)) {
+                    EntityMessage.show(this, "Xóa thành công");
+                    modelThanhToan.removeRow(row);
+                    chiTietHoaDonThanhToanService.reloadData();
+                    chiTietSanPhamService.reloadData();
+                } else {
+                    EntityMessage.show(this, "Xóa thất bại");
+                }
+            } else {
+                EntityMessage.show(this, "Vui lòng chọn 1 hàng");
+            }
+        }
+    }
+
+    // tìm kiếm mã hóa đơn hàng
+    private void evtBtnSearchById(JTextField txtInputId) {
+        String getID = txtInputId.getText();
+        if (getID.equals("Tìm theo mã hóa đơn")) {
+            showTable(getList());
+        } else {
+            if (EntityValidate.checkIdNumber(this, getID)) {
+                HoaDonThanhToanModel hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(getID));
+                if (hoaDonThanhToanModel == null) {
+                    EntityMessage.show(this, "Mã hóa đơn không tồn tại");
+                } else {
+                    lstHoaDonThanhToanModels = new ArrayList<>();
+                    lstHoaDonThanhToanModels.add(hoaDonThanhToanModel);
+                    showTable(lstHoaDonThanhToanModels);
+                }
+            }
+        }
+    }
+
+    // lọc theo ngày được chọn
+    private void evtBtnLoc(JDateChooser dateChooser) {
+        try {
+            Timestamp timestamp = new Timestamp(dateChooser.getCalendar().getTimeInMillis());
+            List<HoaDonThanhToanModel> lstLoc = hoaDonThanhToanService.filterByDate(timestamp);
+            if (lstLoc.isEmpty()) {
+                EntityMessage.show(this, "Không có hóa đơn nào trong ngày được chọn");
+                getList();
+            } else {
+                lstHoaDonThanhToanModels = lstLoc;
+            }
+            showTable(lstHoaDonThanhToanModels);
+        } catch (Exception e) {
+            EntityMessage.show(this, "Mời chọn ngày muốn tìm");
+        }
+    }
+
+    // getdata list
+    public List<HoaDonThanhToanModel> getList() {
+        return lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
     }
 
     public void initFrameThem() {
@@ -247,7 +406,9 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         contentNhaPanel.setLayout(null);
 
         JPanel panel = new JPanel();
-        panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Th\u00F4ng tin phi\u1EBFu nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+        panel.setBorder(new TitledBorder(
+                new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+                "Th\u00F4ng tin phi\u1EBFu nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
         panel.setBounds(10, 11, 595, 510);
         contentNhaPanel.add(panel);
         panel.setLayout(null);
@@ -373,26 +534,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         contentNhaPanel.add(btnLuu);
         themPhieuNhapFrame.setVisible(true);
 
-        //Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
-        tableThanhToan.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() == 2) {
-                    ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan();
-                    chiTietHoaDonThanhToan.setVisible(true);
-                }
-            }
-        });
-
     }
 
-    ActionListener openThemHoaDonThanhToan = new ActionListener() {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame();
-            EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonThanhToan);
-            themHoaDonThanhToan.setVisible(true);
-
-        }
-    };
 }

@@ -7,9 +7,9 @@ import com.polymart.model.SanPhamModel;
 import java.util.List;
 
 public class SanPhamDAO extends AbstractDAO<SanPhamModel> implements ISanPhamDAO {
-    @Override
-    public List<SanPhamModel> findAll() {
-        String sql = "SELECT * FROM SANPHAM";
-        return query(sql, new SanPhamMapper());
-    }
+	@Override
+	public List<SanPhamModel> findAll() {
+		String sql = "SELECT * FROM SANPHAM";
+		return query(sql, new SanPhamMapper());
+	}
 }

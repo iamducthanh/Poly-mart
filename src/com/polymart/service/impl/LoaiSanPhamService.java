@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 
 public class LoaiSanPhamService implements ILoaiSanPhamService {
 
-    private static ILoaiSanPhamDAO loaiSanPhamDAO = new LoaiSanPhamDAO();
-    private static List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamDAO.findAll();
+	private static ILoaiSanPhamDAO loaiSanPhamDAO = new LoaiSanPhamDAO();
+	private static List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamDAO.findAll();
 
-    @Override
-    public String findNameById(Integer id) {
-        List<LoaiSanPhamModel> lst = lstLoaiSanPham.stream().filter(e -> e.getId() == id).collect(Collectors.toList());
-        return lst.isEmpty() ? null : lst.get(0).getTenLoaiSP();
-    }
+	@Override
+	public String findNameById(Integer id) {
+		List<LoaiSanPhamModel> lst = lstLoaiSanPham.stream().filter(e -> e.getId().equals(id))
+				.collect(Collectors.toList());
+		return lst.isEmpty() ? null : lst.get(0).getTenLoaiSP();
+	}
 }

@@ -33,15 +33,15 @@ public class KhachHangDAO extends AbstractDAO<KhachHangModel> implements IKhachH
 
 	@Override
 	public void delete(Integer id) {
-        String sql = "DELETE KHACHHANG WHERE ID = ?";
-        update(sql, id);
+		String sql = "DELETE KHACHHANG WHERE ID = ?";
+		update(sql, id);
 	}
 
 	@Override
 	public KhachHangModel findOne(Integer id) {
-        String sql = "SELECT*FROM KHACHHANG WHERE ID = ?";
-        List<KhachHangModel> list = query(sql, new KhachHangMapper(), id);
-        return list.isEmpty() ? null : list.get(0);
+		String sql = "SELECT*FROM KHACHHANG WHERE ID = ?";
+		List<KhachHangModel> list = query(sql, new KhachHangMapper(), id);
+		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class KhachHangDAO extends AbstractDAO<KhachHangModel> implements IKhachH
 		String sql = "SELECT*FROM KHACHHANG WHERE HOTEN LIKE ? OR SODIENTHOAI LIKE ?";
 		return query(sql, new KhachHangMapper(), "%" + nameOrPhone + "%", "%" + nameOrPhone + "%");
 	}
-	
+
 //	public static void main(String[] args) {
 //		IKhachHangService nv = new KhachHangService();
 //		List<KhachHangModel> list = nv.filter("a");

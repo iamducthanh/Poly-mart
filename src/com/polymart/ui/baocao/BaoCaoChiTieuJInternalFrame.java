@@ -93,13 +93,13 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-		
+
 		JButton btnTimKiem = new JButton("Tìm kiếm");
-		
+
 		JButton btnThmMi = new JButton("- Xóa");
-		
+
 		JButton btnCpNht = new JButton("↹ Cập nhật");
-		
+
 		JButton btnThmMi_2 = new JButton("+ Thêm mới");
 		btnThmMi_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,8 +137,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 							.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 							.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
 
 	}
@@ -170,24 +169,16 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 			}
 		});
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
-		gl_panelLeft.setHorizontalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addGap(5)
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnNewButton))
-		);
-		gl_panelLeft.setVerticalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addGap(5)
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton)
-					.addContainerGap(392, Short.MAX_VALUE))
-		);
+		gl_panelLeft.setHorizontalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup().addGap(5).addComponent(dateChamCong,
+						GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap().addComponent(btnNewButton)));
+		gl_panelLeft.setVerticalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup().addGap(5)
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnNewButton)
+						.addContainerGap(392, Short.MAX_VALUE)));
 		panelLeft.setLayout(gl_panelLeft);
 	}
 

@@ -31,11 +31,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ThemTraHangJInternalFrame extends JInternalFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -1044582693223562703L;
+	
 	private JPanel contentPane;
 	DefaultTableModel modelDanhSachHoaDon = new DefaultTableModel();
 	DefaultTableModel modelDanhSachSanPham = new DefaultTableModel();
@@ -262,11 +260,11 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
-		
+
 		tableDanhSachHoaDON.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(modelDanhSachHoaDon.getRowCount() >= 0) {
+				if (modelDanhSachHoaDon.getRowCount() >= 0) {
 					String soLuong = JOptionPane.showInputDialog("Nhập số lượng cần hoàn trả");
 				}
 			}

@@ -35,200 +35,199 @@ import com.polymart.ui.PolyMartMain;
 
 public class LoginJFrame extends JFrame {
 
-    private static final long serialVersionUID = 2723825969344724367L;
+	private static final long serialVersionUID = 2723825969344724367L;
 
-    private JPanel contentPane;
-    private JTextField txtUsername;
-    private JPasswordField txtPassword;
-    private JButton btnLogin = new JButton("Đăng nhập");
-    private JButton btnCancel;
+	private JPanel contentPane;
+	private JTextField txtUsername;
+	private JPasswordField txtPassword;
+	private JButton btnLogin = new JButton("Đăng nhập");
+	private JButton btnCancel;
 
-    private INhanVienService nhanVienService = new NhanVienService();
+	private INhanVienService nhanVienService = new NhanVienService();
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
 					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-                    LoginJFrame loginJFrame = new LoginJFrame();
-                    loginJFrame.setVisible(true);
-                    loginJFrame.setTitle("Đăng nhập");
-                    loginJFrame.setLocationRelativeTo(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+					LoginJFrame loginJFrame = new LoginJFrame();
+					loginJFrame.setVisible(true);
+					loginJFrame.setTitle("Đăng nhập");
+					loginJFrame.setLocationRelativeTo(null);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
-    public LoginJFrame() {
-        setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
-        setTitle("Đăng nhập");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 682, 384);
-        contentPane = new JPanel();
-        contentPane.setBackground(Color.WHITE);
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setFocusable(true);
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
-        setLocationRelativeTo(null);
+	public LoginJFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+		setTitle("Đăng nhập");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 682, 384);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setFocusable(true);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 
-        txtUsername = new JTextField("10001");
-        txtUsername.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                loginKeyPressed(e);
-            }
-        });
-        txtUsername.setForeground(Color.black);
-        txtUsername.setBackground(Color.white);
-        txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtUsername.setColumns(10);
-        txtUsername.setBorder(new LineBorder(Color.WHITE));
-        txtUsername.setBounds(342, 77, 257, 35);
+		txtUsername = new JTextField("10001");
+		txtUsername.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				loginKeyPressed(e);
+			}
+		});
+		txtUsername.setForeground(Color.black);
+		txtUsername.setBackground(Color.white);
+		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtUsername.setColumns(10);
+		txtUsername.setBorder(new LineBorder(Color.WHITE));
+		txtUsername.setBounds(342, 77, 257, 35);
 
-        contentPane.add(txtUsername);
+		contentPane.add(txtUsername);
 
-        txtPassword = new JPasswordField();
-        txtPassword.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                loginKeyPressed(e);
-            }
-        });
-        txtPassword.setForeground(Color.black);
-        txtPassword.setBackground(Color.white);
-        txtPassword.setText("12345678");
-        txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtPassword.setColumns(10);
-        txtPassword.setBorder(new LineBorder(Color.WHITE));
-        txtPassword.setBounds(342, 138, 257, 35);
-        contentPane.add(txtPassword);
+		txtPassword = new JPasswordField();
+		txtPassword.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				loginKeyPressed(e);
+			}
+		});
+		txtPassword.setForeground(Color.black);
+		txtPassword.setBackground(Color.white);
+		txtPassword.setText("12345678");
+		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtPassword.setColumns(10);
+		txtPassword.setBorder(new LineBorder(Color.WHITE));
+		txtPassword.setBounds(342, 138, 257, 35);
+		contentPane.add(txtPassword);
 
-        JLabel lblLogin = new JLabel("XIN CHÀO!");
-        lblLogin.setForeground(Color.BLACK);
-        lblLogin.setFont(new Font("Ink Free", Font.BOLD, 22));
-        lblLogin.setBounds(413, 26, 203, 40);
-        contentPane.add(lblLogin);
-        btnLogin.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
+		JLabel lblLogin = new JLabel("XIN CHÀO!");
+		lblLogin.setForeground(Color.BLACK);
+		lblLogin.setFont(new Font("Ink Free", Font.BOLD, 22));
+		lblLogin.setBounds(413, 26, 203, 40);
+		contentPane.add(lblLogin);
+		btnLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            }
-        });
-        btnLogin.setIcon(null);
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		btnLogin.setIcon(null);
 
-        btnLogin.setForeground(Color.WHITE);
-        btnLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                login();
-            }
-        });
-        btnLogin.setBorder(new LineBorder(Color.WHITE));
-        btnLogin.setBackground(Color.BLACK);
-        btnLogin.setBounds(328, 208, 288, 45);
-        contentPane.add(btnLogin);
+		btnLogin.setForeground(Color.WHITE);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				login();
+			}
+		});
+		btnLogin.setBorder(new LineBorder(Color.WHITE));
+		btnLogin.setBackground(Color.BLACK);
+		btnLogin.setBounds(328, 208, 288, 45);
+		contentPane.add(btnLogin);
 
+		JLabel lblUser = new JLabel("");
+		lblUser.setIcon(new ImageIcon("images\\logoLO.png"));
+		lblUser.setBounds(20, 0, 279, 340);
+		contentPane.add(lblUser);
 
-        JLabel lblUser = new JLabel("");
-        lblUser.setIcon(new ImageIcon("images\\logoLO.png"));
-        lblUser.setBounds(20, 0, 279, 340);
-        contentPane.add(lblUser);
+		txtUsername.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtUsername.getText().equals(" Username")) {
+					txtUsername.setText("");
+				}
+			}
 
-        txtUsername.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtUsername.getText().equals(" Username")) {
-                    txtUsername.setText("");
-                }
-            }
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtUsername.getText().equals("")) {
+					txtUsername.setText(" Username");
+				}
+			}
+		});
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtUsername.getText().equals("")) {
-                    txtUsername.setText(" Username");
-                }
-            }
-        });
+		txtPassword.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (String.valueOf(txtPassword.getPassword()).equals(" Password")) {
+					txtPassword.setText("");
+				}
+			}
 
-        txtPassword.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (String.valueOf(txtPassword.getPassword()).equals(" Password")) {
-                    txtPassword.setText("");
-                }
-            }
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (String.valueOf(txtPassword.getPassword()).equals("")) {
+					txtPassword.setText(" Password");
+				}
+			}
+		});
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (String.valueOf(txtPassword.getPassword()).equals("")) {
-                    txtPassword.setText(" Password");
-                }
-            }
-        });
+		btnLogin.setContentAreaFilled(false);
 
-        btnLogin.setContentAreaFilled(false);
+		btnCancel = new JButton("Kết thúc");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
 
-        btnCancel = new JButton("Kết thúc");
-        btnCancel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
+			@Override
+			public void mouseExited(MouseEvent e) {
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            }
-        });
-        btnCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+		btnCancel.setForeground(Color.WHITE);
+		btnCancel.setContentAreaFilled(false);
+		btnCancel.setBorder(new LineBorder(Color.WHITE));
+		btnCancel.setBackground(Color.BLACK);
+		btnCancel.setBounds(328, 269, 288, 45);
+		contentPane.add(btnCancel);
 
-        btnCancel.setForeground(Color.WHITE);
-        btnCancel.setContentAreaFilled(false);
-        btnCancel.setBorder(new LineBorder(Color.WHITE));
-        btnCancel.setBackground(Color.BLACK);
-        btnCancel.setBounds(328, 269, 288, 45);
-        contentPane.add(btnCancel);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\login.jpg"));
+		lblNewLabel.setBounds(-20, -20, 650, 350);
+		lblNewLabel.setBackground(Color.black);
+		contentPane.add(lblNewLabel);
 
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("images\\login.jpg"));
-        lblNewLabel.setBounds(-20, -20, 650, 350);
-        lblNewLabel.setBackground(Color.black);
-        contentPane.add(lblNewLabel);
+	}
 
-    }
+	protected void loginKeyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			login();
+		}
+	}
 
-    protected void loginKeyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            login();
-        }
-    }
-
-    public void login() {
-        String username = txtUsername.getText();
-        String password = String.valueOf(txtPassword.getPassword());
-        if (EntityValidate.checkUsername(this, username) && EntityValidate.checkPassword(this, password)) {
-            EntityAuthorization.USER = nhanVienService.findByIdAndPassword(Integer.valueOf(username), password);
-            if (EntityAuthorization.USER != null) {
-                setVisible(false);
-                EntityFrame.POLYMARTMAIN = new PolyMartMain();
-                EntityFrame.POLYMARTMAIN.setVisible(true);
-            } else {
-                EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
-            }
-        }
-    }
+	public void login() {
+		String username = txtUsername.getText();
+		String password = String.valueOf(txtPassword.getPassword());
+		if (EntityValidate.checkUsername(this, username) && EntityValidate.checkPassword(this, password)) {
+			EntityAuthorization.USER = nhanVienService.findByIdAndPassword(Integer.valueOf(username), password);
+			if (EntityAuthorization.USER != null) {
+				setVisible(false);
+				EntityFrame.POLYMARTMAIN = new PolyMartMain();
+				EntityFrame.POLYMARTMAIN.setVisible(true);
+			} else {
+				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");
+			}
+		}
+	}
 }

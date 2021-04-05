@@ -10,8 +10,26 @@ import java.util.List;
 public class HoaDonTraHangDAO extends AbstractDAO<HoaDonTraHangModel> implements IHoaDonTraHangDAO {
 
     @Override
-    public List<Object[]> getDataTableTraHang() {
-        return null;
+    public Object[] getDataTableTraHang(int id) {
+        String sql = "EXEC PROC_SHOWTABLE_TRAHANG ?";
+        ResultSet resultSet = null;
+        Object[] result = null;
+        try {
+            resultSet = queryBySql(sql, id);
+            result = new Object[resultSet.getMetaData().getColumnCount()];
+            resultSet.next();
+            result[0] = resultSet.getString("ID");
+            result[1] = resultSet.getString("IDHOADONTHANHTOAN");
+            result[2] = resultSet.getDate("NGAYTRAHANG");
+            result[3] = resultSet.getString("HOTEN");
+            result[4] = resultSet.getLong("TONGTIEN");
+            resultSet.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
 
     @Override

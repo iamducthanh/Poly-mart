@@ -235,18 +235,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonNhapHang
         tableNhapHang.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() == 2) {
-                    int row = tableNhapHang.getSelectedRow();
-                    if (row > -1 && row < tableNhapHang.getRowCount()) {
-                        HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
-                        List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
-                                .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
-                        ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(
-                                lstChiTietHoaDonNhap,
-                                nguonHangService.getNameById(hoaDonNhapHangModel.getIdNguonHang()));
-                        chiTietHoaDonNhapHang.setVisible(true);
-                    }
-                }
+                setOpenChiTietHoaDonNhap(mouseEvent);
             }
         });
 
@@ -261,6 +250,25 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+    }
+
+    private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            int row = tableNhapHang.getSelectedRow();
+            if (row > -1 && row < tableNhapHang.getRowCount()) {
+                HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
+                List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
+                        .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
+                if (lstChiTietHoaDonNhap.isEmpty()) {
+                    EntityMessage.show(this, "Hóa đơn không có sản phẩm");
+                } else {
+                    ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(
+                            lstChiTietHoaDonNhap,
+                            nguonHangService.getNameById(hoaDonNhapHangModel.getIdNguonHang()));
+                    chiTietHoaDonNhapHang.setVisible(true);
+                }
+            }
+        }
     }
 
     ActionListener openThemPhieuNhapHang = new ActionListener() {
@@ -343,11 +351,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             List<HoaDonNhapHangModel> lstLoc = hoaDonNhapHangService.filterByDate(timestamp);
             if (lstLoc.isEmpty()) {
                 EntityMessage.show(this, "Không có hóa đơn nào trong ngày được chọn");
-                getList();
             } else {
                 lstHoaDonNhapHang = lstLoc;
+                showTable(lstHoaDonNhapHang);
             }
-            showTable(lstHoaDonNhapHang);
         } catch (Exception e) {
             EntityMessage.show(this, "Mời chọn ngày muốn tìm");
         }

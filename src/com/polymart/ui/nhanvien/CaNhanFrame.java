@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
 import com.polymart.ui.taikhoan.ChangePassFrame;
+
 
 public class CaNhanFrame extends JFrame {
 
@@ -62,6 +64,7 @@ public class CaNhanFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public CaNhanFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Thông tin cá nhân");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 594, 515);
@@ -231,14 +234,9 @@ public class CaNhanFrame extends JFrame {
 	}
 
 	public void doiMatKhau() {
-		String mkCu = JOptionPane.showInputDialog("Nhập mật khẩu cũ: ");
-		if (mkCu.equals(EntityAuthorization.USER.getMatKhau())) {
 			close();
 			ChangePassFrame changePassFrame = new ChangePassFrame();
 			changePassFrame.setLocationRelativeTo(null);
-		} else {
-			JOptionPane.showInputDialog(null, "Mật khẩu bạn nhập không chính xác!", new JPasswordField());
-		}
 	}
 
 	public void close() {

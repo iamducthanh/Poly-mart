@@ -189,10 +189,6 @@ public class PolyMartMain extends JFrame {
 		mntmDangXuat.setIcon(new ImageIcon("images\\logout.png"));
 		mnCaNhan.add(mntmDangXuat);
 
-		JMenuItem mntmDoiMK = new JMenuItem("Đổi mật khẩu");
-		mntmDoiMK.setIcon(new ImageIcon("images\\changepassicon.png"));
-		mnCaNhan.add(mntmDoiMK);
-
 		getContentPane().add(pnlMain, BorderLayout.CENTER);
 		pnlMain.setLayout(new CardLayout(0, 0));
 
@@ -205,7 +201,6 @@ public class PolyMartMain extends JFrame {
 		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
-		// mntmDoiMK.addActionListener(doiMatKhau);
 		mntmKhachHang.addActionListener(openKhachHang);
 		mntmHoaDonThanhToan.addActionListener(openThanhToan);
 		mntmHoaDonTraHang.addActionListener(openTraHang);
@@ -232,16 +227,6 @@ public class PolyMartMain extends JFrame {
 
 	public void openKhachHang() {
 		loadChild(new KhachHangJInternalFrame());
-	}
-
-	ActionListener doiMatKhau = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			doiMatKhau();
-		}
-	};
-
-	public void doiMatKhau() {
-		new ChangePassFrame();
 	}
 
 	ActionListener openThietLapGia = new ActionListener() {

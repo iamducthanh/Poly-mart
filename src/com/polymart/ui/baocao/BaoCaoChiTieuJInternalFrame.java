@@ -72,7 +72,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 
 	public void initTopChiTieu() {
 		setTitle("Báo cáo - Chi tiêu");
-		JLabel lblNhanVien = new JLabel("Chi tiêu                              ");
+		JLabel lblNhanVien = new JLabel("Chi tiêu              ");
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
 
 		txtTimKiem = new JTextField();
@@ -101,26 +101,41 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		JButton btnCpNht = new JButton("↹ Cập nhật");
 
 		JButton btnThmMi_2 = new JButton("+ Thêm mới");
+		btnThmMi_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ThemBaoCaoChiTieuFrame themBaoCaoChiTieuFrame = new ThemBaoCaoChiTieuFrame();
+				themBaoCaoChiTieuFrame.setVisible(true);
+				themBaoCaoChiTieuFrame.setLocationRelativeTo(null);
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-						.addComponent(lblNhanVien, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE).addGap(41)
-						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE).addGap(26)
-						.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(8)
-						.addComponent(btnCpNht, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnThmMi, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-						.addGap(0)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+					.addGap(83)
+					.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addGap(8)
+					.addComponent(btnCpNht, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnThmMi, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addGap(0))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnThmMi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnCpNht, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnThmMi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnCpNht, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
@@ -134,7 +149,9 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 
 		tableChiTieu = new JTable();
 		scrollPane.setViewportView(tableChiTieu);
-		modelChiTieu.addColumn("Mã nhân viên");
+		
+		modelChiTieu.addColumn("Mã Chi Tiêu");
+		modelChiTieu.addColumn("Họ Tên");
 		modelChiTieu.addColumn("Mục đích chi tiêu");
 		modelChiTieu.addColumn("Ngày chi tiêu");
 		modelChiTieu.addColumn("Số tiền");

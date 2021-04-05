@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Toolkit;
 
 public class ThemBaoCaoChiTieuFrame extends JFrame {
 
@@ -43,8 +44,9 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ThemBaoCaoChiTieuFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Thêm báo cáo chi tiêu");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 505, 539);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

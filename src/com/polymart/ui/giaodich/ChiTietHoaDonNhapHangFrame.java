@@ -3,6 +3,7 @@ package com.polymart.ui.giaodich;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -52,6 +53,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
      */
 
     public ChiTietHoaDonNhapHangFrame() throws HeadlessException {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
     }
 
     public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang) {

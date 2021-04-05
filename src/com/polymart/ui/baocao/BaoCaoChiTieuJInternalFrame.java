@@ -143,7 +143,9 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 
 		tableChiTieu = new JTable();
 		scrollPane.setViewportView(tableChiTieu);
-		modelChiTieu.addColumn("Mã nhân viên");
+		
+		modelChiTieu.addColumn("Mã Chi Tiêu");
+		modelChiTieu.addColumn("Họ Tên");
 		modelChiTieu.addColumn("Mục đích chi tiêu");
 		modelChiTieu.addColumn("Ngày chi tiêu");
 		modelChiTieu.addColumn("Số tiền");

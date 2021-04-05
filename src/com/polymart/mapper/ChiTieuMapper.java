@@ -11,6 +11,7 @@ public class ChiTieuMapper implements RowMapper<ChiTieuModel> {
     public ChiTieuModel mapRow(ResultSet rs) {
         try {
             ChiTieuModel chiTieuModel=new ChiTieuModel();
+            chiTieuModel.setMaCT(rs.getString("MACT"));
             chiTieuModel.setMucDichChiTieu(rs.getString("MUCDICHCHITIEU"));
             chiTieuModel.setIdNhanVien(rs.getInt("IDNHANVIEN"));
             chiTieuModel.setSoTien(rs.getLong("SOTIEN"));

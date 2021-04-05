@@ -147,8 +147,8 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		modelBangLuong.addColumn("Số ngày Đi Làm Muộn");
 		modelBangLuong.addColumn("Tổng lương");
 		tableBangLuong.setModel(modelBangLuong);
-		moBangLuongThangGanNhat();
 		loadComboboxNam();
+		moBangLuongThangGanNhat();
 
 		// cbb Năm load từ dữ liệu ở bảng chấm công lên
 		// cbb Tháng load theo cbb Năm cũng trong bảng chấm công
@@ -187,7 +187,11 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		int thang = c.get(Calendar.MONTH);
 		loadListChamCong(String.valueOf(nam), String.valueOf(thang));
 		loadTbaleLuong();
-		lblBangLuong.setText("Bảng Lương Tháng " + thang + " Năm " + nam);
+
+		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
+		cboThang.setSelectedIndex(thang-1);
+		cboNam.setSelectedItem(String.valueOf(nam));
+
 	}
 
 	private void loadListChamCong(String nam, String thang) {
@@ -196,13 +200,6 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		listChamCong = chamCongDao.filterMonth(nam, thang);
 	}
 
-	private void loadListChamCongThang() {
-		listChamCong.clear();
-		Calendar c = Calendar.getInstance();
-		String nam = String.valueOf(c.get(Calendar.YEAR));
-		String thang = String.valueOf(c.get(Calendar.MONTH));
-		loadListChamCong(nam, thang);
-	}
 
 	private void loadListNhanVien() {
 		listNhanVien.clear();

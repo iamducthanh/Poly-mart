@@ -3,6 +3,9 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class ChiTieuModel {
+
+	private String MaCT;
+
 	private String mucDichChiTieu;
 	private Long soTien;
 	private String ghiChu;
@@ -10,7 +13,16 @@ public class ChiTieuModel {
 	private Timestamp ngayChiTieu;
 
 	public ChiTieuModel() {
-		super();
+
+	}
+
+	public String getMaCT() {
+		return MaCT;
+
+	}
+
+	public void setMaCT(String maCT) {
+		MaCT = maCT;
 	}
 
 	public ChiTieuModel(String mucDichChiTieu, Long soTien, String ghiChu, Integer idNhanVien, Timestamp ngayChiTieu) {

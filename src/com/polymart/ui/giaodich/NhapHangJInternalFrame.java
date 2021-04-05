@@ -318,9 +318,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
     // xóa một hàng trên table
     private void evtBtnXoa(JTable tbNhapHang) {
-        if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
-            int row = tbNhapHang.getSelectedRow();
-            if (row > -1 && row < tbNhapHang.getRowCount()) {
+        int row = tbNhapHang.getSelectedRow();
+        if (row > -1 && row < tbNhapHang.getRowCount()) {
+            if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
                 HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
                 if (hoaDonNhapHangService.remove(hoaDonNhapHangModel)) {
                     EntityMessage.show(this, "Xóa thành công");
@@ -330,9 +330,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                 } else {
                     EntityMessage.show(this, "Xóa thất bại");
                 }
-            } else {
-                EntityMessage.show(this, "Vui lòng chọn 1 hàng");
             }
+        } else {
+            EntityMessage.show(this, "Vui lòng chọn 1 hàng");
         }
     }
 

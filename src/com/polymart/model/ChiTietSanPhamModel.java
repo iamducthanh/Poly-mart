@@ -13,22 +13,6 @@ public class ChiTietSanPhamModel extends AbstractModel {
 	private Timestamp ngayCapNhat;
 	private Boolean status;
 
-	public ChiTietSanPhamModel() {
-	}
-
-	public ChiTietSanPhamModel(Integer idSanPham, String mauSac, String size, Integer soLuong, Long giaBan, Long giaVon,
-			Long giaGiam, Timestamp ngayCapNhat, Boolean status) {
-		this.idSanPham = idSanPham;
-		this.mauSac = mauSac;
-		this.size = size;
-		this.soLuong = soLuong;
-		this.giaBan = giaBan;
-		this.giaVon = giaVon;
-		this.giaGiam = giaGiam;
-		this.ngayCapNhat = ngayCapNhat;
-		this.status = status;
-	}
-
 	public Integer getIdSanPham() {
 		return idSanPham;
 	}

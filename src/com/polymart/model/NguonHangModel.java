@@ -5,15 +5,6 @@ public class NguonHangModel extends AbstractModel {
 	private String diaChi;
 	private String sdt;
 
-	public NguonHangModel() {
-	}
-
-	public NguonHangModel(String tenNguonHang, String diaChi, String sdt) {
-		this.tenNguonHang = tenNguonHang;
-		this.diaChi = diaChi;
-		this.sdt = sdt;
-	}
-
 	public String getTenNguonHang() {
 		return tenNguonHang;
 	}

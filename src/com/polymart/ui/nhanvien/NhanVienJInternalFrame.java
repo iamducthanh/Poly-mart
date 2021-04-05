@@ -44,6 +44,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.config.SecurityConfig;
+import com.polymart.dao.impl.NhanVienDAO;
 import com.polymart.entity.EntityFrame;
 import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
@@ -179,7 +180,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		JButton btnThemNV = new JButton("+ Thêm nhân viên");
 		pnlFunction.add(btnThemNV);
-		btnXoaNV = new JButton("- Xóa nhân viên");
+		btnXoaNV = new JButton("- Khóa Tài Khoản");
 		btnXoaNV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnDelete();
@@ -234,12 +235,13 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	protected void btnDelete() {
 		if (JOptionPane.showConfirmDialog(this,
-				"Bạn có chắc muốn xoá ra khỏi hệ thống?\nNhân viên: " + list.get(index).getHoTen() + "\nID: "
+				"Bạn có chắc muốn Khóa Tài Kho?\nNhân viên: " + list.get(index).getHoTen() + "\nID: "
 						+ list.get(index).getId(),
 				"Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-			nhanVienService.delete(new Integer[] { list.get(index).getId() });
-
+			NhanVienDAO nhanVien = new NhanVienDAO();
+			nhanVien.khoaTaiKhoanNhanVien(String.valueOf(list.get(index).getId()));
 			loadToTable();
+			btnXoaNV.setEnabled(false);
 		}
 	}
 
@@ -375,9 +377,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private void reloadTable() {
 		model.setRowCount(0);
 		for (NhanVienModel i : list) {
-			model.addRow(new Object[] { i.getId(), i.getMatKhau(), i.getHoTen(), i.getChucVu(), i.getLuong(),
-					i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
-					i.getDiaChi(), i.getSdt(), i.getEmail() });
+				model.addRow(new Object[] { i.getId(), i.getMatKhau(), i.getHoTen(), i.getChucVu(), i.getLuong(),
+						i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
+						i.getDiaChi(), i.getSdt(), i.getEmail() });
 		}
 	}
 }

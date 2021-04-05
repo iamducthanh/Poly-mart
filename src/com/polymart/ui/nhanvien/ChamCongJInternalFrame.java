@@ -10,8 +10,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Timestamp;
@@ -38,11 +37,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.ChamCongDAO;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChamCongModel;
-import com.polymart.model.NhanVienModel;
-import com.polymart.service.INhanVienService;
-import com.polymart.service.impl.NhanVienService;
+
 import com.toedter.calendar.JCalendar;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
@@ -56,19 +54,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private JPanel panel = new JPanel();
 	private JPanel nhanVienJPanel = new JPanel();
 	private JTable tableChamCong;
-	private JTable tableNhanVienChamCong;
 	JButton btnChamCong = new JButton("Chấm công");
-	JButton btnAdd = new JButton("Lưu chấm công");
-	JButton btnXoa = new JButton("    -  Xóa     ");
-	private int maNhanVien;
-	private String hoTen;
 	JCalendar dateChamCong;
 	private Calendar calendar;
 
-	private List<NhanVienModel> listNhanVien;
 	private List<ChamCongModel> listChamCong = new ArrayList<ChamCongModel>();
-	List<ChamCongModel> listLuuChamCong = new ArrayList<ChamCongModel>();
-	private INhanVienService nhanVienService = new NhanVienService();
 	private JPanel panel1;
 
 	/**
@@ -106,9 +96,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 		initTopChamCong();
 		initCenterChamCong();
-		loadToTable();
 		loadListChamCongNgay();
 		loadTableChamCong();
+		moNutChamCong();
 	}
 
 	public void initTopChamCong() {
@@ -123,6 +113,33 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 		JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
 		panel1.add(lblNewLabel_1);
+
+		txtTimKiem = new JTextField();
+		panel.add(txtTimKiem, BorderLayout.CENTER);
+		txtTimKiem.setEnabled(false);
+		txtTimKiem.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				timKiemNhanVien();
+			}
+		});
+		txtTimKiem.setText(" TÌm theo mã nhân viên");
+		txtTimKiem.setColumns(10);
+		txtTimKiem.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
+					txtTimKiem.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTimKiem.getText().equals("")) {
+					txtTimKiem.setText(" TÌm theo mã nhân viên");
+				}
+			}
+		});
 
 	}
 
@@ -157,65 +174,13 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			}
 		});
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-
-		txtTimKiem = new JTextField();
-		txtTimKiem.setEnabled(false);
-		txtTimKiem.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				timKiemNhanVien();
-			}
-		});
-		txtTimKiem.setText(" TÌm theo mã nhân viên");
-		txtTimKiem.setColumns(10);
-		txtTimKiem.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
-					txtTimKiem.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimKiem.getText().equals("")) {
-					txtTimKiem.setText(" TÌm theo mã nhân viên");
-				}
-			}
-		});
-		panel1.add(btnXoa);
-
-		btnXoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				xoaNhanVienChamCong();
-			}
-		});
-		panel1.add(btnAdd);
-
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				luuChamCong();
-			}
-		});
-
-		JButton btnTimTheoThang = new JButton("Tìm Theo Tháng");
+		JButton btnTimTheoThang = new JButton("Xem Chấm Công Tháng");
 		btnTimTheoThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadListChamCongThang();
 				loadTableChamCong();
 				txtTimKiem.setEnabled(true);
-			}
-		});
-
-		JButton btnMoChamCong = new JButton("Mở Chấm Công");
-		btnMoChamCong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				moChamCong();
-				txtTimKiem.setEnabled(false);
-				btnXoa.setEnabled(true);
-				btnAdd.setEnabled(true);
-				btnChamCong.setEnabled(true);
+				moNutChamCong();
 			}
 		});
 
@@ -223,38 +188,21 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		gl_panelLeft.setHorizontalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap()
 						.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
 								.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 										GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelLeft.createSequentialGroup().addGap(10).addComponent(btnTimTheoThang)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnMoChamCong))
-								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panelLeft.createSequentialGroup().addGap(10).addComponent(btnTimTheoThang))
 								.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap()));
+						.addContainerGap(199, Short.MAX_VALUE)));
+		btnChamCong.setEnabled(false);
 		gl_panelLeft.setVerticalGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap()
 						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE).addComponent(btnTimTheoThang)
-								.addComponent(btnMoChamCong))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(18)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnChamCong).addGap(19)));
-
-		tableNhanVienChamCong = new JTable();
-		scrollPane_1.setViewportView(tableNhanVienChamCong);
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnTimTheoThang)
+						.addPreferredGap(ComponentPlacement.RELATED, 445, Short.MAX_VALUE).addComponent(btnChamCong)
+						.addGap(19)));
 		panelLeft.setLayout(gl_panelLeft);
 		modelNhanVienChamCong.addColumn("Mã nhân viên");
 		modelNhanVienChamCong.addColumn("Tên nhân viên");
-		tableNhanVienChamCong.setModel(modelNhanVienChamCong);
-		tableNhanVienChamCong.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent mouseEvent) {
-				int index = tableNhanVienChamCong.getSelectedRow();
-				maNhanVien = Integer.parseInt(String.valueOf(tableNhanVienChamCong.getValueAt(index, 0)));
-				hoTen = String.valueOf(tableNhanVienChamCong.getValueAt(index, 1));
-			}
-		});
 		btnChamCong.addActionListener(new ActionListener() {
 
 			@Override
@@ -263,48 +211,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 			}
 		});
-	}
-
-	// xóa nhân viên chấm công
-	protected void xoaNhanVienChamCong() {
-		boolean i = EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Xóa Không");
-		if (i == false) {
-			return;
-		}
-		int select = tableChamCong.getSelectedRow();
-		int idNhanVien = Integer.parseInt(String.valueOf(tableChamCong.getValueAt(select, 0)));
-		for (ChamCongModel chamCongModel : listLuuChamCong) {
-			if (idNhanVien == chamCongModel.getIdNhanVien()) {
-				modelChamCong.removeRow(select);
-				modelChamCong.fireTableStructureChanged();
-				listLuuChamCong.remove(chamCongModel);
-				return;
-			}
-		}
-		Calendar c = Calendar.getInstance();
-		String nam = String.valueOf(c.get(Calendar.YEAR));
-		String thang = String.valueOf(c.get(Calendar.MONTH) + 1);
-		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-		ChamCongDAO chamCongDao = new ChamCongDAO();
-		chamCongDao.delete(idNhanVien, nam, thang, ngay);
-		modelChamCong.removeRow(select);
-		modelChamCong.fireTableStructureChanged();
-		EntityMessage.show(null, "Delete Thành Công");
-	}
-
-	// mở bảng nhân viên chấm công hiện tại
-	protected void moChamCong() {
-		listChamCong.clear();
-		Calendar c = Calendar.getInstance();
-		String nam = String.valueOf(c.get(Calendar.YEAR));
-		String thang = String.valueOf(c.get(Calendar.MONTH) + 1);
-		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-		ChamCongDAO chamCongDao = new ChamCongDAO();
-		listChamCong = chamCongDao.filterDay(nam, thang, ngay);
-		loadTableChamCong();
-		btnChamCong.setEnabled(true);
-		btnXoa.setEnabled(true);
-		btnAdd.setEnabled(true);
 	}
 
 	// tìm kiếm nhân viên chấm công trong tháng
@@ -322,23 +228,26 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			}
 		}
 		loadTableChamCong();
-
 	}
 
-	// lưu chấm công
-	protected void luuChamCong() {
-		boolean i = EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Lưu ?");
-		if (i) {
-			for (ChamCongModel chamCongModel : listLuuChamCong) {
-				ChamCongDAO chamCong = new ChamCongDAO();
-				chamCong.save(chamCongModel);
-			}
-			EntityMessage.show(null, "Lưu Thành Công");
-			listLuuChamCong.clear();
+	// Mở Nút Chấm Công Tự Động
+	public void moNutChamCong() {
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+		int i = 0;
+		int j = 0;
+		try {
+			i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("7:30:00 AM"));
+			j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("9:00:00 AM"));
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		btnChamCong.setEnabled(false);
-		btnAdd.setEnabled(false);
-		btnXoa.setEnabled(false);
+		if (i == 1 && j==-1 ) {
+			btnChamCong.setEnabled(true);
+		}else {
+			setEnabled(false);
+		}
+
 	}
 
 	// chấm công cho nhân viên
@@ -346,10 +255,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		Date now = new Date();
 		int day = now.getDay();
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-
+		int maNhanVien = EntityAuthorization.USER.getId();
+		String hoTen = EntityAuthorization.USER.getHoTen();
 		for (int i = 0; i < tableChamCong.getRowCount(); i++) {
 			if (maNhanVien == Integer.parseInt(String.valueOf(tableChamCong.getValueAt(i, 0)))) {
-				EntityMessage.show(null, "Nhân Viên Đã Được Chấm Công");
+				EntityMessage.show(null, "Bạn Đã Được Chấm Công Đã Được Chấm Công");
 				return;
 			}
 		}
@@ -365,25 +275,10 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		chamCong.setHoTen(hoTen);
 		chamCong.setIdNhanVien(maNhanVien);
 		chamCong.setNgayChamCong(new Timestamp(now.getTime()));
-		listLuuChamCong.add(chamCong);
-	}
-
-	// load list nhân viên
-	public void loadToTable() {
-		try {
-			listNhanVien = nhanVienService.findAll();
-			reloadTable();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	// load bảng nhân viên chấm công
-	private void reloadTable() {
-		modelNhanVienChamCong.setRowCount(0);
-		for (NhanVienModel i : listNhanVien) {
-			modelNhanVienChamCong.addRow(new Object[] { i.getId(), i.getHoTen() });
-		}
+		ChamCongDAO chamCongDao = new ChamCongDAO();
+		chamCongDao.save(chamCong);
+		loadListChamCongNgay();
+		loadTableChamCong();
 	}
 
 	// load bảng chấm công nhân viên
@@ -426,8 +321,5 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					day == 0 ? "Chủ Nhật" : day + 1, sdf.format(chamCongModel.getNgayChamCong()),
 					i == -1 ? "Đúng Giờ" : "Đi Muộn" });
 		}
-		btnXoa.setEnabled(false);
-		btnAdd.setEnabled(false);
-		btnChamCong.setEnabled(false);
 	}
 }

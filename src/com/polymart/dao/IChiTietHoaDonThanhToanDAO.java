@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface IChiTietHoaDonThanhToanDAO extends GenericDAO<ChiTietHoaDonThanhToanModel> {
 
-	List<ChiTietHoaDonThanhToanModel> findAll();
+    List<ChiTietHoaDonThanhToanModel> findAll();
 
-	boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
+    boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
+
+    boolean update(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
 
 }

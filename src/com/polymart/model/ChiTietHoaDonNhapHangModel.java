@@ -6,17 +6,6 @@ public class ChiTietHoaDonNhapHangModel {
 	private Long giaNhap;
 	private Integer soLuong;
 
-	public ChiTietHoaDonNhapHangModel() {
-	}
-
-	public ChiTietHoaDonNhapHangModel(Integer idHoaDonNhapHang, Integer idChiTietSanPham, Long giaNhap,
-			Integer soLuong) {
-		this.idHoaDonNhapHang = idHoaDonNhapHang;
-		this.idChiTietSanPham = idChiTietSanPham;
-		this.giaNhap = giaNhap;
-		this.soLuong = soLuong;
-	}
-
 	public Integer getIdHoaDonNhapHang() {
 		return idHoaDonNhapHang;
 	}

@@ -6,17 +6,6 @@ public class ChiTietHoaDonThanhToanModel extends AbstractModel {
 	private Integer soLuong;
 	private Long giamGiaThem;
 
-	public ChiTietHoaDonThanhToanModel() {
-	}
-
-	public ChiTietHoaDonThanhToanModel(Integer chiTietSanPham, Integer hoaDonThanhToan, Integer soLuong,
-			Long giamGiaThem) {
-		this.chiTietSanPham = chiTietSanPham;
-		this.hoaDonThanhToan = hoaDonThanhToan;
-		this.soLuong = soLuong;
-		this.giamGiaThem = giamGiaThem;
-	}
-
 	public Integer getChiTietSanPham() {
 		return chiTietSanPham;
 	}

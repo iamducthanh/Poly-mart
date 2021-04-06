@@ -144,7 +144,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
         txtTimKiem = new JTextField();
         txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtTimKiem.setText(" Tìm theo tên hoặc mã sản phẩm");
+        txtTimKiem.setText("Tìm theo tên hoặc mã sản phẩm");
         txtTimKiem.setColumns(10);
 
         JButton btnTimKiem = new JButton("Tìm kiếm");
@@ -488,7 +488,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         cbcNguonHang.removeAllItems();
         if (lstNguonHang != null && !lstNguonHang.isEmpty()) {
             for (NguonHangModel x : lstNguonHang) {
-                cbcNguonHang.addItem(x.getTenNguonHang());
+                cbcNguonHang.addItem("NH - " + x.getTenNguonHang());
             }
         }
     }

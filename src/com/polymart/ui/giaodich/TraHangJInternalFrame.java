@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -56,11 +58,9 @@ public class TraHangJInternalFrame extends JInternalFrame {
     private DefaultTableModel modelTraHang;
 
     private IHoaDonTraHangService hoaDonTraHangService = new HoaDonTraHangService();
-    private IHoaDonThanhToanService hoaDonThanhToanService = new HoaDonThanhToanService();
     private IChiTietHoaDonThanhToanService chiTietHoaDonThanhToanService = new ChiTietHoaDonThanhToanService();
     private IChiTietHoaDonTraHangService chiTietHoaDonTraHangService = new ChiTietHoaDonTraHangService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
-    private IKhachHangService khachHangService = new KhachHangService();
 
     private List<HoaDonTraHangModel> lstHoaDonTraHangModels = hoaDonTraHangService.findAll();
 
@@ -243,7 +243,10 @@ public class TraHangJInternalFrame extends JInternalFrame {
         if (mouseEvent.getClickCount() == 2) {
             int row = tableTraHang.getSelectedRow();
             if (row > -1 && row < tableTraHang.getRowCount()) {
-                HoaDonTraHangModel hoaDonTraHangModel = lstHoaDonTraHangModels.get(row);
+                String getMaHoaDon = tableTraHang.getValueAt(row, 0).toString();
+                HoaDonTraHangModel hoaDonTraHangModel =
+                        lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(Integer.parseInt(getMaHoaDon)))
+                                .collect(Collectors.toList()).get(0);
                 List<ChiTietHoaDonTraHangModel> lstChiTiet = chiTietHoaDonTraHangService.findByIdHoaDonTraHang(hoaDonTraHangModel.getId());
                 if (!lstChiTiet.isEmpty()) {
                     ChiTietHoaDonTraHang chiTietHoaDonTraHang = new ChiTietHoaDonTraHang(lstChiTiet);
@@ -275,14 +278,16 @@ public class TraHangJInternalFrame extends JInternalFrame {
             modelTraHang.setRowCount(0);
             for (HoaDonTraHangModel x : lst) {
                 Object[] result = hoaDonTraHangService.getDataTableById(x.getId());
-                modelTraHang.addRow(new Object[]{
-                        result[0],
-                        result[1],
-                        new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(result[2]),
-                        result[3],
-                        result[4],
-                        x.getGhiChu()
-                });
+                if (result != null) {
+                    modelTraHang.addRow(new Object[]{
+                            result[0],
+                            result[1],
+                            new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(result[2]),
+                            result[3],
+                            result[4],
+                            x.getGhiChu()
+                    });
+                }
             }
         }
     }

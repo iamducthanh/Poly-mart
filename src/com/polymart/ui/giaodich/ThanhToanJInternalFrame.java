@@ -14,8 +14,10 @@ import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -294,7 +296,10 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         if (mouseEvent.getClickCount() == 2) {
             int row = tableThanhToan.getSelectedRow();
             if (row > -1 && row < tableThanhToan.getRowCount()) {
-                HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
+                String getMaHoaDon = tableThanhToan.getValueAt(row, 0).toString();
+                HoaDonThanhToanModel hoaDonThanhToanModel =
+                        lstHoaDonThanhToanModels.stream().filter(e -> e.getId().equals(Integer.parseInt(getMaHoaDon)))
+                                .collect(Collectors.toList()).get(0);
                 List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
                         .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
                 if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {

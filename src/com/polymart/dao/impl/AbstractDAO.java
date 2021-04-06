@@ -109,6 +109,7 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 if (resultSet != null) {
                     resultSet.close();
                 }
+                System.out.println("đã đóng");
             } catch (SQLException e) {
                 return null;
             }

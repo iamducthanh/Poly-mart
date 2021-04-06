@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -256,7 +257,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         if (mouseEvent.getClickCount() == 2) {
             int row = tableNhapHang.getSelectedRow();
             if (row > -1 && row < tableNhapHang.getRowCount()) {
-                HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
+                String getMaHoaDon = tableNhapHang.getValueAt(row, 0).toString();
+                HoaDonNhapHangModel hoaDonNhapHangModel =
+                        lstHoaDonNhapHang.stream().filter(e -> e.getId().equals(Integer.parseInt(getMaHoaDon)))
+                                .collect(Collectors.toList()).get(0);
                 List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
                         .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
                 if (lstChiTietHoaDonNhap.isEmpty()) {

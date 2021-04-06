@@ -446,7 +446,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                             Long tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
                                     e -> (chiTietSanPhamModel.getGiaBan() * Integer.parseInt(getSoLuong))
                                             - (chiTietSanPhamModel.getGiaGiam() * e.getSoLuong())).sum();
-                            lblTongTien.setText(String.valueOf(tongTien - Double.parseDouble(getMoney)));
+                            lblTongTien.setText(String.valueOf(tongTien - Long.parseLong(getMoney)));
                         } else {
                             EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
                         }
@@ -485,7 +485,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private void evtShowVisit(JComboBox<Object> cbcKhachHang) {
         cbcKhachHang.removeAllItems();
         for (KhachHangModel x : lstKhachHang) {
-            cbcKhachHang.addItem(x.getHoTen());
+            cbcKhachHang.addItem("KH - " + x.getHoTen());
         }
     }
 

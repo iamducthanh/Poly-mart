@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,8 +26,10 @@ import javax.swing.UIManager;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
+import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
@@ -40,6 +44,7 @@ import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.ChangePassFrame;
 import com.polymart.ui.taikhoan.LoginJFrame;
+import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class PolyMartMain extends JFrame {
 
@@ -88,6 +93,12 @@ public class PolyMartMain extends JFrame {
 		mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
 		mnTongQuan.setBackground(new Color(0, 191, 255));
 		menuBar.add(mnTongQuan);
+		
+		JMenuItem mntmDoanhThu = new JMenuItem("Thống kê doanh thu");
+		mnTongQuan.add(mntmDoanhThu);
+		
+		JMenuItem mntnDoanhSo = new JMenuItem("Thống kê doanh số bán ra");
+		mnTongQuan.add(mntnDoanhSo);
 
 		JMenu mnHangHoa = new JMenu("Hàng hóa");
 		mnHangHoa.setIcon(new ImageIcon("images\\hanghoa.png"));
@@ -124,14 +135,18 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmHoaDonTraHang = new JMenuItem("Trả hàng");
 		mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
 		mnGiaoDich.add(mntmHoaDonTraHang);
+		
+				JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
+				mnGiaoDich.add(mntmChiTieu);
+				mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
+				mntmChiTieu.addActionListener(openChiTieu);
 
 		JMenu mnDoiTac = new JMenu("Báo cáo");
 		mnDoiTac.setIcon(new ImageIcon("images\\baocao.png"));
 		menuBar.add(mnDoiTac);
-
-		JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
-		mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
-		mnDoiTac.add(mntmChiTieu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Báo cáo chi tiêu trong ngày");
+		mnDoiTac.add(mntmNewMenuItem);
 
 		JMenu mnNhanVien = new JMenu("Nhân viên");
 		mnNhanVien.setIcon(new ImageIcon("images\\nhanvien1.png"));
@@ -148,10 +163,6 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmBangTinhLuong = new JMenuItem("Bảng tính lương");
 		mntmBangTinhLuong.setIcon(new ImageIcon("images\\tinhluong.png"));
 		mnNhanVien.add(mntmBangTinhLuong);
-
-		JMenuItem mntmHoaHong = new JMenuItem("Thiết lập hoa hồng");
-		mntmHoaHong.setIcon(new ImageIcon("images\\laixuat.png"));
-		mnNhanVien.add(mntmHoaHong);
 
 		JMenu mnKhachHang = new JMenu("Khách hàng");
 		mnKhachHang.setIcon(new ImageIcon("images\\doitac.png"));
@@ -198,7 +209,6 @@ public class PolyMartMain extends JFrame {
 		mntmKiemKho.addActionListener(openKiemKho);
 		mntmNguonHang.addActionListener(openNguonHang);
 		mntmChamCong.addActionListener(openChamCong);
-		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
 		mntmKhachHang.addActionListener(openKhachHang);
@@ -206,7 +216,13 @@ public class PolyMartMain extends JFrame {
 		mntmHoaDonTraHang.addActionListener(openTraHang);
 		mntmBangTinhLuong.addActionListener(openBangLuong);
 		mntmCaNhan.addActionListener(openCaNhan);
-
+		mntmDoanhThu.addActionListener(openDoanhThu);
+		
+		JLabel back = new JLabel("");
+		ImageIcon imageIcon = new ImageIcon("C:\\Users\\ADMIN\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper");
+		Image image = EntityImage.resize(imageIcon.getImage(), uiCommon.width, uiCommon.height);
+		back.setIcon(new ImageIcon(image));
+		pnlMain.add(back);
 	}
 
 	ActionListener openTraHang = new ActionListener() {
@@ -260,6 +276,17 @@ public class PolyMartMain extends JFrame {
 	public void openKiemKho() {
 		loadChild(new KiemKhoJInternalFrame());
 		setTitle("Kiểm kho");
+	}
+	
+	ActionListener openDoanhThu = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openDoanhThu();
+		}
+	};
+
+	public void openDoanhThu() {
+		loadChild(new ThongKeDoanhThuJInternalFrame());
+		setTitle("Thống kê doanh thu");
 	}
 
 	ActionListener openNhanVien = new ActionListener() {

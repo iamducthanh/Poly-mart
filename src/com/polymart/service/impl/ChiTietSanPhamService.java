@@ -17,7 +17,7 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public List<ChiTietSanPhamModel> findAll() {
-        return lstChiTietSanPhamModels;
+        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus()).collect(Collectors.toList());
     }
 
     // tìm kiếm theo mã hoặc tên sản phẩm
@@ -55,6 +55,6 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public ChiTietSanPhamModel getById(Integer id) {
-        return lstChiTietSanPhamModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0);
+        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
 }

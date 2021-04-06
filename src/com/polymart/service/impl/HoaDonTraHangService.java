@@ -5,7 +5,10 @@ import com.polymart.dao.impl.HoaDonTraHangDAO;
 import com.polymart.model.HoaDonTraHangModel;
 import com.polymart.service.IHoaDonTraHangService;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HoaDonTraHangService implements IHoaDonTraHangService {
 
@@ -14,7 +17,7 @@ public class HoaDonTraHangService implements IHoaDonTraHangService {
 
     @Override
     public Object[] getDataTableById(Integer id) {
-        return new Object[0];
+        return hoaDonTraHangDAO.getDataTableTraHang(id);
     }
 
     @Override
@@ -42,5 +45,16 @@ public class HoaDonTraHangService implements IHoaDonTraHangService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<HoaDonTraHangModel> findById(int id) {
+        return lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<HoaDonTraHangModel> filterByDate(Timestamp timestamp) {
+        SimpleDateFormat sp = new SimpleDateFormat("yyyyMMdd");
+        return lstHoaDonTraHangModels.stream().filter(e -> sp.format(e.getNgayTraHang()).equals(sp.format(timestamp))).collect(Collectors.toList());
     }
 }

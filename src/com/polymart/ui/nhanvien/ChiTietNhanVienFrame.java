@@ -60,7 +60,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	public JLabel lblAnhDaiDien;
 	private JFileChooser fileChooser;
 	static Integer maNhanVien;
-	JButton btnSave ;
+	JButton btnSave;
 	JButton btnEdit;
 
 	private INhanVienService nhanVienService = new NhanVienService();
@@ -104,7 +104,6 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-
 		JMenu mnNewMenu = new JMenu("Thoát");
 		menuBar.add(mnNewMenu);
 
@@ -121,8 +120,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 		panel.setBackground(SystemColor.control);
 		panel.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Chi ti\u1EBFt nh\u00E2n vi\u00EAn", TitledBorder.LEADING, TitledBorder.TOP, null,
-				SystemColor.desktop));
+				"Chi ti\u1EBFt nh\u00E2n vi\u00EAn  ", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 647, 554);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -133,7 +132,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 				addNhanVien();
 			}
 		});
-		btnSave.setBounds(531, 575, 50, 28);
+
+		btnSave.setBounds(547, 575, 50, 28);
 		contentPane.add(btnSave);
 
 		JButton btnClear = new JButton("Làm mới");
@@ -142,7 +142,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 				clear();
 			}
 		});
-		btnClear.setBounds(432, 575, 78, 28);
+		btnClear.setBounds(459, 575, 78, 28);
 		contentPane.add(btnClear);
 
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
@@ -273,20 +273,20 @@ public class ChiTietNhanVienFrame extends JFrame {
 		comboBox.setBounds(142, 174, 175, 25);
 		panel.add(comboBox);
 
-		 btnEdit = new JButton("Sửa");
+		btnEdit = new JButton("Sửa");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				EditNhanVien();
 			}
 		});
-		btnEdit.setBounds(607, 577, 50, 28);
+		btnEdit.setBounds(607, 575, 50, 28);
 		contentPane.add(btnEdit);
 	}
 
 	protected void EditNhanVien() {
-		if(validated()) {
-			NhanVienModel nhanVien =new  NhanVienModel();
-			nhanVien =addThongTinNhanVien();
+		if (validated()) {
+			NhanVienModel nhanVien = new NhanVienModel();
+			nhanVien = addThongTinNhanVien();
 			nhanVien.setId(maNhanVien);
 			if (nhanVienService.update(nhanVien) != null) {
 				EntityMessage.show(this, "Sửa thành công");
@@ -295,9 +295,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 			} else {
 				EntityMessage.show(this, "Thất bại");
 			}
-			
-		}
 
+		}
 	}
 
 	protected void logoClicked() {
@@ -370,15 +369,15 @@ public class ChiTietNhanVienFrame extends JFrame {
 	protected void addNhanVien() {
 		if (validated()) {
 			NhanVienModel nhanVienModel = new NhanVienModel();
-					nhanVienModel = addThongTinNhanVien();
-				// truyền dữ liệu lên database
-				if (nhanVienService.save(nhanVienModel) != null) {
-					EntityMessage.show(this, "Thêm mới thành công");
-					EntityFrame.NHANVIENJINTERNAL.loadToTable();
-					this.dispose();
-				} else {
-					EntityMessage.show(this, "Thất bại");
-				}
+			nhanVienModel = addThongTinNhanVien();
+			// truyền dữ liệu lên database
+			if (nhanVienService.save(nhanVienModel) != null) {
+				EntityMessage.show(this, "Thêm mới thành công");
+				EntityFrame.NHANVIENJINTERNAL.loadToTable();
+				this.dispose();
+			} else {
+				EntityMessage.show(this, "Thất bại");
+			}
 		}
 	}
 

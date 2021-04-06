@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -24,13 +23,16 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.model.HoaDonThanhToanModel;
-import com.polymart.service.IHoaDonThanhToanService;
-import com.polymart.service.impl.HoaDonThanhToanService;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.polymart.service.impl.ThongKeService;
+import com.polymart.ui.common.uiCommon;
 
 public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 
@@ -40,13 +42,15 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = 8758462980711626613L;
 	private JPanel contentPane;
 	private JTable tableThongKe;
+	JPanel panelContent = new JPanel();
+	JScrollPane scrollPaneBang = new JScrollPane();
+	ChartPanel chartPanel;
+
 	//DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	JComboBox<String> cbbNam = new JComboBox<String>();
 
 	private DefaultTableModel modelThongKe = new DefaultTableModel();
-	
-	private IHoaDonThanhToanService hoaDonThanhToanService = new HoaDonThanhToanService();
-	DecimalFormat fm = new DecimalFormat("#.###");
+		DecimalFormat fm = new DecimalFormat("#.###");
 
 
 	/**
@@ -69,6 +73,8 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ThongKeDoanhThuJInternalFrame() {
+		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 848, 556);
 		contentPane = new JPanel();
@@ -126,11 +132,6 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 					.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
-		cbbNam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				loadTableDoanhThu();
-			}
-		});
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
@@ -171,13 +172,9 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		panel_2.setLayout(gl_panel_2);
 		panel_1.setLayout(gl_panel_1);
 		
-		JPanel panelContent = new JPanel();
 		contentPane.add(panelContent, BorderLayout.CENTER);
 		panelContent.setLayout(new BorderLayout(0, 0));
-		
-		JScrollPane scrollPaneBang = new JScrollPane();
-		panelContent.add(scrollPaneBang, BorderLayout.CENTER);
-		
+				
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
 		
@@ -204,6 +201,19 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		loadTableDoanhThu();		
+		rdoBieuDo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadBieuDoDoanhThu(modelThongKe);
+				rdoTheoBang.setSelected(true);
+			}
+		});
+		cbbNam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadTableDoanhThu();		
+
+			}
+		});
 	}
 	
 	public void loadTableDoanhThu() {
@@ -225,7 +235,30 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 				e.printStackTrace();
 			}
 		}
+		panelContent.add(scrollPaneBang, BorderLayout.CENTER);
+		scrollPaneBang.setVisible(true);
 	}
+	
+	public void loadBieuDoDoanhThu(DefaultTableModel model) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		for(int i=1;i<13;i++) {
+			String so = String.valueOf(model.getValueAt(i-1, 2));
+			Double soNguoi = Double.parseDouble(so);
+			String month = "Tháng "+i;
+			dataset.addValue(soNguoi, "Doanh thu", month);
+		}
+		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
+        chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(chartPanel);
+        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
+        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+	}
+
 	
 	public void fillCbbYear() throws SQLException {
 		ResultSet cbbYear = new ThongKeService().findYear();

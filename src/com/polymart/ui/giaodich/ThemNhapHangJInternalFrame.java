@@ -10,6 +10,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -421,23 +422,49 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     private void evtBtnLuuTam(JTextField txtSoLuong, JTextField txtGiaNhap, JTable tbSanPham, JLabel lblTongTien) {
         String getSoLuong = txtSoLuong.getText();
         String getMoney = txtGiaNhap.getText();
-        if (EntityValidate.checkPositiveNumber(this, getSoLuong) && EntityValidate.checkMoney(this, getMoney)) {
-            int row = tbSanPham.getSelectedRow();
-            if (row > -1 && row < tbSanPham.getRowCount()) {
-                chiTietSanPhamModel = lstTietSanPham.get(row);
-                sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
-                modelDSNhapHang.addRow(new Object[]{chiTietSanPhamModel.getId(), sanPhamModel.getTenSP(),
-                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()), getMoney,
-                        chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
-                // taho đôi tượng chi tiest hóa đơn nhập hàng và add vào list
-                chiTietHoaDonNhapHangModel = new ChiTietHoaDonNhapHangModel();
-                chiTietHoaDonNhapHangModel.setGiaNhap(Long.valueOf(getMoney));
-                chiTietHoaDonNhapHangModel.setSoLuong(Integer.parseInt(getSoLuong));
-                chiTietHoaDonNhapHangModel.setIdChiTietSanPham(chiTietSanPhamModel.getId());
-                lstChiTietHoaDonNhap.add(chiTietHoaDonNhapHangModel);
-                // tính tổng tiền của tất cả sản phẩm có trên table
-                lblTongTien.setText(String.valueOf(
-                        lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
+        int row = tbSanPham.getSelectedRow();
+        if (row > -1 && row < tbSanPham.getRowCount()) {
+            chiTietSanPhamModel = lstTietSanPham.get(row);
+            if (EntityValidate.checkPositiveNumber(this, getSoLuong) && EntityValidate.checkMoney(this, getMoney)) {
+                if (lstChiTietHoaDonNhap.stream().filter(e ->
+                        e.getGiaNhap().equals(Long.valueOf(getMoney))
+                                && e.getIdChiTietSanPham().equals(chiTietSanPhamModel.getId()))
+                        .collect(Collectors.toList()).isEmpty()) {
+                    sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
+                    modelDSNhapHang.addRow(new Object[]{
+                            chiTietSanPhamModel.getId(),
+                            sanPhamModel.getTenSP(),
+                            loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
+                            getMoney,
+                            chiTietSanPhamModel.getSize(),
+                            chiTietSanPhamModel.getMauSac(),
+                            getSoLuong
+                    });
+                    // taho đôi tượng chi tiest hóa đơn nhập hàng và add vào list
+                    chiTietHoaDonNhapHangModel = new ChiTietHoaDonNhapHangModel();
+                    chiTietHoaDonNhapHangModel.setGiaNhap(Long.valueOf(getMoney));
+                    chiTietHoaDonNhapHangModel.setSoLuong(Integer.parseInt(getSoLuong));
+                    chiTietHoaDonNhapHangModel.setIdChiTietSanPham(chiTietSanPhamModel.getId());
+                    lstChiTietHoaDonNhap.add(chiTietHoaDonNhapHangModel);
+                    // tính tổng tiền của tất cả sản phẩm có trên table
+                    lblTongTien.setText(String.valueOf(
+                            lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
+                } else {
+                    int i = 0;
+                    for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhap) {
+                        if (x.getIdChiTietSanPham().equals(chiTietSanPhamModel.getId())
+                                && x.getGiaNhap().equals(Long.valueOf(getMoney))) {
+                            int setSoLuong = x.getSoLuong() + Integer.parseInt(getSoLuong);
+                            x.setSoLuong(setSoLuong);
+                            modelDSNhapHang.setValueAt(setSoLuong, i, 6);
+                            // tính tổng tiền của tất cả sản phẩm có trên table
+                            lblTongTien.setText(String.valueOf(
+                                    lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
+                            return;
+                        }
+                        ++i;
+                    }
+                }
             }
         }
     }

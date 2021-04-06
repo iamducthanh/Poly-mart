@@ -353,6 +353,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                     this.setVisible(false);
                     traHangJInternalFrame.showTable(traHangJInternalFrame.getData());
                     chiTietSanPhamService.reloadData();
+                    chiTietHoaDonTraHangService.reloadData();
                 } else {
                     EntityMessage.show(this, "Thêm thất bại");
                     hoaDonTraHangService.remove(hoaDonTraHangModel);

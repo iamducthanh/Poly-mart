@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IHoaDonTraHangDAO extends GenericDAO<HoaDonTraHangModel> {
 
-    List<Object[]> getDataTableTraHang();
+    Object[] getDataTableTraHang(int id);
 
     List<HoaDonTraHangModel> findAll();
 

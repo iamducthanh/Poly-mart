@@ -273,17 +273,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
         tableThanhToan.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() == 2) {
-                    int row = tableThanhToan.getSelectedRow();
-                    if (row > -1 && row < tableThanhToan.getRowCount()) {
-                        HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
-                        List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
-                                .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
-                        ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan(
-                                lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang());
-                        chiTietHoaDonThanhToan.setVisible(true);
-                    }
-                }
+                setOpenChiTietHoaDonThanhToan(mouseEvent);
             }
         });
 
@@ -298,6 +288,24 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
             }
         });
 
+    }
+
+    private void setOpenChiTietHoaDonThanhToan(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            int row = tableThanhToan.getSelectedRow();
+            if (row > -1 && row < tableThanhToan.getRowCount()) {
+                HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
+                List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
+                        .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
+                if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
+                    ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan(
+                            lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang());
+                    chiTietHoaDonThanhToan.setVisible(true);
+                } else {
+                    EntityMessage.show(this, "Hóa đơn không có sản phẩm");
+                }
+            }
+        }
     }
 
     private void setOpenThemHoaDonThanhToan() {
@@ -325,9 +333,9 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
     // xóa một hàng trên table
     private void evtBtnXoa(JTable tbNhapHang) {
-        if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
-            int row = tbNhapHang.getSelectedRow();
-            if (row > -1 && row < tbNhapHang.getRowCount()) {
+        int row = tbNhapHang.getSelectedRow();
+        if (row > -1 && row < tbNhapHang.getRowCount()) {
+            if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
                 HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
                 if (hoaDonThanhToanService.remove(hoaDonThanhToanModel)) {
                     EntityMessage.show(this, "Xóa thành công");
@@ -337,10 +345,11 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                 } else {
                     EntityMessage.show(this, "Xóa thất bại");
                 }
-            } else {
-                EntityMessage.show(this, "Vui lòng chọn 1 hàng");
             }
+        } else {
+            EntityMessage.show(this, "Vui lòng chọn 1 hàng");
         }
+
     }
 
     // tìm kiếm mã hóa đơn hàng
@@ -369,11 +378,10 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
             List<HoaDonThanhToanModel> lstLoc = hoaDonThanhToanService.filterByDate(timestamp);
             if (lstLoc.isEmpty()) {
                 EntityMessage.show(this, "Không có hóa đơn nào trong ngày được chọn");
-                getList();
             } else {
                 lstHoaDonThanhToanModels = lstLoc;
+                showTable(lstHoaDonThanhToanModels);
             }
-            showTable(lstHoaDonThanhToanModels);
         } catch (Exception e) {
             EntityMessage.show(this, "Mời chọn ngày muốn tìm");
         }

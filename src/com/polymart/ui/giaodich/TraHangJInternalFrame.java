@@ -256,6 +256,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 }
             }
         }
+        
     }
 
     ActionListener openThemHoaDonTraHang = new ActionListener() {

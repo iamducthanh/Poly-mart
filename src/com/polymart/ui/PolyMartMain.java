@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,8 +26,10 @@ import javax.swing.UIManager;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
+import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
@@ -213,7 +217,12 @@ public class PolyMartMain extends JFrame {
 		mntmBangTinhLuong.addActionListener(openBangLuong);
 		mntmCaNhan.addActionListener(openCaNhan);
 		mntmDoanhThu.addActionListener(openDoanhThu);
-
+		
+		JLabel back = new JLabel("");
+		ImageIcon imageIcon = new ImageIcon("C:\\Users\\ADMIN\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper");
+		Image image = EntityImage.resize(imageIcon.getImage(), uiCommon.width, uiCommon.height);
+		back.setIcon(new ImageIcon(image));
+		pnlMain.add(back);
 	}
 
 	ActionListener openTraHang = new ActionListener() {

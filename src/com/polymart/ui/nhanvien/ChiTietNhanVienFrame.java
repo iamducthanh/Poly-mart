@@ -59,6 +59,9 @@ public class ChiTietNhanVienFrame extends JFrame {
 	public JRadioButton rdoNu;
 	public JLabel lblAnhDaiDien;
 	private JFileChooser fileChooser;
+	static Integer maNhanVien;
+	JButton btnSave ;
+	JButton btnEdit;
 
 	private INhanVienService nhanVienService = new NhanVienService();
 
@@ -124,14 +127,14 @@ public class ChiTietNhanVienFrame extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnEdit = new JButton("Lưu");
-		btnEdit.addActionListener(new ActionListener() {
+		btnSave = new JButton("Lưu");
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addNhanVien();
 			}
 		});
-		btnEdit.setBounds(531, 575, 50, 28);
-		contentPane.add(btnEdit);
+		btnSave.setBounds(531, 575, 50, 28);
+		contentPane.add(btnSave);
 
 		JButton btnClear = new JButton("Làm mới");
 		btnClear.addActionListener(new ActionListener() {
@@ -270,9 +273,31 @@ public class ChiTietNhanVienFrame extends JFrame {
 		comboBox.setBounds(142, 174, 175, 25);
 		panel.add(comboBox);
 
-		JButton btnSave = new JButton("Lưu");
-		btnSave.setBounds(607, 577, 50, 28);
-		contentPane.add(btnSave);
+		 btnEdit = new JButton("Sửa");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditNhanVien();
+			}
+		});
+		btnEdit.setBounds(607, 577, 50, 28);
+		contentPane.add(btnEdit);
+	}
+
+	protected void EditNhanVien() {
+		if(validated()) {
+			NhanVienModel nhanVien =new  NhanVienModel();
+			nhanVien =addThongTinNhanVien();
+			nhanVien.setId(maNhanVien);
+			if (nhanVienService.update(nhanVien) != null) {
+				EntityMessage.show(this, "Sửa thành công");
+				EntityFrame.NHANVIENJINTERNAL.loadToTable();
+				this.dispose();
+			} else {
+				EntityMessage.show(this, "Thất bại");
+			}
+			
+		}
+
 	}
 
 	protected void logoClicked() {
@@ -289,7 +314,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	 */
 	protected void clear() {
 		txtHoTen.setText(null);
-		txtNgaySinh.setDate(null);
+		txtNgaySinh.setCalendar(null);
 		rdoNam.setSelected(true);
 		comboBox.setSelectedIndex(0);
 		txtMatKhau.setText(null);
@@ -314,30 +339,38 @@ public class ChiTietNhanVienFrame extends JFrame {
 		return list;
 	}
 
+	public NhanVienModel addThongTinNhanVien() {
+		NhanVienModel nhanVienModel = new NhanVienModel();
+		try {
+			nhanVienModel.setNgaySinh(new SimpleDateFormat("dd/MM/yyyy")
+					.parse(new SimpleDateFormat("dd/MM/yyyy").format(txtNgaySinh.getDate())));
+			nhanVienModel.setGioiTinh((rdoNam.isSelected()) ? true : false);
+			nhanVienModel.setHoTen(txtHoTen.getText());
+			nhanVienModel.setMatKhau(txtMatKhau.getText());
+			nhanVienModel.setLuong(Long.parseLong(txtMucLuong.getText()));
+			nhanVienModel.setSdt(txtSDT.getText());
+			nhanVienModel.setChucVu(comboBox.getSelectedItem().toString());
+			nhanVienModel.setEmail(txtEmail.getText());
+			nhanVienModel.setDiaChi(txtDiaChi.getText());
+
+			if (fileChooser.getSelectedFile() != null) {
+				nhanVienModel.setAnhDaiDien(fileChooser.getSelectedFile().getAbsolutePath());
+			} else {
+				nhanVienModel.setAnhDaiDien("images\\question.png");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return nhanVienModel;
+	}
+
 	/**
 	 * Thêm mới nhân viên
 	 */
 	protected void addNhanVien() {
 		if (validated()) {
-			try {
-				NhanVienModel nhanVienModel = new NhanVienModel();
-				nhanVienModel.setNgaySinh(new SimpleDateFormat("dd/MM/yyyy")
-						.parse(new SimpleDateFormat("dd/MM/yyyy").format(txtNgaySinh.getDate())));
-				nhanVienModel.setGioiTinh((rdoNam.isSelected()) ? true : false);
-				nhanVienModel.setHoTen(txtHoTen.getText());
-				nhanVienModel.setMatKhau(txtMatKhau.getText());
-				nhanVienModel.setLuong(Long.parseLong(txtMucLuong.getText()));
-				nhanVienModel.setSdt(txtSDT.getText());
-				nhanVienModel.setChucVu(comboBox.getSelectedItem().toString());
-				nhanVienModel.setEmail(txtEmail.getText());
-				nhanVienModel.setDiaChi(txtDiaChi.getText());
-
-				if (fileChooser.getSelectedFile() != null) {
-					nhanVienModel.setAnhDaiDien(fileChooser.getSelectedFile().getAbsolutePath());
-				} else {
-					nhanVienModel.setAnhDaiDien("images\\question.png");
-				}
-
+			NhanVienModel nhanVienModel = new NhanVienModel();
+					nhanVienModel = addThongTinNhanVien();
 				// truyền dữ liệu lên database
 				if (nhanVienService.save(nhanVienModel) != null) {
 					EntityMessage.show(this, "Thêm mới thành công");
@@ -346,9 +379,6 @@ public class ChiTietNhanVienFrame extends JFrame {
 				} else {
 					EntityMessage.show(this, "Thất bại");
 				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 

@@ -324,12 +324,14 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		if (mouseEvent.getClickCount() == 2) {
 			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
 			EntityFrame.CHITIETNHANVIEN.setVisible(true);
+			EntityFrame.CHITIETNHANVIEN.btnSave.setEnabled(false);
 			showDetail();
 		}
 	}
 
 	private void showDetail() {
 		EntityFrame.CHITIETNHANVIEN.txtHoTen.setText(list.get(index).getHoTen());
+		EntityFrame.CHITIETNHANVIEN.maNhanVien=list.get(index).getId();
 		EntityFrame.CHITIETNHANVIEN.txtNgaySinh.setDate(list.get(index).getNgaySinh());
 		if (list.get(index).isGioiTinh()) {
 			EntityFrame.CHITIETNHANVIEN.rdoNam.setSelected(true);
@@ -356,7 +358,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	};
 
 	protected void btnThemNhanVien() {
-		new ChiTietNhanVienFrame().setVisible(true);
+		EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+		EntityFrame.CHITIETNHANVIEN.setVisible(true);
+		EntityFrame.CHITIETNHANVIEN.btnEdit.setEnabled(false);
 	}
 
 	private void loadComboboxChucVu() {

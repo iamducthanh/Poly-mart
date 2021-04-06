@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,8 +26,10 @@ import javax.swing.UIManager;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
+import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
@@ -131,14 +135,18 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmHoaDonTraHang = new JMenuItem("Trả hàng");
 		mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
 		mnGiaoDich.add(mntmHoaDonTraHang);
+		
+				JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
+				mnGiaoDich.add(mntmChiTieu);
+				mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
+				mntmChiTieu.addActionListener(openChiTieu);
 
 		JMenu mnDoiTac = new JMenu("Báo cáo");
 		mnDoiTac.setIcon(new ImageIcon("images\\baocao.png"));
 		menuBar.add(mnDoiTac);
-
-		JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
-		mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
-		mnDoiTac.add(mntmChiTieu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Báo cáo chi tiêu trong ngày");
+		mnDoiTac.add(mntmNewMenuItem);
 
 		JMenu mnNhanVien = new JMenu("Nhân viên");
 		mnNhanVien.setIcon(new ImageIcon("images\\nhanvien1.png"));
@@ -201,7 +209,6 @@ public class PolyMartMain extends JFrame {
 		mntmKiemKho.addActionListener(openKiemKho);
 		mntmNguonHang.addActionListener(openNguonHang);
 		mntmChamCong.addActionListener(openChamCong);
-		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
 		mntmKhachHang.addActionListener(openKhachHang);
@@ -210,7 +217,12 @@ public class PolyMartMain extends JFrame {
 		mntmBangTinhLuong.addActionListener(openBangLuong);
 		mntmCaNhan.addActionListener(openCaNhan);
 		mntmDoanhThu.addActionListener(openDoanhThu);
-
+		
+		JLabel back = new JLabel("");
+		ImageIcon imageIcon = new ImageIcon("C:\\Users\\ADMIN\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper");
+		Image image = EntityImage.resize(imageIcon.getImage(), uiCommon.width, uiCommon.height);
+		back.setIcon(new ImageIcon(image));
+		pnlMain.add(back);
 	}
 
 	ActionListener openTraHang = new ActionListener() {

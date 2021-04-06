@@ -17,6 +17,10 @@ public class uiCommon {
 		super();
 		this.panelOption = panelOption;
 	}
+	
+	public uiCommon() {
+		
+	};
 
 	public void addCheckBox(JCheckBox checkBox, int x, int y, int w) {
 		checkBox.setBackground(Color.WHITE);

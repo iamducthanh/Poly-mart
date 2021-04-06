@@ -34,7 +34,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
 
-public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
+public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 
 	/**
 	 * 
@@ -60,7 +60,7 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ThongKeDoanhThuJInternalFrame frame = new ThongKeDoanhThuJInternalFrame();
+					ThongKeDoanhSoJInternalFrame frame = new ThongKeDoanhSoJInternalFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,7 +72,7 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ThongKeDoanhThuJInternalFrame() {
+	public ThongKeDoanhSoJInternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +85,7 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("Thống kê doanh thu");
+		JLabel lblNewLabel = new JLabel("Thống kê doanh số");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

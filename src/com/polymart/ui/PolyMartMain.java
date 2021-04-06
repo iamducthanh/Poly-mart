@@ -131,14 +131,18 @@ public class PolyMartMain extends JFrame {
 		JMenuItem mntmHoaDonTraHang = new JMenuItem("Trả hàng");
 		mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
 		mnGiaoDich.add(mntmHoaDonTraHang);
+		
+				JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
+				mnGiaoDich.add(mntmChiTieu);
+				mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
+				mntmChiTieu.addActionListener(openChiTieu);
 
 		JMenu mnDoiTac = new JMenu("Báo cáo");
 		mnDoiTac.setIcon(new ImageIcon("images\\baocao.png"));
 		menuBar.add(mnDoiTac);
-
-		JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
-		mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
-		mnDoiTac.add(mntmChiTieu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Báo cáo chi tiêu trong ngày");
+		mnDoiTac.add(mntmNewMenuItem);
 
 		JMenu mnNhanVien = new JMenu("Nhân viên");
 		mnNhanVien.setIcon(new ImageIcon("images\\nhanvien1.png"));
@@ -201,7 +205,6 @@ public class PolyMartMain extends JFrame {
 		mntmKiemKho.addActionListener(openKiemKho);
 		mntmNguonHang.addActionListener(openNguonHang);
 		mntmChamCong.addActionListener(openChamCong);
-		mntmChiTieu.addActionListener(openChiTieu);
 		mntmHoaDonNhap.addActionListener(openNhapHang);
 		mntmDangXuat.addActionListener(logoutAccount);
 		mntmKhachHang.addActionListener(openKhachHang);

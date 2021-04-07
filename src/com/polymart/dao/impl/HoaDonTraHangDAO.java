@@ -24,6 +24,7 @@ public class HoaDonTraHangDAO extends AbstractDAO<HoaDonTraHangModel> implements
 				result[3] = resultSet.getString("HOTEN");
 				result[4] = resultSet.getLong("TONGTIEN");
 			}
+			
 			resultSet.close();
 		} catch (Exception e) {
 			e.printStackTrace();

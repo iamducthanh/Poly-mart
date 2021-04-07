@@ -62,6 +62,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 	static Integer maNhanVien;
 	JButton btnSave;
 	JButton btnEdit;
+	ButtonGroup buttonGroup ;
+	static String matKhau;
 
 	private INhanVienService nhanVienService = new NhanVienService();
 
@@ -88,6 +90,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		fileChooser = new JFileChooser();
 		initialize();
 		loadComboboxChucVu().forEach(e -> comboBox.addItem(e));
+		matKhau = txtMatKhau.getText();
 	}
 
 	/**
@@ -189,7 +192,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtNgaySinh.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("date")) {
-					if (!EntityValidate.checkNgaySinh(EntityFrame.CHITIETNHANVIEN, txtNgaySinh.getDate())) {
+					if (!EntityValidate.checkNgaySinh(EntityFrame.CHITIETNHANVIEN, txtNgaySinh.getDate(),false)) {
 						txtNgaySinh.getCalendarButton().requestFocus();
 					}
 				}
@@ -223,6 +226,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 		panel.add(txtSDT);
 
 		txtMatKhau = new JTextField();
+		txtMatKhau.setEditable(false);
+		txtMatKhau.setText("12345678");
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMatKhau.setColumns(10);
 		txtMatKhau.setBounds(142, 230, 235, 25);
@@ -265,7 +270,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		lblAnhDaiDien.setBounds(443, 45, 166, 210);
 		panel.add(lblAnhDaiDien);
 
-		ButtonGroup buttonGroup = new ButtonGroup();
+		 buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdoNam);
 		buttonGroup.add(rdoNu);
 
@@ -314,7 +319,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	protected void clear() {
 		txtHoTen.setText(null);
 		txtNgaySinh.setCalendar(null);
-		rdoNam.setSelected(true);
+		buttonGroup.clearSelection();
 		comboBox.setSelectedIndex(0);
 		txtMatKhau.setText(null);
 		txtMucLuong.setText(null);
@@ -345,7 +350,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 					.parse(new SimpleDateFormat("dd/MM/yyyy").format(txtNgaySinh.getDate())));
 			nhanVienModel.setGioiTinh((rdoNam.isSelected()) ? true : false);
 			nhanVienModel.setHoTen(txtHoTen.getText());
-			nhanVienModel.setMatKhau(txtMatKhau.getText());
+			nhanVienModel.setMatKhau(matKhau);
 			nhanVienModel.setLuong(Long.parseLong(txtMucLuong.getText()));
 			nhanVienModel.setSdt(txtSDT.getText());
 			nhanVienModel.setChucVu(comboBox.getSelectedItem().toString());
@@ -393,7 +398,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		}
 
 		// Ngày sinh
-		if (!EntityValidate.checkNgaySinh(this, txtNgaySinh.getDate())) {
+		if (!EntityValidate.checkNgaySinh(this, txtNgaySinh.getDate(),true)) {
 			txtNgaySinh.requestFocus();
 			return false;
 		}

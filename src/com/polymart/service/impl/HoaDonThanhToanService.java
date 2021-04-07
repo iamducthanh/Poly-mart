@@ -7,6 +7,7 @@ import com.polymart.service.IHoaDonThanhToanService;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ public class HoaDonThanhToanService implements IHoaDonThanhToanService {
 
     @Override
     public List<HoaDonThanhToanModel> findAll() {
+        Collections.reverse(lstHoaDonThanhToanModels);
         return lstHoaDonThanhToanModels;
     }
 

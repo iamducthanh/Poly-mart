@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -73,6 +72,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private INguonHangService nguonHangService = new NguonHangService();
 
     private List<HoaDonNhapHangModel> lstHoaDonNhapHang = null;
+
+    private HoaDonNhapHangModel hoaDonNhapHangModel = null;
 
     /**
      * Launch the application.
@@ -236,6 +237,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonNhapHang
         tableNhapHang.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
+                int row = tableNhapHang.getSelectedRow();
+                if (row > -1 && row < tableNhapHang.getRowCount()) {
+                    hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(tableNhapHang.getValueAt(row, 0).toString()));
+                }
                 setOpenChiTietHoaDonNhap(mouseEvent);
             }
         });
@@ -257,10 +262,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         if (mouseEvent.getClickCount() == 2) {
             int row = tableNhapHang.getSelectedRow();
             if (row > -1 && row < tableNhapHang.getRowCount()) {
-                String getMaHoaDon = tableNhapHang.getValueAt(row, 0).toString();
-                HoaDonNhapHangModel hoaDonNhapHangModel =
-                        lstHoaDonNhapHang.stream().filter(e -> e.getId().equals(Integer.parseInt(getMaHoaDon)))
-                                .collect(Collectors.toList()).get(0);
                 List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
                         .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
                 if (lstChiTietHoaDonNhap.isEmpty()) {
@@ -316,7 +317,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             showTable(getList());
         } else {
             if (EntityValidate.checkIdNumber(this, getID)) {
-                HoaDonNhapHangModel hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
+                hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
                 if (hoaDonNhapHangModel == null) {
                     EntityMessage.show(this, "Mã hóa đơn không tồn tại");
                 } else {
@@ -331,9 +332,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     // xóa một hàng trên table
     private void evtBtnXoa(JTable tbNhapHang) {
         int row = tbNhapHang.getSelectedRow();
-        if (row > -1 && row < tbNhapHang.getRowCount()) {
+        if ((row > -1 && row < tbNhapHang.getRowCount()) && hoaDonNhapHangModel != null) {
             if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
-                HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
+                hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(tableNhapHang.getValueAt(row, 0).toString()));
                 if (hoaDonNhapHangService.remove(hoaDonNhapHangModel)) {
                     EntityMessage.show(this, "Xóa thành công");
                     modelNhapHang.removeRow(row);

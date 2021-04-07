@@ -27,6 +27,11 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     @Override
+    public List<ChiTietSanPhamModel> findAllByHoaDonThanhToan() {
+        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getSoLuong() > 0).collect(Collectors.toList());
+    }
+
+    @Override
     public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
         chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
     }

@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collector;
@@ -63,6 +64,8 @@ public class TraHangJInternalFrame extends JInternalFrame {
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
     private List<HoaDonTraHangModel> lstHoaDonTraHangModels = hoaDonTraHangService.findAll();
+
+    private HoaDonTraHangModel hoaDonTraHangModel = new HoaDonTraHangModel();
 
     /**
      * Launch the application.
@@ -222,6 +225,10 @@ public class TraHangJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
         tableTraHang.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
+                int row = tableTraHang.getSelectedRow();
+                if (row > -1 && row < tableTraHang.getRowCount()) {
+                    hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
+                }
                 setOpenThemHoaDonTraHang(mouseEvent);
             }
         });
@@ -242,12 +249,9 @@ public class TraHangJInternalFrame extends JInternalFrame {
     private void setOpenThemHoaDonTraHang(MouseEvent mouseEvent) {
         if (mouseEvent.getClickCount() == 2) {
             int row = tableTraHang.getSelectedRow();
-            if (row > -1 && row < tableTraHang.getRowCount()) {
-                String getMaHoaDon = tableTraHang.getValueAt(row, 0).toString();
-                HoaDonTraHangModel hoaDonTraHangModel =
-                        lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(Integer.parseInt(getMaHoaDon)))
-                                .collect(Collectors.toList()).get(0);
+            if ((row > -1 && row < tableTraHang.getRowCount()) && hoaDonTraHangModel != null) {
                 List<ChiTietHoaDonTraHangModel> lstChiTiet = chiTietHoaDonTraHangService.findByIdHoaDonTraHang(hoaDonTraHangModel.getId());
+                hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
                 if (!lstChiTiet.isEmpty()) {
                     ChiTietHoaDonTraHang chiTietHoaDonTraHang = new ChiTietHoaDonTraHang(lstChiTiet);
                     chiTietHoaDonTraHang.setVisible(true);
@@ -256,7 +260,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 }
             }
         }
-        
+
     }
 
     ActionListener openThemHoaDonTraHang = new ActionListener() {
@@ -300,11 +304,12 @@ public class TraHangJInternalFrame extends JInternalFrame {
             showTable(getData());
         } else {
             if (EntityValidate.checkIdNumber(this, getTimKiem)) {
-                List<HoaDonTraHangModel> lstTim = hoaDonTraHangService.findById(Integer.parseInt(getTimKiem));
-                if (lstTim.isEmpty()) {
+                hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(getTimKiem));
+                if (hoaDonTraHangModel != null) {
                     EntityMessage.show(this, "Mã hóa đơn không tồn tại");
                 } else {
-                    lstHoaDonTraHangModels = lstTim;
+                    lstHoaDonTraHangModels = new ArrayList<>();
+                    lstHoaDonTraHangModels.add(hoaDonTraHangModel);
                     showTable(lstHoaDonTraHangModels);
                 }
             }
@@ -332,8 +337,8 @@ public class TraHangJInternalFrame extends JInternalFrame {
         int row = tbDanhSach.getSelectedRow();
         if (row > -1 && row < tbDanhSach.getRowCount()) {
             if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
-                HoaDonTraHangModel hoaDonTraHangModel = lstHoaDonTraHangModels.get(row);
-                if (hoaDonTraHangService.remove(hoaDonTraHangModel)) {
+                hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
+                if (hoaDonTraHangModel != null && hoaDonTraHangService.remove(hoaDonTraHangModel)) {
                     EntityMessage.show(this, "Xóa thành công");
                     modelTraHang.removeRow(row);
                     chiTietHoaDonTraHangService.reloadData();

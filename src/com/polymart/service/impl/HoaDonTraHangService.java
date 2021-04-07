@@ -7,6 +7,7 @@ import com.polymart.service.IHoaDonTraHangService;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,7 @@ public class HoaDonTraHangService implements IHoaDonTraHangService {
 
     @Override
     public List<HoaDonTraHangModel> findAll() {
+        Collections.reverse(lstHoaDonTraHangModels);
         return lstHoaDonTraHangModels;
     }
 

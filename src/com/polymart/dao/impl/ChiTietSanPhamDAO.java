@@ -19,7 +19,7 @@ public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implemen
     @Override
     public List<ChiTietSanPhamModel> findByIdOrNameProduct(String input) {
         String sql = "SELECT CTSP.* FROM CHITIETSANPHAM AS CTSP JOIN SANPHAM AS SP\n" + "ON CTSP.IDSANPHAM = SP.ID\n"
-                + "WHERE CTSP.ID LIKE ? OR SP.TEN LIKE ?";
+                + "WHERE CTSP.ID LIKE ? OR SP.TEN LIKE ? AND TRANGTHAI = 1";
         return query(sql, new ChiTietSanPhamMapper(), "%" + input + "%", "%" + input + "%");
     }
 

@@ -1,5 +1,6 @@
 package com.polymart.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,13 +18,19 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public List<ChiTietSanPhamModel> findAll() {
-        return lstChiTietSanPhamModels;
+        Collections.reverse(lstChiTietSanPhamModels);
+        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus()).collect(Collectors.toList());
     }
 
     // tìm kiếm theo mã hoặc tên sản phẩm
     @Override
     public List<ChiTietSanPhamModel> findByIdOrNameProduct(String input) {
         return chiTietSanPhamDAO.findByIdOrNameProduct(input);
+    }
+
+    @Override
+    public List<ChiTietSanPhamModel> findAllByHoaDonThanhToan() {
+        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getSoLuong() > 0).collect(Collectors.toList());
     }
 
     @Override
@@ -55,6 +62,6 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public ChiTietSanPhamModel getById(Integer id) {
-        return lstChiTietSanPhamModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0);
+        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
 }

@@ -11,7 +11,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -29,9 +35,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
-import com.polymart.model.HoaDonTraHangModel;
-import com.polymart.service.IHoaDonTraHangService;
-import com.polymart.service.impl.HoaDonTraHangService;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.*;
+import com.polymart.service.*;
+import com.polymart.service.impl.*;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -51,8 +59,13 @@ public class TraHangJInternalFrame extends JInternalFrame {
     private DefaultTableModel modelTraHang;
 
     private IHoaDonTraHangService hoaDonTraHangService = new HoaDonTraHangService();
+    private IChiTietHoaDonThanhToanService chiTietHoaDonThanhToanService = new ChiTietHoaDonThanhToanService();
+    private IChiTietHoaDonTraHangService chiTietHoaDonTraHangService = new ChiTietHoaDonTraHangService();
+    private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
     private List<HoaDonTraHangModel> lstHoaDonTraHangModels = hoaDonTraHangService.findAll();
+
+    private HoaDonTraHangModel hoaDonTraHangModel = new HoaDonTraHangModel();
 
     /**
      * Launch the application.
@@ -98,6 +111,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
 
         initTopTraHang();
         initCenterTraHang();
+
     }
 
     public void initTopTraHang() {
@@ -106,13 +120,13 @@ public class TraHangJInternalFrame extends JInternalFrame {
         panel.add(lblNewLabel, BorderLayout.WEST);
 
         txtTimPhieuNhap = new JTextField();
-        txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng hoặc hóa đơn thanh toán");
+        txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng");
         panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
         txtTimPhieuNhap.setColumns(10);
         txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtTimPhieuNhap.getText().equals("TÌm theo hóa đơn trả hàng hoặc hóa đơn thanh toán")) {
+                if (txtTimPhieuNhap.getText().equals("TÌm theo hóa đơn trả hàng")) {
                     txtTimPhieuNhap.setText("");
                 }
             }
@@ -120,7 +134,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtTimPhieuNhap.getText().equals("")) {
-                    txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng hoặc hóa đơn thanh toán");
+                    txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng");
                 }
             }
         });
@@ -152,6 +166,22 @@ public class TraHangJInternalFrame extends JInternalFrame {
         panel1.add(cbbOptionKiemKho);
 
         btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
+
+        // tìm kiếm
+        btnTimKiem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnTim(txtTimPhieuNhap);
+            }
+        });
+
+        // xóa
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnXoa(tableTraHang);
+            }
+        });
     }
 
     public void initCenterTraHang() {
@@ -159,7 +189,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
         contentPane.add(scrollPane, BorderLayout.CENTER);
         JLabel lblNewLabel_9 = new JLabel("Thời gian");
 
-        JDateChooser dateChooser = new JDateChooser();
+        JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
@@ -195,12 +225,42 @@ public class TraHangJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
         tableTraHang.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() == 2) {
-                    ChiTietHoaDonTraHang chiTietHoaDonTraHang = new ChiTietHoaDonTraHang();
-                    chiTietHoaDonTraHang.setVisible(true);
+                int row = tableTraHang.getSelectedRow();
+                if (row > -1 && row < tableTraHang.getRowCount()) {
+                    hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
                 }
+                setOpenThemHoaDonTraHang(mouseEvent);
             }
         });
+
+        // hiển thị danh sách hóa đơn trả
+        showTable(lstHoaDonTraHangModels);
+
+        // btn lọc theo ngày
+        btnLocTheoNgay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLoc(dateChooser);
+            }
+        });
+
+    }
+
+    private void setOpenThemHoaDonTraHang(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            int row = tableTraHang.getSelectedRow();
+            if ((row > -1 && row < tableTraHang.getRowCount()) && hoaDonTraHangModel != null) {
+                List<ChiTietHoaDonTraHangModel> lstChiTiet = chiTietHoaDonTraHangService.findByIdHoaDonTraHang(hoaDonTraHangModel.getId());
+                hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
+                if (!lstChiTiet.isEmpty()) {
+                    ChiTietHoaDonTraHang chiTietHoaDonTraHang = new ChiTietHoaDonTraHang(lstChiTiet);
+                    chiTietHoaDonTraHang.setVisible(true);
+                } else {
+                    EntityMessage.show(this, "Hóa đơn không có sản phẩm");
+                }
+            }
+        }
+
     }
 
     ActionListener openThemHoaDonTraHang = new ActionListener() {
@@ -222,8 +282,74 @@ public class TraHangJInternalFrame extends JInternalFrame {
         if (!lst.isEmpty()) {
             modelTraHang.setRowCount(0);
             for (HoaDonTraHangModel x : lst) {
-                return;
+                Object[] result = hoaDonTraHangService.getDataTableById(x.getId());
+                if (result != null) {
+                    modelTraHang.addRow(new Object[]{
+                            result[0],
+                            result[1],
+                            new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(result[2]),
+                            result[3],
+                            result[4],
+                            x.getGhiChu()
+                    });
+                }
             }
+        }
+    }
+
+    // tìm theo hóa đơn trả hàng
+    private void evtBtnTim(JTextField txtTimPhieuNhap) {
+        String getTimKiem = txtTimPhieuNhap.getText();
+        if (getTimKiem.equals("TÌm theo hóa đơn trả hàng")) {
+            showTable(getData());
+        } else {
+            if (EntityValidate.checkIdNumber(this, getTimKiem)) {
+                hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(getTimKiem));
+                if (hoaDonTraHangModel != null) {
+                    EntityMessage.show(this, "Mã hóa đơn không tồn tại");
+                } else {
+                    lstHoaDonTraHangModels = new ArrayList<>();
+                    lstHoaDonTraHangModels.add(hoaDonTraHangModel);
+                    showTable(lstHoaDonTraHangModels);
+                }
+            }
+        }
+    }
+
+    // lọc theo ngày
+    private void evtBtnLoc(JDateChooser dateChooser) {
+        try {
+            Timestamp timestamp = new Timestamp(dateChooser.getCalendar().getTimeInMillis());
+            List<HoaDonTraHangModel> lstLoc = hoaDonTraHangService.filterByDate(timestamp);
+            if (lstLoc.isEmpty()) {
+                EntityMessage.show(this, "Không có hóa đơn nào trong ngày được chọn");
+            } else {
+                lstHoaDonTraHangModels = lstLoc;
+                showTable(lstHoaDonTraHangModels);
+            }
+        } catch (Exception e) {
+            EntityMessage.show(this, "Mời chọn ngày muốn tìm");
+        }
+    }
+
+    // xóa một hàng trên table
+    private void evtBtnXoa(JTable tbDanhSach) {
+        int row = tbDanhSach.getSelectedRow();
+        if (row > -1 && row < tbDanhSach.getRowCount()) {
+            if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
+                hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
+                if (hoaDonTraHangModel != null && hoaDonTraHangService.remove(hoaDonTraHangModel)) {
+                    EntityMessage.show(this, "Xóa thành công");
+                    modelTraHang.removeRow(row);
+                    chiTietHoaDonTraHangService.reloadData();
+                    chiTietSanPhamService.reloadData();
+                    chiTietHoaDonThanhToanService.reloadData();
+                } else {
+                    EntityMessage.show(this, "Xóa thất bại");
+                }
+            }
+        } else {
+            EntityMessage.show(this, "Vui lòng chọn 1 hàng");
         }
     }
 

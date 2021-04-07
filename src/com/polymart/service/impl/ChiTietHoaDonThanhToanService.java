@@ -22,7 +22,8 @@ public class ChiTietHoaDonThanhToanService implements IChiTietHoaDonThanhToanSer
     @Override
     public boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
         if (chiTietHoaDonThanhToanModel != null) {
-            if (hoaDonThanhToanDAO.save(chiTietHoaDonThanhToanModel)) {
+            chiTietHoaDonThanhToanModel = hoaDonThanhToanDAO.save(chiTietHoaDonThanhToanModel);
+            if (chiTietHoaDonThanhToanModel != null) {
                 lstChiTietHoaDonThanhToanModels.add(chiTietHoaDonThanhToanModel);
                 return true;
             }

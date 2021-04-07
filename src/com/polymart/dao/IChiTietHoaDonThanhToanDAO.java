@@ -8,7 +8,7 @@ public interface IChiTietHoaDonThanhToanDAO extends GenericDAO<ChiTietHoaDonThan
 
     List<ChiTietHoaDonThanhToanModel> findAll();
 
-    boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
+    ChiTietHoaDonThanhToanModel save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
 
     boolean update(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
 

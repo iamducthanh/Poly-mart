@@ -339,6 +339,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
             } else {
                 int count = 0;
                 for (ChiTietHoaDonTraHangModel x : lstChiTietHoaDonTraHangModels) {
+                    System.out.println("id hóa đơn trả hàng" + hoaDonTraHangModel.getId());
                     x.setIdHoaDonTraHang(hoaDonTraHangModel.getId());
                     if (chiTietHoaDonTraHangService.save(x)) {
                         ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = chiTietHoaDonThanhToanService.findById(x.getIdHoaDonThanhToanChiTiet());
@@ -353,6 +354,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                     this.setVisible(false);
                     traHangJInternalFrame.showTable(traHangJInternalFrame.getData());
                     chiTietSanPhamService.reloadData();
+                    chiTietHoaDonTraHangService.reloadData();
                 } else {
                     EntityMessage.show(this, "Thêm thất bại");
                     hoaDonTraHangService.remove(hoaDonTraHangModel);

@@ -44,6 +44,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.config.SecurityConfig;
+import com.polymart.dao.impl.NhanVienDAO;
 import com.polymart.entity.EntityFrame;
 import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
@@ -179,7 +180,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 		JButton btnThemNV = new JButton("+ Thêm nhân viên");
 		pnlFunction.add(btnThemNV);
-		btnXoaNV = new JButton("- Xóa nhân viên");
+		btnXoaNV = new JButton("- Khóa Tài Khoản");
 		btnXoaNV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnDelete();
@@ -234,12 +235,13 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	protected void btnDelete() {
 		if (JOptionPane.showConfirmDialog(this,
-				"Bạn có chắc muốn xoá ra khỏi hệ thống?\nNhân viên: " + list.get(index).getHoTen() + "\nID: "
+				"Bạn có chắc muốn Khóa Tài Kho?\nNhân viên: " + list.get(index).getHoTen() + "\nID: "
 						+ list.get(index).getId(),
 				"Xác nhận", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-			nhanVienService.delete(new Integer[] { list.get(index).getId() });
-
+			NhanVienDAO nhanVien = new NhanVienDAO();
+			nhanVien.khoaTaiKhoanNhanVien(String.valueOf(list.get(index).getId()));
 			loadToTable();
+			btnXoaNV.setEnabled(false);
 		}
 	}
 
@@ -262,7 +264,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		tblNhanVien = new JTable();
 		scrollPane.setViewportView(tblNhanVien);
 		model.addColumn("Mã nhân viên");
-		model.addColumn("Mật khẩu");
 		model.addColumn("Tên nhân viên");
 		model.addColumn("Chức vụ");
 		model.addColumn("Mức lương");
@@ -322,12 +323,14 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		if (mouseEvent.getClickCount() == 2) {
 			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
 			EntityFrame.CHITIETNHANVIEN.setVisible(true);
+			EntityFrame.CHITIETNHANVIEN.btnSave.setEnabled(false);
 			showDetail();
 		}
 	}
 
 	private void showDetail() {
 		EntityFrame.CHITIETNHANVIEN.txtHoTen.setText(list.get(index).getHoTen());
+		EntityFrame.CHITIETNHANVIEN.maNhanVien=list.get(index).getId();
 		EntityFrame.CHITIETNHANVIEN.txtNgaySinh.setDate(list.get(index).getNgaySinh());
 		if (list.get(index).isGioiTinh()) {
 			EntityFrame.CHITIETNHANVIEN.rdoNam.setSelected(true);
@@ -335,7 +338,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			EntityFrame.CHITIETNHANVIEN.rdoNu.setSelected(true);
 		}
 		EntityFrame.CHITIETNHANVIEN.comboBox.setSelectedItem(list.get(index).getChucVu());
-		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setText(list.get(index).getMatKhau());
+		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setText("********");
+		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setEditable(false);
+		EntityFrame.CHITIETNHANVIEN.matKhau = list.get(index).getMatKhau();
 		EntityFrame.CHITIETNHANVIEN.txtMucLuong.setText(list.get(index).getLuong().toString());
 		EntityFrame.CHITIETNHANVIEN.txtSDT.setText(list.get(index).getSdt());
 		EntityFrame.CHITIETNHANVIEN.txtEmail.setText(list.get(index).getEmail());
@@ -354,7 +359,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	};
 
 	protected void btnThemNhanVien() {
-		new ChiTietNhanVienFrame().setVisible(true);
+		EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+		EntityFrame.CHITIETNHANVIEN.setVisible(true);
+		EntityFrame.CHITIETNHANVIEN.btnEdit.setEnabled(false);
 	}
 
 	private void loadComboboxChucVu() {
@@ -375,9 +382,10 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private void reloadTable() {
 		model.setRowCount(0);
 		for (NhanVienModel i : list) {
-			model.addRow(new Object[] { i.getId(), i.getMatKhau(), i.getHoTen(), i.getChucVu(), i.getLuong(),
-					i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
-					i.getDiaChi(), i.getSdt(), i.getEmail() });
+				model.addRow(new Object[] { i.getId(), i.getHoTen(), i.getChucVu(), i.getLuong(),
+						i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
+						i.getDiaChi(), i.getSdt(), i.getEmail() });
 		}
+		btnXoaNV.setEnabled(false);
 	}
 }

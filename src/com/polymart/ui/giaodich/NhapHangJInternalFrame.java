@@ -73,6 +73,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
     private List<HoaDonNhapHangModel> lstHoaDonNhapHang = null;
 
+    private HoaDonNhapHangModel hoaDonNhapHangModel = null;
+
     /**
      * Launch the application.
      */
@@ -235,18 +237,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonNhapHang
         tableNhapHang.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
-                if (mouseEvent.getClickCount() == 2) {
-                    int row = tableNhapHang.getSelectedRow();
-                    if (row > -1 && row < tableNhapHang.getRowCount()) {
-                        HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
-                        List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
-                                .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
-                        ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(
-                                lstChiTietHoaDonNhap,
-                                nguonHangService.getNameById(hoaDonNhapHangModel.getIdNguonHang()));
-                        chiTietHoaDonNhapHang.setVisible(true);
-                    }
+                int row = tableNhapHang.getSelectedRow();
+                if (row > -1 && row < tableNhapHang.getRowCount()) {
+                    hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(tableNhapHang.getValueAt(row, 0).toString()));
                 }
+                setOpenChiTietHoaDonNhap(mouseEvent);
             }
         });
 
@@ -261,6 +256,24 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+    }
+
+    private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2) {
+            int row = tableNhapHang.getSelectedRow();
+            if (row > -1 && row < tableNhapHang.getRowCount()) {
+                List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
+                        .findByIdHoaDonNhap(hoaDonNhapHangModel.getId());
+                if (lstChiTietHoaDonNhap.isEmpty()) {
+                    EntityMessage.show(this, "Hóa đơn không có sản phẩm");
+                } else {
+                    ChiTietHoaDonNhapHangFrame chiTietHoaDonNhapHang = new ChiTietHoaDonNhapHangFrame(
+                            lstChiTietHoaDonNhap,
+                            nguonHangService.getNameById(hoaDonNhapHangModel.getIdNguonHang()));
+                    chiTietHoaDonNhapHang.setVisible(true);
+                }
+            }
+        }
     }
 
     ActionListener openThemPhieuNhapHang = new ActionListener() {
@@ -304,7 +317,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             showTable(getList());
         } else {
             if (EntityValidate.checkIdNumber(this, getID)) {
-                HoaDonNhapHangModel hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
+                hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(getID));
                 if (hoaDonNhapHangModel == null) {
                     EntityMessage.show(this, "Mã hóa đơn không tồn tại");
                 } else {
@@ -319,9 +332,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     // xóa một hàng trên table
     private void evtBtnXoa(JTable tbNhapHang) {
         int row = tbNhapHang.getSelectedRow();
-        if (row > -1 && row < tbNhapHang.getRowCount()) {
+        if ((row > -1 && row < tbNhapHang.getRowCount()) && hoaDonNhapHangModel != null) {
             if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
-                HoaDonNhapHangModel hoaDonNhapHangModel = lstHoaDonNhapHang.get(row);
+                hoaDonNhapHangModel = hoaDonNhapHangService.findById(Integer.parseInt(tableNhapHang.getValueAt(row, 0).toString()));
                 if (hoaDonNhapHangService.remove(hoaDonNhapHangModel)) {
                     EntityMessage.show(this, "Xóa thành công");
                     modelNhapHang.removeRow(row);
@@ -343,11 +356,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             List<HoaDonNhapHangModel> lstLoc = hoaDonNhapHangService.filterByDate(timestamp);
             if (lstLoc.isEmpty()) {
                 EntityMessage.show(this, "Không có hóa đơn nào trong ngày được chọn");
-                getList();
             } else {
                 lstHoaDonNhapHang = lstLoc;
+                showTable(lstHoaDonNhapHang);
             }
-            showTable(lstHoaDonNhapHang);
         } catch (Exception e) {
             EntityMessage.show(this, "Mời chọn ngày muốn tìm");
         }

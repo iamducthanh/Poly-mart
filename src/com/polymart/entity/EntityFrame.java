@@ -1,6 +1,8 @@
 package com.polymart.entity;
 
 import com.polymart.ui.PolyMartMain;
+import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
+import com.polymart.ui.baocao.ThemBaoCaoChiTieuFrame;
 import com.polymart.ui.hanghoa.ThemHangHoaJInternalFrame;
 import com.polymart.ui.nhanvien.ChiTietNhanVienFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
@@ -10,4 +12,7 @@ public class EntityFrame {
 	public static ThemHangHoaJInternalFrame THEMHANGHOA = null;
 	public static PolyMartMain POLYMARTMAIN = null;
 	public static NhanVienJInternalFrame NHANVIENJINTERNAL = null;
+	public static BaoCaoChiTieuJInternalFrame baoCaoChiTieu = null;
+	public static ThemBaoCaoChiTieuFrame themBaoCaoChiTieu = null;
+	
 }

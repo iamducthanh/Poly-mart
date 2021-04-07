@@ -2,6 +2,7 @@ package com.polymart.ui.baocao;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +14,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.polymart.dao.impl.ChiTieuDao;
+import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.ChiTieuModel;
+import com.polymart.ui.PolyMartMain;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ThemBaoCaoChiTieuFrame extends JFrame {
 
@@ -23,6 +33,13 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtMaNV;
 	private JTextField txtSoTien;
+	JTextArea txtMucDichCT = new JTextArea();
+	JTextArea txtGhiChu = new JTextArea();
+	private BaoCaoChiTieuJInternalFrame baoCao ;
+	
+	public ThemBaoCaoChiTieuFrame() throws HeadlessException {
+		
+	}
 
 	/**
 	 * Launch the application.
@@ -31,8 +48,8 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ThemBaoCaoChiTieuFrame frame = new ThemBaoCaoChiTieuFrame();
-					frame.setVisible(true);
+					
+					EntityFrame.themBaoCaoChiTieu.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,7 +60,8 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ThemBaoCaoChiTieuFrame() {
+	public ThemBaoCaoChiTieuFrame(BaoCaoChiTieuJInternalFrame baoCao) throws HeadlessException {
+		this.baoCao = baoCao;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Thêm báo cáo chi tiêu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,6 +77,7 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		txtMaNV = new JTextField();
+		txtMaNV.setEditable(false);
 		txtMaNV.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMaNV.setBounds(174, 30, 216, 25);
 		contentPane.add(txtMaNV);
@@ -68,7 +87,6 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 		scrollPane.setBounds(174, 127, 284, 93);
 		contentPane.add(scrollPane);
 
-		JTextArea txtMucDichCT = new JTextArea();
 		scrollPane.setViewportView(txtMucDichCT);
 		txtMucDichCT.setFont(new Font("Monospaced", Font.PLAIN, 15));
 
@@ -82,14 +100,9 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 		scrollPane_1.setBounds(174, 287, 284, 105);
 		contentPane.add(scrollPane_1);
 
-		JTextArea txtGhiChu = new JTextArea();
+
 		scrollPane_1.setViewportView(txtGhiChu);
 		txtGhiChu.setFont(new Font("Monospaced", Font.PLAIN, 15));
-
-		JLabel lblNgyChiTiu = new JLabel("Ngày chi tiêu: ", SwingConstants.RIGHT);
-		lblNgyChiTiu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNgyChiTiu.setBounds(10, 76, 128, 25);
-		contentPane.add(lblNgyChiTiu);
 
 		JLabel lblMcchChi = new JLabel("Mục đích chi tiêu: ", SwingConstants.RIGHT);
 		lblMcchChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -106,12 +119,41 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 		lblGhiCh.setBounds(10, 287, 128, 25);
 		contentPane.add(lblGhiCh);
 
-		JDateChooser dateNgayChiTieu = new JDateChooser();
-		dateNgayChiTieu.setBounds(174, 76, 216, 25);
-		contentPane.add(dateNgayChiTieu);
-
 		JButton btnLuu = new JButton("Lưu");
+		btnLuu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				luuPhieuChiTieu();
+			}
+		});
 		btnLuu.setBounds(369, 468, 89, 23);
 		contentPane.add(btnLuu);
+		loadMaNhanVien();
+	}
+
+
+	protected void luuPhieuChiTieu() {
+		if(txtMucDichCT.getText().isBlank()) {
+			EntityMessage.show(null, "Mục Đích Chi tiêu Không Được Để Trống");
+			return;
+		}
+		if(!EntityValidate.checkMoney(null, txtSoTien.getText())) {
+			return;
+		}
+		ChiTieuModel chiTieu = new ChiTieuModel();
+		chiTieu.setMucDichChiTieu(txtMucDichCT.getText());
+		chiTieu.setSoTien(Long.parseLong(txtSoTien.getText()));
+		chiTieu.setIdNhanVien(Integer.parseInt(txtMaNV.getText()));
+		chiTieu.setGhiChu(txtGhiChu.getText());
+		ChiTieuDao chiTieuDao = new ChiTieuDao();
+		if(EntityMessage.confirm(null,"Việc Lưu Liên Quan Đến Tiền! Bạn Có Chắc Muốn Lưu Phiếu Không?")) {
+		chiTieuDao.save(chiTieu);
+		EntityMessage.show(null, "Lưu Thành Công");
+		baoCao.loadList();
+		baoCao.fillTable();
+		}
+		this.dispose();
+	}
+	public void loadMaNhanVien() {
+		txtMaNV.setText(String.valueOf( EntityAuthorization.USER.getId()));
 	}
 }

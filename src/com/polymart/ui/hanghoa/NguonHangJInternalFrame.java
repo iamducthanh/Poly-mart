@@ -36,6 +36,7 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
+import javax.swing.border.EtchedBorder;
 
 public class NguonHangJInternalFrame extends JInternalFrame {
 
@@ -143,8 +144,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		contentPane.add(panel_2, BorderLayout.EAST);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng", TitledBorder.LEADING,
-				TitledBorder.TOP, null, Color.BLACK));
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		JButton btnXoa = new JButton("Xóa");
 		btnXoa.addActionListener(new ActionListener() {

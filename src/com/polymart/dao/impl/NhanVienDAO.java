@@ -10,7 +10,7 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public List<NhanVienModel> findAll() {
-		String sql = "SELECT*FROM NHANVIEN";
+		String sql = "SELECT*FROM NHANVIEN where MATKHAU !=1";
 		return query(sql, new NhanVienMapper());
 	}
 
@@ -36,7 +36,10 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 				nhanVienModel.getLuong(), nhanVienModel.getAnhDaiDien(), nhanVienModel.getMatKhau(),
 				nhanVienModel.getId());
 	}
-
+	public void khoaTaiKhoanNhanVien(String id) {
+		String sql = "update NHANVIEN set MATKHAU ='1' where ID =?";
+		update(sql,id);
+	}
 	@Override
 	public void delete(Integer id) {
 		String sql = "DELETE NHANVIEN WHERE ID = ?";
@@ -45,14 +48,14 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public NhanVienModel findOne(Integer id) {
-		String sql = "SELECT*FROM NHANVIEN WHERE ID = ?";
+		String sql = "SELECT*FROM NHANVIEN WHERE ID = ? ";
 		List<NhanVienModel> list = query(sql, new NhanVienMapper(), id);
 		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
 	public List<NhanVienModel> filter(String idOrName) {
-		String sql = "SELECT*FROM NHANVIEN WHERE ID LIKE ? OR HOTEN LIKE ?";
+		String sql = "SELECT*FROM NHANVIEN WHERE MATKHAU !=1 and (ID LIKE ? OR HOTEN LIKE ?) ";
 		return query(sql, new NhanVienMapper(), "%" + idOrName + "%", "%" + idOrName + "%");
 	}
 

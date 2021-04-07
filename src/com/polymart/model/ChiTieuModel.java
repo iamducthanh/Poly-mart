@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 
 public class ChiTieuModel {
 
-	private String MaCT;
-
+	private int MaCT;
 	private String mucDichChiTieu;
+	private String hoTen;
 	private Long soTien;
 	private String ghiChu;
 	private Integer idNhanVien;
@@ -16,22 +16,35 @@ public class ChiTieuModel {
 
 	}
 
-	public String getMaCT() {
-		return MaCT;
 
-	}
 
-	public void setMaCT(String maCT) {
+	public ChiTieuModel(int maCT, String mucDichChiTieu, String hoTen, Long soTien, String ghiChu, Integer idNhanVien,
+			Timestamp ngayChiTieu) {
 		MaCT = maCT;
-	}
-
-	public ChiTieuModel(String mucDichChiTieu, Long soTien, String ghiChu, Integer idNhanVien, Timestamp ngayChiTieu) {
-		super();
 		this.mucDichChiTieu = mucDichChiTieu;
+		this.hoTen = hoTen;
 		this.soTien = soTien;
 		this.ghiChu = ghiChu;
 		this.idNhanVien = idNhanVien;
 		this.ngayChiTieu = ngayChiTieu;
+	}
+
+
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+	public int getMaCT() {
+		return MaCT;
+	}
+
+	public void setMaCT(int maCT) {
+		MaCT = maCT;
 	}
 
 	public String getMucDichChiTieu() {

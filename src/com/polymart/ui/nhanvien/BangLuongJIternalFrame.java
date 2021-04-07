@@ -28,9 +28,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.ChamCongDAO;
+import com.polymart.dao.impl.ChiTieuDao;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.BangLuongModel;
 import com.polymart.model.ChamCongModel;
+import com.polymart.model.ChiTieuModel;
 import com.polymart.model.NhanVienModel;
 import com.polymart.service.impl.NhanVienService;
 
@@ -48,6 +51,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	JComboBox<Object> cboThang = new JComboBox<Object>();
 	JComboBox<String> cboNam = new JComboBox<String>();
 	JLabel lblBangLuong = new JLabel("  Bảng lương            ");
+	JButton btnAdd ;
 
 	/**
 	 * Launch the application.
@@ -86,19 +90,24 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 		lblBangLuong.setFont(new Font("Tahoma", Font.BOLD, 18));
 
-		JButton btnNewButton = new JButton("Lưu");
+		 btnAdd = new JButton("Thanh Toán");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				thanhToanLuongChoNhanVien();
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
 				gl_panel.createSequentialGroup()
 						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap()));
 		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 						.addContainerGap()));
 		panel.setLayout(gl_panel);
 
@@ -149,11 +158,48 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		tableBangLuong.setModel(modelBangLuong);
 		loadComboboxNam();
 		moBangLuongThangGanNhat();
+		kiemTraLuu();
 
 		// cbb Năm load từ dữ liệu ở bảng chấm công lên
 		// cbb Tháng load theo cbb Năm cũng trong bảng chấm công
 	}
-
+	// lưu Thanh Toán Lương Vào Bảng Chi Tiêu
+	protected void thanhToanLuongChoNhanVien() {
+//		if(kiemTraLuu()) {
+//			EntityMessage.show(null, "Bạn Đã Hoàn Thành Thanh Toán Rồi Hãy Kiểm Tra Ở Bảng Chi Tiêu");
+//			return;
+//		}
+		List<ChiTieuModel> listChiTieuModel = new ArrayList<ChiTieuModel>();
+		for (int i =0 ;i< tableBangLuong.getRowCount(); i++) {
+			ChiTieuModel chiTieu = new ChiTieuModel();
+			chiTieu.setMucDichChiTieu("Thanh Toán Lương ");
+			chiTieu.setIdNhanVien(EntityAuthorization.USER.getId());
+			chiTieu.setSoTien(Long.parseLong( String.valueOf(tableBangLuong.getValueAt(i, 4))));
+			chiTieu.setGhiChu("Thanh Toán Lương Cho Nhân Viên "+ String.valueOf( tableBangLuong.getValueAt(i, 1)));
+			listChiTieuModel.add(chiTieu);
+		}
+		if(!EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Thanh Toán Lương Cho Nhân Viên")) {
+			return;
+		}
+		ChiTieuDao chiTieuDao = new ChiTieuDao();
+		for (ChiTieuModel x : listChiTieuModel) {
+			chiTieuDao.save(x);
+		}
+		EntityMessage.show(null, "Đã Lưu Vào Mục Chi Tiêu");
+	}
+	public void kiemTraLuu() {
+		ChiTieuDao chiTieuDao = new ChiTieuDao();
+		List<ChiTieuModel> listChiTieuModel = new ArrayList<ChiTieuModel>();
+		Calendar c = Calendar.getInstance();
+		int nam = c.get(Calendar.YEAR);
+		int thang = c.get(Calendar.MONTH)+1;
+		listChiTieuModel = chiTieuDao.findTraLuong(nam, thang);
+		if(listChiTieuModel.size()>0) {
+			btnAdd.setEnabled(false);
+		}
+		
+	}
+	// Tìm Kiếm Lương Theo Tháng
 	protected void timKiemLuongTheoThang() {
 		String nam = cboNam.getSelectedItem().toString();
 		String thang = cboThang.getSelectedItem().toString().replace("Tháng ", "");
@@ -169,7 +215,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadTbaleLuong();
 
 	}
-
+	// lấy năm trong sql luu vào combobox
 	private void loadComboboxNam() {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		List<String> listNam = new ArrayList<String>();
@@ -180,7 +226,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		}
 		cboNam.setModel(new DefaultComboBoxModel<String>(vector));
 	}
-
+	// mở Bảng Lương Tháng gần nhất
 	private void moBangLuongThangGanNhat() {
 		Calendar c = Calendar.getInstance();
 		int nam = c.get(Calendar.YEAR);
@@ -193,14 +239,14 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		cboNam.setSelectedItem(String.valueOf(nam));
 
 	}
-
+	// load list Chấm Công
 	private void loadListChamCong(String nam, String thang) {
 		listChamCong.clear();
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listChamCong = chamCongDao.filterMonth(nam, thang);
 	}
 
-
+	// load list Nhân Viên Của Tháng Chấm Công
 	private void loadListNhanVien() {
 		listNhanVien.clear();
 		List<NhanVienModel> list = new ArrayList<NhanVienModel>();
@@ -223,7 +269,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		}
 
 	}
-
+	// load list của bảng lương
 	private void loadListBangLuong() {
 		listBangLuong.clear();
 		loadListNhanVien();
@@ -254,7 +300,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 			listBangLuong.add(bangLuong);
 		}
 	}
-
+	// hiện thị table bảng lương
 	public void loadTbaleLuong() {
 		modelBangLuong.setRowCount(0);
 		if (listChamCong.size() == 0) {

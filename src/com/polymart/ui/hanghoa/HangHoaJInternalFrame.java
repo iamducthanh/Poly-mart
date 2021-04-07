@@ -415,6 +415,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
                     x.getMauSac()
             });
         }
+        
     }
 
     // getList

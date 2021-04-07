@@ -28,9 +28,9 @@ public class KhachHangService implements IKhachHangService {
 	}
 
 	@Override
-	public KhachHangModel update(KhachHangModel updatekhachHangModel) {
-		khachHangDAO.update(updatekhachHangModel);
-		return khachHangDAO.findOne(updatekhachHangModel.getId());
+	public KhachHangModel update(KhachHangModel updateKhachHangModel) {
+		khachHangDAO.update(updateKhachHangModel);
+		return khachHangDAO.findOne(updateKhachHangModel.getId());
 	}
 
 	@Override

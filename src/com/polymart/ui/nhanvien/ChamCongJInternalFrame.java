@@ -277,7 +277,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		String hoTen = EntityAuthorization.USER.getHoTen();
 		for (int i = 0; i < tableChamCong.getRowCount(); i++) {
 			if (maNhanVien == Integer.parseInt(String.valueOf(tableChamCong.getValueAt(i, 0)))) {
-				EntityMessage.show(null, "Bạn Đã Được Chấm Công Đã Được Chấm Công");
+				EntityMessage.show(null, "Bạn Đã Được Chấm Công ");
 				return;
 			}
 		}

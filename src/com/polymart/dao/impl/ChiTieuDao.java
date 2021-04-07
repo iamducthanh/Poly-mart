@@ -33,6 +33,11 @@ public class ChiTieuDao extends AbstractDAO<ChiTieuModel> implements IChiTieuDAO
 				+ "where YEAR(NGAYCHITIEU) = ? and MONTH(NGAYCHITIEU) = ? and trangthai is  null";
 		return query(sql, new ChiTieuMapper(),nam,thang);
 	}
+	public List<ChiTieuModel> findTraLuong(int nam, int thang) {
+		String sql = " select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN "
+				+ "where year (ngaychitieu) = ? and month(ngaychitieu) = ? and MUCDICHCHITIEU = N'Thanh Toán Lương';";
+		return query(sql, new ChiTieuMapper(),nam,thang);
+	}
 
 //	public void delete(int maCT,String ghiChu) {
 //		String sql = "update  CHITIEU set trangthai = 1, GHICHU = ? where mact =?";

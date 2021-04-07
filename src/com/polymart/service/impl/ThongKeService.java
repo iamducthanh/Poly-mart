@@ -23,6 +23,12 @@ public class ThongKeService implements IThongKeService{
 		return resultSet;
 	}
 	
+	public ResultSet loadTableThongKeDoanhSo(String year, String month) {
+		String sql = "EXEC THONG_KE_DOANH_SO " + year + ", " + month;
+		ResultSet resultSet = excute(sql);
+		return resultSet;
+	}
+	
 	public ResultSet excute(String sql) {
 		AbstractDAO<String> abstractDAO = new AbstractDAO<String>();
 		ResultSet resultSet = null;

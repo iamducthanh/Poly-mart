@@ -45,6 +45,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 	JPanel panelContent = new JPanel();
 	JScrollPane scrollPaneBang = new JScrollPane();
 	ChartPanel chartPanel;
+	JComboBox<String> cbbThang = new JComboBox<String>();
 
 	//DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	JComboBox<String> cbbNam = new JComboBox<String>();
@@ -117,9 +118,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Tháng");
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		JComboBox<String> cbbThang = new JComboBox<String>();
-		
+				
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
@@ -222,7 +221,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		loadTableDoanhThu();		
 		rdoBieuDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadBieuDoDoanhThu(modelThongKe);
+			//	loadBieuDoDoanhThu(modelThongKe);
 				rdoTheoBang.setSelected(true);
 			}
 		});
@@ -237,45 +236,31 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 	public void loadTableDoanhThu() {
 		modelThongKe.setRowCount(0);
 		ThongKeService thongKeService = new ThongKeService();
-		for(int i = 1; i< 13;i++) {
-			ResultSet resultSet = thongKeService.loadTableThongKeDoanhThu((String) cbbNam.getSelectedItem(), String.valueOf(i));
-			try {
-				while(resultSet.next()) {
+		ResultSet tbThongKeDoanhSo = thongKeService.loadTableThongKeDoanhSo((String)cbbNam.getSelectedItem(), (String)cbbThang.getSelectedItem());
 
-					if(resultSet.getString(1) == null) {
-						modelThongKe.addRow(new Object[] {"Tháng "+i, 0,0});
-					} else {
-						modelThongKe.addRow(new Object[] {"Tháng "+i, resultSet.getString(2),fm.format(resultSet.getDouble(1))});
-					}
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		panelContent.add(scrollPaneBang, BorderLayout.CENTER);
 		scrollPaneBang.setVisible(true);
 	}
 	
-	public void loadBieuDoDoanhThu(DefaultTableModel model) {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for(int i=1;i<13;i++) {
-			String so = String.valueOf(model.getValueAt(i-1, 2));
-			Double soNguoi = Double.parseDouble(so);
-			String month = "Tháng "+i;
-			dataset.addValue(soNguoi, "Doanh thu", month);
-		}
-		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
-        chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-        JFrame frame = new JFrame();
-        frame.getContentPane().add(chartPanel);
-        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
-        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-	}
+//	public void loadBieuDoDoanhThu(DefaultTableModel model) {
+//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//		for(int i=1;i<13;i++) {
+//			String so = String.valueOf(model.getValueAt(i-1, 2));
+//			Double soNguoi = Double.parseDouble(so);
+//			String month = "Tháng "+i;
+//			dataset.addValue(soNguoi, "Doanh thu", month);
+//		}
+//		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
+//        chartPanel = new ChartPanel(barChart);
+//        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+//        JFrame frame = new JFrame();
+//        frame.getContentPane().add(chartPanel);
+//        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
+//        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
+//        frame.setLocationRelativeTo(null);
+//        frame.setResizable(false);
+//        frame.setVisible(true);
+//	}
 
 	
 	public void fillCbbYear() throws SQLException {

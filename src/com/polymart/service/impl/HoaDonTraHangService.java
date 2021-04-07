@@ -48,8 +48,8 @@ public class HoaDonTraHangService implements IHoaDonTraHangService {
     }
 
     @Override
-    public List<HoaDonTraHangModel> findById(int id) {
-        return lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList());
+    public HoaDonTraHangModel findById(int id) {
+        return lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
 
     @Override

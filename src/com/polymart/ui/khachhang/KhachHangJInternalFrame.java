@@ -46,13 +46,17 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 	private JTextField txtDiaChi;
 	private JTextField txtTenKhachHang;
 	private JTextField txtSoDienThoai;
-	private JTextField txtTim;
+	private JTextField txtFind;
 	private JTextField txtTichDiem;
 	private JTable tblKhachHang;
+	private Integer index;
+	private JButton btnConfirm;
+	private JButton btnDelete;
 
 	private DefaultTableModel modelKhachHang = new DefaultTableModel();
 	private IKhachHangService khachHangService = new KhachHangService();
 	private List<KhachHangModel> list;
+	private static Integer point = 0;
 
 	/**
 	 * Launch the application.
@@ -74,10 +78,13 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public KhachHangJInternalFrame() {
-		initialize();
 		try {
+			index = -1;
 			list = khachHangService.findAll();
+
+			initialize();
 			loadToTable();
+			disableFuntion();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,26 +106,26 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("   Khách hàng         ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
 
-		txtTim = new JTextField();
-		txtTim.addKeyListener(new KeyAdapter() {
+		txtFind = new JTextField();
+		txtFind.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				findKhachHang();
+				findByNameOrPhone();
 			}
 		});
-		txtTim.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtTim.setText(" Tìm theo tên, số điện thoại khách hàng");
-		txtTim.setColumns(10);
+		txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
+		txtFind.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(lblNewLabel).addGap(5)
-						.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
 						.addGap(184)));
 		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(lblNewLabel))
-								.addGroup(gl_panel_1.createSequentialGroup().addGap(6).addComponent(txtTim,
+								.addGroup(gl_panel_1.createSequentialGroup().addGap(6).addComponent(txtFind,
 										GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel_1.setLayout(gl_panel_1);
@@ -129,63 +136,49 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Chi ti\u1EBFt kh\u00E1ch h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
-		JButton btnXoa = new JButton("Xóa");
-		btnXoa.addActionListener(new ActionListener() {
+		btnDelete = new JButton("Xóa");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnXoa();
+				btnDelete();
 			}
 		});
 
-		txtTim.addFocusListener(new FocusAdapter() {
+		txtFind.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (txtTim.getText().equals(" Tìm theo tên, số điện thoại khách hàng")) {
-					txtTim.setText("");
-				}
+				focusGainedTextFind();
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (txtTim.getText().equals("")) {
-					txtTim.setText(" Tìm theo tên, số điện thoại khách hàng");
-				}
+				focusLostTextFind();
 			}
 		});
 
-		JButton btnCapNhat = new JButton("Cập nhật");
-		btnCapNhat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnCapNhat();
-			}
-		});
+		btnConfirm = new JButton("Xác nhận");
 
-		JButton btnThem = new JButton("Thêm");
-
-		JButton btnTaoMoi = new JButton("Tạo mới");
+		JButton btnNew = new JButton("Thêm mới");
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_2.createSequentialGroup().addContainerGap(73, Short.MAX_VALUE)
-						.addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				.addGroup(Alignment.LEADING,
-						gl_panel_2.createSequentialGroup().addContainerGap()
-								.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(11, Short.MAX_VALUE)));
+		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup().addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_2.createSequentialGroup().addContainerGap()
+								.addComponent(btnNew, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING,
+								gl_panel_2.createSequentialGroup().addContainerGap().addComponent(panel_3,
+										GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(11, Short.MAX_VALUE)));
 		gl_panel_2.setVerticalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 358, GroupLayout.PREFERRED_SIZE).addGap(53)
 						.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(157, Short.MAX_VALUE)));
+								.addComponent(btnDelete, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnConfirm, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNew, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(226, Short.MAX_VALUE)));
 
 		JLabel lblNewLabel_2 = new JLabel("Tên khách hàng");
 		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
@@ -248,18 +241,18 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
 
-		txtTim.addFocusListener(new FocusAdapter() {
+		txtFind.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
-					txtTim.setText("");
+				if (txtFind.getText().equals(" Tìm theo tên, số điện thoại")) {
+					txtFind.setText("");
 				}
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (txtTim.getText().equals("")) {
-					txtTim.setText(" Tìm theo tên, số điện thoại");
+				if (txtFind.getText().equals("")) {
+					txtFind.setText(" Tìm theo tên, số điện thoại");
 				}
 			}
 		});
@@ -274,32 +267,47 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		modelKhachHang.addColumn("Tích điểm");
 		tblKhachHang.setModel(modelKhachHang);
 
-//		showTableKhachHang();
 		tblKhachHang.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				showDetail();
+				tableClicked();
 			}
 		});
 
-		btnTaoMoi.addActionListener(new ActionListener() {
+		btnNew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				clear();
+				createNew();
 			}
 		});
 
-		btnThem.addActionListener(new ActionListener() {
+		btnConfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				btnThem();
+				btnConfirm();
 			}
 		});
 	}
 
-	protected void findKhachHang() {
+	protected void focusLostTextFind() {
+		if (txtFind.getText().equals("")) {
+			txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
+		}
+	}
+
+	protected void focusGainedTextFind() {
+		disableFuntion();
+		clear();
+		tblKhachHang.clearSelection();
+		index = -1;
+		if (!txtFind.getText().isBlank()) {
+			txtFind.setText(null);
+		}
+	}
+
+	protected void findByNameOrPhone() {
 		try {
-			list = khachHangService.filter(txtTim.getText());
+			list = khachHangService.filter(txtFind.getText());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -307,27 +315,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		reloadTable();
 	}
 
-	protected void btnCapNhat() {
-		if (EntityValidate.checkName(this, txtTenKhachHang.getText())
-				&& EntityValidate.checkPhoneNumber(this, txtSoDienThoai.getText())) {
-			KhachHangModel khachHangModel = new KhachHangModel();
-			khachHangModel.setId(list.get(tblKhachHang.getSelectedRow()).getId());
-			khachHangModel.setHoTen(txtTenKhachHang.getText());
-			khachHangModel.setSdt(txtSoDienThoai.getText());
-			khachHangModel.setDiaChi(txtDiaChi.getText());
-			khachHangModel.setTichDiem(Integer.parseInt(txtTichDiem.getText()));
-			if (khachHangService.update(khachHangModel) != null) {
-				EntityMessage.show(this, "Cập nhật thành công");
-			} else {
-				EntityMessage.show(this, "Cập nhật thất bại");
-			}
-
-			clear();
-			loadToTable();
-		}
-	}
-
-	protected void btnXoa() {
+	protected void btnDelete() {
 		if (JOptionPane.showConfirmDialog(this,
 				"Xác nhận xoá khách hàng có tên:  " + list.get(tblKhachHang.getSelectedRow()).getHoTen(), "Xoá",
 				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
@@ -337,38 +325,47 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		}
 	}
 
-	// hiển thị thông tin khach hàng lên form khi được click vào bảng
+	/**
+	 * show
+	 */
+	private void tableClicked() {
+		index = tblKhachHang.getSelectedRow();
+		showDetail();
+		enableFuntion();
+	}
+
 	private void showDetail() {
-		int row = tblKhachHang.getSelectedRow();
-		if (row > -1 && row < tblKhachHang.getRowCount()) {
-			txtTenKhachHang.setText(modelKhachHang.getValueAt(row, 0).toString());
-			txtSoDienThoai.setText(modelKhachHang.getValueAt(row, 1).toString());
-			txtDiaChi.setText(modelKhachHang.getValueAt(row, 2).toString());
-			txtTichDiem.setText(modelKhachHang.getValueAt(row, 3).toString());
-		}
+		txtTenKhachHang.setText(list.get(index).getHoTen());
+		txtSoDienThoai.setText(list.get(index).getSdt());
+		txtDiaChi.setText(list.get(index).getDiaChi());
+		txtTichDiem.setText(list.get(index).getTichDiem().toString());
 	}
 
-	// sự kiện xóa trắng form nút "Tạo mới"
-	private void clear() {
-		txtTenKhachHang.setText("");
-		txtTichDiem.setText("0");
-		txtSoDienThoai.setText("");
-		txtDiaChi.setText("");
-	}
-
-	// sự kiện thêm mới khách hàng nút "Thêm"
-	private void btnThem() {
-		if (EntityValidate.checkName(this, txtTenKhachHang.getText())
-				&& EntityValidate.checkPhoneNumber(this, txtSoDienThoai.getText())) {
+	/**
+	 * Xác nhận thêm mới nhân viên hoặc sửa nhân viên
+	 */
+	private void btnConfirm() {
+		if (validated()) {
 			KhachHangModel khachHangModel = new KhachHangModel();
 			khachHangModel.setHoTen(txtTenKhachHang.getText());
 			khachHangModel.setSdt(txtSoDienThoai.getText());
 			khachHangModel.setDiaChi(txtDiaChi.getText());
-			khachHangModel.setTichDiem(Integer.parseInt(txtTichDiem.getText()));
-			if (khachHangService.save(khachHangModel) != null) {
-				EntityMessage.show(this, "Thêm thành công");
+			khachHangModel.setTichDiem(point);
+			khachHangModel.setId(list.get(index).getId());
+			if (index < 0) {
+				if (khachHangService.save(khachHangModel) != null) {
+					EntityMessage.show(this, "Thêm thành công");
+					disableFuntion();
+				} else {
+					EntityMessage.show(this, "Thêm thất bại");
+				}
 			} else {
-				EntityMessage.show(this, "Thêm thất bại");
+				if (khachHangService.update(khachHangModel) != null) {
+					EntityMessage.show(this, "Cập nhật thành công");
+					disableFuntion();
+				} else {
+					EntityMessage.show(this, "Cập nhật thất bại");
+				}
 			}
 
 			clear();
@@ -376,7 +373,24 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		}
 	}
 
-	// hiển thị danh sách khach hàng lên table
+	private boolean validated() {
+		if (!EntityValidate.checkName(this, txtTenKhachHang.getText())) {
+			txtTenKhachHang.requestFocus();
+			return false;
+		} else if (!EntityValidate.checkPhoneNumber(this, txtSoDienThoai.getText())) {
+			txtSoDienThoai.requestFocus();
+			return false;
+		} else if (txtDiaChi.getText().isBlank()) {
+			EntityMessage.show(this, "Địa chỉ trống");
+			txtDiaChi.requestFocus();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * show info to table
+	 */
 	private void loadToTable() {
 		try {
 			list = khachHangService.findAll();
@@ -387,6 +401,9 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 
 	}
 
+	/**
+	 * reload Table
+	 */
 	private void reloadTable() {
 		modelKhachHang.setRowCount(0);
 		for (KhachHangModel i : list) {
@@ -395,4 +412,46 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		}
 	}
 
+	/**
+	 * Disable funtion
+	 */
+	private void disableFuntion() {
+		txtDiaChi.setEnabled(false);
+		txtTenKhachHang.setEnabled(false);
+		txtSoDienThoai.setEnabled(false);
+		btnConfirm.setEnabled(false);
+		btnDelete.setEnabled(false);
+	}
+
+	/**
+	 * Enable function
+	 */
+	private void enableFuntion() {
+		txtDiaChi.setEnabled(true);
+		txtTenKhachHang.setEnabled(true);
+		txtSoDienThoai.setEnabled(true);
+		btnConfirm.setEnabled(true);
+		btnDelete.setEnabled(true);
+	}
+
+	/**
+	 * clear form
+	 */
+	private void clear() {
+		txtDiaChi.setText(null);
+		txtTenKhachHang.setText(null);
+		txtSoDienThoai.setText(null);
+		txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
+	}
+
+	private void createNew() {
+		clear();
+		tblKhachHang.clearSelection();
+		index = -1;
+		enableFuntion();
+		btnDelete.setEnabled(false);
+		
+		loadToTable();
+		reloadTable();
+	}
 }

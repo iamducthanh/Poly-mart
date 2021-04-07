@@ -114,6 +114,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         modelChiTietHoaDonThanhToan.addColumn("Số lượng");
         modelChiTietHoaDonThanhToan.addColumn("Đơn giá");
         modelChiTietHoaDonThanhToan.addColumn("Giảm giá");
+        modelChiTietHoaDonThanhToan.addColumn("Giá giám thêm");
         modelChiTietHoaDonThanhToan.addColumn("Thành tiền");
         tableChiTietHoaDonThanhToan.setModel(modelChiTietHoaDonThanhToan);
 
@@ -127,7 +128,8 @@ public class ChiTietHoaDonThanhToan extends JFrame {
             modelChiTietHoaDonThanhToan.addRow(new Object[]{e.getChiTietSanPham(),
                     sanPhamService.findByID(chiTietSanPhamService.getIdProductById(e.getChiTietSanPham())).getTenSP(),
                     e.getSoLuong(), chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(),
-                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())});
+                    e.getGiamGiaThem(),
+                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam() - e.getGiamGiaThem())});
         }
     }
 

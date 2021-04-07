@@ -12,9 +12,10 @@ public class ChiTieuMapper implements RowMapper<ChiTieuModel> {
     public ChiTieuModel mapRow(ResultSet rs) {
         try {
             ChiTieuModel chiTieuModel=new ChiTieuModel();
-            chiTieuModel.setMaCT(rs.getString("MACT"));
+            chiTieuModel.setMaCT(rs.getInt("MACT"));
+            chiTieuModel.setHoTen(rs.getString("HoTen"));
             chiTieuModel.setMucDichChiTieu(rs.getString("MUCDICHCHITIEU"));
-            chiTieuModel.setIdNhanVien(rs.getInt("IDNHANVIEN"));
+            chiTieuModel.setSoTien(rs.getLong("SOTIEN"));
             chiTieuModel.setSoTien(rs.getLong("SOTIEN"));
             chiTieuModel.setNgayChiTieu(rs.getTimestamp("NGAYCHITIEU"));
             chiTieuModel.setGhiChu(rs.getString("GHICHU"));

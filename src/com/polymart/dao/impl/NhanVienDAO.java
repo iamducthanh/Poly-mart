@@ -48,14 +48,14 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public NhanVienModel findOne(Integer id) {
-		String sql = "SELECT*FROM NHANVIEN WHERE ID = ?";
+		String sql = "SELECT*FROM NHANVIEN WHERE ID = ? ";
 		List<NhanVienModel> list = query(sql, new NhanVienMapper(), id);
 		return list.isEmpty() ? null : list.get(0);
 	}
 
 	@Override
 	public List<NhanVienModel> filter(String idOrName) {
-		String sql = "SELECT*FROM NHANVIEN WHERE ID LIKE ? OR HOTEN LIKE ?";
+		String sql = "SELECT*FROM NHANVIEN WHERE MATKHAU !=1 and (ID LIKE ? OR HOTEN LIKE ?) ";
 		return query(sql, new NhanVienMapper(), "%" + idOrName + "%", "%" + idOrName + "%");
 	}
 

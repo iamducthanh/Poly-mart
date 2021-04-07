@@ -59,6 +59,11 @@ public class ChiTietNhanVienFrame extends JFrame {
 	public JRadioButton rdoNu;
 	public JLabel lblAnhDaiDien;
 	private JFileChooser fileChooser;
+	static Integer maNhanVien;
+	JButton btnSave;
+	JButton btnEdit;
+	ButtonGroup buttonGroup ;
+	static String matKhau;
 
 	private INhanVienService nhanVienService = new NhanVienService();
 
@@ -85,6 +90,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		fileChooser = new JFileChooser();
 		initialize();
 		loadComboboxChucVu().forEach(e -> comboBox.addItem(e));
+		matKhau = txtMatKhau.getText();
 	}
 
 	/**
@@ -101,7 +107,6 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-
 		JMenu mnNewMenu = new JMenu("Thoát");
 		menuBar.add(mnNewMenu);
 
@@ -116,19 +121,23 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.control);
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt nh\u00E2n vi\u00EAn  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Chi ti\u1EBFt nh\u00E2n vi\u00EAn  ", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 647, 554);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnEdit = new JButton("Lưu");
-		btnEdit.addActionListener(new ActionListener() {
+		btnSave = new JButton("Lưu");
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addNhanVien();
 			}
 		});
-		btnEdit.setBounds(403, 584, 78, 28);
-		contentPane.add(btnEdit);
+
+		btnSave.setBounds(547, 575, 50, 28);
+		contentPane.add(btnSave);
 
 		JButton btnClear = new JButton("Làm mới");
 		btnClear.addActionListener(new ActionListener() {
@@ -136,7 +145,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 				clear();
 			}
 		});
-		btnClear.setBounds(491, 584, 78, 28);
+		btnClear.setBounds(459, 575, 78, 28);
 		contentPane.add(btnClear);
 
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
@@ -183,7 +192,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtNgaySinh.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("date")) {
-					if (!EntityValidate.checkNgaySinh(EntityFrame.CHITIETNHANVIEN, txtNgaySinh.getDate())) {
+					if (!EntityValidate.checkNgaySinh(EntityFrame.CHITIETNHANVIEN, txtNgaySinh.getDate(),false)) {
 						txtNgaySinh.getCalendarButton().requestFocus();
 					}
 				}
@@ -217,6 +226,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 		panel.add(txtSDT);
 
 		txtMatKhau = new JTextField();
+		txtMatKhau.setEditable(false);
+		txtMatKhau.setText("12345678");
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMatKhau.setColumns(10);
 		txtMatKhau.setBounds(142, 230, 235, 25);
@@ -259,7 +270,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		lblAnhDaiDien.setBounds(443, 45, 166, 210);
 		panel.add(lblAnhDaiDien);
 
-		ButtonGroup buttonGroup = new ButtonGroup();
+		 buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdoNam);
 		buttonGroup.add(rdoNu);
 
@@ -267,13 +278,30 @@ public class ChiTietNhanVienFrame extends JFrame {
 		comboBox.setBounds(142, 174, 175, 25);
 		panel.add(comboBox);
 
-		JButton btnSave = new JButton("Thoát");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnEdit = new JButton("Sửa");
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditNhanVien();
 			}
 		});
-		btnSave.setBounds(579, 584, 78, 28);
-		contentPane.add(btnSave);
+		btnEdit.setBounds(607, 575, 50, 28);
+		contentPane.add(btnEdit);
+	}
+
+	protected void EditNhanVien() {
+		if (validated()) {
+			NhanVienModel nhanVien = new NhanVienModel();
+			nhanVien = addThongTinNhanVien();
+			nhanVien.setId(maNhanVien);
+			if (nhanVienService.update(nhanVien) != null) {
+				EntityMessage.show(this, "Sửa thành công");
+				EntityFrame.NHANVIENJINTERNAL.loadToTable();
+				this.dispose();
+			} else {
+				EntityMessage.show(this, "Thất bại");
+			}
+
+		}
 	}
 
 	protected void logoClicked() {
@@ -290,8 +318,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 	 */
 	protected void clear() {
 		txtHoTen.setText(null);
-		txtNgaySinh.setDate(null);
-		rdoNam.setSelected(true);
+		txtNgaySinh.setCalendar(null);
+		buttonGroup.clearSelection();
 		comboBox.setSelectedIndex(0);
 		txtMatKhau.setText(null);
 		txtMucLuong.setText(null);
@@ -315,40 +343,45 @@ public class ChiTietNhanVienFrame extends JFrame {
 		return list;
 	}
 
+	public NhanVienModel addThongTinNhanVien() {
+		NhanVienModel nhanVienModel = new NhanVienModel();
+		try {
+			nhanVienModel.setNgaySinh(new SimpleDateFormat("dd/MM/yyyy")
+					.parse(new SimpleDateFormat("dd/MM/yyyy").format(txtNgaySinh.getDate())));
+			nhanVienModel.setGioiTinh((rdoNam.isSelected()) ? true : false);
+			nhanVienModel.setHoTen(txtHoTen.getText());
+			nhanVienModel.setMatKhau(matKhau);
+			nhanVienModel.setLuong(Long.parseLong(txtMucLuong.getText()));
+			nhanVienModel.setSdt(txtSDT.getText());
+			nhanVienModel.setChucVu(comboBox.getSelectedItem().toString());
+			nhanVienModel.setEmail(txtEmail.getText());
+			nhanVienModel.setDiaChi(txtDiaChi.getText());
+
+			if (fileChooser.getSelectedFile() != null) {
+				nhanVienModel.setAnhDaiDien(fileChooser.getSelectedFile().getAbsolutePath());
+			} else {
+				nhanVienModel.setAnhDaiDien("images\\question.png");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return nhanVienModel;
+	}
+
 	/**
 	 * Thêm mới nhân viên
 	 */
 	protected void addNhanVien() {
 		if (validated()) {
-			try {
-				NhanVienModel nhanVienModel = new NhanVienModel();
-				nhanVienModel.setNgaySinh(new SimpleDateFormat("dd/MM/yyyy")
-						.parse(new SimpleDateFormat("dd/MM/yyyy").format(txtNgaySinh.getDate())));
-				nhanVienModel.setGioiTinh((rdoNam.isSelected()) ? true : false);
-				nhanVienModel.setHoTen(txtHoTen.getText());
-				nhanVienModel.setMatKhau(txtMatKhau.getText());
-				nhanVienModel.setLuong(Long.parseLong(txtMucLuong.getText()));
-				nhanVienModel.setSdt(txtSDT.getText());
-				nhanVienModel.setChucVu(comboBox.getSelectedItem().toString());
-				nhanVienModel.setEmail(txtEmail.getText());
-				nhanVienModel.setDiaChi(txtDiaChi.getText());
-
-				if (fileChooser.getSelectedFile() != null) {
-					nhanVienModel.setAnhDaiDien(fileChooser.getSelectedFile().getAbsolutePath());
-				} else {
-					nhanVienModel.setAnhDaiDien("images\\question.png");
-				}
-
-				// truyền dữ liệu lên database
-				if (nhanVienService.save(nhanVienModel) != null) {
-					EntityMessage.show(this, "Thêm mới thành công");
-					EntityFrame.NHANVIENJINTERNAL.loadToTable();
-					this.dispose();
-				} else {
-					EntityMessage.show(this, "Thất bại");
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
+			NhanVienModel nhanVienModel = new NhanVienModel();
+			nhanVienModel = addThongTinNhanVien();
+			// truyền dữ liệu lên database
+			if (nhanVienService.save(nhanVienModel) != null) {
+				EntityMessage.show(this, "Thêm mới thành công");
+				EntityFrame.NHANVIENJINTERNAL.loadToTable();
+				this.dispose();
+			} else {
+				EntityMessage.show(this, "Thất bại");
 			}
 		}
 	}
@@ -365,7 +398,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		}
 
 		// Ngày sinh
-		if (!EntityValidate.checkNgaySinh(this, txtNgaySinh.getDate())) {
+		if (!EntityValidate.checkNgaySinh(this, txtNgaySinh.getDate(),true)) {
 			txtNgaySinh.requestFocus();
 			return false;
 		}

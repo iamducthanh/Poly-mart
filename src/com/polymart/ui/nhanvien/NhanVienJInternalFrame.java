@@ -264,7 +264,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		tblNhanVien = new JTable();
 		scrollPane.setViewportView(tblNhanVien);
 		model.addColumn("Mã nhân viên");
-		model.addColumn("Mật khẩu");
 		model.addColumn("Tên nhân viên");
 		model.addColumn("Chức vụ");
 		model.addColumn("Mức lương");
@@ -324,12 +323,14 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		if (mouseEvent.getClickCount() == 2) {
 			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
 			EntityFrame.CHITIETNHANVIEN.setVisible(true);
+			EntityFrame.CHITIETNHANVIEN.btnSave.setEnabled(false);
 			showDetail();
 		}
 	}
 
 	private void showDetail() {
 		EntityFrame.CHITIETNHANVIEN.txtHoTen.setText(list.get(index).getHoTen());
+		EntityFrame.CHITIETNHANVIEN.maNhanVien=list.get(index).getId();
 		EntityFrame.CHITIETNHANVIEN.txtNgaySinh.setDate(list.get(index).getNgaySinh());
 		if (list.get(index).isGioiTinh()) {
 			EntityFrame.CHITIETNHANVIEN.rdoNam.setSelected(true);
@@ -337,7 +338,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			EntityFrame.CHITIETNHANVIEN.rdoNu.setSelected(true);
 		}
 		EntityFrame.CHITIETNHANVIEN.comboBox.setSelectedItem(list.get(index).getChucVu());
-		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setText(list.get(index).getMatKhau());
+		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setText("********");
+		EntityFrame.CHITIETNHANVIEN.txtMatKhau.setEditable(false);
+		EntityFrame.CHITIETNHANVIEN.matKhau = list.get(index).getMatKhau();
 		EntityFrame.CHITIETNHANVIEN.txtMucLuong.setText(list.get(index).getLuong().toString());
 		EntityFrame.CHITIETNHANVIEN.txtSDT.setText(list.get(index).getSdt());
 		EntityFrame.CHITIETNHANVIEN.txtEmail.setText(list.get(index).getEmail());
@@ -356,7 +359,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	};
 
 	protected void btnThemNhanVien() {
-		new ChiTietNhanVienFrame().setVisible(true);
+		EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+		EntityFrame.CHITIETNHANVIEN.setVisible(true);
+		EntityFrame.CHITIETNHANVIEN.btnEdit.setEnabled(false);
 	}
 
 	private void loadComboboxChucVu() {
@@ -377,9 +382,10 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private void reloadTable() {
 		model.setRowCount(0);
 		for (NhanVienModel i : list) {
-				model.addRow(new Object[] { i.getId(), i.getMatKhau(), i.getHoTen(), i.getChucVu(), i.getLuong(),
+				model.addRow(new Object[] { i.getId(), i.getHoTen(), i.getChucVu(), i.getLuong(),
 						i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
 						i.getDiaChi(), i.getSdt(), i.getEmail() });
 		}
+		btnXoaNV.setEnabled(false);
 	}
 }

@@ -165,22 +165,39 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		contentPane.add(panelLeft, BorderLayout.WEST);
 
 		dateChamCong = new JCalendar();
-		dateChamCong.addPropertyChangeListener(new PropertyChangeListener() {
+		dateChamCong.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				loadListChamCongNgay();
-				loadTableChamCong();
-				txtTimKiem.setEnabled(false);
-				;
+				if (evt.getPropertyName().equals("day")) {
+					loadListChamCongNgay();;
+					loadTableChamCong();
+					txtTimKiem.setEnabled(false);
+				}
 			}
 		});
+		dateChamCong.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				if (evt.getPropertyName().equals("month")) {
+					loadListChamCongThang();
+					loadTableChamCong();
+					txtTimKiem.setEnabled(true);
+				}
+			}
+		});
+//		dateChamCong.addPropertyChangeListener(new PropertyChangeListener() {
+//			public void propertyChange(PropertyChangeEvent evt) {
+//				loadListChamCongNgay();
+//				loadTableChamCong();
+//				txtTimKiem.setEnabled(false);
+//				;
+//			}
+//		});
 
-		JButton btnTimTheoThang = new JButton("Xem Chấm Công Tháng");
+		JButton btnTimTheoThang = new JButton("Hôm Nay");
 		btnTimTheoThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadListChamCongThang();
+				fillTableChamCongHienTai();
 				loadTableChamCong();
-				txtTimKiem.setEnabled(true);
-				moNutChamCong();
+				txtTimKiem.setEnabled(false);
 			}
 		});
 
@@ -223,7 +240,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listTimKiemChamCong = chamCongDao.filterMonth(nam, thang);
 		for (ChamCongModel chamCongModel : listTimKiemChamCong) {
-			if (txtTimKiem.getText().equals(String.valueOf(chamCongModel.getIdNhanVien()))) {
+			if (String.valueOf(chamCongModel.getIdNhanVien()).toLowerCase().contains(txtTimKiem.getText().toLowerCase())
+					|| chamCongModel.getHoTen().toLowerCase().contains(txtTimKiem.getText().toLowerCase())) {
 				listChamCong.add(chamCongModel);
 			}
 		}
@@ -259,7 +277,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		String hoTen = EntityAuthorization.USER.getHoTen();
 		for (int i = 0; i < tableChamCong.getRowCount(); i++) {
 			if (maNhanVien == Integer.parseInt(String.valueOf(tableChamCong.getValueAt(i, 0)))) {
-				EntityMessage.show(null, "Bạn Đã Được Chấm Công Đã Được Chấm Công");
+				EntityMessage.show(null, "Bạn Đã Được Chấm Công ");
 				return;
 			}
 		}
@@ -281,7 +299,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		loadTableChamCong();
 	}
 
-	// load bảng chấm công nhân viên
+	// load bảng chấm công nhân viên theo ngày trên lịch
 	private void loadListChamCongNgay() {
 		listChamCong.clear();
 		Calendar c = dateChamCong.getCalendar();
@@ -291,7 +309,16 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listChamCong = chamCongDao.filterDay(nam, thang, ngay);
 	}
-
+	// load bảng chấm công của ngày hiện tại
+	public void fillTableChamCongHienTai() {
+		listChamCong.clear();
+		Calendar c = Calendar.getInstance();
+		String nam = String.valueOf(c.get(Calendar.YEAR));
+		String thang = String.valueOf(c.get(Calendar.MONTH) + 1);
+		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		ChamCongDAO chamCongDao = new ChamCongDAO();
+		listChamCong = chamCongDao.filterDay(nam, thang, ngay);
+	}
 	// danh sách chấm công nhân viên tháng
 	private void loadListChamCongThang() {
 		listChamCong.clear();

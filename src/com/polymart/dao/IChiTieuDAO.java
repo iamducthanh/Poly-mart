@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.polymart.model.ChiTieuModel;
 
-public interface IChiTieuDAO extends GenericDAO<ChiTieuModel> {
+public interface IChiTieuDAO  {
 	List<ChiTieuModel> findAll();
-	boolean save(ChiTieuModel chiTieuModel);
+	void save(ChiTieuModel chiTieuModel);
+	List<ChiTieuModel> findTheoNgay(int nam , int thang, int ngay);
 	
 }

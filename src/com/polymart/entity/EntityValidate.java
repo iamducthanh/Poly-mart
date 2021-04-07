@@ -113,7 +113,7 @@ public class EntityValidate {
 			EntityMessage.show(component, "Họ tên không được để trống");
 			return false;
 		}
-		String regx = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$";
+		String regx = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\s]+$";
 		Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(name);
 		if (!matcher.find()) {
@@ -152,9 +152,12 @@ public class EntityValidate {
 	}
 
 	// check birth of date > 18 years old
-	public static boolean checkNgaySinh(Component component, Date date) {
-		if (date == null) {
+	public static boolean checkNgaySinh(Component component, Date date, boolean check) {
+		if (date == null && check ==true) {
 			EntityMessage.show(component, "Ngày sinh trống");
+			return false;
+		}
+		if(date == null) {
 			return false;
 		}
 		Calendar calendar = Calendar.getInstance();

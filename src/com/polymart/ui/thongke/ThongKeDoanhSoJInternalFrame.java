@@ -201,9 +201,11 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
-		modelThongKe.addColumn("Tháng");
-		modelThongKe.addColumn("Sản phẩm bán");
-		modelThongKe.addColumn("Doanh thu");
+		modelThongKe.addColumn("Mã sản phẩm");
+		modelThongKe.addColumn("Tên sản phẩm");
+		modelThongKe.addColumn("Size");
+		modelThongKe.addColumn("Màu sắc");
+		modelThongKe.addColumn("Số lượng bán");
 		tableThongKe.setModel(modelThongKe);
 		
 	//	rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);

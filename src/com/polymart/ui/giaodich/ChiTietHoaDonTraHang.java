@@ -1,14 +1,7 @@
 package com.polymart.ui.giaodich;
 
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietHoaDonTraHangModel;
-import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.SanPhamModel;
-import com.polymart.service.*;
-import com.polymart.service.impl.*;
-
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +10,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Toolkit;
-import java.util.List;
+
+import com.polymart.model.ChiTietHoaDonThanhToanModel;
+import com.polymart.model.ChiTietHoaDonTraHangModel;
+import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.SanPhamModel;
+import com.polymart.service.IChiTietHoaDonThanhToanService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.ISanPhamService;
+import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.SanPhamService;
 
 public class ChiTietHoaDonTraHang extends JFrame {
 

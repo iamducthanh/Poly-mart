@@ -10,7 +10,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Timestamp;
@@ -40,7 +39,6 @@ import com.polymart.dao.impl.ChamCongDAO;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChamCongModel;
-
 import com.toedter.calendar.JCalendar;
 
 public class ChamCongJInternalFrame extends JInternalFrame {
@@ -168,7 +166,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		dateChamCong.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("day")) {
-					loadListChamCongNgay();;
+					loadListChamCongNgay();
+					;
 					loadTableChamCong();
 					txtTimKiem.setEnabled(false);
 				}
@@ -260,9 +259,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		if (i == 1 && j==-1 ) {
+		if (i == 1 && j == -1) {
 			btnChamCong.setEnabled(true);
-		}else {
+		} else {
 			setEnabled(false);
 		}
 
@@ -270,8 +269,10 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 	// chấm công cho nhân viên
 	protected void chamCong() {
+		calendar = Calendar.getInstance();
 		Date now = new Date();
-		int day = now.getDay();
+		calendar.setTime(now);
+		int day = calendar.get(Calendar.DATE);
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
 		int maNhanVien = EntityAuthorization.USER.getId();
 		String hoTen = EntityAuthorization.USER.getHoTen();
@@ -309,6 +310,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listChamCong = chamCongDao.filterDay(nam, thang, ngay);
 	}
+
 	// load bảng chấm công của ngày hiện tại
 	public void fillTableChamCongHienTai() {
 		listChamCong.clear();
@@ -319,6 +321,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
 		listChamCong = chamCongDao.filterDay(nam, thang, ngay);
 	}
+
 	// danh sách chấm công nhân viên tháng
 	private void loadListChamCongThang() {
 		listChamCong.clear();
@@ -331,11 +334,13 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 	// load bảng chấm công
 	private void loadTableChamCong() {
+		Calendar c = Calendar.getInstance();
 		modelChamCong.setRowCount(0);
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
 		for (ChamCongModel chamCongModel : listChamCong) {
 			calendar.setTime(chamCongModel.getNgayChamCong());
-			int day = chamCongModel.getNgayChamCong().getDay();
+			c.setTime(chamCongModel.getNgayChamCong());
+			int day = c.get(Calendar.DATE);
 			int i = 0;
 			String gioChamCong = sdf.format(chamCongModel.getNgayChamCong());
 			try {

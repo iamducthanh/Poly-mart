@@ -42,7 +42,6 @@ import com.polymart.ui.nhanvien.BangLuongJIternalFrame;
 import com.polymart.ui.nhanvien.CaNhanFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
-import com.polymart.ui.taikhoan.ChangePassFrame;
 import com.polymart.ui.taikhoan.LoginJFrame;
 import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 

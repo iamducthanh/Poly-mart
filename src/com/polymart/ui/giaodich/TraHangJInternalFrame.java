@@ -16,10 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -29,7 +28,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -37,9 +35,16 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.model.*;
-import com.polymart.service.*;
-import com.polymart.service.impl.*;
+import com.polymart.model.ChiTietHoaDonTraHangModel;
+import com.polymart.model.HoaDonTraHangModel;
+import com.polymart.service.IChiTietHoaDonThanhToanService;
+import com.polymart.service.IChiTietHoaDonTraHangService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.IHoaDonTraHangService;
+import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
+import com.polymart.service.impl.ChiTietHoaDonTraHangService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.HoaDonTraHangService;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -89,7 +94,10 @@ public class TraHangJInternalFrame extends JInternalFrame {
     public TraHangJInternalFrame() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelTraHang = new DefaultTableModel() {
-            @Override
+
+			private static final long serialVersionUID = -7807772237459649491L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }

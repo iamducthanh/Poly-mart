@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
@@ -32,7 +31,6 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.LoaiSanPhamModel;
 import com.polymart.model.SanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ILoaiSanPhamService;

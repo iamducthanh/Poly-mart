@@ -15,12 +15,13 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
     }
 
     @Override
-    public boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
+    public ChiTietHoaDonThanhToanModel save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
         String sql = "INSERT INTO CHITIETHOADONTHANHTOAN (IDHOADONTHANHTOAN, IDCHITIETSANPHAM, SOLUONG, GIAMGIATHEM)\n"
                 + "VALUES (?, ?, ?, ?)";
-        return insert(sql, chiTietHoaDonThanhToanModel.getHoaDonThanhToan(),
+        int id = insert(sql, chiTietHoaDonThanhToanModel.getHoaDonThanhToan(),
                 chiTietHoaDonThanhToanModel.getChiTietSanPham(), chiTietHoaDonThanhToanModel.getSoLuong(),
-                chiTietHoaDonThanhToanModel.getGiamGiaThem()) > -1;
+                chiTietHoaDonThanhToanModel.getGiamGiaThem());
+        return findOne(id);
     }
 
     @Override
@@ -28,5 +29,11 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
         String sql = "UPDATE CHITIETHOADONTHANHTOAN SET IDCHITIETSANPHAM = ?, SOLUONG = ?, GIAMGIATHEM = ? WHERE ID = ?";
         return update(sql, chiTietHoaDonThanhToanModel.getChiTietSanPham(), chiTietHoaDonThanhToanModel.getSoLuong(),
                 chiTietHoaDonThanhToanModel.getGiamGiaThem(), chiTietHoaDonThanhToanModel.getId()) > -1;
+    }
+
+    private ChiTietHoaDonThanhToanModel findOne(Integer id) {
+        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN WHERE ID = ?";
+        List<ChiTietHoaDonThanhToanModel> lstFind = query(sql, new ChiTietHoaDonThanhToanMapper(), id);
+        return lstFind.isEmpty() ? null : lstFind.get(0);
     }
 }

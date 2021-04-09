@@ -1,4 +1,0 @@
-
-USE POLYMART_v1
-GO
-

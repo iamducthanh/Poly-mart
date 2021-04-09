@@ -48,7 +48,7 @@ public class HoaDonTraHangDAO extends AbstractDAO<HoaDonTraHangModel> implements
 	@Override
 	public boolean remove(HoaDonTraHangModel hoaDonTraHangModel) {
 		String sql = "EXEC PROC_DELETE_HOADONTRAHANG ?";
-		return update(sql, hoaDonTraHangModel.getId()) > -1;
+		return update(sql, hoaDonTraHangModel.getId()) > 0;
 	}
 
 	@Override

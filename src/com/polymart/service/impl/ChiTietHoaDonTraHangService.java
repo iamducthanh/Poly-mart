@@ -1,13 +1,12 @@
 package com.polymart.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.polymart.dao.IChiTietHoaDonTraHangDAO;
 import com.polymart.dao.impl.ChiTietHoaDonTraHangDAO;
 import com.polymart.model.ChiTietHoaDonTraHangModel;
 import com.polymart.service.IChiTietHoaDonTraHangService;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ChiTietHoaDonTraHangService implements IChiTietHoaDonTraHangService {
 

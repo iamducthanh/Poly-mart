@@ -14,10 +14,8 @@ import java.awt.event.MouseEvent;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -94,6 +92,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
     private List<HoaDonThanhToanModel> lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
+
+    private HoaDonThanhToanModel hoaDonThanhToanModel = new HoaDonThanhToanModel();
 
     /**
      * Launch the application.
@@ -275,6 +275,10 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
         tableThanhToan.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
+                int row = tableThanhToan.getSelectedRow();
+                if (row > -1 && row < tableThanhToan.getRowCount()) {
+                    hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(tableThanhToan.getValueAt(row, 0).toString()));
+                }
                 setOpenChiTietHoaDonThanhToan(mouseEvent);
             }
         });
@@ -296,10 +300,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         if (mouseEvent.getClickCount() == 2) {
             int row = tableThanhToan.getSelectedRow();
             if (row > -1 && row < tableThanhToan.getRowCount()) {
-                String getMaHoaDon = tableThanhToan.getValueAt(row, 0).toString();
-                HoaDonThanhToanModel hoaDonThanhToanModel =
-                        lstHoaDonThanhToanModels.stream().filter(e -> e.getId().equals(Integer.parseInt(getMaHoaDon)))
-                                .collect(Collectors.toList()).get(0);
                 List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
                         .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
                 if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
@@ -330,7 +330,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                         x.getIdNhanVien() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
                         lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
                                 * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
-                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())).sum(),
+                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam()
+                                - e.getGiamGiaThem() - x.getDiemDaDoi())).sum(),
                         new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()), x.getGhiChu()});
             }
         }
@@ -339,9 +340,9 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     // xóa một hàng trên table
     private void evtBtnXoa(JTable tbNhapHang) {
         int row = tbNhapHang.getSelectedRow();
-        if (row > -1 && row < tbNhapHang.getRowCount()) {
+        if ((row > -1 && row < tbNhapHang.getRowCount()) && hoaDonThanhToanModel != null) {
             if (EntityMessage.confirm(this, "Thao tác này có thể sẽ bị mất dữ liệu\nĐồng ý xóa?")) {
-                HoaDonThanhToanModel hoaDonThanhToanModel = lstHoaDonThanhToanModels.get(row);
+                hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(tableThanhToan.getValueAt(row, 0).toString()));
                 if (hoaDonThanhToanService.remove(hoaDonThanhToanModel)) {
                     EntityMessage.show(this, "Xóa thành công");
                     modelThanhToan.removeRow(row);
@@ -364,7 +365,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
             showTable(getList());
         } else {
             if (EntityValidate.checkIdNumber(this, getID)) {
-                HoaDonThanhToanModel hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(getID));
+                hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(getID));
                 if (hoaDonThanhToanModel == null) {
                     EntityMessage.show(this, "Mã hóa đơn không tồn tại");
                 } else {

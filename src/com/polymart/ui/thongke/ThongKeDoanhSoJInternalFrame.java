@@ -34,7 +34,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
 
-public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
+public class ThongKeDoanhSoJInternalFrame extends JFrame {
 
 	/**
 	 * 
@@ -45,6 +45,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 	JPanel panelContent = new JPanel();
 	JScrollPane scrollPaneBang = new JScrollPane();
 	ChartPanel chartPanel;
+	JComboBox<String> cbbThang = new JComboBox<String>();
 
 	//DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	JComboBox<String> cbbNam = new JComboBox<String>();
@@ -73,7 +74,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ThongKeDoanhSoJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+	//	((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 848, 556);
@@ -115,22 +116,32 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		JLabel lblNewLabel_1_1 = new JLabel("Năm");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Tháng");
+		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(10)
+							.addContainerGap()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(cbbThang, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
 							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addContainerGap(20, Short.MAX_VALUE)
-					.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(20, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -138,11 +149,15 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(47)
+					.addGap(18)
+					.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(cbbThang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(29)
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(293, Short.MAX_VALUE))
+					.addContainerGap(229, Short.MAX_VALUE))
 		);
 		
 		JRadioButton rdoTheoBang = new JRadioButton("Theo bảng");
@@ -185,9 +200,11 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
-		modelThongKe.addColumn("Tháng");
-		modelThongKe.addColumn("Sản phẩm bán");
-		modelThongKe.addColumn("Doanh thu");
+		modelThongKe.addColumn("Mã sản phẩm");
+		modelThongKe.addColumn("Tên sản phẩm");
+		modelThongKe.addColumn("Size");
+		modelThongKe.addColumn("Màu sắc");
+		modelThongKe.addColumn("Số lượng bán");
 		tableThongKe.setModel(modelThongKe);
 		
 	//	rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
@@ -204,7 +221,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		loadTableDoanhThu();		
 		rdoBieuDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadBieuDoDoanhThu(modelThongKe);
+			//	loadBieuDoDoanhThu(modelThongKe);
 				rdoTheoBang.setSelected(true);
 			}
 		});
@@ -219,45 +236,31 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 	public void loadTableDoanhThu() {
 		modelThongKe.setRowCount(0);
 		ThongKeService thongKeService = new ThongKeService();
-		for(int i = 1; i< 13;i++) {
-			ResultSet resultSet = thongKeService.loadTableThongKeDoanhThu((String) cbbNam.getSelectedItem(), String.valueOf(i));
-			try {
-				while(resultSet.next()) {
+		ResultSet tbThongKeDoanhSo = thongKeService.loadTableThongKeDoanhSo((String)cbbNam.getSelectedItem(), (String)cbbThang.getSelectedItem());
 
-					if(resultSet.getString(1) == null) {
-						modelThongKe.addRow(new Object[] {"Tháng "+i, 0,0});
-					} else {
-						modelThongKe.addRow(new Object[] {"Tháng "+i, resultSet.getString(2),fm.format(resultSet.getDouble(1))});
-					}
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 		panelContent.add(scrollPaneBang, BorderLayout.CENTER);
 		scrollPaneBang.setVisible(true);
 	}
 	
-	public void loadBieuDoDoanhThu(DefaultTableModel model) {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for(int i=1;i<13;i++) {
-			String so = String.valueOf(model.getValueAt(i-1, 2));
-			Double soNguoi = Double.parseDouble(so);
-			String month = "Tháng "+i;
-			dataset.addValue(soNguoi, "Doanh thu", month);
-		}
-		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
-        chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-        JFrame frame = new JFrame();
-        frame.getContentPane().add(chartPanel);
-        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
-        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
-	}
+//	public void loadBieuDoDoanhThu(DefaultTableModel model) {
+//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//		for(int i=1;i<13;i++) {
+//			String so = String.valueOf(model.getValueAt(i-1, 2));
+//			Double soNguoi = Double.parseDouble(so);
+//			String month = "Tháng "+i;
+//			dataset.addValue(soNguoi, "Doanh thu", month);
+//		}
+//		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
+//        chartPanel = new ChartPanel(barChart);
+//        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+//        JFrame frame = new JFrame();
+//        frame.getContentPane().add(chartPanel);
+//        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
+//        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
+//        frame.setLocationRelativeTo(null);
+//        frame.setResizable(false);
+//        frame.setVisible(true);
+//	}
 
 	
 	public void fillCbbYear() throws SQLException {

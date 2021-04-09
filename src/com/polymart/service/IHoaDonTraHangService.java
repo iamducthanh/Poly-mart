@@ -15,7 +15,7 @@ public interface IHoaDonTraHangService {
 
     boolean remove(HoaDonTraHangModel hoaDonTraHangModel);
 
-    List<HoaDonTraHangModel> findById(int id);
+    HoaDonTraHangModel findById(int id);
 
     List<HoaDonTraHangModel> filterByDate(Timestamp timestamp);
 

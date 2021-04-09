@@ -12,6 +12,8 @@ public interface IChiTietSanPhamService {
 
     List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
 
+    List<ChiTietSanPhamModel> findAllByHoaDonThanhToan();
+
     void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
 
     void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);

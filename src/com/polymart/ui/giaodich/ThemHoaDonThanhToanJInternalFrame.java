@@ -60,7 +60,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private IChiTietHoaDonThanhToanService chiTietHoaDonThanhToanService = new ChiTietHoaDonThanhToanService();
     private IKhachHangService khachHangService = new KhachHangService();
 
-    private List<ChiTietSanPhamModel> lstTietSanPham = chiTietSanPhamService.findAll();
+    private List<ChiTietSanPhamModel> lstTietSanPham = chiTietSanPhamService.findAllByHoaDonThanhToan();
     private List<KhachHangModel> lstKhachHang = khachHangService.findAll();
     private List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = new ArrayList<>();
 

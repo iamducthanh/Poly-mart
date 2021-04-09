@@ -247,6 +247,8 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 				xemTatCa();
 			}
 		});
+		
+		JButton btnXemLaiLichSu = new JButton("Lịch Sử Phiếu Đã Xóa");
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
@@ -258,6 +260,9 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 					.addComponent(btnNewButton)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnAll))
+				.addGroup(gl_panelLeft.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnXemLaiLichSu))
 		);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
@@ -268,7 +273,9 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNewButton)
 						.addComponent(btnAll))
-					.addContainerGap(396, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnXemLaiLichSu)
+					.addContainerGap(365, Short.MAX_VALUE))
 		);
 		dateChamCong.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {

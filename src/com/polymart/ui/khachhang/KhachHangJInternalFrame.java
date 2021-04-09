@@ -351,7 +351,6 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 			khachHangModel.setSdt(txtSoDienThoai.getText());
 			khachHangModel.setDiaChi(txtDiaChi.getText());
 			khachHangModel.setTichDiem(point);
-			khachHangModel.setId(list.get(index).getId());
 			if (index < 0) {
 				if (khachHangService.save(khachHangModel) != null) {
 					EntityMessage.show(this, "Thêm thành công");
@@ -360,6 +359,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 					EntityMessage.show(this, "Thêm thất bại");
 				}
 			} else {
+				khachHangModel.setId(list.get(index).getId());
 				if (khachHangService.update(khachHangModel) != null) {
 					EntityMessage.show(this, "Cập nhật thành công");
 					disableFuntion();

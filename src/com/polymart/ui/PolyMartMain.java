@@ -96,9 +96,11 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(mnTongQuan);
 		
 		JMenuItem mntmDoanhThu = new JMenuItem("Thống kê doanh thu");
+		mntmDoanhThu.setIcon(new ImageIcon("C:\\Users\\ADMIN\\git\\Poly-mart\\images\\doanhthu.png"));
 		mnTongQuan.add(mntmDoanhThu);
 		
 		JMenuItem mntnDoanhSo = new JMenuItem("Thống kê doanh số bán ra");
+		mntnDoanhSo.setIcon(new ImageIcon("C:\\Users\\ADMIN\\git\\Poly-mart\\images\\doanhso.png"));
 		mnTongQuan.add(mntnDoanhSo);
 
 		JMenu mnHangHoa = new JMenu("Hàng hóa");

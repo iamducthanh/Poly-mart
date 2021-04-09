@@ -200,7 +200,6 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
-		modelThongKe.addColumn("Mã sản phẩm");
 		modelThongKe.addColumn("Tên sản phẩm");
 		modelThongKe.addColumn("Size");
 		modelThongKe.addColumn("Màu sắc");
@@ -237,7 +236,14 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		modelThongKe.setRowCount(0);
 		ThongKeService thongKeService = new ThongKeService();
 		ResultSet tbThongKeDoanhSo = thongKeService.loadTableThongKeDoanhSo((String)cbbNam.getSelectedItem(), (String)cbbThang.getSelectedItem());
-
+		try {
+			while(tbThongKeDoanhSo.next()) {
+				modelThongKe.addRow(new Object[] {tbThongKeDoanhSo.getString(2),tbThongKeDoanhSo.getString(3),tbThongKeDoanhSo.getString(4),tbThongKeDoanhSo.getString(5)});
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		panelContent.add(scrollPaneBang, BorderLayout.CENTER);
 		scrollPaneBang.setVisible(true);
 	}

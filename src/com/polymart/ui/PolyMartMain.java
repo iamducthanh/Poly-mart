@@ -46,6 +46,8 @@ import com.polymart.ui.taikhoan.LoginJFrame;
 import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class PolyMartMain extends JFrame {
+	
+	int a;
 
 	private static final long serialVersionUID = 6825346390245174222L;
 

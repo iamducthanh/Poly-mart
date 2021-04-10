@@ -14,12 +14,6 @@ public interface IChiTietSanPhamService {
 
     List<ChiTietSanPhamModel> findAllByHoaDonThanhToan();
 
-    void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel);
-
-    void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel);
-
-    void updateTraHang(Integer id, Integer soLuong);
-
     Integer getIdProductById(Integer id);
 
     void reloadData();

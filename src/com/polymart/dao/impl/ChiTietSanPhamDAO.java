@@ -22,35 +22,4 @@ public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implemen
                 + "WHERE CTSP.ID LIKE ? OR SP.TEN LIKE ? AND TRANGTHAI = 1";
         return query(sql, new ChiTietSanPhamMapper(), "%" + input + "%", "%" + input + "%");
     }
-
-    @Override
-    public Integer updateSauKhiXoaHoaDonNhap(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("UPDATE CHITIETSANPHAM\n");
-        sql.append(" SET SOLUONG = SOLUONG - ? WHERE ID = ?");
-        return update(sql.toString(), chiTietHoaDonNhapHangModel.getSoLuong(),
-                chiTietHoaDonNhapHangModel.getIdChiTietSanPham());
-    }
-
-    @Override
-    public Integer updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
-        String sqlUpdate = "UPDATE CHITIETSANPHAM SET GIAVON = ((GIAVON * SOLUONG) + ?) / (SOLUONG + ?),\n"
-                + "SOLUONG = SOLUONG + ? WHERE ID = ?";
-        return update(sqlUpdate, chiTietHoaDonNhapHangModel.getGiaNhap() * chiTietHoaDonNhapHangModel.getSoLuong(),
-                chiTietHoaDonNhapHangModel.getSoLuong(), chiTietHoaDonNhapHangModel.getSoLuong(),
-                chiTietHoaDonNhapHangModel.getIdChiTietSanPham());
-    }
-
-    @Override
-    public Integer updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
-        String sqlUpdate = "UPDATE CHITIETSANPHAM SET SOLUONG = SOLUONG - ? WHERE ID = ?";
-        return update(sqlUpdate, chiTietHoaDonThanhToanModel.getSoLuong(),
-                chiTietHoaDonThanhToanModel.getChiTietSanPham());
-    }
-
-    @Override
-    public Integer updateTraHang(int id, int soLuong) {
-        String sqlUpdate = "UPDATE CHITIETSANPHAM SET SOLUONG = SOLUONG + ? WHERE ID = ?";
-        return update(sqlUpdate, soLuong, id);
-    }
 }

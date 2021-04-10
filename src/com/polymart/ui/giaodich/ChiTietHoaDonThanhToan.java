@@ -128,7 +128,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
                     sanPhamService.findByID(chiTietSanPhamService.getIdProductById(e.getChiTietSanPham())).getTenSP(),
                     e.getSoLuong(), chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(),
                     e.getGiamGiaThem(),
-                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam() - e.getGiamGiaThem())});
+                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem()});
         }
     }
 

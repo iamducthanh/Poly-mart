@@ -15,13 +15,12 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
     }
 
     @Override
-    public ChiTietHoaDonThanhToanModel save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
-        String sql = "INSERT INTO CHITIETHOADONTHANHTOAN (IDHOADONTHANHTOAN, IDCHITIETSANPHAM, SOLUONG, GIAMGIATHEM)\n"
-                + "VALUES (?, ?, ?, ?)";
-        int id = insert(sql, chiTietHoaDonThanhToanModel.getHoaDonThanhToan(),
-                chiTietHoaDonThanhToanModel.getChiTietSanPham(), chiTietHoaDonThanhToanModel.getSoLuong(),
-                chiTietHoaDonThanhToanModel.getGiamGiaThem());
-        return findOne(id);
+    public boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
+        String sql = "EXEC PROC_INSERT_CTHOADONTHANHTOAN ?, ?, ?, ?";
+        return update(sql, chiTietHoaDonThanhToanModel.getHoaDonThanhToan(),
+                chiTietHoaDonThanhToanModel.getChiTietSanPham(),
+                chiTietHoaDonThanhToanModel.getGiamGiaThem(),
+                chiTietHoaDonThanhToanModel.getSoLuong()) > 0;
     }
 
     @Override

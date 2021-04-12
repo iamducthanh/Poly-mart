@@ -11,7 +11,7 @@ VALUES (N'Áo thun'),
 (N'Chân váy')
 
 INSERT INTO SANPHAM (IDLOAISANPHAM, TEN)
-VALUES (1, N'Thun tay ngắn'),
+VALUES (10001, N'Thun tay ngắn'),
 (10001, N'Thun tay dài'),
 (10002, N'Sơ mi tay ngắn'),
 (10002, N'Sơ mi tay dài'),
@@ -21,7 +21,7 @@ VALUES (1, N'Thun tay ngắn'),
 (10005, N'Chân váy')
 
 INSERT INTO CHITIETSANPHAM (IDSANPHAM, MAUSAC, SIZE, SOLUONG, GIABAN, TRANGTHAI)
-VALUES (1, N'Đen', 'XL', 0, 215000, 1),
+VALUES (10001, N'Đen', 'XL', 0, 215000, 1),
 (10001, N'Đen', 'L', 0, 215000, 0),
 (10001, N'Đen', 'M', 0, 215000, 1),
 (10001, N'Đen', 'S', 0, 215000, 1),

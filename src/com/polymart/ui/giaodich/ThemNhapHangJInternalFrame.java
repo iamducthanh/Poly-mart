@@ -502,19 +502,26 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             hoaDonNhapHangModel.setGhiChu(txaGhiChu.getText());
             hoaDonNhapHangModel = hoaDonNhapHangService.save(hoaDonNhapHangModel);
             if (hoaDonNhapHangModel != null) {
-                for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhap) {
-                    x.setIdHoaDonNhapHang(hoaDonNhapHangModel.getId());
-                    if (!chiTietHoaDonNhapHangService.save(x)) {
-                        hoaDonNhapHangService.remove(hoaDonNhapHangModel);
-                        chiTietHoaDonNhapHangService.reloadData();
-                        EntityMessage.show(this, "Thêm thất bại");
-                        return;
+                try {
+                    for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhap) {
+                        x.setIdHoaDonNhapHang(hoaDonNhapHangModel.getId());
+                        if (!chiTietHoaDonNhapHangService.save(x)) {
+                            hoaDonNhapHangService.remove(hoaDonNhapHangModel);
+                            chiTietHoaDonNhapHangService.reloadData();
+                            EntityMessage.show(this, "Thêm thất bại");
+                            return;
+                        }
                     }
+                    EntityMessage.show(this, "Thêm thành công");
+                    this.setVisible(false);
+                    nhapHangJInternalFrame.showTable(hoaDonNhapHangService.findAll());
+                    chiTietSanPhamService.reloadData();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    hoaDonNhapHangService.remove(hoaDonNhapHangModel);
+                    chiTietHoaDonNhapHangService.reloadData();
+                    EntityMessage.show(this, "Thêm thất bại");
                 }
-                EntityMessage.show(this, "Thêm thành công");
-                this.setVisible(false);
-                nhapHangJInternalFrame.showTable(hoaDonNhapHangService.findAll());
-                chiTietSanPhamService.reloadData();
             } else {
                 EntityMessage.show(this, "Thêm thất bại");
             }

@@ -408,7 +408,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
                     x.getSoLuong(),
                     x.getGiaBan(),
                     x.getGiaVon(),
-                    x.getGiaBan(),
+                    x.getGiaGiam(),
                     x.getSize(),
                     x.getMauSac()
             });

@@ -398,6 +398,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             }
         });
 
+        
         // hiển thị danh sách sản phẩm
         showTableProduct(lstTietSanPham);
 

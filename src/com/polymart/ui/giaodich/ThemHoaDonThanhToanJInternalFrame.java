@@ -50,7 +50,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private JTextField txtTimKiem;
     private JTable tableDSSanPham;
     private JTextField txtSoLgBan;
-    private JTable tableDSNhapHang;
+    private JTable tableDSThanhToan;
     private JTextField txtGiaGiamThem;
 
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
@@ -70,6 +70,9 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private JTextField textField;
 
     private ThanhToanJInternalFrame thanhToanJInternalFrame = null;
+
+    // tính tổng tiền
+    private Long tongTien;
 
     /**
      * Launch the application.
@@ -325,8 +328,8 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         JTextArea txtGhiChu = new JTextArea();
         scrollPane_2.setViewportView(txtGhiChu);
 
-        tableDSNhapHang = new JTable();
-        scrollPane_1.setViewportView(tableDSNhapHang);
+        tableDSThanhToan = new JTable();
+        scrollPane_1.setViewportView(tableDSThanhToan);
         panel_2.setLayout(gl_panel_2);
         modelDSSanPham.addColumn("Mã sản phẩm");
         modelDSSanPham.addColumn("Tên sản phẩm");
@@ -345,7 +348,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         modelDSThanhToan.addColumn("Size");
         modelDSThanhToan.addColumn("Màu sắc");
         modelDSThanhToan.addColumn("Số lượng bán");
-        tableDSNhapHang.setModel(modelDSThanhToan);
+        tableDSThanhToan.setModel(modelDSThanhToan);
 
         txtTimKiem.addFocusListener(new FocusAdapter() {
             @Override
@@ -392,6 +395,14 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
         // hiển thị danh sách sản phẩm
         showTableProduct(lstTietSanPham);
+
+        // xóa sản phẩm thanh toán
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnDelete(tableDSThanhToan, lblTongTien);
+            }
+        });
     }
 
     public void close() {
@@ -443,10 +454,10 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                             chiTietHoaDonThanhToanModel.setChiTietSanPham(chiTietSanPhamModel.getId());
                             lstChiTietHoaDonThanhToanModels.add(chiTietHoaDonThanhToanModel);
                             // tính tổng tiền của tất cả sản phẩm có trên table
-                            Long tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
-                                    e -> (chiTietSanPhamModel.getGiaBan() * Integer.parseInt(getSoLuong))
-                                            - (chiTietSanPhamModel.getGiaGiam() * e.getSoLuong())).sum();
-                            lblTongTien.setText(String.valueOf(tongTien - Long.parseLong(getMoney)));
+                            tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
+                                    e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
+                                            * e.getSoLuong()) - e.getGiamGiaThem())).sum();
+                            lblTongTien.setText(String.valueOf(tongTien));
                         } else {
                             EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
                         }
@@ -460,10 +471,10 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                                     x.setSoLuong(setSoLuong);
                                     modelDSThanhToan.setValueAt(setSoLuong, i, 8);
                                     // tính tổng tiền của tất cả sản phẩm có trên table
-                                    Long tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
-                                            e -> (chiTietSanPhamModel.getGiaBan() * Integer.parseInt(getSoLuong))
-                                                    - (chiTietSanPhamModel.getGiaGiam() * e.getSoLuong())).sum();
-                                    lblTongTien.setText(String.valueOf(tongTien - Double.parseDouble(getMoney)));
+                                    tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
+                                            e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
+                                                    * e.getSoLuong()) - e.getGiamGiaThem())).sum();
+                                    lblTongTien.setText(String.valueOf(tongTien));
                                 } else {
                                     EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
                                 }
@@ -492,28 +503,35 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     // hoàn thành hóa đơn và cập nhật dữ liệu liên quan
     private void evtBtnHoanThanh(JComboBox<Object> cbcKhachHang, JTextArea txaGhiChu) {
         if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
+            KhachHangModel khachHangModel = lstKhachHang.get(cbcKhachHang.getSelectedIndex());
             HoaDonThanhToanModel hoaDonThanhToanModel = new HoaDonThanhToanModel();
-            hoaDonThanhToanModel.setIdKhachHang(lstKhachHang.get(cbcKhachHang.getSelectedIndex()).getId());
+            hoaDonThanhToanModel.setIdKhachHang(khachHangModel.getId());
             hoaDonThanhToanModel.setIdNhanVien(EntityAuthorization.USER.getId());
             hoaDonThanhToanModel.setGhiChu(txaGhiChu.getText());
             hoaDonThanhToanModel.setDiemDaDoi(0);
             hoaDonThanhToanModel = hoaDonThanhToanService.save(hoaDonThanhToanModel);
             if (hoaDonThanhToanModel != null) {
-                int count = 0;
                 for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
                     x.setHoaDonThanhToan(hoaDonThanhToanModel.getId());
-                    if (chiTietHoaDonThanhToanService.save(x)) {
-                        chiTietSanPhamService.updateThanhToan(x);
-                        count++;
+                    if (!chiTietHoaDonThanhToanService.save(x)) {
+                        hoaDonThanhToanService.remove(hoaDonThanhToanModel);
+                        chiTietHoaDonThanhToanService.reloadData();
+                        EntityMessage.show(this, "Thêm thất bại");
+                        return;
                     }
                 }
-                if (count > 0) {
+                String tichDiem = String.valueOf(tongTien * 0.01);
+                khachHangModel.setTichDiem(khachHangModel.getTichDiem() - hoaDonThanhToanModel.getDiemDaDoi()
+                        + Integer.parseInt(tichDiem.substring(0, tichDiem.indexOf("."))));
+                if (khachHangService.update(khachHangModel) != null) {
                     EntityMessage.show(this, "Thêm thành công");
                     this.setVisible(false);
                     thanhToanJInternalFrame.showTable(hoaDonThanhToanService.findAll());
                     chiTietSanPhamService.reloadData();
+                    chiTietHoaDonThanhToanService.reloadData();
                 } else {
                     hoaDonThanhToanService.remove(hoaDonThanhToanModel);
+                    chiTietHoaDonThanhToanService.reloadData();
                     EntityMessage.show(this, "Thêm thất bại");
                 }
             } else {
@@ -521,6 +539,24 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             }
         } else {
             EntityMessage.show(this, "Chưa thêm sản phẩm");
+        }
+    }
+
+    // nút "Xóa" một hàng của bảng danh sách sản phẩm nhập
+    private void evtBtnDelete(JTable tbDSThanhToan, JLabel lblTongTien) {
+        int row = tbDSThanhToan.getSelectedRow();
+        if (row > -1 && row < tbDSThanhToan.getRowCount()) {
+            chiTietSanPhamModel = chiTietSanPhamService.getById(Integer.parseInt(tbDSThanhToan.getValueAt(row, 0).toString()));
+            // xóa trên bảng
+            modelDSThanhToan.removeRow(row);
+            lstChiTietHoaDonThanhToanModels.remove(row);
+            // tính tổng tiền của tất cả sản phẩm có trên table
+            tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
+                    e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) * e.getSoLuong())
+                            - e.getGiamGiaThem())).sum();
+            lblTongTien.setText(String.valueOf(tongTien));
+        } else {
+            EntityMessage.show(this, "Vui lòng chọn 1 hàng");
         }
     }
 

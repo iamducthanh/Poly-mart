@@ -109,18 +109,18 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDanhSachSanPham = new DefaultTableModel() {
 
-			private static final long serialVersionUID = -6399184591727512268L;
+            private static final long serialVersionUID = -6399184591727512268L;
 
-			@Override
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         modelDanhSachTraHang = new DefaultTableModel() {
 
-			private static final long serialVersionUID = 6710114029206253334L;
+            private static final long serialVersionUID = 6710114029206253334L;
 
-			@Override
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -359,28 +359,20 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
             if (hoaDonTraHangModel == null) {
                 EntityMessage.show(this, "Lưu thất bại");
             } else {
-                int count = 0;
                 for (ChiTietHoaDonTraHangModel x : lstChiTietHoaDonTraHangModels) {
-                    System.out.println("id hóa đơn trả hàng" + hoaDonTraHangModel.getId());
                     x.setIdHoaDonTraHang(hoaDonTraHangModel.getId());
-                    if (chiTietHoaDonTraHangService.save(x)) {
-                        ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = chiTietHoaDonThanhToanService.findById(x.getIdHoaDonThanhToanChiTiet());
-                        chiTietHoaDonThanhToanModel.setSoLuong(chiTietHoaDonThanhToanModel.getSoLuong() - x.getSoLuong());
-                        chiTietHoaDonThanhToanService.update(chiTietHoaDonThanhToanModel);
-                        chiTietSanPhamService.updateTraHang(chiTietHoaDonThanhToanModel.getChiTietSanPham(), x.getSoLuong());
-                        count++;
+                    if (!chiTietHoaDonTraHangService.save(x)) {
+                        EntityMessage.show(this, "Thêm thất bại");
+                        hoaDonTraHangService.remove(hoaDonTraHangModel);
+                        chiTietHoaDonTraHangService.reloadData();
                     }
                 }
-                if (count > 0) {
-                    EntityMessage.show(this, "Thêm thành công");
-                    this.setVisible(false);
-                    traHangJInternalFrame.showTable(traHangJInternalFrame.getData());
-                    chiTietSanPhamService.reloadData();
-                    chiTietHoaDonTraHangService.reloadData();
-                } else {
-                    EntityMessage.show(this, "Thêm thất bại");
-                    hoaDonTraHangService.remove(hoaDonTraHangModel);
-                }
+                EntityMessage.show(this, "Thêm thành công");
+                this.setVisible(false);
+                traHangJInternalFrame.showTable(traHangJInternalFrame.getData());
+                chiTietSanPhamService.reloadData();
+                chiTietHoaDonTraHangService.reloadData();
+                chiTietHoaDonThanhToanService.reloadData();
             }
         } else {
             EntityMessage.show(this, "Thêm sản trả trước khi lưu");
@@ -411,7 +403,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                             chiTietHoaDonTraHangModel.setSoLuong(Integer.parseInt(soLuong));
                             lstChiTietHoaDonTraHangModels.add(chiTietHoaDonTraHangModel);
                             Long tongTien = Long.parseLong(lblTongTien.getText()) + (Integer.parseInt(soLuong) * (chiTietSanPhamModel.getGiaBan()
-                                    - chiTietSanPhamModel.getGiaGiam()) - chiTietHoaDonThanhToanModel.getGiamGiaThem());
+                                    - chiTietSanPhamModel.getGiaGiam()));
                             lblTongTien.setText(tongTien.toString());
                         } else {
                             EntityMessage.show(this, "Số lượng trả không được lớn hơn số lượng mua");
@@ -427,7 +419,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                                     x.setSoLuong(setSoLuong);
                                     modelDanhSachTraHang.setValueAt(setSoLuong, i, 2);
                                     Long tongTien = Long.parseLong(lblTongTien.getText()) + (Integer.parseInt(soLuong) * (chiTietSanPhamModel.getGiaBan()
-                                            - chiTietSanPhamModel.getGiaGiam()) - chiTietHoaDonThanhToanModel.getGiamGiaThem());
+                                            - chiTietSanPhamModel.getGiaGiam()));
                                     lblTongTien.setText(tongTien.toString());
                                 }
                                 return;

@@ -18,11 +18,10 @@ public class ChiTietHoaDonNhapHangDAO extends AbstractDAO<ChiTietHoaDonNhapHangM
 	@Override
 	public boolean save(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
 		if (chiTietHoaDonNhapHangModel != null) {
-			String sqlInsert = "INSERT INTO CHITIETHOADONNHAPHANG (IDHOADONNHAPHANG, IDCHITIETSANPHAM, GIANHAP, SOLUONG)\n"
-					+ "VALUES (?, ?, ?, ?)";
-			return (insert(sqlInsert, chiTietHoaDonNhapHangModel.getIdHoaDonNhapHang(),
+			String sqlInsert = "EXEC PROC_INSERT_CTHOADONNHAPHANG ?, ?, ?, ?";
+			return (update(sqlInsert, chiTietHoaDonNhapHangModel.getIdHoaDonNhapHang(),
 					chiTietHoaDonNhapHangModel.getIdChiTietSanPham(), chiTietHoaDonNhapHangModel.getGiaNhap(),
-					chiTietHoaDonNhapHangModel.getSoLuong())) > -1;
+					chiTietHoaDonNhapHangModel.getSoLuong())) > 0;
 		}
 		return false;
 	}

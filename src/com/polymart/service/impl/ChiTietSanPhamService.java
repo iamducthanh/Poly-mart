@@ -34,21 +34,6 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     @Override
-    public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
-        chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
-    }
-
-    @Override
-    public void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
-        chiTietSanPhamDAO.updateThanhToan(chiTietHoaDonThanhToanModel);
-    }
-
-    @Override
-    public void updateTraHang(Integer id, Integer soLuong) {
-        chiTietSanPhamDAO.updateTraHang(id, soLuong);
-    }
-
-    @Override
     public Integer getIdProductById(Integer id) {
         List<ChiTietSanPhamModel> lstTim = lstChiTietSanPhamModels.stream().filter(e -> e.getId().equals(id))
                 .collect(Collectors.toList());
@@ -63,5 +48,10 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     @Override
     public ChiTietSanPhamModel getById(Integer id) {
         return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getId().equals(id)).collect(Collectors.toList()).get(0);
+    }
+
+    @Override
+    public boolean updatePrice(int id, Long giaBan, Long giaGiam) {
+        return chiTietSanPhamDAO.updatePrice(id, giaBan, giaGiam);
     }
 }

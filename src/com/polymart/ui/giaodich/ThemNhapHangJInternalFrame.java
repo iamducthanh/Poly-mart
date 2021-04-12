@@ -469,6 +469,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         }
     }
 
+    
     // nút "Xóa" một hàng của bảng danh sách sản phẩm nhập
     private void evtBtnDelete(JTable tbDSNhapHang, JLabel lblTongTien) {
         int row = tbDSNhapHang.getSelectedRow();
@@ -502,21 +503,24 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
             hoaDonNhapHangModel.setGhiChu(txaGhiChu.getText());
             hoaDonNhapHangModel = hoaDonNhapHangService.save(hoaDonNhapHangModel);
             if (hoaDonNhapHangModel != null) {
-                int count = 0;
-                for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhap) {
-                    x.setIdHoaDonNhapHang(hoaDonNhapHangModel.getId());
-                    if (chiTietHoaDonNhapHangService.save(x)) {
-                        chiTietSanPhamService.updateNhapHang(x);
-                        count++;
+                try {
+                    for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhap) {
+                        x.setIdHoaDonNhapHang(hoaDonNhapHangModel.getId());
+                        if (!chiTietHoaDonNhapHangService.save(x)) {
+                            hoaDonNhapHangService.remove(hoaDonNhapHangModel);
+                            chiTietHoaDonNhapHangService.reloadData();
+                            EntityMessage.show(this, "Thêm thất bại");
+                            return;
+                        }
                     }
-                }
-                if (count > 0) {
                     EntityMessage.show(this, "Thêm thành công");
                     this.setVisible(false);
                     nhapHangJInternalFrame.showTable(hoaDonNhapHangService.findAll());
                     chiTietSanPhamService.reloadData();
-                } else {
+                } catch (Exception e) {
+                    e.printStackTrace();
                     hoaDonNhapHangService.remove(hoaDonNhapHangModel);
+                    chiTietHoaDonNhapHangService.reloadData();
                     EntityMessage.show(this, "Thêm thất bại");
                 }
             } else {

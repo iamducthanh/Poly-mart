@@ -49,4 +49,9 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     public ChiTietSanPhamModel getById(Integer id) {
         return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getId().equals(id)).collect(Collectors.toList()).get(0);
     }
+
+    @Override
+    public boolean updatePrice(int id, Long giaBan, Long giaGiam) {
+        return chiTietSanPhamDAO.updatePrice(id, giaBan, giaGiam);
+    }
 }

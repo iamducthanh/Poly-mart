@@ -19,21 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -67,7 +55,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = null;
     private ChiTietSanPhamModel chiTietSanPhamModel = null;
     private SanPhamModel sanPhamModel = null;
-    private JTextField textField;
+    private JCheckBox chkTichDiem;
 
     private ThanhToanJInternalFrame thanhToanJInternalFrame = null;
 
@@ -95,9 +83,15 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
      */
 
     public ThemHoaDonThanhToanJInternalFrame() {
+        init();
     }
 
     public ThemHoaDonThanhToanJInternalFrame(ThanhToanJInternalFrame thanhToanJInternalFrame) {
+        this.thanhToanJInternalFrame = thanhToanJInternalFrame;
+        init();
+    }
+
+    private void init() {
         this.thanhToanJInternalFrame = thanhToanJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSThanhToan = new DefaultTableModel() {
@@ -145,7 +139,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
         txtTimKiem = new JTextField();
         txtTimKiem.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        txtTimKiem.setText(" Tìm theo tên hoặc mã sản phẩm");
+        txtTimKiem.setText("Tìm theo tên hoặc mã sản phẩm");
         txtTimKiem.setColumns(10);
 
         JButton btnTimKiem = new JButton("Tìm kiếm");
@@ -193,8 +187,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         JLabel lbliim = new JLabel("Đổi điểm");
         lbliim.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-        textField = new JTextField("0");
-        textField.setColumns(10);
+        chkTichDiem = new JCheckBox("Điểm hiện có");
         GroupLayout gl_panel_4 = new GroupLayout(panel_4);
         gl_panel_4.setHorizontalGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_panel_4.createSequentialGroup().addContainerGap()
@@ -205,7 +198,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                         .addGap(18).addComponent(lblGiaGiamThem).addGap(34)
                         .addComponent(txtGiaGiamThem, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
                         .addGap(18).addComponent(lbliim, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-                        .addGap(34).addComponent(textField, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                        .addGap(34).addComponent(chkTichDiem, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
                         .addGap(50).addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
                         .addGap(957)));
         gl_panel_4.setVerticalGroup(gl_panel_4.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_4
@@ -219,7 +212,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 .addGroup(gl_panel_4.createSequentialGroup().addGap(13)
                         .addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
                                 .addComponent(lbliim, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(gl_panel_4.createSequentialGroup().addGap(2).addComponent(textField,
+                                .addGroup(gl_panel_4.createSequentialGroup().addGap(2).addComponent(chkTichDiem,
                                         GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(txtGiaGiamThem, GroupLayout.PREFERRED_SIZE, 30,
@@ -379,17 +372,29 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 evtBtnAddProductToTable(txtSoLgBan, txtGiaGiamThem, tableDSSanPham, lblTongTien);
+                clickedTichDiem(chkTichDiem, lblTongTien);
             }
         });
 
         // hiển thị danh sách khách hàng
         evtShowVisit(cbbKhachHang);
 
+        // hiển thị điểm khách hàng
+        cbbKhachHang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                KhachHangModel khachHangModel = lstKhachHang.get(cbbKhachHang.getSelectedIndex());
+                chkTichDiem.setText(khachHangModel.getTichDiem().toString());
+                chkTichDiem.setSelected(false);
+                lblTongTien.setText(tongTien.toString());
+            }
+        });
+
         // lưu hóa đơn
         btnHoanThanh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                evtBtnHoanThanh(cbbKhachHang, txtGhiChu);
+                evtBtnHoanThanh(cbbKhachHang, txtGhiChu, chkTichDiem);
             }
         });
 
@@ -403,6 +408,25 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 evtBtnDelete(tableDSThanhToan, lblTongTien);
             }
         });
+
+        // trừ tổng tiền khi dùng điểm
+        chkTichDiem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickedTichDiem(chkTichDiem, lblTongTien);
+            }
+        });
+    }
+
+    // set tiền khi tích đổi điểm
+    private void clickedTichDiem(JCheckBox chkTichDiem, JLabel lblTongTien) {
+        Long setTien;
+        if (chkTichDiem.isSelected()) {
+            setTien = tongTien - Long.parseLong(chkTichDiem.getText());
+            lblTongTien.setText(setTien.toString());
+        } else {
+            lblTongTien.setText(tongTien.toString());
+        }
     }
 
     public void close() {
@@ -495,20 +519,27 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     // hiển thị danh sach khách hàng
     private void evtShowVisit(JComboBox<Object> cbcKhachHang) {
         cbcKhachHang.removeAllItems();
+        if (!lstKhachHang.isEmpty()) {
+            chkTichDiem.setText(lstKhachHang.get(0).getTichDiem().toString());
+        }
         for (KhachHangModel x : lstKhachHang) {
             cbcKhachHang.addItem("KH - " + x.getHoTen());
         }
     }
 
     // hoàn thành hóa đơn và cập nhật dữ liệu liên quan
-    private void evtBtnHoanThanh(JComboBox<Object> cbcKhachHang, JTextArea txaGhiChu) {
+    private void evtBtnHoanThanh(JComboBox<Object> cbcKhachHang, JTextArea txaGhiChu, JCheckBox chkTichDiem) {
         if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
             KhachHangModel khachHangModel = lstKhachHang.get(cbcKhachHang.getSelectedIndex());
             HoaDonThanhToanModel hoaDonThanhToanModel = new HoaDonThanhToanModel();
             hoaDonThanhToanModel.setIdKhachHang(khachHangModel.getId());
             hoaDonThanhToanModel.setIdNhanVien(EntityAuthorization.USER.getId());
             hoaDonThanhToanModel.setGhiChu(txaGhiChu.getText());
-            hoaDonThanhToanModel.setDiemDaDoi(0);
+            if (chkTichDiem.isSelected()) {
+                hoaDonThanhToanModel.setDiemDaDoi(khachHangModel.getTichDiem());
+            } else {
+                hoaDonThanhToanModel.setDiemDaDoi(0);
+            }
             hoaDonThanhToanModel = hoaDonThanhToanService.save(hoaDonThanhToanModel);
             if (hoaDonThanhToanModel != null) {
                 for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
@@ -523,6 +554,9 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 String tichDiem = String.valueOf(tongTien * 0.01);
                 khachHangModel.setTichDiem(khachHangModel.getTichDiem() - hoaDonThanhToanModel.getDiemDaDoi()
                         + Integer.parseInt(tichDiem.substring(0, tichDiem.indexOf("."))));
+                if (khachHangModel.getHoTen().equalsIgnoreCase("admin")) {
+                    khachHangModel.setTichDiem(0);
+                }
                 if (khachHangService.update(khachHangModel) != null) {
                     EntityMessage.show(this, "Thêm thành công");
                     this.setVisible(false);

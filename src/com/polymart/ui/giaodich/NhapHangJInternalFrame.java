@@ -227,10 +227,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         tableNhapHang = new JTable();
         scrollPane.setViewportView(tableNhapHang);
         modelNhapHang.addColumn("Mã hóa đơn");
-        modelNhapHang.addColumn("Ngày");
-        modelNhapHang.addColumn("Tổng tiền");
         modelNhapHang.addColumn("Người nhập");
         modelNhapHang.addColumn("Nguồn hàng");
+        modelNhapHang.addColumn("Ngày");
+        modelNhapHang.addColumn("Tổng tiền");
         modelNhapHang.addColumn("Ghi chú");
         tableNhapHang.setModel(modelNhapHang);
 
@@ -302,11 +302,13 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhap = chiTietHoaDonNhapHangService
                     .findByIdHoaDonNhap(x.getId());
             modelNhapHang.addRow(
-                    new Object[]{x.getId(), new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()),
+                    new Object[]{x.getId(),
+                            x.getIdNhanVienNhap() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVienNhap()),
+                            nguonHangService.getNameById(x.getIdNguonHang()),
+                            new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()),
                             lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum(),
-                            x.getIdNhanVienNhap() + " - "
-                                    + nhanVienService.getNameNhanVien().get(x.getIdNhanVienNhap()),
-                            nguonHangService.getNameById(x.getIdNguonHang()), x.getGhiChu()});
+                            x.getGhiChu()
+                    });
         }
     }
 

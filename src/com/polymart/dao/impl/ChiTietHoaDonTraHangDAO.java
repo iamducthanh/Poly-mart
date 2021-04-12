@@ -10,7 +10,9 @@ public class ChiTietHoaDonTraHangDAO extends AbstractDAO<ChiTietHoaDonTraHangMod
         implements IChiTietHoaDonTraHangDAO {
     @Override
     public List<ChiTietHoaDonTraHangModel> findAll() {
-        String sql = "SELECT * FROM CHITIETHOADONTRAHANG";
+        String sql = "SELECT * FROM CHITIETHOADONTRAHANG JOIN HOADONTRAHANG\n" +
+                "ON HOADONTRAHANG.ID = CHITIETHOADONTRAHANG.IDHOADONTRAHANG\n" +
+                "WHERE HOADONTRAHANG.TREMOVE = 1";
         return query(sql, new ChiTietHoaDonTraHangMapper());
     }
 

@@ -48,7 +48,7 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
 
     @Override
     public HoaDonNhapHangModel findById(Integer id) {
-        List<HoaDonNhapHangModel> lst = lstHoaDonNhapHangModels.stream().filter(e -> e.getId().equals(id))
+        List<HoaDonNhapHangModel> lst = lstHoaDonNhapHangModels.stream().filter(e -> e.getId().equals(id) && e.isRemove())
                 .collect(Collectors.toList());
         return lst.isEmpty() ? null : lst.get(0);
     }
@@ -57,7 +57,7 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
     public List<HoaDonNhapHangModel> filterByDate(Timestamp timestamp) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         return lstHoaDonNhapHangModels.stream()
-                .filter(e -> simpleDateFormat.format(e.getNgayNhap()).equals(simpleDateFormat.format(timestamp)))
+                .filter(e -> simpleDateFormat.format(e.getNgayNhap()).equals(simpleDateFormat.format(timestamp)) && e.isRemove())
                 .collect(Collectors.toList());
     }
 }

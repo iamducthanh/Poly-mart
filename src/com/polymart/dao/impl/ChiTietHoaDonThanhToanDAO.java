@@ -10,7 +10,9 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
         implements IChiTietHoaDonThanhToanDAO {
     @Override
     public List<ChiTietHoaDonThanhToanModel> findAll() {
-        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN";
+        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN JOIN HOADONTHANHTOAN\n" +
+                "ON HOADONTHANHTOAN.ID = CHITIETHOADONTHANHTOAN.IDHOADONTHANHTOAN\n" +
+                "WHERE HOADONTHANHTOAN.TREMOVE = 1";
         return query(sql, new ChiTietHoaDonThanhToanMapper());
     }
 
@@ -28,11 +30,5 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
         String sql = "UPDATE CHITIETHOADONTHANHTOAN SET IDCHITIETSANPHAM = ?, SOLUONG = ?, GIAMGIATHEM = ? WHERE ID = ?";
         return update(sql, chiTietHoaDonThanhToanModel.getChiTietSanPham(), chiTietHoaDonThanhToanModel.getSoLuong(),
                 chiTietHoaDonThanhToanModel.getGiamGiaThem(), chiTietHoaDonThanhToanModel.getId()) > -1;
-    }
-
-    private ChiTietHoaDonThanhToanModel findOne(Integer id) {
-        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN WHERE ID = ?";
-        List<ChiTietHoaDonThanhToanModel> lstFind = query(sql, new ChiTietHoaDonThanhToanMapper(), id);
-        return lstFind.isEmpty() ? null : lstFind.get(0);
     }
 }

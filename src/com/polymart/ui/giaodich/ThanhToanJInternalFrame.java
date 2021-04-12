@@ -303,9 +303,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                 List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
                         .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
                 if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
-                    ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan(
-                            lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang());
-                    chiTietHoaDonThanhToan.setVisible(true);
+                    new ChiTietHoaDonThanhToan(
+                            lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang(), hoaDonThanhToanModel.getDiemDaDoi()).setVisible(true);
                 } else {
                     EntityMessage.show(this, "Hóa đơn không có sản phẩm");
                 }

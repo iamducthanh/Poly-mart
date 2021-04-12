@@ -95,9 +95,9 @@ public class TraHangJInternalFrame extends JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelTraHang = new DefaultTableModel() {
 
-			private static final long serialVersionUID = -7807772237459649491L;
+            private static final long serialVersionUID = -7807772237459649491L;
 
-			@Override
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -261,8 +261,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 List<ChiTietHoaDonTraHangModel> lstChiTiet = chiTietHoaDonTraHangService.findByIdHoaDonTraHang(hoaDonTraHangModel.getId());
                 hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
                 if (!lstChiTiet.isEmpty()) {
-                    ChiTietHoaDonTraHang chiTietHoaDonTraHang = new ChiTietHoaDonTraHang(lstChiTiet);
-                    chiTietHoaDonTraHang.setVisible(true);
+                    new ChiTietHoaDonTraHang(lstChiTiet).setVisible(true);
                 } else {
                     EntityMessage.show(this, "Hóa đơn không có sản phẩm");
                 }

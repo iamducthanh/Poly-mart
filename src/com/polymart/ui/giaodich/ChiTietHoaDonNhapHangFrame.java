@@ -53,7 +53,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
      */
 
     public ChiTietHoaDonNhapHangFrame() throws HeadlessException {
-    	setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
     }
 
     public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang) {
@@ -68,6 +68,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
         };
         setTitle("Chi tiết hóa đơn nhập hàng");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setBounds(100, 100, 877, 594);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

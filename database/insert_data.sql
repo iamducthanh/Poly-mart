@@ -294,10 +294,11 @@ VALUES (N'Nguyễn Quang Ngọc', '01-01-2001', 1, N'Hà Nội', '0345678901', '
 (N'Hoàng Quốc Huy', '01-01-2001', 1, N'Nghệ An', '0345678901', 'huy@gmail.com', N'NHÂN VIÊN BÁN HÀNG', 5500000, 'huynq.jpg', '12345678')
 
 INSERT INTO KHACHHANG (HOTEN, SODIENTHOAI, DIACHI, TICHDIEM)
-VALUES (N'Đỗ Văn Duy', '0345678912', N'', 0),
+VALUES (N'ADMIN', '88888888', N'ADMIN', 0),
+(N'Đỗ Văn Duy', '0345678912', N'', 0),
 (N'Nguyễn Quang Ngọc', '0345678912', NULL, 0),
-(N'Bùi Việt Đức', '0345678912', N'Hoàn Kiếm', 100),
-(N'Nguyễn Đức Thành', '0345678912', NULL, 10)
+(N'Bùi Việt Đức', '0345678912', N'Hoàn Kiếm', 0),
+(N'Nguyễn Đức Thành', '0345678912', NULL, 0)
 
 INSERT INTO NGUONHANG (TEN, SODIENTHOAI, DIACHI)
 VALUES (N'Nhà may kinh đô', '18008198', N'Nam Từ Liêm'),

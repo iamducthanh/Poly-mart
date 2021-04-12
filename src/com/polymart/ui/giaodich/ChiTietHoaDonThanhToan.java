@@ -38,27 +38,24 @@ public class ChiTietHoaDonThanhToan extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ChiTietHoaDonThanhToan frame = new ChiTietHoaDonThanhToan();
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    ChiTietHoaDonThanhToan frame = new ChiTietHoaDonThanhToan();
+//                    frame.setVisible(true);
+//                    frame.setLocationRelativeTo(null);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     /**
      * Create the frame.
      */
 
-    public ChiTietHoaDonThanhToan() throws HeadlessException {
-    }
-
-    public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang) {
+    public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang, int diemDaDoi) {
         modelChiTietHoaDonThanhToan = new DefaultTableModel() {
 
             private static final long serialVersionUID = 3913815213671293282L;
@@ -70,6 +67,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         };
         setTitle("Chi tiết hóa đơn thanh toán");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setBounds(100, 100, 877, 594);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -114,12 +112,24 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         modelChiTietHoaDonThanhToan.addColumn("Đơn giá");
         modelChiTietHoaDonThanhToan.addColumn("Giảm giá");
         modelChiTietHoaDonThanhToan.addColumn("Giá giám thêm");
+        modelChiTietHoaDonThanhToan.addColumn("Trả hàng");
         modelChiTietHoaDonThanhToan.addColumn("Thành tiền");
         tableChiTietHoaDonThanhToan.setModel(modelChiTietHoaDonThanhToan);
+        
+        JLabel lblNewLabel_1_1_1 = new JLabel("Điểm đã đổi:");
+        lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel_1_1_1.setBounds(30, 132, 170, 25);
+        contentPane.add(lblNewLabel_1_1_1);
+        
+        JLabel lblDiemDaDoi = new JLabel("Cái label này để hiển thị điểm đã đổi");
+        lblDiemDaDoi.setFont(new Font("Tahoma", Font.BOLD, 15));
+        lblDiemDaDoi.setBounds(136, 133, 387, 25);
+        contentPane.add(lblDiemDaDoi);
 
         if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
             lblMaHoaDon.setText(lstChiTietHoaDonThanhToanModels.get(0).getHoaDonThanhToan().toString());
             lblTenKhachHang.setText(khachHangService.findOne(idKhachHang).getHoTen());
+            lblDiemDaDoi.setText(String.valueOf(diemDaDoi));
         }
         modelChiTietHoaDonThanhToan.setRowCount(0);
         for (ChiTietHoaDonThanhToanModel e : lstChiTietHoaDonThanhToanModels) {
@@ -128,8 +138,8 @@ public class ChiTietHoaDonThanhToan extends JFrame {
                     sanPhamService.findByID(chiTietSanPhamService.getIdProductById(e.getChiTietSanPham())).getTenSP(),
                     e.getSoLuong(), chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(),
                     e.getGiamGiaThem(),
+                    e.getTraHang(),
                     e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem()});
         }
     }
-
 }

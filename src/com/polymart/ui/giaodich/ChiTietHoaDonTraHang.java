@@ -66,6 +66,7 @@ public class ChiTietHoaDonTraHang extends JFrame {
         };
         setTitle("Chi tiết hóa đơn trả hàng");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setBounds(100, 100, 877, 594);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

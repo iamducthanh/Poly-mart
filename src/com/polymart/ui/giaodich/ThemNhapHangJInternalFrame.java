@@ -469,6 +469,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         }
     }
 
+    
     // nút "Xóa" một hàng của bảng danh sách sản phẩm nhập
     private void evtBtnDelete(JTable tbDSNhapHang, JLabel lblTongTien) {
         int row = tbDSNhapHang.getSelectedRow();

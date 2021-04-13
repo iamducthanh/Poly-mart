@@ -74,7 +74,6 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	 */
 	public BangLuongJIternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
@@ -159,6 +158,8 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadComboboxNam();
 		moBangLuongThangGanNhat();
 		kiemTraLuu();
+		tableBangLuong.setRowHeight(25);
+
 
 		// cbb Năm load từ dữ liệu ở bảng chấm công lên
 		// cbb Tháng load theo cbb Năm cũng trong bảng chấm công

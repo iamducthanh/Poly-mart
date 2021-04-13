@@ -131,7 +131,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         txtFind.setText(" Tìm theo mã, tên hàng");
         txtFind.setColumns(10);
         pnlTop.add(txtFind);
-
         txtFind.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -385,6 +384,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         // hiển thị table
         showTable(getList());
+        tblHangHoa.setRowHeight(25);
+
     }
 
     ActionListener themSanPham = new ActionListener() {
@@ -408,7 +409,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
                     x.getSoLuong(),
                     x.getGiaBan(),
                     x.getGiaVon(),
-                    x.getGiaBan(),
+                    x.getGiaGiam(),
                     x.getSize(),
                     x.getMauSac()
             });

@@ -97,6 +97,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		loadListChamCongNgay();
 		loadTableChamCong();
 		moNutChamCong();
+		
+		tableChamCong.setRowHeight(25);
 	}
 
 	public void initTopChamCong() {

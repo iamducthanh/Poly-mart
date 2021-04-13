@@ -194,7 +194,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                 evtBtnXoa(tableNhapHang);
             }
         });
-    }
+            }
 
     public void initCenterNhapHang() {
         JScrollPane scrollPane = new JScrollPane();
@@ -256,6 +256,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+        tableNhapHang.setRowHeight(25);
+
     }
 
     private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {

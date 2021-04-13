@@ -403,6 +403,8 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 evtBtnDelete(tableDSThanhToan, lblTongTien);
             }
         });
+        tableDSSanPham.setRowHeight(25);
+        tableDSThanhToan.setRowHeight(25);
     }
 
     public void close() {

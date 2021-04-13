@@ -211,6 +211,8 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 				}
 			}
 		});
+		
+		tableThietLapGia.setRowHeight(25);
 	}
 
 }

@@ -134,6 +134,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
 
+
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
 
@@ -347,6 +348,8 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                 saveHoaDonTraHang(tableDanhSachTraHang, txaGhiChu);
             }
         });
+        tableDanhSachSanPham.setRowHeight(25);
+        tableDanhSachTraHang.setRowHeight(25);
     }
 
     // lưu hóa đơn trả hàng

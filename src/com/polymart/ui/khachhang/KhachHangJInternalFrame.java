@@ -287,6 +287,8 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 				btnConfirm();
 			}
 		});
+		tblKhachHang.setRowHeight(25);
+
 	}
 
 	protected void focusLostTextFind() {

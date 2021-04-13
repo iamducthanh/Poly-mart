@@ -157,7 +157,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
-
+		tableChiTieu.setRowHeight(25);
 	}
 	// Xóa Phiếu Chi Tiêu
 	protected void xoaPhieuChi() {

@@ -73,7 +73,6 @@ public class ChiTietSanPhamFrame extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(10, 32, 124, 25);
 		panel.add(lblNewLabel);
-
 		txtMaSP = new JTextField();
 		txtMaSP.setEditable(false);
 		txtMaSP.setBounds(174, 34, 152, 25);

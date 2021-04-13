@@ -125,7 +125,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 		initTopNhanVien();
 		initCenterNhanVien();
-
 		loadComboboxChucVu();
 		try {
 			index = 0;
@@ -135,6 +134,8 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		tblNhanVien.setRowHeight(25);
+
 	}
 
 	public void initTopNhanVien() {

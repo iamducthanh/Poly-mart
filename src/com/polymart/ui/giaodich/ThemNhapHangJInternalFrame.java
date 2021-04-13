@@ -384,7 +384,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 evtBtnHoanThanh(cbbNguonHang, txtGhiChu);
             }
         });
-
+        tableDSNhapHang.setRowHeight(25);
+        tableDSSanPham.setRowHeight(25);
     }
 
     public void close() {
@@ -467,6 +468,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 }
             }
         }
+        
     }
 
     // nút "Xóa" một hàng của bảng danh sách sản phẩm nhập

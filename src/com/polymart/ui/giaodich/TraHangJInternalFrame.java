@@ -146,7 +146,6 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 }
             }
         });
-
         JButton btnTimKiem = new JButton("Tìm kiếm");
         panel1.add(btnTimKiem);
         JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
@@ -251,6 +250,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+        tableTraHang.setRowHeight(25);
 
     }
 

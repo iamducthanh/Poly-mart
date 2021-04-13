@@ -36,11 +36,7 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietHoaDonTraHangModel;
-import com.polymart.model.ChiTietSanPhamModel;
-import com.polymart.model.HoaDonThanhToanModel;
-import com.polymart.model.HoaDonTraHangModel;
+import com.polymart.model.*;
 import com.polymart.service.IChiTietHoaDonThanhToanService;
 import com.polymart.service.IChiTietHoaDonTraHangService;
 import com.polymart.service.IChiTietSanPhamService;
@@ -81,8 +77,13 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 
     private TraHangJInternalFrame traHangJInternalFrame;
 
-    private Long tongTien;
+    private Long tongTien = Long.valueOf(0);
     private HoaDonThanhToanModel hoaDonThanhToanModel;
+    private ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel;
+    private KhachHangModel khachHangModel;
+    private ChiTietSanPhamModel chiTietSanPhamModel;
+
+    private Long tongTienHoaDon = Long.valueOf(0);
 
     /**
      * Launch the application.
@@ -105,10 +106,15 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemTraHangJInternalFrame() {
+        init();
     }
 
     public ThemTraHangJInternalFrame(TraHangJInternalFrame traHangJInternalFrame) {
         this.traHangJInternalFrame = traHangJInternalFrame;
+        init();
+    }
+
+    private void init() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDanhSachSanPham = new DefaultTableModel() {
 
@@ -316,7 +322,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    addProductToTableTraHang(tableDanhSachSanPham, lblTongTien);
+                    addProductToTableTraHang(tableDanhSachSanPham, lblTongTien, txaGhiChu);
                 }
             }
         });
@@ -324,7 +330,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         btnTimKiem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                evtTimKiemHoaDonThanhToan(txtTimKiem, lblKhachHang, lblMaHoaDonThanhToan, lblTongTien);
+                evtTimKiemHoaDonThanhToan(txtTimKiem, lblKhachHang, lblMaHoaDonThanhToan, lblTongTien, txaGhiChu);
             }
         });
 
@@ -373,6 +379,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                         EntityMessage.show(this, "Thêm thất bại");
                         hoaDonTraHangService.remove(hoaDonTraHangModel);
                         chiTietHoaDonTraHangService.reloadData();
+                        return;
                     }
                 }
                 EntityMessage.show(this, "Thêm thành công");
@@ -388,7 +395,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
     }
 
     // thêm sản phẩm trả hàng
-    private void addProductToTableTraHang(JTable tbSanPham, JLabel lblTongTien) {
+    private void addProductToTableTraHang(JTable tbSanPham, JLabel lblTongTien, JTextArea txaGhiChu) {
         if (modelDanhSachSanPham.getRowCount() >= 0) {
             int row = tbSanPham.getSelectedRow();
             if (row > -1 && row < tbSanPham.getRowCount()) {
@@ -410,7 +417,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                             chiTietHoaDonTraHangModel.setIdHoaDonThanhToanChiTiet(chiTietHoaDonThanhToanModel.getId());
                             chiTietHoaDonTraHangModel.setSoLuong(Integer.parseInt(soLuong));
                             lstChiTietHoaDonTraHangModels.add(chiTietHoaDonTraHangModel);
-                            setTongTien(lblTongTien, soLuong, chiTietSanPhamModel);
+                            setTongTien(lblTongTien, txaGhiChu);
                         } else {
                             EntityMessage.show(this, "Số lượng trả không được lớn hơn số lượng mua");
                         }
@@ -424,7 +431,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                                 } else {
                                     x.setSoLuong(setSoLuong);
                                     modelDanhSachTraHang.setValueAt(setSoLuong, i, 2);
-                                    setTongTien(lblTongTien, soLuong, chiTietSanPhamModel);
+                                    setTongTien(lblTongTien, txaGhiChu);
                                 }
                                 return;
                             }
@@ -437,19 +444,38 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
     }
 
     // hiển thị tổng tiền lên label
-    private void setTongTien(JLabel lblTongTien, String soLuong, ChiTietSanPhamModel chiTietSanPhamModel) {
-        tongTien = Long.parseLong(lblTongTien.getText()) + (Integer.parseInt(soLuong) * (chiTietSanPhamModel.getGiaBan()
-                - chiTietSanPhamModel.getGiaGiam()));
+    private void setTongTien(JLabel lblTongTien, JTextArea txaGhiChu) {
+        tongTien = Long.valueOf(0);
+        tongTienHoaDon = Long.valueOf(0);
+        lstChiTietHoaDonTraHangModels.forEach(e -> {
+            chiTietHoaDonThanhToanModel = chiTietHoaDonThanhToanService.findById(e.getIdHoaDonThanhToanChiTiet());
+            chiTietSanPhamModel = chiTietSanPhamService.getById(chiTietHoaDonThanhToanModel.getChiTietSanPham());
+            tongTien += ((chiTietSanPhamModel.getGiaBan()
+                    - chiTietSanPhamModel.getGiaGiam()) * e.getSoLuong()
+                    - chiTietHoaDonThanhToanModel.getGiamGiaThem());
+        });
         int sumTra = lstChiTietHoaDonTraHangModels.stream().mapToInt(e -> e.getSoLuong()).sum();
         int sumThanhToan = lstChiTietHoaDonThanhToanModels.stream().mapToInt(e -> e.getSoLuong()).sum();
         if (sumTra == sumThanhToan) {
             tongTien -= hoaDonThanhToanModel.getDiemDaDoi();
+            tongTienHoaDon = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
+                    e -> (((chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
+                            - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
+                            * e.getSoLuong()) - e.getGiamGiaThem())).sum();
+            if (tongTienHoaDon > 0) {
+                txaGhiChu.setText(txaGhiChu.getText() + " - Trừ " + tongTienHoaDon * 0.01
+                        + " điểm cộng sau khi thanh toán hóa đơn " + chiTietHoaDonThanhToanModel.getHoaDonThanhToan() + "\n");
+            }
+            if (hoaDonThanhToanModel.getDiemDaDoi() > 0) {
+                txaGhiChu.setText(txaGhiChu.getText() + " - Trừ " + hoaDonThanhToanModel.getDiemDaDoi()
+                        + " điểm đã đổi khi thanh toán hóa đơn (điểm đã đùng không được hoàn trả)");
+            }
         }
-        lblTongTien.setText(tongTien.toString());
+        lblTongTien.setText(String.valueOf(tongTien - (tongTienHoaDon * 0.01)));
     }
 
     // Tìm kiếm hóa đơn thanh toán
-    private void evtTimKiemHoaDonThanhToan(JTextField txtTimKiem, JLabel lblKhachHang, JLabel lblMaHoaDon, JLabel lblTongTien) {
+    private void evtTimKiemHoaDonThanhToan(JTextField txtTimKiem, JLabel lblKhachHang, JLabel lblMaHoaDon, JLabel lblTongTien, JTextArea txaGhiChu) {
         String getTimKiem = txtTimKiem.getText();
         if (EntityValidate.checkIdNumber(this, getTimKiem)) {
             hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(getTimKiem));
@@ -458,9 +484,12 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                 if (lstChiTietHoaDonThanhToanModels.isEmpty()) {
                     EntityMessage.show(this, "Hóa đơn không có hàng");
                 } else {
-                    lblKhachHang.setText(khachHangService.findOne(hoaDonThanhToanModel.getIdKhachHang()).getHoTen());
+                    lstChiTietHoaDonTraHangModels = new ArrayList<>();
+                    khachHangModel = khachHangService.findOne(hoaDonThanhToanModel.getIdKhachHang());
+                    lblKhachHang.setText(khachHangModel.getHoTen());
                     lblMaHoaDon.setText(hoaDonThanhToanModel.getId().toString());
                     lblTongTien.setText("0");
+                    txaGhiChu.setText("");
                     modelDanhSachTraHang.setRowCount(0);
                     modelDanhSachSanPham.setRowCount(0);
                     for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {

@@ -20,4 +20,6 @@ public interface IChiTietSanPhamService {
 
     ChiTietSanPhamModel getById(Integer id);
 
+    boolean updatePrice(int id, Long giaBan, Long giaGiam);
+
 }

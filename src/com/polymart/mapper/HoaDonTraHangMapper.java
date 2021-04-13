@@ -14,6 +14,7 @@ public class HoaDonTraHangMapper implements RowMapper<HoaDonTraHangModel> {
 			hoaDonTraHangModel.setIdNhanVien(rs.getInt("IDNHANVIEN"));
 			hoaDonTraHangModel.setNgayTraHang(rs.getTimestamp("NGAYTRAHANG"));
 			hoaDonTraHangModel.setGhiChu(rs.getString("GHICHU"));
+			hoaDonTraHangModel.setRemove(rs.getBoolean("TREMOVE"));
 			return hoaDonTraHangModel;
 		} catch (SQLException e) {
 			e.printStackTrace();

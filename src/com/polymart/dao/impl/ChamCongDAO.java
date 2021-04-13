@@ -21,8 +21,8 @@ public class ChamCongDAO extends AbstractDAO<ChamCongModel> implements IChamCong
 
 	@Override
 	public Integer save(ChamCongModel chamCongModel) {
-		String sql = "INSERT INTO CHAMCONG (IDNHANVIEN,NGAYCHAMCONG) VALUES (?,?)";
-		return insert(sql, chamCongModel.getIdNhanVien(), chamCongModel.getNgayChamCong());
+		String sql = "INSERT INTO CHAMCONG (IDNHANVIEN,NGAYCHAMCONG,Giora) VALUES (?,?,?)";
+		return insert(sql, chamCongModel.getIdNhanVien(), chamCongModel.getNgayChamCong(),chamCongModel.getGioRa());
 	}
 
 	@Override

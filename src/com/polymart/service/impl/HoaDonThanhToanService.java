@@ -24,9 +24,15 @@ public class HoaDonThanhToanService implements IHoaDonThanhToanService {
 
     @Override
     public HoaDonThanhToanModel findById(int id) {
-        List<HoaDonThanhToanModel> lstTim = lstHoaDonThanhToanModels.stream().filter(e -> e.getId().equals(id))
-                .collect(Collectors.toList());
-        return lstTim.isEmpty() ? null : lstTim.get(0);
+        var ref = new Object() {
+            HoaDonThanhToanModel hoaDonThanhToanModel = null;
+        };
+        lstHoaDonThanhToanModels.forEach(e -> {
+            if (e.getId().equals(id) && e.isRemove()) {
+                ref.hoaDonThanhToanModel = e;
+            }
+        });
+        return ref.hoaDonThanhToanModel;
     }
 
     @Override
@@ -53,7 +59,7 @@ public class HoaDonThanhToanService implements IHoaDonThanhToanService {
     public List<HoaDonThanhToanModel> filterByDate(Timestamp timestamp) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         return lstHoaDonThanhToanModels.stream()
-                .filter(e -> simpleDateFormat.format(e.getNgayThanhToan()).equals(simpleDateFormat.format(timestamp)))
+                .filter(e -> simpleDateFormat.format(e.getNgayThanhToan()).equals(simpleDateFormat.format(timestamp)) && e.isRemove())
                 .collect(Collectors.toList());
     }
 }

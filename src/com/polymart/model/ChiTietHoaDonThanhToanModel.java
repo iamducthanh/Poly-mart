@@ -5,6 +5,15 @@ public class ChiTietHoaDonThanhToanModel extends AbstractModel {
 	private Integer hoaDonThanhToan;
 	private Integer soLuong;
 	private Long giamGiaThem;
+	private Integer traHang;
+
+	public Integer getTraHang() {
+		return traHang;
+	}
+
+	public void setTraHang(Integer traHang) {
+		this.traHang = traHang;
+	}
 
 	public Integer getChiTietSanPham() {
 		return chiTietSanPham;

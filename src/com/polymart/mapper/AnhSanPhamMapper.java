@@ -10,7 +10,8 @@ public class AnhSanPhamMapper implements RowMapper<AnhSanPhamModel> {
 	public AnhSanPhamModel mapRow(ResultSet rs) {
 		try {
 			AnhSanPhamModel anhSanPhamModel = new AnhSanPhamModel();
-			anhSanPhamModel.setIdSanPham(rs.getInt("IDCHITIETSANPHAM"));
+			anhSanPhamModel.setIdChiTietSanPham(rs.getInt("IDCHITIETSANPHAM"));
+			anhSanPhamModel.setIdSanPham(rs.getInt("IDSANPHAM"));
 			anhSanPhamModel.setTenAnh(rs.getString("TENANH"));
 			return anhSanPhamModel;
 		} catch (SQLException e) {

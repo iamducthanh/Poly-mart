@@ -5,6 +5,15 @@ import java.sql.Timestamp;
 public class ChamCongModel {
 	private Integer idNhanVien;
 	private Timestamp ngayChamCong;
+	private Timestamp gioRa;
+	public Timestamp getGioRa() {
+		return gioRa;
+	}
+
+	public void setGioRa(Timestamp gioRa) {
+		this.gioRa = gioRa;
+	}
+
 	private String hoTen;
 
 	public String getHoTen() {

@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
 import java.util.List;
 
 import javax.swing.Box;
@@ -386,6 +383,16 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         showTable(getList());
         tblHangHoa.setRowHeight(25);
 
+        // click table
+        tblHangHoa.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int row = tblHangHoa.getSelectedRow();
+                if (e.getClickCount() == 2 && row > -1 && row < tblHangHoa.getRowCount()) {
+                    clickTable(row);
+                }
+            }
+        });
     }
 
     ActionListener themSanPham = new ActionListener() {
@@ -397,8 +404,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         }
     };
 
+    private void clickTable(int row) {
+        new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);
+    }
+
     // showw sản phẩm lên bảng
-    private void showTable(List<ChiTietSanPhamModel> lst) {
+    public void showTable(List<ChiTietSanPhamModel> lst) {
         modelHangHoa.setRowCount(0);
         for (ChiTietSanPhamModel x : lst) {
             SanPhamModel sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
@@ -418,7 +429,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     }
 
     // getList
-    private List<ChiTietSanPhamModel> getList() {
+    public List<ChiTietSanPhamModel> getList() {
         return lstChiTietSanPhamModels = chiTietSanPhamService.findAll();
     }
 

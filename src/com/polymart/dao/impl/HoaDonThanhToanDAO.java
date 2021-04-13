@@ -9,13 +9,13 @@ import java.util.List;
 public class HoaDonThanhToanDAO extends AbstractDAO<HoaDonThanhToanModel> implements IHoaDonThanhToanDAO {
 	@Override
 	public List<HoaDonThanhToanModel> findAll() {
-		String sql = "SELECT * FROM HOADONTHANHTOAN";
+		String sql = "SELECT * FROM HOADONTHANHTOAN WHERE TREMOVE = 1";
 		return query(sql, new HoaDonThanhToanMapper());
 	}
 
 	@Override
 	public HoaDonThanhToanModel findById(int id) {
-		String sql = "SELECT * FROM HOADONTHANHTOAN WHERE ID = ?";
+		String sql = "SELECT * FROM HOADONTHANHTOAN WHERE ID = ? AND TREMOVE = 1";
 		List<HoaDonThanhToanModel> lst = query(sql, new HoaDonThanhToanMapper(), id);
 		return lst.isEmpty() ? null : lst.get(0);
 	}

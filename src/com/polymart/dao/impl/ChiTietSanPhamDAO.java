@@ -22,4 +22,10 @@ public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implemen
                 + "WHERE CTSP.ID LIKE ? OR SP.TEN LIKE ? AND TRANGTHAI = 1";
         return query(sql, new ChiTietSanPhamMapper(), "%" + input + "%", "%" + input + "%");
     }
+
+    @Override
+    public boolean updatePrice(int id, Long giaBan, Long giaGiam) {
+        String sql = "EXEC PROC_UPDATE_PRICE_PRODUCT ?, ?, ?";
+        return update(sql, id, giaBan, giaGiam) > 0;
+    }
 }

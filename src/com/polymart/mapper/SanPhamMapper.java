@@ -14,6 +14,7 @@ public class SanPhamMapper implements RowMapper<SanPhamModel> {
 			sanPham.setId(rs.getInt("ID"));
 			sanPham.setIdLoaiSP(rs.getInt("IDLOAISANPHAM"));
 			sanPham.setTenSP(rs.getString("TEN"));
+			sanPham.setMoTa(rs.getString("MOTA"));
 			return sanPham;
 		} catch (SQLException e) {
 			e.printStackTrace();

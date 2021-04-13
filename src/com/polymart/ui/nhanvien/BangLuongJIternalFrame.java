@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.ChamCongDAO;
 import com.polymart.dao.impl.ChiTieuDao;
+import com.polymart.dao.impl.NhanVienDAO;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.BangLuongModel;
@@ -251,9 +252,9 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	private void loadListNhanVien() {
 		listNhanVien.clear();
 		List<NhanVienModel> list = new ArrayList<NhanVienModel>();
-		NhanVienService nhanVienService = new NhanVienService();
+		NhanVienDAO nhanVienService = new NhanVienDAO();
 		try {
-			list = nhanVienService.findAll();
+			list = nhanVienService.findAllNhanVien();
 		} catch (Exception e) {
 		}
 		for (NhanVienModel x : list) {

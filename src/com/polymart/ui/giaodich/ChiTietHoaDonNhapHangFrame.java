@@ -1,6 +1,5 @@
 package com.polymart.ui.giaodich;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
@@ -30,27 +29,6 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
 
     private ISanPhamService sanPhamService = new SanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ChiTietHoaDonNhapHangFrame frame = new ChiTietHoaDonNhapHangFrame();
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
-     * Create the frame.
-     */
 
     public ChiTietHoaDonNhapHangFrame() throws HeadlessException {
         setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));

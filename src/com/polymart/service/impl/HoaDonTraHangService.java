@@ -51,7 +51,15 @@ public class HoaDonTraHangService implements IHoaDonTraHangService {
 
     @Override
     public HoaDonTraHangModel findById(int id) {
-        return lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(id) && e.isRemove()).collect(Collectors.toList()).get(0);
+        var ref = new Object() {
+            HoaDonTraHangModel hoaDonTraHangModel = null;
+        };
+        lstHoaDonTraHangModels.forEach(e -> {
+            if (e.getId().equals(id) && e.isRemove()) {
+                ref.hoaDonTraHangModel = e;
+            }
+        });
+        return ref.hoaDonTraHangModel;
     }
 
     @Override

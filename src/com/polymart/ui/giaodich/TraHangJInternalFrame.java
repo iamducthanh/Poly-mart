@@ -312,7 +312,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
         } else {
             if (EntityValidate.checkIdNumber(this, getTimKiem)) {
                 hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(getTimKiem));
-                if (hoaDonTraHangModel != null) {
+                if (hoaDonTraHangModel == null) {
                     EntityMessage.show(this, "Mã hóa đơn không tồn tại");
                 } else {
                     lstHoaDonTraHangModels = new ArrayList<>();

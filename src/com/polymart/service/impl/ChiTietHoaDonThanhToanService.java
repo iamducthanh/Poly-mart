@@ -45,7 +45,15 @@ public class ChiTietHoaDonThanhToanService implements IChiTietHoaDonThanhToanSer
 
     @Override
     public ChiTietHoaDonThanhToanModel findById(int id) {
-        return lstChiTietHoaDonThanhToanModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0);
+        var ref = new Object() {
+            ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel = null;
+        };
+        lstChiTietHoaDonThanhToanModels.forEach(e -> {
+            if (e.getId().equals(id)) {
+                ref.chiTietHoaDonThanhToanModel = e;
+            }
+        });
+        return ref.chiTietHoaDonThanhToanModel;
     }
 
     @Override

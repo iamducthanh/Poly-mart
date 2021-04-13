@@ -34,26 +34,6 @@ public class ChiTietHoaDonTraHang extends JFrame {
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private ISanPhamService sanPhamService = new SanPhamService();
 
-    /**
-     * Launch the application.
-     */
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    ChiTietHoaDonTraHang frame = new ChiTietHoaDonTraHang();
-//                    frame.setLocationRelativeTo(null);
-//                    frame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-
-    /**
-     * Create the frame.
-     */
     public ChiTietHoaDonTraHang(List<ChiTietHoaDonTraHangModel> lstChiTietHoaDonTraHangModels) {
         modelChiTietHoaDonTraHang = new DefaultTableModel() {
 

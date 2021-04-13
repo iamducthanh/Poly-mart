@@ -1,8 +1,6 @@
 package com.polymart.ui.giaodich;
 
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -33,27 +31,6 @@ public class ChiTietHoaDonThanhToan extends JFrame {
     private ISanPhamService sanPhamService = new SanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private IKhachHangService khachHangService = new KhachHangService();
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    ChiTietHoaDonThanhToan frame = new ChiTietHoaDonThanhToan();
-//                    frame.setVisible(true);
-//                    frame.setLocationRelativeTo(null);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-    }
-
-    /**
-     * Create the frame.
-     */
 
     public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang, int diemDaDoi) {
         modelChiTietHoaDonThanhToan = new DefaultTableModel() {

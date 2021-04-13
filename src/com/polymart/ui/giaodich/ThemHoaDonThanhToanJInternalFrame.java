@@ -398,7 +398,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             }
         });
 
-        
+
         // hiển thị danh sách sản phẩm
         showTableProduct(lstTietSanPham);
 
@@ -407,6 +407,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 evtBtnDelete(tableDSThanhToan, lblTongTien);
+                clickedTichDiem(chkTichDiem, lblTongTien);
             }
         });
 
@@ -462,52 +463,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 int soLuongDaThem = lstChiTietHoaDonThanhToanModels.stream().filter(e ->
                         e.getChiTietSanPham().equals(chiTietSanPhamModel.getId())).mapToInt(x -> x.getSoLuong()).sum();
                 if ((Integer.parseInt(getSoLuong) + soLuongDaThem) <= chiTietSanPhamModel.getSoLuong()) {
-                    if (lstChiTietHoaDonThanhToanModels.stream().filter(e ->
-                            e.getChiTietSanPham().equals(chiTietSanPhamModel.getId())
-                                    && e.getGiamGiaThem().equals(Long.valueOf(getMoney)))
-                            .collect(Collectors.toList()).isEmpty()) {
-                        if (Integer.parseInt(getSoLuong) <= chiTietSanPhamModel.getSoLuong()) {
-                            sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
-                            modelDSThanhToan.addRow(new Object[]{chiTietSanPhamModel.getId(), sanPhamModel.getTenSP(),
-                                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
-                                    chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(), getMoney,
-                                    chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
-                            // taho đôi tượng chi tiest hóa đơn nhập hàng và add vào list
-                            chiTietHoaDonThanhToanModel = new ChiTietHoaDonThanhToanModel();
-                            chiTietHoaDonThanhToanModel.setGiamGiaThem(Long.valueOf(getMoney));
-                            chiTietHoaDonThanhToanModel.setSoLuong(Integer.parseInt(getSoLuong));
-                            chiTietHoaDonThanhToanModel.setChiTietSanPham(chiTietSanPhamModel.getId());
-                            lstChiTietHoaDonThanhToanModels.add(chiTietHoaDonThanhToanModel);
-                            // tính tổng tiền của tất cả sản phẩm có trên table
-                            tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
-                                    e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
-                                            * e.getSoLuong()) - e.getGiamGiaThem())).sum();
-                            lblTongTien.setText(String.valueOf(tongTien));
-                        } else {
-                            EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
-                        }
-                    } else {
-                        int i = 0;
-                        for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
-                            if (x.getChiTietSanPham().equals(chiTietSanPhamModel.getId())
-                                    && x.getGiamGiaThem().equals(Long.valueOf(getMoney))) {
-                                int setSoLuong = x.getSoLuong() + Integer.parseInt(getSoLuong);
-                                if (setSoLuong <= chiTietSanPhamModel.getSoLuong()) {
-                                    x.setSoLuong(setSoLuong);
-                                    modelDSThanhToan.setValueAt(setSoLuong, i, 8);
-                                    // tính tổng tiền của tất cả sản phẩm có trên table
-                                    tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
-                                            e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
-                                                    * e.getSoLuong()) - e.getGiamGiaThem())).sum();
-                                    lblTongTien.setText(String.valueOf(tongTien));
-                                } else {
-                                    EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
-                                }
-                                return;
-                            }
-                            ++i;
-                        }
-                    }
+                    saveHoaDon(lblTongTien, getSoLuong, getMoney);
                 } else {
                     EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
                 }
@@ -515,6 +471,69 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 EntityMessage.show(this, "Mời chọn 1 sản phẩm");
             }
         }
+    }
+
+    private void saveHoaDon(JLabel lblTongTien, String getSoLuong, String getMoney) {
+        if (lstChiTietHoaDonThanhToanModels.stream().filter(e ->
+                e.getChiTietSanPham().equals(chiTietSanPhamModel.getId())
+                        && e.getGiamGiaThem().equals(Long.valueOf(getMoney)))
+                .collect(Collectors.toList()).isEmpty()) {
+            // check nếu thông tin sản phẩm chưa có trong list trả hàng
+            checkSanPhamChuaCoTrongList(lblTongTien, getSoLuong, getMoney);
+        } else {
+            // cộng dồn số lượng khi thông tin trả hàng đã có trong list trả hàng
+            checkSanPhamCoTrongList(lblTongTien, getSoLuong, getMoney);
+        }
+    }
+
+    // cộng dồn số lượng khi thông tin trả hàng đã có trong list trả hàng
+    private void checkSanPhamCoTrongList(JLabel lblTongTien, String getSoLuong, String getMoney) {
+        int i = 0;
+        for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
+            if (x.getChiTietSanPham().equals(chiTietSanPhamModel.getId())
+                    && x.getGiamGiaThem().equals(Long.valueOf(getMoney))) {
+                int setSoLuong = x.getSoLuong() + Integer.parseInt(getSoLuong);
+                if (setSoLuong <= chiTietSanPhamModel.getSoLuong()) {
+                    x.setSoLuong(setSoLuong);
+                    modelDSThanhToan.setValueAt(setSoLuong, i, 8);
+                    // tính tổng tiền của tất cả sản phẩm có trên table
+                    tinhTienHienThiLabel(lblTongTien);
+                } else {
+                    EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
+                }
+                return;
+            }
+            ++i;
+        }
+    }
+
+    // check nếu thông tin sản phẩm chưa có trong list trả hàng
+    private void checkSanPhamChuaCoTrongList(JLabel lblTongTien, String getSoLuong, String getMoney) {
+        if (Integer.parseInt(getSoLuong) <= chiTietSanPhamModel.getSoLuong()) {
+            sanPhamModel = sanPhamService.findByID(chiTietSanPhamModel.getIdSanPham());
+            modelDSThanhToan.addRow(new Object[]{chiTietSanPhamModel.getId(), sanPhamModel.getTenSP(),
+                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
+                    chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(), getMoney,
+                    chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getMauSac(), getSoLuong});
+            // taho đôi tượng chi tiest hóa đơn nhập hàng và add vào list
+            chiTietHoaDonThanhToanModel = new ChiTietHoaDonThanhToanModel();
+            chiTietHoaDonThanhToanModel.setGiamGiaThem(Long.valueOf(getMoney));
+            chiTietHoaDonThanhToanModel.setSoLuong(Integer.parseInt(getSoLuong));
+            chiTietHoaDonThanhToanModel.setChiTietSanPham(chiTietSanPhamModel.getId());
+            lstChiTietHoaDonThanhToanModels.add(chiTietHoaDonThanhToanModel);
+            // tính tổng tiền của tất cả sản phẩm có trên table
+            tinhTienHienThiLabel(lblTongTien);
+        } else {
+            EntityMessage.show(this, "Số lượng vượt quá số lượng hàng tồn kho");
+        }
+    }
+
+    // tính tổng tiền và hiển thị lên table
+    private void tinhTienHienThiLabel(JLabel lblTongTien) {
+        tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
+                e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
+                        * e.getSoLuong()) - e.getGiamGiaThem())).sum();
+        lblTongTien.setText(String.valueOf(tongTien));
     }
 
     // hiển thị danh sach khách hàng
@@ -543,38 +562,56 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             }
             hoaDonThanhToanModel = hoaDonThanhToanService.save(hoaDonThanhToanModel);
             if (hoaDonThanhToanModel != null) {
-                for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
-                    x.setHoaDonThanhToan(hoaDonThanhToanModel.getId());
-                    if (!chiTietHoaDonThanhToanService.save(x)) {
-                        hoaDonThanhToanService.remove(hoaDonThanhToanModel);
-                        chiTietHoaDonThanhToanService.reloadData();
-                        EntityMessage.show(this, "Thêm thất bại");
-                        return;
-                    }
-                }
-                String tichDiem = String.valueOf(tongTien * 0.01);
-                khachHangModel.setTichDiem(khachHangModel.getTichDiem() - hoaDonThanhToanModel.getDiemDaDoi()
-                        + Integer.parseInt(tichDiem.substring(0, tichDiem.indexOf("."))));
-                if (khachHangModel.getHoTen().equalsIgnoreCase("admin")) {
-                    khachHangModel.setTichDiem(0);
-                }
-                if (khachHangService.update(khachHangModel) != null) {
-                    EntityMessage.show(this, "Thêm thành công");
-                    this.setVisible(false);
-                    thanhToanJInternalFrame.showTable(hoaDonThanhToanService.findAll());
-                    chiTietSanPhamService.reloadData();
-                    chiTietHoaDonThanhToanService.reloadData();
-                } else {
-                    hoaDonThanhToanService.remove(hoaDonThanhToanModel);
-                    chiTietHoaDonThanhToanService.reloadData();
-                    EntityMessage.show(this, "Thêm thất bại");
-                }
+                taoHoaDonThanhToanThanhCong(khachHangModel, hoaDonThanhToanModel);
             } else {
                 EntityMessage.show(this, "Thêm thất bại");
             }
         } else {
             EntityMessage.show(this, "Chưa thêm sản phẩm");
         }
+    }
+
+    private void taoHoaDonThanhToanThanhCong(KhachHangModel khachHangModel, HoaDonThanhToanModel hoaDonThanhToanModel) {
+        if (luuChiTietHoaDonThanhToan(hoaDonThanhToanModel)) return;
+        capNhatTichDiemCuaKhachHang(khachHangModel, hoaDonThanhToanModel);
+        if (khachHangService.update(khachHangModel) != null) {
+            EntityMessage.show(this, "Thêm thành công");
+            this.setVisible(false);
+            thanhToanJInternalFrame.showTable(hoaDonThanhToanService.findAll());
+            chiTietSanPhamService.reloadData();
+            chiTietHoaDonThanhToanService.reloadData();
+        } else {
+            luuHoaDonThatBai(hoaDonThanhToanModel);
+        }
+    }
+
+    // cập nhật tích điểm của khách hàng thanh toán
+    private void capNhatTichDiemCuaKhachHang(KhachHangModel khachHangModel, HoaDonThanhToanModel hoaDonThanhToanModel) {
+        String tichDiem = String.valueOf(tongTien * 0.01);
+        khachHangModel.setTichDiem(khachHangModel.getTichDiem() - hoaDonThanhToanModel.getDiemDaDoi()
+                + Integer.parseInt(tichDiem.substring(0, tichDiem.indexOf("."))));
+        if (khachHangModel.getHoTen().equalsIgnoreCase("admin")) {
+            khachHangModel.setTichDiem(0);
+        }
+    }
+
+    // lưu lần lượt chi tiết hóa đơn thanh toán
+    private boolean luuChiTietHoaDonThanhToan(HoaDonThanhToanModel hoaDonThanhToanModel) {
+        for (ChiTietHoaDonThanhToanModel x : lstChiTietHoaDonThanhToanModels) {
+            x.setHoaDonThanhToan(hoaDonThanhToanModel.getId());
+            if (!chiTietHoaDonThanhToanService.save(x)) {
+                luuHoaDonThatBai(hoaDonThanhToanModel);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // hiển thị thông báo khi lưu hóa đơn thất bái
+    private void luuHoaDonThatBai(HoaDonThanhToanModel hoaDonThanhToanModel) {
+        hoaDonThanhToanService.remove(hoaDonThanhToanModel);
+        chiTietHoaDonThanhToanService.reloadData();
+        EntityMessage.show(this, "Thêm thất bại");
     }
 
     // nút "Xóa" một hàng của bảng danh sách sản phẩm nhập
@@ -586,10 +623,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             modelDSThanhToan.removeRow(row);
             lstChiTietHoaDonThanhToanModels.remove(row);
             // tính tổng tiền của tất cả sản phẩm có trên table
-            tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
-                    e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) * e.getSoLuong())
-                            - e.getGiamGiaThem())).sum();
-            lblTongTien.setText(String.valueOf(tongTien));
+            tinhTienHienThiLabel(lblTongTien);
         } else {
             EntityMessage.show(this, "Vui lòng chọn 1 hàng");
         }

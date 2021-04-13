@@ -81,6 +81,9 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 
     private TraHangJInternalFrame traHangJInternalFrame;
 
+    private Long tongTien;
+    private HoaDonThanhToanModel hoaDonThanhToanModel;
+
     /**
      * Launch the application.
      */
@@ -291,23 +294,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         tableDanhSachTraHang = new JTable();
         scrollPane_1.setViewportView(tableDanhSachTraHang);
         panel_2.setLayout(gl_panel_2);
-        modelDanhSachSanPham.addColumn("Mã thanh toán");
-        modelDanhSachSanPham.addColumn("Mã sản phẩm");
-        modelDanhSachSanPham.addColumn("Tên sản phẩm");
-        modelDanhSachSanPham.addColumn("Số lượng");
-        modelDanhSachSanPham.addColumn("Size");
-        modelDanhSachSanPham.addColumn("Màu sắc");
-        modelDanhSachSanPham.addColumn("Đơn giá");
-        modelDanhSachSanPham.addColumn("Giá giảm");
-        modelDanhSachSanPham.addColumn("Giá giảm thêm");
-        tableDanhSachSanPham.setModel(modelDanhSachSanPham);
-
-        modelDanhSachTraHang.addColumn("Mã sản phẩm");
-        modelDanhSachTraHang.addColumn("Tên sản phẩm");
-        modelDanhSachTraHang.addColumn("Số lượng trả");
-        modelDanhSachTraHang.addColumn("Size");
-        modelDanhSachTraHang.addColumn("Màu sắc");
-        tableDanhSachTraHang.setModel(modelDanhSachTraHang);
+        setColumnTable();
 
         txtTimKiem.addFocusListener(new FocusAdapter() {
             @Override
@@ -347,6 +334,27 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                 saveHoaDonTraHang(tableDanhSachTraHang, txaGhiChu);
             }
         });
+    }
+
+    // set cột table
+    private void setColumnTable() {
+        modelDanhSachSanPham.addColumn("Mã thanh toán");
+        modelDanhSachSanPham.addColumn("Mã sản phẩm");
+        modelDanhSachSanPham.addColumn("Tên sản phẩm");
+        modelDanhSachSanPham.addColumn("Số lượng");
+        modelDanhSachSanPham.addColumn("Size");
+        modelDanhSachSanPham.addColumn("Màu sắc");
+        modelDanhSachSanPham.addColumn("Đơn giá");
+        modelDanhSachSanPham.addColumn("Giá giảm");
+        modelDanhSachSanPham.addColumn("Giá giảm thêm");
+        tableDanhSachSanPham.setModel(modelDanhSachSanPham);
+
+        modelDanhSachTraHang.addColumn("Mã sản phẩm");
+        modelDanhSachTraHang.addColumn("Tên sản phẩm");
+        modelDanhSachTraHang.addColumn("Số lượng trả");
+        modelDanhSachTraHang.addColumn("Size");
+        modelDanhSachTraHang.addColumn("Màu sắc");
+        tableDanhSachTraHang.setModel(modelDanhSachTraHang);
     }
 
     // lưu hóa đơn trả hàng
@@ -402,9 +410,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                             chiTietHoaDonTraHangModel.setIdHoaDonThanhToanChiTiet(chiTietHoaDonThanhToanModel.getId());
                             chiTietHoaDonTraHangModel.setSoLuong(Integer.parseInt(soLuong));
                             lstChiTietHoaDonTraHangModels.add(chiTietHoaDonTraHangModel);
-                            Long tongTien = Long.parseLong(lblTongTien.getText()) + (Integer.parseInt(soLuong) * (chiTietSanPhamModel.getGiaBan()
-                                    - chiTietSanPhamModel.getGiaGiam()));
-                            lblTongTien.setText(tongTien.toString());
+                            setTongTien(lblTongTien, soLuong, chiTietSanPhamModel);
                         } else {
                             EntityMessage.show(this, "Số lượng trả không được lớn hơn số lượng mua");
                         }
@@ -418,9 +424,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                                 } else {
                                     x.setSoLuong(setSoLuong);
                                     modelDanhSachTraHang.setValueAt(setSoLuong, i, 2);
-                                    Long tongTien = Long.parseLong(lblTongTien.getText()) + (Integer.parseInt(soLuong) * (chiTietSanPhamModel.getGiaBan()
-                                            - chiTietSanPhamModel.getGiaGiam()));
-                                    lblTongTien.setText(tongTien.toString());
+                                    setTongTien(lblTongTien, soLuong, chiTietSanPhamModel);
                                 }
                                 return;
                             }
@@ -432,11 +436,23 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         }
     }
 
+    // hiển thị tổng tiền lên label
+    private void setTongTien(JLabel lblTongTien, String soLuong, ChiTietSanPhamModel chiTietSanPhamModel) {
+        tongTien = Long.parseLong(lblTongTien.getText()) + (Integer.parseInt(soLuong) * (chiTietSanPhamModel.getGiaBan()
+                - chiTietSanPhamModel.getGiaGiam()));
+        int sumTra = lstChiTietHoaDonTraHangModels.stream().mapToInt(e -> e.getSoLuong()).sum();
+        int sumThanhToan = lstChiTietHoaDonThanhToanModels.stream().mapToInt(e -> e.getSoLuong()).sum();
+        if (sumTra == sumThanhToan) {
+            tongTien -= hoaDonThanhToanModel.getDiemDaDoi();
+        }
+        lblTongTien.setText(tongTien.toString());
+    }
+
     // Tìm kiếm hóa đơn thanh toán
     private void evtTimKiemHoaDonThanhToan(JTextField txtTimKiem, JLabel lblKhachHang, JLabel lblMaHoaDon, JLabel lblTongTien) {
         String getTimKiem = txtTimKiem.getText();
         if (EntityValidate.checkIdNumber(this, getTimKiem)) {
-            HoaDonThanhToanModel hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(getTimKiem));
+            hoaDonThanhToanModel = hoaDonThanhToanService.findById(Integer.parseInt(getTimKiem));
             if (hoaDonThanhToanModel != null) {
                 lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService.findByIdHoaDonThanhToan(Integer.parseInt(getTimKiem));
                 if (lstChiTietHoaDonThanhToanModels.isEmpty()) {

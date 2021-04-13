@@ -48,9 +48,15 @@ public class HoaDonNhapHangService implements IHoaDonNhapHangService {
 
     @Override
     public HoaDonNhapHangModel findById(Integer id) {
-        List<HoaDonNhapHangModel> lst = lstHoaDonNhapHangModels.stream().filter(e -> e.getId().equals(id) && e.isRemove())
-                .collect(Collectors.toList());
-        return lst.isEmpty() ? null : lst.get(0);
+        var ref = new Object() {
+            HoaDonNhapHangModel hoaDonNhapHangModel = null;
+        };
+        lstHoaDonNhapHangModels.forEach(e -> {
+            if (e.getId().equals(id)) {
+                ref.hoaDonNhapHangModel = e;
+            }
+        });
+        return ref.hoaDonNhapHangModel;
     }
 
     @Override

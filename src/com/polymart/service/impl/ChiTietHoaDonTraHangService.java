@@ -2,6 +2,7 @@ package com.polymart.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.polymart.dao.IChiTietHoaDonTraHangDAO;
 import com.polymart.dao.impl.ChiTietHoaDonTraHangDAO;
@@ -24,15 +25,14 @@ public class ChiTietHoaDonTraHangService implements IChiTietHoaDonTraHangService
 
     @Override
     public List<ChiTietHoaDonTraHangModel> findByIdHoaDonTraHang(int idHoaDonTraHang) {
-        List<ChiTietHoaDonTraHangModel> lst = new ArrayList<>();
-        lstChiTietHoaDonTraHangModels.forEach(e -> {
-            if (e.getIdHoaDonTraHang().equals(idHoaDonTraHang)) {
-                lst.add(e);
-            }
-        });
-        System.out.println("size: " + lst.size());
-        return lst;
-//        return lstChiTietHoaDonTraHangModels.stream().filter(e -> e.getIdHoaDonTraHang().equals(idHoaDonTraHang)).collect(Collectors.toList());
+//        List<ChiTietHoaDonTraHangModel> lst = new ArrayList<>();
+//        lstChiTietHoaDonTraHangModels.forEach(e -> {
+//            if (e.getIdHoaDonTraHang().equals(idHoaDonTraHang)) {
+//                lst.add(e);
+//            }
+//        });
+//        return lst;
+        return lstChiTietHoaDonTraHangModels.stream().filter(e -> e.getIdHoaDonTraHang().equals(idHoaDonTraHang)).collect(Collectors.toList());
     }
 
     @Override

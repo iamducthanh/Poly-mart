@@ -1,23 +1,32 @@
 package com.polymart.model;
 
 public class AnhSanPhamModel {
-	private Integer idSanPham;
-	private String tenAnh;
+    private Integer idSanPham;
+    private String tenAnh;
+    private Integer idChiTietSanPham;
 
-	public Integer getIdSanPham() {
-		return idSanPham;
-	}
+    public Integer getIdChiTietSanPham() {
+        return idChiTietSanPham;
+    }
 
-	public void setIdSanPham(Integer idSanPham) {
-		this.idSanPham = idSanPham;
-	}
+    public void setIdChiTietSanPham(Integer idChiTietSanPham) {
+        this.idChiTietSanPham = idChiTietSanPham;
+    }
 
-	public String getTenAnh() {
-		return tenAnh;
-	}
+    public Integer getIdSanPham() {
+        return idSanPham;
+    }
 
-	public void setTenAnh(String tenAnh) {
-		this.tenAnh = tenAnh;
-	}
+    public void setIdSanPham(Integer idSanPham) {
+        this.idSanPham = idSanPham;
+    }
+
+    public String getTenAnh() {
+        return tenAnh;
+    }
+
+    public void setTenAnh(String tenAnh) {
+        this.tenAnh = tenAnh;
+    }
 
 }

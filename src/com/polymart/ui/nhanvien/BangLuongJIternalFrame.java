@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.ChamCongDAO;
 import com.polymart.dao.impl.ChiTieuDao;
+import com.polymart.dao.impl.NhanVienDAO;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.BangLuongModel;
@@ -74,7 +75,6 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	 */
 	public BangLuongJIternalFrame() {
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-
 		setFocusable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
@@ -159,6 +159,8 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadComboboxNam();
 		moBangLuongThangGanNhat();
 		kiemTraLuu();
+		tableBangLuong.setRowHeight(25);
+
 
 		// cbb Năm load từ dữ liệu ở bảng chấm công lên
 		// cbb Tháng load theo cbb Năm cũng trong bảng chấm công
@@ -250,9 +252,9 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	private void loadListNhanVien() {
 		listNhanVien.clear();
 		List<NhanVienModel> list = new ArrayList<NhanVienModel>();
-		NhanVienService nhanVienService = new NhanVienService();
+		NhanVienDAO nhanVienService = new NhanVienDAO();
 		try {
-			list = nhanVienService.findAll();
+			list = nhanVienService.findAllNhanVien();
 		} catch (Exception e) {
 		}
 		for (NhanVienModel x : list) {

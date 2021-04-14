@@ -34,7 +34,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
 
-public class ThongKeDoanhSoJInternalFrame extends JFrame {
+public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 
 	/**
 	 * 
@@ -85,6 +85,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
+		tableThongKe.setRowHeight(25);
 		
 		JLabel lblNewLabel = new JLabel("Thống kê doanh số");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -200,9 +201,8 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
+		modelThongKe.addColumn("Mã sản phẩm");
 		modelThongKe.addColumn("Tên sản phẩm");
-		modelThongKe.addColumn("Size");
-		modelThongKe.addColumn("Màu sắc");
 		modelThongKe.addColumn("Số lượng bán");
 		tableThongKe.setModel(modelThongKe);
 		
@@ -213,6 +213,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		
 		try {
 			fillCbbYear();
+			fillCbbMonth();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -220,7 +221,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		loadTableDoanhThu();		
 		rdoBieuDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	loadBieuDoDoanhThu(modelThongKe);
+				loadBieuDoDoanhThu(modelThongKe);
 				rdoTheoBang.setSelected(true);
 			}
 		});
@@ -238,7 +239,7 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		ResultSet tbThongKeDoanhSo = thongKeService.loadTableThongKeDoanhSo((String)cbbNam.getSelectedItem(), (String)cbbThang.getSelectedItem());
 		try {
 			while(tbThongKeDoanhSo.next()) {
-				modelThongKe.addRow(new Object[] {tbThongKeDoanhSo.getString(2),tbThongKeDoanhSo.getString(3),tbThongKeDoanhSo.getString(4),tbThongKeDoanhSo.getString(5)});
+				modelThongKe.addRow(new Object[] {tbThongKeDoanhSo.getString(1),tbThongKeDoanhSo.getString(2),tbThongKeDoanhSo.getString(3)});
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -248,25 +249,27 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		scrollPaneBang.setVisible(true);
 	}
 	
-//	public void loadBieuDoDoanhThu(DefaultTableModel model) {
-//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//		for(int i=1;i<13;i++) {
-//			String so = String.valueOf(model.getValueAt(i-1, 2));
-//			Double soNguoi = Double.parseDouble(so);
-//			String month = "Tháng "+i;
-//			dataset.addValue(soNguoi, "Doanh thu", month);
-//		}
-//		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
-//        chartPanel = new ChartPanel(barChart);
-//        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-//        JFrame frame = new JFrame();
-//        frame.getContentPane().add(chartPanel);
-//        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
-//        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
-//        frame.setLocationRelativeTo(null);
-//        frame.setResizable(false);
-//        frame.setVisible(true);
-//	}
+	public void loadBieuDoDoanhThu(DefaultTableModel model) {
+		int size = modelThongKe.getRowCount();
+		if(size > 10) {
+			size = 10;
+		}
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		for(int i=0;i<size;i++) {			
+			Double soNguoi = Double.parseDouble(String.valueOf(model.getValueAt(i,2)));
+			dataset.addValue(soNguoi, "Số lượng bán", (Comparable<?>) modelThongKe.getValueAt(i, 1));
+		}
+		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê top 10 sản phẩm bán chạy nhất trong tháng", "Sản phẩm", "Số lượng bán ra", dataset, PlotOrientation.VERTICAL, false, false, false);
+        chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(chartPanel);
+        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
+        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
+	}
 
 	
 	public void fillCbbYear() throws SQLException {
@@ -274,6 +277,18 @@ public class ThongKeDoanhSoJInternalFrame extends JFrame {
 		while(cbbYear.next()) {
 			try {
 				cbbNam.addItem(cbbYear.getString(1));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void fillCbbMonth() throws SQLException {
+		ResultSet cbbMonth = new ThongKeService().findMonth();
+		while(cbbMonth.next()) {
+			try {
+				cbbThang.addItem(cbbMonth.getString(1));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

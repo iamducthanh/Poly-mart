@@ -3,47 +3,56 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class HoaDonNhapHangModel extends AbstractModel {
-	private Integer idNhanVienNhap;
-	private Integer idNguonHang;
-	private Timestamp ngayNhap;
-	private String ghiChu;
+    private Integer idNhanVienNhap;
+    private Integer idNguonHang;
+    private Timestamp ngayNhap;
+    private String ghiChu;
+    private boolean remove;
 
-	public Integer getIdNhanVienNhap() {
-		return idNhanVienNhap;
-	}
+    public boolean isRemove() {
+        return remove;
+    }
 
-	public void setIdNhanVienNhap(Integer idNhanVienNhap) {
-		this.idNhanVienNhap = idNhanVienNhap;
-	}
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
 
-	public Integer getIdNguonHang() {
-		return idNguonHang;
-	}
+    public Integer getIdNhanVienNhap() {
+        return idNhanVienNhap;
+    }
 
-	public void setIdNguonHang(Integer idNguonHang) {
-		this.idNguonHang = idNguonHang;
-	}
+    public void setIdNhanVienNhap(Integer idNhanVienNhap) {
+        this.idNhanVienNhap = idNhanVienNhap;
+    }
 
-	public Timestamp getNgayNhap() {
-		return ngayNhap;
-	}
+    public Integer getIdNguonHang() {
+        return idNguonHang;
+    }
 
-	public void setNgayNhap(Timestamp ngayNhap) {
-		this.ngayNhap = ngayNhap;
-	}
+    public void setIdNguonHang(Integer idNguonHang) {
+        this.idNguonHang = idNguonHang;
+    }
 
-	public String getGhiChu() {
-		return ghiChu;
-	}
+    public Timestamp getNgayNhap() {
+        return ngayNhap;
+    }
 
-	public void setGhiChu(String ghiChu) {
-		this.ghiChu = ghiChu;
-	}
+    public void setNgayNhap(Timestamp ngayNhap) {
+        this.ngayNhap = ngayNhap;
+    }
 
-	@Override
-	public String toString() {
-		return "HoaDonNhapHangModel [id = " + getId() + "idNhanVienNhap=" + idNhanVienNhap + ", idNguonHang="
-				+ idNguonHang + ", ngayNhap=" + ngayNhap + ", ghiChu=" + ghiChu + "]";
-	}
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    @Override
+    public String toString() {
+        return "HoaDonNhapHangModel [id = " + getId() + "idNhanVienNhap=" + idNhanVienNhap + ", idNguonHang="
+                + idNguonHang + ", ngayNhap=" + ngayNhap + ", ghiChu=" + ghiChu + "]";
+    }
 
 }

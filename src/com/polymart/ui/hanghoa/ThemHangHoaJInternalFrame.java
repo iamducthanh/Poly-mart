@@ -94,6 +94,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 639);
+		
+		tableDSSanPhamThem.setRowHeight(25);
 
 		setFocusable(true);
 		contentPane = new JPanel();

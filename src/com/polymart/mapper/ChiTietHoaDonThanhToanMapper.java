@@ -15,6 +15,7 @@ public class ChiTietHoaDonThanhToanMapper implements RowMapper<ChiTietHoaDonThan
 			hoaDonThanhToanModel.setHoaDonThanhToan(rs.getInt("IDHOADONTHANHTOAN"));
 			hoaDonThanhToanModel.setSoLuong(rs.getInt("SOLUONG"));
 			hoaDonThanhToanModel.setGiamGiaThem(rs.getLong("GIAMGIATHEM"));
+			hoaDonThanhToanModel.setTraHang(rs.getInt("TRAHANG"));
 			return hoaDonThanhToanModel;
 		} catch (SQLException e) {
 			e.printStackTrace();

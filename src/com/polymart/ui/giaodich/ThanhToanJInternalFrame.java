@@ -139,7 +139,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         contentPane.add(hangHoaJPanel, BorderLayout.WEST);
         panel.add(panel1, BorderLayout.EAST);
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
         initTopThanhToan();
         initCenterThanhToan();
 //        initFrameThem();
@@ -293,6 +292,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+        tableThanhToan.setRowHeight(25);
 
     }
 
@@ -303,9 +303,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                 List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
                         .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
                 if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
-                    ChiTietHoaDonThanhToan chiTietHoaDonThanhToan = new ChiTietHoaDonThanhToan(
-                            lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang());
-                    chiTietHoaDonThanhToan.setVisible(true);
+                    new ChiTietHoaDonThanhToan(
+                            lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang(), hoaDonThanhToanModel.getDiemDaDoi()).setVisible(true);
                 } else {
                     EntityMessage.show(this, "Hóa đơn không có sản phẩm");
                 }
@@ -330,8 +329,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                         x.getIdNhanVien() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
                         lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
                                 * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
-                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam()
-                                - e.getGiamGiaThem() - x.getDiemDaDoi())).sum(),
+                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
+                                - e.getGiamGiaThem() - x.getDiemDaDoi()).sum(),
                         new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()), x.getGhiChu()});
             }
         }

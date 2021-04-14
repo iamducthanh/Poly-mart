@@ -34,26 +34,6 @@ public class ChiTietHoaDonTraHang extends JFrame {
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private ISanPhamService sanPhamService = new SanPhamService();
 
-    /**
-     * Launch the application.
-     */
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    ChiTietHoaDonTraHang frame = new ChiTietHoaDonTraHang();
-//                    frame.setLocationRelativeTo(null);
-//                    frame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-
-    /**
-     * Create the frame.
-     */
     public ChiTietHoaDonTraHang(List<ChiTietHoaDonTraHangModel> lstChiTietHoaDonTraHangModels) {
         modelChiTietHoaDonTraHang = new DefaultTableModel() {
 
@@ -66,12 +46,13 @@ public class ChiTietHoaDonTraHang extends JFrame {
         };
         setTitle("Chi tiết hóa đơn trả hàng");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setBounds(100, 100, 877, 594);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
+   
         JLabel lblNewLabel = new JLabel("Chi tiết hóa đơn trả hàng");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
         lblNewLabel.setBounds(20, 11, 307, 39);
@@ -121,6 +102,8 @@ public class ChiTietHoaDonTraHang extends JFrame {
                     x.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
             });
         }
+        tableChiTietHoaDonTraHang.setRowHeight(25);
+
     }
 
 }

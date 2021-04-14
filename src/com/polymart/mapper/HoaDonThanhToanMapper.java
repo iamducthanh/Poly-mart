@@ -16,6 +16,7 @@ public class HoaDonThanhToanMapper implements RowMapper<HoaDonThanhToanModel> {
 			hoaDonThanhToanModel.setDiemDaDoi(rs.getInt("DIEMDADOI"));
 			hoaDonThanhToanModel.setNgayThanhToan(rs.getTimestamp("NGAYTHANHTOAN"));
 			hoaDonThanhToanModel.setGhiChu(rs.getString("GHICHU"));
+			hoaDonThanhToanModel.setRemove(rs.getBoolean("TREMOVE"));
 			return hoaDonThanhToanModel;
 		} catch (SQLException e) {
 			e.printStackTrace();

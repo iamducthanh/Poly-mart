@@ -34,25 +34,16 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     @Override
-    public void updateNhapHang(ChiTietHoaDonNhapHangModel chiTietHoaDonNhapHangModel) {
-        chiTietSanPhamDAO.updateNhapHang(chiTietHoaDonNhapHangModel);
-    }
-
-    @Override
-    public void updateThanhToan(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
-        chiTietSanPhamDAO.updateThanhToan(chiTietHoaDonThanhToanModel);
-    }
-
-    @Override
-    public void updateTraHang(Integer id, Integer soLuong) {
-        chiTietSanPhamDAO.updateTraHang(id, soLuong);
-    }
-
-    @Override
     public Integer getIdProductById(Integer id) {
-        List<ChiTietSanPhamModel> lstTim = lstChiTietSanPhamModels.stream().filter(e -> e.getId().equals(id))
-                .collect(Collectors.toList());
-        return lstTim.isEmpty() ? -1 : lstTim.get(0).getIdSanPham();
+        var ref = new Object() {
+            int idSp = -1;
+        };
+        lstChiTietSanPhamModels.forEach(e -> {
+            if (e.getId().equals(id) && e.getStatus()) {
+                ref.idSp = e.getIdSanPham();
+            }
+        });
+        return ref.idSp;
     }
 
     @Override
@@ -62,6 +53,19 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
 
     @Override
     public ChiTietSanPhamModel getById(Integer id) {
-        return lstChiTietSanPhamModels.stream().filter(e -> e.getStatus() && e.getId().equals(id)).collect(Collectors.toList()).get(0);
+        var ref = new Object() {
+            ChiTietSanPhamModel chiTietSanPhamModel = null;
+        };
+        lstChiTietSanPhamModels.forEach(e -> {
+            if (e.getId().equals(id) && e.getStatus()) {
+                ref.chiTietSanPhamModel = e;
+            }
+        });
+        return ref.chiTietSanPhamModel;
+    }
+
+    @Override
+    public boolean updatePrice(int id, Long giaBan, Long giaGiam) {
+        return chiTietSanPhamDAO.updatePrice(id, giaBan, giaGiam);
     }
 }

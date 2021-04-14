@@ -13,7 +13,11 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 		String sql = "SELECT*FROM NHANVIEN where MATKHAU !=1";
 		return query(sql, new NhanVienMapper());
 	}
-
+	public List<NhanVienModel> findAllNhanVien() {
+		String sql = "SELECT*FROM NHANVIEN ";
+		return query(sql, new NhanVienMapper());
+	}
+	
 	@Override
 	public Integer save(NhanVienModel nhanVienModel) {
 		StringBuilder sql = new StringBuilder("INSERT INTO NHANVIEN (HOTEN, ");

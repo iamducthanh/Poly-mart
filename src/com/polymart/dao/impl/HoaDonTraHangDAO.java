@@ -35,7 +35,7 @@ public class HoaDonTraHangDAO extends AbstractDAO<HoaDonTraHangModel> implements
 
 	@Override
 	public List<HoaDonTraHangModel> findAll() {
-		String sql = "SELECT * FROM HOADONTRAHANG";
+		String sql = "SELECT * FROM HOADONTRAHANG WHERE TREMOVE = 1";
 		return query(sql, new HoaDonTraHangMapper());
 	}
 
@@ -53,7 +53,7 @@ public class HoaDonTraHangDAO extends AbstractDAO<HoaDonTraHangModel> implements
 
 	@Override
 	public HoaDonTraHangModel findById(Integer id) {
-		String sql = "SELECT * FROM HOADONTRAHANG WHERE ID = ?";
+		String sql = "SELECT * FROM HOADONTRAHANG WHERE ID = ? AND TREMOVE = 1";
 		List<HoaDonTraHangModel> lstTim = query(sql, new HoaDonTraHangMapper(), id);
 		return lstTim.isEmpty() ? null : lstTim.get(0);
 	}

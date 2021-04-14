@@ -102,9 +102,10 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
 		initTopKiemKho();
 		initCenterKiemKho();
+		tableKiemKho.setRowHeight(25);
+
 	}
 
 	public void initTopKiemKho() {

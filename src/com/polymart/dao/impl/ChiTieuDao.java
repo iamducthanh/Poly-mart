@@ -10,7 +10,7 @@ public class ChiTieuDao extends AbstractDAO<ChiTieuModel> implements IChiTieuDAO
 
 	@Override
 	public List<ChiTieuModel> findAll() {
-		String sql = "select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN  where trangthai is  null";
+		String sql = "select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN  where trangthai is  null order by MACT desc";
 		return query(sql, new ChiTieuMapper());
 	}
 
@@ -24,18 +24,18 @@ public class ChiTieuDao extends AbstractDAO<ChiTieuModel> implements IChiTieuDAO
 	@Override
 	public List<ChiTieuModel> findTheoNgay(int nam, int thang, int ngay) {
 		String sql = "select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN "
-				+ "where YEAR(NGAYCHITIEU) = ? and MONTH(NGAYCHITIEU) = ? and DAY(NGAYCHITIEU) =? and trangthai is  null";
+				+ "where YEAR(NGAYCHITIEU) = ? and MONTH(NGAYCHITIEU) = ? and DAY(NGAYCHITIEU) =? and trangthai is  null order by MACT desc";
 		return query(sql, new ChiTieuMapper(),nam,thang,ngay);
 	}
 	
 	public List<ChiTieuModel> findTheoThang(int nam, int thang) {
 		String sql = "select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN "
-				+ "where YEAR(NGAYCHITIEU) = ? and MONTH(NGAYCHITIEU) = ? and trangthai is  null";
+				+ "where YEAR(NGAYCHITIEU) = ? and MONTH(NGAYCHITIEU) = ? and trangthai is  null order by MACT desc";
 		return query(sql, new ChiTieuMapper(),nam,thang);
 	}
 	public List<ChiTieuModel> findTraLuong(int nam, int thang) {
 		String sql = " select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN "
-				+ "where year (ngaychitieu) = ? and month(ngaychitieu) = ? and MUCDICHCHITIEU = N'Thanh Toán Lương';";
+				+ "where year (ngaychitieu) = ? and month(ngaychitieu) = ? and MUCDICHCHITIEU = N'Thanh Toán Lương' order by MACT desc;";
 		return query(sql, new ChiTieuMapper(),nam,thang);
 	}
 

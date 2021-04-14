@@ -10,18 +10,19 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
         implements IChiTietHoaDonThanhToanDAO {
     @Override
     public List<ChiTietHoaDonThanhToanModel> findAll() {
-        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN";
+        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN JOIN HOADONTHANHTOAN\n" +
+                "ON HOADONTHANHTOAN.ID = CHITIETHOADONTHANHTOAN.IDHOADONTHANHTOAN\n" +
+                "WHERE HOADONTHANHTOAN.TREMOVE = 1";
         return query(sql, new ChiTietHoaDonThanhToanMapper());
     }
 
     @Override
-    public ChiTietHoaDonThanhToanModel save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
-        String sql = "INSERT INTO CHITIETHOADONTHANHTOAN (IDHOADONTHANHTOAN, IDCHITIETSANPHAM, SOLUONG, GIAMGIATHEM)\n"
-                + "VALUES (?, ?, ?, ?)";
-        int id = insert(sql, chiTietHoaDonThanhToanModel.getHoaDonThanhToan(),
-                chiTietHoaDonThanhToanModel.getChiTietSanPham(), chiTietHoaDonThanhToanModel.getSoLuong(),
-                chiTietHoaDonThanhToanModel.getGiamGiaThem());
-        return findOne(id);
+    public boolean save(ChiTietHoaDonThanhToanModel chiTietHoaDonThanhToanModel) {
+        String sql = "EXEC PROC_INSERT_CTHOADONTHANHTOAN ?, ?, ?, ?";
+        return update(sql, chiTietHoaDonThanhToanModel.getHoaDonThanhToan(),
+                chiTietHoaDonThanhToanModel.getChiTietSanPham(),
+                chiTietHoaDonThanhToanModel.getGiamGiaThem(),
+                chiTietHoaDonThanhToanModel.getSoLuong()) > 0;
     }
 
     @Override
@@ -29,11 +30,5 @@ public class ChiTietHoaDonThanhToanDAO extends AbstractDAO<ChiTietHoaDonThanhToa
         String sql = "UPDATE CHITIETHOADONTHANHTOAN SET IDCHITIETSANPHAM = ?, SOLUONG = ?, GIAMGIATHEM = ? WHERE ID = ?";
         return update(sql, chiTietHoaDonThanhToanModel.getChiTietSanPham(), chiTietHoaDonThanhToanModel.getSoLuong(),
                 chiTietHoaDonThanhToanModel.getGiamGiaThem(), chiTietHoaDonThanhToanModel.getId()) > -1;
-    }
-
-    private ChiTietHoaDonThanhToanModel findOne(Integer id) {
-        String sql = "SELECT * FROM CHITIETHOADONTHANHTOAN WHERE ID = ?";
-        List<ChiTietHoaDonThanhToanModel> lstFind = query(sql, new ChiTietHoaDonThanhToanMapper(), id);
-        return lstFind.isEmpty() ? null : lstFind.get(0);
     }
 }

@@ -276,6 +276,8 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 
 		listNguonHang = nguonHangService.findAll();
 		loadToTable();
+		
+		tableNguonHang.setRowHeight(25);
 	}
 
 	protected void findNguonHang() {

@@ -51,12 +51,20 @@ public class HoaDonTraHangService implements IHoaDonTraHangService {
 
     @Override
     public HoaDonTraHangModel findById(int id) {
-        return lstHoaDonTraHangModels.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList()).get(0);
+        var ref = new Object() {
+            HoaDonTraHangModel hoaDonTraHangModel = null;
+        };
+        lstHoaDonTraHangModels.forEach(e -> {
+            if (e.getId().equals(id) && e.isRemove()) {
+                ref.hoaDonTraHangModel = e;
+            }
+        });
+        return ref.hoaDonTraHangModel;
     }
 
     @Override
     public List<HoaDonTraHangModel> filterByDate(Timestamp timestamp) {
         SimpleDateFormat sp = new SimpleDateFormat("yyyyMMdd");
-        return lstHoaDonTraHangModels.stream().filter(e -> sp.format(e.getNgayTraHang()).equals(sp.format(timestamp))).collect(Collectors.toList());
+        return lstHoaDonTraHangModels.stream().filter(e -> sp.format(e.getNgayTraHang()).equals(sp.format(timestamp)) && e.isRemove()).collect(Collectors.toList());
     }
 }

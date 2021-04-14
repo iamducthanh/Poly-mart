@@ -3,32 +3,41 @@ package com.polymart.model;
 import java.sql.Timestamp;
 
 public class HoaDonTraHangModel extends AbstractModel {
-	private Integer idNhanVien;
-	private Timestamp ngayTraHang;
-	private String ghiChu;
+    private Integer idNhanVien;
+    private Timestamp ngayTraHang;
+    private String ghiChu;
+    private boolean remove;
 
-	public Integer getIdNhanVien() {
-		return idNhanVien;
-	}
+    public boolean isRemove() {
+        return remove;
+    }
 
-	public void setIdNhanVien(Integer idNhanVien) {
-		this.idNhanVien = idNhanVien;
-	}
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
 
-	public Timestamp getNgayTraHang() {
-		return ngayTraHang;
-	}
+    public Integer getIdNhanVien() {
+        return idNhanVien;
+    }
 
-	public void setNgayTraHang(Timestamp ngayTraHang) {
-		this.ngayTraHang = ngayTraHang;
-	}
+    public void setIdNhanVien(Integer idNhanVien) {
+        this.idNhanVien = idNhanVien;
+    }
 
-	public String getGhiChu() {
-		return ghiChu;
-	}
+    public Timestamp getNgayTraHang() {
+        return ngayTraHang;
+    }
 
-	public void setGhiChu(String ghiChu) {
-		this.ghiChu = ghiChu;
-	}
+    public void setNgayTraHang(Timestamp ngayTraHang) {
+        this.ngayTraHang = ngayTraHang;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
 
 }

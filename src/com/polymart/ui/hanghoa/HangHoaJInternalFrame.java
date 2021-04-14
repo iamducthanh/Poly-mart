@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.Box;
@@ -20,6 +21,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -39,7 +41,7 @@ import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.polymart.ui.common.uiCommon;
-
+import com.polymart.entity.EntityExcel;
 public class HangHoaJInternalFrame extends JInternalFrame {
 
     private static final long serialVersionUID = 7158581259856675232L;
@@ -82,7 +84,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
     // lisst
     private List<ChiTietSanPhamModel> lstChiTietSanPhamModels;
-
+    
     /**
      * Launch the application.
      */
@@ -166,11 +168,33 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         JButton btnImport = new JButton("Import");
         btnImport.setFont(new Font("SansSerif", Font.PLAIN, 15));
         pnlTop.add(btnImport);
-
+        btnImport.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	try {
+            		modelHangHoa.setRowCount(0);
+					new EntityExcel().importExcel(modelHangHoa);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+            }
+        });
+        
         JButton btnExport = new JButton("Export");
         btnExport.setFont(new Font("SansSerif", Font.PLAIN, 15));
         pnlTop.add(btnExport);
-
+        btnExport.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+					new EntityExcel().exportExcel(tblHangHoa);
+					JOptionPane.showMessageDialog(null, "Lưu thành công");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Lưu thất bại");
+				}
+            }
+        });
         JButton btnOption = new JButton("");
         btnOption.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

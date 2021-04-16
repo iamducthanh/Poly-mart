@@ -94,8 +94,6 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1920, 639);
-		
-		tableDSSanPhamThem.setRowHeight(25);
 
 		setFocusable(true);
 		contentPane = new JPanel();
@@ -338,7 +336,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 		tableDSSanPhamThem.setModel(modelDSSanPhamThem);
 		panel_2.setLayout(gl_panel_2);
 		panel.setLayout(gl_panel);
-
+		tableDSSanPhamThem.setRowHeight(25);
 	}
 
 	MouseListener chonHinh = new MouseListener() {

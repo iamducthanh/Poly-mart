@@ -124,7 +124,8 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
 
-        JButton btnQuayLai = new JButton("<-   ");
+        JButton btnQuayLai = new JButton("");
+        btnQuayLai.setIcon(new ImageIcon("C:\\Users\\ADMIN\\git\\Poly-mart\\images\\quaylai.png"));
         btnQuayLai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 close();

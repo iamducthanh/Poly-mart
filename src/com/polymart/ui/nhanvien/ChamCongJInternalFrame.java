@@ -91,7 +91,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new BorderLayout(0, 0));
 
 		initTopChamCong();
 		initCenterChamCong();
@@ -106,17 +105,14 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		setTitle("Nhân viên - Chấm công");
 		JLabel lblNhanVien = new JLabel("Chấm công                        ");
 		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
-		panel.add(lblNhanVien, BorderLayout.WEST);
 
 		panel1 = new JPanel();
-		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JLabel lblNewLabel_1 = new JLabel(String.format("%100s", " "));
 		panel1.add(lblNewLabel_1);
 
 		txtTimKiem = new JTextField();
-		panel.add(txtTimKiem, BorderLayout.CENTER);
 		txtTimKiem.setEnabled(false);
 		txtTimKiem.addKeyListener(new KeyAdapter() {
 			@Override
@@ -126,6 +122,26 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		});
 		txtTimKiem.setText(" TÌm theo mã nhân viên");
 		txtTimKiem.setColumns(10);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE)
+					.addGap(104)
+					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 343, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 		txtTimKiem.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -210,14 +226,13 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCheckOut, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-						.addComponent(btnTimTheoThang, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-						.addComponent(btnChamCong, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_panelLeft.createSequentialGroup()
-							.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(199, Short.MAX_VALUE))))
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(btnCheckOut, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnChamCong, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnTimTheoThang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
+					.addContainerGap(2, Short.MAX_VALUE))
 		);
-		btnChamCong.setBackground(Color.GREEN);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
@@ -229,8 +244,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnCheckOut, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(333, Short.MAX_VALUE))
+					.addContainerGap(229, Short.MAX_VALUE))
 		);
+		btnChamCong.setBackground(Color.GREEN);
 		btnChamCong.setEnabled(false);
 		panelLeft.setLayout(gl_panelLeft);
 		modelNhanVienChamCong.addColumn("Mã nhân viên");

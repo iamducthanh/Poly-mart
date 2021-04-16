@@ -85,7 +85,6 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
-		tableThongKe.setRowHeight(25);
 		
 		JLabel lblNewLabel = new JLabel("Thống kê doanh số");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -231,6 +230,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 
 			}
 		});
+		tableThongKe.setRowHeight(25);
 	}
 	
 	public void loadTableDoanhThu() {

@@ -171,7 +171,6 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		);
 		panel_2.setLayout(gl_panel_2);
 		panel_1.setLayout(gl_panel_1);
-		tableThongKe.setRowHeight(25);
 		
 		contentPane.add(panelContent, BorderLayout.CENTER);
 		panelContent.setLayout(new BorderLayout(0, 0));
@@ -215,6 +214,8 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 
 			}
 		});
+		
+		tableThongKe.setRowHeight(25);
 	}
 	
 	public void loadTableDoanhThu() {

@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -54,6 +55,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	private JPanel nhanVienJPanel = new JPanel();
 	private JTable tableChamCong;
 	JButton btnChamCong = new JButton("Chấm công");
+	JButton btnCheckOut = new JButton("Check Out");
 	JCalendar dateChamCong;
 	private Calendar calendar;
 
@@ -97,7 +99,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		loadListChamCongNgay();
 		loadTableChamCong();
 		moNutChamCong();
-		
+		moNutCheckUot();
+
 		tableChamCong.setRowHeight(25);
 	}
 
@@ -212,8 +215,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				txtTimKiem.setEnabled(false);
 			}
 		});
-		
-		JButton btnCheckOut = new JButton("Check Out");
+		btnCheckOut.setBackground(Color.GREEN);
+		btnCheckOut.setEnabled(false);
+
 		btnCheckOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				checkInGioRa();
@@ -248,6 +252,17 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		);
 		btnChamCong.setBackground(Color.GREEN);
 		btnChamCong.setEnabled(false);
+		btnChamCong.setBackground(Color.GREEN);
+		gl_panelLeft.setVerticalGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLeft.createSequentialGroup().addContainerGap()
+						.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnTimTheoThang, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnCheckOut, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(333, Short.MAX_VALUE)));
 		panelLeft.setLayout(gl_panelLeft);
 		modelNhanVienChamCong.addColumn("Mã nhân viên");
 		modelNhanVienChamCong.addColumn("Tên nhân viên");
@@ -262,8 +277,19 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 	}
 
 	protected void checkInGioRa() {
-		// TODO Auto-generated method stub
-		
+		loadListChamCongNgay();
+		ChamCongDAO chamCongDao = new ChamCongDAO();
+		Date now = new Date();
+		int maNhanVien = EntityAuthorization.USER.getId();
+		for (ChamCongModel chamCongModel : listChamCong) {
+			if (maNhanVien == chamCongModel.getIdNhanVien() && chamCongModel.getGioRa() == null) {
+				chamCongModel.setGioRa(new Timestamp(now.getTime()));
+				chamCongDao.updateGioRa(chamCongModel);
+				loadListChamCongNgay();
+				loadTableChamCong();
+				return;
+			}
+		}
 	}
 
 	// tìm kiếm nhân viên chấm công trong tháng
@@ -286,21 +312,84 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 	// Mở Nút Chấm Công Tự Động
 	public void moNutChamCong() {
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-		int i = 0;
-		int j = 0;
-		try {
-			i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("7:30:00 AM"));
-			j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("9:00:00 AM"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		if (i == 1 && j == -1) {
-			btnChamCong.setEnabled(true);
-		} else {
-			setEnabled(false);
-		}
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+					Date now = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+					int i = 0;
+					int j = 0;
+					try {
+						i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("7:30:00 AM"));
+						j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("9:00:00 AM"));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					boolean check = true;
+					for (int k = 0; k < tableChamCong.getRowCount(); k++) {
+						if (EntityAuthorization.USER.getId() == Integer
+								.parseInt(String.valueOf(tableChamCong.getValueAt(k, 0)))) {
+							check = false;
+							break;
+						}
+					}
+					if (i == 1 && j == -1 && check ==true) {
+						btnChamCong.setEnabled(true);
+					} else {
+						setEnabled(false);
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (Exception e) {
+
+					}
+				}
+			}
+		};
+		th.start();
+
+	}
+
+	// Mở Nút Chấm Công
+	public void moNutCheckUot() {
+		Thread th = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+					Date now = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+					int i = 0;
+					int j = 0;
+					try {
+						i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("2:30:00 PM"));
+						j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("22:30:00 PM"));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					boolean check = true;
+					for (int k = 0; k < tableChamCong.getRowCount(); k++) {
+						if (EntityAuthorization.USER.getId() == Integer
+								.parseInt(String.valueOf(tableChamCong.getValueAt(k, 0)))
+								&& String.valueOf(tableChamCong.getValueAt(k, 0)).equals("")) {
+							check = false;
+							break;
+						}
+					}
+					if (i == 1 && j == -1 && check == false) {
+						btnCheckOut.setEnabled(true);
+					} else {
+						setEnabled(false);
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+			}
+		};
+		th.start();
 
 	}
 
@@ -385,31 +474,36 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			int j =0;
-			if(chamCongModel.getGioRa()!=null) {
+			int j = 0;
+			if (chamCongModel.getGioRa() != null) {
 				String gioRa = sdf.format(chamCongModel.getGioRa());
 				try {
-					j = sdf.parse(gioRa).compareTo(sdf.parse("9:00:00 PM"));
+					j = sdf.parse(gioRa).compareTo(sdf.parse("10:00:00 PM"));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}
 			String trangThai;
-			if(i==1) {
-				trangThai="Đi Muộn";
-			}else {
-				trangThai="Đúng Giờ";
+			String gioRa = "";
+			try {
+				gioRa = sdf.format(chamCongModel.getGioRa());
+			} catch (Exception e) {
 			}
-			if(j==1) {
-				trangThai = trangThai +", Về Đúng Giờ";
-			}else {
-				trangThai = trangThai +", Về Sớm";
+			if (i == 1) {
+				trangThai = "Đi Muộn";
+			} else {
+				trangThai = "Đúng Giờ";
 			}
-			
+			if (gioRa.length() > 0) {
+				if (j == 1) {
+					trangThai = trangThai + ", Về Đúng Giờ";
+				} else {
+					trangThai = trangThai + ", Về Sớm";
+				}
+			}
 			modelChamCong.addRow(new Object[] { chamCongModel.getIdNhanVien(), chamCongModel.getHoTen(),
 					new SimpleDateFormat("dd-MM-yyyy").format(chamCongModel.getNgayChamCong()),
-					day == 1 ? "Chủ Nhật" : day, sdf.format(chamCongModel.getNgayChamCong()),
-							sdf.format(chamCongModel.getGioRa()),trangThai});
+					day == 1 ? "Chủ Nhật" : day, sdf.format(chamCongModel.getNgayChamCong()), gioRa, trangThai });
 		}
 	}
 }

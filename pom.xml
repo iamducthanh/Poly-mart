@@ -12,6 +12,7 @@
 		<jcalendar.version>1.4</jcalendar.version>
 		<swingx-all.version>1.6.3</swingx-all.version>
 		<jfreechart.version>1.0.13</jfreechart.version>
+		<poi-ooxml.version>4.1.2</poi-ooxml.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +28,11 @@
 			<version>${sqlserver.version}</version>
 		</dependency>
 		<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.0</version>
+        </dependency>
+		<dependency>
 			<groupId>com.toedter</groupId>
 			<artifactId>jcalendar</artifactId>
 			<version>${jcalendar.version}</version>
@@ -41,11 +47,12 @@
 			<artifactId>swingx-all</artifactId>
 			<version>${swingx-all.version}</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.apache.poi</groupId>
-    		<artifactId>poi-ooxml</artifactId>
-    		<version>5.0.0</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.0.0</version>
+
 		</dependency>
 	</dependencies>
 

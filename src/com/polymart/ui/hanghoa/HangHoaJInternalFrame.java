@@ -39,6 +39,10 @@ import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.polymart.ui.common.uiCommon;
 import com.polymart.entity.EntityExcel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EtchedBorder;
 public class HangHoaJInternalFrame extends JInternalFrame {
 
     private static final long serialVersionUID = 7158581259856675232L;
@@ -241,9 +245,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     public void initCenterHangHoa() {
         JPanel pnlLoaiHang = new JPanel();
         pnlLoaiHang.setBorder(
-                new TitledBorder(null, "Lo\u1EA1i H\u00E0ng", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        pnlNavibar.setLayout(new BoxLayout(pnlNavibar, BoxLayout.Y_AXIS));
-        pnlNavibar.add(pnlLoaiHang);
+                new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Lo\u1EA1i H\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlLoaiHang.setLayout(new BoxLayout(pnlLoaiHang, BoxLayout.Y_AXIS));
         JCheckBox chkbHangHoa = new JCheckBox("Hàng hóa");
         chkbHangHoa.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -251,17 +253,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         JCheckBox chkbDichVu = new JCheckBox("Dịch vụ");
         chkbDichVu.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLoaiHang.add(chkbDichVu);
-        JCheckBox chkbCombo = new JCheckBox("Combo - đóng gói              ");
+        JCheckBox chkbCombo = new JCheckBox("Combo - đóng gói");
         chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLoaiHang.add(chkbCombo);
 
-        Component verticalStrut = Box.createVerticalStrut(20);
-        pnlNavibar.add(verticalStrut);
-
         JPanel pnlTonKho = new JPanel();
-        pnlTonKho.setBorder(new TitledBorder(null, "T\u1ED3n kho", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        pnlTonKho.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " T\u1ED3n kho ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlTonKho.setLayout(new BoxLayout(pnlTonKho, BoxLayout.Y_AXIS));
-        pnlNavibar.add(pnlTonKho);
 
         JRadioButton rdoTonKhoTatCa = new JRadioButton("Tất cả");
         rdoTonKhoTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -286,14 +284,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup.add(rdoConHangTrongKho);
         buttonGroup.add(rdoHetHangTrongKho);
 
-        Component verticalStrut_1_1 = Box.createVerticalStrut(20);
-        pnlNavibar.add(verticalStrut_1_1);
-
         JPanel pnlBanTrucTiep = new JPanel();
-        pnlBanTrucTiep.setBorder(new TitledBorder(null, "B\u00E1n tr\u1EF1c ti\u1EBFp", TitledBorder.LEADING,
-                TitledBorder.TOP, null, null));
+        pnlBanTrucTiep.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " B\u00E1n tr\u1EF1c ti\u1EBFp ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlBanTrucTiep.setLayout(new BoxLayout(pnlBanTrucTiep, BoxLayout.Y_AXIS));
-        pnlNavibar.add(pnlBanTrucTiep);
 
         JRadioButton rdoBanTrucTiepTatCa = new JRadioButton("Tất cả");
         rdoBanTrucTiepTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -310,16 +303,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup2.add(rdoDuocBanTrucTiep);
         buttonGroup2.add(rdoKhongDuocBanTrucTiep);
 
-        Component verticalStrut_1_2 = Box.createVerticalStrut(20);
-        pnlNavibar.add(verticalStrut_1_2);
-
         JPanel pnlNgayDuKienHetHang = new JPanel();
-        pnlNgayDuKienHetHang.setBorder(new TitledBorder(null, "Ng\u00E0y d\u1EF1 ki\u1EBFn h\u1EBFt h\u00E0ng",
-                TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        pnlNgayDuKienHetHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Ng\u00E0y d\u1EF1 ki\u1EBFn h\u1EBFt h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlNgayDuKienHetHang.setLayout(new BoxLayout(pnlNgayDuKienHetHang, BoxLayout.Y_AXIS));
-        pnlNavibar.add(pnlNgayDuKienHetHang);
 
-        JRadioButton rdoToanThoiGian = new JRadioButton("Toàn thời gian                    ");
+        JRadioButton rdoToanThoiGian = new JRadioButton("Toàn thời gian");
         rdoToanThoiGian.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoLuaChonKhac = new JRadioButton("Lựa chọn khác");
         rdoLuaChonKhac.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -330,14 +318,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup3.add(rdoToanThoiGian);
         buttonGroup3.add(rdoLuaChonKhac);
 
-        Component verticalStrut_2 = Box.createVerticalStrut(20);
-        pnlNavibar.add(verticalStrut_2);
-
         JPanel pnlLienKetBanHang = new JPanel();
-        pnlLienKetBanHang.setBorder(new TitledBorder(null, "Li\u00EAn k\u1EBFt b\u00E1n h\u00E0ng",
-                TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        pnlLienKetBanHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Li\u00EAn k\u1EBFt b\u00E1n h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlLienKetBanHang.setLayout(new BoxLayout(pnlLienKetBanHang, BoxLayout.Y_AXIS));
-        pnlNavibar.add(pnlLienKetBanHang);
 
         JRadioButton rdoLienKetBanHangTatCa = new JRadioButton("Tất cả");
         rdoLienKetBanHangTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -354,14 +337,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup4.add(rdoCoLienKetKenhBan);
         buttonGroup4.add(rdoKhongLienKetKenhBan);
 
-        Component verticalStrut_1 = Box.createVerticalStrut(20);
-        pnlNavibar.add(verticalStrut_1);
-
         JPanel pnlLuaChonHienThi = new JPanel();
-        pnlLuaChonHienThi.setBorder(new TitledBorder(null, "L\u1EF1a ch\u1ECDn hi\u1EC3n th\u1ECB",
-                TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        pnlLuaChonHienThi.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " L\u1EF1a ch\u1ECDn hi\u1EC3n th\u1ECB ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlLuaChonHienThi.setLayout(new BoxLayout(pnlLuaChonHienThi, BoxLayout.Y_AXIS));
-        pnlNavibar.add(pnlLuaChonHienThi);
 
         JRadioButton rdoLuaChonHienThiTatCa = new JRadioButton("Tất cả");
         rdoLuaChonHienThiTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -377,6 +355,40 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup5.add(rdoLuaChonHienThiTatCa);
         buttonGroup5.add(rdoHangDangKinhDoanh);
         buttonGroup5.add(rdoHangNgungKinhDoanh);
+        GroupLayout gl_pnlNavibar = new GroupLayout(pnlNavibar);
+        gl_pnlNavibar.setHorizontalGroup(
+        	gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlNavibar.createSequentialGroup()
+        			.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
+        			.addGap(5))
+        		.addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
+        			.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
+        			.addGap(5))
+        		.addGroup(gl_pnlNavibar.createSequentialGroup()
+        			.addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        			.addGap(5))
+        		.addGroup(gl_pnlNavibar.createSequentialGroup()
+        			.addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        			.addGap(5))
+        		.addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
+        			.addGroup(gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(pnlNgayDuKienHetHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        				.addComponent(pnlBanTrucTiep, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+        			.addGap(5))
+        );
+        gl_pnlNavibar.setVerticalGroup(
+        	gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlNavibar.createSequentialGroup()
+        			.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        );
+        pnlNavibar.setLayout(gl_pnlNavibar);
 
         JScrollPane scrollPane = new JScrollPane();
         contentPane.add(scrollPane, BorderLayout.CENTER);

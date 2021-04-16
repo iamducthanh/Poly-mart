@@ -165,23 +165,30 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		txtTimNhomHang.setText(" Tìm kiếm nhóm hàng");
 		txtTimNhomHang.setColumns(10);
 		GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-		gl_hangHoaJPanel.setHorizontalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap().addGroup(gl_hangHoaJPanel
-						.createParallelGroup(Alignment.LEADING, false)
+		gl_hangHoaJPanel.setHorizontalGroup(
+			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_4_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtTimNhomHang)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_hangHoaJPanel.setVerticalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap().addComponent(lblNewLabel_4)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblNewLabel_4_1)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(121, Short.MAX_VALUE)));
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_hangHoaJPanel.setVerticalGroup(
+			gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel_4)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_4_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtTimNhomHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(121, Short.MAX_VALUE))
+		);
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));

@@ -47,9 +47,6 @@ import com.polymart.ui.thongke.ThongKeDoanhSoJInternalFrame;
 import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class PolyMartMain extends JFrame {
-	
-	int a;
-
 	private static final long serialVersionUID = 6825346390245174222L;
 
 	public JDesktopPane pnlMain = new JDesktopPane();

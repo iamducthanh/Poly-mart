@@ -251,6 +251,12 @@ public class TraHangJInternalFrame extends JInternalFrame {
             }
         });
         tableTraHang.setRowHeight(25);
+        tableTraHang.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tableTraHang.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tableTraHang.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
 
     }
 

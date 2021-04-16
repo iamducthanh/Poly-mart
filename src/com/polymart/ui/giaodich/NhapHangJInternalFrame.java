@@ -257,7 +257,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             }
         });
         tableNhapHang.setRowHeight(25);
-
+        tableNhapHang.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tableNhapHang.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tableNhapHang.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tableNhapHang.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tableNhapHang.getColumnModel().getColumn(4).setPreferredWidth(120);
     }
 
     private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {

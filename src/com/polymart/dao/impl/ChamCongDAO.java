@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.polymart.dao.IChamCongDAO;
@@ -21,8 +22,8 @@ public class ChamCongDAO extends AbstractDAO<ChamCongModel> implements IChamCong
 
 	@Override
 	public Integer save(ChamCongModel chamCongModel) {
-		String sql = "INSERT INTO CHAMCONG (IDNHANVIEN,NGAYCHAMCONG,Giora) VALUES (?,?,?)";
-		return insert(sql, chamCongModel.getIdNhanVien(), chamCongModel.getNgayChamCong(),chamCongModel.getGioRa());
+		String sql = "INSERT INTO CHAMCONG (IDNHANVIEN,NGAYCHAMCONG) VALUES (?,?)";
+		return insert(sql, chamCongModel.getIdNhanVien(), chamCongModel.getNgayChamCong());
 	}
 
 	@Override
@@ -58,5 +59,11 @@ public class ChamCongDAO extends AbstractDAO<ChamCongModel> implements IChamCong
 		}
 
 		return listNam;
+	}
+	public void updateGioRa(ChamCongModel chamCong) {
+		Calendar c= Calendar.getInstance();
+		c.setTime(chamCong.getNgayChamCong());
+		String sql = "update CHAMCONG set Giora = ? where IDNHANVIEN = ? and YEAR(NGAYCHAMCONG) = ? and MONTH(NGAYCHAMCONG) = ? and DAY(NGAYCHAMCONG) = ?";
+		update(sql, chamCong.getGioRa(),chamCong.getIdNhanVien(),c.get(Calendar.YEAR),(c.get(Calendar.MONTH)+1),c.get(Calendar.DAY_OF_MONTH));
 	}
 }

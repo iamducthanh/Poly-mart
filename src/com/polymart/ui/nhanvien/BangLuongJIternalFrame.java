@@ -52,7 +52,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 	JComboBox<Object> cboThang = new JComboBox<Object>();
 	JComboBox<String> cboNam = new JComboBox<String>();
 	JLabel lblBangLuong = new JLabel("  Bảng lương            ");
-	JButton btnAdd ;
+	JButton btnAdd;
 
 	/**
 	 * Launch the application.
@@ -90,7 +90,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 
 		lblBangLuong.setFont(new Font("Tahoma", Font.BOLD, 18));
 
-		 btnAdd = new JButton("Thanh Toán");
+		btnAdd = new JButton("Thanh Toán");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				thanhToanLuongChoNhanVien();
@@ -141,8 +141,8 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 				timKiemLuongTheoThang();
 			}
 		});
-		cboThang.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5",
-				"Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
+		cboThang.setModel(new DefaultComboBoxModel<Object>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4",
+				"Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
 		panel_1.setLayout(gl_panel_1);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -154,6 +154,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		modelBangLuong.addColumn("Tên nhân viên");
 		modelBangLuong.addColumn("Số ngày làm việc");
 		modelBangLuong.addColumn("Số ngày Đi Làm Muộn");
+		modelBangLuong.addColumn("Số Ngày Về Sớm");
 		modelBangLuong.addColumn("Tổng lương");
 		tableBangLuong.setModel(modelBangLuong);
 		loadComboboxNam();
@@ -161,10 +162,10 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		kiemTraLuu();
 		tableBangLuong.setRowHeight(25);
 
-
 		// cbb Năm load từ dữ liệu ở bảng chấm công lên
 		// cbb Tháng load theo cbb Năm cũng trong bảng chấm công
 	}
+
 	// lưu Thanh Toán Lương Vào Bảng Chi Tiêu
 	protected void thanhToanLuongChoNhanVien() {
 //		if(kiemTraLuu()) {
@@ -172,15 +173,15 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 //			return;
 //		}
 		List<ChiTieuModel> listChiTieuModel = new ArrayList<ChiTieuModel>();
-		for (int i =0 ;i< tableBangLuong.getRowCount(); i++) {
+		for (int i = 0; i < tableBangLuong.getRowCount(); i++) {
 			ChiTieuModel chiTieu = new ChiTieuModel();
 			chiTieu.setMucDichChiTieu("Thanh Toán Lương ");
 			chiTieu.setIdNhanVien(EntityAuthorization.USER.getId());
-			chiTieu.setSoTien(Long.parseLong( String.valueOf(tableBangLuong.getValueAt(i, 4))));
-			chiTieu.setGhiChu("Thanh Toán Lương Cho Nhân Viên "+ String.valueOf( tableBangLuong.getValueAt(i, 1)));
+			chiTieu.setSoTien(Long.parseLong(String.valueOf(tableBangLuong.getValueAt(i, 4))));
+			chiTieu.setGhiChu("Thanh Toán Lương Cho Nhân Viên " + String.valueOf(tableBangLuong.getValueAt(i, 1)));
 			listChiTieuModel.add(chiTieu);
 		}
-		if(!EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Thanh Toán Lương Cho Nhân Viên")) {
+		if (!EntityMessage.confirm(null, "Bạn Chắc Chắn Muốn Thanh Toán Lương Cho Nhân Viên")) {
 			return;
 		}
 		ChiTieuDao chiTieuDao = new ChiTieuDao();
@@ -189,18 +190,20 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		}
 		EntityMessage.show(null, "Đã Lưu Vào Mục Chi Tiêu");
 	}
+
 	public void kiemTraLuu() {
 		ChiTieuDao chiTieuDao = new ChiTieuDao();
 		List<ChiTieuModel> listChiTieuModel = new ArrayList<ChiTieuModel>();
 		Calendar c = Calendar.getInstance();
 		int nam = c.get(Calendar.YEAR);
-		int thang = c.get(Calendar.MONTH)+1;
+		int thang = c.get(Calendar.MONTH) + 1;
 		listChiTieuModel = chiTieuDao.findTraLuong(nam, thang);
-		if(listChiTieuModel.size()>0) {
+		if (listChiTieuModel.size() > 0) {
 			btnAdd.setEnabled(false);
 		}
-		
+
 	}
+
 	// Tìm Kiếm Lương Theo Tháng
 	protected void timKiemLuongTheoThang() {
 		String nam = cboNam.getSelectedItem().toString();
@@ -217,6 +220,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadTbaleLuong();
 
 	}
+
 	// lấy năm trong sql luu vào combobox
 	private void loadComboboxNam() {
 		ChamCongDAO chamCongDao = new ChamCongDAO();
@@ -228,6 +232,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		}
 		cboNam.setModel(new DefaultComboBoxModel<String>(vector));
 	}
+
 	// mở Bảng Lương Tháng gần nhất
 	private void moBangLuongThangGanNhat() {
 		Calendar c = Calendar.getInstance();
@@ -236,11 +241,12 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadListChamCong(String.valueOf(nam), String.valueOf(thang));
 		loadTbaleLuong();
 
-		lblBangLuong.setText("Bảng Lương Tháng " + thang+ " Năm " + nam);
-		cboThang.setSelectedIndex(thang-1);
+		lblBangLuong.setText("Bảng Lương Tháng " + thang + " Năm " + nam);
+		cboThang.setSelectedIndex(thang - 1);
 		cboNam.setSelectedItem(String.valueOf(nam));
 
 	}
+
 	// load list Chấm Công
 	private void loadListChamCong(String nam, String thang) {
 		listChamCong.clear();
@@ -271,6 +277,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		}
 
 	}
+
 	// load list của bảng lương
 	private void loadListBangLuong() {
 		listBangLuong.clear();
@@ -279,16 +286,23 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		for (NhanVienModel nhanVien : listNhanVien) {
 			int soNgayDilam = 0;
 			int soNgayDiMuon = 0;
+			int soNgayVeSom = 0;
 			for (ChamCongModel chamCong : listChamCong) {
-				if (String.valueOf(nhanVien.getId()).equals(String.valueOf(chamCong.getIdNhanVien()))) {
+				if (String.valueOf(nhanVien.getId()).equals(String.valueOf(chamCong.getIdNhanVien()))
+						&& chamCong.getGioRa() != null) {
 					int i = 0;
+					int j = 0;
 					try {
 						i = sdf.parse(sdf.format(chamCong.getNgayChamCong())).compareTo(sdf.parse("8:00:00 AM"));
+						j = sdf.parse(sdf.format(chamCong.getGioRa())).compareTo(sdf.parse("9:00:00 PM"));
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
 					if (i == 1) {
 						soNgayDiMuon++;
+					}
+					if(j==-1) {
+						soNgayVeSom++;
 					}
 					soNgayDilam++;
 				}
@@ -299,9 +313,11 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 			bangLuong.setLuong(nhanVien.getLuong());
 			bangLuong.setSoNgayDiLam(soNgayDilam);
 			bangLuong.setSoNgayDiMuon(soNgayDiMuon);
+			bangLuong.setSoNgayVeSom(soNgayVeSom);
 			listBangLuong.add(bangLuong);
 		}
 	}
+
 	// hiện thị table bảng lương
 	public void loadTbaleLuong() {
 		modelBangLuong.setRowCount(0);
@@ -311,16 +327,19 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		loadListBangLuong();
 		for (BangLuongModel x : listBangLuong) {
 			Long tongLuong;
-			if (x.getSoNgayDiLam() >= 30) {
+			if (x.getSoNgayDiLam() >= 28) {
 				tongLuong = x.getLuong();
 			} else {
-				tongLuong = x.getLuong() - ((30 - x.getSoNgayDiLam()) * 200000);
+				tongLuong = x.getLuong() - ((28 - x.getSoNgayDiLam()) * 200000);
 			}
 			if (x.getSoNgayDiMuon() > 0) {
 				tongLuong = tongLuong - x.getSoNgayDiMuon() * 100000;
 			}
+			if(x.getSoNgayVeSom()>0) {
+				tongLuong = tongLuong - x.getSoNgayVeSom()*100000;
+			}
 			modelBangLuong.addRow(new Object[] { x.getMaNhanVien(), x.getHoTen(), x.getSoNgayDiLam(),
-					x.getSoNgayDiMuon(), tongLuong });
+					x.getSoNgayDiMuon(),x.getSoNgayVeSom(), tongLuong });
 		}
 	}
 }

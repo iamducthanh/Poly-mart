@@ -27,6 +27,11 @@
 			<version>${sqlserver.version}</version>
 		</dependency>
 		<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.0</version>
+        </dependency>
+		<dependency>
 			<groupId>com.toedter</groupId>
 			<artifactId>jcalendar</artifactId>
 			<version>${jcalendar.version}</version>
@@ -41,11 +46,11 @@
 			<artifactId>swingx-all</artifactId>
 			<version>${swingx-all.version}</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.apache.poi</groupId>
-    		<artifactId>poi-ooxml</artifactId>
-    		<version>5.0.0</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.0.0</version>
 		</dependency>
 	</dependencies>
 

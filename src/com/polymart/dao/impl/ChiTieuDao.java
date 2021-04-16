@@ -13,7 +13,10 @@ public class ChiTieuDao extends AbstractDAO<ChiTieuModel> implements IChiTieuDAO
 		String sql = "select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN  where trangthai is  null order by MACT desc";
 		return query(sql, new ChiTieuMapper());
 	}
-
+	public List<ChiTieuModel> findAllLichSuXoa() {
+		String sql = "select a.*,b.HOTEN from CHITIEU a join NHANVIEN b on b.ID = a.IDNHANVIEN  where trangthai = 1 order by MACT desc";
+		return query(sql, new ChiTieuMapper());
+	}
 	@Override
 	public void save(ChiTieuModel chiTieuModel) {
 		String sql = "insert into CHITIEU (MUCDICHCHITIEU,IDNHANVIEN,SOTIEN,GHICHU) values(?,?,?,?)";
@@ -43,8 +46,8 @@ public class ChiTieuDao extends AbstractDAO<ChiTieuModel> implements IChiTieuDAO
 //		String sql = "update  CHITIEU set trangthai = 1, GHICHU = ? where mact =?";
 //		update(sql,ghiChu, maCT);
 //	}
-	public void delete(int maCT) {
-		String sql = "update  CHITIEU set trangthai = 1 where mact =?";
-		update(sql, maCT);
+	public void delete(int maCT,String ghiChu) {
+		String sql = "update  CHITIEU set trangthai = 1, ghichu = ? where mact =?";
+		update(sql,ghiChu, maCT);
 	}
 }

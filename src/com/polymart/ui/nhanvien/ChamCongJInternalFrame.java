@@ -298,42 +298,42 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		loadTableChamCong();
 	}
 
-	// Mở Nút Chấm Công Tự Động
-	public void moNutChamCong() {
-		Thread th = new Thread() {
-			@Override
-			public void run() {
-				while (true) {
-					Date now = new Date();
-					SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-					int i = 0;
-					int j = 0;
-					try {
-						if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
-							i = sdf.parse(sdf.format(now)).compareTo(
-									sdf.parse("7:30:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-							j = sdf.parse(sdf.format(now)).compareTo(
-									sdf.parse("11:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-						}
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					boolean check = true;
-					for (int k = 0; k < tableChamCong.getRowCount(); k++) {
-						if (EntityAuthorization.USER.getId() == Integer
-								.parseInt(String.valueOf(tableChamCong.getValueAt(k, 0)))) {
-							check = false;
-							break;
-						}
-					}
-					if (i == 1 && j == -1 && check == true) {
-						btnChamCong.setEnabled(true);
-					} else {
-						setEnabled(false);
-					}
-					try {
-						Thread.sleep(1000);
-					} catch (Exception e) {
+    // Mở Nút Chấm Công Tự Động
+    public void moNutChamCong() {
+        Thread th = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    Date now = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+                    int i = 0;
+                    int j = 0;
+                    try {
+                        if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
+                            i = sdf.parse(sdf.format(now)).compareTo(
+                                    sdf.parse("7:30:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+                            j = sdf.parse(sdf.format(now)).compareTo(
+                                    sdf.parse("9:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    boolean check = true;
+                    for (int k = 0; k < tableChamCong.getRowCount(); k++) {
+                        if (EntityAuthorization.USER.getId() == Integer
+                                .parseInt(String.valueOf(tableChamCong.getValueAt(k, 0)))) {
+                            check = false;
+                            break;
+                        }
+                    }
+                    if (i == 1 && j == -1 && check == true) {
+                        btnChamCong.setEnabled(true);
+                    } else {
+                        setEnabled(false);
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
 
 					}
 				}
@@ -456,56 +456,55 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		listChamCong = chamCongDao.filterMonth(nam, thang);
 	}
 
-	// load bảng chấm công
-	private void loadTableChamCong() {
-		Calendar c = Calendar.getInstance();
-		modelChamCong.setRowCount(0);
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-		for (ChamCongModel chamCongModel : listChamCong) {
-			calendar.setTime(chamCongModel.getNgayChamCong());
-			c.setTime(chamCongModel.getNgayChamCong());
-			int day = c.get(Calendar.DAY_OF_WEEK);
-			int i = 0;
-			String gioChamCong = sdf.format(chamCongModel.getNgayChamCong());
-			try {
-				if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
-					i = sdf.parse(gioChamCong)
-							.compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			int j = 0;
-			if (chamCongModel.getGioRa() != null) {
-				String gioRa = sdf.format(chamCongModel.getGioRa());
-				try {
-					j = sdf.parse(gioRa)
-							.compareTo(sdf.parse("9:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
-			String trangThai;
-			String gioRa = "";
-			try {
-				gioRa = sdf.format(chamCongModel.getGioRa());
-			} catch (Exception e) {
-			}
-			if (i == 1) {
-				trangThai = "Đi Muộn";
-			} else {
-				trangThai = "Đúng Giờ";
-			}
-			if (gioRa.length() > 0) {
-				if (j == 1) {
-					trangThai = trangThai + ", Về Đúng Giờ";
-				} else {
-					trangThai = trangThai + ", Về Sớm";
-				}
-			}
-			modelChamCong.addRow(new Object[] { chamCongModel.getIdNhanVien(), chamCongModel.getHoTen(),
-					new SimpleDateFormat("dd-MM-yyyy").format(chamCongModel.getNgayChamCong()),
-					day == 1 ? "Chủ Nhật" : day, sdf.format(chamCongModel.getNgayChamCong()), gioRa, trangThai });
-		}
-	}
+
+    // load bảng chấm công
+    private void loadTableChamCong() {
+        Calendar c = Calendar.getInstance();
+        modelChamCong.setRowCount(0);
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+        for (ChamCongModel chamCongModel : listChamCong) {
+            calendar.setTime(chamCongModel.getNgayChamCong());
+            c.setTime(chamCongModel.getNgayChamCong());
+            int day = c.get(Calendar.DAY_OF_WEEK);
+            int i = 0;
+            String gioChamCong = sdf.format(chamCongModel.getNgayChamCong());
+            try {
+                i = sdf.parse(gioChamCong)
+                        .compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            int j = -1;
+            if (chamCongModel.getGioRa() != null) {
+                String gioRa = sdf.format(chamCongModel.getGioRa());
+                try {
+                    j = sdf.parse(gioRa).compareTo(
+                            sdf.parse("9:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            String trangThai;
+            String gioRa = "";
+            try {
+                gioRa = sdf.format(chamCongModel.getGioRa());
+            } catch (Exception e) {
+            }
+            if (i == 1) {
+                trangThai = "Đi Muộn";
+            } else {
+                trangThai = "Đúng Giờ";
+            }
+            if (gioRa.length() > 0) {
+                if (j == 1 || j == 0) {
+                    trangThai = trangThai + ", Về Đúng Giờ";
+                } else {
+                    trangThai = trangThai + ", Về Sớm";
+                }
+            }
+            modelChamCong.addRow(new Object[]{chamCongModel.getIdNhanVien(), chamCongModel.getHoTen(),
+                    new SimpleDateFormat("dd-MM-yyyy").format(chamCongModel.getNgayChamCong()),
+                    day == 1 ? "Chủ Nhật" : day, sdf.format(chamCongModel.getNgayChamCong()), gioRa, trangThai});
+        }
+    }
 }

@@ -317,7 +317,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					int j = 0;
 					try {
 						i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("7:30:00 AM"));
-						j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("9:00:00 AM"));
+						j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("11:00:00 AM"));
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}

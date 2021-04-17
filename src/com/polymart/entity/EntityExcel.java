@@ -64,8 +64,8 @@ public class EntityExcel {
             cellHeader.setCellValue(table.getColumnName(i));
             cellHeader.setCellStyle(createStyleForHeader(sheet));
         }
-        for (int i = 1; i < table.getRowCount(); i++) {
-            Row row = sheet.createRow(i);
+        for (int i = 0; i < table.getRowCount(); i++) {
+            Row row = sheet.createRow(i + 1);
             for (int j = 0; j < table.getColumnCount(); j++) {
                 Cell cell = row.createCell(j);
                 cell.setCellValue(table.getValueAt(i, j).toString());

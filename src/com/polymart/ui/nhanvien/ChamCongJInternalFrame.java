@@ -313,7 +313,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
                             i = sdf.parse(sdf.format(now)).compareTo(
                                     sdf.parse("7:30:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
                             j = sdf.parse(sdf.format(now)).compareTo(
-                                    sdf.parse("11:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+                                    sdf.parse("9:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -468,21 +468,17 @@ public class ChamCongJInternalFrame extends JInternalFrame {
             int i = 0;
             String gioChamCong = sdf.format(chamCongModel.getNgayChamCong());
             try {
-                if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
-                    i = sdf.parse(gioChamCong)
-                            .compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-                }
+                i = sdf.parse(gioChamCong)
+                        .compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            int j = 0;
+            int j = -1;
             if (chamCongModel.getGioRa() != null) {
                 String gioRa = sdf.format(chamCongModel.getGioRa());
                 try {
-                    if (calendar.get(Calendar.AM_PM) == Calendar.PM) {
-                        j = sdf.parse(gioRa).compareTo(
-                                sdf.parse("10:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-                    }
+                    j = sdf.parse(gioRa).compareTo(
+                            sdf.parse("9:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -499,7 +495,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
                 trangThai = "Đúng Giờ";
             }
             if (gioRa.length() > 0) {
-                if (j == 1) {
+                if (j == 1 || j == 0) {
                     trangThai = trangThai + ", Về Đúng Giờ";
                 } else {
                     trangThai = trangThai + ", Về Sớm";

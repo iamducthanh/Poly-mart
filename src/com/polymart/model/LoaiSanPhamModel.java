@@ -11,4 +11,9 @@ public class LoaiSanPhamModel extends AbstractModel {
 		this.tenLoaiSP = tenLoaiSP;
 	}
 
+	@Override
+	public String toString() {
+		return "LoaiSanPhamModel [tenLoaiSP=" + tenLoaiSP + "]";
+	}
+
 }

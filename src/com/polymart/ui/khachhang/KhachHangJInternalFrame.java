@@ -241,21 +241,21 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
 
-		txtFind.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtFind.getText().equals(" Tìm theo tên, số điện thoại")) {
-					txtFind.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtFind.getText().equals("")) {
-					txtFind.setText(" Tìm theo tên, số điện thoại");
-				}
-			}
-		});
+//		txtFind.addFocusListener(new FocusAdapter() {
+//			@Override
+//			public void focusGained(FocusEvent e) {
+//				if (txtFind.getText().equals(" Tìm theo tên, số điện thoại")) {
+//					txtFind.setText("");
+//				}
+//			}
+//
+//			@Override
+//			public void focusLost(FocusEvent e) {
+//				if (txtFind.getText().equals("")) {
+//					txtFind.setText(" Tìm theo tên, số điện thoại");
+//				}
+//			}
+//		});
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -287,6 +287,8 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 				btnConfirm();
 			}
 		});
+		tblKhachHang.setRowHeight(25);
+
 	}
 
 	protected void focusLostTextFind() {
@@ -441,11 +443,11 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		txtDiaChi.setText(null);
 		txtTenKhachHang.setText(null);
 		txtSoDienThoai.setText(null);
-		txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
 	}
 
 	private void createNew() {
 		clear();
+		txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
 		tblKhachHang.clearSelection();
 		index = -1;
 		enableFuntion();

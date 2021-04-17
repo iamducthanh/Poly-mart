@@ -146,7 +146,6 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 }
             }
         });
-
         JButton btnTimKiem = new JButton("Tìm kiếm");
         panel1.add(btnTimKiem);
         JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
@@ -251,6 +250,13 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+        tableTraHang.setRowHeight(25);
+        tableTraHang.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tableTraHang.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tableTraHang.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
 
     }
 

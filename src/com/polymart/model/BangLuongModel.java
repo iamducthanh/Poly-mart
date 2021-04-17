@@ -5,11 +5,20 @@ public class BangLuongModel {
 	private String hoTen;
 	private int soNgayDiLam;
 	private int soNgayDiMuon;
+	private int soNgayVeSom;
 
 	private Long luong;
 
 	public Long getLuong() {
 		return luong;
+	}
+
+	public int getSoNgayVeSom() {
+		return soNgayVeSom;
+	}
+
+	public void setSoNgayVeSom(int soNgayVeSom) {
+		this.soNgayVeSom = soNgayVeSom;
 	}
 
 	public void setLuong(long luong) {

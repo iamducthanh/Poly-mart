@@ -43,12 +43,10 @@ import com.polymart.ui.nhanvien.CaNhanFrame;
 import com.polymart.ui.nhanvien.ChamCongJInternalFrame;
 import com.polymart.ui.nhanvien.NhanVienJInternalFrame;
 import com.polymart.ui.taikhoan.LoginJFrame;
+import com.polymart.ui.thongke.ThongKeDoanhSoJInternalFrame;
 import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class PolyMartMain extends JFrame {
-	
-	int a;
-
 	private static final long serialVersionUID = 6825346390245174222L;
 
 	public JDesktopPane pnlMain = new JDesktopPane();
@@ -96,11 +94,11 @@ public class PolyMartMain extends JFrame {
 		menuBar.add(mnTongQuan);
 		
 		JMenuItem mntmDoanhThu = new JMenuItem("Thống kê doanh thu");
-		mntmDoanhThu.setIcon(new ImageIcon("C:\\Users\\ADMIN\\git\\Poly-mart\\images\\doanhthu.png"));
+		mntmDoanhThu.setIcon(new ImageIcon("images\\doanhthu.png"));
 		mnTongQuan.add(mntmDoanhThu);
 		
 		JMenuItem mntnDoanhSo = new JMenuItem("Thống kê doanh số bán ra");
-		mntnDoanhSo.setIcon(new ImageIcon("C:\\Users\\ADMIN\\git\\Poly-mart\\images\\doanhso.png"));
+		mntnDoanhSo.setIcon(new ImageIcon("images\\doanhso.png"));
 		mnTongQuan.add(mntnDoanhSo);
 
 		JMenu mnHangHoa = new JMenu("Hàng hóa");
@@ -220,6 +218,7 @@ public class PolyMartMain extends JFrame {
 		mntmBangTinhLuong.addActionListener(openBangLuong);
 		mntmCaNhan.addActionListener(openCaNhan);
 		mntmDoanhThu.addActionListener(openDoanhThu);
+		mntnDoanhSo.addActionListener(openDoanhSo);
 		
 		JLabel back = new JLabel("");
 		ImageIcon imageIcon = new ImageIcon("C:\\Users\\ADMIN\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper");
@@ -291,6 +290,17 @@ public class PolyMartMain extends JFrame {
 		loadChild(new ThongKeDoanhThuJInternalFrame());
 		setTitle("Thống kê doanh thu");
 	}
+	
+	ActionListener openDoanhSo = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			openDoanhSo();
+		}
+	};
+
+	public void openDoanhSo() {
+		loadChild(new ThongKeDoanhSoJInternalFrame());
+		setTitle("Thống kê doanh số");
+	}
 
 	ActionListener openNhanVien = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -346,7 +356,7 @@ public class PolyMartMain extends JFrame {
 
 	public void openChiTieu() {
 		loadChild(new BaoCaoChiTieuJInternalFrame());
-		setTitle("Báo cáo - Chi tiêu");
+		setTitle("Giao dịch - Chi tiêu");
 	}
 
 	ActionListener openNhapHang = new ActionListener() {

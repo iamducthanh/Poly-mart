@@ -125,7 +125,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		// setExtendedState(JFrame.MAXIMIZED_BOTH);
 		initTopNhanVien();
 		initCenterNhanVien();
-
 		loadComboboxChucVu();
 		try {
 			index = 0;
@@ -135,6 +134,8 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		tblNhanVien.setRowHeight(25);
+
 	}
 
 	public void initTopNhanVien() {
@@ -306,6 +307,16 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(515, Short.MAX_VALUE)));
 		panelLeft.setLayout(gl_panelLeft);
+		
+        tblNhanVien.getColumnModel().getColumn(0).setPreferredWidth(130);
+        tblNhanVien.getColumnModel().getColumn(1).setPreferredWidth(250);
+        tblNhanVien.getColumnModel().getColumn(2).setPreferredWidth(220);
+        tblNhanVien.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tblNhanVien.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tblNhanVien.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tblNhanVien.getColumnModel().getColumn(6).setPreferredWidth(130);
+        tblNhanVien.getColumnModel().getColumn(7).setPreferredWidth(130);
+        tblNhanVien.getColumnModel().getColumn(8).setPreferredWidth(230);
 	}
 
 	protected void comboBoxSelected() {

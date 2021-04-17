@@ -369,7 +369,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 evtBtnHoanThanh(cbbNguonHang, txtGhiChu);
             }
         });
-
+        tableDSNhapHang.setRowHeight(25);
+        tableDSSanPham.setRowHeight(25);
     }
 
     // set cột của table
@@ -470,6 +471,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 }
             }
         }
+        
     }
 
 

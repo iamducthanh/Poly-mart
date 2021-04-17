@@ -139,7 +139,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         contentPane.add(hangHoaJPanel, BorderLayout.WEST);
         panel.add(panel1, BorderLayout.EAST);
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
         initTopThanhToan();
         initCenterThanhToan();
 //        initFrameThem();
@@ -252,25 +251,13 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         tableThanhToan = new JTable();
         scrollPane.setViewportView(tableThanhToan);
         modelThanhToan.addColumn("Mã hóa đơn");
-        modelThanhToan.addColumn("Mã khách hàng");
-        modelThanhToan.addColumn("Mã nhân viên");
+        modelThanhToan.addColumn("Tên khách hàng");
+        modelThanhToan.addColumn("Nhân viên");
         modelThanhToan.addColumn("Tổng tiền");
         modelThanhToan.addColumn("Ngày tạo");
         modelThanhToan.addColumn("Ghi chú");
 
         tableThanhToan.setModel(modelThanhToan);
-
-        // table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//		table.getColumnModel().getColumn(0).setPreferredWidth(50);
-//		table.getColumnModel().getColumn(1).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(2).setPreferredWidth(150);
-//		table.getColumnModel().getColumn(3).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(4).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(5).setPreferredWidth(120);
-//		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-//		table.getColumnModel().getColumn(7).setPreferredWidth(130);
-//		table.getColumnModel().getColumn(8).setPreferredWidth(130);
-//		table.getColumnModel().getColumn(9).setPreferredWidth(130);
 
         // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonThanhToan
         tableThanhToan.addMouseListener(new MouseAdapter() {
@@ -293,6 +280,14 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                 evtBtnLoc(dateChooser);
             }
         });
+        tableThanhToan.setRowHeight(25);
+        
+        tableThanhToan.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tableThanhToan.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tableThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tableThanhToan.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tableThanhToan.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tableThanhToan.getColumnModel().getColumn(4).setPreferredWidth(120);
 
     }
 

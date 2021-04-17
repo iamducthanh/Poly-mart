@@ -52,7 +52,7 @@ public class ChiTietHoaDonTraHang extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
+   
         JLabel lblNewLabel = new JLabel("Chi tiết hóa đơn trả hàng");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
         lblNewLabel.setBounds(20, 11, 307, 39);
@@ -102,6 +102,8 @@ public class ChiTietHoaDonTraHang extends JFrame {
                     x.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
             });
         }
+        tableChiTietHoaDonTraHang.setRowHeight(25);
+
     }
 
 }

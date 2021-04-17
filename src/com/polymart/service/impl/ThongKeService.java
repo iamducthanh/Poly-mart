@@ -17,6 +17,12 @@ public class ThongKeService implements IThongKeService{
 		return rsYear;
 	}
 	
+	public ResultSet findMonth() {
+		String sql = "select distinct month(NGAYTHANHTOAN) as thang from HOADONTHANHTOAN order by thang desc";
+		ResultSet rsYear = excute(sql);
+		return rsYear;
+	}
+	
 	public ResultSet loadTableThongKeDoanhThu(String year, String month) {
 		String sql = "EXEC THONG_KE_DOANH_THU " + year + ", " + month;
 		ResultSet resultSet = excute(sql);

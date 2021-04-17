@@ -52,13 +52,11 @@ public class ChiTietSanPhamFrame extends JFrame {
     private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
     private IAnhSanPhamService anhSanPhamService = new AnhSanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
-
     private ImageIcon imageIcon;
     private Image image;
     private Image newimg;
 
     private HangHoaJInternalFrame hangHoaJInternalFrame;
-
     /**
      * Launch the application.
      */

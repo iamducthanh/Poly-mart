@@ -13,8 +13,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -33,9 +35,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.dao.impl.ChiTieuDao;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTieuModel;
 import com.toedter.calendar.JCalendar;
+import java.awt.Color;
 
 public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 
@@ -132,61 +136,53 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 			}
 		});
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE)
-					.addGap(266)
-					.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-					.addGap(0))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(gl_panel
+				.createSequentialGroup().addContainerGap()
+				.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 346, GroupLayout.PREFERRED_SIZE).addGap(266)
+				.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(18)
+				.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE).addGap(0)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnThmMi_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
-
 	}
+
 	// Xóa Phiếu Chi Tiêu
 	protected void xoaPhieuChi() {
-		if(!EntityMessage.confirm(null, "Bạn Có Chắc Chắn Muốn Xóa Không")) {
+		if (!EntityMessage.confirm(null, "Bạn Có Chắc Chắn Muốn Xóa Không")) {
 			return;
 		}
 		int select = tableChiTieu.getSelectedRow();
 		String maCT = String.valueOf(tableChiTieu.getValueAt(select, 0));
 		int id = Integer.parseInt(maCT.replace("PC", ""));
-//		String nguoiXoa ="Người Xóa : " +EntityAuthorization.USER.getHoTen()+"("+EntityAuthorization.USER.getId() +")";
-		chiTieu.delete(id);
+		Date now = new Date();
+		String ghiChu =EntityAuthorization.USER.getHoTen() + " Đã Xóa Vào "+ new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a").format(now);
+		chiTieu.delete(id,ghiChu);
 		loadList();
 		fillTable();
 	}
 
 	// tìm kiếm phiếu chi tiêu theo mã chi tiêu hoặc theo mục đích
 	protected void timKiemChiTieu() {
-		if(txtTimKiem.getText().isBlank()) {
+		if (txtTimKiem.getText().isBlank()) {
 //			modelChiTieu.setRowCount(0);
 			return;
 		}
 		list.clear();
 		List<ChiTieuModel> listAll = new ArrayList<ChiTieuModel>();
-		listAll=chiTieu.findAll();
+		listAll = chiTieu.findAll();
 		for (ChiTieuModel chiTieuModel : listAll) {
 			String mucDichChiTieu = chiTieuModel.getMucDichChiTieu().toLowerCase();
 			String timKiem = txtTimKiem.getText().toLowerCase();
-			String maCT ="PC"+ String.valueOf(chiTieuModel.getMaCT());
-			if(maCT.toLowerCase().contains(timKiem)||mucDichChiTieu.contains(timKiem)){
+			String maCT = "PC" + String.valueOf(chiTieuModel.getMaCT());
+			if (maCT.toLowerCase().contains(timKiem) || mucDichChiTieu.contains(timKiem)) {
 				list.add(chiTieuModel);
 			}
 		}
@@ -233,34 +229,38 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		});
 
 		JButton btnNewButton = new JButton("Hôm Nay");
+		btnNewButton.setBackground(Color.GREEN);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				timChiTieuHomNay();
 			}
 		});
-		
+
 		JButton btnAll = new JButton("Tất Cả");
+		btnAll.setBackground(Color.GREEN);
 		btnAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				xemTatCa();
 			}
 		});
-		
+
 		JButton btnXemLaiLichSu = new JButton("Lịch Sử Phiếu Đã Xóa");
+		btnXemLaiLichSu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				xemLichSuXoaPhieu();
+			}
+		});
+		btnXemLaiLichSu.setBackground(Color.GREEN);
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addGap(5)
-					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnAll))
-				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnXemLaiLichSu))
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnXemLaiLichSu, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnAll, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(dateChamCong, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 		);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
@@ -268,12 +268,12 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 					.addGap(5)
 					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(btnAll))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnXemLaiLichSu)
-					.addContainerGap(365, Short.MAX_VALUE))
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAll, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnXemLaiLichSu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(281, Short.MAX_VALUE))
 		);
 		dateChamCong.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -283,12 +283,24 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 			}
 		});
 		panelLeft.setLayout(gl_panelLeft);
+		tableChiTieu.setRowHeight(25);
+
 	}
+
+	protected void xemLichSuXoaPhieu() {
+		list.clear();
+		ChiTieuDao chiTieuDao = new ChiTieuDao();
+		list = chiTieuDao.findAllLichSuXoa();
+		fillTable();
+		
+	}
+
 	// Xem Tất Cả Phiếu Chi
 	protected void xemTatCa() {
 		loadList();
 		fillTable();
 	}
+
 	// Tìm Phiếu Chi Ngày Hiện Tại
 	protected void timChiTieuHomNay() {
 		list.clear();
@@ -296,10 +308,11 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		int nam = calendar.get(Calendar.YEAR);
 		int thang = calendar.get(Calendar.MONTH) + 1;
 		int ngay = calendar.get(Calendar.DAY_OF_MONTH);
-		list = chiTieu.findTheoNgay(nam, thang,ngay);
+		list = chiTieu.findTheoNgay(nam, thang, ngay);
 		fillTable();
-		
+
 	}
+
 	// Tìm Tất Cả Phiếu Chi Của Tháng Đã Chọn
 	protected void timChiTieuThang() {
 		list.clear();
@@ -308,8 +321,9 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		int thang = calendar.get(Calendar.MONTH) + 1;
 		list = chiTieu.findTheoThang(nam, thang);
 		fillTable();
-		
+
 	}
+
 	// Tìm Tất Cả Phiếu Chi Theo NGày Đc Chọn
 	protected void timKiemTheoNgay() {
 		list.clear();
@@ -330,10 +344,12 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 	// load table Chi Tiêu
 	public void fillTable() {
 		modelChiTieu.setRowCount(0);
-		for (ChiTieuModel x : list) {
-			modelChiTieu.addRow(new Object[] { "PC" + x.getMaCT(), x.getHoTen(), x.getMucDichChiTieu(),
-					x.getNgayChiTieu(), x.getSoTien(), x.getGhiChu() });
+		if (list.size() > 0) {
+			for (ChiTieuModel x : list) {
+				modelChiTieu.addRow(new Object[] { "PC" + x.getMaCT(), x.getHoTen(), x.getMucDichChiTieu(),
+						x.getNgayChiTieu(), x.getSoTien(), x.getGhiChu() });
+			}
+			btnXoa.setEnabled(false);
 		}
-		btnXoa.setEnabled(false);
 	}
 }

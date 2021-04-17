@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -35,10 +38,22 @@ import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
 
 public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
-
+	class thongke{
+		String thang;
+		int soLuongBan;
+		double doanhThu;
+		
+		public thongke(String thang, int soLuongBan, double doanhThu) {
+			this.thang = thang;
+			this.soLuongBan = soLuongBan;
+			this.doanhThu = doanhThu;
+		}
+	}
 	/**
 	 * 
 	 */
+	
+	ArrayList<thongke> listThongKe = new ArrayList<thongke>();
 	private static final long serialVersionUID = 8758462980711626613L;
 	private JPanel contentPane;
 	private JTable tableThongKe;
@@ -46,12 +61,13 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	JScrollPane scrollPaneBang = new JScrollPane();
 	ChartPanel chartPanel;
 
-	//DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+	// DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 	JComboBox<String> cbbNam = new JComboBox<String>();
 
 	private DefaultTableModel modelThongKe = new DefaultTableModel();
-		DecimalFormat fm = new DecimalFormat("#.###");
-
+	DecimalFormat fm = new DecimalFormat("###");
+    Locale localeVN = new Locale("vi", "VN");
+    NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 
 	/**
 	 * Launch the application.
@@ -81,127 +97,107 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel = new JLabel("Thống kê doanh thu");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel)
-					.addContainerGap(634, Short.MAX_VALUE))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+				gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
+						.addContainerGap().addComponent(lblNewLabel).addContainerGap(634, Short.MAX_VALUE)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+				gl_panel.createSequentialGroup()
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel.setLayout(gl_panel);
-		
+
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.WEST);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Lựa chọn hiển thị");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Năm");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
+
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(10)
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(10).addComponent(panel_2,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addContainerGap(20, Short.MAX_VALUE)
-					.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(47)
-					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(293, Short.MAX_VALUE))
-		);
-		
+				.addContainerGap())
+				.addGroup(Alignment.TRAILING,
+						gl_panel_1.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
+								.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
+				.createSequentialGroup()
+				.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addGap(47).addComponent(lblNewLabel_1).addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+				.addContainerGap(293, Short.MAX_VALUE)));
+
 		JRadioButton rdoTheoBang = new JRadioButton("Theo bảng");
 		rdoTheoBang.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
+
 		JRadioButton rdoBieuDo = new JRadioButton("Biểu đồ");
 		rdoBieuDo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-					.addGap(14)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addComponent(rdoBieuDo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-						.addComponent(rdoTheoBang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(rdoTheoBang)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(rdoBieuDo)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				gl_panel_2.createSequentialGroup().addGap(14)
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+								.addComponent(rdoBieuDo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 144,
+										Short.MAX_VALUE)
+								.addComponent(rdoTheoBang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 144,
+										Short.MAX_VALUE))
+						.addContainerGap()));
+		gl_panel_2.setVerticalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup().addContainerGap().addComponent(rdoTheoBang)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(rdoBieuDo)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel_2.setLayout(gl_panel_2);
 		panel_1.setLayout(gl_panel_1);
-		
+
 		contentPane.add(panelContent, BorderLayout.CENTER);
 		panelContent.setLayout(new BorderLayout(0, 0));
-				
+
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
-		
+
 		ButtonGroup gr = new ButtonGroup();
 		gr.add(rdoBieuDo);
 		gr.add(rdoTheoBang);
 		rdoTheoBang.setSelected(true);
-		
+
 		tableThongKe = new JTable();
 		scrollPaneBang.setViewportView(tableThongKe);
 		modelThongKe.addColumn("Tháng");
 		modelThongKe.addColumn("Sản phẩm bán");
 		modelThongKe.addColumn("Doanh thu");
 		tableThongKe.setModel(modelThongKe);
-		
-	//	rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-	//	tableThongKe.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
-	//	tableThongKe.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
-	//	tableThongKe.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
-		
+
+		// rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		// tableThongKe.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+		// tableThongKe.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
+		// tableThongKe.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+
 		try {
 			fillCbbYear();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		loadTableDoanhThu();		
+		loadTableDoanhThu();
 		rdoBieuDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadBieuDoDoanhThu(modelThongKe);
@@ -210,24 +206,30 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		});
 		cbbNam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadTableDoanhThu();		
+				loadTableDoanhThu();
 
 			}
 		});
+
+		tableThongKe.setRowHeight(25);
 	}
-	
+
 	public void loadTableDoanhThu() {
 		modelThongKe.setRowCount(0);
 		ThongKeService thongKeService = new ThongKeService();
-		for(int i = 1; i< 13;i++) {
-			ResultSet resultSet = thongKeService.loadTableThongKeDoanhThu((String) cbbNam.getSelectedItem(), String.valueOf(i));
+		for (int i = 1; i < 13; i++) {
+			ResultSet resultSet = thongKeService.loadTableThongKeDoanhThu((String) cbbNam.getSelectedItem(),
+					String.valueOf(i));
 			try {
-				while(resultSet.next()) {
+				while (resultSet.next()) {
 
-					if(resultSet.getString(1) == null) {
-						modelThongKe.addRow(new Object[] {"Tháng "+i, 0,0});
+					if (resultSet.getString(1) == null) {
+						listThongKe.add(new thongke("Tháng " +i, 0, 0));
+						modelThongKe.addRow(new Object[] { "Tháng " + i, 0, 0 });
 					} else {
-						modelThongKe.addRow(new Object[] {"Tháng "+i, resultSet.getString(2),fm.format(resultSet.getDouble(1))});
+						listThongKe.add(new thongke("Tháng " +i, Integer.valueOf(resultSet.getString(2)), resultSet.getDouble(1)));
+						modelThongKe.addRow(new Object[] { "Tháng " + i, resultSet.getString(2),
+								currencyVN.format(resultSet.getDouble(1)) });
 					}
 				}
 			} catch (SQLException e) {
@@ -238,31 +240,32 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		panelContent.add(scrollPaneBang, BorderLayout.CENTER);
 		scrollPaneBang.setVisible(true);
 	}
-	
+
+	@SuppressWarnings("static-access")
 	public void loadBieuDoDoanhThu(DefaultTableModel model) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for(int i=1;i<13;i++) {
-			String so = String.valueOf(model.getValueAt(i-1, 2));
+		for (int i = 1; i < 13; i++) {
+			String so = String.valueOf(listThongKe.get(i-1).doanhThu);
 			Double soNguoi = Double.parseDouble(so);
-			String month = "Tháng "+i;
+			String month = "Tháng " + i;
 			dataset.addValue(soNguoi, "Doanh thu", month);
 		}
-		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu", dataset, PlotOrientation.VERTICAL, false, false, false);
-        chartPanel = new ChartPanel(barChart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
-        JFrame frame = new JFrame();
-        frame.getContentPane().add(chartPanel);
-        frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
-        frame.setSize(new uiCommon().width / 100 *90, new uiCommon().height / 100 * 80);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setVisible(true);
+		JFreeChart barChart = ChartFactory.createBarChart("Biểu đồ thống kê doanh thu trong năm", "Tháng", "Doanh thu",
+				dataset, PlotOrientation.VERTICAL, false, false, false);
+		chartPanel = new ChartPanel(barChart);
+		chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(chartPanel);
+		frame.setTitle("Biểu đồ thống kê doanh thu trong năm");
+		frame.setSize(new uiCommon().width / 100 * 90, new uiCommon().height / 100 * 80);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		frame.setVisible(true);
 	}
 
-	
 	public void fillCbbYear() throws SQLException {
 		ResultSet cbbYear = new ThongKeService().findYear();
-		while(cbbYear.next()) {
+		while (cbbYear.next()) {
 			try {
 				cbbNam.addItem(cbbYear.getString(1));
 			} catch (SQLException e) {

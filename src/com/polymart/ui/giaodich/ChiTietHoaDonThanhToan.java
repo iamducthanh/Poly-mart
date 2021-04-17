@@ -50,7 +50,6 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
         JLabel lblNewLabel = new JLabel("Chi tiết hóa đơn thanh toán");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
         lblNewLabel.setBounds(20, 11, 307, 39);
@@ -118,5 +117,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
                     e.getTraHang(),
                     e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem()});
         }
+        tableChiTietHoaDonThanhToan.setRowHeight(25);
+
     }
 }

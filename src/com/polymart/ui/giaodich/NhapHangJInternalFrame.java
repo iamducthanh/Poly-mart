@@ -56,7 +56,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
     private JPanel contentPane;
     private JPanel panel = new JPanel();
-    private JPanel panel1 = new JPanel();
     private JPanel hangHoaJPanel = new JPanel();
 
     private JTextField txtTimPhieuNhap;
@@ -114,11 +113,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         contentPane.setLayout(new BorderLayout(0, 0));
         contentPane.add(panel, BorderLayout.NORTH);
         panel.setBounds(68, 120, 96, 20);
-        panel.setLayout(new BorderLayout(0, 0));
 
         contentPane.add(hangHoaJPanel, BorderLayout.WEST);
-        panel.add(panel1, BorderLayout.EAST);
-        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         initTopNhapHang();
         initCenterNhapHang();
@@ -127,13 +123,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     public void initTopNhapHang() {
         setTitle("Hàng hóa - Kiểm kho");
 
-        JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng        ");
+        JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-        panel.add(lblNewLabel, BorderLayout.WEST);
 
         txtTimPhieuNhap = new JTextField();
         txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
-        panel.add(txtTimPhieuNhap, BorderLayout.CENTER);
         txtTimPhieuNhap.setColumns(10);
         txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
             @Override
@@ -151,18 +145,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             }
         });
 
-        JButton btnTimKiem = new JButton("Tìm kiếm");
-        panel1.add(btnTimKiem);
-        JLabel lblNewLabel_1 = new JLabel("                        ");
-        panel1.add(lblNewLabel_1);
-
-        JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
-        panel1.add(btnThemPhieuNhap);
-        JButton btnXoa = new JButton("- Xoá ");
-        panel1.add(btnXoa);
-        JButton btnExport = new JButton("→ Xuất file ");
-        panel1.add(btnExport);
-
         optionKiemKhoFrame.setSize(344, 234);
         optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
         panelOption = new JPanel();
@@ -172,28 +154,72 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
         optionKiemKhoFrame.getContentPane().add(panelOption);
         optionKiemKhoFrame.setUndecorated(true);
-
-        JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
-        cbbOptionKiemKho.addItem("≡");
-        panel1.add(cbbOptionKiemKho);
-
-        btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
-
-        // tìm kiếm hóa đơn
-        btnTimKiem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                evtBtnSearchById(txtTimPhieuNhap);
-            }
+        
+                btnTimKiem = new JButton("Tìm kiếm");
+                
+                        // tìm kiếm hóa đơn
+                        btnTimKiem.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                evtBtnSearchById(txtTimPhieuNhap);
+                            }
+                        });
+        
+                btnThemPhieuNhap = new JButton("+ Thêm mới ");
+                
+                        btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
+        btnXoa = new JButton("- Xoá ");
+        
+                // xóa hóa đơn
+                btnXoa.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        evtBtnXoa(tableNhapHang);
+                    }
+                });
+        btnExport = new JButton("→ Xuất file ");
+        btnExport.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
         });
-
-        // xóa hóa đơn
-        btnXoa.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                evtBtnXoa(tableNhapHang);
-            }
-        });
+        
+                cbbOptionKiemKho = new JComboBox<String>();
+                cbbOptionKiemKho.addItem("≡");
+        GroupLayout gl_panel = new GroupLayout(panel);
+        gl_panel.setHorizontalGroup(
+        	gl_panel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+        			.addGap(12)
+        			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+        			.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(cbbOptionKiemKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(8))
+        );
+        gl_panel.setVerticalGroup(
+        	gl_panel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addGap(5)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(cbbOptionKiemKho, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panel.setLayout(gl_panel);
             }
 
     public void initCenterNhapHang() {
@@ -205,24 +231,31 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
         JButton btnLocTheoNgay = new JButton("Lọc");
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-        gl_hangHoaJPanel.setHorizontalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-                .addGroup(gl_hangHoaJPanel.createSequentialGroup().addContainerGap()
-                        .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                                .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnLocTheoNgay)
-                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        gl_hangHoaJPanel.setVerticalGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_hangHoaJPanel.createSequentialGroup().addGap(5).addComponent(lblNewLabel_9)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-                                GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnLocTheoNgay)
-                        .addContainerGap(141, Short.MAX_VALUE)));
-
+        gl_hangHoaJPanel.setHorizontalGroup(
+        	gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+        			.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+        					.addGap(10)
+        					.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+        						.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        gl_hangHoaJPanel.setVerticalGroup(
+        	gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_hangHoaJPanel.createSequentialGroup()
+        			.addGap(5)
+        			.addComponent(lblNewLabel_9)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        			.addGap(11)
+        			.addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+        );
         hangHoaJPanel.setLayout(gl_hangHoaJPanel);
-        panel.add(panel1, BorderLayout.EAST);
-        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         tableNhapHang = new JTable();
         scrollPane.setViewportView(tableNhapHang);
@@ -289,6 +322,11 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             setOpenThemPhieuNhapHang();
         }
     };
+    private JButton btnTimKiem;
+    private JButton btnThemPhieuNhap;
+    private JButton btnXoa;
+    private JButton btnExport;
+    private JComboBox<String> cbbOptionKiemKho;
 
     private void setOpenThemPhieuNhapHang() {
         ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame(this);

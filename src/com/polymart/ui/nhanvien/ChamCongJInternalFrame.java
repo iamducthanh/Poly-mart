@@ -131,7 +131,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
 					.addGap(100)
 					.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 343, GroupLayout.PREFERRED_SIZE))
 		);

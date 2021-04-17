@@ -49,7 +49,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
     private JPanel contentPane;
     private JPanel panelOption;
-    private JTextField txtFind;
     private JTable tblHangHoa;
     private DefaultTableModel modelHangHoa;
     private String columnHangHoa[] = {"Mã sản phẩm", "Tên sản phẩm", "Loại", "Số lượng", "Giá bán", "Giá vốn",
@@ -118,22 +117,57 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         pnlTop.setBounds(68, 120, 96, 20);
 
         contentPane.add(pnlNavibar, BorderLayout.WEST);
-        pnlTop.setLayout(new BoxLayout(pnlTop, BoxLayout.X_AXIS));
-
-        Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-        pnlTop.add(horizontalStrut_1);
         JLabel lblTitle = new JLabel("Hàng hóa");
         lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
-        pnlTop.add(lblTitle);
-
-        Component horizontalStrut = Box.createHorizontalStrut(95);
-        pnlTop.add(horizontalStrut);
-
+        
         txtFind = new JTextField();
-        txtFind.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
         txtFind.setText(" Tìm theo mã, tên hàng");
         txtFind.setColumns(10);
-        pnlTop.add(txtFind);
+        
+        JButton btnTimKiem = new JButton("Tìm kiếm");
+        
+        JButton btnOption = new JButton("");
+        btnOption.setIcon(new ImageIcon("images\\danhmuc.png"));
+        
+        JButton btnExport = new JButton("Export");
+        
+        JButton btnThemHang = new JButton("+ Thêm mới");
+        GroupLayout gl_pnlTop = new GroupLayout(pnlTop);
+        gl_pnlTop.setHorizontalGroup(
+        	gl_pnlTop.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlTop.createSequentialGroup()
+        			.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnTimKiem)
+        			.addPreferredGap(ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+        			.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnOption)
+        			.addContainerGap())
+        );
+        gl_pnlTop.setVerticalGroup(
+        	gl_pnlTop.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(Alignment.LEADING, gl_pnlTop.createSequentialGroup()
+        			.addGap(5)
+        			.addGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_pnlTop.createSequentialGroup()
+        					.addGap(5)
+        					.addGroup(gl_pnlTop.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnOption, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
+        			.addGap(5))
+        );
+        pnlTop.setLayout(gl_pnlTop);
+
         txtFind.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -150,39 +184,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
             }
         });
 
-        Component horizontalGlue = Box.createHorizontalGlue();
-        pnlTop.add(horizontalGlue);
-
-        JButton btnTimKiem = new JButton("Tìm kiếm");
-        btnTimKiem.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        pnlTop.add(btnTimKiem);
-
-        Component horizontalStrut_2 = Box.createHorizontalStrut(120);
-        pnlTop.add(horizontalStrut_2);
-
-        JButton btnThemHang = new JButton("+ Thêm mới");
-        btnThemHang.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        pnlTop.add(btnThemHang);
         btnThemHang.addActionListener(themSanPham);
-
-        JButton btnImport = new JButton("Import");
-        btnImport.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        pnlTop.add(btnImport);
-        btnImport.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	try {
-            		modelHangHoa.setRowCount(0);
-					new EntityExcel().importExcel(modelHangHoa);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-            }
-        });
         
-        JButton btnExport = new JButton("Export");
-        btnExport.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        pnlTop.add(btnExport);
         btnExport.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -195,14 +198,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 				}
             }
         });
-        JButton btnOption = new JButton("");
         btnOption.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 optionClicked();
             }
         });
-        pnlTop.add(btnOption);
-        btnOption.setIcon(new ImageIcon("images\\danhmuc.png"));
 
         initTopHangHoa();
         initCenterHangHoa();
@@ -439,6 +439,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
             themHangHoaJInternalFrame.setVisible(true);
         }
     };
+    private JTextField txtFind;
 
     private void clickTable(int row) {
         new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);

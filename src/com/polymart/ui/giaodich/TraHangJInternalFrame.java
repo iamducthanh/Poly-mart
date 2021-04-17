@@ -11,6 +11,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -162,6 +164,11 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 
                         btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
         JButton btnExport = new JButton("→ Xuất file ");
+        btnExport.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		evtBtnXuatFileExcel();
+        	}
+        });
         JButton btnXoa = new JButton("- Xoá ");
         
                 // xóa
@@ -387,6 +394,17 @@ public class TraHangJInternalFrame extends JInternalFrame {
             }
         } else {
             EntityMessage.show(this, "Vui lòng chọn 1 hàng");
+        }
+    }
+
+    // xuất file excel
+    private void evtBtnXuatFileExcel() {
+        try {
+            EntityExcel.exportExcel(tableTraHang);
+            EntityMessage.show(this, "Lưu thành côngg");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            EntityMessage.show(this, "Lưu thất bại");
         }
     }
 

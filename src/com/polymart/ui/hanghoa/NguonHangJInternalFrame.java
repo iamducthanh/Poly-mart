@@ -54,6 +54,10 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 	DefaultTableModel modelNguonHang = new DefaultTableModel();
 	private INguonHangService nguonHangService = new NguonHangService();
 	private List<NguonHangModel> listNguonHang;
+	JButton btnXoa = new JButton("Xóa");
+	JButton btnCapNhat = new JButton("Cập nhật");
+	JButton btnThem = new JButton("Thêm");
+	JButton btnMoi = new JButton("Tạo mới");
 
 	/**
 	 * Launch the application.
@@ -146,25 +150,25 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
-		JButton btnXoa = new JButton("Xóa");
+	
 		btnXoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnXoa();
 			}
 		});
-		JButton btnCapNhat = new JButton("Cập nhật");
+		
 		btnCapNhat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnCapNhat();
 			}
 		});
-		JButton btnThem = new JButton("Thêm");
+		
 		btnThem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnThem();
 			}
 		});
-		JButton btnMoi = new JButton("Tạo mới");
+
 		btnMoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
@@ -334,6 +338,10 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		for (NguonHangModel i : listNguonHang) {
 			modelNguonHang.addRow(new Object[] { i.getTenNguonHang(), i.getDiaChi(), i.getSdt() });
 		}
+		btnXoa.setEnabled(true);
+		btnCapNhat.setEnabled(true);
+		btnThem.setEnabled(false);
+		display(0);
 	}
 
 	void display(int row) {
@@ -350,7 +358,9 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		txtNguonHang.setText("");
 		txtDiaChi.setText("");
 		txtSoDT.setText("");
-
+		btnCapNhat.setEnabled(false);
+		btnXoa.setEnabled(false);
+		btnThem.setEnabled(true);
 	}
 
 	// Xóa nguồn hàng đã chọn

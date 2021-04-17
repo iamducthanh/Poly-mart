@@ -11,6 +11,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -172,7 +174,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
 		optionKiemKhoFrame.getContentPane().add(panelOption);
 		optionKiemKhoFrame.setUndecorated(true);
-
 		JButton btnTimKiem = new JButton("Tìm kiếm");
 
 		// tìm kiếm
@@ -308,13 +309,21 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 			}
 		});
 		tableThanhToan.setRowHeight(25);
-
 		tableThanhToan.getColumnModel().getColumn(0).setPreferredWidth(50);
 		tableThanhToan.getColumnModel().getColumn(1).setPreferredWidth(150);
 		tableThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
 		tableThanhToan.getColumnModel().getColumn(3).setPreferredWidth(120);
 		tableThanhToan.getColumnModel().getColumn(4).setPreferredWidth(120);
 		tableThanhToan.getColumnModel().getColumn(4).setPreferredWidth(120);
+        // lọc theo ngày
+        btnLocTheoNgay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLoc(dateChooser);
+            }
+        });
+        tableThanhToan.setRowHeight(25);
+
 
 	}
 
@@ -421,16 +430,26 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	public List<HoaDonThanhToanModel> getList() {
 		return lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
 	}
+    // xuất file excel
+    private void evtBtnXuatFileExcel() {
+        try {
+            EntityExcel.exportExcel(tableThanhToan);
+            EntityMessage.show(this, "Lưu thành côngg");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            EntityMessage.show(this, "Lưu thất bại");
+        }
+    }
 
-	public void initFrameThem() {
-		JFrame themPhieuNhapFrame = new JFrame();
-		themPhieuNhapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		themPhieuNhapFrame.setTitle("Thêm phiếu thanh toán");
-		themPhieuNhapFrame.setBounds(100, 100, 633, 626);
-		themPhieuNhapFrame.setFocusable(true);
-		themPhieuNhapFrame.setLocationRelativeTo(null);
-		JMenuBar menuBar = new JMenuBar();
-		themPhieuNhapFrame.setJMenuBar(menuBar);
+public void initFrameThem() {
+	JFrame themPhieuNhapFrame = new JFrame();
+	themPhieuNhapFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	themPhieuNhapFrame.setTitle("Thêm phiếu thanh toán");
+	themPhieuNhapFrame.setBounds(100, 100, 633, 626);
+	themPhieuNhapFrame.setFocusable(true);
+	themPhieuNhapFrame.setLocationRelativeTo(null);
+	JMenuBar menuBar = new JMenuBar();
+	themPhieuNhapFrame.setJMenuBar(menuBar);
 
 		JMenu mnThoat = new JMenu("Thoát");
 		menuBar.add(mnThoat);

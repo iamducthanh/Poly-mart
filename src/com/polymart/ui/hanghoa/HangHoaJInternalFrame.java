@@ -29,20 +29,21 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.SanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.ILoaiSanPhamService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
-import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.polymart.ui.common.uiCommon;
 import com.polymart.entity.EntityExcel;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
+
 public class HangHoaJInternalFrame extends JInternalFrame {
 
     private static final long serialVersionUID = 7158581259856675232L;
@@ -51,7 +52,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     private JPanel panelOption;
     private JTable tblHangHoa;
     private DefaultTableModel modelHangHoa;
-    private String columnHangHoa[] = {"Mã sản phẩm", "Tên sản phẩm", "Loại", "Số lượng", "Giá bán", "Giá vốn",
+    private String columnHangHoa[] = {"Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá bán", "Giá vốn",
             "Giảm giá", "Size", "Màu sắc"};
 
     private JPanel pnlTop = new JPanel();
@@ -79,12 +80,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
     // service
     private ISanPhamService sanPhamService = new SanPhamService();
-    private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
     // lisst
     private List<ChiTietSanPhamModel> lstChiTietSanPhamModels;
-    
+
     /**
      * Launch the application.
      */
@@ -118,8 +118,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         contentPane.add(pnlNavibar, BorderLayout.WEST);
         JLabel lblTitle = new JLabel("Hàng hóa");
-        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
-        
+        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));        
         txtFind = new JTextField();
         txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
         txtFind.setText(" Tìm theo mã, tên hàng");
@@ -171,31 +170,30 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         txtFind.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
-                    txtFind.setText("");
+                if (txtFind.getText().equals("Tìm theo mã, tên hàng")) {
+                	txtFind.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtFind.getText().equals("")) {
-                    txtFind.setText(" Tìm theo mã, tên hàng");
+                	txtFind.setText("Tìm theo mã, tên hàng");
                 }
             }
         });
 
         btnThemHang.addActionListener(themSanPham);
-        
         btnExport.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					new EntityExcel().exportExcel(tblHangHoa);
-					JOptionPane.showMessageDialog(null, "Lưu thành công");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Lưu thất bại");
-				}
+                    EntityExcel.exportExcel(tblHangHoa);
+                    JOptionPane.showMessageDialog(null, "Lưu thành công");
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Lưu thất bại");
+                }
             }
         });
         btnOption.addActionListener(new ActionListener() {
@@ -206,6 +204,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         initTopHangHoa();
         initCenterHangHoa();
+
+        // tìm kiếm
+        btnTimKiem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnTimKiem(txtFind);
+            }
+        });
     }
 
     public void initTopHangHoa() {
@@ -240,6 +246,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         optionDanhMucFrame.getContentPane().add(panelOption);
         optionDanhMucFrame.setUndecorated(true);
+
     }
 
     public void initCenterHangHoa() {
@@ -357,36 +364,36 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup5.add(rdoHangNgungKinhDoanh);
         GroupLayout gl_pnlNavibar = new GroupLayout(pnlNavibar);
         gl_pnlNavibar.setHorizontalGroup(
-        	gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_pnlNavibar.createSequentialGroup()
-        			.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
-        			.addGap(5))
-        		.addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
-        			.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
-        			.addGap(5))
-        		.addGroup(gl_pnlNavibar.createSequentialGroup()
-        			.addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-        			.addGap(5))
-        		.addGroup(gl_pnlNavibar.createSequentialGroup()
-        			.addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-        			.addGap(5))
-        		.addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
-        			.addGroup(gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(pnlNgayDuKienHetHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-        				.addComponent(pnlBanTrucTiep, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
-        			.addGap(5))
+                gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_pnlNavibar.createSequentialGroup()
+                                .addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
+                                .addGap(5))
+                        .addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
+                                .addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
+                                .addGap(5))
+                        .addGroup(gl_pnlNavibar.createSequentialGroup()
+                                .addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                .addGap(5))
+                        .addGroup(gl_pnlNavibar.createSequentialGroup()
+                                .addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                .addGap(5))
+                        .addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
+                                .addGroup(gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
+                                        .addComponent(pnlNgayDuKienHetHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                        .addComponent(pnlBanTrucTiep, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                                .addGap(5))
         );
         gl_pnlNavibar.setVerticalGroup(
-        	gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_pnlNavibar.createSequentialGroup()
-        			.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_pnlNavibar.createSequentialGroup()
+                                .addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
         pnlNavibar.setLayout(gl_pnlNavibar);
 
@@ -445,6 +452,22 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);
     }
 
+    // Tìm kiếm sản phẩm
+    private void evtBtnTimKiem(JTextField txtTimKiem) {
+        String getTimKiem = txtTimKiem.getText();
+        if (getTimKiem.equals("Tìm theo mã, tên hàng")) {
+            showTable(getList());
+        } else {
+            lstChiTietSanPhamModels = chiTietSanPhamService.findByIdOrNameProduct(getTimKiem);
+            if (lstChiTietSanPhamModels.isEmpty()) {
+                showTable(getList());
+                EntityMessage.show(this, "Mã hoặc tên sản phẩm không tồn tại");
+            } else {
+                showTable(lstChiTietSanPhamModels);
+            }
+        }
+    }
+
     // showw sản phẩm lên bảng
     public void showTable(List<ChiTietSanPhamModel> lst) {
         modelHangHoa.setRowCount(0);
@@ -453,7 +476,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
             modelHangHoa.addRow(new Object[]{
                     x.getId(),
                     sanPhamModel.getTenSP(),
-                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
                     x.getSoLuong(),
                     x.getGiaBan(),
                     x.getGiaVon(),

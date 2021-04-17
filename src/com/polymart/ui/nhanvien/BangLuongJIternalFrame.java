@@ -94,6 +94,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				thanhToanLuongChoNhanVien();
+				btnAdd.setEnabled(false);
 			}
 		});
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -177,7 +178,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 			ChiTieuModel chiTieu = new ChiTieuModel();
 			chiTieu.setMucDichChiTieu("Thanh Toán Lương ");
 			chiTieu.setIdNhanVien(EntityAuthorization.USER.getId());
-			chiTieu.setSoTien(Long.parseLong(String.valueOf(tableBangLuong.getValueAt(i, 4))));
+			chiTieu.setSoTien(Long.parseLong(String.valueOf(tableBangLuong.getValueAt(i, 5))));
 			chiTieu.setGhiChu("Thanh Toán Lương Cho Nhân Viên " + String.valueOf(tableBangLuong.getValueAt(i, 1)));
 			listChiTieuModel.add(chiTieu);
 		}

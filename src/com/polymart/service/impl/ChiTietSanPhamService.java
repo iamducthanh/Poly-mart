@@ -10,6 +10,7 @@ import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.ISanPhamService;
 
 public class ChiTietSanPhamService implements IChiTietSanPhamService {
 

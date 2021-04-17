@@ -11,6 +11,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -181,6 +183,13 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         JButton btnExport = new JButton("→ Xuất file ");
         panel1.add(btnExport);
 
+        btnExport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnXuatFileExcel();
+            }
+        });
+
         optionKiemKhoFrame.setSize(344, 234);
         optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
         panelOption = new JPanel();
@@ -281,7 +290,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
             }
         });
         tableThanhToan.setRowHeight(25);
-        
+
         tableThanhToan.getColumnModel().getColumn(0).setPreferredWidth(50);
         tableThanhToan.getColumnModel().getColumn(1).setPreferredWidth(150);
         tableThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
@@ -390,6 +399,17 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     // getdata list
     public List<HoaDonThanhToanModel> getList() {
         return lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
+    }
+
+    // xuất file excel
+    private void evtBtnXuatFileExcel() {
+        try {
+            EntityExcel.exportExcel(tableThanhToan);
+            EntityMessage.show(this, "Lưu thành côngg");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+            EntityMessage.show(this, "Lưu thất bại");
+        }
     }
 
     public void initFrameThem() {

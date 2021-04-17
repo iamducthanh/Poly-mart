@@ -358,7 +358,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					int j = 0;
 					try {
 						i = sdf.parse(sdf.format(now)).compareTo(sdf.parse("2:30:00 PM"));
-						j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("22:30:00 PM"));
+						j = sdf.parse(sdf.format(now)).compareTo(sdf.parse("9:30:00 PM"));
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
@@ -473,7 +473,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			if (chamCongModel.getGioRa() != null) {
 				String gioRa = sdf.format(chamCongModel.getGioRa());
 				try {
-					j = sdf.parse(gioRa).compareTo(sdf.parse("10:00:00 PM"));
+					j = sdf.parse(gioRa).compareTo(sdf.parse("9:00:00 PM"));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}

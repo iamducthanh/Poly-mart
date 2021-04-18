@@ -7,5 +7,6 @@ import java.util.List;
 public interface IAnhSanPhamDAO extends GenericDAO<AnhSanPhamModel> {
     List<AnhSanPhamModel> findAll();
 
-    List<AnhSanPhamModel> getByIdCtsp(int idSp);
+    boolean save(AnhSanPhamModel anhSanPhamModel);
+
 }

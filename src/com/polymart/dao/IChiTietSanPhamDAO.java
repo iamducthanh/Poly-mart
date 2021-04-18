@@ -11,5 +11,7 @@ public interface IChiTietSanPhamDAO extends GenericDAO<ChiTietSanPhamModel> {
 
     List<ChiTietSanPhamModel> findByIdOrNameProduct(String input);
 
+    int save(ChiTietSanPhamModel chiTietSanPhamModel);
+
     boolean updatePrice(int id, Long giaBan, Long giaGiam);
 }

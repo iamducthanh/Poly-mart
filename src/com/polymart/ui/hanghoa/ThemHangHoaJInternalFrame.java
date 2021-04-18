@@ -48,6 +48,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private JTextField txtSize;
     private JButton btnTaoHinhMoi;
     private JPanel panelImage = new JPanel();
+
+    // list hình ảnh
     private List<LabelImageModel> listLabelImg = new ArrayList<LabelImageModel>();
 
     // list này để lúc lưu sẽ get link ra để lưu
@@ -62,13 +64,14 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private ISanPhamService sanPhamService = new SanPhamService();
     private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
-    private IAnhSanPhamService anhSanPhamService = new AnhSanPhamService();
 
     // tạo list model
     private List<SanPhamModel> lstSanPhamModels;
     private List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamService.findAll();
     private List<ChiTietSanPhamModel> lstChiTietSanPhamThemMoi = new ArrayList<>();
-    private List<AnhSanPhamModel> lstAnhSanPhamThemMoi = new ArrayList<>();
+
+    // list lưu lại hình ảnh tương ứng của sản phẩm
+    private List<String> lstPhoto = new ArrayList<>();
 
     // tạo model    ;
     private LoaiSanPhamModel loaiSanPhamModel;
@@ -340,6 +343,22 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 resetForm();
             }
         });
+
+        // xoá 1 hàng
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeProduct();
+            }
+        });
+
+        // lưu sản phẩm
+        btnHoanThanh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveProduct();
+            }
+        });
     }
 
     private void evtAddImage() {
@@ -384,6 +403,33 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         }
     };
 
+    // lưu thông tin sản phẩm
+    private void saveProduct() {
+        if (lstChiTietSanPhamThemMoi.isEmpty()) {
+            EntityMessage.show(this, "Chưa thêm sản phẩm nào");
+            return;
+        }
+        int rowCountSave = chiTietSanPhamService.saveProduct(lstChiTietSanPhamThemMoi, lstPhoto);
+        if (rowCountSave == 0) {
+            EntityMessage.show(this, "Lưu thất bại");
+            return;
+        }
+        EntityMessage.show(this, "Lưu thành công " + rowCountSave + " sản phẩm");
+    }
+
+    // xoá 1 hàng trong bảng
+    private void removeProduct() {
+        int row = tableDSSanPhamThem.getSelectedRow();
+        if (row > -1 && row < tableDSSanPhamThem.getRowCount()) {
+            lstChiTietSanPhamThemMoi.remove(row);
+            lstPhoto.remove(row);
+            modelDSSanPhamThem.removeRow(row);
+            EntityMessage.show(this, "Đã xoá 1 hàng");
+        } else {
+            EntityMessage.show(this, "Mời chọn 1 hàng");
+        }
+    }
+
     // reset form nút tạo mới
     private void resetForm() {
         if (cbcLoaiSanPham.getItemCount() > 0) {
@@ -424,13 +470,18 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                         listName.append(Image.getName() + ", ");
                     }
                 });
+                String namePhoto = listName.toString();
+                if (namePhoto.contains(",")) {
+                    namePhoto = namePhoto.trim().substring(0, namePhoto.lastIndexOf(","));
+                }
+                lstPhoto.add(namePhoto);
                 modelDSSanPhamThem.addRow(new Object[]{
                         sanPhamModel.getTenSP(),
                         loaiSanPhamModel.getTenLoaiSP(),
                         getMoney,
                         getSize,
                         getColor,
-                        listName.toString()
+                        namePhoto
                 });
             } else {
                 EntityMessage.show(this, "Chi tiết sản phẩm đã tồn tại");

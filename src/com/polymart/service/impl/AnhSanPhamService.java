@@ -17,4 +17,9 @@ public class AnhSanPhamService implements IAnhSanPhamService {
     public List<AnhSanPhamModel> getByIdCtsp(int idSp) {
         return lstAnhSanPhamModels.stream().filter(e -> e.getIdChiTietSanPham().equals(idSp)).collect(Collectors.toList());
     }
+
+    @Override
+    public boolean saveAnhSanPhamById(AnhSanPhamModel anhSanPhamModel) {
+        return anhSanPhamDAO.save(anhSanPhamModel);
+    }
 }

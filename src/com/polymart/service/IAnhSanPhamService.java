@@ -7,4 +7,7 @@ import java.util.List;
 public interface IAnhSanPhamService {
 
     List<AnhSanPhamModel> getByIdCtsp(int idSp);
+
+    boolean saveAnhSanPhamById(AnhSanPhamModel anhSanPhamModel);
+
 }

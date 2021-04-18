@@ -15,10 +15,9 @@ public class AnhSanPhamDAO extends AbstractDAO<AnhSanPhamModel> implements IAnhS
     }
 
     @Override
-    public List<AnhSanPhamModel> getByIdCtsp(int idSp) {
-        String sql = "SELECT * FROM ANHSANPHAM JOIN CHITIETSANPHAM" +
-                " ON ANHSANPHAM.IDCHITIETSANPHAM = CHITIETSANPHAM.ID" +
-                " WHERE IDSANPHAM = ?";
-        return query(sql, new AnhSanPhamMapper(), idSp);
+    public boolean save(AnhSanPhamModel anhSanPhamModel) {
+        String sql = "INSERT INTO ANHSANPHAM (IDCHITIETSANPHAM, TENANH)\n" +
+                "VALUES (?, ?)";
+        return insert(sql, anhSanPhamModel.getIdChiTietSanPham(), anhSanPhamModel.getTenAnh()) > -1;
     }
 }

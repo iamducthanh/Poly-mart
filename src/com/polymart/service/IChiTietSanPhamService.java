@@ -14,6 +14,8 @@ public interface IChiTietSanPhamService {
 
     List<ChiTietSanPhamModel> findAllByHoaDonThanhToan();
 
+    int saveProduct(List<ChiTietSanPhamModel> lstChiTietSanPham, List<String> lstPhoto);
+
     Integer getIdProductById(Integer id);
 
     void reloadData();
@@ -21,5 +23,7 @@ public interface IChiTietSanPhamService {
     ChiTietSanPhamModel getById(Integer id);
 
     boolean updatePrice(int id, Long giaBan, Long giaGiam);
+
+    boolean checkThemMoiSanPham(ChiTietSanPhamModel chiTietSanPhamModel);
 
 }

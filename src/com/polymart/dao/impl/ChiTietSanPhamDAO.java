@@ -24,6 +24,14 @@ public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implemen
     }
 
     @Override
+    public int save(ChiTietSanPhamModel chiTietSanPhamModel) {
+        String sql = "INSERT INTO CHITIETSANPHAM (IDSANPHAM, MAUSAC, SIZE, GIABAN)\n" +
+                "VALUES (?, ?, ?, ?)";
+        return insert(sql, chiTietSanPhamModel.getIdSanPham(), chiTietSanPhamModel.getMauSac(),
+                chiTietSanPhamModel.getSize(), chiTietSanPhamModel.getGiaBan());
+    }
+
+    @Override
     public boolean updatePrice(int id, Long giaBan, Long giaGiam) {
         String sql = "EXEC PROC_UPDATE_PRICE_PRODUCT ?, ?, ?";
         return update(sql, id, giaBan, giaGiam) > 0;

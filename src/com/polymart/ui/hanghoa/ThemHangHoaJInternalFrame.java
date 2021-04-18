@@ -11,21 +11,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -33,386 +22,498 @@ import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.dao.impl.LoaiSanPhamDAO;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityImage;
-import com.polymart.model.LabelImageModel;
-import com.polymart.model.LoaiSanPhamModel;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.*;
+import com.polymart.service.IAnhSanPhamService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.ILoaiSanPhamService;
+import com.polymart.service.ISanPhamService;
+import com.polymart.service.impl.AnhSanPhamService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.LoaiSanPhamService;
+import com.polymart.service.impl.SanPhamService;
 
 public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
-	private static final long serialVersionUID = -2914525596895096982L;
+    private static final long serialVersionUID = -2914525596895096982L;
 
-	private JPanel contentPane;
-	private JTextField txtTenSP;
-	private JTextField txtLoai;
-	private JTextField txtGiaBan;
-	private JTextField txtGiaGiam;
-	private JTextField txtMauSac;
-	JPanel panelImage = new JPanel();
-	private List<LoaiSanPhamModel> lstLoaiSanPham = new LoaiSanPhamDAO().findAll();
-	List<LabelImageModel> listLabelImg = new ArrayList<LabelImageModel>();
-	// list này để lúc lưu sẽ get link ra để lưu
+    private JPanel contentPane;
+    private JComboBox cbcTenSanPham;
+    private JComboBox cbcLoaiSanPham;
+    private JTextField txtGiaBan;
+    private JTextField txtMauSac;
+    private JTextField txtSize;
+    private JButton btnTaoHinhMoi;
+    private JPanel panelImage = new JPanel();
 
-	JLabel Image1 = new JLabel();
-	JLabel Image2 = new JLabel();
-	JLabel Image3 = new JLabel();
-	JLabel Image4 = new JLabel();
-	JLabel Image5 = new JLabel();
-	JLabel Image6 = new JLabel();
-	JLabel Image7 = new JLabel();
-	JLabel Image8 = new JLabel();
-	JLabel Image9 = new JLabel();
-	JLabel Image10 = new JLabel();
-	JLabel Image11 = new JLabel();
-	JLabel Image12 = new JLabel();
-	// nó éo reload lại form cho nên phải tạo sẵn, lúc lấy ảnh cứ load list lấy link
-	// để lưu
+    // list hình ảnh
+    private List<LabelImageModel> listLabelImg = new ArrayList<LabelImageModel>();
 
-	private JTable tableDSSanPhamThem;
-	DefaultTableModel modelDSSanPhamThem = new DefaultTableModel();
+    // list này để lúc lưu sẽ get link ra để lưu
+    private JLabel[] arrImage = new JLabel[12];
+    // nó éo reload lại form cho nên phải tạo sẵn, lúc lấy ảnh cứ load list lấy link
+    // để lưu
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EntityFrame.THEMHANGHOA.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    private JTable tableDSSanPhamThem;
+    private DefaultTableModel modelDSSanPhamThem;
 
-	/**
-	 * Create the frame.
-	 */
-	public ThemHangHoaJInternalFrame() {
-		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1920, 639);
+    // gọi service
+    private ISanPhamService sanPhamService = new SanPhamService();
+    private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
+    private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
-		setFocusable(true);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+    // tạo list model
+    private List<SanPhamModel> lstSanPhamModels;
+    private List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamService.findAll();
+    private List<ChiTietSanPhamModel> lstChiTietSanPhamThemMoi = new ArrayList<>();
 
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.NORTH);
+    // list lưu lại hình ảnh tương ứng của sản phẩm
+    private List<String> lstPhoto = new ArrayList<>();
 
-		JButton btnQuayLai = new JButton("<-   ");
-		btnQuayLai.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				close();
-			}
-		});
-		btnQuayLai.setContentAreaFilled(false);
-		btnQuayLai.setBorder(null);
-		btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
+    // tạo model    ;
+    private LoaiSanPhamModel loaiSanPhamModel;
+    private SanPhamModel sanPhamModel;
+    private ChiTietSanPhamModel chiTietSanPhamModel;
 
-		JLabel lblNewLabel = new JLabel("Thêm sản phẩm");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(btnQuayLai).addGap(5)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-						.addGap(1011)));
-		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup().addGap(5)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panel_1.setLayout(gl_panel_1);
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    EntityFrame.THEMHANGHOA.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
+    /**
+     * Create the frame.
+     */
+    public ThemHangHoaJInternalFrame() {
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 1920, 639);
+        modelDSSanPhamThem = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        setFocusable(true);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(
-				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"  Chi ti\u1EBFt s\u1EA3n ph\u1EA9m  ", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 0)));
+        JPanel panel_1 = new JPanel();
+        contentPane.add(panel_1, BorderLayout.NORTH);
 
-		JButton btnLuuTam = new JButton("Lưu tạm");
-		btnLuuTam.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\luutam.png", 20, 20)));
-		btnLuuTam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnLuuTam();
-			}
-		});
+        JButton btnQuayLai = new JButton("<-   ");
+        btnQuayLai.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                close();
+            }
+        });
+        btnQuayLai.setContentAreaFilled(false);
+        btnQuayLai.setBorder(null);
+        btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
 
-		JButton btnTaoMoi = new JButton("Tạo mới");
-		btnTaoMoi.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\luutam.png", 20, 20)));
+        JLabel lblNewLabel = new JLabel("Thêm sản phẩm");
+        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+        GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+        gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(btnQuayLai).addGap(5)
+                        .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+                        .addGap(1011)));
+        gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_panel_1.createSequentialGroup().addGap(5)
+                        .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        panel_1.setLayout(gl_panel_1);
 
+        JPanel panel = new JPanel();
+        contentPane.add(panel, BorderLayout.CENTER);
 
-		JPanel panel_3 = new JPanel();
+        JPanel panel_2 = new JPanel();
+        panel_2.setBorder(new TitledBorder(
+                new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+                "  Chi ti\u1EBFt s\u1EA3n ph\u1EA9m  ", TitledBorder.LEADING, TitledBorder.TOP, null,
+                new Color(0, 0, 0)));
 
-		JButton btnHoanThanh = new JButton("Hoàn thành");
+        JButton btnLuuTam = new JButton("Lưu tạm");
+        btnLuuTam.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btnLuuTam();
+            }
+        });
 
-		JButton btnXoa = new JButton("Xoá");
-		
-		JButton btnTaoMoi_1 = new JButton("Import");
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnTaoMoi, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-						.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnTaoMoi_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-					.addGap(20))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnTaoMoi_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-							.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
-		);
-		panel_3.setLayout(new BorderLayout(0, 0));
+        JButton btnTaoMoi = new JButton("Tạo mới");
 
-		JScrollPane scrollPane = new JScrollPane();
-		panel_3.add(scrollPane, BorderLayout.CENTER);
+        JPanel panel_3 = new JPanel();
 
-		tableDSSanPhamThem = new JTable();
-		scrollPane.setViewportView(tableDSSanPhamThem);
+        JButton btnHoanThanh = new JButton("Hoàn thành");
 
-		JLabel lblNewLabel_1 = new JLabel("Tên sản phẩm: ", JLabel.RIGHT);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        JButton btnXoa = new JButton("Xoá");
 
-		txtTenSP = new JTextField();
-		txtTenSP.setColumns(10);
+        JButton btnTaoMoi_1 = new JButton("Import");
+        GroupLayout gl_panel = new GroupLayout(panel);
+        gl_panel.setHorizontalGroup(
+                gl_panel.createParallelGroup(Alignment.TRAILING)
+                        .addGroup(gl_panel.createSequentialGroup()
+                                .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+                                        .addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
+                                        .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE))
+                                .addGap(18)
+                                .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+                                                .addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnTaoMoi, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                                        .addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnTaoMoi_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+                                .addGap(20))
+        );
+        gl_panel.setVerticalGroup(
+                gl_panel.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel.createSequentialGroup()
+                                .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_panel.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(ComponentPlacement.RELATED)
+                                                .addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+                                        .addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                                        .addGroup(gl_panel.createSequentialGroup()
+                                                .addComponent(btnTaoMoi_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                                                .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(ComponentPlacement.RELATED)
+                                                .addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addContainerGap())))
+        );
+        panel_3.setLayout(new BorderLayout(0, 0));
 
-		txtLoai = new JTextField();
-		txtLoai.setColumns(10);
+        JScrollPane scrollPane = new JScrollPane();
+        panel_3.add(scrollPane, BorderLayout.CENTER);
 
-		txtGiaBan = new JTextField();
-		txtGiaBan.setColumns(10);
+        tableDSSanPhamThem = new JTable();
+        scrollPane.setViewportView(tableDSSanPhamThem);
 
-		txtGiaGiam = new JTextField();
-		txtGiaGiam.setColumns(10);
+        JLabel lblTenSanPham = new JLabel("Tên sản phẩm: ", JLabel.RIGHT);
+        lblTenSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		txtMauSac = new JTextField();
-		txtMauSac.setColumns(10);
+        cbcTenSanPham = new JComboBox<>();
 
-		JComboBox<Object> cbbSize = new JComboBox<Object>();
-		cbbSize.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		cbbSize.setModel(
-				new DefaultComboBoxModel<Object>(new String[] { "S", "M", "L", "XL", "XXL", "XXXL", "FREE SIZE" }));
-		
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Loại: ", JLabel.RIGHT);
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        cbcLoaiSanPham = new JComboBox<>();
 
-		JLabel lblNewLabel_1_2 = new JLabel("Giá bán: ", JLabel.RIGHT);
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtGiaBan = new JTextField();
+        txtGiaBan.setColumns(10);
 
-		JLabel lblNewLabel_1_3 = new JLabel("Giá giảm: ", JLabel.RIGHT);
-		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtMauSac = new JTextField();
+        txtMauSac.setColumns(10);
 
-		JLabel lblNewLabel_1_4 = new JLabel("Size: ", JLabel.RIGHT);
-		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtSize = new JTextField();
+        txtSize.setColumns(10);
 
-		JLabel lblNewLabel_1_5 = new JLabel("Màu sắc: ", JLabel.RIGHT);
-		lblNewLabel_1_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        txtSize = new JTextField();
+        txtSize.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
-		panelImage.setBorder(
-				new TitledBorder(null, "  H\u00ECnh \u1EA3nh  ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        JLabel lblLoai = new JLabel("Loại: ", JLabel.RIGHT);
+        lblLoai.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton btnNewButton_1 = new JButton("Tạo mới hình");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EntityImage.clearHinh(listLabelImg);
-				EntityImage.closeLabelImage(listLabelImg);
-			}
-		});
-		
-		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_4, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_5, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
-					.addGap(40)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(txtMauSac, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-						.addComponent(txtGiaGiam, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-						.addComponent(txtGiaBan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-						.addComponent(txtLoai, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-						.addComponent(txtTenSP, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-						.addComponent(cbbSize, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(panelImage, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 665, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton_1, Alignment.TRAILING))
-					.addContainerGap())
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtTenSP, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_2.createSequentialGroup()
-									.addComponent(txtLoai, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtGiaBan, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtGiaGiam, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(cbbSize, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addGap(17)
-									.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-										.addComponent(txtMauSac, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel_1_5, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_panel_2.createSequentialGroup()
-									.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblNewLabel_1_4, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))))
-						.addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1)
-					.addGap(12))
-		);
-		panelImage.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		addListImage();
+        JLabel lblGiaBan = new JLabel("Giá bán: ", JLabel.RIGHT);
+        lblGiaBan.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		listLabelImg.forEach((anh) -> {
-			anh.getLblImage().setIcon(new ImageIcon("images\\imgThemAnh.jpg"));
-			anh.getLblImage().addMouseListener(chonHinh);
-		});
+        JLabel lblSize = new JLabel("Size: ", JLabel.RIGHT);
+        lblSize.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		panelImage.add(Image1);
-		panelImage.add(Image2);
-		panelImage.add(Image3);
-		panelImage.add(Image4);
-		panelImage.add(Image5);
-		panelImage.add(Image6);
-		panelImage.add(Image7);
-		panelImage.add(Image8);
-		panelImage.add(Image9);
-		panelImage.add(Image10);
-		panelImage.add(Image11);
-		panelImage.add(Image12);
+        JLabel lblMauSac = new JLabel("Màu sắc: ", JLabel.RIGHT);
+        lblMauSac.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		modelDSSanPhamThem.addColumn("Tên sản phẩm");
-		modelDSSanPhamThem.addColumn("Loại");
-		modelDSSanPhamThem.addColumn("Giá bán");
-		modelDSSanPhamThem.addColumn("Giảm giá");
-		modelDSSanPhamThem.addColumn("Size");
-		modelDSSanPhamThem.addColumn("Màu sách");
-		modelDSSanPhamThem.addColumn("Hình ảnh");
-		tableDSSanPhamThem.setModel(modelDSSanPhamThem);
-		panel_2.setLayout(gl_panel_2);
-		panel.setLayout(gl_panel);
-		tableDSSanPhamThem.setRowHeight(25);
-	}
+        btnTaoHinhMoi = new JButton("Tạo mới hình");
 
-	MouseListener chonHinh = new MouseListener() {
+        panelImage.setBorder(
+                new TitledBorder(null, "  H\u00ECnh \u1EA3nh  ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			chonHinh((JLabel) e.getComponent());
-		}
+        GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+        gl_panel_2.setHorizontalGroup(
+                gl_panel_2.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel_2.createSequentialGroup()
+                                .addGap(23)
+                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblLoai, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblGiaBan, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblSize, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblMauSac, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblTenSanPham, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE))
+                                .addGap(40)
+                                .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING, false)
+                                        .addComponent(txtMauSac, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                        .addComponent(txtGiaBan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                        .addComponent(cbcLoaiSanPham, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                        .addComponent(cbcTenSanPham, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                        .addComponent(txtSize, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(ComponentPlacement.RELATED, 678, Short.MAX_VALUE)
+                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(panelImage, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 665, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnTaoHinhMoi, Alignment.TRAILING))
+                                .addContainerGap())
+        );
+        gl_panel_2.setVerticalGroup(
+                gl_panel_2.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel_2.createSequentialGroup()
+                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_panel_2.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                                                        .addComponent(lblTenSanPham, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cbcTenSanPham, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+                                                        .addGroup(gl_panel_2.createSequentialGroup()
+                                                                .addComponent(cbcLoaiSanPham, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                .addComponent(txtGiaBan, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(50)
+                                                                .addComponent(txtSize, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(17)
+                                                                .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+                                                                        .addComponent(txtMauSac, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblMauSac, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(gl_panel_2.createSequentialGroup()
+                                                                .addComponent(lblLoai, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                .addComponent(lblGiaBan, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(50)
+                                                                .addComponent(lblSize, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(panelImage, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnTaoHinhMoi)
+                                .addGap(12))
+        );
+        panelImage.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		public void mousePressed(MouseEvent e) {
-		}
+        modelDSSanPhamThem.addColumn("Tên sản phẩm");
+        modelDSSanPhamThem.addColumn("Loại");
+        modelDSSanPhamThem.addColumn("Giá bán");
+        modelDSSanPhamThem.addColumn("Size");
+        modelDSSanPhamThem.addColumn("Màu sắc");
+        modelDSSanPhamThem.addColumn("Hình ảnh");
+        tableDSSanPhamThem.setModel(modelDSSanPhamThem);
+        panel_2.setLayout(gl_panel_2);
+        panel.setLayout(gl_panel);
+        tableDSSanPhamThem.setRowHeight(25);
 
-		public void mouseReleased(MouseEvent e) {
-		}
+        // set thuọc tính thêm hình ảnh
+        evtAddImage();
 
-		public void mouseEntered(MouseEvent e) {
-		}
+        // không thể đảo lộn từ dòng này ---- >
+        // hiển thị tên loại sản phẩm
+        showTenLoaiSanPham();
+        // click chọn loại sản phẩm
+        cbcLoaiSanPham.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loaiSanPhamModel = lstLoaiSanPham.get(cbcLoaiSanPham.getSelectedIndex());
+                lstSanPhamModels = sanPhamService.findByIdLoai(loaiSanPhamModel.getId());
+                showTenSanPham();
+            }
+        });
+        // << -- tới dòng này
 
-		public void mouseExited(MouseEvent e) {
-		}
-	};
+        // reset form
+        resetForm();
 
-	public void btnLuuTam() {
-		StringBuilder listName = new StringBuilder();
-		listLabelImg.forEach((Image) -> {
-			if (!Image.getName().equals("imgThemAnh.jpg")) {
-				listName.append(Image.getName() + ", ");
-			}
-		});
+        // tạo mới form
+        btnTaoMoi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetForm();
+            }
+        });
 
-		modelDSSanPhamThem.addRow(new Object[] { "", "", "", "", "", "", listName.toString() });
-		tableDSSanPhamThem.setModel(modelDSSanPhamThem);
-	}
+        // xoá 1 hàng
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeProduct();
+            }
+        });
 
-	public void addListImage() {
-		listLabelImg.add(new LabelImageModel(Image1, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image2, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image3, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image4, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image5, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image6, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image7, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image8, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image9, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image10, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image11, "imgThemAnh.jpg"));
-		listLabelImg.add(new LabelImageModel(Image12, "imgThemAnh.jpg"));
+        // lưu sản phẩm
+        btnHoanThanh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveProduct();
+            }
+        });
+    }
 
-		EntityImage.closeLabelImage(listLabelImg);
-	}
+    private void evtAddImage() {
+        // set label hình ảnh
+        for (int i = 0; i < arrImage.length; i++) {
+            arrImage[i] = new JLabel();
+            panelImage.add(arrImage[i]);
+            listLabelImg.add(new LabelImageModel(arrImage[i], "imgThemAnh.jpg"));
+        }
+        EntityImage.closeLabelImage(listLabelImg);
+        // reset lại label hình ảnh
+        btnTaoHinhMoi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EntityImage.clearHinh(listLabelImg);
+            }
+        });
+        // sự kiện click thêm hình ảnh
+        listLabelImg.forEach(e -> {
+            e.getLblImage().setIcon(new ImageIcon("images\\imgThemAnh.jpg"));
+            e.getLblImage().addMouseListener(chonHinh);
+        });
+    }
 
-	public void chonHinh(JLabel label) {
-		JFileChooser file = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG and PNG", new String[] { "JPG", "PNG" });
-		file.setFileFilter(filter);
+    // khi click thêm hình ảnh
+    private MouseListener chonHinh = new MouseListener() {
 
-		int i = file.showOpenDialog(null);
-		if (i == 0) {
-			String path = file.getSelectedFile().getPath();
-			String name = file.getSelectedFile().getName();
-			EntityImage.setNameToListImage(listLabelImg, name, path, label);
-		}
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            chonHinh((JLabel) e.getComponent());
+        }
 
-	}
+        public void mousePressed(MouseEvent e) {
+        }
 
-	public void close() {
-		this.dispose();
-	}
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        public void mouseExited(MouseEvent e) {
+        }
+    };
+
+    // lưu thông tin sản phẩm
+    private void saveProduct() {
+        if (lstChiTietSanPhamThemMoi.isEmpty()) {
+            EntityMessage.show(this, "Chưa thêm sản phẩm nào");
+            return;
+        }
+        int rowCountSave = chiTietSanPhamService.saveProduct(lstChiTietSanPhamThemMoi, lstPhoto);
+        if (rowCountSave == 0) {
+            EntityMessage.show(this, "Lưu thất bại");
+            return;
+        }
+        EntityMessage.show(this, "Lưu thành công " + rowCountSave + " sản phẩm");
+    }
+
+    // xoá 1 hàng trong bảng
+    private void removeProduct() {
+        int row = tableDSSanPhamThem.getSelectedRow();
+        if (row > -1 && row < tableDSSanPhamThem.getRowCount()) {
+            lstChiTietSanPhamThemMoi.remove(row);
+            lstPhoto.remove(row);
+            modelDSSanPhamThem.removeRow(row);
+            EntityMessage.show(this, "Đã xoá 1 hàng");
+        } else {
+            EntityMessage.show(this, "Mời chọn 1 hàng");
+        }
+    }
+
+    // reset form nút tạo mới
+    private void resetForm() {
+        if (cbcLoaiSanPham.getItemCount() > 0) {
+            cbcLoaiSanPham.setSelectedIndex(0);
+        }
+        txtSize.setText("");
+        txtGiaBan.setText("");
+        txtMauSac.setText("");
+        EntityImage.clearHinh(listLabelImg);
+    }
+
+    // lưu tạm thông tin sản phẩm
+    private void btnLuuTam() {
+        // validate
+        String getMoney = txtGiaBan.getText();
+        String getSize = txtSize.getText();
+        String getColor = txtMauSac.getText();
+        if (EntityValidate.checkMoney(this, getMoney)
+                && EntityValidate.checkSize(this, getSize)
+                && EntityValidate.checkColor(this, getColor)) {
+            chiTietSanPhamModel = new ChiTietSanPhamModel();
+            sanPhamModel = lstSanPhamModels.get(cbcTenSanPham.getSelectedIndex());
+            chiTietSanPhamModel.setIdSanPham(sanPhamModel.getId());
+            chiTietSanPhamModel.setGiaBan(Long.valueOf(getMoney));
+            chiTietSanPhamModel.setMauSac(getColor);
+            chiTietSanPhamModel.setSize(getSize);
+            // kiểm tra đã được lưu tạm chưa?
+            boolean flag = lstChiTietSanPhamThemMoi.stream().filter(e ->
+                    e.getIdSanPham().equals(chiTietSanPhamModel.getIdSanPham())
+                            && e.getMauSac().equalsIgnoreCase(chiTietSanPhamModel.getMauSac())
+                            && e.getSize().equalsIgnoreCase(chiTietSanPhamModel.getSize()))
+                    .collect(Collectors.toList()).isEmpty();
+            if (chiTietSanPhamService.checkThemMoiSanPham(chiTietSanPhamModel) && flag) {
+                lstChiTietSanPhamThemMoi.add(chiTietSanPhamModel);
+                StringBuilder listName = new StringBuilder();
+                listLabelImg.forEach((Image) -> {
+                    if (!Image.getName().equals("imgThemAnh.jpg")) {
+                        listName.append(Image.getName() + ", ");
+                    }
+                });
+                String namePhoto = listName.toString();
+                if (namePhoto.contains(",")) {
+                    namePhoto = namePhoto.trim().substring(0, namePhoto.lastIndexOf(","));
+                }
+                lstPhoto.add(namePhoto);
+                modelDSSanPhamThem.addRow(new Object[]{
+                        sanPhamModel.getTenSP(),
+                        loaiSanPhamModel.getTenLoaiSP(),
+                        getMoney,
+                        getSize,
+                        getColor,
+                        namePhoto
+                });
+            } else {
+                EntityMessage.show(this, "Chi tiết sản phẩm đã tồn tại");
+            }
+        }
+    }
+
+    // chọn hình ảnh
+    private void chonHinh(JLabel label) {
+        JFileChooser file = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG and PNG", new String[]{"JPG", "PNG"});
+        file.setFileFilter(filter);
+
+        int i = file.showOpenDialog(null);
+        if (i == 0) {
+            String path = file.getSelectedFile().getPath();
+            String name = file.getSelectedFile().getName();
+            EntityImage.setNameToListImage(listLabelImg, name, path, label);
+        }
+    }
+
+    // show combobox tên sản phẩm
+    private void showTenSanPham() {
+        cbcTenSanPham.setModel(new DefaultComboBoxModel(lstSanPhamModels.stream().map(e -> e.getTenSP()).collect(Collectors.toList()).toArray()));
+    }
+
+    // show combobox loại sản phẩm
+    private void showTenLoaiSanPham() {
+        cbcLoaiSanPham.setModel(new DefaultComboBoxModel(lstLoaiSanPham.stream().map(e -> e.getTenLoaiSP()).collect(Collectors.toList()).toArray()));
+    }
+
+    private void close() {
+        this.dispose();
+    }
 }

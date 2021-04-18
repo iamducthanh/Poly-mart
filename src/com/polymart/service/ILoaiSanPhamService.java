@@ -1,6 +1,14 @@
 package com.polymart.service;
 
-public interface ILoaiSanPhamService {
+import com.polymart.model.LoaiSanPhamModel;
 
-	String findNameById(Integer id);
+import java.util.List;
+
+public interface ILoaiSanPhamService {
+    List<LoaiSanPhamModel> findAll();
+
+    String findNameById(Integer id);
+
+    List<LoaiSanPhamModel> findById(Integer id);
+
 }

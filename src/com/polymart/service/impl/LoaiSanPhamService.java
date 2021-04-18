@@ -14,6 +14,11 @@ public class LoaiSanPhamService implements ILoaiSanPhamService {
     private static List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamDAO.findAll();
 
     @Override
+    public List<LoaiSanPhamModel> findAll() {
+        return lstLoaiSanPham;
+    }
+
+    @Override
     public String findNameById(Integer id) {
         var ref = new Object() {
             String nameProduct = null;
@@ -24,5 +29,10 @@ public class LoaiSanPhamService implements ILoaiSanPhamService {
             }
         });
         return ref.nameProduct;
+    }
+
+    @Override
+    public List<LoaiSanPhamModel> findById(Integer id) {
+        return lstLoaiSanPham.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList());
     }
 }

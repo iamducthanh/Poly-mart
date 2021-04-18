@@ -19,6 +19,11 @@ public class SanPhamService implements ISanPhamService {
     }
 
     @Override
+    public List<SanPhamModel> findByIdLoai(int idLoai) {
+        return lstSanPham.stream().filter(e -> e.getIdLoaiSP().equals(idLoai)).collect(Collectors.toList());
+    }
+
+    @Override
     public SanPhamModel findByID(Integer id) {
         var ref = new Object() {
             SanPhamModel sanPhamModel = null;

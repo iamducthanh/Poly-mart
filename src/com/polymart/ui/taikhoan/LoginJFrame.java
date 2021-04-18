@@ -31,6 +31,7 @@ import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
+import com.polymart.ui.MainFrame;
 import com.polymart.ui.PolyMartMain;
 
 public class LoginJFrame extends JFrame {
@@ -223,7 +224,7 @@ public class LoginJFrame extends JFrame {
 			EntityAuthorization.USER = nhanVienService.findByIdAndPassword(Integer.valueOf(username), password);
 			if (EntityAuthorization.USER != null) {
 				setVisible(false);
-				EntityFrame.POLYMARTMAIN = new PolyMartMain();
+				EntityFrame.POLYMARTMAIN = new MainFrame();
 				EntityFrame.POLYMARTMAIN.setVisible(true);
 			} else {
 				EntityMessage.show(this, "Nhân viên không tồn tại!\nVui lòng kiểm tra lại mã đăng nhập và mật khẩu");

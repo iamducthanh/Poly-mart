@@ -150,7 +150,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
 
         optionKiemKhoFrame.getContentPane().add(panelOption);
         optionKiemKhoFrame.setUndecorated(true);
-        JButton btnTimKiem = new JButton("Tìm kiếm");
+        JButton btnTimKiem = new JButton("Tìm");
         
                 // tìm kiếm
                 btnTimKiem.addActionListener(new ActionListener() {
@@ -160,10 +160,10 @@ public class TraHangJInternalFrame extends JInternalFrame {
                     }
                 });
         
-                JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
+                JButton btnThemPhieuNhap = new JButton("+ Thêm");
                 
                         btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
-        JButton btnExport = new JButton("→ Xuất file ");
+        JButton btnExport = new JButton("→ Xuất");
         btnExport.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		evtBtnXuatFileExcel();
@@ -178,9 +178,6 @@ public class TraHangJInternalFrame extends JInternalFrame {
                         evtBtnXoa(tableTraHang);
                     }
                 });
-        
-                JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
-                cbbOptionKiemKho.addItem("≡");
         GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(
         	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -188,17 +185,15 @@ public class TraHangJInternalFrame extends JInternalFrame {
         			.addContainerGap()
         			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
         			.addGap(12)
         			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-        			.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+        			.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(cbbOptionKiemKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
         );
         gl_panel.setVerticalGroup(
         	gl_panel.createParallelGroup(Alignment.LEADING)
@@ -206,13 +201,12 @@ public class TraHangJInternalFrame extends JInternalFrame {
         			.addGap(5)
         			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(cbbOptionKiemKho, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+        					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel.setLayout(gl_panel);

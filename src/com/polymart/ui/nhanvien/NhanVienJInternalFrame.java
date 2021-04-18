@@ -127,14 +127,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 			index = 0;
 			list = nhanVienService.findAll();
 			loadToTable();
-
-			JButton btnMore = new JButton();
-			btnMore.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					optionNhanVienFrame.setVisible(true);
-				}
-			});
-			btnMore.setText("≡");
 		//	btnXoaNV.setEnabled(false);
 			btnXoaNV = new JButton("- Khóa Tài Khoản");
 			btnXoaNV.addActionListener(new ActionListener() {
@@ -152,13 +144,11 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 						.addContainerGap()
 						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-						.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+						.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
-						.addGap(6)
-						.addComponent(btnMore))
+						.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 			);
 			gl_panel.setVerticalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
@@ -166,12 +156,11 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 						.addGap(5)
 						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnMore, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 			);
 			panel.setLayout(gl_panel);

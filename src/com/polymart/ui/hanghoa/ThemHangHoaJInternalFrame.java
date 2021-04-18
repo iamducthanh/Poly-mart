@@ -139,6 +139,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 				new Color(0, 0, 0)));
 
 		JButton btnLuuTam = new JButton("Lưu tạm");
+		btnLuuTam.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\luutam.png", 20, 20)));
 		btnLuuTam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnLuuTam();
@@ -146,6 +147,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 		});
 
 		JButton btnTaoMoi = new JButton("Tạo mới");
+		btnTaoMoi.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\luutam.png", 20, 20)));
+
 
 		JPanel panel_3 = new JPanel();
 

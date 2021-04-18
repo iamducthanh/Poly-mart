@@ -174,7 +174,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
 		optionKiemKhoFrame.getContentPane().add(panelOption);
 		optionKiemKhoFrame.setUndecorated(true);
-		JButton btnTimKiem = new JButton("Tìm kiếm");
+		JButton btnTimKiem = new JButton("Tìm");
 
 		// tìm kiếm
 		btnTimKiem.addActionListener(new ActionListener() {
@@ -184,7 +184,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 			}
 		});
 
-		JButton btnThemPhieuNhap = new JButton("+ Thêm mới ");
+		JButton btnThemPhieuNhap = new JButton("+ Thêm");
 
 		btnThemPhieuNhap.addActionListener(new ActionListener() {
 			@Override
@@ -201,10 +201,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 				evtBtnXoa(tableThanhToan);
 			}
 		});
-		JButton btnExport = new JButton("→ Xuất file ");
-
-		JComboBox<String> cbbOptionKiemKho = new JComboBox<String>();
-		cbbOptionKiemKho.addItem("≡");
+		JButton btnExport = new JButton("→ Xuất");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -212,31 +209,27 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 					.addContainerGap()
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
-					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-					.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addGap(2)
-					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cbbOptionKiemKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+					.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cbbOptionKiemKho, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);

@@ -29,6 +29,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
+import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.SanPhamModel;
@@ -125,44 +126,40 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         txtFind.setColumns(10);
         
         JButton btnTimKiem = new JButton("Tìm kiếm");
-        
-        JButton btnOption = new JButton("");
-        btnOption.setIcon(new ImageIcon("images\\danhmuc.png"));
+   //     btnTimKiem.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\search.png", 20, 20)));
         
         JButton btnExport = new JButton("Export");
-        
-        JButton btnThemHang = new JButton("+ Thêm mới");
+   //     btnExport.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
+        JButton btnThemHang = new JButton("Thêm mới");
+
         GroupLayout gl_pnlTop = new GroupLayout(pnlTop);
         gl_pnlTop.setHorizontalGroup(
         	gl_pnlTop.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_pnlTop.createSequentialGroup()
-        			.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+        			.addGap(1)
+        			.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnTimKiem)
-        			.addPreferredGap(ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+        			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
         			.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnOption)
-        			.addContainerGap())
+        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
         );
         gl_pnlTop.setVerticalGroup(
-        	gl_pnlTop.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(Alignment.LEADING, gl_pnlTop.createSequentialGroup()
+        	gl_pnlTop.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlTop.createSequentialGroup()
         			.addGap(5)
         			.addGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING)
-        				.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_pnlTop.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_pnlTop.createSequentialGroup()
         					.addGap(5)
         					.addGroup(gl_pnlTop.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnOption, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
+        						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
         			.addGap(5))
         );
         pnlTop.setLayout(gl_pnlTop);
@@ -170,7 +167,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         txtFind.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtFind.getText().equals("Tìm theo mã, tên hàng")) {
+                if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
                 	txtFind.setText("");
                 }
             }
@@ -178,7 +175,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtFind.getText().equals("")) {
-                	txtFind.setText("Tìm theo mã, tên hàng");
+                	txtFind.setText(" Tìm theo mã, tên hàng");
                 }
             }
         });
@@ -196,11 +193,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
                 }
             }
         });
-        btnOption.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                optionClicked();
-            }
-        });
 
         initTopHangHoa();
         initCenterHangHoa();
@@ -215,7 +207,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     }
 
     public void initTopHangHoa() {
-        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         setTitle("Hàng hóa - Hàng hóa");
 
         optionDanhMucFrame.setSize(344, 264);
@@ -490,9 +481,5 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     // getList
     public List<ChiTietSanPhamModel> getList() {
         return lstChiTietSanPhamModels = chiTietSanPhamService.findAll();
-    }
-
-    protected void optionClicked() {
-        optionDanhMucFrame.setVisible(!optionDanhMucFrame.isVisible());
     }
 }

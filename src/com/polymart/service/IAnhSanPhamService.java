@@ -10,4 +10,6 @@ public interface IAnhSanPhamService {
 
     boolean saveAnhSanPhamById(AnhSanPhamModel anhSanPhamModel);
 
+    void reloadDta();
+
 }

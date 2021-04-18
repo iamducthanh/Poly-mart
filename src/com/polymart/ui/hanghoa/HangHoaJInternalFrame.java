@@ -116,52 +116,52 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         contentPane.add(pnlNavibar, BorderLayout.WEST);
         JLabel lblTitle = new JLabel("Hàng hóa");
-        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));        
+        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
         txtFind = new JTextField();
         txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
         txtFind.setText(" Tìm theo mã, tên hàng");
         txtFind.setColumns(10);
-        
+
         JButton btnTimKiem = new JButton("Tìm kiếm");
-        
+
         JButton btnOption = new JButton("");
         btnOption.setIcon(new ImageIcon("images\\danhmuc.png"));
-        
+
         JButton btnExport = new JButton("Export");
-        
+
         JButton btnThemHang = new JButton("+ Thêm mới");
         GroupLayout gl_pnlTop = new GroupLayout(pnlTop);
         gl_pnlTop.setHorizontalGroup(
-        	gl_pnlTop.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_pnlTop.createSequentialGroup()
-        			.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnTimKiem)
-        			.addPreferredGap(ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-        			.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnOption)
-        			.addContainerGap())
+                gl_pnlTop.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_pnlTop.createSequentialGroup()
+                                .addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnTimKiem)
+                                .addPreferredGap(ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                                .addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnOption)
+                                .addContainerGap())
         );
         gl_pnlTop.setVerticalGroup(
-        	gl_pnlTop.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(Alignment.LEADING, gl_pnlTop.createSequentialGroup()
-        			.addGap(5)
-        			.addGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING)
-        				.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(gl_pnlTop.createSequentialGroup()
-        					.addGap(5)
-        					.addGroup(gl_pnlTop.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnOption, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
-        			.addGap(5))
+                gl_pnlTop.createParallelGroup(Alignment.TRAILING)
+                        .addGroup(Alignment.LEADING, gl_pnlTop.createSequentialGroup()
+                                .addGap(5)
+                                .addGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(gl_pnlTop.createSequentialGroup()
+                                                .addGap(5)
+                                                .addGroup(gl_pnlTop.createParallelGroup(Alignment.BASELINE)
+                                                        .addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnOption, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
+                                .addGap(5))
         );
         pnlTop.setLayout(gl_pnlTop);
 
@@ -169,14 +169,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 if (txtFind.getText().equals("Tìm theo mã, tên hàng")) {
-                	txtFind.setText("");
+                    txtFind.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtFind.getText().equals("")) {
-                	txtFind.setText("Tìm theo mã, tên hàng");
+                    txtFind.setText("Tìm theo mã, tên hàng");
                 }
             }
         });
@@ -439,11 +439,16 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     ActionListener themSanPham = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame();
-            EntityFrame.POLYMARTMAIN.pnlMain.add(themHangHoaJInternalFrame);
-            themHangHoaJInternalFrame.setVisible(true);
+            openThemHangHoa();
         }
     };
+
+    private void openThemHangHoa() {
+        ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame(this);
+        EntityFrame.POLYMARTMAIN.pnlMain.add(themHangHoaJInternalFrame);
+        themHangHoaJInternalFrame.setVisible(true);
+    }
+
     private JTextField txtFind;
 
     private void clickTable(int row) {

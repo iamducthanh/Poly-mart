@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,6 +67,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private ISanPhamService sanPhamService = new SanPhamService();
     private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
+    private IAnhSanPhamService anhSanPhamService = new AnhSanPhamService();
 
     // tạo list model
     private List<SanPhamModel> lstSanPhamModels;
@@ -71,12 +75,21 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private List<ChiTietSanPhamModel> lstChiTietSanPhamThemMoi = new ArrayList<>();
 
     // list lưu lại hình ảnh tương ứng của sản phẩm
-    private List<String> lstPhoto = new ArrayList<>();
+    private List<UpdatePhotoProduct> lstUpdatePhotoProduct = new ArrayList<>();
+    private UpdatePhotoProduct updatePhotoProduct;
+    private List<String> lstNameFiles = new ArrayList<>();
+    private List<File> lstDstFiles = new ArrayList<>();
+    private List<Path> lstPathFiles = new ArrayList<>();
+    private Path pathForm;
+    private File dstFile;
+    private String nameFile;
 
     // tạo model    ;
     private LoaiSanPhamModel loaiSanPhamModel;
     private SanPhamModel sanPhamModel;
     private ChiTietSanPhamModel chiTietSanPhamModel;
+
+    private HangHoaJInternalFrame hangHoaJInternalFrame;
 
     /**
      * Launch the application.
@@ -97,6 +110,14 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
      * Create the frame.
      */
     public ThemHangHoaJInternalFrame() {
+    }
+
+    public ThemHangHoaJInternalFrame(HangHoaJInternalFrame hangHoaJInternalFrame) {
+        this.hangHoaJInternalFrame = hangHoaJInternalFrame;
+        init();
+    }
+
+    private void init() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1920, 639);
@@ -388,6 +409,27 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
             chonHinh((JLabel) e.getComponent());
+            // khi thay đổi hình ảnh mà list lưuu thông tin hfinh ảnh đã có ảnh cũ thì sẽ xoá
+            for (int i = 0; i < listLabelImg.size(); i++) {
+                if (listLabelImg.get(i).getLblImage() == (JLabel) e.getComponent()) {
+                    if (!listLabelImg.get(i).getName().equalsIgnoreCase("imgThemAnh.jpg")) {
+                        if (lstNameFiles.size() > i) {
+                            lstNameFiles.remove(i);
+                            lstDstFiles.remove(i);
+                            lstPathFiles.remove(i);
+                            break;
+                        }
+                    }
+                }
+            }
+            // và thay thế bằng thông tin ảnh mới
+            if (nameFile != null
+                    && dstFile != null
+                    && pathForm != null) {
+                lstNameFiles.add(nameFile);
+                lstDstFiles.add(dstFile);
+                lstPathFiles.add(pathForm);
+            }
         }
 
         public void mousePressed(MouseEvent e) {
@@ -403,18 +445,48 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         }
     };
 
+    // chọn hình ảnh
+    private void chonHinh(JLabel label) {
+        nameFile = null;
+        dstFile = null;
+        pathForm = null;
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG and PNG", new String[]{"JPG", "PNG"});
+        chooser.setFileFilter(filter);
+        int i = chooser.showOpenDialog(null);
+        File srcFile = chooser.getSelectedFile();
+        while (true) {
+            nameFile = Math.random() * 10000000 + srcFile.getName();
+            dstFile = new File("anh-san-pham", nameFile);
+            if (!dstFile.exists()) {
+                break;
+            }
+        }
+        if (!dstFile.getParentFile().exists()) {
+            dstFile.getParentFile().mkdirs();
+        }
+        pathForm = Paths.get(srcFile.getAbsolutePath());
+        if (i == 0) {
+            String path = srcFile.getPath();
+            EntityImage.setNameToListImage(listLabelImg, nameFile, path, label);
+        }
+    }
+
     // lưu thông tin sản phẩm
     private void saveProduct() {
         if (lstChiTietSanPhamThemMoi.isEmpty()) {
             EntityMessage.show(this, "Chưa thêm sản phẩm nào");
             return;
         }
-        int rowCountSave = chiTietSanPhamService.saveProduct(lstChiTietSanPhamThemMoi, lstPhoto);
+        int rowCountSave = chiTietSanPhamService.saveProduct(lstChiTietSanPhamThemMoi, lstUpdatePhotoProduct);
         if (rowCountSave == 0) {
             EntityMessage.show(this, "Lưu thất bại");
             return;
         }
         EntityMessage.show(this, "Lưu thành công " + rowCountSave + " sản phẩm");
+        anhSanPhamService.reloadDta();
+        hangHoaJInternalFrame.showTable(hangHoaJInternalFrame.getList());
+        close();
     }
 
     // xoá 1 hàng trong bảng
@@ -422,7 +494,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         int row = tableDSSanPhamThem.getSelectedRow();
         if (row > -1 && row < tableDSSanPhamThem.getRowCount()) {
             lstChiTietSanPhamThemMoi.remove(row);
-            lstPhoto.remove(row);
+            lstUpdatePhotoProduct.remove(row);
             modelDSSanPhamThem.removeRow(row);
             EntityMessage.show(this, "Đã xoá 1 hàng");
         } else {
@@ -474,7 +546,6 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 if (namePhoto.contains(",")) {
                     namePhoto = namePhoto.trim().substring(0, namePhoto.lastIndexOf(","));
                 }
-                lstPhoto.add(namePhoto);
                 modelDSSanPhamThem.addRow(new Object[]{
                         sanPhamModel.getTenSP(),
                         loaiSanPhamModel.getTenLoaiSP(),
@@ -483,23 +554,22 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                         getColor,
                         namePhoto
                 });
+                // clear hfinh ảnh
+                EntityImage.clearHinh(listLabelImg);
+                // cập nhật đối tương lưu trữ thông tin hình ảnh
+                updatePhotoProduct = new UpdatePhotoProduct();
+                updatePhotoProduct.setNameFiles(lstNameFiles);
+                updatePhotoProduct.setDstFiles(lstDstFiles);
+                updatePhotoProduct.setPathFromsFile(lstPathFiles);
+                // thêm đối tượng lưuu trữ hình ảnh vào  list
+                lstUpdatePhotoProduct.add(updatePhotoProduct);
+                // reset lại list lưu trữ thông tin hình ảnh
+                lstNameFiles = new ArrayList<>();
+                lstDstFiles = new ArrayList<>();
+                lstPathFiles = new ArrayList<>();
             } else {
                 EntityMessage.show(this, "Chi tiết sản phẩm đã tồn tại");
             }
-        }
-    }
-
-    // chọn hình ảnh
-    private void chonHinh(JLabel label) {
-        JFileChooser file = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG and PNG", new String[]{"JPG", "PNG"});
-        file.setFileFilter(filter);
-
-        int i = file.showOpenDialog(null);
-        if (i == 0) {
-            String path = file.getSelectedFile().getPath();
-            String name = file.getSelectedFile().getName();
-            EntityImage.setNameToListImage(listLabelImg, name, path, label);
         }
     }
 

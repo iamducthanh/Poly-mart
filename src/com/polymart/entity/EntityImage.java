@@ -11,10 +11,16 @@ import com.polymart.model.LabelImageModel;
 public class EntityImage {
     static int a;
 
-    public static Image resize(Image image, int width, int height) {
-        Image reImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return reImage;
-    }
+	public static Image resize(Image image, int width, int height) {
+		Image reImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		return reImage;
+	}
+	
+	public static Image resizeTheoUrl(String url, int width, int height) {
+		ImageIcon imageIcon = new ImageIcon(url);
+		Image reImage = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		return reImage;
+	}
 
     public static void closeLabelImage(List<LabelImageModel> listLabelImg) {
         for (int i = 1; i < listLabelImg.size(); i++) {

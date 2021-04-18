@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -28,6 +29,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityImage;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -136,13 +138,17 @@ public class KiemKhoJInternalFrame extends JInternalFrame {
 		});
 
 		JButton btnNewButton = new JButton("Tìm kiếm");
+		btnNewButton.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\search.png", 20, 20)));
 		panel1.add(btnNewButton);
 		JLabel lblNewLabel_1 = new JLabel(String.format("%60s", " "));
 		panel1.add(lblNewLabel_1);
 
-		JButton btnKiemKho = new JButton("+ Kiểm kho ");
+		JButton btnKiemKho = new JButton("Kiểm kho ");
+		btnKiemKho.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\themoi.png", 20, 20)));
+
 		panel1.add(btnKiemKho);
-		JButton btnExport = new JButton("→ Xuất file ");
+		JButton btnExport = new JButton("Xuất file ");
+		btnExport.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
 		panel1.add(btnExport);
 
 		optionKiemKhoFrame.setSize(344, 234);

@@ -31,6 +31,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityImage;
 import com.polymart.ui.common.uiCommon;
 
 public class ThietLapGiaJInternalFrame extends JInternalFrame {
@@ -101,7 +102,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		panel.add(lblNewLabel, BorderLayout.WEST);
 
 		JButton btnImport = new JButton("Xuất file ");
-		btnImport.setIcon(new ImageIcon("images\\export.png"));
+		btnImport.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
 		panel1.add(btnImport);
 
 		JComboBox<String> cbbOptionSetGia = new JComboBox<String>();

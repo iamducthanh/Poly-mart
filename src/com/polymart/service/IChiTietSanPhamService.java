@@ -22,4 +22,6 @@ public interface IChiTietSanPhamService {
 
     boolean updatePrice(int id, Long giaBan, Long giaGiam);
 
+    boolean checkThemMoiSanPham(ChiTietSanPhamModel chiTietSanPhamModel);
+
 }

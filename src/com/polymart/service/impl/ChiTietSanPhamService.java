@@ -69,4 +69,12 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     public boolean updatePrice(int id, Long giaBan, Long giaGiam) {
         return chiTietSanPhamDAO.updatePrice(id, giaBan, giaGiam);
     }
+
+    @Override
+    public boolean checkThemMoiSanPham(ChiTietSanPhamModel chiTietSanPhamModel) {
+        return lstChiTietSanPhamModels.stream().filter(e ->
+                e.getIdSanPham().equals(chiTietSanPhamModel.getIdSanPham())
+                        && e.getMauSac().equalsIgnoreCase(chiTietSanPhamModel.getMauSac())
+                        && e.getSize().equalsIgnoreCase(chiTietSanPhamModel.getSize())).collect(Collectors.toList()).isEmpty();
+    }
 }

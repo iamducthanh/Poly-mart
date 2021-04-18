@@ -11,20 +11,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -34,29 +24,56 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityImage;
-import com.polymart.model.LabelImageModel;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
+import com.polymart.model.*;
+import com.polymart.service.IAnhSanPhamService;
+import com.polymart.service.IChiTietSanPhamService;
+import com.polymart.service.ILoaiSanPhamService;
+import com.polymart.service.ISanPhamService;
+import com.polymart.service.impl.AnhSanPhamService;
+import com.polymart.service.impl.ChiTietSanPhamService;
+import com.polymart.service.impl.LoaiSanPhamService;
+import com.polymart.service.impl.SanPhamService;
 
 public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
     private static final long serialVersionUID = -2914525596895096982L;
 
     private JPanel contentPane;
-    private JComboBox txtTenSP;
-    private JComboBox txtLoai;
+    private JComboBox cbcTenSanPham;
+    private JComboBox cbcLoaiSanPham;
     private JTextField txtGiaBan;
     private JTextField txtMauSac;
     private JTextField txtSize;
     private JButton btnTaoHinhMoi;
     private JPanel panelImage = new JPanel();
     private List<LabelImageModel> listLabelImg = new ArrayList<LabelImageModel>();
-    // list này để lúc lưu sẽ get link ra để lưu
 
+    // list này để lúc lưu sẽ get link ra để lưu
     private JLabel[] arrImage = new JLabel[12];
     // nó éo reload lại form cho nên phải tạo sẵn, lúc lấy ảnh cứ load list lấy link
     // để lưu
 
     private JTable tableDSSanPhamThem;
     private DefaultTableModel modelDSSanPhamThem;
+
+    // gọi service
+    private ISanPhamService sanPhamService = new SanPhamService();
+    private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
+    private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
+    private IAnhSanPhamService anhSanPhamService = new AnhSanPhamService();
+
+    // tạo list model
+    private List<SanPhamModel> lstSanPhamModels;
+    private List<LoaiSanPhamModel> lstLoaiSanPham = loaiSanPhamService.findAll();
+    private List<ChiTietSanPhamModel> lstChiTietSanPhamThemMoi = new ArrayList<>();
+    private List<AnhSanPhamModel> lstAnhSanPhamThemMoi = new ArrayList<>();
+
+    // tạo model    ;
+    private LoaiSanPhamModel loaiSanPhamModel;
+    private SanPhamModel sanPhamModel;
+    private ChiTietSanPhamModel chiTietSanPhamModel;
 
     /**
      * Launch the application.
@@ -194,9 +211,9 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         JLabel lblTenSanPham = new JLabel("Tên sản phẩm: ", JLabel.RIGHT);
         lblTenSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-        txtTenSP = new JComboBox<>();
+        cbcTenSanPham = new JComboBox<>();
 
-        txtLoai = new JComboBox<>();
+        cbcLoaiSanPham = new JComboBox<>();
 
         txtGiaBan = new JTextField();
         txtGiaBan.setColumns(10);
@@ -242,8 +259,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                                 .addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING, false)
                                         .addComponent(txtMauSac, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                                         .addComponent(txtGiaBan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                        .addComponent(txtLoai, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                        .addComponent(txtTenSP, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                        .addComponent(cbcLoaiSanPham, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                        .addComponent(cbcTenSanPham, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                                         .addComponent(txtSize, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(ComponentPlacement.RELATED, 678, Short.MAX_VALUE)
                                 .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
@@ -259,11 +276,11 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                                                 .addContainerGap()
                                                 .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
                                                         .addComponent(lblTenSanPham, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtTenSP, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(cbcTenSanPham, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                                 .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
                                                         .addGroup(gl_panel_2.createSequentialGroup()
-                                                                .addComponent(txtLoai, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(cbcLoaiSanPham, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                                                 .addComponent(txtGiaBan, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(50)
@@ -288,9 +305,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         modelDSSanPhamThem.addColumn("Tên sản phẩm");
         modelDSSanPhamThem.addColumn("Loại");
         modelDSSanPhamThem.addColumn("Giá bán");
-        modelDSSanPhamThem.addColumn("Giảm giá");
         modelDSSanPhamThem.addColumn("Size");
-        modelDSSanPhamThem.addColumn("Màu sách");
+        modelDSSanPhamThem.addColumn("Màu sắc");
         modelDSSanPhamThem.addColumn("Hình ảnh");
         tableDSSanPhamThem.setModel(modelDSSanPhamThem);
         panel_2.setLayout(gl_panel_2);
@@ -299,6 +315,31 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
         // set thuọc tính thêm hình ảnh
         evtAddImage();
+
+        // không thể đảo lộn từ dòng này ---- >
+        // hiển thị tên loại sản phẩm
+        showTenLoaiSanPham();
+        // click chọn loại sản phẩm
+        cbcLoaiSanPham.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loaiSanPhamModel = lstLoaiSanPham.get(cbcLoaiSanPham.getSelectedIndex());
+                lstSanPhamModels = sanPhamService.findByIdLoai(loaiSanPhamModel.getId());
+                showTenSanPham();
+            }
+        });
+        // << -- tới dòng này
+
+        // reset form
+        resetForm();
+
+        // tạo mới form
+        btnTaoMoi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetForm();
+            }
+        });
     }
 
     private void evtAddImage() {
@@ -313,7 +354,6 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         btnTaoHinhMoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EntityImage.clearHinh(listLabelImg);
-                EntityImage.closeLabelImage(listLabelImg);
             }
         });
         // sự kiện click thêm hình ảnh
@@ -344,17 +384,58 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         }
     };
 
-    // lưu tạm thông tin sản phẩm
-    public void btnLuuTam() {
-        StringBuilder listName = new StringBuilder();
-        listLabelImg.forEach((Image) -> {
-            if (!Image.getName().equals("imgThemAnh.jpg")) {
-                listName.append(Image.getName() + ", ");
-            }
-        });
+    // reset form nút tạo mới
+    private void resetForm() {
+        if (cbcLoaiSanPham.getItemCount() > 0) {
+            cbcLoaiSanPham.setSelectedIndex(0);
+        }
+        txtSize.setText("");
+        txtGiaBan.setText("");
+        txtMauSac.setText("");
+        EntityImage.clearHinh(listLabelImg);
+    }
 
-        modelDSSanPhamThem.addRow(new Object[]{"", "", "", "", "", "", listName.toString()});
-        tableDSSanPhamThem.setModel(modelDSSanPhamThem);
+    // lưu tạm thông tin sản phẩm
+    private void btnLuuTam() {
+        // validate
+        String getMoney = txtGiaBan.getText();
+        String getSize = txtSize.getText();
+        String getColor = txtMauSac.getText();
+        if (EntityValidate.checkMoney(this, getMoney)
+                && EntityValidate.checkSize(this, getSize)
+                && EntityValidate.checkColor(this, getColor)) {
+            chiTietSanPhamModel = new ChiTietSanPhamModel();
+            sanPhamModel = lstSanPhamModels.get(cbcTenSanPham.getSelectedIndex());
+            chiTietSanPhamModel.setIdSanPham(sanPhamModel.getId());
+            chiTietSanPhamModel.setGiaBan(Long.valueOf(getMoney));
+            chiTietSanPhamModel.setMauSac(getColor);
+            chiTietSanPhamModel.setSize(getSize);
+            // kiểm tra đã được lưu tạm chưa?
+            boolean flag = lstChiTietSanPhamThemMoi.stream().filter(e ->
+                    e.getIdSanPham().equals(chiTietSanPhamModel.getIdSanPham())
+                            && e.getMauSac().equalsIgnoreCase(chiTietSanPhamModel.getMauSac())
+                            && e.getSize().equalsIgnoreCase(chiTietSanPhamModel.getSize()))
+                    .collect(Collectors.toList()).isEmpty();
+            if (chiTietSanPhamService.checkThemMoiSanPham(chiTietSanPhamModel) && flag) {
+                lstChiTietSanPhamThemMoi.add(chiTietSanPhamModel);
+                StringBuilder listName = new StringBuilder();
+                listLabelImg.forEach((Image) -> {
+                    if (!Image.getName().equals("imgThemAnh.jpg")) {
+                        listName.append(Image.getName() + ", ");
+                    }
+                });
+                modelDSSanPhamThem.addRow(new Object[]{
+                        sanPhamModel.getTenSP(),
+                        loaiSanPhamModel.getTenLoaiSP(),
+                        getMoney,
+                        getSize,
+                        getColor,
+                        listName.toString()
+                });
+            } else {
+                EntityMessage.show(this, "Chi tiết sản phẩm đã tồn tại");
+            }
+        }
     }
 
     // chọn hình ảnh
@@ -369,6 +450,16 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
             String name = file.getSelectedFile().getName();
             EntityImage.setNameToListImage(listLabelImg, name, path, label);
         }
+    }
+
+    // show combobox tên sản phẩm
+    private void showTenSanPham() {
+        cbcTenSanPham.setModel(new DefaultComboBoxModel(lstSanPhamModels.stream().map(e -> e.getTenSP()).collect(Collectors.toList()).toArray()));
+    }
+
+    // show combobox loại sản phẩm
+    private void showTenLoaiSanPham() {
+        cbcLoaiSanPham.setModel(new DefaultComboBoxModel(lstLoaiSanPham.stream().map(e -> e.getTenLoaiSP()).collect(Collectors.toList()).toArray()));
     }
 
     private void close() {

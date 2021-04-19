@@ -43,7 +43,6 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     public int saveProduct(List<ChiTietSanPhamModel> lstChiTietSanPham, List<UpdatePhotoProduct> lstPhoto) {
         int rowCountSave = 0;
         int id = -1;
-        String[] arrPhoto;
         AnhSanPhamModel anhSanPhamModel;
         for (int j = 0; j < lstChiTietSanPham.size(); j++) {
             id = chiTietSanPhamDAO.save(lstChiTietSanPham.get(j));

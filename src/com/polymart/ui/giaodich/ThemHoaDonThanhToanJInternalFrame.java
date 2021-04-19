@@ -60,7 +60,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private ThanhToanJInternalFrame thanhToanJInternalFrame = null;
 
     // tính tổng tiền
-    private Long tongTien;
+    private Long tongTien = Long.valueOf(0);
 
     /**
      * Launch the application.

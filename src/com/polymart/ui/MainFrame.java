@@ -237,7 +237,7 @@ public class MainFrame extends JFrame {
 		lblDanhMucOpen.setVisible(false);
 		setBackground(new Color(75, 0, 130));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1295, 741);
+	//	setBounds(100, 100, 1295, 741);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(51, 0, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

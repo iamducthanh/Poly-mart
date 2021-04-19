@@ -47,6 +47,7 @@ import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
 import com.polymart.service.impl.ChiTietHoaDonTraHangService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.HoaDonTraHangService;
+import com.polymart.ui.MainFrame;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -311,7 +312,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
     // set sự kiện mở form thêm hóa đơn trả
     private void setOpenThemHoaDonTraHang() {
         ThemTraHangJInternalFrame themHoaDonTraHang = new ThemTraHangJInternalFrame(this);
-        EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonTraHang);
+        MainFrame.pnlMain.add(themHoaDonTraHang);
         themHoaDonTraHang.setVisible(true);
     }
 

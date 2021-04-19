@@ -35,6 +35,7 @@ import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.SanPhamService;
+import com.polymart.ui.MainFrame;
 import com.polymart.ui.common.uiCommon;
 import com.polymart.entity.EntityExcel;
 
@@ -431,7 +432,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame();
-            EntityFrame.POLYMARTMAIN.pnlMain.add(themHangHoaJInternalFrame);
+            MainFrame.pnlMain.add(themHangHoaJInternalFrame);
             themHangHoaJInternalFrame.setVisible(true);
         }
     };

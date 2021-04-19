@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
@@ -92,7 +93,7 @@ public class MainFrame extends JFrame {
 	JPanel panelHangHoa = new JPanel();
 	private JLabel lblDanhMuc = new JLabel("");
 
-	public JDesktopPane pnlMain = new JDesktopPane();
+	public static JDesktopPane pnlMain = new JDesktopPane();
 	private JLabel lblDanhMucOpen = new JLabel("");
 	JPanel panel = new JPanel();
 	private JPanel panelDoanhThu = new JPanel();
@@ -148,6 +149,8 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+		setTitle("Quản lý cửa hàng");
 		lblTenUser.setForeground(Color.WHITE);
 		lblTenUser.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		if (EntityAuthorization.USER != null) {

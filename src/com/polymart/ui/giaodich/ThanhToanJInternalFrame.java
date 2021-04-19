@@ -56,6 +56,7 @@ import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.HoaDonThanhToanService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.NhanVienService;
+import com.polymart.ui.MainFrame;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
@@ -338,7 +339,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
 	private void setOpenThemHoaDonThanhToan() {
 		ThemHoaDonThanhToanJInternalFrame themHoaDonThanhToan = new ThemHoaDonThanhToanJInternalFrame(this);
-		EntityFrame.POLYMARTMAIN.pnlMain.add(themHoaDonThanhToan);
+		MainFrame.pnlMain.add(themHoaDonThanhToan);
 		themHoaDonThanhToan.setVisible(true);
 	}
 

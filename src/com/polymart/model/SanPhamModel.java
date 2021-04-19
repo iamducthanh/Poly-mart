@@ -4,6 +4,15 @@ public class SanPhamModel extends AbstractModel {
     private Integer idLoaiSP;
     private String tenSP;
     private String moTa;
+    private boolean statusKinhDoanh;
+
+    public boolean isStatusKinhDoanh() {
+        return statusKinhDoanh;
+    }
+
+    public void setStatusKinhDoanh(boolean statusKinhDoanh) {
+        this.statusKinhDoanh = statusKinhDoanh;
+    }
 
     public String getMoTa() {
         return moTa;

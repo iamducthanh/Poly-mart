@@ -632,8 +632,8 @@ public class MainFrame extends JFrame {
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-							.addGap(21)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
 							.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_panel.createSequentialGroup()
@@ -667,39 +667,40 @@ public class MainFrame extends JFrame {
 								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
 									.addComponent(panelBangLuong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGap(18)
-									.addComponent(panelChamCong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 									.addGroup(gl_panel.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(panelKhachHang1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+										.addGap(18)
+										.addComponent(panelChamCong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 										.addGroup(gl_panel.createSequentialGroup()
 											.addContainerGap()
-											.addComponent(panelDangXuat, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+											.addComponent(panelKhachHang1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 											.addGroup(gl_panel.createSequentialGroup()
 												.addContainerGap()
-												.addComponent(panelCaNhan1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+												.addComponent(panelDangXuat, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 											.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 												.addGroup(gl_panel.createSequentialGroup()
 													.addContainerGap()
-													.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(lblTenUser, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-													.addGap(18)
-													.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-												.addComponent(panelNhanVien, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-												.addComponent(panelKhachHang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-												.addComponent(panelCaNhan, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-												.addComponent(panelBanHang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-												.addComponent(panelHangHoa, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-												.addComponent(panelGiaoDich, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-												.addComponent(panelThongKe, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-												.addGroup(gl_panel.createSequentialGroup()
-													.addContainerGap()
-													.addComponent(panelNhanVien1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))))))
+													.addComponent(panelCaNhan1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+													.addGroup(gl_panel.createSequentialGroup()
+														.addContainerGap()
+														.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(lblTenUser, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+														.addGap(18)
+														.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+													.addComponent(panelNhanVien, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
+													.addComponent(panelKhachHang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
+													.addComponent(panelCaNhan, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
+													.addComponent(panelBanHang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
+													.addComponent(panelHangHoa, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+													.addComponent(panelGiaoDich, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
+													.addComponent(panelThongKe, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+													.addGroup(gl_panel.createSequentialGroup()
+														.addContainerGap()
+														.addComponent(panelNhanVien1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)))))))
 								.addComponent(panelBaoCao1, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE))))
 					.addGap(0))
 		);
@@ -881,12 +882,12 @@ public class MainFrame extends JFrame {
 
 		listToolBar.add(new Toolbar(panelSelectThongKe, panelThongKe, lblThongKe));
 		listToolBar.add(new Toolbar(panelSelectHangHoa, panelHangHoa, lblHangHoa));
+		listToolBar.add(new Toolbar(panelSelectBaoCao, panelBaoCao1, lblBaoCaoTo));
 		listToolBar.add(new Toolbar(panelSelectGiaoDich, panelGiaoDich, lblGiaoDich));
 		listToolBar.add(new Toolbar(panelSelectNhanVien, panelNhanVien, lblNhanVien));
 		listToolBar.add(new Toolbar(panelSelectKhachHang, panelKhachHang, lblKhachHang));
 		listToolBar.add(new Toolbar(panelSelectCaNhan, panelCaNhan, lblCaNhan));
 		listToolBar.add(new Toolbar(panelSelectBanHang, panelBanHang, lblBanHang));
-		listToolBar.add(new Toolbar(panelSelectBaoCao, panelBaoCao1, lblBaoCaoTo));
 		pnlMain.setLayout(new CardLayout(0, 0));
 
 		addMouseEnter();
@@ -901,7 +902,7 @@ public class MainFrame extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				select = 0;
+				select = 2;
 				if (openBaoCao == 0) {
 					openBaoCao = 1;
 					closeAllPanel();
@@ -952,7 +953,7 @@ public class MainFrame extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				select = 6;
+				select = 7;
 				resetColor();
 			}
 
@@ -969,7 +970,7 @@ public class MainFrame extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				select = 5;
+				select = 6;
 				if (openCaNhan == 0) {
 					openCaNhan = 1;
 					closeAllPanel();
@@ -1010,7 +1011,7 @@ public class MainFrame extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				select = 2;
+				select = 3;
 				if (openGiaoDich == 0) {
 					openGiaoDich = 1;
 					closeAllPanel();
@@ -1072,7 +1073,7 @@ public class MainFrame extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				select = 4;
+				select = 5;
 				if (openKhachHang == 0) {
 					openKhachHang = 1;
 					closeAllPanel();
@@ -1098,7 +1099,7 @@ public class MainFrame extends JFrame {
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				select = 3;
+				select = 4;
 				if (openNhanVien == 0) {
 					openNhanVien = 1;
 					closeAllPanel();

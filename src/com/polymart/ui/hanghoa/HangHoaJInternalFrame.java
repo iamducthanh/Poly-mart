@@ -280,7 +280,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         JPanel pnlTonKho = new JPanel();
         pnlTonKho.setBackground(Color.WHITE);
         pnlTonKho.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " T\u1ED3n kho ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-        pnlTonKho.setLayout(new BoxLayout(pnlTonKho, BoxLayout.Y_AXIS));
 
         JRadioButton rdoTonKhoTatCa = new JRadioButton("Tất cả");
         rdoTonKhoTatCa.setBackground(Color.WHITE);
@@ -291,24 +290,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         JRadioButton rdoVuotDinhMucTon = new JRadioButton("Vượi định mức tồn");
         rdoVuotDinhMucTon.setBackground(Color.WHITE);
         rdoVuotDinhMucTon.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        JRadioButton rdoConHangTrongKho = new JRadioButton("Còn hàng trong kho");
-        rdoConHangTrongKho.setBackground(Color.WHITE);
-        rdoConHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        JRadioButton rdoHetHangTrongKho = new JRadioButton("Hết hàng trong kho            ");
-        rdoHetHangTrongKho.setBackground(Color.WHITE);
-        rdoHetHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        pnlTonKho.add(rdoTonKhoTatCa);
-        pnlTonKho.add(rdoDuoiDinhMucTon);
-        pnlTonKho.add(rdoVuotDinhMucTon);
-        pnlTonKho.add(rdoConHangTrongKho);
-        pnlTonKho.add(rdoHetHangTrongKho);
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(rdoTonKhoTatCa);
         buttonGroup.add(rdoDuoiDinhMucTon);
         buttonGroup.add(rdoVuotDinhMucTon);
-        buttonGroup.add(rdoConHangTrongKho);
-        buttonGroup.add(rdoHetHangTrongKho);
 
         JPanel pnlBanTrucTiep = new JPanel();
         pnlBanTrucTiep.setBackground(Color.WHITE);
@@ -398,37 +384,83 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup5.add(rdoHangNgungKinhDoanh);
         GroupLayout gl_pnlNavibar = new GroupLayout(pnlNavibar);
         gl_pnlNavibar.setHorizontalGroup(
-                gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_pnlNavibar.createSequentialGroup()
-                                .addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE)
-                                .addGap(5))
-                        .addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
-                                .addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
-                                .addGap(5))
-                        .addGroup(gl_pnlNavibar.createSequentialGroup()
-                                .addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                .addGap(5))
-                        .addGroup(gl_pnlNavibar.createSequentialGroup()
-                                .addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                .addGap(5))
-                        .addGroup(Alignment.TRAILING, gl_pnlNavibar.createSequentialGroup()
-                                .addGroup(gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
-                                        .addComponent(pnlNgayDuKienHetHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                        .addComponent(pnlBanTrucTiep, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
-                                .addGap(5))
+        	gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(gl_pnlNavibar.createSequentialGroup()
+        			.addGroup(gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+        				.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
+        				.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
+        				.addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        				.addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        				.addComponent(pnlNgayDuKienHetHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+        				.addComponent(pnlBanTrucTiep, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+        			.addGap(5))
         );
         gl_pnlNavibar.setVerticalGroup(
-                gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_pnlNavibar.createSequentialGroup()
-                                .addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        	gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlNavibar.createSequentialGroup()
+        			.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
+        JRadioButton rdoConHangTrongKho = new JRadioButton("Còn hàng trong kho");
+        rdoConHangTrongKho.setBackground(Color.WHITE);
+        rdoConHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        buttonGroup.add(rdoConHangTrongKho);
+        JRadioButton rdoHetHangTrongKho = new JRadioButton("Hết hàng trong kho            ");
+        rdoHetHangTrongKho.setBackground(Color.WHITE);
+        rdoHetHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        buttonGroup.add(rdoHetHangTrongKho);
+        
+        textField = new JTextField();
+        textField.setColumns(10);
+        
+        JLabel lblNewLabel = new JLabel("Định mức tồn");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        GroupLayout gl_pnlTonKho = new GroupLayout(pnlTonKho);
+        gl_pnlTonKho.setHorizontalGroup(
+        	gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlTonKho.createSequentialGroup()
+        			.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(rdoConHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(rdoVuotDinhMucTon, Alignment.LEADING)
+        				.addComponent(rdoDuoiDinhMucTon, Alignment.LEADING)
+        				.addGroup(Alignment.LEADING, gl_pnlTonKho.createParallelGroup(Alignment.TRAILING)
+        					.addGroup(gl_pnlTonKho.createSequentialGroup()
+        						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+        							.addGroup(gl_pnlTonKho.createSequentialGroup()
+        								.addContainerGap()
+        								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addGap(13)
+        								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE))
+        							.addComponent(rdoTonKhoTatCa))
+        						.addGap(4))
+        					.addComponent(rdoHetHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap())
+        );
+        gl_pnlTonKho.setVerticalGroup(
+        	gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_pnlTonKho.createSequentialGroup()
+        			.addComponent(rdoTonKhoTatCa)
+        			.addGap(1)
+        			.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        			.addGap(1)
+        			.addComponent(rdoDuoiDinhMucTon)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(rdoVuotDinhMucTon)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(rdoConHangTrongKho)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(rdoHetHangTrongKho)
+        			.addContainerGap())
+        );
+        pnlTonKho.setLayout(gl_pnlTonKho);
         pnlNavibar.setLayout(gl_pnlNavibar);
 
         JScrollPane scrollPane = new JScrollPane();
@@ -487,6 +519,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     }
 
     private JTextField txtFind;
+    private JTextField textField;
 
     private void clickTable(int row) {
         new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);

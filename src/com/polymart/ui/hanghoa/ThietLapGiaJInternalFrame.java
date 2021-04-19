@@ -33,6 +33,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityImage;
 import com.polymart.ui.common.uiCommon;
+import javax.swing.border.LineBorder;
 
 public class ThietLapGiaJInternalFrame extends JInternalFrame {
 
@@ -79,14 +80,18 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setFocusable(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setBounds(68, 120, 96, 20);
 		panel.setLayout(new BorderLayout(0, 0));
+		hangHoaJPanel.setBackground(Color.WHITE);
 
 		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
+		panel1.setBackground(Color.WHITE);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -193,7 +198,7 @@ public class ThietLapGiaJInternalFrame extends JInternalFrame {
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 		panel.add(panel1, BorderLayout.EAST);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		txtTimNhomHang.setBorder(null);
+		txtTimNhomHang.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		tableThietLapGia = new JTable();
 		scrollPane.setViewportView(tableThietLapGia);

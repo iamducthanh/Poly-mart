@@ -89,6 +89,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		contentPane.add(panel_1, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("   Nguồn hàng         ");
@@ -144,9 +145,11 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
 		contentPane.add(panel_2, BorderLayout.EAST);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 	
@@ -208,6 +211,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 
 		txtNguonHang = new JTextField();
+		txtNguonHang.setBackground(Color.WHITE);
 		txtNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNguonHang.setColumns(10);
 
@@ -215,6 +219,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 
 		txtSoDT = new JTextField();
+		txtSoDT.setBackground(Color.WHITE);
 		txtSoDT.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSoDT.setColumns(10);
 
@@ -222,6 +227,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2_1_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 
 		txtDiaChi = new JTextField();
+		txtDiaChi.setBackground(Color.WHITE);
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);

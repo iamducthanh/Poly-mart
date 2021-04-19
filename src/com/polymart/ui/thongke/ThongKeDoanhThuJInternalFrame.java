@@ -36,6 +36,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
+import java.awt.Color;
 
 public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	class thongke{
@@ -57,6 +58,7 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = 8758462980711626613L;
 	private JPanel contentPane;
 	private JTable tableThongKe;
+	private JTable tableThongKe_1;
 	JPanel panelContent = new JPanel();
 	JScrollPane scrollPaneBang = new JScrollPane();
 	ChartPanel chartPanel;
@@ -89,19 +91,23 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ThongKeDoanhThuJInternalFrame() {
+		setBackground(new Color(75, 0, 130));
 		((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 848, 556);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(75, 0, 130));
 		contentPane.add(panel, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Thống kê doanh thu");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -114,15 +120,19 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(75, 0, 130));
 		contentPane.add(panel_1, BorderLayout.WEST);
 
 		JLabel lblNewLabel_1 = new JLabel("Lựa chọn hiển thị");
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(75, 0, 130));
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
 		JLabel lblNewLabel_1_1 = new JLabel("Năm");
+		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -153,9 +163,13 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		);
 
 		JRadioButton rdoTheoBang = new JRadioButton("Theo bảng");
+		rdoTheoBang.setBackground(new Color(75, 0, 130));
+		rdoTheoBang.setForeground(new Color(255, 255, 255));
 		rdoTheoBang.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 		JRadioButton rdoBieuDo = new JRadioButton("Biểu đồ");
+		rdoBieuDo.setBackground(new Color(75, 0, 130));
+		rdoBieuDo.setForeground(new Color(255, 255, 255));
 		rdoBieuDo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -172,24 +186,30 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel_2.setLayout(gl_panel_2);
 		panel_1.setLayout(gl_panel_1);
+		panelContent.setBackground(new Color(75, 0, 130));
 
 		contentPane.add(panelContent, BorderLayout.CENTER);
 		panelContent.setLayout(new BorderLayout(0, 0));
 
 		tableThongKe = new JTable();
+		tableThongKe.setForeground(new Color(255, 255, 255));
+		tableThongKe.setBackground(new Color(75, 0, 130));
 		scrollPaneBang.setViewportView(tableThongKe);
 
 		ButtonGroup gr = new ButtonGroup();
 		gr.add(rdoBieuDo);
 		gr.add(rdoTheoBang);
 		rdoTheoBang.setSelected(true);
+		scrollPaneBang.setBackground(new Color(75, 0, 130));
 
-		tableThongKe = new JTable();
-		scrollPaneBang.setViewportView(tableThongKe);
+		tableThongKe_1 = new JTable();
+		tableThongKe_1.setForeground(new Color(255, 255, 255));
+		tableThongKe_1.setBackground(new Color(75, 0, 130));
+		scrollPaneBang.setViewportView(tableThongKe_1);
 		modelThongKe.addColumn("Tháng");
 		modelThongKe.addColumn("Sản phẩm bán");
 		modelThongKe.addColumn("Doanh thu");
-		tableThongKe.setModel(modelThongKe);
+		tableThongKe_1.setModel(modelThongKe);
 
 		// rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 		// tableThongKe.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
@@ -216,7 +236,7 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 			}
 		});
 
-		tableThongKe.setRowHeight(25);
+		tableThongKe_1.setRowHeight(25);
 	}
 
 	public void loadTableDoanhThu() {

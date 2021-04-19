@@ -80,9 +80,11 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(Color.WHITE);
 
 		contentPane.add(panel, BorderLayout.NORTH);
 
@@ -211,6 +213,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		tableChiTieu = new JTable();
+		tableChiTieu.setBackground(Color.WHITE);
 		tableChiTieu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -229,6 +232,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		tableChiTieu.setModel(modelChiTieu);
 
 		JPanel panelLeft = new JPanel();
+		panelLeft.setBackground(Color.WHITE);
 		contentPane.add(panelLeft, BorderLayout.WEST);
 		dateChamCong.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -272,6 +276,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(dateChamCong, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)))
 		);
+		dateChamCong.getDayChooser().getDayPanel().setBackground(Color.WHITE);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()

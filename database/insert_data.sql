@@ -460,9 +460,9 @@ INSERT INTO KHACHHANG (HOTEN, SODIENTHOAI, DIACHI, TICHDIEM)
 VALUES 
 (N'ADMIN', '88888888', N'ADMIN', 0),
 (N'Đỗ Văn Duy', '0345678912', N'', 0),
-(N'Nguyễn Quang Ngọc', '0345678912', NULL, 0),
+(N'Nguyễn Quang Ngọc', '0345678912', '', 0),
 (N'Bùi Việt Đức', '0345678912', N'Hoàn Kiếm', 0),
-(N'Nguyễn Đức Thành', '0345678912', NULL, 0)
+(N'Nguyễn Đức Thành', '0345678912', '', 0)
 
 INSERT INTO NGUONHANG (TEN, SODIENTHOAI, DIACHI)
 VALUES 

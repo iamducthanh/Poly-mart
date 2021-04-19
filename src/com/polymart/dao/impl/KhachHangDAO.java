@@ -31,6 +31,7 @@ public class KhachHangDAO extends AbstractDAO<KhachHangModel> implements IKhachH
 				khachHangModel.getTichDiem(), khachHangModel.getId());
 	}
 
+	
 	@Override
 	public void delete(Integer id) {
 		String sql = "DELETE KHACHHANG WHERE ID = ?";

@@ -56,7 +56,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private List<LabelImageModel> listLabelImg = new ArrayList<LabelImageModel>();
 
     // list này để lúc lưu sẽ get link ra để lưu
-    private JLabel[] arrImage = new JLabel[12];
+    private JLabel[] arrImage = new JLabel[4];
     // nó éo reload lại form cho nên phải tạo sẵn, lúc lấy ảnh cứ load list lấy link
     // để lưu
 

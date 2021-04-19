@@ -455,15 +455,16 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         chooser.setFileFilter(filter);
         int i = chooser.showOpenDialog(null);
         File srcFile = chooser.getSelectedFile();
+        dstFile = new File("images", "anh-san-pham");
+        if (!dstFile.getParentFile().exists()) {
+            dstFile.getParentFile().mkdirs();
+        }
         while (true) {
             nameFile = Math.random() * 10000000 + srcFile.getName();
-            dstFile = new File("anh-san-pham", nameFile);
+            dstFile = new File("images\\anh-san-pham", nameFile);
             if (!dstFile.exists()) {
                 break;
             }
-        }
-        if (!dstFile.getParentFile().exists()) {
-            dstFile.getParentFile().mkdirs();
         }
         pathForm = Paths.get(srcFile.getAbsolutePath());
         if (i == 0) {

@@ -226,7 +226,7 @@ public class MainFrame extends JFrame {
 		lblDanhMucOpen.setVisible(false);
 		setBackground(new Color(75, 0, 130));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1295, 741);
+	//	setBounds(100, 100, 1295, 741);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(51, 0, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -244,7 +244,7 @@ public class MainFrame extends JFrame {
 					.addGap(1)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
-					.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
+					.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
 					.addGap(1))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -254,7 +254,7 @@ public class MainFrame extends JFrame {
 						.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 777, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+							.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 							.addGap(1)))
 					.addGap(0))
 		);

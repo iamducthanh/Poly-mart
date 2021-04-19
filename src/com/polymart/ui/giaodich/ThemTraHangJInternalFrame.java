@@ -51,6 +51,7 @@ import com.polymart.service.impl.HoaDonThanhToanService;
 import com.polymart.service.impl.HoaDonTraHangService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.SanPhamService;
+import javax.swing.ImageIcon;
 
 public class ThemTraHangJInternalFrame extends JInternalFrame {
 
@@ -147,7 +148,8 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
 
-        JButton btnQuayLai = new JButton("<-   ");
+        JButton btnQuayLai = new JButton("");
+        btnQuayLai.setIcon(new ImageIcon("images\\back-6.png"));
         btnQuayLai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 close();
@@ -157,7 +159,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         btnQuayLai.setBorder(null);
         btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
 
-        JLabel lblNewLabel = new JLabel("Trả hàng");
+        JLabel lblNewLabel = new JLabel("  Trả hàng");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 
         txtTimKiem = new JTextField();

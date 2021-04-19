@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -129,7 +130,9 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         JPanel panel_1 = new JPanel();
         contentPane.add(panel_1, BorderLayout.NORTH);
 
-        JButton btnQuayLai = new JButton("<-   ");
+        JButton btnQuayLai = new JButton("");
+        btnQuayLai.setIcon(new ImageIcon("images\\back-6.png"));
+
         btnQuayLai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 close();

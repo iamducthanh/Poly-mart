@@ -125,7 +125,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         contentPane.add(panel_1, BorderLayout.NORTH);
 
         JButton btnQuayLai = new JButton("");
-        btnQuayLai.setIcon(new ImageIcon("C:\\Users\\ADMIN\\git\\Poly-mart\\images\\quaylai.png"));
+        btnQuayLai.setIcon(new ImageIcon("images\\back-6.png"));
         btnQuayLai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 close();
@@ -135,7 +135,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         btnQuayLai.setBorder(null);
         btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
 
-        JLabel lblNewLabel = new JLabel("Thanh toán bán hàng");
+        JLabel lblNewLabel = new JLabel("  Thanh toán bán hàng");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 
         txtTimKiem = new JTextField();

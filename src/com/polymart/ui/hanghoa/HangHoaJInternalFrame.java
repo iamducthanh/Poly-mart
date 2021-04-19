@@ -109,10 +109,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         pnlNavibar = new JPanel();
+        pnlNavibar.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+        pnlTop.setBackground(Color.WHITE);
         contentPane.add(pnlTop, BorderLayout.NORTH);
         pnlTop.setBounds(68, 120, 96, 20);
 
@@ -167,7 +170,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         txtFind.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtFind.getText().equals("Tìm theo mã, tên hàng")) {
+                if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
                     txtFind.setText("");
                 }
             }
@@ -175,7 +178,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtFind.getText().equals("")) {
-                    txtFind.setText("Tìm theo mã, tên hàng");
+                    txtFind.setText(" Tìm theo mã, tên hàng");
                 }
             }
         });
@@ -242,32 +245,42 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
     public void initCenterHangHoa() {
         JPanel pnlLoaiHang = new JPanel();
+        pnlLoaiHang.setBackground(Color.WHITE);
         pnlLoaiHang.setBorder(
                 new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Lo\u1EA1i H\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlLoaiHang.setLayout(new BoxLayout(pnlLoaiHang, BoxLayout.Y_AXIS));
         JCheckBox chkbHangHoa = new JCheckBox("Hàng hóa");
+        chkbHangHoa.setBackground(Color.WHITE);
         chkbHangHoa.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLoaiHang.add(chkbHangHoa);
         JCheckBox chkbDichVu = new JCheckBox("Dịch vụ");
+        chkbDichVu.setBackground(Color.WHITE);
         chkbDichVu.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLoaiHang.add(chkbDichVu);
         JCheckBox chkbCombo = new JCheckBox("Combo - đóng gói");
+        chkbCombo.setBackground(Color.WHITE);
         chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLoaiHang.add(chkbCombo);
 
         JPanel pnlTonKho = new JPanel();
+        pnlTonKho.setBackground(Color.WHITE);
         pnlTonKho.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " T\u1ED3n kho ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlTonKho.setLayout(new BoxLayout(pnlTonKho, BoxLayout.Y_AXIS));
 
         JRadioButton rdoTonKhoTatCa = new JRadioButton("Tất cả");
+        rdoTonKhoTatCa.setBackground(Color.WHITE);
         rdoTonKhoTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoDuoiDinhMucTon = new JRadioButton("Dưới định mức tồn");
+        rdoDuoiDinhMucTon.setBackground(Color.WHITE);
         rdoDuoiDinhMucTon.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoVuotDinhMucTon = new JRadioButton("Vượi định mức tồn");
+        rdoVuotDinhMucTon.setBackground(Color.WHITE);
         rdoVuotDinhMucTon.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoConHangTrongKho = new JRadioButton("Còn hàng trong kho");
+        rdoConHangTrongKho.setBackground(Color.WHITE);
         rdoConHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoHetHangTrongKho = new JRadioButton("Hết hàng trong kho            ");
+        rdoHetHangTrongKho.setBackground(Color.WHITE);
         rdoHetHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlTonKho.add(rdoTonKhoTatCa);
         pnlTonKho.add(rdoDuoiDinhMucTon);
@@ -283,14 +296,18 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup.add(rdoHetHangTrongKho);
 
         JPanel pnlBanTrucTiep = new JPanel();
+        pnlBanTrucTiep.setBackground(Color.WHITE);
         pnlBanTrucTiep.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " B\u00E1n tr\u1EF1c ti\u1EBFp ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlBanTrucTiep.setLayout(new BoxLayout(pnlBanTrucTiep, BoxLayout.Y_AXIS));
 
         JRadioButton rdoBanTrucTiepTatCa = new JRadioButton("Tất cả");
+        rdoBanTrucTiepTatCa.setBackground(Color.WHITE);
         rdoBanTrucTiepTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoDuocBanTrucTiep = new JRadioButton("Được bán trực tiếp");
+        rdoDuocBanTrucTiep.setBackground(Color.WHITE);
         rdoDuocBanTrucTiep.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoKhongDuocBanTrucTiep = new JRadioButton("Không được bán trực tiếp");
+        rdoKhongDuocBanTrucTiep.setBackground(Color.WHITE);
         rdoKhongDuocBanTrucTiep.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlBanTrucTiep.add(rdoBanTrucTiepTatCa);
         pnlBanTrucTiep.add(rdoDuocBanTrucTiep);
@@ -302,12 +319,15 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup2.add(rdoKhongDuocBanTrucTiep);
 
         JPanel pnlNgayDuKienHetHang = new JPanel();
+        pnlNgayDuKienHetHang.setBackground(Color.WHITE);
         pnlNgayDuKienHetHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Ng\u00E0y d\u1EF1 ki\u1EBFn h\u1EBFt h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlNgayDuKienHetHang.setLayout(new BoxLayout(pnlNgayDuKienHetHang, BoxLayout.Y_AXIS));
 
         JRadioButton rdoToanThoiGian = new JRadioButton("Toàn thời gian");
+        rdoToanThoiGian.setBackground(Color.WHITE);
         rdoToanThoiGian.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoLuaChonKhac = new JRadioButton("Lựa chọn khác");
+        rdoLuaChonKhac.setBackground(Color.WHITE);
         rdoLuaChonKhac.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlNgayDuKienHetHang.add(rdoToanThoiGian);
         pnlNgayDuKienHetHang.add(rdoLuaChonKhac);
@@ -317,14 +337,18 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup3.add(rdoLuaChonKhac);
 
         JPanel pnlLienKetBanHang = new JPanel();
+        pnlLienKetBanHang.setBackground(Color.WHITE);
         pnlLienKetBanHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Li\u00EAn k\u1EBFt b\u00E1n h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlLienKetBanHang.setLayout(new BoxLayout(pnlLienKetBanHang, BoxLayout.Y_AXIS));
 
         JRadioButton rdoLienKetBanHangTatCa = new JRadioButton("Tất cả");
+        rdoLienKetBanHangTatCa.setBackground(Color.WHITE);
         rdoLienKetBanHangTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoCoLienKetKenhBan = new JRadioButton("Có liên kết kênh bán");
+        rdoCoLienKetKenhBan.setBackground(Color.WHITE);
         rdoCoLienKetKenhBan.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoKhongLienKetKenhBan = new JRadioButton("Không liên kết kênh bán  ");
+        rdoKhongLienKetKenhBan.setBackground(Color.WHITE);
         rdoKhongLienKetKenhBan.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLienKetBanHang.add(rdoLienKetBanHangTatCa);
         pnlLienKetBanHang.add(rdoCoLienKetKenhBan);
@@ -336,14 +360,18 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         buttonGroup4.add(rdoKhongLienKetKenhBan);
 
         JPanel pnlLuaChonHienThi = new JPanel();
+        pnlLuaChonHienThi.setBackground(Color.WHITE);
         pnlLuaChonHienThi.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " L\u1EF1a ch\u1ECDn hi\u1EC3n th\u1ECB ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         pnlLuaChonHienThi.setLayout(new BoxLayout(pnlLuaChonHienThi, BoxLayout.Y_AXIS));
 
         JRadioButton rdoLuaChonHienThiTatCa = new JRadioButton("Tất cả");
+        rdoLuaChonHienThiTatCa.setBackground(Color.WHITE);
         rdoLuaChonHienThiTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoHangDangKinhDoanh = new JRadioButton("Hàng đang kinh doanh");
+        rdoHangDangKinhDoanh.setBackground(Color.WHITE);
         rdoHangDangKinhDoanh.setFont(new Font("SansSerif", Font.PLAIN, 14));
         JRadioButton rdoHangNgungKinhDoanh = new JRadioButton("Hàng ngừng kinh doanh   ");
+        rdoHangNgungKinhDoanh.setBackground(Color.WHITE);
         rdoHangNgungKinhDoanh.setFont(new Font("SansSerif", Font.PLAIN, 14));
         pnlLuaChonHienThi.add(rdoLuaChonHienThiTatCa);
         pnlLuaChonHienThi.add(rdoHangDangKinhDoanh);
@@ -401,6 +429,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
             ;
         };
+        tblHangHoa.setBackground(Color.WHITE);
         scrollPane.setViewportView(tblHangHoa);
 
         // table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

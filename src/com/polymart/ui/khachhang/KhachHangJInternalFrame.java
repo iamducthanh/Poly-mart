@@ -96,11 +96,13 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		contentPane.add(panel_1, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel(" Khách hàng         ");
@@ -141,9 +143,11 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
 		contentPane.add(panel_2, BorderLayout.EAST);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Chi ti\u1EBFt kh\u00E1ch h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		btnDelete = new JButton("Xóa");
@@ -199,6 +203,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 
 		txtTenKhachHang = new JTextField();
+		txtTenKhachHang.setBackground(Color.WHITE);
 		txtTenKhachHang.setFont(new Font("Dialog", Font.PLAIN, 16));
 		txtTenKhachHang.setColumns(10);
 
@@ -206,6 +211,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 
 		txtSoDienThoai = new JTextField();
+		txtSoDienThoai.setBackground(Color.WHITE);
 		txtSoDienThoai.setFont(new Font("Dialog", Font.PLAIN, 16));
 		txtSoDienThoai.setColumns(10);
 
@@ -213,6 +219,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2_1_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
 
 		txtDiaChi = new JTextField();
+		txtDiaChi.setBackground(Color.WHITE);
 		txtDiaChi.setFont(new Font("Dialog", Font.PLAIN, 16));
 		txtDiaChi.setColumns(10);
 
@@ -220,6 +227,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		txtTichDiem = new JTextField("0");
+		txtTichDiem.setBackground(Color.WHITE);
 		txtTichDiem.setFont(new Font("Dialog", Font.PLAIN, 16));
 		txtTichDiem.setColumns(10);
 		txtTichDiem.setEnabled(false);
@@ -282,6 +290,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		tblKhachHang = new JTable();
+		tblKhachHang.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tblKhachHang);
 		modelKhachHang.addColumn("Tên khách hàng");
 		modelKhachHang.addColumn("Số điện thoại");

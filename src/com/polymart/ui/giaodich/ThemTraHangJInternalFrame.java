@@ -140,12 +140,14 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
 
         setFocusable(true);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
 
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(Color.WHITE);
         contentPane.add(panel_1, BorderLayout.NORTH);
 
         JButton btnQuayLai = new JButton("");
@@ -192,6 +194,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         panel.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_5 = new JPanel();
+        panel_5.setBackground(Color.WHITE);
         panel_5.setBorder(new TitledBorder(
                 new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
                 " Th\u00F4ng tin h\u00F3a \u0111\u01A1n", TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -203,9 +206,11 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         panel_5.add(scrollPane, BorderLayout.CENTER);
 
         tableDanhSachSanPham = new JTable();
+        tableDanhSachSanPham.setBackground(Color.WHITE);
         scrollPane.setViewportView(tableDanhSachSanPham);
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBackground(Color.WHITE);
         panel_2.setBorder(new TitledBorder(
                 new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
                 " Danh s\u00E1ch s\u1EA3n ph\u1EA9m ", TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -301,6 +306,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         scrollPane_2.setViewportView(txaGhiChu);
 
         tableDanhSachTraHang = new JTable();
+        tableDanhSachTraHang.setBackground(Color.WHITE);
         scrollPane_1.setViewportView(tableDanhSachTraHang);
         panel_2.setLayout(gl_panel_2);
         setColumnTable();

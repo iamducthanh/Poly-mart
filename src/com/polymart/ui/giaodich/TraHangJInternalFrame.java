@@ -108,11 +108,14 @@ public class TraHangJInternalFrame extends JInternalFrame {
         // setBounds(100, 100, 1920, 639);
         setFocusable(true);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
+        panel.setBackground(Color.WHITE);
         contentPane.add(panel, BorderLayout.NORTH);
         panel.setBounds(68, 120, 96, 20);
+        hangHoaJPanel.setBackground(Color.WHITE);
 
         contentPane.add(hangHoaJPanel, BorderLayout.WEST);
         initTopTraHang();
@@ -246,6 +249,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
 
         hangHoaJPanel.setLayout(gl_hangHoaJPanel);
         tableTraHang = new JTable();
+        tableTraHang.setBackground(Color.WHITE);
         scrollPane.setViewportView(tableTraHang);
         modelTraHang.addColumn("Mã trả hàng");
         modelTraHang.addColumn("Mã thanh toán");

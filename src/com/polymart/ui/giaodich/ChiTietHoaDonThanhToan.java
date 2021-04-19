@@ -19,6 +19,7 @@ import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.SanPhamService;
+import java.awt.Color;
 
 public class ChiTietHoaDonThanhToan extends JFrame {
 
@@ -47,6 +48,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         setResizable(false);
         setBounds(100, 100, 877, 594);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);

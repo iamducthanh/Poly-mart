@@ -117,11 +117,13 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
 
         setFocusable(true);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(Color.WHITE);
         contentPane.add(panel_1, BorderLayout.NORTH);
 
         JButton btnQuayLai = new JButton("");
@@ -169,6 +171,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         panel.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_4 = new JPanel();
+        panel_4.setBackground(Color.WHITE);
         panel.add(panel_4, BorderLayout.SOUTH);
 
         txtSoLgBan = new JTextField();
@@ -224,6 +227,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         panel_4.setLayout(gl_panel_4);
 
         JPanel panel_5 = new JPanel();
+        panel_5.setBackground(Color.WHITE);
         panel_5.setBorder(new TitledBorder(
                 new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
                 " Th\u00F4ng tin s\u1EA3n ph\u1EA9m ", TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -235,9 +239,11 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         panel_5.add(scrollPane, BorderLayout.CENTER);
 
         tableDSSanPham = new JTable();
+        tableDSSanPham.setBackground(Color.WHITE);
         scrollPane.setViewportView(tableDSSanPham);
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBackground(Color.WHITE);
         panel_2.setBorder(new TitledBorder(
                 new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
                 " Danh s\u00E1ch thanh to\u00E1n ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -323,6 +329,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         scrollPane_2.setViewportView(txtGhiChu);
 
         tableDSThanhToan = new JTable();
+        tableDSThanhToan.setBackground(Color.WHITE);
         scrollPane_1.setViewportView(tableDSThanhToan);
         panel_2.setLayout(gl_panel_2);
         modelDSSanPham.addColumn("Mã sản phẩm");

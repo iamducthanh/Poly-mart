@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
 import com.polymart.ui.taikhoan.ChangePassFrame;
+import java.awt.Color;
 
 
 public class CaNhanFrame extends JFrame {
@@ -68,6 +69,7 @@ public class CaNhanFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 594, 515);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -118,6 +120,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(lblGiVn_3);
 
 		txtMaNhanVien = new JTextField();
+		txtMaNhanVien.setBackground(Color.WHITE);
 		txtMaNhanVien.setEditable(false);
 		txtMaNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMaNhanVien.setColumns(10);
@@ -125,6 +128,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtMaNhanVien);
 
 		txtHoTen = new JTextField();
+		txtHoTen.setBackground(Color.WHITE);
 		txtHoTen.setEditable(false);
 		txtHoTen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtHoTen.setColumns(10);
@@ -132,6 +136,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtHoTen);
 
 		txtNgaySInh = new JTextField();
+		txtNgaySInh.setBackground(Color.WHITE);
 		txtNgaySInh.setEditable(false);
 		txtNgaySInh.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNgaySInh.setColumns(10);
@@ -139,6 +144,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtNgaySInh);
 
 		txtMatKhau = new JPasswordField();
+		txtMatKhau.setBackground(Color.WHITE);
 		txtMatKhau.setEditable(false);
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMatKhau.setColumns(10);
@@ -146,6 +152,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtMatKhau);
 
 		txtChucVu = new JTextField();
+		txtChucVu.setBackground(Color.WHITE);
 		txtChucVu.setEditable(false);
 		txtChucVu.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtChucVu.setColumns(10);
@@ -153,6 +160,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtChucVu);
 
 		txtSoDT = new JTextField();
+		txtSoDT.setBackground(Color.WHITE);
 		txtSoDT.setEditable(false);
 		txtSoDT.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSoDT.setColumns(10);
@@ -160,6 +168,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtSoDT);
 
 		txtDiaChi = new JTextField();
+		txtDiaChi.setBackground(Color.WHITE);
 		txtDiaChi.setEditable(false);
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
@@ -167,6 +176,7 @@ public class CaNhanFrame extends JFrame {
 		contentPane.add(txtDiaChi);
 
 		txtEmail = new JTextField();
+		txtEmail.setBackground(Color.WHITE);
 		txtEmail.setEditable(false);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEmail.setColumns(10);
@@ -175,13 +185,13 @@ public class CaNhanFrame extends JFrame {
 
 		rdoNam.setEnabled(false);
 		rdoNam.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		rdoNam.setBackground(SystemColor.menu);
+		rdoNam.setBackground(Color.WHITE);
 		rdoNam.setBounds(146, 109, 84, 25);
 		contentPane.add(rdoNam);
 
 		rdoNu.setEnabled(false);
 		rdoNu.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		rdoNu.setBackground(SystemColor.menu);
+		rdoNu.setBackground(Color.WHITE);
 		rdoNu.setBounds(232, 107, 111, 25);
 		contentPane.add(rdoNu);
 

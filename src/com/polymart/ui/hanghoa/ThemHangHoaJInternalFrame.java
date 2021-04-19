@@ -131,14 +131,17 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         };
         setFocusable(true);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(Color.WHITE);
         contentPane.add(panel_1, BorderLayout.NORTH);
 
-        JButton btnQuayLai = new JButton("<-   ");
+        JButton btnQuayLai = new JButton("");
+        btnQuayLai.setIcon(new ImageIcon("images\\back-6.png"));
         btnQuayLai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 close();
@@ -148,25 +151,35 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         btnQuayLai.setBorder(null);
         btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
 
-        JLabel lblNewLabel = new JLabel("Thêm sản phẩm");
+        JLabel lblNewLabel = new JLabel("  Thêm sản phẩm");
         lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-        gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel_1.createSequentialGroup().addGap(5).addComponent(btnQuayLai).addGap(5)
-                        .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-                        .addGap(1011)));
-        gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                .addGroup(gl_panel_1.createSequentialGroup().addGap(5)
-                        .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        gl_panel_1.setHorizontalGroup(
+        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_1.createSequentialGroup()
+        			.addGap(5)
+        			.addComponent(btnQuayLai)
+        			.addGap(5)
+        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+        			.addGap(1011))
+        );
+        gl_panel_1.setVerticalGroup(
+        	gl_panel_1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel_1.createSequentialGroup()
+        			.addGap(5)
+        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         panel_1.setLayout(gl_panel_1);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         contentPane.add(panel, BorderLayout.CENTER);
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBackground(Color.WHITE);
         panel_2.setBorder(new TitledBorder(
                 new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
                 "  Chi ti\u1EBFt s\u1EA3n ph\u1EA9m  ", TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -232,6 +245,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         panel_3.add(scrollPane, BorderLayout.CENTER);
 
         tableDSSanPhamThem = new JTable();
+        tableDSSanPhamThem.setBackground(Color.WHITE);
         scrollPane.setViewportView(tableDSSanPhamThem);
 
         JLabel lblTenSanPham = new JLabel("Tên sản phẩm: ", JLabel.RIGHT);
@@ -266,6 +280,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         lblMauSac.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
         btnTaoHinhMoi = new JButton("Tạo mới hình");
+        panelImage.setBackground(Color.WHITE);
 
         panelImage.setBorder(
                 new TitledBorder(null, "  H\u00ECnh \u1EA3nh  ", TitledBorder.LEADING, TitledBorder.TOP, null, null));

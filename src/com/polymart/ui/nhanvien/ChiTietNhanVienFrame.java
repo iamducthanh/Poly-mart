@@ -102,7 +102,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 684, 682);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.control);
+		contentPane.setBackground(Color.WHITE);
 		setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -120,7 +120,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.control);
+		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Chi ti\u1EBFt nh\u00E2n vi\u00EAn  ", TitledBorder.LEADING, TitledBorder.TOP, null,
@@ -208,24 +208,28 @@ public class ChiTietNhanVienFrame extends JFrame {
 		panel.add(lblGiVn_9_1);
 
 		txtDiaChi = new JTextField();
+		txtDiaChi.setBackground(Color.WHITE);
 		txtDiaChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtDiaChi.setColumns(10);
 		txtDiaChi.setBounds(142, 413, 467, 25);
 		panel.add(txtDiaChi);
 
 		txtHoTen = new JTextField();
+		txtHoTen.setBackground(Color.WHITE);
 		txtHoTen.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtHoTen.setColumns(10);
 		txtHoTen.setBounds(142, 45, 235, 25);
 		panel.add(txtHoTen);
 
 		txtSDT = new JTextField();
+		txtSDT.setBackground(Color.WHITE);
 		txtSDT.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtSDT.setColumns(10);
 		txtSDT.setBounds(142, 327, 235, 25);
 		panel.add(txtSDT);
 
 		txtMatKhau = new JTextField();
+		txtMatKhau.setBackground(Color.WHITE);
 		txtMatKhau.setEditable(false);
 		txtMatKhau.setText("12345678");
 		txtMatKhau.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -234,12 +238,14 @@ public class ChiTietNhanVienFrame extends JFrame {
 		panel.add(txtMatKhau);
 
 		txtEmail = new JTextField();
+		txtEmail.setBackground(Color.WHITE);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(142, 373, 467, 25);
 		panel.add(txtEmail);
 
 		txtMucLuong = new JTextField();
+		txtMucLuong.setBackground(Color.WHITE);
 		txtMucLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtMucLuong.setColumns(10);
 		txtMucLuong.setBounds(142, 280, 235, 25);
@@ -247,13 +253,13 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 		rdoNam = new JRadioButton("Nam");
 		rdoNam.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		rdoNam.setBackground(SystemColor.control);
+		rdoNam.setBackground(Color.WHITE);
 		rdoNam.setBounds(142, 139, 84, 25);
 		panel.add(rdoNam);
 
 		rdoNu = new JRadioButton("Nữ");
 		rdoNu.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		rdoNu.setBackground(SystemColor.control);
+		rdoNu.setBackground(Color.WHITE);
 		rdoNu.setBounds(225, 139, 111, 25);
 		panel.add(rdoNu);
 
@@ -275,6 +281,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		buttonGroup.add(rdoNu);
 
 		comboBox = new JComboBox<Object>();
+		comboBox.setBackground(Color.WHITE);
 		comboBox.setBounds(142, 174, 175, 25);
 		panel.add(comboBox);
 

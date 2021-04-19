@@ -33,6 +33,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 
@@ -42,6 +44,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 	private static final long serialVersionUID = 8758462980711626613L;
 	private JPanel contentPane;
 	private JTable tableThongKe;
+	private JTable tableThongKe_1;
 	JPanel panelContent = new JPanel();
 	JScrollPane scrollPaneBang = new JScrollPane();
 	ChartPanel chartPanel;
@@ -80,6 +83,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("Thống kê doanh số");
@@ -95,13 +99,15 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel_1, BorderLayout.WEST);
 
 		JLabel lblNewLabel_1 = new JLabel("Lựa chọn hiển thị");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_2.setBackground(new Color(255, 255, 255));
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		JLabel lblNewLabel_1_1 = new JLabel("Năm");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -123,6 +129,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 						.addComponent(lblNewLabel_1_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(20, Short.MAX_VALUE))
 		);
+		cbbNam.setBackground(new Color(255, 255, 255));
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
@@ -141,9 +148,11 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		);
 
 		JRadioButton rdoTheoBang = new JRadioButton("Theo bảng");
+		rdoTheoBang.setBackground(new Color(255, 255, 255));
 		rdoTheoBang.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 		JRadioButton rdoBieuDo = new JRadioButton("Biểu đồ");
+		rdoBieuDo.setBackground(new Color(255, 255, 255));
 		rdoBieuDo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -160,11 +169,13 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		panel_2.setLayout(gl_panel_2);
 		panel_1.setLayout(gl_panel_1);
+		panelContent.setBackground(new Color(255, 255, 255));
 
 		contentPane.add(panelContent, BorderLayout.CENTER);
 		panelContent.setLayout(new BorderLayout(0, 0));
 
 		tableThongKe = new JTable();
+		tableThongKe.setBackground(new Color(255, 255, 255));
 		scrollPaneBang.setViewportView(tableThongKe);
 
 		ButtonGroup gr = new ButtonGroup();
@@ -172,12 +183,13 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		gr.add(rdoTheoBang);
 		rdoTheoBang.setSelected(true);
 
-		tableThongKe = new JTable();
-		scrollPaneBang.setViewportView(tableThongKe);
+		tableThongKe_1 = new JTable();
+		tableThongKe_1.setBackground(new Color(240, 255, 255));
+		scrollPaneBang.setViewportView(tableThongKe_1);
 		modelThongKe.addColumn("Mã sản phẩm");
 		modelThongKe.addColumn("Tên sản phẩm");
 		modelThongKe.addColumn("Số lượng bán");
-		tableThongKe.setModel(modelThongKe);
+		tableThongKe_1.setModel(modelThongKe);
 
 		// rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
 		// tableThongKe.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
@@ -211,7 +223,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 
 			}
 		});
-		tableThongKe.setRowHeight(25);
+		tableThongKe_1.setRowHeight(25);
 	}
 
 	public void loadTableDoanhThu() {

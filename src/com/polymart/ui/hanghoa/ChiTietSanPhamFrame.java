@@ -89,11 +89,13 @@ public class ChiTietSanPhamFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 799, 565);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE);
         panel.setBorder(new TitledBorder(null, "Chi ti\u1EBFt s\u1EA3n ph\u1EA9m", TitledBorder.LEADING,
                 TitledBorder.TOP, null, Color.BLACK));
         panel.setBounds(10, 11, 765, 470);
@@ -106,52 +108,61 @@ public class ChiTietSanPhamFrame extends JFrame {
         panel.add(lblNewLabel);
 
         txtMaSP = new JTextField();
+        txtMaSP.setBackground(Color.WHITE);
         txtMaSP.setEditable(false);
         txtMaSP.setBounds(174, 34, 152, 25);
         panel.add(txtMaSP);
         txtMaSP.setColumns(10);
 
         txtTenSP = new JTextField();
+        txtTenSP.setBackground(Color.WHITE);
         txtTenSP.setEditable(false);
         txtTenSP.setColumns(10);
         txtTenSP.setBounds(174, 74, 240, 25);
         panel.add(txtTenSP);
 
         txtGiaBan = new JTextField();
+        txtGiaBan.setBackground(Color.WHITE);
         txtGiaBan.setColumns(10);
         txtGiaBan.setBounds(174, 194, 152, 25);
         panel.add(txtGiaBan);
 
         txtLoai = new JTextField();
+        txtLoai.setBackground(Color.WHITE);
         txtLoai.setEditable(false);
         txtLoai.setColumns(10);
         txtLoai.setBounds(174, 114, 240, 25);
         panel.add(txtLoai);
 
         txtGiaVon = new JTextField();
+        txtGiaVon.setBackground(Color.WHITE);
         txtGiaVon.setEditable(false);
         txtGiaVon.setColumns(10);
         txtGiaVon.setBounds(174, 234, 152, 25);
         panel.add(txtGiaVon);
 
         txtSoLuong = new JTextField();
+        txtSoLuong.setBackground(Color.WHITE);
         txtSoLuong.setEditable(false);
         txtSoLuong.setColumns(10);
         txtSoLuong.setBounds(174, 154, 152, 25);
         panel.add(txtSoLuong);
 
         txtGiaGiam = new JTextField();
+        txtGiaGiam.setBackground(Color.WHITE);
         txtGiaGiam.setColumns(10);
         txtGiaGiam.setBounds(174, 274, 152, 25);
         panel.add(txtGiaGiam);
 
         txtMauSac = new JTextField();
+        txtMauSac.setBackground(Color.WHITE);
         txtMauSac.setEditable(false);
         txtMauSac.setColumns(10);
         txtMauSac.setBounds(174, 354, 152, 25);
         panel.add(txtMauSac);
 
         txtSize = new JTextField();
+        txtSize.setBackground(Color.WHITE);
         txtSize.setEditable(false);
         txtSize.setColumns(2);
         txtSize.setBounds(174, 314, 152, 25);
@@ -198,6 +209,7 @@ public class ChiTietSanPhamFrame extends JFrame {
         panel.add(lblMuSc);
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(Color.WHITE);
         panel_1.setBorder(
                 new TitledBorder(null, "H\u00ECnh \u1EA3nh", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         panel_1.setBounds(424, 11, 327, 448);

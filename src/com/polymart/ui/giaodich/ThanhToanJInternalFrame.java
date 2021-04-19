@@ -134,8 +134,10 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setBounds(68, 120, 96, 20);
+		hangHoaJPanel.setBackground(Color.WHITE);
 
 		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
 		initTopThanhToan();
@@ -270,6 +272,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 		tableThanhToan = new JTable();
+		tableThanhToan.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tableThanhToan);
 		modelThanhToan.addColumn("Mã hóa đơn");
 		modelThanhToan.addColumn("Tên khách hàng");

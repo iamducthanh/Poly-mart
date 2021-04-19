@@ -86,9 +86,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1169, 801);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(Color.WHITE);
 
 		contentPane.add(panel, BorderLayout.NORTH);
 
@@ -160,6 +162,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		tableChamCong = new JTable();
+		tableChamCong.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tableChamCong);
 		modelChamCong.addColumn("Mã nhân viên");
 		modelChamCong.addColumn("Tên nhân viên");
@@ -172,9 +175,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		tableChamCong.setModel(modelChamCong);
 
 		JPanel panelLeft = new JPanel();
+		panelLeft.setBackground(Color.WHITE);
 		contentPane.add(panelLeft, BorderLayout.WEST);
 
 		dateChamCong = new JCalendar();
+		dateChamCong.getDayChooser().getDayPanel().setBackground(Color.WHITE);
 		dateChamCong.getYearChooser().getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 13));
 		dateChamCong.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {

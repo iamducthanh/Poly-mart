@@ -115,9 +115,11 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(Color.WHITE);
 
 		contentPane.add(panel, BorderLayout.NORTH);
 		initTopNhanVien();
@@ -267,6 +269,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		tblNhanVien = new JTable();
+		tblNhanVien.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tblNhanVien);
 		model.addColumn("Mã nhân viên");
 		model.addColumn("Tên nhân viên");
@@ -285,6 +288,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		});
 
 		JPanel panelLeft = new JPanel();
+		panelLeft.setBackground(Color.WHITE);
 		contentPane.add(panelLeft, BorderLayout.WEST);
 
 		JLabel lblChcDanh = new JLabel("Chức vụ");

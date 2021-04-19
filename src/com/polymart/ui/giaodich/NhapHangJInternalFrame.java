@@ -114,8 +114,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setBounds(68, 120, 96, 20);
+		hangHoaJPanel.setBackground(Color.WHITE);
 
 		contentPane.add(hangHoaJPanel, BorderLayout.WEST);
 
@@ -250,6 +252,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		hangHoaJPanel.setLayout(gl_hangHoaJPanel);
 
 		tableNhapHang = new JTable();
+		tableNhapHang.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tableNhapHang);
 		modelNhapHang.addColumn("Mã hóa đơn");
 		modelNhapHang.addColumn("Người nhập");

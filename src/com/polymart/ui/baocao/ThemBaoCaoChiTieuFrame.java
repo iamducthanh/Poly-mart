@@ -23,6 +23,7 @@ import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTieuModel;
+import java.awt.Color;
 
 public class ThemBaoCaoChiTieuFrame extends JFrame {
 
@@ -36,6 +37,7 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 	private BaoCaoChiTieuJInternalFrame baoCao ;
 	
 	public ThemBaoCaoChiTieuFrame() throws HeadlessException {
+		getContentPane().setBackground(Color.WHITE);
 		
 	}
 

@@ -123,7 +123,7 @@ public class PolyMartMain extends JFrame {
 
         JMenu mnGiaoDich = new JMenu("Giao dịch");
         mnGiaoDich.setIcon(new ImageIcon("images\\giaodich.png"));
-        menuBar.add(mnGiaoDich);
+        menuBar.add(mnGiaoDich); 
 
         JMenuItem mntmHoaDonNhap = new JMenuItem("Nhập hàng");
         mntmHoaDonNhap.setIcon(new ImageIcon("images\\hdnhap.png"));

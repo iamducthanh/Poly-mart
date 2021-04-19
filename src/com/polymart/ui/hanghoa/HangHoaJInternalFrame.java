@@ -29,8 +29,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityFrame;
-import com.polymart.entity.EntityImage;
+
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.LoaiSanPhamModel;
@@ -153,6 +152,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		// ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
 		JButton btnThemHang = new JButton("Thêm mới");
 
+
+
 		GroupLayout gl_pnlTop = new GroupLayout(pnlTop);
 		gl_pnlTop.setHorizontalGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlTop.createSequentialGroup()
@@ -255,6 +256,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 	}
 
+
 	public void initCenterHangHoa() {
 		JPanel pnlLoaiHang = new JPanel();
 		pnlLoaiHang.setBackground(Color.WHITE);
@@ -268,6 +270,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 			}
 		});
 
+
+
 		pnlLoaiHang.add(cboLoaiSanPham);
 		JCheckBox chkbHangHoa = new JCheckBox("Hàng hóa");
 		chkbHangHoa.setBackground(Color.WHITE);
@@ -277,6 +281,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		chkbCombo.setBackground(Color.WHITE);
 		chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		pnlLoaiHang.add(chkbCombo);
+
 
 		JPanel pnlTonKho = new JPanel();
 		pnlTonKho.setBackground(Color.WHITE);
@@ -294,6 +299,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		rdoTonKhoTatCa.setBackground(Color.WHITE);
 		rdoTonKhoTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
+
 		rdoDuoiDinhMucTon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				locSanPham();
@@ -301,6 +307,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		});
 		rdoDuoiDinhMucTon.setBackground(Color.WHITE);
 		rdoDuoiDinhMucTon.setFont(new Font("SansSerif", Font.PLAIN, 14));
+
 
 		rdoVuotDinhMucTon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -331,12 +338,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlTonKho.add(rdoConHangTrongKho);
 		pnlTonKho.add(rdoHetHangTrongKho);
 
+
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdoTonKhoTatCa);
 		buttonGroup.add(rdoDuoiDinhMucTon);
 		buttonGroup.add(rdoVuotDinhMucTon);
 		buttonGroup.add(rdoConHangTrongKho);
 		buttonGroup.add(rdoHetHangTrongKho);
+
 
 		JPanel pnlBanTrucTiep = new JPanel();
 		pnlBanTrucTiep.setBackground(Color.WHITE);
@@ -358,10 +367,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlBanTrucTiep.add(rdoDuocBanTrucTiep);
 		pnlBanTrucTiep.add(rdoKhongDuocBanTrucTiep);
 
+
 		ButtonGroup buttonGroup2 = new ButtonGroup();
 		buttonGroup2.add(rdoBanTrucTiepTatCa);
 		buttonGroup2.add(rdoDuocBanTrucTiep);
 		buttonGroup2.add(rdoKhongDuocBanTrucTiep);
+
 
 		JPanel pnlNgayDuKienHetHang = new JPanel();
 		pnlNgayDuKienHetHang.setBackground(Color.WHITE);
@@ -380,9 +391,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlNgayDuKienHetHang.add(rdoToanThoiGian);
 		pnlNgayDuKienHetHang.add(rdoLuaChonKhac);
 
+
 		ButtonGroup buttonGroup3 = new ButtonGroup();
 		buttonGroup3.add(rdoToanThoiGian);
 		buttonGroup3.add(rdoLuaChonKhac);
+
 
 		JPanel pnlLienKetBanHang = new JPanel();
 		pnlLienKetBanHang.setBackground(Color.WHITE);

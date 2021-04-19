@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -862,6 +863,7 @@ public class MainFrame extends JFrame {
 				select = 0;
 				if (openThongKe == 0) {
 					openThongKe = 1;
+					closeAllPanel();
 					panelDoanhso.setVisible(true);
 					panelDoanhThu.setVisible(true);
 				} else {
@@ -905,6 +907,7 @@ public class MainFrame extends JFrame {
 				select = 5;
 				if (openCaNhan == 0) {
 					openCaNhan = 1;
+					closeAllPanel();
 					panelCaNhan1.setVisible(true);
 					panelDangXuat.setVisible(true);
 				} else {
@@ -920,6 +923,19 @@ public class MainFrame extends JFrame {
 				resetColor();
 			}
 		});
+		
+        lblBanHang.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                Runtime runtime = Runtime.getRuntime();
+                String url = "http://polymart.tk/";
+                try {
+                    runtime.exec("rundll32 url.dll, FileProtocolHandler " + url);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
 
 		lblGiaoDich.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -932,6 +948,7 @@ public class MainFrame extends JFrame {
 				select = 2;
 				if (openGiaoDich == 0) {
 					openGiaoDich = 1;
+					closeAllPanel();
 					panelBanHangCon.setVisible(true);
 					panelNhapHang.setVisible(true);
 					panelChiTieu.setVisible(true);
@@ -963,6 +980,7 @@ public class MainFrame extends JFrame {
 				select = 1;
 				if (openHangHoa == 0) {
 					openHangHoa = 1;
+					closeAllPanel();
 					panelHangHoaCon.setVisible(true);
 					panelNguonHang.setVisible(true);
 					panelKiemKho.setVisible(true);
@@ -992,6 +1010,7 @@ public class MainFrame extends JFrame {
 				select = 4;
 				if (openKhachHang == 0) {
 					openKhachHang = 1;
+					closeAllPanel();
 					panelKhachHang1.setVisible(true);
 				} else {
 					openKhachHang = 0;
@@ -1017,6 +1036,7 @@ public class MainFrame extends JFrame {
 				select = 3;
 				if (openNhanVien == 0) {
 					openNhanVien = 1;
+					closeAllPanel();
 					panelNhanVien1.setVisible(true);
 					panelChamCong.setVisible(true);
 					panelBangLuong.setVisible(true);
@@ -1063,5 +1083,23 @@ public class MainFrame extends JFrame {
 		}
 		pnlMain.add(frame);
 		pnlMain.repaint();
+	}
+	
+	public void closeAllPanel() {
+		panelDoanhso.setVisible(false);
+		panelDoanhThu.setVisible(false);
+		panelHangHoaCon.setVisible(false);
+		panelKiemKho.setVisible(false);
+		panelNguonHang.setVisible(false);
+		panelNhapHang.setVisible(false);
+		panelBanHangCon.setVisible(false);
+		panelTraHang.setVisible(false);
+		panelChiTieu.setVisible(false);
+		panelNhanVien1.setVisible(false);
+		panelChamCong.setVisible(false);
+		panelBangLuong.setVisible(false);
+		panelKhachHang1.setVisible(false);
+		panelCaNhan1.setVisible(false);
+		panelDangXuat.setVisible(false);
 	}
 }

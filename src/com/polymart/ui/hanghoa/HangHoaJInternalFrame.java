@@ -438,7 +438,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
     private void openThemHangHoa() {
         ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame(this);
-        EntityFrame.POLYMARTMAIN.pnlMain.add(themHangHoaJInternalFrame);
+        MainFrame.pnlMain.add(themHangHoaJInternalFrame);
         themHangHoaJInternalFrame.setVisible(true);
     }
 

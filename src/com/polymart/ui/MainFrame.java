@@ -226,7 +226,7 @@ public class MainFrame extends JFrame {
 		lblDanhMucOpen.setVisible(false);
 		setBackground(new Color(75, 0, 130));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1295, 747);
+		setBounds(100, 100, 1295, 741);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(51, 0, 102));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -237,21 +237,25 @@ public class MainFrame extends JFrame {
 
 		pnlMain.setBackground(new Color(102, 0, 255));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup()
-				.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGap(1)
-				.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-				.addGap(1).addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE).addGap(0)));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 35,
-										GroupLayout.PREFERRED_SIZE)
-								.addGap(737))
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 777, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(pnlMain, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(1)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(1)
+					.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
+					.addGap(1))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 777, GroupLayout.PREFERRED_SIZE)
+						.addComponent(pnlMain, GroupLayout.PREFERRED_SIZE, 670, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 
 		panelThongKe.setBackground(new Color(153, 51, 255));
 

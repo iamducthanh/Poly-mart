@@ -1,6 +1,6 @@
 package com.polymart.ui.giaodich;
 
-import java.awt.Font;
+import java.awt.*;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -19,7 +19,6 @@ import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.SanPhamService;
-import java.awt.Color;
 
 public class ChiTietHoaDonThanhToan extends JFrame {
 
@@ -29,11 +28,41 @@ public class ChiTietHoaDonThanhToan extends JFrame {
     private JTable tableChiTietHoaDonThanhToan;
     private DefaultTableModel modelChiTietHoaDonThanhToan;
 
+    private JLabel lblDiemDaDoi;
+    private JLabel lblTenKhachHang;
+    private JLabel lblMaHoaDon;
+
     private ISanPhamService sanPhamService = new SanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
     private IKhachHangService khachHangService = new KhachHangService();
 
+    public ChiTietHoaDonThanhToan() throws HeadlessException {
+        init();
+    }
+
     public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang, int diemDaDoi) {
+        init();
+
+        if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
+            lblMaHoaDon.setText(lstChiTietHoaDonThanhToanModels.get(0).getHoaDonThanhToan().toString());
+            lblTenKhachHang.setText(khachHangService.findOne(idKhachHang).getHoTen());
+            lblDiemDaDoi.setText(String.valueOf(diemDaDoi));
+        }
+        modelChiTietHoaDonThanhToan.setRowCount(0);
+        for (ChiTietHoaDonThanhToanModel e : lstChiTietHoaDonThanhToanModels) {
+            ChiTietSanPhamModel chiTietSanPhamModel = chiTietSanPhamService.getById(e.getChiTietSanPham());
+            modelChiTietHoaDonThanhToan.addRow(new Object[]{e.getChiTietSanPham(),
+                    sanPhamService.findByID(chiTietSanPhamService.getIdProductById(e.getChiTietSanPham())).getTenSP(),
+                    e.getSoLuong(), chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(),
+                    e.getGiamGiaThem(),
+                    e.getTraHang(),
+                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem()});
+        }
+        tableChiTietHoaDonThanhToan.setRowHeight(25);
+
+    }
+
+    private void init() {
         modelChiTietHoaDonThanhToan = new DefaultTableModel() {
 
             private static final long serialVersionUID = 3913815213671293282L;
@@ -62,7 +91,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         lblNewLabel_1.setBounds(30, 61, 170, 25);
         contentPane.add(lblNewLabel_1);
 
-        JLabel lblMaHoaDon = new JLabel("Cái label này để hiển thị mã hóa đơn thanh toán");
+        lblMaHoaDon = new JLabel("Cái label này để hiển thị mã hóa đơn thanh toán");
         lblMaHoaDon.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblMaHoaDon.setBounds(210, 61, 387, 25);
         contentPane.add(lblMaHoaDon);
@@ -79,7 +108,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         lblNewLabel_1_1.setBounds(30, 96, 170, 25);
         contentPane.add(lblNewLabel_1_1);
 
-        JLabel lblTenKhachHang = new JLabel("Cái label này để hiển thị khách hàng");
+        lblTenKhachHang = new JLabel("Cái label này để hiển thị khách hàng");
         lblTenKhachHang.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblTenKhachHang.setBounds(136, 97, 387, 25);
         contentPane.add(lblTenKhachHang);
@@ -93,33 +122,15 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         modelChiTietHoaDonThanhToan.addColumn("Trả hàng");
         modelChiTietHoaDonThanhToan.addColumn("Thành tiền");
         tableChiTietHoaDonThanhToan.setModel(modelChiTietHoaDonThanhToan);
-        
+
         JLabel lblNewLabel_1_1_1 = new JLabel("Điểm đã đổi:");
         lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_1_1.setBounds(30, 132, 170, 25);
         contentPane.add(lblNewLabel_1_1_1);
-        
-        JLabel lblDiemDaDoi = new JLabel("Cái label này để hiển thị điểm đã đổi");
+
+        lblDiemDaDoi = new JLabel("Cái label này để hiển thị điểm đã đổi");
         lblDiemDaDoi.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblDiemDaDoi.setBounds(136, 133, 387, 25);
         contentPane.add(lblDiemDaDoi);
-
-        if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
-            lblMaHoaDon.setText(lstChiTietHoaDonThanhToanModels.get(0).getHoaDonThanhToan().toString());
-            lblTenKhachHang.setText(khachHangService.findOne(idKhachHang).getHoTen());
-            lblDiemDaDoi.setText(String.valueOf(diemDaDoi));
-        }
-        modelChiTietHoaDonThanhToan.setRowCount(0);
-        for (ChiTietHoaDonThanhToanModel e : lstChiTietHoaDonThanhToanModels) {
-            ChiTietSanPhamModel chiTietSanPhamModel = chiTietSanPhamService.getById(e.getChiTietSanPham());
-            modelChiTietHoaDonThanhToan.addRow(new Object[]{e.getChiTietSanPham(),
-                    sanPhamService.findByID(chiTietSanPhamService.getIdProductById(e.getChiTietSanPham())).getTenSP(),
-                    e.getSoLuong(), chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(),
-                    e.getGiamGiaThem(),
-                    e.getTraHang(),
-                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem()});
-        }
-        tableChiTietHoaDonThanhToan.setRowHeight(25);
-
     }
 }

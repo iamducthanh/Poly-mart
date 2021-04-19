@@ -131,6 +131,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -146,27 +147,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 	}
 
 	public void initTopThanhToan() {
-		JLabel lblNewLabel = new JLabel("Hóa đơn thanh toán");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-
-		txtTimHoaDon = new JTextField();
-		txtTimHoaDon.setText("Tìm theo mã hóa đơn");
-		txtTimHoaDon.setColumns(10);
-		txtTimHoaDon.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimHoaDon.getText().equals("Tìm theo mã hóa đơn")) {
-					txtTimHoaDon.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimHoaDon.getText().equals("")) {
-					txtTimHoaDon.setText("Tìm theo mã hóa đơn");
-				}
-			}
-		});
 
 		optionKiemKhoFrame.setSize(344, 234);
 		optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
@@ -177,64 +157,102 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
 
 		optionKiemKhoFrame.getContentPane().add(panelOption);
 		optionKiemKhoFrame.setUndecorated(true);
-		JButton btnTimKiem = new JButton("Tìm");
-
-		// tìm kiếm
-		btnTimKiem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				evtBtnSearchById(txtTimHoaDon);
-			}
-		});
-
-		JButton btnThemPhieuNhap = new JButton("+ Thêm");
-
-		btnThemPhieuNhap.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setOpenThemHoaDonThanhToan();
-			}
-		});
-		JButton btnXoa = new JButton("- Xoá ");
-
-		// xóa
-		btnXoa.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				evtBtnXoa(tableThanhToan);
-			}
-		});
-		JButton btnExport = new JButton("→ Xuất");
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		JButton btnExport = new JButton("→ Xuất");
+		JButton btnXoa = new JButton("- Xoá ");
+		
+				// xóa
+				btnXoa.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						evtBtnXoa(tableThanhToan);
+					}
+				});
+		
+				JButton btnThemPhieuNhap = new JButton("+ Thêm");
+				
+						btnThemPhieuNhap.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								setOpenThemHoaDonThanhToan();
+							}
+						});
+		JButton btnTimKiem = new JButton("Tìm");
+		
+				// tìm kiếm
+				btnTimKiem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						evtBtnSearchById(txtTimHoaDon);
+					}
+				});
+		
+				txtTimHoaDon = new JTextField();
+				txtTimHoaDon.setBorder(null);
+				txtTimHoaDon.setText(" Tìm theo mã hóa đơn");
+				txtTimHoaDon.setColumns(10);
+				txtTimHoaDon.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusGained(FocusEvent e) {
+						if (txtTimHoaDon.getText().equals(" Tìm theo mã hóa đơn")) {
+							txtTimHoaDon.setText("");
+						}
+					}
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if (txtTimHoaDon.getText().equals("")) {
+							txtTimHoaDon.setText(" Tìm theo mã hóa đơn");
+						}
+					}
+				});
+		JLabel lblNewLabel = new JLabel("Hóa đơn thanh toán");
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
 					.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtTimHoaDon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
 
 	}

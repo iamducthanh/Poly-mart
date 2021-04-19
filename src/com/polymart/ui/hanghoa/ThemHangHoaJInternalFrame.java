@@ -13,7 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -533,7 +535,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
             dstFile.getParentFile().mkdirs();
         }
         while (true) {
-            nameFile = Math.random() * 10000000 + srcFile.getName();
+            nameFile = (new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss.SSS").format(new Date())) + "." + srcFile.getName();
             dstFile = new File("images\\anh-san-pham", nameFile);
             if (!dstFile.exists()) {
                 break;

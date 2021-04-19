@@ -168,7 +168,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		modelChamCong.addColumn("Tên nhân viên");
 		modelChamCong.addColumn("Ngày");
 		modelChamCong.addColumn("Thứ");
-		modelChamCong.addColumn("Thời gian làm");
+		modelChamCong.addColumn("Thời Gian Vào Làm");
 		modelChamCong.addColumn("Thời gian Về");
 		modelChamCong.addColumn("Trạng Thái");
 
@@ -331,6 +331,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
                     } else {
                         setEnabled(false);
                     }
+                    if(j==1) {
+                    	return;
+                    }
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -342,7 +345,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		th.start();
 	}
 
-	// Mở Nút Chấm Công
+	// Mở Nút Check out
 	public void moNutCheckUot() {
 		Thread th = new Thread() {
 			@Override
@@ -366,7 +369,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					for (int k = 0; k < tableChamCong.getRowCount(); k++) {
 						if (EntityAuthorization.USER.getId() == Integer
 								.parseInt(String.valueOf(tableChamCong.getValueAt(k, 0)))
-								&& String.valueOf(tableChamCong.getValueAt(k, 0)).equals("")) {
+								&& String.valueOf(tableChamCong.getValueAt(k, 5)).equals("")) {
 							check = false;
 							break;
 						}
@@ -374,7 +377,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					if (i == 1 && j == -1 && check == false) {
 						btnCheckOut.setEnabled(true);
 					} else {
-						setEnabled(false);
+						btnCheckOut.setEnabled(false);
+
+					}
+					if(j==1) {
+						return;
 					}
 					try {
 						Thread.sleep(1000);
@@ -393,8 +400,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		calendar = Calendar.getInstance();
 		Date now = new Date();
 		calendar.setTime(now);
-		int day = calendar.get(Calendar.DATE);
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+//		int day = calendar.get(Calendar.DATE);
+//		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
 		int maNhanVien = EntityAuthorization.USER.getId();
 		String hoTen = EntityAuthorization.USER.getHoTen();
 		for (int i = 0; i < tableChamCong.getRowCount(); i++) {
@@ -403,17 +410,17 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				return;
 			}
 		}
-		int i = 0;
-		try {
-			if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
-				i = sdf.parse(sdf.format(now))
-						.compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		modelChamCong.addRow(new Object[] { maNhanVien, hoTen, new SimpleDateFormat("yyyy-MM-dd").format(now),
-				day == 0 ? "Chủ Nhật" : day + 1, sdf.format(now), i == -1 ? "Đúng Giờ" : "Đi Muộn" });
+//		int i = 0;
+//		try {
+//			if (calendar.get(Calendar.AM_PM) == Calendar.AM) {
+//				i = sdf.parse(sdf.format(now))
+//						.compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+//			}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		modelChamCong.addRow(new Object[] { maNhanVien, hoTen, new SimpleDateFormat("yyyy-MM-dd").format(now),
+//				day == 0 ? "Chủ Nhật" : day + 1, sdf.format(now), i == -1 ? "Đúng Giờ" : "Đi Muộn" });
 		ChamCongModel chamCong = new ChamCongModel();
 		chamCong.setHoTen(hoTen);
 		chamCong.setIdNhanVien(maNhanVien);
@@ -463,14 +470,14 @@ public class ChamCongJInternalFrame extends JInternalFrame {
         modelChamCong.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
         for (ChamCongModel chamCongModel : listChamCong) {
-            calendar.setTime(chamCongModel.getNgayChamCong());
+            calendar.setTime(chamCongModel.getGioRa());
             c.setTime(chamCongModel.getNgayChamCong());
             int day = c.get(Calendar.DAY_OF_WEEK);
             int i = 0;
             String gioChamCong = sdf.format(chamCongModel.getNgayChamCong());
             try {
                 i = sdf.parse(gioChamCong)
-                        .compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(calendar.getTime())));
+                        .compareTo(sdf.parse("8:00:00 " + new SimpleDateFormat("aa").format(c.getTime())));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

@@ -36,7 +36,7 @@ import com.polymart.model.BangLuongModel;
 import com.polymart.model.ChamCongModel;
 import com.polymart.model.ChiTieuModel;
 import com.polymart.model.NhanVienModel;
-import com.polymart.service.impl.NhanVienService;
+
 import java.awt.Color;
 
 public class BangLuongJIternalFrame extends JInternalFrame {

@@ -94,11 +94,15 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
      */
 
     public ThemNhapHangJInternalFrame() {
-
+        init();
     }
 
     public ThemNhapHangJInternalFrame(NhapHangJInternalFrame nhapHangJInternalFrame) {
         this.nhapHangJInternalFrame = nhapHangJInternalFrame;
+        init();
+    }
+
+    private void init() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSNhapHang = new DefaultTableModel() {
 
@@ -474,7 +478,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 }
             }
         }
-        
+
     }
 
 

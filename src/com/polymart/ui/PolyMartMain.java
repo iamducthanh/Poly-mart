@@ -47,373 +47,373 @@ import com.polymart.ui.thongke.ThongKeDoanhSoJInternalFrame;
 import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class PolyMartMain extends JFrame {
-	private static final long serialVersionUID = 6825346390245174222L;
+    private static final long serialVersionUID = 6825346390245174222L;
 
-	public JDesktopPane pnlMain = new JDesktopPane();
-	URI uri;
+    public JDesktopPane pnlMain = new JDesktopPane();
+    URI uri;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-					EntityFrame.POLYMARTMAIN = new PolyMartMain();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                    EntityFrame.POLYMARTMAIN = new MainFrame();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-	/**
-	 * Create the frame.
-	 */
-	public PolyMartMain() {
-		setVisible(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
-		setTitle(EntityMessage.TITLE);
-		if (EntityAuthorization.USER != null) {
-			setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
-					+ EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
-		}
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		editMenu();
-	}
+    /**
+     * Create the frame.
+     */
+    public PolyMartMain() {
+        setVisible(true);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+        setTitle(EntityMessage.TITLE);
+        if (EntityAuthorization.USER != null) {
+            setTitle("Poly Mart          " + EntityAuthorization.USER.getHoTen() + "          "
+                    + EntityAuthorization.USER.getChucVu()); // Tiêu đề theo tên người dùng
+        }
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        editMenu();
+    }
 
-	public void editMenu() {
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+    public void editMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
 
-		JMenu mnTongQuan = new JMenu("Thống kê");
-		mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
-		mnTongQuan.setBackground(new Color(0, 191, 255));
-		menuBar.add(mnTongQuan);
-		
-		JMenuItem mntmDoanhThu = new JMenuItem("Thống kê doanh thu");
-		mntmDoanhThu.setIcon(new ImageIcon("images\\doanhthu.png"));
-		mnTongQuan.add(mntmDoanhThu);
-		
-		JMenuItem mntnDoanhSo = new JMenuItem("Thống kê doanh số bán ra");
-		mntnDoanhSo.setIcon(new ImageIcon("images\\doanhso.png"));
-		mnTongQuan.add(mntnDoanhSo);
+        JMenu mnTongQuan = new JMenu("Thống kê");
+        mnTongQuan.setIcon(new ImageIcon("images\\tongquan.png"));
+        mnTongQuan.setBackground(new Color(0, 191, 255));
+        menuBar.add(mnTongQuan);
 
-		JMenu mnHangHoa = new JMenu("Hàng hóa");
-		mnHangHoa.setIcon(new ImageIcon("images\\hanghoa.png"));
-		menuBar.add(mnHangHoa);
+        JMenuItem mntmDoanhThu = new JMenuItem("Thống kê doanh thu");
+        mntmDoanhThu.setIcon(new ImageIcon("images\\doanhthu.png"));
+        mnTongQuan.add(mntmDoanhThu);
 
-		JMenuItem mntmHangHoa = new JMenuItem("Hàng hóa");
-		mntmHangHoa.setIcon(new ImageIcon("images\\danhmuc.png"));
-		mnHangHoa.add(mntmHangHoa);
+        JMenuItem mntnDoanhSo = new JMenuItem("Thống kê doanh số bán ra");
+        mntnDoanhSo.setIcon(new ImageIcon("images\\doanhso.png"));
+        mnTongQuan.add(mntnDoanhSo);
 
-		JMenuItem mntmThietLapGia = new JMenuItem("Thiết lập giá");
-		mntmThietLapGia.setIcon(new ImageIcon("images\\setgia.png"));
-		mnHangHoa.add(mntmThietLapGia);
+        JMenu mnHangHoa = new JMenu("Hàng hóa");
+        mnHangHoa.setIcon(new ImageIcon("images\\hanghoa.png"));
+        menuBar.add(mnHangHoa);
 
-		JMenuItem mntmKiemKho = new JMenuItem("Kiểm kho");
-		mntmKiemKho.setIcon(new ImageIcon("images\\kiemkho.png"));
-		mnHangHoa.add(mntmKiemKho);
+        JMenuItem mntmHangHoa = new JMenuItem("Hàng hóa");
+        mntmHangHoa.setIcon(new ImageIcon("images\\danhmuc.png"));
+        mnHangHoa.add(mntmHangHoa);
 
-		JMenuItem mntmNguonHang = new JMenuItem("Nguồn hàng");
-		mntmNguonHang.setIcon(new ImageIcon("images\\nguonhang.png"));
-		mnHangHoa.add(mntmNguonHang);
+        JMenuItem mntmThietLapGia = new JMenuItem("Thiết lập giá");
+        mntmThietLapGia.setIcon(new ImageIcon("images\\setgia.png"));
+        mnHangHoa.add(mntmThietLapGia);
 
-		JMenu mnGiaoDich = new JMenu("Giao dịch");
-		mnGiaoDich.setIcon(new ImageIcon("images\\giaodich.png"));
-		menuBar.add(mnGiaoDich);
+        JMenuItem mntmKiemKho = new JMenuItem("Kiểm kho");
+        mntmKiemKho.setIcon(new ImageIcon("images\\kiemkho.png"));
+        mnHangHoa.add(mntmKiemKho);
 
-		JMenuItem mntmHoaDonNhap = new JMenuItem("Nhập hàng");
-		mntmHoaDonNhap.setIcon(new ImageIcon("images\\hdnhap.png"));
-		mnGiaoDich.add(mntmHoaDonNhap);
+        JMenuItem mntmNguonHang = new JMenuItem("Nguồn hàng");
+        mntmNguonHang.setIcon(new ImageIcon("images\\nguonhang.png"));
+        mnHangHoa.add(mntmNguonHang);
 
-		JMenuItem mntmHoaDonThanhToan = new JMenuItem("Thanh toán bán hàng");
-		mntmHoaDonThanhToan.setIcon(new ImageIcon("images\\hdxuat.png"));
-		mnGiaoDich.add(mntmHoaDonThanhToan);
+        JMenu mnGiaoDich = new JMenu("Giao dịch");
+        mnGiaoDich.setIcon(new ImageIcon("images\\giaodich.png"));
+        menuBar.add(mnGiaoDich);
 
-		JMenuItem mntmHoaDonTraHang = new JMenuItem("Trả hàng");
-		mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
-		mnGiaoDich.add(mntmHoaDonTraHang);
-		
-				JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
-				mnGiaoDich.add(mntmChiTieu);
-				mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
-				mntmChiTieu.addActionListener(openChiTieu);
+        JMenuItem mntmHoaDonNhap = new JMenuItem("Nhập hàng");
+        mntmHoaDonNhap.setIcon(new ImageIcon("images\\hdnhap.png"));
+        mnGiaoDich.add(mntmHoaDonNhap);
 
-		JMenu mnDoiTac = new JMenu("Báo cáo");
-		mnDoiTac.setIcon(new ImageIcon("images\\baocao.png"));
-		menuBar.add(mnDoiTac);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Báo cáo chi tiêu trong ngày");
-		mnDoiTac.add(mntmNewMenuItem);
+        JMenuItem mntmHoaDonThanhToan = new JMenuItem("Thanh toán bán hàng");
+        mntmHoaDonThanhToan.setIcon(new ImageIcon("images\\hdxuat.png"));
+        mnGiaoDich.add(mntmHoaDonThanhToan);
 
-		JMenu mnNhanVien = new JMenu("Nhân viên");
-		mnNhanVien.setIcon(new ImageIcon("images\\nhanvien1.png"));
-		menuBar.add(mnNhanVien);
+        JMenuItem mntmHoaDonTraHang = new JMenuItem("Trả hàng");
+        mntmHoaDonTraHang.setIcon(new ImageIcon("images\\hdtrahang.png"));
+        mnGiaoDich.add(mntmHoaDonTraHang);
 
-		JMenuItem mntmNhanVien = new JMenuItem("Nhân viên");
-		mntmNhanVien.setIcon(new ImageIcon("images\\nhanvien.png"));
-		mnNhanVien.add(mntmNhanVien);
+        JMenuItem mntmChiTieu = new JMenuItem("Chi tiêu");
+        mnGiaoDich.add(mntmChiTieu);
+        mntmChiTieu.setIcon(new ImageIcon("images\\chitieu.png"));
+        mntmChiTieu.addActionListener(openChiTieu);
 
-		JMenuItem mntmChamCong = new JMenuItem("Chấm công");
-		mntmChamCong.setIcon(new ImageIcon("images\\chamcong.png"));
-		mnNhanVien.add(mntmChamCong);
+        JMenu mnDoiTac = new JMenu("Báo cáo");
+        mnDoiTac.setIcon(new ImageIcon("images\\baocao.png"));
+        menuBar.add(mnDoiTac);
 
-		JMenuItem mntmBangTinhLuong = new JMenuItem("Bảng tính lương");
-		mntmBangTinhLuong.setIcon(new ImageIcon("images\\tinhluong.png"));
-		mnNhanVien.add(mntmBangTinhLuong);
+        JMenuItem mntmNewMenuItem = new JMenuItem("Báo cáo chi tiêu trong ngày");
+        mnDoiTac.add(mntmNewMenuItem);
 
-		JMenu mnKhachHang = new JMenu("Khách hàng");
-		mnKhachHang.setIcon(new ImageIcon("images\\doitac.png"));
-		menuBar.add(mnKhachHang);
+        JMenu mnNhanVien = new JMenu("Nhân viên");
+        mnNhanVien.setIcon(new ImageIcon("images\\nhanvien1.png"));
+        menuBar.add(mnNhanVien);
 
-		JMenuItem mntmKhachHang = new JMenuItem("Khách hàng");
-		mntmKhachHang.setIcon(new ImageIcon("images\\khachhang.png"));
-		mnKhachHang.add(mntmKhachHang);
+        JMenuItem mntmNhanVien = new JMenuItem("Nhân viên");
+        mntmNhanVien.setIcon(new ImageIcon("images\\nhanvien.png"));
+        mnNhanVien.add(mntmNhanVien);
 
-		JMenu mnCaNhan = new JMenu("Cá nhân");
-		mnCaNhan.setIcon(new ImageIcon("images\\user.png"));
-		menuBar.add(mnCaNhan);
+        JMenuItem mntmChamCong = new JMenuItem("Chấm công");
+        mntmChamCong.setIcon(new ImageIcon("images\\chamcong.png"));
+        mnNhanVien.add(mntmChamCong);
 
-		JMenu mnBanHang = new JMenu("Bán hàng");
-		mnBanHang.setIcon(new ImageIcon("images\\banhang.png"));
-		menuBar.add(mnBanHang);
-		mnBanHang.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				Runtime runtime = Runtime.getRuntime();
-				String url = "http://polymart.tk/";
-				try {
-					runtime.exec("rundll32 url.dll, FileProtocolHandler " + url);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+        JMenuItem mntmBangTinhLuong = new JMenuItem("Bảng tính lương");
+        mntmBangTinhLuong.setIcon(new ImageIcon("images\\tinhluong.png"));
+        mnNhanVien.add(mntmBangTinhLuong);
 
-		JMenuItem mntmCaNhan = new JMenuItem("Cá nhân");
-		mntmCaNhan.setIcon(new ImageIcon("images\\user.png"));
-		mnCaNhan.add(mntmCaNhan);
+        JMenu mnKhachHang = new JMenu("Khách hàng");
+        mnKhachHang.setIcon(new ImageIcon("images\\doitac.png"));
+        menuBar.add(mnKhachHang);
 
-		JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
-		mntmDangXuat.setIcon(new ImageIcon("images\\logout.png"));
-		mnCaNhan.add(mntmDangXuat);
+        JMenuItem mntmKhachHang = new JMenuItem("Khách hàng");
+        mntmKhachHang.setIcon(new ImageIcon("images\\khachhang.png"));
+        mnKhachHang.add(mntmKhachHang);
 
-		getContentPane().add(pnlMain, BorderLayout.CENTER);
-		pnlMain.setLayout(new CardLayout(0, 0));
+        JMenu mnCaNhan = new JMenu("Cá nhân");
+        mnCaNhan.setIcon(new ImageIcon("images\\user.png"));
+        menuBar.add(mnCaNhan);
 
-		mntmHangHoa.addActionListener(openDanhMuc);
-		mntmNhanVien.addActionListener(openNhanVien);
-		mntmThietLapGia.addActionListener(openThietLapGia);
-		mntmKiemKho.addActionListener(openKiemKho);
-		mntmNguonHang.addActionListener(openNguonHang);
-		mntmChamCong.addActionListener(openChamCong);
-		mntmHoaDonNhap.addActionListener(openNhapHang);
-		mntmDangXuat.addActionListener(logoutAccount);
-		mntmKhachHang.addActionListener(openKhachHang);
-		mntmHoaDonThanhToan.addActionListener(openThanhToan);
-		mntmHoaDonTraHang.addActionListener(openTraHang);
-		mntmBangTinhLuong.addActionListener(openBangLuong);
-		mntmCaNhan.addActionListener(openCaNhan);
-		mntmDoanhThu.addActionListener(openDoanhThu);
-		mntnDoanhSo.addActionListener(openDoanhSo);
-		
-		JLabel back = new JLabel("");
-		ImageIcon imageIcon = new ImageIcon("C:\\Users\\ADMIN\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper");
-		Image image = EntityImage.resize(imageIcon.getImage(), uiCommon.width, uiCommon.height);
-		back.setIcon(new ImageIcon(image));
-		pnlMain.add(back);
-	}
+        JMenu mnBanHang = new JMenu("Bán hàng");
+        mnBanHang.setIcon(new ImageIcon("images\\banhang.png"));
+        menuBar.add(mnBanHang);
+        mnBanHang.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                Runtime runtime = Runtime.getRuntime();
+                String url = "http://polymart.tk/";
+                try {
+                    runtime.exec("rundll32 url.dll, FileProtocolHandler " + url);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
 
-	ActionListener openTraHang = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openTraHang();
-		}
-	};
+        JMenuItem mntmCaNhan = new JMenuItem("Cá nhân");
+        mntmCaNhan.setIcon(new ImageIcon("images\\user.png"));
+        mnCaNhan.add(mntmCaNhan);
 
-	public void openTraHang() {
-		loadChild(new TraHangJInternalFrame());
-	}
+        JMenuItem mntmDangXuat = new JMenuItem("Đăng xuất");
+        mntmDangXuat.setIcon(new ImageIcon("images\\logout.png"));
+        mnCaNhan.add(mntmDangXuat);
 
-	ActionListener openKhachHang = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openKhachHang();
-		}
-	};
+        getContentPane().add(pnlMain, BorderLayout.CENTER);
+        pnlMain.setLayout(new CardLayout(0, 0));
 
-	public void openKhachHang() {
-		loadChild(new KhachHangJInternalFrame());
-	}
+        mntmHangHoa.addActionListener(openDanhMuc);
+        mntmNhanVien.addActionListener(openNhanVien);
+        mntmThietLapGia.addActionListener(openThietLapGia);
+        mntmKiemKho.addActionListener(openKiemKho);
+        mntmNguonHang.addActionListener(openNguonHang);
+        mntmChamCong.addActionListener(openChamCong);
+        mntmHoaDonNhap.addActionListener(openNhapHang);
+        mntmDangXuat.addActionListener(logoutAccount);
+        mntmKhachHang.addActionListener(openKhachHang);
+        mntmHoaDonThanhToan.addActionListener(openThanhToan);
+        mntmHoaDonTraHang.addActionListener(openTraHang);
+        mntmBangTinhLuong.addActionListener(openBangLuong);
+        mntmCaNhan.addActionListener(openCaNhan);
+        mntmDoanhThu.addActionListener(openDoanhThu);
+        mntnDoanhSo.addActionListener(openDoanhSo);
 
-	ActionListener openThietLapGia = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openThietLapGia();
-		}
-	};
+        JLabel back = new JLabel("");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\ADMIN\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper");
+        Image image = EntityImage.resize(imageIcon.getImage(), uiCommon.width, uiCommon.height);
+        back.setIcon(new ImageIcon(image));
+        pnlMain.add(back);
+    }
 
-	public void openThietLapGia() {
-		loadChild(new ThietLapGiaJInternalFrame());
-		setTitle("Thiếp lập giá sản phẩm");
-	}
+    ActionListener openTraHang = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openTraHang();
+        }
+    };
 
-	ActionListener openDanhMuc = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openDanhMuc();
-		}
-	};
+    public void openTraHang() {
+        loadChild(new TraHangJInternalFrame());
+    }
 
-	public void openDanhMuc() {
-		loadChild(new HangHoaJInternalFrame());
-		setTitle("Danh mục hàng hóa");
-	}
+    ActionListener openKhachHang = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openKhachHang();
+        }
+    };
 
-	ActionListener openKiemKho = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openKiemKho();
-		}
-	};
+    public void openKhachHang() {
+        loadChild(new KhachHangJInternalFrame());
+    }
 
-	public void openKiemKho() {
-		loadChild(new KiemKhoJInternalFrame());
-		setTitle("Kiểm kho");
-	}
-	
-	ActionListener openDoanhThu = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openDoanhThu();
-		}
-	};
+    ActionListener openThietLapGia = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openThietLapGia();
+        }
+    };
 
-	public void openDoanhThu() {
-		loadChild(new ThongKeDoanhThuJInternalFrame());
-		setTitle("Thống kê doanh thu");
-	}
-	
-	ActionListener openDoanhSo = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openDoanhSo();
-		}
-	};
+    public void openThietLapGia() {
+        loadChild(new ThietLapGiaJInternalFrame());
+        setTitle("Thiếp lập giá sản phẩm");
+    }
 
-	public void openDoanhSo() {
-		loadChild(new ThongKeDoanhSoJInternalFrame());
-		setTitle("Thống kê doanh số");
-	}
+    ActionListener openDanhMuc = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openDanhMuc();
+        }
+    };
 
-	ActionListener openNhanVien = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openNhanVien();
-		}
-	};
+    public void openDanhMuc() {
+        loadChild(new HangHoaJInternalFrame());
+        setTitle("Danh mục hàng hóa");
+    }
 
-	public void openNhanVien() {
-		EntityFrame.NHANVIENJINTERNAL = new NhanVienJInternalFrame();
-		loadChild(EntityFrame.NHANVIENJINTERNAL);
-		setTitle("Quản lý nhân viên");
-	}
+    ActionListener openKiemKho = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openKiemKho();
+        }
+    };
 
-	ActionListener openNguonHang = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openNguonHang();
-		}
-	};
+    public void openKiemKho() {
+        loadChild(new KiemKhoJInternalFrame());
+        setTitle("Kiểm kho");
+    }
 
-	public void openNguonHang() {
-		loadChild(new NguonHangJInternalFrame());
-		setTitle("Quản lý nguồn hàng");
-	}
+    ActionListener openDoanhThu = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openDoanhThu();
+        }
+    };
 
-	ActionListener openChamCong = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openChamCong();
-		}
-	};
+    public void openDoanhThu() {
+        loadChild(new ThongKeDoanhThuJInternalFrame());
+        setTitle("Thống kê doanh thu");
+    }
 
-	public void openCaNhan() {
-		CaNhanFrame caNhanFrame = new CaNhanFrame();
-		caNhanFrame.setLocationRelativeTo(null);
-		caNhanFrame.setVisible(true);
-	}
+    ActionListener openDoanhSo = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openDoanhSo();
+        }
+    };
 
-	ActionListener openCaNhan = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openCaNhan();
-		}
-	};
+    public void openDoanhSo() {
+        loadChild(new ThongKeDoanhSoJInternalFrame());
+        setTitle("Thống kê doanh số");
+    }
 
-	public void openChamCong() {
-		loadChild(new ChamCongJInternalFrame());
-		setTitle("Kiểm tra chấm công");
-	}
+    ActionListener openNhanVien = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openNhanVien();
+        }
+    };
 
-	ActionListener openChiTieu = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openChiTieu();
-		}
-	};
+    public void openNhanVien() {
+        EntityFrame.NHANVIENJINTERNAL = new NhanVienJInternalFrame();
+        loadChild(EntityFrame.NHANVIENJINTERNAL);
+        setTitle("Quản lý nhân viên");
+    }
 
-	public void openChiTieu() {
-		loadChild(new BaoCaoChiTieuJInternalFrame());
-		setTitle("Giao dịch - Chi tiêu");
-	}
+    ActionListener openNguonHang = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openNguonHang();
+        }
+    };
 
-	ActionListener openNhapHang = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openNhapHang();
-		}
-	};
+    public void openNguonHang() {
+        loadChild(new NguonHangJInternalFrame());
+        setTitle("Quản lý nguồn hàng");
+    }
 
-	public void openNhapHang() {
-		loadChild(new NhapHangJInternalFrame());
-		setTitle("Quản lý nhập hàng");
-	}
+    ActionListener openChamCong = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openChamCong();
+        }
+    };
 
-	ActionListener openThanhToan = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openHangHoa();
-		}
-	};
+    public void openCaNhan() {
+        CaNhanFrame caNhanFrame = new CaNhanFrame();
+        caNhanFrame.setLocationRelativeTo(null);
+        caNhanFrame.setVisible(true);
+    }
 
-	public void openHangHoa() {
-		loadChild(new ThanhToanJInternalFrame());
-	}
+    ActionListener openCaNhan = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openCaNhan();
+        }
+    };
 
-	ActionListener logoutAccount = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			loginClicked();
-		}
-	};
+    public void openChamCong() {
+        loadChild(new ChamCongJInternalFrame());
+        setTitle("Kiểm tra chấm công");
+    }
 
-	public void loginClicked() {
-		if (EntityMessage.confirm(this, "Đồng ý đăng xuất tài khoản?")) {
-			EntityAuthorization.USER = null;
-			new LoginJFrame().setVisible(true);
-			this.setVisible(false);
-		}
-	}
+    ActionListener openChiTieu = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openChiTieu();
+        }
+    };
 
-	ActionListener openBangLuong = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			openBangLuong();
-		}
-	};
+    public void openChiTieu() {
+        loadChild(new BaoCaoChiTieuJInternalFrame());
+        setTitle("Giao dịch - Chi tiêu");
+    }
 
-	public void openBangLuong() {
-		loadChild(new BangLuongJIternalFrame());
-	}
+    ActionListener openNhapHang = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openNhapHang();
+        }
+    };
 
-	// load JInternalFrame to Mainboard
-	public void loadChild(JInternalFrame frame) {
-		pnlMain.removeAll();
-		frame.setSize(pnlMain.getSize());
-		try {
-			frame.setMaximum(true);
-		} catch (PropertyVetoException e) {
-			e.printStackTrace();
-		}
-		pnlMain.add(frame);
-		pnlMain.repaint();
-	}
+    public void openNhapHang() {
+        loadChild(new NhapHangJInternalFrame());
+        setTitle("Quản lý nhập hàng");
+    }
+
+    ActionListener openThanhToan = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openHangHoa();
+        }
+    };
+
+    public void openHangHoa() {
+        loadChild(new ThanhToanJInternalFrame());
+    }
+
+    ActionListener logoutAccount = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            loginClicked();
+        }
+    };
+
+    public void loginClicked() {
+        if (EntityMessage.confirm(this, "Đồng ý đăng xuất tài khoản?")) {
+            EntityAuthorization.USER = null;
+            new LoginJFrame().setVisible(true);
+            this.setVisible(false);
+        }
+    }
+
+    ActionListener openBangLuong = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            openBangLuong();
+        }
+    };
+
+    public void openBangLuong() {
+        loadChild(new BangLuongJIternalFrame());
+    }
+
+    // load JInternalFrame to Mainboard
+    public void loadChild(JInternalFrame frame) {
+        pnlMain.removeAll();
+        frame.setSize(pnlMain.getSize());
+        try {
+            frame.setMaximum(true);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }
+        pnlMain.add(frame);
+        pnlMain.repaint();
+    }
 }

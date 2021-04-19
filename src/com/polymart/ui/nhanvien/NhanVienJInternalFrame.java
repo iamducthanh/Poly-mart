@@ -115,7 +115,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -125,6 +125,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		initTopNhanVien();
 		initCenterNhanVien();
 		loadComboboxChucVu();
+
 //		try {
 		index = 0;
 //		list = nhanVienService.findAll();
@@ -162,41 +163,12 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
+
 		tblNhanVien.setRowHeight(25);
 
 	}
 
 	public void initTopNhanVien() {
-		lblNhanVien = new JLabel("Nhân viên");
-		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
-
-		txtTimKiem = new JTextField();
-		txtTimKiem.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				findNhanVien();
-			}
-		});
-		txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
-		txtTimKiem.setColumns(10);
-		txtTimKiem.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				cboChucDanh.setSelectedIndex(0);
-				tblNhanVien.clearSelection();
-				btnXoaNV.setEnabled(false);
-				if (txtTimKiem.getText().equals(" Tìm theo mã, tên nhân viên")) {
-					txtTimKiem.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimKiem.getText().equals("")) {
-					txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
-				}
-			}
-		});
 
 		optionNhanVienFrame.setSize(319, 235);
 		optionNhanVienFrame.setLocation(width - 325, height - (height / 100 * 86));
@@ -370,6 +342,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		}
 	};
 	private JLabel lblNhanVien;
+	private JPanel panel_1;
 
 	protected void btnThemNhanVien() {
 		EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
@@ -399,6 +372,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 					i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
 					i.getDiaChi(), i.getSdt(), i.getEmail() });
 		}
-		btnXoaNV.setEnabled(false);
+	//	btnXoaNV.setEnabled(false);
 	}
 }

@@ -195,6 +195,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 			}
 		});
 
+
 		btnThemHang.addActionListener(themSanPham);
 		btnExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -209,9 +210,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 			}
 		});
 
+
+
 		initTopHangHoa();
 		initCenterHangHoa();
 		loadLoaiSanPham();
+
+
 
 		// tìm kiếm
 		btnTimKiem.addActionListener(new ActionListener() {
@@ -221,6 +226,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 			}
 		});
 	}
+
 
 	public void initTopHangHoa() {
 		setTitle("Hàng hóa - Hàng hóa");
@@ -281,6 +287,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		chkbCombo.setBackground(Color.WHITE);
 		chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		pnlLoaiHang.add(chkbCombo);
+
 
 
 		JPanel pnlTonKho = new JPanel();
@@ -347,12 +354,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		buttonGroup.add(rdoHetHangTrongKho);
 
 
+
 		JPanel pnlBanTrucTiep = new JPanel();
 		pnlBanTrucTiep.setBackground(Color.WHITE);
 		pnlBanTrucTiep.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				" B\u00E1n tr\u1EF1c ti\u1EBFp ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pnlBanTrucTiep.setLayout(new BoxLayout(pnlBanTrucTiep, BoxLayout.Y_AXIS));
+
 
 		JRadioButton rdoBanTrucTiepTatCa = new JRadioButton("Tất cả");
 		rdoBanTrucTiepTatCa.setBackground(Color.WHITE);

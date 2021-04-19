@@ -168,7 +168,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		modelChamCong.addColumn("Tên nhân viên");
 		modelChamCong.addColumn("Ngày");
 		modelChamCong.addColumn("Thứ");
-		modelChamCong.addColumn("Thời gian làm");
+		modelChamCong.addColumn("Thời Gian Vào Làm");
 		modelChamCong.addColumn("Thời gian Về");
 		modelChamCong.addColumn("Trạng Thái");
 

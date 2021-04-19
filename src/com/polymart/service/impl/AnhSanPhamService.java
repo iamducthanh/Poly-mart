@@ -22,4 +22,9 @@ public class AnhSanPhamService implements IAnhSanPhamService {
     public boolean saveAnhSanPhamById(AnhSanPhamModel anhSanPhamModel) {
         return anhSanPhamDAO.save(anhSanPhamModel);
     }
+
+    @Override
+    public void reloadDta() {
+        lstAnhSanPhamModels = anhSanPhamDAO.findAll();
+    }
 }

@@ -250,7 +250,7 @@ public class ChiTietSanPhamFrame extends JFrame {
         txtMauSac.setText(chiTietSanPhamModel.getMauSac());
 
         for (int i = 0; i < lstAnhSanPhamModel.size() && i < arrImage.length; i++) {
-            imageIcon = new ImageIcon("images\\anh-san-pham\\" + lstAnhSanPhamModel.get(i).getTenAnh()); // load the image to a imageIcon
+            imageIcon = new ImageIcon("anh-san-pham\\" + lstAnhSanPhamModel.get(i).getTenAnh()); // load the image to a imageIcon
             image = imageIcon.getImage(); // transform it
             newimg = image.getScaledInstance(143, 200, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
             imageIcon = new ImageIcon(newimg);  // transform it back

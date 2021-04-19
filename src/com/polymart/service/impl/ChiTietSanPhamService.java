@@ -1,15 +1,17 @@
 package com.polymart.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.dao.impl.ChiTietSanPhamDAO;
-import com.polymart.model.AnhSanPhamModel;
-import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.*;
 import com.polymart.service.IAnhSanPhamService;
 import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
@@ -38,7 +40,7 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     @Override
-    public int saveProduct(List<ChiTietSanPhamModel> lstChiTietSanPham, List<String> lstPhoto) {
+    public int saveProduct(List<ChiTietSanPhamModel> lstChiTietSanPham, List<UpdatePhotoProduct> lstPhoto) {
         int rowCountSave = 0;
         int id = -1;
         String[] arrPhoto;
@@ -47,12 +49,19 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
             id = chiTietSanPhamDAO.save(lstChiTietSanPham.get(j));
             if (id > 0) {
                 lstChiTietSanPham.get(j).setId(id);
-                arrPhoto = lstPhoto.get(j).split(",");
-                for (int i = 0; i < arrPhoto.length; i++) {
+                for (int i = 0; i < lstPhoto.get(j).getDstFiles().size(); i++) {
                     anhSanPhamModel = new AnhSanPhamModel();
                     anhSanPhamModel.setIdChiTietSanPham(id);
-                    anhSanPhamModel.setTenAnh(arrPhoto[i].trim());
-                    anhSanPhamService.saveAnhSanPhamById(anhSanPhamModel);
+                    anhSanPhamModel.setTenAnh(lstPhoto.get(j).getNameFiles().get(i));
+                    if (anhSanPhamService.saveAnhSanPhamById(anhSanPhamModel)) {
+                        try {
+                            Path pathTo = Paths.get(lstPhoto.get(j).getDstFiles().get(i).getAbsolutePath());
+                            Files.copy(lstPhoto.get(j).getPathFromsFile().get(i),
+                                    pathTo, StandardCopyOption.REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
                 rowCountSave++;
                 lstChiTietSanPhamModels.add(lstChiTietSanPham.get(j));

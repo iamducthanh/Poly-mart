@@ -118,16 +118,17 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
         contentPane.add(pnlNavibar, BorderLayout.WEST);
         JLabel lblTitle = new JLabel("Hàng hóa");
-        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));        
+        lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
         txtFind = new JTextField();
         txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
         txtFind.setText(" Tìm theo mã, tên hàng");
         txtFind.setColumns(10);
-        
+
         JButton btnTimKiem = new JButton("Tìm kiếm");
+
    //     btnTimKiem.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\search.png", 20, 20)));
-        
         JButton btnExport = new JButton("Export");
+
    //     btnExport.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
         JButton btnThemHang = new JButton("Thêm mới");
 
@@ -166,15 +167,15 @@ public class HangHoaJInternalFrame extends JInternalFrame {
         txtFind.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
-                	txtFind.setText("");
+                if (txtFind.getText().equals("Tìm theo mã, tên hàng")) {
+                    txtFind.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtFind.getText().equals("")) {
-                	txtFind.setText(" Tìm theo mã, tên hàng");
+                    txtFind.setText("Tìm theo mã, tên hàng");
                 }
             }
         });
@@ -431,11 +432,16 @@ public class HangHoaJInternalFrame extends JInternalFrame {
     ActionListener themSanPham = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame();
-            MainFrame.pnlMain.add(themHangHoaJInternalFrame);
-            themHangHoaJInternalFrame.setVisible(true);
+            openThemHangHoa();
         }
     };
+
+    private void openThemHangHoa() {
+        ThemHangHoaJInternalFrame themHangHoaJInternalFrame = new ThemHangHoaJInternalFrame(this);
+        EntityFrame.POLYMARTMAIN.pnlMain.add(themHangHoaJInternalFrame);
+        themHangHoaJInternalFrame.setVisible(true);
+    }
+
     private JTextField txtFind;
 
     private void clickTable(int row) {

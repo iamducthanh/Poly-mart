@@ -3,6 +3,7 @@ package com.polymart.service;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.UpdatePhotoProduct;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface IChiTietSanPhamService {
 
     List<ChiTietSanPhamModel> findAllByHoaDonThanhToan();
 
-    int saveProduct(List<ChiTietSanPhamModel> lstChiTietSanPham, List<String> lstPhoto);
+    int saveProduct(List<ChiTietSanPhamModel> lstChiTietSanPham, List<UpdatePhotoProduct> lstPhoto);
 
     Integer getIdProductById(Integer id);
 

@@ -129,13 +129,13 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         };
         setFocusable(true);
         contentPane = new JPanel();
-        contentPane.setBackground(Color.WHITE);
+        contentPane.setBackground(new Color(75, 0, 130));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_1 = new JPanel();
-        panel_1.setBackground(Color.WHITE);
+        panel_1.setBackground(new Color(75, 0, 130));
         contentPane.add(panel_1, BorderLayout.NORTH);
 
         JButton btnQuayLai = new JButton("");
@@ -150,7 +150,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         btnQuayLai.setFont(new Font("Tahoma", Font.BOLD, 17));
 
         JLabel lblNewLabel = new JLabel("  Thêm sản phẩm");
-        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblNewLabel.setForeground(new Color(255, 255, 255));
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
         gl_panel_1.setHorizontalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -164,11 +165,11 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         gl_panel_1.setVerticalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_panel_1.createSequentialGroup()
-        			.addGap(5)
+        			.addGap(7)
         			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
         				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
         				.addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        			.addContainerGap(7, Short.MAX_VALUE))
         );
         panel_1.setLayout(gl_panel_1);
 

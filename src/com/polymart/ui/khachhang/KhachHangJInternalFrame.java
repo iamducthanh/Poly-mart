@@ -148,7 +148,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), " Chi ti\u1EBFt kh\u00E1ch h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " Chi ti\u1EBFt kh\u00E1ch h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		btnDelete = new JButton("Xóa");
 		btnDelete.addActionListener(new ActionListener() {

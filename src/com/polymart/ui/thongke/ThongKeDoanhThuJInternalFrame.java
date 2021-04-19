@@ -37,6 +37,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	class thongke{
@@ -103,55 +104,82 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(75, 0, 130));
+		panel.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel, BorderLayout.NORTH);
-
-		JLabel lblNewLabel = new JLabel("Thống kê doanh thu");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap().addComponent(lblNewLabel).addContainerGap(634, Short.MAX_VALUE)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-				gl_panel.createSequentialGroup()
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+					.addGap(22))
+		);
+		
+				JLabel lblNewLabel = new JLabel("Thống kê doanh thu");
+				lblNewLabel.setForeground(new Color(255, 255, 255));
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+				GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+				gl_panel_3.setHorizontalGroup(
+					gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addGap(21)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(647, Short.MAX_VALUE))
+				);
+				gl_panel_3.setVerticalGroup(
+					gl_panel_3.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel)
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+				panel_3.setLayout(gl_panel_3);
 		panel.setLayout(gl_panel);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(75, 0, 130));
+		panel_1.setBackground(new Color(255, 255, 255));
 		contentPane.add(panel_1, BorderLayout.WEST);
 
 		JLabel lblNewLabel_1 = new JLabel("Lựa chọn hiển thị");
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setForeground(new Color(0, 0, 0));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(75, 0, 130));
-		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_2.setBackground(new Color(255, 255, 255));
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		JLabel lblNewLabel_1_1 = new JLabel("Năm");
-		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_1.setForeground(new Color(0, 0, 0));
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(10)
-							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
 						.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(25, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(20)
 					.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(cbbNam, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -159,17 +187,17 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(282, Short.MAX_VALUE))
+					.addContainerGap(236, Short.MAX_VALUE))
 		);
 
 		JRadioButton rdoTheoBang = new JRadioButton("Theo bảng");
-		rdoTheoBang.setBackground(new Color(75, 0, 130));
-		rdoTheoBang.setForeground(new Color(255, 255, 255));
+		rdoTheoBang.setBackground(new Color(255, 255, 255));
+		rdoTheoBang.setForeground(new Color(0, 0, 0));
 		rdoTheoBang.setFont(new Font("Tahoma", Font.PLAIN, 13));
 
 		JRadioButton rdoBieuDo = new JRadioButton("Biểu đồ");
-		rdoBieuDo.setBackground(new Color(75, 0, 130));
-		rdoBieuDo.setForeground(new Color(255, 255, 255));
+		rdoBieuDo.setBackground(new Color(255, 255, 255));
+		rdoBieuDo.setForeground(new Color(0, 0, 0));
 		rdoBieuDo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
@@ -192,8 +220,8 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		panelContent.setLayout(new BorderLayout(0, 0));
 
 		tableThongKe = new JTable();
-		tableThongKe.setForeground(new Color(255, 255, 255));
-		tableThongKe.setBackground(new Color(75, 0, 130));
+		tableThongKe.setForeground(new Color(0, 0, 0));
+		tableThongKe.setBackground(new Color(255, 255, 255));
 		scrollPaneBang.setViewportView(tableThongKe);
 
 		ButtonGroup gr = new ButtonGroup();
@@ -203,8 +231,8 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		scrollPaneBang.setBackground(new Color(75, 0, 130));
 
 		tableThongKe_1 = new JTable();
-		tableThongKe_1.setForeground(new Color(255, 255, 255));
-		tableThongKe_1.setBackground(new Color(75, 0, 130));
+		tableThongKe_1.setForeground(new Color(0, 0, 0));
+		tableThongKe_1.setBackground(new Color(255, 255, 255));
 		scrollPaneBang.setViewportView(tableThongKe_1);
 		modelThongKe.addColumn("Tháng");
 		modelThongKe.addColumn("Sản phẩm bán");

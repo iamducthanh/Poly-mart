@@ -111,6 +111,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -128,28 +129,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	public void initTopNhapHang() {
 		setTitle("Hàng hóa - Kiểm kho");
 
-		JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-
-		txtTimPhieuNhap = new JTextField();
-		txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
-		txtTimPhieuNhap.setColumns(10);
-		txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimPhieuNhap.getText().equals("Tìm theo mã phiếu nhập")) {
-					txtTimPhieuNhap.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimPhieuNhap.getText().equals("")) {
-					txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
-				}
-			}
-		});
-
 		optionKiemKhoFrame.setSize(344, 234);
 		optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
 		panelOption = new JPanel();
@@ -159,67 +138,113 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 
 		optionKiemKhoFrame.getContentPane().add(panelOption);
 		optionKiemKhoFrame.setUndecorated(true);
-
-		btnTimKiem = new JButton("Tìm");
-
-		// tìm kiếm hóa đơn
-		btnTimKiem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				evtBtnSearchById(txtTimPhieuNhap);
-			}
-		});
-
-		btnThemPhieuNhap = new JButton("+ Thêm");
-
-		btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
-		btnXoa = new JButton("- Xoá ");
-
-		// xóa hóa đơn
-		btnXoa.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				evtBtnXoa(tableNhapHang);
-			}
-		});
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(75, 0, 130));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+					.addGap(16))
+		);
 		btnExport = new JButton("→ Xuất");
 		btnExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-						.addGap(12).addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-						.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addGap(5)
-				.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+		btnXoa = new JButton("- Xoá ");
+		
+				// xóa hóa đơn
+				btnXoa.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						evtBtnXoa(tableNhapHang);
+					}
+				});
+				
+						// xóa hóa đơn
+						btnXoa.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								evtBtnXoa(tableNhapHang);
+							}
+						});
+		
+				btnThemPhieuNhap = new JButton("+ Thêm");
+				
+						btnThemPhieuNhap.addActionListener(openThemPhieuNhapHang);
+		
+				btnTimKiem = new JButton("Tìm");
+				
+						// tìm kiếm hóa đơn
+						btnTimKiem.addActionListener(new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								evtBtnSearchById(txtTimPhieuNhap);
+							}
+						});
+		
+				txtTimPhieuNhap = new JTextField();
+				txtTimPhieuNhap.setBorder(null);
+				txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
+				txtTimPhieuNhap.setColumns(10);
+				txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusGained(FocusEvent e) {
+						if (txtTimPhieuNhap.getText().equals("Tìm theo mã phiếu nhập")) {
+							txtTimPhieuNhap.setText("");
+						}
+					}
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if (txtTimPhieuNhap.getText().equals("")) {
+							txtTimPhieuNhap.setText("Tìm theo mã phiếu nhập");
+						}
+					}
+				});
+		
+				JLabel lblNewLabel = new JLabel("Hóa đơn nhập hàng");
+				lblNewLabel.setForeground(new Color(255, 255, 255));
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+					.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addGap(6))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+					.addContainerGap())
+		);
+		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
-
-		// xóa hóa đơn
-		btnXoa.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				evtBtnXoa(tableNhapHang);
-			}
-		});
 	}
 
 	public void initCenterNhapHang() {
@@ -321,6 +346,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 	private JButton btnThemPhieuNhap;
 	private JButton btnXoa;
 	private JButton btnExport;
+	private JPanel panel_1;
 
 	private void setOpenThemPhieuNhapHang() {
 		ThemNhapHangJInternalFrame themNhapHangJInternalFrame = new ThemNhapHangJInternalFrame(this);

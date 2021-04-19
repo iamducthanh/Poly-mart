@@ -84,6 +84,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,57 +92,87 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		contentPane.add(panel_1, BorderLayout.NORTH);
-
-		JLabel lblNewLabel = new JLabel("   Nguồn hàng         ");
-		lblNewLabel.setFont(new java.awt.Font("Tahoma", java.awt.Font.BOLD, 18));
-
-		txtTim = new JTextField();
-		txtTim.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
-		txtTim.setText(" Tìm theo tên, số điện thoại");
-		txtTim.setColumns(10);
-		txtTim.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				findNguonHang();
-			}
-		});
-		txtTim.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
-					txtTim.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTim.getText().equals("")) {
-					txtTim.setText(" Tìm theo tên, số điện thoại");
-				}
-			}
-		});
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNewLabel)
-					.addGap(5)
-					.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 326, GroupLayout.PREFERRED_SIZE)
-					.addGap(461))
+				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(5)
-							.addComponent(lblNewLabel))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(6)
-							.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+					.addGap(22))
 		);
+		
+				txtTim = new JTextField();
+				txtTim.setBorder(null);
+				txtTim.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+				txtTim.setText(" Tìm theo tên, số điện thoại");
+				txtTim.setColumns(10);
+				txtTim.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						findNguonHang();
+					}
+				});
+				txtTim.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusGained(FocusEvent e) {
+						if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
+							txtTim.setText("");
+						}
+					}
+
+					@Override
+					public void focusLost(FocusEvent e) {
+						if (txtTim.getText().equals("")) {
+							txtTim.setText(" Tìm theo tên, số điện thoại");
+						}
+					}
+				});
+				
+						txtTim.addFocusListener(new FocusAdapter() {
+							@Override
+							public void focusGained(FocusEvent e) {
+								if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
+									txtTim.setText("");
+								}
+							}
+				
+							@Override
+							public void focusLost(FocusEvent e) {
+								if (txtTim.getText().equals("")) {
+									txtTim.setText(" Tìm theo tên, số điện thoại");
+								}
+							}
+						});
+		
+				JLabel lblNewLabel = new JLabel("   Nguồn hàng         ");
+				lblNewLabel.setForeground(new Color(255, 255, 255));
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(308, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap(14, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(txtTim, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		panel.setLayout(gl_panel);
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel_2 = new JPanel();
@@ -150,7 +181,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt ngu\u1ED3n h\u00E0ng  ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 	
 		btnXoa.addActionListener(new ActionListener() {
@@ -263,22 +294,6 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		);
 		panel_3.setLayout(gl_panel_3);
 		panel_2.setLayout(gl_panel_2);
-
-		txtTim.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTim.getText().equals(" Tìm theo tên, số điện thoại")) {
-					txtTim.setText("");
-				}
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTim.getText().equals("")) {
-					txtTim.setText(" Tìm theo tên, số điện thoại");
-				}
-			}
-		});
 
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);

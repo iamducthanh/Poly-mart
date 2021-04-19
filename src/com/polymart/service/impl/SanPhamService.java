@@ -35,4 +35,10 @@ public class SanPhamService implements ISanPhamService {
         });
         return ref.sanPhamModel;
     }
+
+    @Override
+    public SanPhamModel findByNameSPAndNameLoai(String nameSanPham, String nameLoaiSanPham) {
+        List<SanPhamModel> lstTimKiem = sanPhamDAO.findByNameSPAndNameLoai(nameSanPham, nameLoaiSanPham);
+        return lstTimKiem.isEmpty() ? null : lstTimKiem.get(0);
+    }
 }

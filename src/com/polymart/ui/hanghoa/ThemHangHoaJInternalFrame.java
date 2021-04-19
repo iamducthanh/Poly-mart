@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -25,10 +26,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityFrame;
-import com.polymart.entity.EntityImage;
-import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
+import com.polymart.entity.*;
 import com.polymart.model.*;
 import com.polymart.service.IAnhSanPhamService;
 import com.polymart.service.IChiTietSanPhamService;
@@ -50,6 +48,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private JTextField txtMauSac;
     private JTextField txtSize;
     private JButton btnTaoHinhMoi;
+    private JButton btnImportExcel;
     private JPanel panelImage = new JPanel();
 
     // list hình ảnh
@@ -199,7 +198,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
         JButton btnXoa = new JButton("Xoá");
 
-        JButton btnTaoMoi_1 = new JButton("Import");
+        btnImportExcel = new JButton("Import");
         GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(
                 gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -214,7 +213,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                                                 .addComponent(btnTaoMoi, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                                         .addComponent(btnHoanThanh, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnTaoMoi_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnImportExcel, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
                                 .addGap(20))
         );
         gl_panel.setVerticalGroup(
@@ -231,7 +230,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                                 .addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
                                         .addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                                         .addGroup(gl_panel.createSequentialGroup()
-                                                .addComponent(btnTaoMoi_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnImportExcel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                                                 .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(ComponentPlacement.RELATED)
@@ -396,6 +395,158 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 saveProduct();
             }
         });
+
+        // đọc file excel
+        btnImportExcel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (modelDSSanPhamThem.getRowCount() > 0) {
+                    if (!EntityMessage.confirm(null, "Hành động này có thể làm mất hết dữ liệu trên form đang có")) {
+                        return;
+                    }
+                }
+                importExcel();
+            }
+        });
+    }
+
+    // đọc dữ liệu từ file excel
+    private void importExcel() {
+        try {
+            EntityExcel.importExcel(modelDSSanPhamThem);
+            String getTenSanPham, getTenLoaiSanPham, getGiaBan, getSize, getMauSac, getHinhAnh;
+            List<Integer> lstLoiDuLieu = new ArrayList<>();
+            List<Integer> lstDaTonTai = new ArrayList<>();
+            List<Integer> lstLoiAnh = new ArrayList<>();
+            lstUpdatePhotoProduct = new ArrayList<>();
+            lstChiTietSanPhamThemMoi = new ArrayList<>();
+            for (int i = 0; i < modelDSSanPhamThem.getRowCount(); i++) {
+                getTenSanPham = modelDSSanPhamThem.getValueAt(i, 0).toString();
+                getTenLoaiSanPham = modelDSSanPhamThem.getValueAt(i, 1).toString();
+                getGiaBan = modelDSSanPhamThem.getValueAt(i, 2).toString();
+                getSize = modelDSSanPhamThem.getValueAt(i, 3).toString();
+                getMauSac = modelDSSanPhamThem.getValueAt(i, 4).toString();
+                getHinhAnh = modelDSSanPhamThem.getValueAt(i, 5).toString();
+                // kiểm tra dữ liệu bản ghi có hợp lệ không
+                sanPhamModel = sanPhamService.findByNameSPAndNameLoai(getTenSanPham, getTenLoaiSanPham);
+                if (sanPhamModel == null
+                        || !EntityValidate.checkMoney2(this, getGiaBan)
+                        || !EntityValidate.checkSize2(this, getSize)
+                        || !EntityValidate.checkColor2(this, getMauSac)) {
+                    lstLoiDuLieu.add(i + 2);
+                    continue;
+                }
+                // set thuộc tính mới vào đối tượng chiTietSanPham
+                setThuocTinhChiTietSanPham(getGiaBan, getSize, getMauSac);
+                // kiểm tra đã được lưu tạm chưa?
+                boolean flag = lstChiTietSanPhamThemMoi.stream().filter(e ->
+                        e.getIdSanPham().equals(chiTietSanPhamModel.getIdSanPham())
+                                && e.getMauSac().equalsIgnoreCase(chiTietSanPhamModel.getMauSac())
+                                && e.getSize().equalsIgnoreCase(chiTietSanPhamModel.getSize()))
+                        .collect(Collectors.toList()).isEmpty();
+                // kiểm tra bản ghi đã tồn tại trên db chưa
+                if (chiTietSanPhamService.checkThemMoiSanPham(chiTietSanPhamModel) && flag) {
+                    // set thuộc tính vào list lưu dữ liệu hình ảnh
+                    File srcFile = new File(getHinhAnh);
+                    if (srcFile.exists()) {
+                        setDuLieuFileAnh(srcFile);
+                        // lưu thông tin ảnh
+                        saveInfoPhoto();
+                    } else {
+                        lstLoiAnh.add(i + 2);
+                        modelDSSanPhamThem.setValueAt("", i, 5);
+                    }
+                    setThuocTinhPhoTo();
+                    lstChiTietSanPhamThemMoi.add(chiTietSanPhamModel);
+                } else {
+                    lstDaTonTai.add(i + 2);
+                }
+            }
+            StringBuilder sp = new StringBuilder();
+            sp.append("Tổng số bản ghi excel có: ");
+            sp.append(modelDSSanPhamThem.getRowCount());
+            if (!lstLoiDuLieu.isEmpty()) {
+                sp.append("\nCác bản ghi không thể đọc (Lỗi dữ liệu): ");
+                lstLoiDuLieu.forEach(e -> sp.append(e.toString()).append(", "));
+            }
+            if (!lstDaTonTai.isEmpty()) {
+                sp.append("\nCác bản ghi không thể đọc (Đã tồn tại): ");
+                lstDaTonTai.forEach(e -> sp.append(e.toString()).append(", "));
+            }
+            if (!lstLoiAnh.isEmpty()) {
+                sp.append("\nCác bản ghi lỗi hình ảnh (Không bị xoá trên form): ");
+                lstLoiAnh.forEach(e -> sp.append(e.toString()).append(", "));
+            }
+            lstLoiDuLieu.addAll(lstDaTonTai);
+            for (int i = lstLoiDuLieu.size() - 1; i >= 0; i--) {
+                modelDSSanPhamThem.removeRow(i);
+            }
+            if (!lstLoiDuLieu.isEmpty()
+                    || !lstDaTonTai.isEmpty()
+                    || !lstLoiAnh.isEmpty()) {
+                sp.append("\nSố thứ dự được đánh theo thứ tự trên file excel");
+            }
+            sp.append("\nĐọc file excel thành công ");
+            sp.append(modelDSSanPhamThem.getRowCount());
+            sp.append(" bản ghi.");
+            EntityMessage.show(this, sp.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            EntityMessage.show(this, "Đọc file excel thất bại");
+        }
+    }
+
+    private void saveInfoPhoto() {
+        if (nameFile != null
+                && dstFile != null
+                && pathForm != null) {
+            lstNameFiles.add(nameFile);
+            lstDstFiles.add(dstFile);
+            lstPathFiles.add(pathForm);
+        }
+    }
+
+    // sety thuộc tính vào list lưu trữ thông tin hình ảnh
+    private void setThuocTinhPhoTo() {
+        // cập nhật đối tương lưu trữ thông tin hình ảnh
+        updatePhotoProduct = new UpdatePhotoProduct();
+        updatePhotoProduct.setNameFiles(lstNameFiles);
+        updatePhotoProduct.setDstFiles(lstDstFiles);
+        updatePhotoProduct.setPathFromsFile(lstPathFiles);
+        // thêm đối tượng lưuu trữ hình ảnh vào  list
+        lstUpdatePhotoProduct.add(updatePhotoProduct);
+        // reset lại list lưu trữ thông tin hình ảnh
+        lstNameFiles = new ArrayList<>();
+        lstDstFiles = new ArrayList<>();
+        lstPathFiles = new ArrayList<>();
+        System.out.println("size ảnh: " + lstUpdatePhotoProduct.size());
+    }
+
+    // set dữ liệu file ảnh vào dstFile, nameFile, pathFile
+    private void setDuLieuFileAnh(File srcFile) {
+        nameFile = null;
+        dstFile = null;
+        pathForm = null;
+        dstFile = new File("images", "anh-san-pham");
+        if (!dstFile.getParentFile().exists()) {
+            dstFile.getParentFile().mkdirs();
+        }
+        while (true) {
+            nameFile = Math.random() * 10000000 + srcFile.getName();
+            dstFile = new File("images\\anh-san-pham", nameFile);
+            if (!dstFile.exists()) {
+                break;
+            }
+        }
+        pathForm = Paths.get(srcFile.getAbsolutePath());
+    }
+
+    private void setThuocTinhChiTietSanPham(String getGiaBan, String getSize, String getMauSac) {
+        chiTietSanPhamModel = new ChiTietSanPhamModel();
+        chiTietSanPhamModel.setIdSanPham(sanPhamModel.getId());
+        chiTietSanPhamModel.setGiaBan(Long.valueOf(getGiaBan));
+        chiTietSanPhamModel.setMauSac(getMauSac);
+        chiTietSanPhamModel.setSize(getSize);
     }
 
     private void evtAddImage() {
@@ -439,13 +590,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 }
             }
             // và thay thế bằng thông tin ảnh mới
-            if (nameFile != null
-                    && dstFile != null
-                    && pathForm != null) {
-                lstNameFiles.add(nameFile);
-                lstDstFiles.add(dstFile);
-                lstPathFiles.add(pathForm);
-            }
+            saveInfoPhoto();
         }
 
         public void mousePressed(MouseEvent e) {
@@ -463,26 +608,12 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
     // chọn hình ảnh
     private void chonHinh(JLabel label) {
-        nameFile = null;
-        dstFile = null;
-        pathForm = null;
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG and PNG", new String[]{"JPG", "PNG"});
         chooser.setFileFilter(filter);
         int i = chooser.showOpenDialog(null);
         File srcFile = chooser.getSelectedFile();
-        dstFile = new File("images", "anh-san-pham");
-        if (!dstFile.getParentFile().exists()) {
-            dstFile.getParentFile().mkdirs();
-        }
-        while (true) {
-            nameFile = Math.random() * 10000000 + srcFile.getName();
-            dstFile = new File("images\\anh-san-pham", nameFile);
-            if (!dstFile.exists()) {
-                break;
-            }
-        }
-        pathForm = Paths.get(srcFile.getAbsolutePath());
+        setDuLieuFileAnh(srcFile);
         if (i == 0) {
             String path = srcFile.getPath();
             EntityImage.setNameToListImage(listLabelImg, nameFile, path, label);
@@ -539,12 +670,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         if (EntityValidate.checkMoney(this, getMoney)
                 && EntityValidate.checkSize(this, getSize)
                 && EntityValidate.checkColor(this, getColor)) {
-            chiTietSanPhamModel = new ChiTietSanPhamModel();
             sanPhamModel = lstSanPhamModels.get(cbcTenSanPham.getSelectedIndex());
-            chiTietSanPhamModel.setIdSanPham(sanPhamModel.getId());
-            chiTietSanPhamModel.setGiaBan(Long.valueOf(getMoney));
-            chiTietSanPhamModel.setMauSac(getColor);
-            chiTietSanPhamModel.setSize(getSize);
+            setThuocTinhChiTietSanPham(getMoney, getSize, getColor);
             // kiểm tra đã được lưu tạm chưa?
             boolean flag = lstChiTietSanPhamThemMoi.stream().filter(e ->
                     e.getIdSanPham().equals(chiTietSanPhamModel.getIdSanPham())
@@ -574,16 +701,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 // clear hfinh ảnh
                 EntityImage.clearHinh(listLabelImg);
                 // cập nhật đối tương lưu trữ thông tin hình ảnh
-                updatePhotoProduct = new UpdatePhotoProduct();
-                updatePhotoProduct.setNameFiles(lstNameFiles);
-                updatePhotoProduct.setDstFiles(lstDstFiles);
-                updatePhotoProduct.setPathFromsFile(lstPathFiles);
-                // thêm đối tượng lưuu trữ hình ảnh vào  list
-                lstUpdatePhotoProduct.add(updatePhotoProduct);
-                // reset lại list lưu trữ thông tin hình ảnh
-                lstNameFiles = new ArrayList<>();
-                lstDstFiles = new ArrayList<>();
-                lstPathFiles = new ArrayList<>();
+                setThuocTinhPhoTo();
             } else {
                 EntityMessage.show(this, "Chi tiết sản phẩm đã tồn tại");
             }

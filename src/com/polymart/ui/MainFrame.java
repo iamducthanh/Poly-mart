@@ -244,7 +244,7 @@ public class MainFrame extends JFrame {
 					.addGap(1)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
-					.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 944, Short.MAX_VALUE)
+					.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 953, Short.MAX_VALUE)
 					.addGap(1))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -253,8 +253,10 @@ public class MainFrame extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 777, GroupLayout.PREFERRED_SIZE)
-						.addComponent(pnlMain, GroupLayout.PREFERRED_SIZE, 670, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+							.addGap(107)))
+					.addGap(0))
 		);
 
 		panelThongKe.setBackground(new Color(153, 51, 255));

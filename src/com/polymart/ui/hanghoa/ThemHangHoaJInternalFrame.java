@@ -110,6 +110,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
      * Create the frame.
      */
     public ThemHangHoaJInternalFrame() {
+        init();
     }
 
     public ThemHangHoaJInternalFrame(HangHoaJInternalFrame hangHoaJInternalFrame) {

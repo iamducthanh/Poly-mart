@@ -8,4 +8,6 @@ public interface ISanPhamDAO extends GenericDAO<SanPhamModel> {
 
 	List<SanPhamModel> findAll();
 
+	List<SanPhamModel> findByNameSPAndNameLoai(String nameSanPham, String nameLoaiSanPham);
+
 }

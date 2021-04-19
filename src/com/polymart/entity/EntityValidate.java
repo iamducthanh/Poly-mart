@@ -212,4 +212,38 @@ public class EntityValidate {
         }
         return true;
     }
+
+    // kiểm tra số tiền check excel
+    public static boolean checkMoney2(Component component, String money) {
+        String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
+        if (money.isBlank()) {
+            return false;
+        }
+        if (!money.matches(regex)) {
+            return false;
+        }
+        return true;
+    }
+
+    // check Silze check excel
+    public static boolean checkSize2(Component component, String size) {
+        if (!size.isBlank() && size.matches("[a-zA-Z0-9]+")) {
+            return true;
+        }
+        return false;
+    }
+
+    // check màu sắc tiếng việt check excel
+    public static boolean checkColor2(Component component, String name) {
+        if (name.isBlank()) {
+            return false;
+        }
+        String regx = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\s]+$";
+        Pattern pattern = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(name);
+        if (!matcher.find()) {
+            return false;
+        }
+        return true;
+    }
 }

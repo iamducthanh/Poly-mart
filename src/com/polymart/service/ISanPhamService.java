@@ -12,4 +12,6 @@ public interface ISanPhamService {
 
     SanPhamModel findByID(Integer id);
 
+    SanPhamModel findByNameSPAndNameLoai(String nameSanPham, String nameLoaiSanPham);
+
 }

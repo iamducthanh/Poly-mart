@@ -255,7 +255,7 @@ public class MainFrame extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 777, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
-							.addGap(107)))
+							.addGap(1)))
 					.addGap(0))
 		);
 

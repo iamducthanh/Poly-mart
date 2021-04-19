@@ -68,7 +68,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private JComboBox<Object> cboChucDanh;
 	private List<NhanVienModel> list;
 	private int index;
-	private JButton btnXoaNV;
+	private JButton btnXoaNV = new JButton("- Khóa Tài Khoản");
 
 	private JFrame optionNhanVienFrame = new JFrame();
 	private JCheckBox chkMaNV = new JCheckBox("Mã nhân viên");
@@ -125,50 +125,43 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		initTopNhanVien();
 		initCenterNhanVien();
 		loadComboboxChucVu();
-		try {
-			index = 0;
-			list = nhanVienService.findAll();
-			loadToTable();
-		//	btnXoaNV.setEnabled(false);
-			btnXoaNV = new JButton("- Khóa Tài Khoản");
-			btnXoaNV.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					btnDelete();
-				}
-			});
+//		try {
+		index = 0;
+//		list = nhanVienService.findAll();
+		loadToTable();
+		// btnXoaNV.setEnabled(false);
+		btnXoaNV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnDelete();
+			}
+		});
 
-			JButton btnThemNV = new JButton("+ Thêm nhân viên");
-			btnThemNV.addActionListener(chiTietNhanVien);
-			GroupLayout gl_panel = new GroupLayout(panel);
-			gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup()
-						.addContainerGap()
+		JButton btnThemNV = new JButton("+ Thêm nhân viên");
+		btnThemNV.addActionListener(chiTietNhanVien);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup().addContainerGap()
 						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
 						.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-			);
-			gl_panel.setVerticalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup()
-						.addGap(5)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+				.createSequentialGroup().addGap(5)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-			);
-			panel.setLayout(gl_panel);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		panel.setLayout(gl_panel);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		tblNhanVien.setRowHeight(25);
 
 	}

@@ -18,6 +18,7 @@ import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.SanPhamService;
+import javax.swing.JTextArea;
 
 public class ChiTietHoaDonNhapHangFrame extends JFrame {
 
@@ -77,7 +78,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
         contentPane.add(lblMaHoaDon);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(20, 155, 819, 391);
+        scrollPane.setBounds(20, 247, 819, 299);
         contentPane.add(scrollPane);
 
         tableChiTietHoaDonNhap = new JTable();
@@ -99,6 +100,18 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
         modelChiTietHoaDonNhap.addColumn("Đơn giá");
         modelChiTietHoaDonNhap.addColumn("Thành tiền");
         tableChiTietHoaDonNhap.setModel(modelChiTietHoaDonNhap);
+        
+        JLabel lblNewLabel_1_1_1 = new JLabel("Ghi chú:");
+        lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel_1_1_1.setBounds(30, 132, 87, 25);
+        contentPane.add(lblNewLabel_1_1_1);
+        
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(146, 132, 451, 100);
+        contentPane.add(scrollPane_1);
+        
+        JTextArea txtGhiChu = new JTextArea();
+        scrollPane_1.setViewportView(txtGhiChu);
     }
 
     private void setForm(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang,

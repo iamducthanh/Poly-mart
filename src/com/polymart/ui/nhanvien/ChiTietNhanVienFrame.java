@@ -136,7 +136,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 			}
 		});
 
-		btnSave.setBounds(547, 575, 50, 28);
+		btnSave.setBounds(496, 576, 73, 28);
 		contentPane.add(btnSave);
 
 		JButton btnClear = new JButton("Làm mới");
@@ -145,7 +145,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 				clear();
 			}
 		});
-		btnClear.setBounds(459, 575, 78, 28);
+		btnClear.setBounds(408, 576, 78, 28);
 		contentPane.add(btnClear);
 
 		JLabel lblTnNhnVin = new JLabel("Tên nhân viên");
@@ -291,7 +291,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 				EditNhanVien();
 			}
 		});
-		btnEdit.setBounds(607, 575, 50, 28);
+		btnEdit.setBounds(579, 575, 78, 28);
 		contentPane.add(btnEdit);
 	}
 

@@ -372,6 +372,6 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 					i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
 					i.getDiaChi(), i.getSdt(), i.getEmail() });
 		}
-	//	btnXoaNV.setEnabled(false);
+		btnXoaNV.setEnabled(false);
 	}
 }

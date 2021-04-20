@@ -29,7 +29,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.LoaiSanPhamModel;
@@ -135,90 +134,80 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlTop.setBounds(68, 120, 96, 20);
 
 		contentPane.add(pnlNavibar, BorderLayout.WEST);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(75, 0, 130));
-
-
-
 		GroupLayout gl_pnlTop = new GroupLayout(pnlTop);
-		gl_pnlTop.setHorizontalGroup(
-			gl_pnlTop.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1185, Short.MAX_VALUE)
-		);
-		gl_pnlTop.setVerticalGroup(
-			gl_pnlTop.createParallelGroup(Alignment.LEADING)
+		gl_pnlTop.setHorizontalGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING).addComponent(panel,
+				Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1185, Short.MAX_VALUE));
+		gl_pnlTop.setVerticalGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlTop.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		
-				// btnTimKiem.setIcon(new
-				// ImageIcon(EntityImage.resizeTheoUrl("images\\search.png", 20, 20)));
-				JButton btnExport = new JButton("Export");
-				btnExport.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						try {
-							EntityExcel.exportExcel(tblHangHoa);
-							JOptionPane.showMessageDialog(null, "Lưu thành công");
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-							JOptionPane.showMessageDialog(null, "Lưu thất bại");
-						}
-					}
-				});
-		
-				// btnExport.setIcon(new
-				// ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
-				JButton btnThemHang = new JButton("Thêm mới");
-				
-				
-						btnThemHang.addActionListener(themSanPham);
-		
-				JButton btnTimKiem = new JButton("Tìm kiếm");
-				
-				
-				
-						// tìm kiếm
-						btnTimKiem.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								evtBtnTimKiem(txtFind);
-							}
-						});
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+
+		// btnTimKiem.setIcon(new
+		// ImageIcon(EntityImage.resizeTheoUrl("images\\search.png", 20, 20)));
+		JButton btnExport = new JButton("Export");
+		btnExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					EntityExcel.exportExcel(tblHangHoa);
+					JOptionPane.showMessageDialog(null, "Lưu thành công");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Lưu thất bại");
+				}
+			}
+		});
+
+		// btnExport.setIcon(new
+		// ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
+		JButton btnThemHang = new JButton("Thêm mới");
+
+		btnThemHang.addActionListener(themSanPham);
+
+		JButton btnTimKiem = new JButton("Tìm kiếm");
+
+		// tìm kiếm
+		btnTimKiem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				evtBtnTimKiem(txtFind);
+			}
+		});
 		txtFind = new JTextField();
 		txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtFind.setText(" Tìm theo mã, tên hàng");
 		txtFind.setColumns(10);
-		
-				txtFind.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusGained(FocusEvent e) {
-						if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
-							txtFind.setText("");
-						}
-					}
-		
-					@Override
-					public void focusLost(FocusEvent e) {
-						if (txtFind.getText().equals("")) {
-							txtFind.setText(" Tìm theo mã, tên hàng");
-						}
-					}
-				});
+
+		txtFind.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (txtFind.getText().equals(" Tìm theo mã, tên hàng")) {
+					txtFind.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtFind.getText().equals("")) {
+					txtFind.setText(" Tìm theo mã, tên hàng");
+				}
+			}
+		});
 		JLabel lblTitle = new JLabel("Hàng hóa");
 		lblTitle.setForeground(new Color(255, 255, 255));
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+					.addGap(1)
 					.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(10)
 					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
 					.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
@@ -230,24 +219,22 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblTitle)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblTitle)
+							.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		pnlTop.setLayout(gl_pnlTop);
 
-
-
 		initTopHangHoa();
 		initCenterHangHoa();
 		loadLoaiSanPham();
 	}
-
 
 	public void initTopHangHoa() {
 		setTitle("Hàng hóa - Hàng hóa");
@@ -283,11 +270,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 	}
 
-
 	public void initCenterHangHoa() {
 		JPanel pnlLoaiHang = new JPanel();
 		pnlLoaiHang.setBackground(Color.WHITE);
-		pnlLoaiHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " Lo\u1EA1i H\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlLoaiHang.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				" Lo\u1EA1i H\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		cboLoaiSanPham.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				locSanPham();
@@ -300,11 +288,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		chkbCombo.setBackground(Color.WHITE);
 		chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-
-
 		JPanel pnlTonKho = new JPanel();
 		pnlTonKho.setBackground(Color.WHITE);
-		pnlTonKho.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " T\u1ED3n kho ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlTonKho.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				" T\u1ED3n kho ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		rdoTonKhoTatCa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -315,7 +303,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		rdoTonKhoTatCa.setBackground(Color.WHITE);
 		rdoTonKhoTatCa.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-
 		rdoDuoiDinhMucTon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				locSanPham();
@@ -324,7 +311,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		rdoDuoiDinhMucTon.setBackground(Color.WHITE);
 		rdoDuoiDinhMucTon.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-
 		rdoVuotDinhMucTon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				locSanPham();
@@ -332,7 +318,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		});
 		rdoVuotDinhMucTon.setBackground(Color.WHITE);
 		rdoVuotDinhMucTon.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		
+
 		rdoConHangTrongKho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				locSanPham();
@@ -349,7 +335,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		rdoHetHangTrongKho.setBackground(Color.WHITE);
 		rdoHetHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdoTonKhoTatCa);
 		buttonGroup.add(rdoDuoiDinhMucTon);
@@ -357,13 +342,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		buttonGroup.add(rdoConHangTrongKho);
 		buttonGroup.add(rdoHetHangTrongKho);
 
-
-
 		JPanel pnlBanTrucTiep = new JPanel();
 		pnlBanTrucTiep.setBackground(Color.WHITE);
-		pnlBanTrucTiep.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " B\u00E1n tr\u1EF1c ti\u1EBFp ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlBanTrucTiep.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				" B\u00E1n tr\u1EF1c ti\u1EBFp ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pnlBanTrucTiep.setLayout(new BoxLayout(pnlBanTrucTiep, BoxLayout.Y_AXIS));
-
 
 		JRadioButton rdoBanTrucTiepTatCa = new JRadioButton("Tất cả");
 		rdoBanTrucTiepTatCa.setBackground(Color.WHITE);
@@ -378,16 +362,17 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlBanTrucTiep.add(rdoDuocBanTrucTiep);
 		pnlBanTrucTiep.add(rdoKhongDuocBanTrucTiep);
 
-
 		ButtonGroup buttonGroup2 = new ButtonGroup();
 		buttonGroup2.add(rdoBanTrucTiepTatCa);
 		buttonGroup2.add(rdoDuocBanTrucTiep);
 		buttonGroup2.add(rdoKhongDuocBanTrucTiep);
 
-
 		JPanel pnlNgayDuKienHetHang = new JPanel();
 		pnlNgayDuKienHetHang.setBackground(Color.WHITE);
-		pnlNgayDuKienHetHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " Ng\u00E0y d\u1EF1 ki\u1EBFn h\u1EBFt h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlNgayDuKienHetHang.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				" Ng\u00E0y d\u1EF1 ki\u1EBFn h\u1EBFt h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		pnlNgayDuKienHetHang.setLayout(new BoxLayout(pnlNgayDuKienHetHang, BoxLayout.Y_AXIS));
 
 		JRadioButton rdoToanThoiGian = new JRadioButton("Toàn thời gian");
@@ -399,15 +384,16 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlNgayDuKienHetHang.add(rdoToanThoiGian);
 		pnlNgayDuKienHetHang.add(rdoLuaChonKhac);
 
-
 		ButtonGroup buttonGroup3 = new ButtonGroup();
 		buttonGroup3.add(rdoToanThoiGian);
 		buttonGroup3.add(rdoLuaChonKhac);
 
-
 		JPanel pnlLienKetBanHang = new JPanel();
 		pnlLienKetBanHang.setBackground(Color.WHITE);
-		pnlLienKetBanHang.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), " Li\u00EAn k\u1EBFt b\u00E1n h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlLienKetBanHang.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				" Li\u00EAn k\u1EBFt b\u00E1n h\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		pnlLienKetBanHang.setLayout(new BoxLayout(pnlLienKetBanHang, BoxLayout.Y_AXIS));
 
 		JRadioButton rdoLienKetBanHangTatCa = new JRadioButton("Tất cả");
@@ -489,72 +475,61 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
-		
+
 		JLabel lblNewLabel = new JLabel("Định mức tồn");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField.setText("10");
 		textField.setColumns(10);
 		GroupLayout gl_pnlTonKho = new GroupLayout(pnlTonKho);
-		gl_pnlTonKho.setHorizontalGroup(
-			gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnlTonKho.createSequentialGroup()
-					.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
-						.addComponent(rdoTonKhoTatCa)
+		gl_pnlTonKho.setHorizontalGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING).addGroup(gl_pnlTonKho
+				.createSequentialGroup()
+				.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING).addComponent(rdoTonKhoTatCa)
 						.addComponent(rdoVuotDinhMucTon)
 						.addComponent(rdoConHangTrongKho, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_pnlTonKho.createSequentialGroup()
-							.addGap(1)
-							.addComponent(rdoDuoiDinhMucTon))
+						.addGroup(gl_pnlTonKho.createSequentialGroup().addGap(1).addComponent(rdoDuoiDinhMucTon))
 						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.TRAILING)
-							.addGroup(Alignment.LEADING, gl_pnlTonKho.createSequentialGroup()
-								.addGap(7)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-							.addComponent(rdoHetHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
-					.addGap(15))
-		);
-		gl_pnlTonKho.setVerticalGroup(
-			gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnlTonKho.createSequentialGroup()
-					.addComponent(rdoTonKhoTatCa)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(3)
-					.addComponent(rdoDuoiDinhMucTon)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(rdoVuotDinhMucTon)
-					.addComponent(rdoConHangTrongKho)
-					.addComponent(rdoHetHangTrongKho))
-		);
+								.addGroup(Alignment.LEADING,
+										gl_pnlTonKho.createSequentialGroup().addGap(7)
+												.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 95,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(textField,
+														GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+								.addComponent(rdoHetHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190,
+										GroupLayout.PREFERRED_SIZE)))
+				.addGap(15)));
+		gl_pnlTonKho.setVerticalGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pnlTonKho.createSequentialGroup().addComponent(rdoTonKhoTatCa)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addGap(3).addComponent(rdoDuoiDinhMucTon).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(rdoVuotDinhMucTon).addComponent(rdoConHangTrongKho)
+						.addComponent(rdoHetHangTrongKho)));
 		pnlTonKho.setLayout(gl_pnlTonKho);
 		GroupLayout gl_pnlLoaiHang = new GroupLayout(pnlLoaiHang);
-		gl_pnlLoaiHang.setHorizontalGroup(
-			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
-				.addComponent(cboLoaiSanPham, 0, 190, Short.MAX_VALUE)
+		gl_pnlLoaiHang
+				.setHorizontalGroup(
+						gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+								.addComponent(cboLoaiSanPham, 0, 190, Short.MAX_VALUE)
+								.addGroup(gl_pnlLoaiHang.createSequentialGroup().addContainerGap()
+										.addComponent(chkbHangHoa, GroupLayout.PREFERRED_SIZE, 85,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(99, Short.MAX_VALUE))
+								.addGroup(gl_pnlLoaiHang
+										.createSequentialGroup().addContainerGap().addComponent(chkbCombo,
+												GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(49, Short.MAX_VALUE)));
+		gl_pnlLoaiHang.setVerticalGroup(gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(chkbHangHoa, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(99, Short.MAX_VALUE))
-				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(chkbCombo, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(49, Short.MAX_VALUE))
-		);
-		gl_pnlLoaiHang.setVerticalGroup(
-			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
-					.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(chkbHangHoa)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(chkbCombo))
-		);
+						.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(chkbHangHoa)
+						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(chkbCombo)));
 		pnlLoaiHang.setLayout(gl_pnlLoaiHang);
 		pnlNavibar.setLayout(gl_pnlNavibar);
 
@@ -698,14 +673,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 				}
 			}
 		}
-		if(rdoHetHangTrongKho.isSelected()==true) {
+		if (rdoHetHangTrongKho.isSelected() == true) {
 			for (ChiTietSanPhamModel chiTietSanPhamModel : listSanPhamLoc) {
 				if (chiTietSanPhamModel.getSoLuong() == 0) {
 					listSanPhamLocKho.add(chiTietSanPhamModel);
 				}
 			}
 		}
-		if(rdoConHangTrongKho.isSelected()) {
+		if (rdoConHangTrongKho.isSelected()) {
 			for (ChiTietSanPhamModel chiTietSanPhamModel : listSanPhamLoc) {
 				if (chiTietSanPhamModel.getSoLuong() > 0) {
 					listSanPhamLocKho.add(chiTietSanPhamModel);

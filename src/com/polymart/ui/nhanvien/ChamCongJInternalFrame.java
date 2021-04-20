@@ -151,18 +151,19 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
-					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(485, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(14, Short.MAX_VALUE))
@@ -219,8 +220,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		});
 
 		JButton btnTimTheoThang = new JButton("Hôm Nay");
+		btnTimTheoThang.setForeground(new Color(255, 255, 255));
 		btnTimTheoThang.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnTimTheoThang.setBackground(Color.GREEN);
+		btnTimTheoThang.setBackground(new Color(75, 0, 130));
 		btnTimTheoThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fillTableChamCongHienTai();
@@ -229,7 +231,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 			}
 		});
 		btnCheckOut.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnCheckOut.setBackground(Color.GREEN);
+		btnCheckOut.setBackground(new Color(75, 0, 130));
 		btnCheckOut.setEnabled(false);
 
 		btnCheckOut.addActionListener(new ActionListener() {
@@ -251,6 +253,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 							.addComponent(btnTimTheoThang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+		btnChamCong.setForeground(new Color(255, 255, 255));
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
@@ -265,9 +268,8 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					.addContainerGap(207, Short.MAX_VALUE))
 		);
 		btnChamCong.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnChamCong.setBackground(Color.GREEN);
+		btnChamCong.setBackground(new Color(75, 0, 130));
 		btnChamCong.setEnabled(false);
-		btnChamCong.setBackground(Color.GREEN);
 		panelLeft.setLayout(gl_panelLeft);
 		modelNhanVienChamCong.addColumn("Mã nhân viên");
 		modelNhanVienChamCong.addColumn("Tên nhân viên");
@@ -279,6 +281,9 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 				btnChamCong.setEnabled(false);
 			}
 		});
+		
+		btnCheckOut.setForeground(new Color(255, 255, 255));
+
 	}
 
 	protected void checkInGioRa() {

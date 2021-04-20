@@ -269,24 +269,17 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlLoaiHang.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				" Lo\u1EA1i H\u00E0ng ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pnlLoaiHang.setLayout(new BoxLayout(pnlLoaiHang, BoxLayout.Y_AXIS));
 		cboLoaiSanPham.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				locSanPham();
 			}
 		});
-
-
-
-		pnlLoaiHang.add(cboLoaiSanPham);
 		JCheckBox chkbHangHoa = new JCheckBox("Hàng hóa");
 		chkbHangHoa.setBackground(Color.WHITE);
 		chkbHangHoa.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		pnlLoaiHang.add(chkbHangHoa);
 		JCheckBox chkbCombo = new JCheckBox("Combo - đóng gói");
 		chkbCombo.setBackground(Color.WHITE);
 		chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		pnlLoaiHang.add(chkbCombo);
 
 
 
@@ -295,7 +288,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		pnlTonKho.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				" T\u1ED3n kho ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		pnlTonKho.setLayout(new BoxLayout(pnlTonKho, BoxLayout.Y_AXIS));
 
 		rdoTonKhoTatCa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -339,11 +331,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		});
 		rdoHetHangTrongKho.setBackground(Color.WHITE);
 		rdoHetHangTrongKho.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		pnlTonKho.add(rdoTonKhoTatCa);
-		pnlTonKho.add(rdoDuoiDinhMucTon);
-		pnlTonKho.add(rdoVuotDinhMucTon);
-		pnlTonKho.add(rdoConHangTrongKho);
-		pnlTonKho.add(rdoHetHangTrongKho);
 
 
 		ButtonGroup buttonGroup = new ButtonGroup();
@@ -493,6 +480,73 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE,
 												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
+		
+		JLabel lblNewLabel = new JLabel("Định mức tồn");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField.setText("10");
+		textField.setColumns(10);
+		GroupLayout gl_pnlTonKho = new GroupLayout(pnlTonKho);
+		gl_pnlTonKho.setHorizontalGroup(
+			gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pnlTonKho.createSequentialGroup()
+					.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+						.addComponent(rdoTonKhoTatCa)
+						.addComponent(rdoVuotDinhMucTon)
+						.addComponent(rdoConHangTrongKho, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_pnlTonKho.createSequentialGroup()
+							.addGap(1)
+							.addComponent(rdoDuoiDinhMucTon))
+						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.TRAILING)
+							.addGroup(Alignment.LEADING, gl_pnlTonKho.createSequentialGroup()
+								.addGap(7)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+							.addComponent(rdoHetHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)))
+					.addGap(15))
+		);
+		gl_pnlTonKho.setVerticalGroup(
+			gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pnlTonKho.createSequentialGroup()
+					.addComponent(rdoTonKhoTatCa)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(3)
+					.addComponent(rdoDuoiDinhMucTon)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(rdoVuotDinhMucTon)
+					.addComponent(rdoConHangTrongKho)
+					.addComponent(rdoHetHangTrongKho))
+		);
+		pnlTonKho.setLayout(gl_pnlTonKho);
+		GroupLayout gl_pnlLoaiHang = new GroupLayout(pnlLoaiHang);
+		gl_pnlLoaiHang.setHorizontalGroup(
+			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+				.addComponent(cboLoaiSanPham, 0, 190, Short.MAX_VALUE)
+				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(chkbHangHoa, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(99, Short.MAX_VALUE))
+				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(chkbCombo, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(49, Short.MAX_VALUE))
+		);
+		gl_pnlLoaiHang.setVerticalGroup(
+			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
+					.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(chkbHangHoa)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(chkbCombo))
+		);
+		pnlLoaiHang.setLayout(gl_pnlLoaiHang);
 		pnlNavibar.setLayout(gl_pnlNavibar);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -551,6 +605,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	}
 
 	private JTextField txtFind;
+	private JTextField textField;
 
 	private void clickTable(int row) {
 		new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);

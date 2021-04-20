@@ -156,22 +156,22 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
         gl_panel_1.setHorizontalGroup(
-        	gl_panel_1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel_1.createSequentialGroup()
-        			.addGap(5)
-        			.addComponent(btnQuayLai)
-        			.addGap(5)
-        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-        			.addGap(1011))
+                gl_panel_1.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel_1.createSequentialGroup()
+                                .addGap(5)
+                                .addComponent(btnQuayLai)
+                                .addGap(5)
+                                .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+                                .addGap(1011))
         );
         gl_panel_1.setVerticalGroup(
-        	gl_panel_1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel_1.createSequentialGroup()
-        			.addGap(7)
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(7, Short.MAX_VALUE))
+                gl_panel_1.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel_1.createSequentialGroup()
+                                .addGap(7)
+                                .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(7, Short.MAX_VALUE))
         );
         panel_1.setLayout(gl_panel_1);
 
@@ -436,7 +436,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                         || !EntityValidate.checkMoney2(this, getGiaBan)
                         || !EntityValidate.checkSize2(this, getSize)
                         || !EntityValidate.checkColor2(this, getMauSac)) {
-                    lstLoiDuLieu.add(i + 2);
+                    lstLoiDuLieu.add(i);
                     continue;
                 }
                 // set thuộc tính mới vào đối tượng chiTietSanPham
@@ -456,13 +456,13 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                         // lưu thông tin ảnh
                         saveInfoPhoto();
                     } else {
-                        lstLoiAnh.add(i + 2);
+                        lstLoiAnh.add(i);
                         modelDSSanPhamThem.setValueAt("", i, 5);
                     }
                     setThuocTinhPhoTo();
                     lstChiTietSanPhamThemMoi.add(chiTietSanPhamModel);
                 } else {
-                    lstDaTonTai.add(i + 2);
+                    lstDaTonTai.add(i);
                 }
             }
             StringBuilder sp = new StringBuilder();
@@ -470,19 +470,19 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
             sp.append(modelDSSanPhamThem.getRowCount());
             if (!lstLoiDuLieu.isEmpty()) {
                 sp.append("\nCác bản ghi không thể đọc (Lỗi dữ liệu): ");
-                lstLoiDuLieu.forEach(e -> sp.append(e.toString()).append(", "));
+                lstLoiDuLieu.forEach(e -> sp.append((e + 2)).append(", "));
             }
             if (!lstDaTonTai.isEmpty()) {
                 sp.append("\nCác bản ghi không thể đọc (Đã tồn tại): ");
-                lstDaTonTai.forEach(e -> sp.append(e.toString()).append(", "));
+                lstDaTonTai.forEach(e -> sp.append((e + 2)).append(", "));
             }
             if (!lstLoiAnh.isEmpty()) {
                 sp.append("\nCác bản ghi lỗi hình ảnh (Không bị xoá trên form): ");
-                lstLoiAnh.forEach(e -> sp.append(e.toString()).append(", "));
+                lstLoiAnh.forEach(e -> sp.append((e + 2)).append(", "));
             }
             lstLoiDuLieu.addAll(lstDaTonTai);
             for (int i = lstLoiDuLieu.size() - 1; i >= 0; i--) {
-                modelDSSanPhamThem.removeRow(i);
+                modelDSSanPhamThem.removeRow(lstLoiDuLieu.get(i));
             }
             if (!lstLoiDuLieu.isEmpty()
                     || !lstDaTonTai.isEmpty()

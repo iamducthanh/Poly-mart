@@ -51,6 +51,7 @@ import com.polymart.service.impl.HoaDonThanhToanService;
 import com.polymart.service.impl.HoaDonTraHangService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.SanPhamService;
+
 import javax.swing.ImageIcon;
 
 public class ThemTraHangJInternalFrame extends JInternalFrame {
@@ -404,7 +405,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
             EntityMessage.show(this, "Thêm sản trả trước khi lưu");
         }
     }
-
+ 
     // thêm sản phẩm trả hàng
     private void addProductToTableTraHang(JTable tbSanPham, JLabel lblTongTien, JTextArea txaGhiChu) {
         if (modelDanhSachSanPham.getRowCount() >= 0) {
@@ -478,8 +479,8 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
                         + " điểm cộng sau khi thanh toán hóa đơn " + chiTietHoaDonThanhToanModel.getHoaDonThanhToan() + "\n");
             }
             if (hoaDonThanhToanModel.getDiemDaDoi() > 0) {
-                txaGhiChu.setText(txaGhiChu.getText() + " - Trừ " + hoaDonThanhToanModel.getDiemDaDoi()
-                        + " điểm đã đổi khi thanh toán hóa đơn (điểm đã đùng không được hoàn trả)");
+                txaGhiChu.setText(txaGhiChu.getText() + " - Hoàn trả " + hoaDonThanhToanModel.getDiemDaDoi()
+                        + " điểm vào tài khoản khách hàng");
             }
         }
         lblTongTien.setText(String.valueOf(tongTien - (tongTienHoaDon * 0.01)));

@@ -18,6 +18,7 @@ import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.SanPhamService;
+import javax.swing.JTextArea;
 
 public class ChiTietHoaDonNhapHangFrame extends JFrame {
 
@@ -27,14 +28,23 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
     private JTable tableChiTietHoaDonNhap;
     private DefaultTableModel modelChiTietHoaDonNhap;
 
+    private JLabel lblMaHoaDon;
+    private JLabel lblTenNguonHang;
+
     private ISanPhamService sanPhamService = new SanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
 
     public ChiTietHoaDonNhapHangFrame() throws HeadlessException {
-        setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
+        init();
     }
 
     public ChiTietHoaDonNhapHangFrame(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang) {
+        init();
+        setForm(lstChiTietHoaDonNhapHang, nguonHang, lblMaHoaDon, lblTenNguonHang);
+    }
+
+    private void init() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
         modelChiTietHoaDonNhap = new DefaultTableModel() {
 
             private static final long serialVersionUID = 7584408658853210846L;
@@ -62,13 +72,13 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
         lblNewLabel_1.setBounds(30, 61, 170, 25);
         contentPane.add(lblNewLabel_1);
 
-        JLabel lblMaHoaDon = new JLabel("Cái label này để hiển thị mã hóa đơn nhập hàng");
+        lblMaHoaDon = new JLabel("Cái label này để hiển thị mã hóa đơn nhập hàng");
         lblMaHoaDon.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblMaHoaDon.setBounds(210, 61, 387, 25);
         contentPane.add(lblMaHoaDon);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(20, 155, 819, 391);
+        scrollPane.setBounds(20, 247, 819, 299);
         contentPane.add(scrollPane);
 
         tableChiTietHoaDonNhap = new JTable();
@@ -79,7 +89,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
         lblNewLabel_1_1.setBounds(30, 96, 170, 25);
         contentPane.add(lblNewLabel_1_1);
 
-        JLabel lblTenNguonHang = new JLabel("Cái label này để hiển thị nguồn hàng");
+        lblTenNguonHang = new JLabel("Cái label này để hiển thị nguồn hàng");
         lblTenNguonHang.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblTenNguonHang.setBounds(136, 97, 387, 25);
         contentPane.add(lblTenNguonHang);
@@ -90,7 +100,22 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
         modelChiTietHoaDonNhap.addColumn("Đơn giá");
         modelChiTietHoaDonNhap.addColumn("Thành tiền");
         tableChiTietHoaDonNhap.setModel(modelChiTietHoaDonNhap);
+        
+        JLabel lblNewLabel_1_1_1 = new JLabel("Ghi chú:");
+        lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lblNewLabel_1_1_1.setBounds(30, 132, 87, 25);
+        contentPane.add(lblNewLabel_1_1_1);
+        
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(146, 132, 451, 100);
+        contentPane.add(scrollPane_1);
+        
+        JTextArea txtGhiChu = new JTextArea();
+        scrollPane_1.setViewportView(txtGhiChu);
+    }
 
+    private void setForm(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang,
+                         JLabel lblMaHoaDon, JLabel lblTenNguonHang) {
         if (lstChiTietHoaDonNhapHang != null && !lstChiTietHoaDonNhapHang.isEmpty()) {
             lblMaHoaDon.setText(lstChiTietHoaDonNhapHang.get(0).getIdHoaDonNhapHang().toString());
             lblTenNguonHang.setText(nguonHang);
@@ -102,6 +127,5 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
             }
         }
         tableChiTietHoaDonNhap.setRowHeight(25);
-
     }
 }

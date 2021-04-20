@@ -80,7 +80,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1062, 662);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,33 +91,50 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		contentPane.add(panel_1, BorderLayout.WEST);
-
-		lblBangLuong.setFont(new Font("Tahoma", Font.BOLD, 18));
-
-		btnAdd = new JButton("Thanh Toán");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				thanhToanLuongChoNhanVien();
-				btnAdd.setEnabled(false);
-			}
-		});
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 455, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 482, Short.MAX_VALUE)
-					.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addComponent(panel_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+		
+				btnAdd = new JButton("Thanh Toán");
+				btnAdd.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						thanhToanLuongChoNhanVien();
+						btnAdd.setEnabled(false);
+					}
+				});
+				lblBangLuong.setForeground(new Color(255, 255, 255));
+		
+				lblBangLuong.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_2.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 567, Short.MAX_VALUE)
+					.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(14, Short.MAX_VALUE))
+		);
+		panel_2.setLayout(gl_panel_2);
 		panel.setLayout(gl_panel);
 
 		JLabel lblNewLabel = new JLabel("Năm");

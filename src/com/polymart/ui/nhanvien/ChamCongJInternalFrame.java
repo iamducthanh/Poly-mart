@@ -86,7 +86,7 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1169, 801);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -106,52 +106,69 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 	public void initTopChamCong() {
 		setTitle("Nhân viên - Chấm công");
-		JLabel lblNhanVien = new JLabel("Chấm công                        ");
-		lblNhanVien.setFont(new Font("Tahoma", Font.BOLD, 18));
-
-		txtTimKiem = new JTextField();
-		txtTimKiem.setEnabled(false);
-		txtTimKiem.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				timKiemNhanVien();
-			}
-		});
-		txtTimKiem.setText(" TÌm theo mã nhân viên");
-		txtTimKiem.setColumns(10);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-					.addGap(25)
-					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-					.addGap(443))
+				.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1149, Short.MAX_VALUE)
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(12, Short.MAX_VALUE))
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		panel.setLayout(gl_panel);
-		txtTimKiem.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
-					txtTimKiem.setText("");
-				}
-			}
+		
+				txtTimKiem = new JTextField();
+				txtTimKiem.setEnabled(false);
+				txtTimKiem.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						timKiemNhanVien();
+					}
+				});
+				txtTimKiem.setText(" TÌm theo mã nhân viên");
+				txtTimKiem.setColumns(10);
+				txtTimKiem.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusGained(FocusEvent e) {
+						if (txtTimKiem.getText().equals(" TÌm theo mã nhân viên")) {
+							txtTimKiem.setText("");
+						}
+					}
 
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (txtTimKiem.getText().equals("")) {
-					txtTimKiem.setText(" TÌm theo mã nhân viên");
-				}
-			}
-		});
+					@Override
+					public void focusLost(FocusEvent e) {
+						if (txtTimKiem.getText().equals("")) {
+							txtTimKiem.setText(" TÌm theo mã nhân viên");
+						}
+					}
+				});
+		JLabel lblNhanVien = new JLabel("Chấm công                        ");
+		lblNhanVien.setForeground(new Color(255, 255, 255));
+		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(14, Short.MAX_VALUE))
+		);
+		panel_1.setLayout(gl_panel_1);
+		panel.setLayout(gl_panel);
 	}
 
 	public void initCenterChamCong() {

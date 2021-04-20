@@ -405,7 +405,7 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
             EntityMessage.show(this, "Thêm sản trả trước khi lưu");
         }
     }
-
+ 
     // thêm sản phẩm trả hàng
     private void addProductToTableTraHang(JTable tbSanPham, JLabel lblTongTien, JTextArea txaGhiChu) {
         if (modelDanhSachSanPham.getRowCount() >= 0) {

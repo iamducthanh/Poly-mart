@@ -1,5 +1,6 @@
 package com.polymart.ui;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -42,11 +43,11 @@ import com.polymart.ui.thongke.ThongKeDoanhSoJInternalFrame;
 import com.polymart.ui.thongke.ThongKeDoanhThuJInternalFrame;
 
 public class MainFrame extends JFrame {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7487210947528786106L;
+	private static final long serialVersionUID = 8757117687802845785L;
 	static int select = 0;
 	static int openThongKe = 0;
 	static int openHangHoa = 0;
@@ -160,464 +161,434 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		panelSelectBaoCao.setBackground(new Color(102, 0, 204));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 867, 591);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 0, 102));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		setTitle("Quản lý cửa hàng");
-		lblTenUser.setForeground(Color.WHITE);
-		lblTenUser.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		panel.setBackground(new Color(51, 0, 102));
+		contentPane.add(panel, BorderLayout.WEST);
+		
 		if (EntityAuthorization.USER != null) {
 			String urlAnh = "images\\" + EntityAuthorization.USER.getAnhDaiDien();
 			lblAvatar.setIcon(new ImageIcon(EntityImage.resizeTheoUrl(urlAnh, 50, 50)));
 
 			lblTenUser.setText(EntityAuthorization.USER.getHoTen());
 		}
-		lblBangLuong.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new BangLuongJIternalFrame());
-			}
-		});
-		lblBangLuong.setForeground(Color.WHITE);
-		lblBangLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblChamCong.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new ChamCongJInternalFrame());
-			}
-		});
-		lblChamCong.setForeground(Color.WHITE);
-		lblChamCong.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNhanVien1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new NhanVienJInternalFrame());
-			}
-		});
-		lblNhanVien1.setForeground(Color.WHITE);
-		lblNhanVien1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelBangLuong.setBackground(new Color(102, 51, 153));
-		panelChamCong.setBackground(new Color(102, 51, 153));
-		lblKhachHang1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new KhachHangJInternalFrame());
-			}
-		});
-		lblKhachHang1.setForeground(Color.WHITE);
-		lblKhachHang1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelKhachHang1.setBackground(new Color(102, 51, 153));
-		lblDangXuat.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				logout();
-			}
-		});
-		lblDangXuat.setForeground(Color.WHITE);
-		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelDangXuat.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelDangXuat = new GroupLayout(panelDangXuat);
-		gl_panelDangXuat.setHorizontalGroup(gl_panelDangXuat.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 272, Short.MAX_VALUE).addGroup(Alignment.TRAILING,
-						gl_panelDangXuat.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE).addComponent(
-								lblDangXuat, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelDangXuat
-				.setVerticalGroup(gl_panelDangXuat.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addGroup(gl_panelDangXuat.createSequentialGroup()
-								.addComponent(lblDangXuat, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelDangXuat.setLayout(gl_panelDangXuat);
-		lblDanhMucOpen.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panel.setVisible(true);
-				lblDanhMucOpen.setVisible(false);
-			}
-		});
-
-		lblDanhMucOpen.setVisible(false);
-		setBackground(new Color(75, 0, 130));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//	setBounds(100, 100, 1295, 741);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(51, 0, 102));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-		panel.setBackground(new Color(51, 0, 102));
-
-		pnlMain.setBackground(new Color(102, 0, 255));
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(1)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(1)
-					.addComponent(pnlMain, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblDanhMucOpen, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 777, Short.MAX_VALUE)
-						.addComponent(pnlMain, Alignment.TRAILING))
-					.addGap(0))
-		);
-
+		
 		panelThongKe.setBackground(new Color(153, 51, 255));
-
-		panelHangHoa.setBackground(new Color(102, 0, 204));
-
-		panelSelectHangHoa.setBackground(new Color(102, 0, 204));
-
-		lblHangHoa.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
-
-		lblHangHoa.setForeground(Color.WHITE);
-		lblHangHoa.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GroupLayout gl_panelHangHoa = new GroupLayout(panelHangHoa);
-		gl_panelHangHoa.setHorizontalGroup(gl_panelHangHoa.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelHangHoa.createSequentialGroup()
-						.addComponent(panelSelectHangHoa, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblHangHoa, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panelHangHoa.setVerticalGroup(gl_panelHangHoa.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelHangHoa.createSequentialGroup()
-						.addGroup(gl_panelHangHoa.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelSelectHangHoa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblHangHoa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57,
-										Short.MAX_VALUE))
-						.addContainerGap()));
-		panelHangHoa.setLayout(gl_panelHangHoa);
-
-		panelGiaoDich.setBackground(new Color(102, 0, 204));
-
-		panelSelectGiaoDich.setBackground(new Color(102, 0, 204));
-
-		lblGiaoDich.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\giaodich.png", 20, 20)));
-		lblGiaoDich.setForeground(Color.WHITE);
-		lblGiaoDich.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GroupLayout gl_panelGiaoDich = new GroupLayout(panelGiaoDich);
-		gl_panelGiaoDich.setHorizontalGroup(gl_panelGiaoDich.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelGiaoDich.createSequentialGroup()
-						.addComponent(panelSelectGiaoDich, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblGiaoDich, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panelGiaoDich.setVerticalGroup(gl_panelGiaoDich.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelGiaoDich.createSequentialGroup()
-						.addGroup(gl_panelGiaoDich.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelSelectGiaoDich, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblGiaoDich, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57,
-										Short.MAX_VALUE))
-						.addContainerGap()));
-		panelGiaoDich.setLayout(gl_panelGiaoDich);
-
-		panelNhanVien.setBackground(new Color(102, 0, 204));
-
-		panelSelectNhanVien.setBackground(new Color(102, 0, 204));
-
-		lblNhanVien.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhanvien.png", 20, 20)));
-		lblNhanVien.setForeground(Color.WHITE);
-		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GroupLayout gl_panelNhanVien = new GroupLayout(panelNhanVien);
-		gl_panelNhanVien.setHorizontalGroup(gl_panelNhanVien.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNhanVien.createSequentialGroup()
-						.addComponent(panelSelectNhanVien, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panelNhanVien.setVerticalGroup(gl_panelNhanVien.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNhanVien.createSequentialGroup()
-						.addGroup(gl_panelNhanVien.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelSelectNhanVien, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblNhanVien, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57,
-										Short.MAX_VALUE))
-						.addContainerGap()));
-		panelNhanVien.setLayout(gl_panelNhanVien);
-
-		panelKhachHang.setBackground(new Color(102, 0, 204));
-
-		panelSelectKhachHang.setBackground(new Color(102, 0, 204));
-
-		lblKhachHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\khachhang.png", 20, 20)));
-
-		lblKhachHang.setForeground(Color.WHITE);
-		lblKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GroupLayout gl_panelKhachHang = new GroupLayout(panelKhachHang);
-		gl_panelKhachHang.setHorizontalGroup(gl_panelKhachHang.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelKhachHang.createSequentialGroup()
-						.addComponent(panelSelectKhachHang, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblKhachHang, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panelKhachHang.setVerticalGroup(gl_panelKhachHang.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelKhachHang.createSequentialGroup()
-						.addGroup(gl_panelKhachHang.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelSelectKhachHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblKhachHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57,
-										Short.MAX_VALUE))
-						.addContainerGap()));
-		panelKhachHang.setLayout(gl_panelKhachHang);
-
-		panelCaNhan.setBackground(new Color(102, 0, 204));
-
-		panelSelectCaNhan.setBackground(new Color(102, 0, 204));
-
-		lblCaNhan.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\canhan.png", 20, 20)));
-		lblCaNhan.setForeground(Color.WHITE);
-		lblCaNhan.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GroupLayout gl_panelCaNhan = new GroupLayout(panelCaNhan);
-		gl_panelCaNhan.setHorizontalGroup(gl_panelCaNhan.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelCaNhan.createSequentialGroup()
-						.addComponent(panelSelectCaNhan, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblCaNhan, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panelCaNhan.setVerticalGroup(gl_panelCaNhan.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelCaNhan.createSequentialGroup()
-						.addGroup(gl_panelCaNhan.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelSelectCaNhan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblCaNhan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57,
-										Short.MAX_VALUE))
-						.addContainerGap()));
-		panelCaNhan.setLayout(gl_panelCaNhan);
-
+		
+		panelSelectThongKe.setBackground(Color.BLACK);
+				lblThongKe.setForeground(Color.WHITE);
+		lblThongKe.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GroupLayout gl_panelThongKe = new GroupLayout(panelThongKe);
+		gl_panelThongKe.setHorizontalGroup(
+			gl_panelThongKe.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
+				.addGroup(gl_panelThongKe.createSequentialGroup()
+					.addComponent(panelSelectThongKe, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblThongKe, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+		);
+		gl_panelThongKe.setVerticalGroup(
+			gl_panelThongKe.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addComponent(panelSelectThongKe, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+				.addComponent(lblThongKe, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+		);
+		panelThongKe.setLayout(gl_panelThongKe);
+		
+		
+		lblTenUser.setForeground(Color.WHITE);
+		lblTenUser.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panelBanHang.setBackground(new Color(102, 0, 204));
-
 		panelSelectBanHang.setBackground(new Color(102, 0, 204));
-
-		lblBanHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\banhang.png", 20, 20)));
+		
 		lblBanHang.setForeground(Color.WHITE);
 		lblBanHang.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GroupLayout gl_panelBanHang = new GroupLayout(panelBanHang);
-		gl_panelBanHang.setHorizontalGroup(gl_panelBanHang.createParallelGroup(Alignment.LEADING)
+		gl_panelBanHang.setHorizontalGroup(
+			gl_panelBanHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
 				.addGroup(gl_panelBanHang.createSequentialGroup()
-						.addComponent(panelSelectBanHang, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblBanHang, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		gl_panelBanHang.setVerticalGroup(gl_panelBanHang.createParallelGroup(Alignment.LEADING)
+					.addComponent(panelSelectBanHang, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblBanHang, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelBanHang.setVerticalGroup(
+			gl_panelBanHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
 				.addGroup(gl_panelBanHang.createSequentialGroup()
-						.addGroup(gl_panelBanHang.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panelSelectBanHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblBanHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57,
-										Short.MAX_VALUE))
-						.addContainerGap()));
+					.addGroup(gl_panelBanHang.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelSelectBanHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblBanHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 		panelBanHang.setLayout(gl_panelBanHang);
-
+		
+		panelDangXuat.setBackground(new Color(102, 51, 153));
+		
 		panelCaNhan1.setBackground(new Color(102, 51, 153));
-		lblNhapHang.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new NhapHangJInternalFrame());
-			}
-		});
-		lblNhapHang.setForeground(Color.WHITE);
-		lblNhapHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNhapHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhaphang.png", 20, 20)));
-		panelNhapHang.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelNhapHang = new GroupLayout(panelNhapHang);
-		gl_panelNhapHang.setHorizontalGroup(gl_panelNhapHang.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelNhapHang.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblNhapHang, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelNhapHang.setVerticalGroup(gl_panelNhapHang.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNhapHang.createSequentialGroup()
-						.addComponent(lblNhapHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelNhapHang.setLayout(gl_panelNhapHang);
-		panelNhapHang.setVisible(false);
-		lblBanHangCon.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new ThanhToanJInternalFrame());
-			}
-		});
-		lblBanHangCon.setForeground(Color.WHITE);
-		lblBanHangCon.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelBanHangCon.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelBanHangCon = new GroupLayout(panelBanHangCon);
-		gl_panelBanHangCon.setHorizontalGroup(gl_panelBanHangCon.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 272, Short.MAX_VALUE).addGroup(Alignment.TRAILING,
-						gl_panelBanHangCon.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE).addComponent(
-								lblBanHangCon, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelBanHangCon.setVerticalGroup(
-				gl_panelBanHangCon.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addGroup(gl_panelBanHangCon.createSequentialGroup()
-								.addComponent(lblBanHangCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelBanHangCon.setLayout(gl_panelBanHangCon);
-
-		lblBanHangCon.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\banhang.png", 20, 20)));
-
-		panelBanHangCon.setVisible(false);
-		lblTraHang.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new TraHangJInternalFrame());
-			}
-		});
+		
+		lblCaNhan1.setForeground(Color.WHITE);
+		lblCaNhan1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelCaNhan1 = new GroupLayout(panelCaNhan1);
+		gl_panelCaNhan1.setHorizontalGroup(
+			gl_panelCaNhan1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_panelCaNhan1.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblCaNhan1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelCaNhan1.setVerticalGroup(
+			gl_panelCaNhan1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelCaNhan1.createSequentialGroup()
+					.addComponent(lblCaNhan1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelCaNhan1.setLayout(gl_panelCaNhan1);
+		
+		panelCaNhan.setBackground(new Color(102, 0, 204));
+		
+		panelSelectCaNhan.setBackground(new Color(102, 0, 204));
+		
+		lblCaNhan.setForeground(Color.WHITE);
+		lblCaNhan.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GroupLayout gl_panelCaNhan = new GroupLayout(panelCaNhan);
+		gl_panelCaNhan.setHorizontalGroup(
+			gl_panelCaNhan.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
+				.addGroup(gl_panelCaNhan.createSequentialGroup()
+					.addComponent(panelSelectCaNhan, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblCaNhan, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelCaNhan.setVerticalGroup(
+			gl_panelCaNhan.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addGroup(gl_panelCaNhan.createSequentialGroup()
+					.addGroup(gl_panelCaNhan.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelSelectCaNhan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblCaNhan, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		panelCaNhan.setLayout(gl_panelCaNhan);
+		
+		panelKhachHang1.setBackground(new Color(102, 51, 153));
+		
+		lblKhachHang1.setForeground(Color.WHITE);
+		lblKhachHang1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelKhachHang1 = new GroupLayout(panelKhachHang1);
+		gl_panelKhachHang1.setHorizontalGroup(
+			gl_panelKhachHang1.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelKhachHang1.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblKhachHang1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelKhachHang1.setVerticalGroup(
+			gl_panelKhachHang1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelKhachHang1.createSequentialGroup()
+					.addComponent(lblKhachHang1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelKhachHang1.setLayout(gl_panelKhachHang1);
+		
+		panelKhachHang.setBackground(new Color(102, 0, 204));
+		
+		panelSelectKhachHang.setBackground(new Color(102, 0, 204));
+		
+		lblKhachHang.setForeground(Color.WHITE);
+		lblKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GroupLayout gl_panelKhachHang = new GroupLayout(panelKhachHang);
+		gl_panelKhachHang.setHorizontalGroup(
+			gl_panelKhachHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
+				.addGroup(gl_panelKhachHang.createSequentialGroup()
+					.addComponent(panelSelectKhachHang, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblKhachHang, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelKhachHang.setVerticalGroup(
+			gl_panelKhachHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addGroup(gl_panelKhachHang.createSequentialGroup()
+					.addGroup(gl_panelKhachHang.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelSelectKhachHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblKhachHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		panelKhachHang.setLayout(gl_panelKhachHang);
+		
+		panelBangLuong.setBackground(new Color(102, 51, 153));
+		
+		lblBangLuong.setForeground(Color.WHITE);
+		lblBangLuong.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelBangLuong = new GroupLayout(panelBangLuong);
+		gl_panelBangLuong.setHorizontalGroup(
+			gl_panelBangLuong.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelBangLuong.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelBangLuong.setVerticalGroup(
+			gl_panelBangLuong.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelBangLuong.createSequentialGroup()
+					.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelBangLuong.setLayout(gl_panelBangLuong);
+		
+		panelChamCong.setBackground(new Color(102, 51, 153));
+		
+		lblChamCong.setForeground(Color.WHITE);
+		lblChamCong.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelChamCong = new GroupLayout(panelChamCong);
+		gl_panelChamCong.setHorizontalGroup(
+			gl_panelChamCong.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelChamCong.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblChamCong, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelChamCong.setVerticalGroup(
+			gl_panelChamCong.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelChamCong.createSequentialGroup()
+					.addComponent(lblChamCong, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelChamCong.setLayout(gl_panelChamCong);
+		
+		panelNhanVien1.setBackground(new Color(102, 51, 153));
+		
+		lblNhanVien1.setForeground(Color.WHITE);
+		lblNhanVien1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelNhanVien1 = new GroupLayout(panelNhanVien1);
+		gl_panelNhanVien1.setHorizontalGroup(
+			gl_panelNhanVien1.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelNhanVien1.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblNhanVien1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelNhanVien1.setVerticalGroup(
+			gl_panelNhanVien1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelNhanVien1.createSequentialGroup()
+					.addComponent(lblNhanVien1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelNhanVien1.setLayout(gl_panelNhanVien1);
+		
+		panelNhanVien.setBackground(new Color(102, 0, 204));
+		
+		panelSelectNhanVien.setBackground(new Color(102, 0, 204));
+		
+		lblNhanVien.setForeground(Color.WHITE);
+		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GroupLayout gl_panelNhanVien = new GroupLayout(panelNhanVien);
+		gl_panelNhanVien.setHorizontalGroup(
+			gl_panelNhanVien.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
+				.addGroup(gl_panelNhanVien.createSequentialGroup()
+					.addComponent(panelSelectNhanVien, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelNhanVien.setVerticalGroup(
+			gl_panelNhanVien.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addGroup(gl_panelNhanVien.createSequentialGroup()
+					.addGroup(gl_panelNhanVien.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelSelectNhanVien, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblNhanVien, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		panelNhanVien.setLayout(gl_panelNhanVien);
+		
+		panelTraHang.setBackground(new Color(102, 51, 153));
+		
 		lblTraHang.setForeground(Color.WHITE);
 		lblTraHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelTraHang.setBackground(new Color(102, 51, 153));
 		GroupLayout gl_panelTraHang = new GroupLayout(panelTraHang);
-		gl_panelTraHang.setHorizontalGroup(gl_panelTraHang.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 272, Short.MAX_VALUE).addGroup(Alignment.TRAILING,
-						gl_panelTraHang.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE).addComponent(
-								lblTraHang, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelTraHang
-				.setVerticalGroup(gl_panelTraHang.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addGroup(gl_panelTraHang.createSequentialGroup()
-								.addComponent(lblTraHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_panelTraHang.setHorizontalGroup(
+			gl_panelTraHang.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelTraHang.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblTraHang, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelTraHang.setVerticalGroup(
+			gl_panelTraHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelTraHang.createSequentialGroup()
+					.addComponent(lblTraHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panelTraHang.setLayout(gl_panelTraHang);
-		lblTraHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\trahang.png", 20, 20)));
-		panelTraHang.setVisible(false);
-		lblChiTieu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new BaoCaoChiTieuJInternalFrame());
-			}
-		});
+		
+		panelBanHangCon.setBackground(new Color(102, 51, 153));
+		
+		lblBanHangCon.setForeground(Color.WHITE);
+		lblBanHangCon.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelBanHangCon = new GroupLayout(panelBanHangCon);
+		gl_panelBanHangCon.setHorizontalGroup(
+			gl_panelBanHangCon.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelBanHangCon.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblBanHangCon, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelBanHangCon.setVerticalGroup(
+			gl_panelBanHangCon.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelBanHangCon.createSequentialGroup()
+					.addComponent(lblBanHangCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelBanHangCon.setLayout(gl_panelBanHangCon);
+		
+		panelNhapHang.setBackground(new Color(102, 51, 153));
+		
+		lblNhapHang.setForeground(Color.WHITE);
+		lblNhapHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelNhapHang = new GroupLayout(panelNhapHang);
+		gl_panelNhapHang.setHorizontalGroup(
+			gl_panelNhapHang.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelNhapHang.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblNhapHang, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelNhapHang.setVerticalGroup(
+			gl_panelNhapHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelNhapHang.createSequentialGroup()
+					.addComponent(lblNhapHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelNhapHang.setLayout(gl_panelNhapHang);
+		
+		panelChiTieu.setBackground(new Color(102, 51, 153));
+		
 		lblChiTieu.setForeground(Color.WHITE);
 		lblChiTieu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelChiTieu.setBackground(new Color(102, 51, 153));
 		GroupLayout gl_panelChiTieu = new GroupLayout(panelChiTieu);
-		gl_panelChiTieu.setHorizontalGroup(gl_panelChiTieu.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 272, Short.MAX_VALUE).addGroup(Alignment.TRAILING,
-						gl_panelChiTieu.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE).addComponent(
-								lblChiTieu, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelChiTieu
-				.setVerticalGroup(gl_panelChiTieu.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addGroup(gl_panelChiTieu.createSequentialGroup()
-								.addComponent(lblChiTieu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		gl_panelChiTieu.setHorizontalGroup(
+			gl_panelChiTieu.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelChiTieu.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblChiTieu, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelChiTieu.setVerticalGroup(
+			gl_panelChiTieu.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelChiTieu.createSequentialGroup()
+					.addComponent(lblChiTieu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panelChiTieu.setLayout(gl_panelChiTieu);
-		lblChiTieu.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\chitieu.png", 20, 20)));
-		panelChiTieu.setVisible(false);
-		lblHangHoaCon.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new HangHoaJInternalFrame());
-			}
-		});
-		lblHangHoaCon.setForeground(Color.WHITE);
-		lblHangHoaCon.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelHangHoaCon.setBackground(new Color(102, 51, 153));
-		lblHangHoaCon.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
-		GroupLayout gl_panelHangHoaCon = new GroupLayout(panelHangHoaCon);
-		gl_panelHangHoaCon.setHorizontalGroup(gl_panelHangHoaCon.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelHangHoaCon.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblHangHoaCon, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelHangHoaCon.setVerticalGroup(gl_panelHangHoaCon.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelHangHoaCon.createSequentialGroup()
-						.addComponent(lblHangHoaCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelHangHoaCon.setLayout(gl_panelHangHoaCon);
-
-		panelHangHoaCon.setVisible(false);
-		lblKiemKho.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new KiemKhoJInternalFrame());
-			}
-		});
-		lblKiemKho.setForeground(Color.WHITE);
-		lblKiemKho.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelKiemKho.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelKiemKho = new GroupLayout(panelKiemKho);
-		gl_panelKiemKho.setHorizontalGroup(gl_panelKiemKho.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 272, Short.MAX_VALUE).addGroup(Alignment.TRAILING,
-						gl_panelKiemKho.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE).addComponent(
-								lblKiemKho, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelKiemKho
-				.setVerticalGroup(gl_panelKiemKho.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addGroup(gl_panelKiemKho.createSequentialGroup()
-								.addComponent(lblKiemKho, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelKiemKho.setLayout(gl_panelKiemKho);
-		lblKiemKho.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\kiemkho.png", 20, 20)));
-		panelKiemKho.setVisible(false);
-		lblNguonHang.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new NguonHangJInternalFrame());
-			}
-		});
-		lblNguonHang.setForeground(Color.WHITE);
-		lblNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelNguonHang.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelNguonHang = new GroupLayout(panelNguonHang);
-		gl_panelNguonHang.setHorizontalGroup(
-				gl_panelNguonHang.createParallelGroup(Alignment.TRAILING).addGap(0, 272, Short.MAX_VALUE)
-						.addGroup(gl_panelNguonHang.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-								.addComponent(lblNguonHang, GroupLayout.PREFERRED_SIZE, 252,
-										GroupLayout.PREFERRED_SIZE)));
-		gl_panelNguonHang.setVerticalGroup(
-				gl_panelNguonHang.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addGroup(gl_panelNguonHang.createSequentialGroup()
-								.addComponent(lblNguonHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelNguonHang.setLayout(gl_panelNguonHang);
-		lblNguonHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nguonhang.png", 20, 20)));
-		panelNguonHang.setVisible(false);
-		lblDoanhThu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new ThongKeDoanhThuJInternalFrame());
-			}
-		});
-		lblDoanhThu.setForeground(Color.WHITE);
-		lblDoanhThu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelDoanhThu.setBackground(new Color(102, 51, 153));
-		lblDoanhThu.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\doanhthu.png", 20, 20)));
-		GroupLayout gl_panelDoanhThu = new GroupLayout(panelDoanhThu);
-		gl_panelDoanhThu.setHorizontalGroup(gl_panelDoanhThu.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelDoanhThu.createSequentialGroup().addContainerGap(18, Short.MAX_VALUE)
-						.addComponent(lblDoanhThu, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelDoanhThu.setVerticalGroup(gl_panelDoanhThu.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblDoanhThu, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE));
-		panelDoanhThu.setLayout(gl_panelDoanhThu);
-		panelDoanhThu.setVisible(false);
-		lblDoanhSo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new ThongKeDoanhSoJInternalFrame());
-			}
-		});
-		lblDoanhSo.setForeground(Color.WHITE);
-		lblDoanhSo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelDoanhso.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelDoanhso = new GroupLayout(panelDoanhso);
-		gl_panelDoanhso.setHorizontalGroup(
-				gl_panelDoanhso.createParallelGroup(Alignment.TRAILING).addGap(0, 272, Short.MAX_VALUE)
-						.addGroup(gl_panelDoanhso.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-								.addComponent(lblDoanhSo, GroupLayout.PREFERRED_SIZE, 252,
-										GroupLayout.PREFERRED_SIZE)));
-		gl_panelDoanhso
-				.setVerticalGroup(gl_panelDoanhso.createParallelGroup(Alignment.LEADING).addGap(0, 40, Short.MAX_VALUE)
-						.addComponent(lblDoanhSo, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE));
-		panelDoanhso.setLayout(gl_panelDoanhso);
-		lblDoanhSo.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\doanhso.png", 20, 20)));
-
-		panelDoanhso.setVisible(false);
-
+		
+		panelGiaoDich.setBackground(new Color(102, 0, 204));
+		
+		panelSelectGiaoDich.setBackground(new Color(102, 0, 204));
+		
+		lblGiaoDich.setForeground(Color.WHITE);
+		lblGiaoDich.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GroupLayout gl_panelGiaoDich = new GroupLayout(panelGiaoDich);
+		gl_panelGiaoDich.setHorizontalGroup(
+			gl_panelGiaoDich.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
+				.addGroup(gl_panelGiaoDich.createSequentialGroup()
+					.addComponent(panelSelectGiaoDich, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblGiaoDich, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelGiaoDich.setVerticalGroup(
+			gl_panelGiaoDich.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addGroup(gl_panelGiaoDich.createSequentialGroup()
+					.addGroup(gl_panelGiaoDich.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelSelectGiaoDich, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblGiaoDich, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		panelGiaoDich.setLayout(gl_panelGiaoDich);
+		
+		panelBaoBao.setBackground(new Color(102, 51, 153));
+		
+		lblBaoCao.setForeground(Color.WHITE);
+		lblBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelBaoBao = new GroupLayout(panelBaoBao);
+		gl_panelBaoBao.setHorizontalGroup(
+			gl_panelBaoBao.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelBaoBao.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblBaoCao, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelBaoBao.setVerticalGroup(
+			gl_panelBaoBao.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelBaoBao.createSequentialGroup()
+					.addComponent(lblBaoCao, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelBaoBao.setLayout(gl_panelBaoBao);
+		
 		panelBaoCao1.setBackground(new Color(102, 0, 204));
-
+		
+		panelSelectBaoCao.setBackground(new Color(102, 0, 204));
+		
 		lblBaoCaoTo.setForeground(Color.WHITE);
 		lblBaoCaoTo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GroupLayout gl_panelBaoCao1 = new GroupLayout(panelBaoCao1);
 		gl_panelBaoCao1.setHorizontalGroup(
 			gl_panelBaoCao1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
 				.addGroup(gl_panelBaoCao1.createSequentialGroup()
 					.addComponent(panelSelectBaoCao, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -626,6 +597,7 @@ public class MainFrame extends JFrame {
 		);
 		gl_panelBaoCao1.setVerticalGroup(
 			gl_panelBaoCao1.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
 				.addGroup(gl_panelBaoCao1.createSequentialGroup()
 					.addGroup(gl_panelBaoCao1.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblBaoCaoTo, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
@@ -633,6 +605,182 @@ public class MainFrame extends JFrame {
 					.addContainerGap())
 		);
 		panelBaoCao1.setLayout(gl_panelBaoCao1);
+		
+		panelNguonHang.setBackground(new Color(102, 51, 153));
+		
+		lblNguonHang.setForeground(Color.WHITE);
+		lblNguonHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelNguonHang = new GroupLayout(panelNguonHang);
+		gl_panelNguonHang.setHorizontalGroup(
+			gl_panelNguonHang.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelNguonHang.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblNguonHang, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelNguonHang.setVerticalGroup(
+			gl_panelNguonHang.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelNguonHang.createSequentialGroup()
+					.addComponent(lblNguonHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelNguonHang.setLayout(gl_panelNguonHang);
+		
+		panelKiemKho.setBackground(new Color(102, 51, 153));
+		
+		lblKiemKho.setForeground(Color.WHITE);
+		lblKiemKho.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelKiemKho = new GroupLayout(panelKiemKho);
+		gl_panelKiemKho.setHorizontalGroup(
+			gl_panelKiemKho.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelKiemKho.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblKiemKho, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelKiemKho.setVerticalGroup(
+			gl_panelKiemKho.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelKiemKho.createSequentialGroup()
+					.addComponent(lblKiemKho, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelKiemKho.setLayout(gl_panelKiemKho);
+		
+		panelHangHoaCon.setBackground(new Color(102, 51, 153));
+		
+		lblHangHoaCon.setForeground(Color.WHITE);
+		lblHangHoaCon.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelHangHoaCon = new GroupLayout(panelHangHoaCon);
+		gl_panelHangHoaCon.setHorizontalGroup(
+			gl_panelHangHoaCon.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelHangHoaCon.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblHangHoaCon, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelHangHoaCon.setVerticalGroup(
+			gl_panelHangHoaCon.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelHangHoaCon.createSequentialGroup()
+					.addComponent(lblHangHoaCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelHangHoaCon.setLayout(gl_panelHangHoaCon);
+		
+		panelHangHoa.setBackground(new Color(102, 0, 204));
+		
+		panelSelectHangHoa.setBackground(new Color(102, 0, 204));
+		
+		lblHangHoa.setForeground(Color.WHITE);
+		lblHangHoa.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GroupLayout gl_panelHangHoa = new GroupLayout(panelHangHoa);
+		gl_panelHangHoa.setHorizontalGroup(
+			gl_panelHangHoa.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 293, Short.MAX_VALUE)
+				.addGroup(gl_panelHangHoa.createSequentialGroup()
+					.addComponent(panelSelectHangHoa, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblHangHoa, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelHangHoa.setVerticalGroup(
+			gl_panelHangHoa.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 50, Short.MAX_VALUE)
+				.addGroup(gl_panelHangHoa.createSequentialGroup()
+					.addGroup(gl_panelHangHoa.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panelSelectHangHoa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblHangHoa, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		panelHangHoa.setLayout(gl_panelHangHoa);
+		
+		panelDoanhThu.setBackground(new Color(102, 51, 153));
+		
+		lblDoanhThu.setForeground(Color.WHITE);
+		lblDoanhThu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelDoanhThu = new GroupLayout(panelDoanhThu);
+		gl_panelDoanhThu.setHorizontalGroup(
+			gl_panelDoanhThu.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelDoanhThu.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblDoanhThu, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelDoanhThu.setVerticalGroup(
+			gl_panelDoanhThu.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelDoanhThu.createSequentialGroup()
+					.addComponent(lblDoanhThu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelDoanhThu.setLayout(gl_panelDoanhThu);
+		
+		panelDoanhso.setBackground(new Color(102, 51, 153));
+		
+		lblDoanhSo.setForeground(Color.WHITE);
+		lblDoanhSo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelDoanhso = new GroupLayout(panelDoanhso);
+		gl_panelDoanhso.setHorizontalGroup(
+			gl_panelDoanhso.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGap(0, 272, Short.MAX_VALUE)
+				.addGroup(gl_panelDoanhso.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblDoanhSo, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelDoanhso.setVerticalGroup(
+			gl_panelDoanhso.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGap(0, 40, Short.MAX_VALUE)
+				.addGroup(gl_panelDoanhso.createSequentialGroup()
+					.addComponent(lblDoanhSo, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelDoanhso.setLayout(gl_panelDoanhso);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -640,91 +788,98 @@ public class MainFrame extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(panelBaoBao, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+							.addComponent(panelKhachHang1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addContainerGap()
-									.addComponent(panelDoanhso, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelNguonHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelKiemKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelHangHoaCon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelChiTieu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelTraHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelBanHangCon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelNhapHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(panelBangLuong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+									.addComponent(panelCaNhan1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 									.addGroup(gl_panel.createSequentialGroup()
-										.addGap(18)
-										.addComponent(panelChamCong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_panel.createSequentialGroup()
-											.addContainerGap()
-											.addComponent(panelKhachHang1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+										.addContainerGap()
+										.addComponent(panelDangXuat, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_panel.createSequentialGroup()
 												.addContainerGap()
-												.addComponent(panelDangXuat, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-											.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-												.addGroup(gl_panel.createSequentialGroup()
-													.addContainerGap()
-													.addComponent(panelCaNhan1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-													.addGroup(gl_panel.createSequentialGroup()
-														.addContainerGap()
-														.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.UNRELATED)
-														.addComponent(lblTenUser, GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-														.addGap(18)
-														.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-													.addComponent(panelNhanVien, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-													.addComponent(panelKhachHang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-													.addComponent(panelCaNhan, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-													.addComponent(panelBanHang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-													.addComponent(panelHangHoa, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-													.addComponent(panelGiaoDich, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
-													.addComponent(panelThongKe, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-													.addGroup(gl_panel.createSequentialGroup()
-														.addContainerGap()
-														.addComponent(panelNhanVien1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)))))))
-								.addComponent(panelBaoCao1, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE))))
-					.addGap(0))
+												.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(lblTenUser, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+											.addComponent(panelThongKe, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+										.addComponent(panelBanHang, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))))
+							.addComponent(panelCaNhan, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)))
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelBangLuong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panelKhachHang, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(22, Short.MAX_VALUE)
+					.addComponent(panelChamCong, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelNhanVien1, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panelNhanVien, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(22, Short.MAX_VALUE)
+					.addComponent(panelTraHang, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelBanHangCon, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelNhapHang, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelChiTieu, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panelGiaoDich, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(22, Short.MAX_VALUE)
+					.addComponent(panelBaoBao, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panelBaoCao1, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(22, Short.MAX_VALUE)
+					.addComponent(panelNguonHang, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelHangHoaCon, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panelHangHoa, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(22, Short.MAX_VALUE)
+					.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelDoanhso, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelKiemKho, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblTenUser, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTenUser, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
-					.addGap(40)
+						.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+					.addGap(50)
 					.addComponent(panelThongKe, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
-					.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
-					.addComponent(panelDoanhso, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(1)
+					.addComponent(panelDoanhso, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addGap(2)
 					.addComponent(panelHangHoa, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
 					.addComponent(panelHangHoaCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
@@ -768,46 +923,25 @@ public class MainFrame extends JFrame {
 					.addComponent(panelBanHang, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-
-		lblBaoCao.setForeground(Color.WHITE);
-		lblBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GroupLayout gl_panelBaoBao = new GroupLayout(panelBaoBao);
-		panelBaoBao.setBackground(new Color(102, 51, 153));
-		gl_panelBaoBao.setHorizontalGroup(gl_panelBaoBao.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelBaoBao.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblBaoCao, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelBaoBao.setVerticalGroup(gl_panelBaoBao.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBaoBao.createSequentialGroup()
-						.addComponent(lblBaoCao, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelBaoBao.setLayout(gl_panelBaoBao);
-		GroupLayout gl_panelBangLuong = new GroupLayout(panelBangLuong);
-		gl_panelBangLuong.setHorizontalGroup(gl_panelBangLuong.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelBangLuong.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelBangLuong.setVerticalGroup(gl_panelBangLuong.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBangLuong.createSequentialGroup()
-						.addComponent(lblBangLuong, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelBangLuong.setLayout(gl_panelBangLuong);
-		GroupLayout gl_panelChamCong = new GroupLayout(panelChamCong);
-		gl_panelChamCong.setHorizontalGroup(gl_panelChamCong.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelChamCong.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblChamCong, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelChamCong.setVerticalGroup(gl_panelChamCong.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelChamCong.createSequentialGroup()
-						.addComponent(lblChamCong, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelChamCong.setLayout(gl_panelChamCong);
-		GroupLayout gl_panelChamCong1 = new GroupLayout(panelKhachHang1);
-		gl_panelChamCong1.setHorizontalGroup(gl_panelChamCong1.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelChamCong1.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblKhachHang1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelChamCong1.setVerticalGroup(gl_panelChamCong1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelChamCong1.createSequentialGroup()
-						.addComponent(lblKhachHang1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelKhachHang1.setLayout(gl_panelChamCong1);
+		
+		lblDangXuat.setForeground(Color.WHITE);
+		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_panelDangXuat = new GroupLayout(panelDangXuat);
+		gl_panelDangXuat.setHorizontalGroup(
+			gl_panelDangXuat.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panelDangXuat.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblDangXuat, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelDangXuat.setVerticalGroup(
+			gl_panelDangXuat.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelDangXuat.createSequentialGroup()
+					.addComponent(lblDangXuat, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelDangXuat.setLayout(gl_panelDangXuat);
+		panel.setLayout(gl_panel);
+		
 		lblCaNhan1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -816,75 +950,139 @@ public class MainFrame extends JFrame {
 				caNhanFrame.setVisible(true);
 			}
 		});
-
-		lblCaNhan1.setForeground(Color.WHITE);
-		lblCaNhan1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GroupLayout gl_panelCaNhan1 = new GroupLayout(panelCaNhan1);
-		gl_panelCaNhan1.setHorizontalGroup(gl_panelCaNhan1.createParallelGroup(Alignment.LEADING).addGroup(
-				Alignment.TRAILING, gl_panelCaNhan1.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblCaNhan1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelCaNhan1.setVerticalGroup(gl_panelCaNhan1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelCaNhan1.createSequentialGroup()
-						.addComponent(lblCaNhan1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-		panelCaNhan1.setLayout(gl_panelCaNhan1);
-		panelNhanVien1.setBackground(new Color(102, 51, 153));
-		GroupLayout gl_panelNhanVien1 = new GroupLayout(panelNhanVien1);
-		gl_panelNhanVien1.setHorizontalGroup(gl_panelNhanVien1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelNhanVien1.createSequentialGroup().addContainerGap(20, Short.MAX_VALUE)
-						.addComponent(lblNhanVien1, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)));
-		gl_panelNhanVien1.setVerticalGroup(gl_panelNhanVien1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNhanVien1.createSequentialGroup()
-						.addComponent(lblNhanVien1, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(1, Short.MAX_VALUE)));
-		panelNhanVien1.setLayout(gl_panelNhanVien1);
+		lblDoanhSo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new ThongKeDoanhSoJInternalFrame());
+			}
+		});
+		lblDoanhThu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new ThongKeDoanhThuJInternalFrame());
+			}
+		});
+		lblBangLuong.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new BangLuongJIternalFrame());
+			}
+		});
+		lblChamCong.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new ChamCongJInternalFrame());
+			}
+		});
+		lblNhanVien1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new NhanVienJInternalFrame());
+			}
+		});
+		lblChiTieu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new BaoCaoChiTieuJInternalFrame());
+			}
+		});
+		lblTraHang.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new TraHangJInternalFrame());
+			}
+		});
+		lblBanHangCon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new ThanhToanJInternalFrame());
+			}
+		});
+		lblNhapHang.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new NhapHangJInternalFrame());
+			}
+		});
+		lblNguonHang.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new NguonHangJInternalFrame());
+			}
+		});
+		lblKiemKho.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new KiemKhoJInternalFrame());
+			}
+		});
+		lblHangHoaCon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new HangHoaJInternalFrame());
+			}
+		});
+		lblDangXuat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				logout();
+			}
+		});
+		lblKhachHang1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new KhachHangJInternalFrame());
+			}
+		});
+		lblDanhMucOpen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblDanhMucOpen.setVisible(false);
+				contentPane.add(panel, BorderLayout.WEST);
+				panel.setVisible(true);
+			}
+		});
+		
 		lblDanhMuc.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panel.setVisible(false);
+				contentPane.add(lblDanhMucOpen, BorderLayout.WEST);
 				lblDanhMucOpen.setVisible(true);
 			}
 		});
-
-		panelSelectThongKe.setBackground(Color.BLACK);
-
-		lblThongKe.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\thongke.png", 20, 20)));
-		lblDanhMuc.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmuc.png", 20, 20)));
-		lblDanhMucOpen.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmuc.png", 20, 20)));
-
+		lblHangHoaCon.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
+		lblKiemKho.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\kiemkho.png", 20, 20)));
+		lblNguonHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nguonhang.png", 20, 20)));
+		lblBaoCao.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\baocao.png", 20, 20)));
+		lblNhapHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhaphang.png", 20, 20)));
+		lblBanHangCon.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\banhang.png", 20, 20)));
+		lblChiTieu.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\chitieu.png", 20, 20)));
 		lblNhanVien1.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhanvien.png", 20, 20)));
+		lblGiaoDich.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\giaodich.png", 20, 20)));
+		lblHangHoa.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
+		lblDoanhSo.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\doanhso.png", 20, 20)));
+		lblDoanhThu.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\doanhthu.png", 20, 20)));
 		lblBangLuong.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\bangluong.png", 20, 20)));
 		lblChamCong.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\chamcong.png", 20, 20)));
-
-		lblThongKe.setForeground(Color.WHITE);
-		lblThongKe.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GroupLayout gl_panelThongKe = new GroupLayout(panelThongKe);
-		gl_panelThongKe.setHorizontalGroup(gl_panelThongKe.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelThongKe.createSequentialGroup()
-						.addComponent(panelSelectThongKe, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblThongKe, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)));
-		gl_panelThongKe.setVerticalGroup(gl_panelThongKe.createParallelGroup(Alignment.LEADING)
-				.addComponent(panelSelectThongKe, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-				.addComponent(lblThongKe, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE));
-		panelThongKe.setLayout(gl_panelThongKe);
-		panel.setLayout(gl_panel);
-		contentPane.setLayout(gl_contentPane);
-
+		pnlMain.setBackground(new Color(51, 0, 153));
+		contentPane.add(pnlMain, BorderLayout.CENTER);
+		lblCaNhan.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\canhan.png", 20, 20)));
+		lblNhanVien.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhanvien.png", 20, 20)));
+		lblKhachHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\khachhang.png", 20, 20)));
+		lblThongKe.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\thongke.png", 20, 20)));
+		lblDanhMuc.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmuc.png", 20, 20)));
+		lblDanhMucOpen.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmucopen.png", 30, 30)));
 		lblCaNhan1.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\canhan.png", 20, 20)));
 		lblDangXuat.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\logout1.png", 20, 20)));
 		lblKhachHang1.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\khachhang.png", 20, 20)));
-		lblBaoCao.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\baocao.png", 20, 20)));
 		lblBaoCaoTo.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\baocao.png", 20, 20)));
+		lblBanHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\banhang.png", 20, 20)));
+		lblTraHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\trahang.png", 20, 20)));
 
 		panelCaNhan1.setVisible(false);
 		panelDangXuat.setVisible(false);
 		panelKhachHang1.setVisible(false);
-
-		panelNhanVien1.setVisible(false);
-		panelChamCong.setVisible(false);
-		panelBangLuong.setVisible(false);
-		panelBaoBao.setVisible(false);
 
 		listToolBar.add(new Toolbar(panelSelectThongKe, panelThongKe, lblThongKe));
 		listToolBar.add(new Toolbar(panelSelectHangHoa, panelHangHoa, lblHangHoa));
@@ -896,9 +1094,10 @@ public class MainFrame extends JFrame {
 		listToolBar.add(new Toolbar(panelSelectBanHang, panelBanHang, lblBanHang));
 		pnlMain.setLayout(new CardLayout(0, 0));
 
+		closeAllPanel();
 		addMouseEnter();
 	}
-
+	
 	public void addMouseEnter() {
 		lblBaoCaoTo.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -1175,4 +1374,5 @@ public class MainFrame extends JFrame {
 		panelDangXuat.setVisible(false);
 		panelBaoBao.setVisible(false);
 	}
+
 }

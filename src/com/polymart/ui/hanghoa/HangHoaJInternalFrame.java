@@ -228,6 +228,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 							.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+
 		panel.setLayout(gl_panel);
 		pnlTop.setLayout(gl_pnlTop);
 
@@ -479,14 +480,21 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		JLabel lblNewLabel = new JLabel("Định mức tồn");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField.setText("10");
-		textField.setColumns(10);
+		txtDinhMuc = new JTextField();
+		txtDinhMuc.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				checkDinhMuc();
+			}
+		});
+		txtDinhMuc.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtDinhMuc.setText("10");
+		txtDinhMuc.setColumns(10);
 		GroupLayout gl_pnlTonKho = new GroupLayout(pnlTonKho);
 		gl_pnlTonKho.setHorizontalGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING).addGroup(gl_pnlTonKho
 				.createSequentialGroup()
 				.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING).addComponent(rdoTonKhoTatCa)
+
 						.addComponent(rdoVuotDinhMucTon)
 						.addComponent(rdoConHangTrongKho, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_pnlTonKho.createSequentialGroup().addGap(1).addComponent(rdoDuoiDinhMucTon))
@@ -495,7 +503,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 										gl_pnlTonKho.createSequentialGroup().addGap(7)
 												.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 95,
 														GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(textField,
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(txtDinhMuc,
 														GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
 								.addComponent(rdoHetHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190,
 										GroupLayout.PREFERRED_SIZE)))
@@ -505,7 +513,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtDinhMuc, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 						.addGap(3).addComponent(rdoDuoiDinhMucTon).addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(rdoVuotDinhMucTon).addComponent(rdoConHangTrongKho)
 						.addComponent(rdoHetHangTrongKho)));
@@ -575,6 +583,21 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		});
 	}
 
+	protected boolean checkDinhMuc() {
+		if (txtDinhMuc.getText().isBlank()) {
+			EntityMessage.show(null, "Định Mức Tồn Không Được Để Trống");
+			return true;
+		} else {
+			try {
+				Integer.parseInt(txtDinhMuc.getText());
+			} catch (Exception e) {
+				EntityMessage.show(null, "Bạn Nhập Sai! Nhập Lại Định Mức Tồn Là Kiểu Số");
+				return true;
+			}
+		}
+		return false;
+	}
+
 	ActionListener themSanPham = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -589,7 +612,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	}
 
 	private JTextField txtFind;
-	private JTextField textField;
+	private JTextField txtDinhMuc;
 
 	private void clickTable(int row) {
 		new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);
@@ -638,9 +661,13 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		}
 		cboLoaiSanPham.setModel(new DefaultComboBoxModel(loaiSanPham));
 	}
-
+	// lọc sản phẩm trong kho 
 	public void locSanPham() {
+		if(checkDinhMuc()==true) {
+			return;
+		}
 		String loaiSanPham = cboLoaiSanPham.getSelectedItem().toString();
+		int index = cboLoaiSanPham.getSelectedIndex();
 		List<ChiTietSanPhamModel> listSanPhamLocKho = new ArrayList<ChiTietSanPhamModel>();
 		listSanPhamLocKho.clear();
 		listSanPhamLoc.clear();
@@ -649,7 +676,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		} else {
 			for (ChiTietSanPhamModel sanPham : lstChiTietSanPhamModels) {
 				SanPhamModel sanPhamModel = sanPhamService.findByID(sanPham.getIdSanPham());
-				if (sanPhamModel.getTenSP().contains(loaiSanPham)) {
+				if (sanPhamModel.getIdLoaiSP().equals(lstLoaiSanPham.get(index-1).getId())) {
 					listSanPhamLoc.add(sanPham);
 				}
 			}
@@ -661,14 +688,14 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		}
 		if (rdoDuoiDinhMucTon.isSelected() == true) {
 			for (ChiTietSanPhamModel chiTietSanPhamModel : listSanPhamLoc) {
-				if (chiTietSanPhamModel.getSoLuong() < 10) {
+				if (chiTietSanPhamModel.getSoLuong() < Integer.parseInt(txtDinhMuc.getText())) {
 					listSanPhamLocKho.add(chiTietSanPhamModel);
 				}
 			}
 		}
 		if (rdoVuotDinhMucTon.isSelected() == true) {
 			for (ChiTietSanPhamModel chiTietSanPhamModel : listSanPhamLoc) {
-				if (chiTietSanPhamModel.getSoLuong() >= 10) {
+				if (chiTietSanPhamModel.getSoLuong() >= Integer.parseInt(txtDinhMuc.getText())) {
 					listSanPhamLocKho.add(chiTietSanPhamModel);
 				}
 			}

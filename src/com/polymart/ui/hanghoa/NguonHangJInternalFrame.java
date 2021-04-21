@@ -36,6 +36,8 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
+import com.polymart.ui.common.uiCommon;
+
 import javax.swing.border.EtchedBorder;
 
 public class NguonHangJInternalFrame extends JInternalFrame {
@@ -317,6 +319,10 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 		loadToTable();
 		
 		tableNguonHang.setRowHeight(25);
+		uiCommon.editButtonCenter(btnThem);
+		uiCommon.editButtonCenter(btnXoa);
+		uiCommon.editButtonCenter(btnCapNhat);
+		uiCommon.editButtonCenter(btnMoi);
 	}
 
 	protected void findNguonHang() {
@@ -456,7 +462,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 
 	public boolean checkNull(Component component, String name) {
 		if (name.isBlank()) {
-			EntityMessage.show(component, "Họ tên không được để trống");
+			EntityMessage.show(component, "Thông tin nhập không được để trống");
 			return false;
 		}
 		return true;

@@ -1,20 +1,13 @@
 package com.polymart.entity;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +20,6 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class EntityExcel {
@@ -89,7 +81,6 @@ public class EntityExcel {
         Iterator<Cell> cellIterator = fistRow.cellIterator();
         int colCount = 0;
         while (cellIterator.hasNext()) {
-            Cell cell = cellIterator.next();
             colCount++;
             if (!cellIterator.hasNext()) {
                 break;

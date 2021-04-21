@@ -39,6 +39,7 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.*;
 import com.polymart.service.*;
 import com.polymart.service.impl.*;
+import com.polymart.ui.common.uiCommon;
 
 public class ThemNhapHangJInternalFrame extends JInternalFrame {
 
@@ -157,6 +158,9 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         txtTimKiem.setColumns(10);
 
         JButton btnTimKiem = new JButton("Tìm kiếm");
+        
+        JButton btnImport = new JButton("Import");
+        uiCommon.editButtonCenter(btnImport);
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
         gl_panel_1.setHorizontalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -169,7 +173,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         			.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-        			.addGap(557))
+        			.addPreferredGap(ComponentPlacement.RELATED, 503, Short.MAX_VALUE)
+        			.addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
         );
         gl_panel_1.setVerticalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -178,7 +183,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
         					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         				.addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
         				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -217,19 +223,24 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         			.addComponent(lblGiaNhap)
         			.addGap(28)
         			.addComponent(txtGiaNhap, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        			.addGap(41)
-        			.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-        			.addGap(1261))
+        			.addGap(18)
+        			.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+        			.addGap(1284))
         );
         gl_panel_4.setVerticalGroup(
         	gl_panel_4.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_panel_4.createSequentialGroup()
         			.addContainerGap()
-        			.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(lblGiaNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(txtGiaNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnLuuTam, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+        			.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE, false)
+        					.addGroup(gl_panel_4.createSequentialGroup()
+        						.addGap(2)
+        						.addComponent(lblGiaNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        					.addGroup(gl_panel_4.createSequentialGroup()
+        						.addGap(2)
+        						.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
+        							.addComponent(txtGiaNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(btnLuuTam, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
         				.addGroup(gl_panel_4.createParallelGroup(Alignment.BASELINE)
         					.addComponent(lblSoLuongNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
         					.addComponent(txtSoLuongNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
@@ -403,6 +414,10 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         });
         tableDSNhapHang.setRowHeight(25);
         tableDSSanPham.setRowHeight(25);
+        uiCommon.editButtonCenter(btnXoa);
+        uiCommon.editButtonCenter(btnHoanThanh);
+        uiCommon.editButtonCenter(btnLuuTam);
+        uiCommon.editButtonCenter(btnTimKiem);
     }
 
     // set cột của table

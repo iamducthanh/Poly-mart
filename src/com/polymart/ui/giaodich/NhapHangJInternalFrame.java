@@ -3,7 +3,6 @@ package com.polymart.ui.giaodich;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +20,6 @@ import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -34,7 +32,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityExcel;
-import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
@@ -316,6 +313,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         tableNhapHang.getColumnModel().getColumn(2).setPreferredWidth(120);
         tableNhapHang.getColumnModel().getColumn(3).setPreferredWidth(120);
         tableNhapHang.getColumnModel().getColumn(4).setPreferredWidth(120);
+		uiCommon.editButtonTop(btnTimKiem);
+		uiCommon.editButtonTop(btnThemPhieuNhap);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnXoa);
     }
 
     private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {

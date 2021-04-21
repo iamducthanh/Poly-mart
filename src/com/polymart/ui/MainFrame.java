@@ -22,6 +22,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import com.polymart.entity.EntityAuthorization;
@@ -34,7 +35,6 @@ import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
 import com.polymart.ui.hanghoa.HangHoaJInternalFrame;
-import com.polymart.ui.hanghoa.KiemKhoJInternalFrame;
 import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
 import com.polymart.ui.hanghoa.SanPhamJInternalFrame;
 import com.polymart.ui.khachhang.KhachHangJInternalFrame;
@@ -115,8 +115,6 @@ public class MainFrame extends JFrame {
 	private JLabel lblDoanhSo = new JLabel("      Thống kê doanh số");
 	JPanel panelHangHoaCon = new JPanel();
 	private JLabel lblHangHoaCon = new JLabel("      Hàng hóa");
-	private JPanel panelKiemKho = new JPanel();
-	private JLabel lblKiemKho = new JLabel("      Kiểm kho");
 	private JPanel panelNguonHang = new JPanel();
 	private JLabel lblNguonHang = new JLabel("      Nguồn hàng");
 	private JPanel panelNhapHang = new JPanel();
@@ -154,6 +152,7 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+                //    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -643,35 +642,6 @@ public class MainFrame extends JFrame {
 		);
 		panelNguonHang.setLayout(gl_panelNguonHang);
 		
-		panelKiemKho.setBackground(new Color(102, 51, 153));
-		
-		lblKiemKho.setForeground(Color.WHITE);
-		lblKiemKho.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GroupLayout gl_panelKiemKho = new GroupLayout(panelKiemKho);
-		gl_panelKiemKho.setHorizontalGroup(
-			gl_panelKiemKho.createParallelGroup(Alignment.TRAILING)
-				.addGap(0, 272, Short.MAX_VALUE)
-				.addGap(0, 272, Short.MAX_VALUE)
-				.addGap(0, 272, Short.MAX_VALUE)
-				.addGap(0, 272, Short.MAX_VALUE)
-				.addGap(0, 272, Short.MAX_VALUE)
-				.addGroup(gl_panelKiemKho.createSequentialGroup()
-					.addContainerGap(20, Short.MAX_VALUE)
-					.addComponent(lblKiemKho, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_panelKiemKho.setVerticalGroup(
-			gl_panelKiemKho.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 40, Short.MAX_VALUE)
-				.addGap(0, 40, Short.MAX_VALUE)
-				.addGap(0, 40, Short.MAX_VALUE)
-				.addGap(0, 40, Short.MAX_VALUE)
-				.addGap(0, 40, Short.MAX_VALUE)
-				.addGroup(gl_panelKiemKho.createSequentialGroup()
-					.addComponent(lblKiemKho, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		panelKiemKho.setLayout(gl_panelKiemKho);
-		
 		panelHangHoaCon.setBackground(new Color(102, 51, 153));
 		
 		lblHangHoaCon.setForeground(Color.WHITE);
@@ -813,7 +783,7 @@ public class MainFrame extends JFrame {
 												.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addComponent(lblTenUser, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+												.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
 												.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.RELATED))
 											.addComponent(panelThongKe, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
@@ -868,9 +838,6 @@ public class MainFrame extends JFrame {
 					.addContainerGap()
 					.addComponent(panelDoanhso, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panelKiemKho, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panelHangHoa, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
 					.addGap(1))
 				.addGroup(gl_panel.createSequentialGroup()
@@ -897,8 +864,6 @@ public class MainFrame extends JFrame {
 					.addComponent(panelSanPham, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
 					.addComponent(panelHangHoaCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addGap(1)
-					.addComponent(panelKiemKho, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
 					.addComponent(panelNguonHang, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
@@ -1050,12 +1015,6 @@ public class MainFrame extends JFrame {
 				loadChild(new NguonHangJInternalFrame());
 			}
 		});
-		lblKiemKho.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				loadChild(new KiemKhoJInternalFrame());
-			}
-		});
 		lblHangHoaCon.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1076,7 +1035,7 @@ public class MainFrame extends JFrame {
 		});
 		lblDanhMucOpen.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseEntered(MouseEvent e) {
 				lblDanhMucOpen.setVisible(false);
 				contentPane.add(panel, BorderLayout.WEST);
 				panel.setVisible(true);
@@ -1092,7 +1051,6 @@ public class MainFrame extends JFrame {
 			}
 		});
 		lblHangHoaCon.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
-		lblKiemKho.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\kiemkho.png", 20, 20)));
 		lblNguonHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nguonhang.png", 20, 20)));
 		lblBaoCao.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\baocao.png", 20, 20)));
 		lblNhapHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhaphang.png", 20, 20)));
@@ -1248,7 +1206,6 @@ public class MainFrame extends JFrame {
 				try {
 					runtime.exec("rundll32 url.dll, FileProtocolHandler " + url);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -1301,12 +1258,10 @@ public class MainFrame extends JFrame {
 					panelSanPham.setVisible(true);
 					panelHangHoaCon.setVisible(true);
 					panelNguonHang.setVisible(true);
-					panelKiemKho.setVisible(true);
 				} else {
 					openHangHoa = 0;
 					panelHangHoaCon.setVisible(false);
 					panelNguonHang.setVisible(false);
-					panelKiemKho.setVisible(false);
 					panelSanPham.setVisible(false);
 				}
 				resetColor();
@@ -1408,7 +1363,6 @@ public class MainFrame extends JFrame {
 		panelDoanhso.setVisible(false);
 		panelDoanhThu.setVisible(false);
 		panelHangHoaCon.setVisible(false);
-		panelKiemKho.setVisible(false);
 		panelNguonHang.setVisible(false);
 		panelNhapHang.setVisible(false);
 		panelBanHangCon.setVisible(false);

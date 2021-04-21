@@ -4,8 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -13,9 +20,11 @@ import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -25,10 +34,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.LoaiSanPhamModel;
@@ -40,14 +53,8 @@ import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.polymart.ui.MainFrame;
+import com.polymart.ui.common.RoundedBorder;
 import com.polymart.ui.common.uiCommon;
-import com.polymart.entity.EntityExcel;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JComboBox;
 
 public class HangHoaJInternalFrame extends JInternalFrame {
 
@@ -87,7 +94,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JRadioButton rdoDuoiDinhMucTon = new JRadioButton("Dưới định mức tồn");
 	JRadioButton rdoTonKhoTatCa = new JRadioButton("Tất cả");
 	JRadioButton rdoConHangTrongKho = new JRadioButton("Còn hàng trong kho");
-	JComboBox cboLoaiSanPham = new JComboBox();
+	JComboBox<String> cboLoaiSanPham = new JComboBox<String>();
 
 	// service
 	private ISanPhamService sanPhamService = new SanPhamService();
@@ -148,6 +155,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		// btnTimKiem.setIcon(new
 		// ImageIcon(EntityImage.resizeTheoUrl("images\\search.png", 20, 20)));
 		JButton btnExport = new JButton("Export");
+		btnExport.setBackground(new Color(75, 0, 130));
+		btnExport.setForeground(new Color(255, 255, 255));
+		btnExport.setBorder(new RoundedBorder(10));
 		btnExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -164,11 +174,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		// btnExport.setIcon(new
 		// ImageIcon(EntityImage.resizeTheoUrl("images\\export.png", 20, 20)));
 		JButton btnThemHang = new JButton("Thêm mới");
-
+		uiCommon.editButtonTop(btnThemHang);
 		btnThemHang.addActionListener(themSanPham);
-
 		JButton btnTimKiem = new JButton("Tìm kiếm");
-
 		// tìm kiếm
 		btnTimKiem.addActionListener(new ActionListener() {
 			@Override
@@ -209,7 +217,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 					.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
 					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
 					.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
@@ -217,7 +225,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
+					.addGap(7)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblTitle)
@@ -235,6 +243,11 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		initTopHangHoa();
 		initCenterHangHoa();
 		loadLoaiSanPham();
+		
+		uiCommon.editButtonTop(btnThemHang);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnTimKiem);
+
 	}
 
 	public void initTopHangHoa() {
@@ -615,7 +628,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	private JTextField txtDinhMuc;
 
 	private void clickTable(int row) {
-		new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);
+		ChiTietSanPhamFrame chiTietSanPhamFrame = new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this);
+		chiTietSanPhamFrame.setVisible(true);
+		chiTietSanPhamFrame.setLocationRelativeTo(null);
 	}
 
 	// Tìm kiếm sản phẩm
@@ -659,7 +674,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		for (LoaiSanPhamModel loaiSanPhamModel : lstLoaiSanPham) {
 			loaiSanPham.add(loaiSanPhamModel.getTenLoaiSP());
 		}
-		cboLoaiSanPham.setModel(new DefaultComboBoxModel(loaiSanPham));
+		cboLoaiSanPham.setModel(new DefaultComboBoxModel<String>(loaiSanPham));
 	}
 	// lọc sản phẩm trong kho 
 	public void locSanPham() {

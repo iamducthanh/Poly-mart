@@ -55,12 +55,12 @@ public class uiCommon {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-//				button.setBorder(new RoundedBorder(0));
-//				button.setBackground(new Color(153, 50, 204));
-//				button.setForeground(new Color(255, 255, 255));
-				button.setBorder(new LineBorder(new Color(153, 50, 204), 2));
-				button.setForeground(new Color(153, 50, 204));
-				button.setContentAreaFilled(false);
+				button.setBorder(new RoundedBorder(10));
+				button.setBackground(new Color(153, 50, 204));
+				button.setForeground(new Color(255, 255, 255));
+//				button.setBorder(new LineBorder(new Color(153, 50, 204), 2));
+//				button.setForeground(new Color(153, 50, 204));
+//				button.setContentAreaFilled(false);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {

@@ -158,6 +158,9 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         txtTimKiem.setColumns(10);
 
         JButton btnTimKiem = new JButton("Tìm kiếm");
+        
+        JButton btnImport = new JButton("Import");
+        uiCommon.editButtonCenter(btnImport);
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
         gl_panel_1.setHorizontalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -170,7 +173,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         			.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-        			.addGap(557))
+        			.addPreferredGap(ComponentPlacement.RELATED, 503, Short.MAX_VALUE)
+        			.addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
         );
         gl_panel_1.setVerticalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -179,7 +183,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         			.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
         					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(btnImport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         				.addComponent(btnQuayLai, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
         				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

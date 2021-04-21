@@ -167,31 +167,30 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(Alignment.LEADING, gl_panel_2.createSequentialGroup()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, gl_panel_2.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap()
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(11, Short.MAX_VALUE))
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addContainerGap(184, Short.MAX_VALUE)
+					.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
-		btnMoi.setBackground(new Color(255, 255, 255));
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
-					.addGap(30)
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+					.addGap(72)
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(155, Short.MAX_VALUE))
+					.addContainerGap(56, Short.MAX_VALUE))
 		);
+		btnMoi.setBackground(new Color(255, 255, 255));
 
 		JLabel lblNewLabel_2 = new JLabel("Tên sản phẩm");
 		lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
@@ -232,34 +231,36 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 		ButtonGroup gr = new ButtonGroup();
 		gr.add(rdoNgungKinhDoanh);
 		gr.add(rdoDangKinhDoanh);
+		
+		JButton btnSua = new JButton("Sửa");
+		uiCommon.editButtonCenter(btnSua);
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_3.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_3.createSequentialGroup()
-									.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(rdoDangKinhDoanh, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(lblNewLabel_2_1_1, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
-									.addGap(5)
+									.addGap(10)
+									.addComponent(rdoDangKinhDoanh)
+									.addGap(18)
 									.addComponent(rdoNgungKinhDoanh, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblNewLabel_2_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-									.addComponent(cbbLoaiSP, GroupLayout.PREFERRED_SIZE, 284, GroupLayout.PREFERRED_SIZE)
+								.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+								.addComponent(txtTenSanPham, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+								.addGroup(gl_panel_3.createSequentialGroup()
+									.addComponent(btnThemLoai, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnThemLoai, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(btnSua, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+								.addComponent(cbbLoaiSP, GroupLayout.PREFERRED_SIZE, 408, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_2_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap())
 						.addGroup(gl_panel_3.createSequentialGroup()
-							.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING)
-								.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-								.addComponent(txtTenSanPham, GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
-							.addContainerGap())))
+							.addComponent(lblNewLabel_2_1_1, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+							.addGap(263))))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -267,10 +268,12 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 					.addContainerGap()
 					.addComponent(lblNewLabel_2_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cbbLoaiSP, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnThemLoai, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGap(20)
+					.addComponent(cbbLoaiSP, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnThemLoai, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSua, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addGap(28)
 					.addComponent(lblNewLabel_2)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(txtTenSanPham, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -280,11 +283,11 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(rdoNgungKinhDoanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(rdoDangKinhDoanh))
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addGap(7)
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE)
+						.addComponent(rdoDangKinhDoanh)
+						.addComponent(rdoNgungKinhDoanh, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(102, Short.MAX_VALUE))
 		);
 		
 		JTextArea txtMoTa = new JTextArea();
@@ -309,6 +312,4 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 		uiCommon.editButtonCenter(btnMoi);
 
 	}
-
-	
 }

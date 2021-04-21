@@ -38,6 +38,7 @@ import com.polymart.service.impl.AnhSanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
+import com.polymart.ui.common.uiCommon;
 
 public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
@@ -144,7 +145,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         contentPane.add(panel_1, BorderLayout.NORTH);
 
         JButton btnQuayLai = new JButton("");
-        btnQuayLai.setIcon(new ImageIcon("images\\back-6.png"));
+        btnQuayLai.setIcon(new ImageIcon("images\\back-61.png"));
         btnQuayLai.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 close();
@@ -201,10 +202,12 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         JPanel panel_3 = new JPanel();
 
         JButton btnHoanThanh = new JButton("Hoàn thành");
+        btnHoanThanh.setFont(new Font("Tahoma", Font.PLAIN, 10));
 
         JButton btnXoa = new JButton("Xoá");
 
         btnImportExcel = new JButton("Import");
+        uiCommon.editButtonCenter(btnImportExcel);
         GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(
                 gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -284,6 +287,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         lblMauSac.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
         btnTaoHinhMoi = new JButton("Tạo mới hình");
+        uiCommon.editButtonCenter(btnTaoHinhMoi);
         panelImage.setBackground(Color.WHITE);
 
         panelImage.setBorder(
@@ -414,6 +418,11 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 importExcel();
             }
         });
+        
+        uiCommon.editButtonCenter(btnXoa);
+        uiCommon.editButtonCenter(btnHoanThanh);
+        uiCommon.editButtonCenter(btnLuuTam);
+        uiCommon.editButtonCenter(btnTaoMoi);
     }
 
     // đọc dữ liệu từ file excel

@@ -22,7 +22,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import com.polymart.entity.EntityAuthorization;

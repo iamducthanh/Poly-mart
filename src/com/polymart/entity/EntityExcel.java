@@ -82,6 +82,7 @@ public class EntityExcel {
         int colCount = 0;
         while (cellIterator.hasNext()) {
             colCount++;
+            cellIterator.next();
             if (!cellIterator.hasNext()) {
                 break;
             }
@@ -95,7 +96,6 @@ public class EntityExcel {
                 model.setValueAt(cell.getStringCellValue().toString(), i, j);
             }
         }
-
     }
 
     //Đọc tên file

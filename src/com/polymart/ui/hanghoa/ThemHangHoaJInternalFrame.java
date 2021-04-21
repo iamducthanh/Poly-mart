@@ -125,10 +125,10 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1920, 639);
         modelDSSanPhamThem = new DefaultTableModel() {
-        	
-			private static final long serialVersionUID = 1171051584049337518L;
 
-			@Override
+            private static final long serialVersionUID = 1171051584049337518L;
+
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -418,7 +418,7 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
                 importExcel();
             }
         });
-        
+
         uiCommon.editButtonCenter(btnXoa);
         uiCommon.editButtonCenter(btnHoanThanh);
         uiCommon.editButtonCenter(btnLuuTam);

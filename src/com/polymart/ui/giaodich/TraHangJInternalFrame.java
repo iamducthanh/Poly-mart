@@ -121,6 +121,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
         initTopTraHang();
         initCenterTraHang();
 
+        
     }
 
     public void initTopTraHang() {
@@ -229,6 +230,11 @@ public class TraHangJInternalFrame extends JInternalFrame {
         );
         panel_1.setLayout(gl_panel_1);
         panel.setLayout(gl_panel);
+        
+		uiCommon.editButtonTop(btnTimKiem);
+		uiCommon.editButtonTop(btnThemPhieuNhap);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnXoa);
     }
 
     public void initCenterTraHang() {
@@ -239,6 +245,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
         JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
+        uiCommon.editButtonCenter(btnLocTheoNgay);
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
         gl_hangHoaJPanel.setHorizontalGroup(
         	gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)

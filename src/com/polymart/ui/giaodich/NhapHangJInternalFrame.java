@@ -245,6 +245,13 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
+		
+		uiCommon.editButtonTop(btnTimKiem);
+		uiCommon.editButtonTop(btnThemPhieuNhap);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnXoa);
+
+
 	}
 
 	public void initCenterNhapHang() {
@@ -316,6 +323,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		tableNhapHang.getColumnModel().getColumn(2).setPreferredWidth(120);
 		tableNhapHang.getColumnModel().getColumn(3).setPreferredWidth(120);
 		tableNhapHang.getColumnModel().getColumn(4).setPreferredWidth(120);
+		
+		uiCommon.editButtonCenter(btnLocTheoNgay);
 	}
 
 	private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {

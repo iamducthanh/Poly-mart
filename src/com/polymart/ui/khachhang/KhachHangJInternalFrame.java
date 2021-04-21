@@ -34,6 +34,7 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.KhachHangModel;
 import com.polymart.service.IKhachHangService;
 import com.polymart.service.impl.KhachHangService;
+import com.polymart.ui.common.uiCommon;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -332,6 +333,9 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 			}
 		});
 		tblKhachHang.setRowHeight(25);
+		uiCommon.editButtonCenter(btnNew);
+		uiCommon.editButtonCenter(btnConfirm);
+		uiCommon.editButtonCenter(btnDelete);
 
 	}
 

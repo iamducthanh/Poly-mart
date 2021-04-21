@@ -216,6 +216,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
+		
+		uiCommon.editButtonTop(btnThemNV);
+		uiCommon.editButtonTop(btnXoaNV);
 
 	}
 

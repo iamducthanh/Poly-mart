@@ -19,6 +19,7 @@ import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.SanPhamService;
+
 import javax.swing.JTextArea;
 
 public class ChiTietHoaDonThanhToan extends JFrame {
@@ -32,6 +33,7 @@ public class ChiTietHoaDonThanhToan extends JFrame {
     private JLabel lblDiemDaDoi;
     private JLabel lblTenKhachHang;
     private JLabel lblMaHoaDon;
+    private JTextArea txtGhiChu;
 
     private ISanPhamService sanPhamService = new SanPhamService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
@@ -41,13 +43,15 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         init();
     }
 
-    public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang, int diemDaDoi) {
+    public ChiTietHoaDonThanhToan(List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels, int idKhachHang,
+                                  int diemDaDoi, String ghiChu) {
         init();
 
         if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
             lblMaHoaDon.setText(lstChiTietHoaDonThanhToanModels.get(0).getHoaDonThanhToan().toString());
             lblTenKhachHang.setText(khachHangService.findOne(idKhachHang).getHoTen());
             lblDiemDaDoi.setText(String.valueOf(diemDaDoi));
+            txtGhiChu.setText(ghiChu);
         }
         modelChiTietHoaDonThanhToan.setRowCount(0);
         for (ChiTietHoaDonThanhToanModel e : lstChiTietHoaDonThanhToanModels) {
@@ -133,17 +137,18 @@ public class ChiTietHoaDonThanhToan extends JFrame {
         lblDiemDaDoi.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblDiemDaDoi.setBounds(136, 133, 387, 25);
         contentPane.add(lblDiemDaDoi);
-        
+
         JLabel lblNewLabel_1_1_1_1 = new JLabel("Ghi chú:");
         lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_1_1_1.setBounds(30, 168, 81, 25);
         contentPane.add(lblNewLabel_1_1_1_1);
-        
+
         JScrollPane scrollPane_1 = new JScrollPane();
         scrollPane_1.setBounds(136, 170, 387, 66);
         contentPane.add(scrollPane_1);
-        
-        JTextArea txtGhiChu = new JTextArea();
+
+        txtGhiChu = new JTextArea();
+        txtGhiChu.setEditable(false);
         scrollPane_1.setViewportView(txtGhiChu);
     }
 }

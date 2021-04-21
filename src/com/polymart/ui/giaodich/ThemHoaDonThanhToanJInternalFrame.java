@@ -6,6 +6,7 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.*;
 import com.polymart.service.*;
 import com.polymart.service.impl.*;
+import com.polymart.ui.common.uiCommon;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -92,7 +93,6 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     }
 
     private void init() {
-        this.thanhToanJInternalFrame = thanhToanJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSThanhToan = new DefaultTableModel() {
 
@@ -158,7 +158,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         			.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-        			.addGap(552))
+        			.addContainerGap(558, Short.MAX_VALUE))
         );
         gl_panel_1.setVerticalGroup(
         	gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -443,6 +443,11 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                 clickedTichDiem(chkTichDiem, lblTongTien);
             }
         });
+        
+        uiCommon.editButtonCenter(btnXoa);
+        uiCommon.editButtonCenter(btnHoanThanh);
+        uiCommon.editButtonCenter(btnLuuTam);
+        uiCommon.editButtonCenter(btnTimKiem);
     }
 
     // set tiền khi tích đổi điểm

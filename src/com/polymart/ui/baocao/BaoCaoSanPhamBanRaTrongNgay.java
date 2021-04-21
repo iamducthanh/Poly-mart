@@ -165,8 +165,8 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(dateNgayBaoCao, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(dateNgayBaoCao, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)

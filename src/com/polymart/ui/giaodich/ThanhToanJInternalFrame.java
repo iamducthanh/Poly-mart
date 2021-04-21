@@ -3,7 +3,6 @@ package com.polymart.ui.giaodich;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +21,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -41,7 +39,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityExcel;
-import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
@@ -254,6 +251,11 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         );
         panel_1.setLayout(gl_panel_1);
         panel.setLayout(gl_panel);
+        
+		uiCommon.editButtonTop(btnTimKiem);
+		uiCommon.editButtonTop(btnThemPhieuNhap);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnXoa);
 
     }
 
@@ -265,6 +267,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
+        uiCommon.editButtonCenter(btnLocTheoNgay);
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
         gl_hangHoaJPanel.setHorizontalGroup(
                 gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
@@ -350,7 +353,8 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                         .findByIdHoaDonThanhToan(hoaDonThanhToanModel.getId());
                 if (!lstChiTietHoaDonThanhToanModels.isEmpty()) {
                     new ChiTietHoaDonThanhToan(lstChiTietHoaDonThanhToanModels, hoaDonThanhToanModel.getIdKhachHang(),
-                            hoaDonThanhToanModel.getDiemDaDoi()).setVisible(true);
+                            hoaDonThanhToanModel.getDiemDaDoi(),
+                            hoaDonThanhToanModel.getGhiChu()).setVisible(true);
                 } else {
                     EntityMessage.show(this, "Hóa đơn không có sản phẩm");
                 }

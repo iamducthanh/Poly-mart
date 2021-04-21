@@ -32,7 +32,6 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
 import com.polymart.ui.MainFrame;
-import com.polymart.ui.PolyMartMain;
 
 public class LoginJFrame extends JFrame {
 

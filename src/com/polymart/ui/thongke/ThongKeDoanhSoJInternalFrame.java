@@ -1,6 +1,7 @@
 package com.polymart.ui.thongke;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -21,8 +22,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
@@ -33,15 +34,11 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 
 public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8758462980711626613L;
+	
 	private JPanel contentPane;
 	private JTable tableThongKe;
 	private JTable tableThongKe_1;
@@ -111,15 +108,15 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 					gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addGap(21)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(640, Short.MAX_VALUE))
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(613, Short.MAX_VALUE))
 				);
 				gl_panel_3.setVerticalGroup(
 					gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblNewLabel)
-							.addContainerGap(17, Short.MAX_VALUE))
+							.addContainerGap(22, Short.MAX_VALUE))
 				);
 				panel_3.setLayout(gl_panel_3);
 		panel.setLayout(gl_panel);

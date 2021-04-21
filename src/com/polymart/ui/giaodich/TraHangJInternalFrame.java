@@ -121,6 +121,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
         initTopTraHang();
         initCenterTraHang();
 
+        
     }
 
     public void initTopTraHang() {
@@ -133,102 +134,107 @@ public class TraHangJInternalFrame extends JInternalFrame {
 
         optionKiemKhoFrame.getContentPane().add(panelOption);
         optionKiemKhoFrame.setUndecorated(true);
-        
+
         JPanel panel_1 = new JPanel();
         panel_1.setBackground(new Color(75, 0, 130));
         GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(
-        	gl_panel.createParallelGroup(Alignment.LEADING)
-        		.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
+                gl_panel.createParallelGroup(Alignment.LEADING)
+                        .addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1195, Short.MAX_VALUE)
         );
         gl_panel.setVerticalGroup(
-        	gl_panel.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel.createSequentialGroup()
-        			.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                gl_panel.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel.createSequentialGroup()
+                                .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JButton btnExport = new JButton("→ Xuất");
         btnExport.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		evtBtnXuatFileExcel();
-        	}
+            public void actionPerformed(ActionEvent e) {
+                evtBtnXuatFileExcel();
+            }
         });
         JButton btnXoa = new JButton("- Xoá ");
-        
-                // xóa
-                btnXoa.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        evtBtnXoa(tableTraHang);
-                    }
-                });
-        
-                JButton btnThemPhieuNhap = new JButton("+ Thêm");
-                
-                        btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
-        JButton btnTimKiem = new JButton("Tìm");
-        
-                // tìm kiếm
-                btnTimKiem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        evtBtnTim(txtTimPhieuNhap);
-                    }
-                });
-        
-                txtTimPhieuNhap = new JTextField();
-                txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng");
-                txtTimPhieuNhap.setColumns(10);
-                txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
-                    @Override
-                    public void focusGained(FocusEvent e) {
-                        if (txtTimPhieuNhap.getText().equals("TÌm theo hóa đơn trả hàng")) {
-                            txtTimPhieuNhap.setText("");
-                        }
-                    }
 
-                    @Override
-                    public void focusLost(FocusEvent e) {
-                        if (txtTimPhieuNhap.getText().equals("")) {
-                            txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng");
-                        }
-                    }
-                });
+        // xóa
+        btnXoa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnXoa(tableTraHang);
+            }
+        });
+
+        JButton btnThemPhieuNhap = new JButton("+ Thêm");
+
+        btnThemPhieuNhap.addActionListener(openThemHoaDonTraHang);
+        JButton btnTimKiem = new JButton("Tìm");
+
+        // tìm kiếm
+        btnTimKiem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnTim(txtTimPhieuNhap);
+            }
+        });
+
+        txtTimPhieuNhap = new JTextField();
+        txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng");
+        txtTimPhieuNhap.setColumns(10);
+        txtTimPhieuNhap.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (txtTimPhieuNhap.getText().equals("TÌm theo hóa đơn trả hàng")) {
+                    txtTimPhieuNhap.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (txtTimPhieuNhap.getText().equals("")) {
+                    txtTimPhieuNhap.setText("TÌm theo hóa đơn trả hàng");
+                }
+            }
+        });
         JLabel lblNewLabel = new JLabel("Hóa đơn trả hàng");
         lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
         gl_panel_1.setHorizontalGroup(
-        	gl_panel_1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-        			.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+                gl_panel_1.createParallelGroup(Alignment.LEADING)
+                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                                .addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
         );
         gl_panel_1.setVerticalGroup(
-        	gl_panel_1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_panel_1.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(14, Short.MAX_VALUE))
+                gl_panel_1.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_panel_1.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(14, Short.MAX_VALUE))
         );
         panel_1.setLayout(gl_panel_1);
         panel.setLayout(gl_panel);
+        
+		uiCommon.editButtonTop(btnTimKiem);
+		uiCommon.editButtonTop(btnThemPhieuNhap);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnXoa);
     }
 
     public void initCenterTraHang() {
@@ -239,27 +245,28 @@ public class TraHangJInternalFrame extends JInternalFrame {
         JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
+        uiCommon.editButtonCenter(btnLocTheoNgay);
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
         gl_hangHoaJPanel.setHorizontalGroup(
-        	gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-        		.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-        				.addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
+                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gl_hangHoaJPanel.setVerticalGroup(
-        	gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_hangHoaJPanel.createSequentialGroup()
-        			.addGap(5)
-        			.addComponent(lblNewLabel_9)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(133, Short.MAX_VALUE))
+                gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
+                                .addGap(5)
+                                .addComponent(lblNewLabel_9)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         hangHoaJPanel.setLayout(gl_hangHoaJPanel);
@@ -312,7 +319,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                 List<ChiTietHoaDonTraHangModel> lstChiTiet = chiTietHoaDonTraHangService.findByIdHoaDonTraHang(hoaDonTraHangModel.getId());
                 hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
                 if (!lstChiTiet.isEmpty()) {
-                    new ChiTietHoaDonTraHang(lstChiTiet).setVisible(true);
+                    new ChiTietHoaDonTraHang(lstChiTiet, hoaDonTraHangModel.getGhiChu()).setVisible(true);
                 } else {
                     EntityMessage.show(this, "Hóa đơn không có sản phẩm");
                 }

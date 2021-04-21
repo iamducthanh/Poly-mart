@@ -1,7 +1,6 @@
 package com.polymart.entity;
 
 import com.polymart.ui.MainFrame;
-import com.polymart.ui.PolyMartMain;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
 import com.polymart.ui.baocao.ThemBaoCaoChiTieuFrame;
 import com.polymart.ui.hanghoa.ThemHangHoaJInternalFrame;

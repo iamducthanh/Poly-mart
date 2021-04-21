@@ -2,15 +2,18 @@ package com.polymart.ui.hanghoa;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.polymart.dao.impl.LoaiSanPhamDAO;
+import com.polymart.model.LoaiSanPhamModel;
+
 public class LoaiSanPhamJInternalFrame extends JFrame {
 
 	private JPanel contentPane;
-
 	/**
 	 * Launch the application.
 	 */
@@ -32,11 +35,11 @@ public class LoaiSanPhamJInternalFrame extends JFrame {
 	 */
 	public LoaiSanPhamJInternalFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 619, 332);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 	}
-
+	
 }

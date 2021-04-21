@@ -316,20 +316,13 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         // hiển thị hóa đơn lên table
         showTable(lstHoaDonThanhToanModels);
 
-        // lọc theo ngày
-        btnLocTheoNgay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                evtBtnLoc(dateChooser);
-            }
-        });
-        tableThanhToan.setRowHeight(25);
         tableThanhToan.getColumnModel().getColumn(0).setPreferredWidth(50);
         tableThanhToan.getColumnModel().getColumn(1).setPreferredWidth(150);
         tableThanhToan.getColumnModel().getColumn(2).setPreferredWidth(120);
         tableThanhToan.getColumnModel().getColumn(3).setPreferredWidth(120);
         tableThanhToan.getColumnModel().getColumn(4).setPreferredWidth(120);
         tableThanhToan.getColumnModel().getColumn(4).setPreferredWidth(120);
+
         // lọc theo ngày
         btnLocTheoNgay.addActionListener(new ActionListener() {
             @Override

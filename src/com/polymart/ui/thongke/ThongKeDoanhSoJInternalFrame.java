@@ -108,15 +108,15 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 					gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addGap(21)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(640, Short.MAX_VALUE))
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(613, Short.MAX_VALUE))
 				);
 				gl_panel_3.setVerticalGroup(
 					gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblNewLabel)
-							.addContainerGap(17, Short.MAX_VALUE))
+							.addContainerGap(22, Short.MAX_VALUE))
 				);
 				panel_3.setLayout(gl_panel_3);
 		panel.setLayout(gl_panel);

@@ -2,7 +2,6 @@ package com.polymart.ui.hanghoa;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,36 +10,32 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JTextArea;
-import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
 
 public class SanPhamJInternalFrame extends JInternalFrame {
 
@@ -223,7 +218,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 		JLabel lblNewLabel_2_2 = new JLabel("Loại sản phẩm");
 		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		JComboBox cbbLoaiSP = new JComboBox();
+		JComboBox<Object> cbbLoaiSP = new JComboBox<Object>();
 		
 		JButton btnThemLoai = new JButton("Thêm loại");
 		btnThemLoai.addActionListener(new ActionListener() {

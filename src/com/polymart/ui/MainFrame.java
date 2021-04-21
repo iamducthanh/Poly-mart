@@ -22,6 +22,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import com.polymart.entity.EntityAuthorization;
@@ -154,6 +155,7 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -1076,7 +1078,7 @@ public class MainFrame extends JFrame {
 		});
 		lblDanhMucOpen.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseEntered(MouseEvent e) {
 				lblDanhMucOpen.setVisible(false);
 				contentPane.add(panel, BorderLayout.WEST);
 				panel.setVisible(true);
@@ -1248,7 +1250,6 @@ public class MainFrame extends JFrame {
 				try {
 					runtime.exec("rundll32 url.dll, FileProtocolHandler " + url);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

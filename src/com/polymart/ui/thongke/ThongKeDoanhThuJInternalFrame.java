@@ -1,6 +1,7 @@
 package com.polymart.ui.thongke;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -24,8 +25,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
@@ -36,8 +37,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 
 public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 	class thongke{

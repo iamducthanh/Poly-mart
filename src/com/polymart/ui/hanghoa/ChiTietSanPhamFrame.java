@@ -1,5 +1,24 @@
 package com.polymart.ui.hanghoa;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.AnhSanPhamModel;
@@ -13,22 +32,6 @@ import com.polymart.service.impl.AnhSanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
-
-import java.awt.*;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.List;
 
 public class ChiTietSanPhamFrame extends JFrame {
 

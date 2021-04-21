@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.mapper.ChiTietSanPhamMapper;
-import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 
 public class ChiTietSanPhamDAO extends AbstractDAO<ChiTietSanPhamModel> implements IChiTietSanPhamDAO {

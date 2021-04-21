@@ -1,10 +1,8 @@
 package com.polymart.dao;
 
-import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
-import com.polymart.model.ChiTietSanPhamModel;
-
 import java.util.List;
+
+import com.polymart.model.ChiTietSanPhamModel;
 
 public interface IChiTietSanPhamDAO extends GenericDAO<ChiTietSanPhamModel> {
     List<ChiTietSanPhamModel> findAll();

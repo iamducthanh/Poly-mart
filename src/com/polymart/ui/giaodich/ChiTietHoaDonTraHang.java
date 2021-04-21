@@ -1,14 +1,16 @@
 package com.polymart.ui.giaodich;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.HeadlessException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,8 +24,6 @@ import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.SanPhamService;
-
-import javax.swing.JTextArea;
 
 public class ChiTietHoaDonTraHang extends JFrame {
 

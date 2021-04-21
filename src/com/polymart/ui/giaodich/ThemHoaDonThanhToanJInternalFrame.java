@@ -92,7 +92,6 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     }
 
     private void init() {
-        this.thanhToanJInternalFrame = thanhToanJInternalFrame;
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelDSThanhToan = new DefaultTableModel() {
 

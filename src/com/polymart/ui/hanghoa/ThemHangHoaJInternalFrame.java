@@ -44,8 +44,8 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
     private static final long serialVersionUID = -2914525596895096982L;
 
     private JPanel contentPane;
-    private JComboBox cbcTenSanPham;
-    private JComboBox cbcLoaiSanPham;
+    private JComboBox<Object> cbcTenSanPham;
+    private JComboBox<Object> cbcLoaiSanPham;
     private JTextField txtGiaBan;
     private JTextField txtMauSac;
     private JTextField txtSize;
@@ -124,7 +124,10 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1920, 639);
         modelDSSanPhamThem = new DefaultTableModel() {
-            @Override
+        	
+			private static final long serialVersionUID = 1171051584049337518L;
+
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -713,12 +716,12 @@ public class ThemHangHoaJInternalFrame extends JInternalFrame {
 
     // show combobox tên sản phẩm
     private void showTenSanPham() {
-        cbcTenSanPham.setModel(new DefaultComboBoxModel(lstSanPhamModels.stream().map(e -> e.getTenSP()).collect(Collectors.toList()).toArray()));
+        cbcTenSanPham.setModel(new DefaultComboBoxModel<Object>(lstSanPhamModels.stream().map(e -> e.getTenSP()).collect(Collectors.toList()).toArray()));
     }
 
     // show combobox loại sản phẩm
     private void showTenLoaiSanPham() {
-        cbcLoaiSanPham.setModel(new DefaultComboBoxModel(lstLoaiSanPham.stream().map(e -> e.getTenLoaiSP()).collect(Collectors.toList()).toArray()));
+        cbcLoaiSanPham.setModel(new DefaultComboBoxModel<Object>(lstLoaiSanPham.stream().map(e -> e.getTenLoaiSP()).collect(Collectors.toList()).toArray()));
     }
 
     private void close() {

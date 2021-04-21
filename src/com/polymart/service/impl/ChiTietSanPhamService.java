@@ -11,10 +11,11 @@ import java.util.stream.Collectors;
 
 import com.polymart.dao.IChiTietSanPhamDAO;
 import com.polymart.dao.impl.ChiTietSanPhamDAO;
-import com.polymart.model.*;
+import com.polymart.model.AnhSanPhamModel;
+import com.polymart.model.ChiTietSanPhamModel;
+import com.polymart.model.UpdatePhotoProduct;
 import com.polymart.service.IAnhSanPhamService;
 import com.polymart.service.IChiTietSanPhamService;
-import com.polymart.service.ISanPhamService;
 
 public class ChiTietSanPhamService implements IChiTietSanPhamService {
 

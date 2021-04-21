@@ -4,8 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -13,9 +20,11 @@ import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -25,10 +34,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.LoaiSanPhamModel;
@@ -41,13 +53,6 @@ import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.polymart.ui.MainFrame;
 import com.polymart.ui.common.uiCommon;
-import com.polymart.entity.EntityExcel;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JComboBox;
 
 public class HangHoaJInternalFrame extends JInternalFrame {
 
@@ -87,7 +92,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JRadioButton rdoDuoiDinhMucTon = new JRadioButton("Dưới định mức tồn");
 	JRadioButton rdoTonKhoTatCa = new JRadioButton("Tất cả");
 	JRadioButton rdoConHangTrongKho = new JRadioButton("Còn hàng trong kho");
-	JComboBox cboLoaiSanPham = new JComboBox();
+	JComboBox<String> cboLoaiSanPham = new JComboBox<String>();
 
 	// service
 	private ISanPhamService sanPhamService = new SanPhamService();
@@ -659,7 +664,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		for (LoaiSanPhamModel loaiSanPhamModel : lstLoaiSanPham) {
 			loaiSanPham.add(loaiSanPhamModel.getTenLoaiSP());
 		}
-		cboLoaiSanPham.setModel(new DefaultComboBoxModel(loaiSanPham));
+		cboLoaiSanPham.setModel(new DefaultComboBoxModel<String>(loaiSanPham));
 	}
 	// lọc sản phẩm trong kho 
 	public void locSanPham() {

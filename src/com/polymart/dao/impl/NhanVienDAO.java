@@ -52,7 +52,7 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public NhanVienModel findOne(Integer id) {
-		String sql = "SELECT*FROM NHANVIEN WHERE ID = ? ";
+		String sql = "SELECT*FROM NHANVIEN WHERE ID = ?";
 		List<NhanVienModel> list = query(sql, new NhanVienMapper(), id);
 		return list.isEmpty() ? null : list.get(0);
 	}
@@ -71,7 +71,7 @@ public class NhanVienDAO extends AbstractDAO<NhanVienModel> implements INhanVien
 
 	@Override
 	public List<NhanVienModel> filterByChucVu(String chucVu) {
-		String sql = "SELECT*FROM NHANVIEN WHERE CHUCVU = ?";
+		String sql = "SELECT*FROM NHANVIEN WHERE CHUCVU = ? and MATKHAU !='1'";
 		return query(sql, new NhanVienMapper(), chucVu);
 	}
 }

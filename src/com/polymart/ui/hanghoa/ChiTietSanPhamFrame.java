@@ -32,6 +32,7 @@ import com.polymart.service.impl.AnhSanPhamService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.LoaiSanPhamService;
 import com.polymart.service.impl.SanPhamService;
+import com.polymart.ui.common.uiCommon;
 
 public class ChiTietSanPhamFrame extends JFrame {
 
@@ -279,6 +280,11 @@ public class ChiTietSanPhamFrame extends JFrame {
                 updatePrice(txtGiaBan, txtGiaGiam);
             }
         });
+        
+		uiCommon.editButtonCenter(btnLu);
+		uiCommon.editButtonCenter(btnNewButton);
+		uiCommon.editButtonCenter(btnSua);
+
     }
 
     // evt thay đổi giá bán

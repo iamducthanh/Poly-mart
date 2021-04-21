@@ -23,6 +23,8 @@ import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTieuModel;
+import com.polymart.ui.common.uiCommon;
+
 import java.awt.Color;
 
 public class ThemBaoCaoChiTieuFrame extends JFrame {
@@ -128,6 +130,9 @@ public class ThemBaoCaoChiTieuFrame extends JFrame {
 		btnLuu.setBounds(369, 468, 89, 23);
 		contentPane.add(btnLuu);
 		loadMaNhanVien();
+		
+		uiCommon.editButtonCenter(btnLuu);
+
 	}
 
 

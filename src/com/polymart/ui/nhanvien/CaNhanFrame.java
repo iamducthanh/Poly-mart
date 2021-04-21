@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
+import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.taikhoan.ChangePassFrame;
 
 
@@ -214,6 +215,8 @@ public class CaNhanFrame extends JFrame {
 		});
 		btnDoiMatKau.setBounds(342, 431, 121, 30);
 		contentPane.add(btnDoiMatKau);
+		uiCommon.editButtonCenter(btnDoiMatKau);
+		uiCommon.editButtonCenter(btnThoat);
 
 		loadInfor();
 	}

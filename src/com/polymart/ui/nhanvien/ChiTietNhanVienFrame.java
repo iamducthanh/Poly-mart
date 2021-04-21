@@ -38,6 +38,7 @@ import com.polymart.entity.EntityValidate;
 import com.polymart.model.NhanVienModel;
 import com.polymart.service.INhanVienService;
 import com.polymart.service.impl.NhanVienService;
+import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JDateChooser;
 
 public class ChiTietNhanVienFrame extends JFrame {
@@ -291,6 +292,10 @@ public class ChiTietNhanVienFrame extends JFrame {
 		});
 		btnEdit.setBounds(579, 575, 78, 28);
 		contentPane.add(btnEdit);
+		
+		uiCommon.editButtonCenter(btnClear);
+		uiCommon.editButtonCenter(btnEdit);
+		uiCommon.editButtonCenter(btnSave);
 	}
 
 	protected void EditNhanVien() {

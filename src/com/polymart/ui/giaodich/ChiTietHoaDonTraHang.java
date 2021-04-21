@@ -1,6 +1,8 @@
 package com.polymart.ui.giaodich;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.HeadlessException;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -8,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,7 +24,6 @@ import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.ChiTietHoaDonThanhToanService;
 import com.polymart.service.impl.ChiTietSanPhamService;
 import com.polymart.service.impl.SanPhamService;
-import javax.swing.JTextArea;
 
 public class ChiTietHoaDonTraHang extends JFrame {
 
@@ -32,6 +34,7 @@ public class ChiTietHoaDonTraHang extends JFrame {
     private DefaultTableModel modelChiTietHoaDonTraHang;
 
     private JLabel lblMaHoaDon;
+    private JTextArea txtGhiChu;
 
     private IChiTietHoaDonThanhToanService chiTietHoaDonThanhToanService = new ChiTietHoaDonThanhToanService();
     private IChiTietSanPhamService chiTietSanPhamService = new ChiTietSanPhamService();
@@ -41,7 +44,7 @@ public class ChiTietHoaDonTraHang extends JFrame {
         init();
     }
 
-    public ChiTietHoaDonTraHang(List<ChiTietHoaDonTraHangModel> lstChiTietHoaDonTraHangModels) {
+    public ChiTietHoaDonTraHang(List<ChiTietHoaDonTraHangModel> lstChiTietHoaDonTraHangModels, String ghiChu) {
         init();
         modelChiTietHoaDonTraHang.setRowCount(0);
         for (ChiTietHoaDonTraHangModel x : lstChiTietHoaDonTraHangModels) {
@@ -60,6 +63,7 @@ public class ChiTietHoaDonTraHang extends JFrame {
                     x.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
             });
         }
+        txtGhiChu.setText(ghiChu);
         tableChiTietHoaDonTraHang.setRowHeight(25);
     }
 
@@ -114,17 +118,18 @@ public class ChiTietHoaDonTraHang extends JFrame {
         modelChiTietHoaDonTraHang.addColumn("Giảm giá");
         modelChiTietHoaDonTraHang.addColumn("Thành tiền");
         tableChiTietHoaDonTraHang.setModel(modelChiTietHoaDonTraHang);
-        
+
         JLabel lblNewLabel_1_1 = new JLabel("Ghi chú:");
         lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblNewLabel_1_1.setBounds(30, 97, 106, 25);
         contentPane.add(lblNewLabel_1_1);
-        
+
         JScrollPane scrollPane_1 = new JScrollPane();
         scrollPane_1.setBounds(183, 97, 387, 104);
         contentPane.add(scrollPane_1);
-        
-        JTextArea txtGhiChu = new JTextArea();
+
+        txtGhiChu = new JTextArea();
+        txtGhiChu.setEditable(false);
         scrollPane_1.setViewportView(txtGhiChu);
     }
 }

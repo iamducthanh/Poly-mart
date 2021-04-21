@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 public class LoaiSanPhamJInternalFrame extends JFrame {
 
+	private static final long serialVersionUID = 431830901503296761L;
+	
 	private JPanel contentPane;
 
 	/**

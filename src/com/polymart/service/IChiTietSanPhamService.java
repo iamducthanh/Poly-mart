@@ -1,11 +1,9 @@
 package com.polymart.service;
 
-import com.polymart.model.ChiTietHoaDonNhapHangModel;
-import com.polymart.model.ChiTietHoaDonThanhToanModel;
+import java.util.List;
+
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.UpdatePhotoProduct;
-
-import java.util.List;
 
 public interface IChiTietSanPhamService {
 

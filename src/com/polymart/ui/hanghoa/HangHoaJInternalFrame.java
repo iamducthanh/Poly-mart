@@ -94,7 +94,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	JRadioButton rdoDuoiDinhMucTon = new JRadioButton("Dưới định mức tồn");
 	JRadioButton rdoTonKhoTatCa = new JRadioButton("Tất cả");
 	JRadioButton rdoConHangTrongKho = new JRadioButton("Còn hàng trong kho");
-	JComboBox cboLoaiSanPham = new JComboBox();
+	JComboBox<String> cboLoaiSanPham = new JComboBox<String>();
 
 	// service
 	private ISanPhamService sanPhamService = new SanPhamService();
@@ -672,7 +672,7 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		for (LoaiSanPhamModel loaiSanPhamModel : lstLoaiSanPham) {
 			loaiSanPham.add(loaiSanPhamModel.getTenLoaiSP());
 		}
-		cboLoaiSanPham.setModel(new DefaultComboBoxModel(loaiSanPham));
+		cboLoaiSanPham.setModel(new DefaultComboBoxModel<String>(loaiSanPham));
 	}
 	// lọc sản phẩm trong kho 
 	public void locSanPham() {

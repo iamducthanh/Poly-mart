@@ -1,9 +1,9 @@
 package com.polymart.ui.nhanvien;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +21,6 @@ import javax.swing.border.EmptyBorder;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
 import com.polymart.ui.taikhoan.ChangePassFrame;
-import java.awt.Color;
 
 
 public class CaNhanFrame extends JFrame {

@@ -456,7 +456,7 @@ public class NguonHangJInternalFrame extends JInternalFrame {
 
 	public boolean checkNull(Component component, String name) {
 		if (name.isBlank()) {
-			EntityMessage.show(component, "Họ tên không được để trống");
+			EntityMessage.show(component, "Thông tin nhập không được để trống");
 			return false;
 		}
 		return true;

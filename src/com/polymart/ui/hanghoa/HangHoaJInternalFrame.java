@@ -628,7 +628,9 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 	private JTextField txtDinhMuc;
 
 	private void clickTable(int row) {
-		new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this).setVisible(true);
+		ChiTietSanPhamFrame chiTietSanPhamFrame = new ChiTietSanPhamFrame(lstChiTietSanPhamModels.get(row), this);
+		chiTietSanPhamFrame.setVisible(true);
+		chiTietSanPhamFrame.setLocationRelativeTo(null);
 	}
 
 	// Tìm kiếm sản phẩm

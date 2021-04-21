@@ -251,6 +251,11 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         );
         panel_1.setLayout(gl_panel_1);
         panel.setLayout(gl_panel);
+        
+		uiCommon.editButtonTop(btnTimKiem);
+		uiCommon.editButtonTop(btnThemPhieuNhap);
+		uiCommon.editButtonTop(btnExport);
+		uiCommon.editButtonTop(btnXoa);
 
     }
 
@@ -262,6 +267,7 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         JDateChooser dateChooser = new JDateChooser(new Date());
 
         JButton btnLocTheoNgay = new JButton("Lọc");
+        uiCommon.editButtonCenter(btnLocTheoNgay);
         GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
         gl_hangHoaJPanel.setHorizontalGroup(
                 gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)

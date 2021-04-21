@@ -241,14 +241,14 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
-			gl_panelLeft.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panelLeft.createSequentialGroup()
+			gl_panelLeft.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnTimTheoThang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-						.addComponent(dateChamCong, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-						.addComponent(btnChamCong, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-						.addComponent(btnCheckOut, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnTimTheoThang, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+						.addComponent(dateChamCong, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnChamCong, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCheckOut, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_panelLeft.setVerticalGroup(
@@ -257,12 +257,12 @@ public class ChamCongJInternalFrame extends JInternalFrame {
 					.addContainerGap()
 					.addComponent(dateChamCong, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnTimTheoThang, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnTimTheoThang, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCheckOut, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(300, Short.MAX_VALUE))
+					.addComponent(btnChamCong, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(btnCheckOut, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(202, Short.MAX_VALUE))
 		);
 		btnChamCong.setForeground(new Color(255, 255, 255));
 		btnChamCong.setFont(new Font("Tahoma", Font.PLAIN, 13));

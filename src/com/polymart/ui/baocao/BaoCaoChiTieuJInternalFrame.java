@@ -38,6 +38,7 @@ import com.polymart.dao.impl.ChiTieuDao;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.model.ChiTieuModel;
+import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JCalendar;
 import java.awt.Color;
 
@@ -178,6 +179,9 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
+		
+		uiCommon.editButtonTop(btnThmMi_2);
+		uiCommon.editButtonTop(btnXoa);
 	}
 
 	// Xóa Phiếu Chi Tiêu
@@ -317,7 +321,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
 		});
 		panelLeft.setLayout(gl_panelLeft);
 		tableChiTieu.setRowHeight(25);
-
+		
 	}
 
 	protected void xemLichSuXoaPhieu() {

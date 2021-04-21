@@ -36,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.model.NguonHangModel;
 import com.polymart.service.INguonHangService;
 import com.polymart.service.impl.NguonHangService;
+import com.polymart.ui.common.uiCommon;
 
 public class SanPhamJInternalFrame extends JInternalFrame {
 
@@ -160,7 +161,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt s\u1EA3n ph\u1EA9m", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), "Chi ti\u1EBFt s\u1EA3n ph\u1EA9m ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
@@ -179,6 +180,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(11, Short.MAX_VALUE))
 		);
+		btnMoi.setBackground(new Color(255, 255, 255));
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
@@ -300,6 +302,12 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 		modelNguonHang.addColumn("Mô tả");
 		modelNguonHang.addColumn("Trạng thái");
 		tableNguonHang.setModel(modelNguonHang);
+		
+		uiCommon.editButtonCenter(btnThem);
+		uiCommon.editButtonCenter(btnThemLoai);
+		uiCommon.editButtonCenter(btnCapNhat);
+		uiCommon.editButtonCenter(btnMoi);
+
 	}
 
 	

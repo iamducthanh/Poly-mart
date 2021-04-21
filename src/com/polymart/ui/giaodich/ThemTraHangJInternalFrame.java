@@ -51,6 +51,7 @@ import com.polymart.service.impl.HoaDonThanhToanService;
 import com.polymart.service.impl.HoaDonTraHangService;
 import com.polymart.service.impl.KhachHangService;
 import com.polymart.service.impl.SanPhamService;
+import com.polymart.ui.common.uiCommon;
 
 import javax.swing.ImageIcon;
 
@@ -361,6 +362,9 @@ public class ThemTraHangJInternalFrame extends JInternalFrame {
         });
         tableDanhSachSanPham.setRowHeight(25);
         tableDanhSachTraHang.setRowHeight(25);
+        
+        uiCommon.editButtonCenter(btnHoanTra);
+        uiCommon.editButtonCenter(btnTimKiem);
     }
 
     // set cột table

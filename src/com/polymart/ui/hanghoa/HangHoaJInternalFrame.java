@@ -137,7 +137,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(75, 0, 130));
-
 		GroupLayout gl_pnlTop = new GroupLayout(pnlTop);
 		gl_pnlTop.setHorizontalGroup(gl_pnlTop.createParallelGroup(Alignment.LEADING).addComponent(panel,
 				Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1185, Short.MAX_VALUE));
@@ -201,26 +200,35 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		lblTitle.setForeground(new Color(255, 255, 255));
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
-				gl_panel.createSequentialGroup().addContainerGap()
-						.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
-						.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-				.createSequentialGroup().addContainerGap()
-				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(lblTitle)
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+					.addGap(1)
+					.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
+					.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+							.addComponent(lblTitle)
+							.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnThemHang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+
 		panel.setLayout(gl_panel);
 		pnlTop.setLayout(gl_pnlTop);
 
@@ -274,6 +282,12 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 				locSanPham();
 			}
 		});
+		JCheckBox chkbHangHoa = new JCheckBox("Hàng hóa");
+		chkbHangHoa.setBackground(Color.WHITE);
+		chkbHangHoa.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		JCheckBox chkbCombo = new JCheckBox("Combo - đóng gói");
+		chkbCombo.setBackground(Color.WHITE);
+		chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
 		JPanel pnlTonKho = new JPanel();
 		pnlTonKho.setBackground(Color.WHITE);
@@ -477,52 +491,53 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		txtDinhMuc.setText("10");
 		txtDinhMuc.setColumns(10);
 		GroupLayout gl_pnlTonKho = new GroupLayout(pnlTonKho);
-		gl_pnlTonKho.setHorizontalGroup(
-			gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnlTonKho.createSequentialGroup()
-					.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+		gl_pnlTonKho.setHorizontalGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING).addGroup(gl_pnlTonKho
+				.createSequentialGroup()
+				.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING).addComponent(rdoTonKhoTatCa)
+
 						.addComponent(rdoVuotDinhMucTon)
 						.addComponent(rdoConHangTrongKho, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-						.addComponent(rdoHetHangTrongKho, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_pnlTonKho.createSequentialGroup()
-							.addGap(4)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtDinhMuc, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_pnlTonKho.createSequentialGroup()
-							.addGap(1)
-							.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
-								.addComponent(rdoTonKhoTatCa)
-								.addComponent(rdoDuoiDinhMucTon))))
-					.addContainerGap(67, Short.MAX_VALUE))
-		);
-		gl_pnlTonKho.setVerticalGroup(
-			gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pnlTonKho.createSequentialGroup()
-					.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtDinhMuc, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addGap(5)
-					.addComponent(rdoTonKhoTatCa)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(rdoDuoiDinhMucTon)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(rdoVuotDinhMucTon)
-					.addComponent(rdoConHangTrongKho)
-					.addComponent(rdoHetHangTrongKho))
-		);
+						.addGroup(gl_pnlTonKho.createSequentialGroup().addGap(1).addComponent(rdoDuoiDinhMucTon))
+						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.TRAILING)
+								.addGroup(Alignment.LEADING,
+										gl_pnlTonKho.createSequentialGroup().addGap(7)
+												.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 95,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(txtDinhMuc,
+														GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
+								.addComponent(rdoHetHangTrongKho, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 190,
+										GroupLayout.PREFERRED_SIZE)))
+				.addGap(15)));
+		gl_pnlTonKho.setVerticalGroup(gl_pnlTonKho.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pnlTonKho.createSequentialGroup().addComponent(rdoTonKhoTatCa)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_pnlTonKho.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtDinhMuc, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addGap(3).addComponent(rdoDuoiDinhMucTon).addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(rdoVuotDinhMucTon).addComponent(rdoConHangTrongKho)
+						.addComponent(rdoHetHangTrongKho)));
 		pnlTonKho.setLayout(gl_pnlTonKho);
 		GroupLayout gl_pnlLoaiHang = new GroupLayout(pnlLoaiHang);
-		gl_pnlLoaiHang.setHorizontalGroup(
-			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
-				.addComponent(cboLoaiSanPham, 0, 191, Short.MAX_VALUE)
-		);
-		gl_pnlLoaiHang.setVerticalGroup(
-			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+		gl_pnlLoaiHang
+				.setHorizontalGroup(
+						gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+								.addComponent(cboLoaiSanPham, 0, 190, Short.MAX_VALUE)
+								.addGroup(gl_pnlLoaiHang.createSequentialGroup().addContainerGap()
+										.addComponent(chkbHangHoa, GroupLayout.PREFERRED_SIZE, 85,
+												GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(99, Short.MAX_VALUE))
+								.addGroup(gl_pnlLoaiHang
+										.createSequentialGroup().addContainerGap().addComponent(chkbCombo,
+												GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(49, Short.MAX_VALUE)));
+		gl_pnlLoaiHang.setVerticalGroup(gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
-					.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(56, Short.MAX_VALUE))
-		);
+						.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED).addComponent(chkbHangHoa)
+						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(chkbCombo)));
 		pnlLoaiHang.setLayout(gl_pnlLoaiHang);
 		pnlNavibar.setLayout(gl_pnlNavibar);
 

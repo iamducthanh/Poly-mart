@@ -96,7 +96,7 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		// setBounds(100, 100, 1920, 639);
 		setFocusable(true);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(75, 0, 130));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -104,42 +104,67 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		contentPane.add(panel_1, BorderLayout.NORTH);
-
-		JLabel lblNewLabel = new JLabel(" Khách hàng         ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
-
-		txtFind = new JTextField();
-		txtFind.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				findByNameOrPhone();
-			}
-		});
-		txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
-		txtFind.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(5)
-					.addComponent(lblNewLabel)
-					.addGap(5)
-					.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-					.addGap(184))
+				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 977, Short.MAX_VALUE)
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(5)
-							.addComponent(lblNewLabel))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(6)
-							.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+		
+				txtFind = new JTextField();
+				txtFind.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						findByNameOrPhone();
+					}
+				});
+				txtFind.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtFind.setText(" Tìm theo tên, số điện thoại khách hàng");
+				txtFind.setColumns(10);
+				
+						txtFind.addFocusListener(new FocusAdapter() {
+							@Override
+							public void focusGained(FocusEvent e) {
+								focusGainedTextFind();
+							}
+				
+							@Override
+							public void focusLost(FocusEvent e) {
+								focusLostTextFind();
+							}
+						});
+		
+				JLabel lblNewLabel = new JLabel(" Khách hàng         ");
+				lblNewLabel.setForeground(new Color(255, 255, 255));
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(467, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtFind, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(14, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 		panel_1.setLayout(gl_panel_1);
 
 		JPanel panel_2 = new JPanel();
@@ -154,18 +179,6 @@ public class KhachHangJInternalFrame extends JInternalFrame {
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnDelete();
-			}
-		});
-
-		txtFind.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				focusGainedTextFind();
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				focusLostTextFind();
 			}
 		});
 

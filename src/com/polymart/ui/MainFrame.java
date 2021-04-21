@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -27,12 +28,15 @@ import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
+import com.polymart.ui.baocao.BaoCaoSanPhamBanRaTrongNgay;
+import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
 import com.polymart.ui.giaodich.TraHangJInternalFrame;
 import com.polymart.ui.hanghoa.HangHoaJInternalFrame;
 import com.polymart.ui.hanghoa.KiemKhoJInternalFrame;
 import com.polymart.ui.hanghoa.NguonHangJInternalFrame;
+import com.polymart.ui.hanghoa.SanPhamJInternalFrame;
 import com.polymart.ui.khachhang.KhachHangJInternalFrame;
 import com.polymart.ui.nhanvien.BangLuongJIternalFrame;
 import com.polymart.ui.nhanvien.CaNhanFrame;
@@ -140,6 +144,8 @@ public class MainFrame extends JFrame {
 	private JLabel lblTenUser = new JLabel("N");
 	private JPanel panelBaoBao = new JPanel();
 	private JPanel panelSelectBaoCao = new JPanel();
+	private final JPanel panelSanPham = new JPanel();
+	private final JLabel lblSanPham = new JLabel("      Sản phẩm");
 
 	/**
 	 * Launch the application.
@@ -161,6 +167,9 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		lblSanPham.setForeground(Color.WHITE);
+		lblSanPham.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panelSanPham.setBackground(new Color(102, 51, 153));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 867, 591);
 		contentPane = new JPanel();
@@ -553,7 +562,6 @@ public class MainFrame extends JFrame {
 		panelGiaoDich.setLayout(gl_panelGiaoDich);
 		
 		panelBaoBao.setBackground(new Color(102, 51, 153));
-		
 		lblBaoCao.setForeground(Color.WHITE);
 		lblBaoCao.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panelBaoBao = new GroupLayout(panelBaoBao);
@@ -805,8 +813,9 @@ public class MainFrame extends JFrame {
 												.addComponent(lblAvatar, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addComponent(lblTenUser, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+												.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+												.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED))
 											.addComponent(panelThongKe, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
 										.addComponent(panelBanHang, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))))
 							.addComponent(panelCaNhan, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)))
@@ -853,9 +862,6 @@ public class MainFrame extends JFrame {
 					.addContainerGap()
 					.addComponent(panelHangHoaCon, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(panelHangHoa, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
-					.addGap(1))
-				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(22, Short.MAX_VALUE)
 					.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 				.addGroup(gl_panel.createSequentialGroup()
@@ -864,6 +870,12 @@ public class MainFrame extends JFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panelKiemKho, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(panelHangHoa, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
+					.addGap(1))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panelSanPham, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -879,8 +891,10 @@ public class MainFrame extends JFrame {
 					.addComponent(panelDoanhThu, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
 					.addComponent(panelDoanhso, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addGap(2)
+					.addGap(3)
 					.addComponent(panelHangHoa, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addGap(1)
+					.addComponent(panelSanPham, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
 					.addComponent(panelHangHoaCon, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 					.addGap(1)
@@ -923,6 +937,20 @@ public class MainFrame extends JFrame {
 					.addComponent(panelBanHang, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
+		GroupLayout gl_panelSanPham = new GroupLayout(panelSanPham);
+		gl_panelSanPham.setHorizontalGroup(
+			gl_panelSanPham.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panelSanPham.createSequentialGroup()
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addComponent(lblSanPham, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panelSanPham.setVerticalGroup(
+			gl_panelSanPham.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelSanPham.createSequentialGroup()
+					.addComponent(lblSanPham, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panelSanPham.setLayout(gl_panelSanPham);
 		
 		lblDangXuat.setForeground(Color.WHITE);
 		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -968,10 +996,22 @@ public class MainFrame extends JFrame {
 				loadChild(new BangLuongJIternalFrame());
 			}
 		});
+		lblBaoCao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new BaoCaoSanPhamBanRaTrongNgay());
+			}
+		});
 		lblChamCong.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				loadChild(new ChamCongJInternalFrame());
+			}
+		});
+		lblSanPham.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadChild(new SanPhamJInternalFrame());
 			}
 		});
 		lblNhanVien1.addMouseListener(new MouseAdapter() {
@@ -1065,6 +1105,7 @@ public class MainFrame extends JFrame {
 		lblDoanhThu.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\doanhthu.png", 20, 20)));
 		lblBangLuong.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\bangluong.png", 20, 20)));
 		lblChamCong.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\chamcong.png", 20, 20)));
+		lblSanPham.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\sanpham.png", 20, 20)));
 		pnlMain.setBackground(new Color(51, 0, 153));
 		contentPane.add(pnlMain, BorderLayout.CENTER);
 		lblCaNhan.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\canhan.png", 20, 20)));
@@ -1093,6 +1134,11 @@ public class MainFrame extends JFrame {
 		listToolBar.add(new Toolbar(panelSelectCaNhan, panelCaNhan, lblCaNhan));
 		listToolBar.add(new Toolbar(panelSelectBanHang, panelBanHang, lblBanHang));
 		pnlMain.setLayout(new CardLayout(0, 0));
+        JLabel back = new JLabel("");
+        ImageIcon imageIcon = new ImageIcon("images\\bkg.jpg");
+        Image image = EntityImage.resize(imageIcon.getImage(), uiCommon.width, uiCommon.height);
+        back.setIcon(new ImageIcon(image));
+        pnlMain.add(back);
 
 		closeAllPanel();
 		addMouseEnter();
@@ -1252,6 +1298,7 @@ public class MainFrame extends JFrame {
 				if (openHangHoa == 0) {
 					openHangHoa = 1;
 					closeAllPanel();
+					panelSanPham.setVisible(true);
 					panelHangHoaCon.setVisible(true);
 					panelNguonHang.setVisible(true);
 					panelKiemKho.setVisible(true);
@@ -1260,6 +1307,7 @@ public class MainFrame extends JFrame {
 					panelHangHoaCon.setVisible(false);
 					panelNguonHang.setVisible(false);
 					panelKiemKho.setVisible(false);
+					panelSanPham.setVisible(false);
 				}
 				resetColor();
 
@@ -1373,6 +1421,7 @@ public class MainFrame extends JFrame {
 		panelCaNhan1.setVisible(false);
 		panelDangXuat.setVisible(false);
 		panelBaoBao.setVisible(false);
+		panelSanPham.setVisible(false);
 	}
 
 }

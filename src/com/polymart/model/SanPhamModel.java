@@ -7,14 +7,14 @@ public class SanPhamModel extends AbstractModel {
     private boolean statusKinhDoanh;
 
     public boolean isStatusKinhDoanh() {
-        return statusKinhDoanh;
-    }
+		return statusKinhDoanh;
+	}
 
-    public void setStatusKinhDoanh(boolean statusKinhDoanh) {
-        this.statusKinhDoanh = statusKinhDoanh;
-    }
+	public void setStatusKinhDoanh(boolean statusKinhDoanh) {
+		this.statusKinhDoanh = statusKinhDoanh;
+	}
 
-    public String getMoTa() {
+	public String getMoTa() {
         return moTa;
     }
 
@@ -38,4 +38,10 @@ public class SanPhamModel extends AbstractModel {
         this.tenSP = tenSP;
     }
 
+	@Override
+	public String toString() {
+		return "SanPhamModel [idLoaiSP=" + idLoaiSP + ", tenSP=" + tenSP + ", moTa=" + moTa + ", statusKinhDoanh="
+				+ statusKinhDoanh + "]";
+	}
+    
 }

@@ -87,6 +87,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private JCheckBox chkNoLuong = new JCheckBox("Nợ lương nhân viên");
 
 	private INhanVienService nhanVienService = new NhanVienService();
+	String path;
 
 	/**
 	 * Launch the application.
@@ -373,6 +374,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		EntityFrame.CHITIETNHANVIEN.txtSDT.setText(list.get(index).getSdt());
 		EntityFrame.CHITIETNHANVIEN.txtEmail.setText(list.get(index).getEmail());
 		EntityFrame.CHITIETNHANVIEN.txtDiaChi.setText(list.get(index).getDiaChi());
+		path = list.get(index).getAnhDaiDien();
 
 		ImageIcon imageIcon = new ImageIcon("images\\" + list.get(index).getAnhDaiDien());
 		Image image = imageIcon.getImage().getScaledInstance(164, 177, Image.SCALE_SMOOTH);

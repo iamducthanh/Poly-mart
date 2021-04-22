@@ -68,6 +68,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	ButtonGroup buttonGroup;
 	static String matKhau;
 	String img;
+	Boolean check = true;
 
 	private INhanVienService nhanVienService = new NhanVienService();
 	
@@ -308,6 +309,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 
 	protected void EditNhanVien() {
 		if (validated()) {
+			check= false;
 			NhanVienModel nhanVien = new NhanVienModel();
 			nhanVien = addThongTinNhanVien();
 			nhanVien.setId(maNhanVien);
@@ -394,8 +396,10 @@ public class ChiTietNhanVienFrame extends JFrame {
 				} catch (Exception e) {
 				}
 				nhanVienModel.setAnhDaiDien(img);
-			} else {
+			} else if(check ==true) {
 				nhanVienModel.setAnhDaiDien("images\\question.png");
+			}else {
+				nhanVienModel.setAnhDaiDien(nhanVienJInternalFrame.path);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -408,6 +412,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	 */
 	protected void addNhanVien() {
 		if (validated()) {
+			check=true;
 			NhanVienModel nhanVienModel = new NhanVienModel();
 			nhanVienModel = addThongTinNhanVien();
 

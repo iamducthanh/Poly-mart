@@ -30,9 +30,10 @@ public class SanPhamDAO extends AbstractDAO<SanPhamModel> implements ISanPhamDAO
     }
 
     public boolean update(SanPhamModel spModel) {
-        StringBuilder sql = new StringBuilder("UPDATE SANPHAM SET MOTA = ?, TRANGTHAIKINHDOANH = ?");
+        StringBuilder sql = new StringBuilder("UPDATE SANPHAM SET MOTA = ?, TRANGTHAIKINHDOANH = ?, TEN = ?");
         sql.append(" WHERE ID = ?");
-        return update(sql.toString(), spModel.getMoTa(), spModel.isStatusKinhDoanh(), spModel.getId()) > -1;
+        return update(sql.toString(), spModel.getMoTa(),
+                spModel.isStatusKinhDoanh(), spModel.getTenSP(), spModel.getId()) > -1;
     }
 
 }

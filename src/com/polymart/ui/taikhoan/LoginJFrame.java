@@ -77,7 +77,7 @@ public class LoginJFrame extends JFrame {
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
 
-        txtUsername = new JTextField("10001");
+        txtUsername = new JTextField(" Username");
         txtUsername.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -102,7 +102,7 @@ public class LoginJFrame extends JFrame {
         });
         txtPassword.setForeground(Color.black);
         txtPassword.setBackground(Color.white);
-        txtPassword.setText("12345678");
+        txtPassword.setText(" Password");
         txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtPassword.setColumns(10);
         txtPassword.setBorder(new LineBorder(Color.WHITE));

@@ -339,7 +339,6 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtNgaySinh.setCalendar(null);
 		buttonGroup.clearSelection();
 		comboBox.setSelectedIndex(0);
-		txtMatKhau.setText(null);
 		txtMucLuong.setText(null);
 		txtSDT.setText(null);
 		txtEmail.setText(null);

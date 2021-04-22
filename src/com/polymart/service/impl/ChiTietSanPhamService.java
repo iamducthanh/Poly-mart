@@ -32,7 +32,7 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     // tìm kiếm theo mã hoặc tên sản phẩm
     @Override
     public List<ChiTietSanPhamModel> findByIdOrNameProduct(String input) {
-        return chiTietSanPhamDAO.findByIdOrNameProduct(input);
+        return chiTietSanPhamDAO.findByIdOrNameProduct(input).stream().filter(e -> e.getStatus()).collect(Collectors.toList());
     }
 
     @Override
@@ -114,6 +114,7 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
         return lstChiTietSanPhamModels.stream().filter(e ->
                 e.getIdSanPham().equals(chiTietSanPhamModel.getIdSanPham())
                         && e.getMauSac().equalsIgnoreCase(chiTietSanPhamModel.getMauSac())
-                        && e.getSize().equalsIgnoreCase(chiTietSanPhamModel.getSize())).collect(Collectors.toList()).isEmpty();
+                        && e.getSize().equalsIgnoreCase(chiTietSanPhamModel.getSize())
+                        && e.getStatus()).collect(Collectors.toList()).isEmpty();
     }
 }

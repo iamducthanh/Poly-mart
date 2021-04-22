@@ -9,12 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -61,10 +65,13 @@ public class ChiTietNhanVienFrame extends JFrame {
 	static Integer maNhanVien;
 	JButton btnSave;
 	JButton btnEdit;
-	ButtonGroup buttonGroup ;
+	ButtonGroup buttonGroup;
 	static String matKhau;
+	String img;
 
 	private INhanVienService nhanVienService = new NhanVienService();
+	
+	private NhanVienJInternalFrame nhanVienJInternalFrame;
 
 	/**
 	 * Launch the application.
@@ -84,7 +91,8 @@ public class ChiTietNhanVienFrame extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public ChiTietNhanVienFrame() {
+	public ChiTietNhanVienFrame(NhanVienJInternalFrame nhanVienJInternalFrame) {
+		this.nhanVienJInternalFrame = nhanVienJInternalFrame;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\fpt.png"));
 		fileChooser = new JFileChooser();
 		initialize();
@@ -191,7 +199,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		txtNgaySinh.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if (evt.getPropertyName().equals("date")) {
-					if (!EntityValidate.checkNgaySinh(EntityFrame.CHITIETNHANVIEN, txtNgaySinh.getDate(),false)) {
+					if (!EntityValidate.checkNgaySinh(EntityFrame.CHITIETNHANVIEN, txtNgaySinh.getDate(), false)) {
 						txtNgaySinh.getCalendarButton().requestFocus();
 					}
 				}
@@ -275,7 +283,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		lblAnhDaiDien.setBounds(443, 45, 166, 210);
 		panel.add(lblAnhDaiDien);
 
-		 buttonGroup = new ButtonGroup();
+		buttonGroup = new ButtonGroup();
 		buttonGroup.add(rdoNam);
 		buttonGroup.add(rdoNu);
 
@@ -292,7 +300,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		});
 		btnEdit.setBounds(579, 575, 78, 28);
 		contentPane.add(btnEdit);
-		
+
 		uiCommon.editButtonCenter(btnClear);
 		uiCommon.editButtonCenter(btnEdit);
 		uiCommon.editButtonCenter(btnSave);
@@ -305,7 +313,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 			nhanVien.setId(maNhanVien);
 			if (nhanVienService.update(nhanVien) != null) {
 				EntityMessage.show(this, "Sửa thành công");
-				EntityFrame.NHANVIENJINTERNAL.loadToTable();
+				nhanVienJInternalFrame.loadToTable();
 				this.dispose();
 			} else {
 				EntityMessage.show(this, "Thất bại");
@@ -367,8 +375,27 @@ public class ChiTietNhanVienFrame extends JFrame {
 			nhanVienModel.setEmail(txtEmail.getText());
 			nhanVienModel.setDiaChi(txtDiaChi.getText());
 
+			BufferedImage i = null;
+			File f = null;
 			if (fileChooser.getSelectedFile() != null) {
-				nhanVienModel.setAnhDaiDien(fileChooser.getSelectedFile().getAbsolutePath());
+				img = fileChooser.getSelectedFile().getPath();
+				File file = new File(img);
+				try {
+					f = new File(img);
+					i = ImageIO.read(f);
+					img = file.getName();
+					if (img.equals("png")) {
+						f = new File("images\\" + img);
+						ImageIO.write(i, "png", f);
+					}
+					if (img.equals("jpg")) {
+						f = new File("images\\" + img);
+						ImageIO.write(i, "jpg", f);
+					}
+
+				} catch (Exception e) {
+				}
+				nhanVienModel.setAnhDaiDien(img);
 			} else {
 				nhanVienModel.setAnhDaiDien("images\\question.png");
 			}
@@ -385,10 +412,11 @@ public class ChiTietNhanVienFrame extends JFrame {
 		if (validated()) {
 			NhanVienModel nhanVienModel = new NhanVienModel();
 			nhanVienModel = addThongTinNhanVien();
+
 			// truyền dữ liệu lên database
 			if (nhanVienService.save(nhanVienModel) != null) {
 				EntityMessage.show(this, "Thêm mới thành công");
-				EntityFrame.NHANVIENJINTERNAL.loadToTable();
+				nhanVienJInternalFrame.loadToTable();
 				this.dispose();
 			} else {
 				EntityMessage.show(this, "Thất bại");
@@ -408,7 +436,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 		}
 
 		// Ngày sinh
-		if (!EntityValidate.checkNgaySinh(this, txtNgaySinh.getDate(),true)) {
+		if (!EntityValidate.checkNgaySinh(this, txtNgaySinh.getDate(), true)) {
 			txtNgaySinh.requestFocus();
 			return false;
 		}

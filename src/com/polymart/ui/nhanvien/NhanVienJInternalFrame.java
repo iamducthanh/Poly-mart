@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -63,7 +64,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private JPanel panelOption;
 	private JPanel panel = new JPanel();
 	private JComboBox<Object> cboChucDanh;
-	private List<NhanVienModel> list;
+	private List<NhanVienModel> list = new ArrayList<NhanVienModel>();
 	private int index;
 	private JButton btnXoaNV = new JButton("- Khóa Tài Khoản");
 
@@ -127,93 +128,83 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		index = 0;
 //		list = nhanVienService.findAll();
 		loadToTable();
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(75, 0, 130));
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addComponent(panel_2,
+				Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		// btnXoaNV.setEnabled(false);
 		btnXoaNV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnDelete();
 			}
 		});
-		
-				JButton btnThemNV = new JButton("+ Thêm nhân viên");
-				btnThemNV.addActionListener(chiTietNhanVien);
-		
-				txtTimKiem = new JTextField();
-				txtTimKiem.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyReleased(KeyEvent e) {
-						findNhanVien();
-					}
-				});
-				txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
-				txtTimKiem.setColumns(10);
-				txtTimKiem.addFocusListener(new FocusAdapter() {
-					@Override
-					public void focusGained(FocusEvent e) {
-						cboChucDanh.setSelectedIndex(0);
-						tblNhanVien.clearSelection();
-						btnXoaNV.setEnabled(false);
-						if (txtTimKiem.getText().equals(" Tìm theo mã, tên nhân viên")) {
-							txtTimKiem.setText("");
-						}
-					}
 
-					@Override
-					public void focusLost(FocusEvent e) {
-						if (txtTimKiem.getText().equals("")) {
-							txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
-						}
-					}
-				});
+		JButton btnThemNV = new JButton("+ Thêm nhân viên");
+		btnThemNV.addActionListener(chiTietNhanVien);
+
+		txtTimKiem = new JTextField();
+		txtTimKiem.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				findNhanVien();
+			}
+		});
+		txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
+		txtTimKiem.setColumns(10);
+		txtTimKiem.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				cboChucDanh.setSelectedIndex(0);
+				tblNhanVien.clearSelection();
+				btnXoaNV.setEnabled(false);
+				if (txtTimKiem.getText().equals(" Tìm theo mã, tên nhân viên")) {
+					txtTimKiem.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (txtTimKiem.getText().equals("")) {
+					txtTimKiem.setText(" Tìm theo mã, tên nhân viên");
+				}
+			}
+		});
 		lblNhanVien = new JLabel("Nhân viên");
 		lblNhanVien.setForeground(new Color(255, 255, 255));
 		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-					.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-		);
-		gl_panel_2.setVerticalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(14, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-					.addContainerGap(14, Short.MAX_VALUE)
-					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+		gl_panel_2.setHorizontalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING).addGroup(Alignment.TRAILING,
+				gl_panel_2.createSequentialGroup().addContainerGap()
+						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
+						.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)));
+		gl_panel_2.setVerticalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnXoaNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnThemNV, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(14, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING,
+						gl_panel_2.createSequentialGroup().addContainerGap(14, Short.MAX_VALUE)
+								.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()));
 		panel_2.setLayout(gl_panel_2);
 		panel.setLayout(gl_panel);
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		
+
 		uiCommon.editButtonTop(btnThemNV);
 		uiCommon.editButtonTop(btnXoaNV);
 
@@ -358,7 +349,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		index = tblNhanVien.getSelectedRow();
 		btnXoaNV.setEnabled(true);
 		if (mouseEvent.getClickCount() == 2) {
-			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame(this);
 			EntityFrame.CHITIETNHANVIEN.setVisible(true);
 			EntityFrame.CHITIETNHANVIEN.btnSave.setEnabled(false);
 			showDetail();
@@ -383,7 +374,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 		EntityFrame.CHITIETNHANVIEN.txtEmail.setText(list.get(index).getEmail());
 		EntityFrame.CHITIETNHANVIEN.txtDiaChi.setText(list.get(index).getDiaChi());
 
-		ImageIcon imageIcon = new ImageIcon(list.get(index).getAnhDaiDien());
+		ImageIcon imageIcon = new ImageIcon("images\\" + list.get(index).getAnhDaiDien());
 		Image image = imageIcon.getImage().getScaledInstance(164, 177, Image.SCALE_SMOOTH);
 		EntityFrame.CHITIETNHANVIEN.lblAnhDaiDien.setIcon(new ImageIcon(image));
 	}
@@ -397,7 +388,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private JLabel lblNhanVien;
 
 	protected void btnThemNhanVien() {
-		EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame();
+		EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame(this);
 		EntityFrame.CHITIETNHANVIEN.setVisible(true);
 		EntityFrame.CHITIETNHANVIEN.btnEdit.setEnabled(false);
 	}
@@ -409,12 +400,9 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	}
 
 	public void loadToTable() {
-		try {
-			list = nhanVienService.findAll();
-			reloadTable();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		list.clear();
+		list = nhanVienService.findAll();
+		reloadTable();
 	}
 
 	private void reloadTable() {

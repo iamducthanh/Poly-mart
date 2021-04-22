@@ -11,6 +11,8 @@ public interface ISanPhamService {
     List<SanPhamModel> findByIdLoai(int idLoai);
 
     SanPhamModel findByID(Integer id);
+    
+    List<SanPhamModel> searchByID(Integer id);
 
     SanPhamModel findByNameSPAndNameLoai(String nameSanPham, String nameLoaiSanPham);
 

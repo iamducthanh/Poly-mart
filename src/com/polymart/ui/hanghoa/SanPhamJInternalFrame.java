@@ -12,6 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -35,6 +36,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.dao.impl.LoaiSanPhamDAO;
+import com.polymart.dao.impl.SanPhamDAO;
 import com.polymart.entity.EntityMessage;
 import com.polymart.service.ILoaiSanPhamService;
 import com.polymart.service.ISanPhamService;
@@ -273,6 +276,11 @@ public class SanPhamJInternalFrame extends JInternalFrame {
         gr.add(rdoDangKinhDoanh);
 
         JButton btnSua = new JButton("Sửa");
+        btnSua.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		updateLoaiSP();
+        	}
+        });
         uiCommon.editButtonCenter(btnSua);
         GroupLayout gl_panel_3 = new GroupLayout(panel_3);
         gl_panel_3.setHorizontalGroup(
@@ -395,7 +403,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
     }
 
     public String getTenLoaiSpById(int id) {
-        for (LoaiSanPhamModel x : lstLoaiSanPham) {
+        for (LoaiSanPhamModel x : new LoaiSanPhamDAO().findAll()) {
             if (x.getId() == id) return x.getTenLoaiSP();
         }
         return null;
@@ -403,7 +411,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 
     public void loadTable(DefaultTableModel model) {
         model.setRowCount(0);
-        for (SanPhamModel x : lstSanPham = sanPhamService.findAll()) {
+        for (SanPhamModel x : new SanPhamDAO().findAll()) {
             model.addRow(new Object[]{
                     x.getId(), x.getTenSP(), getTenLoaiSpById(x.getIdLoaiSP()), x.getMoTa(),
                     x.isStatusKinhDoanh() ? "Đang kinh doanh" : "Ngừng kinh doanh"
@@ -413,7 +421,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 
     public void fillCbxLoaiSp(JComboBox cbx) {
         cbx.removeAllItems();
-        for (LoaiSanPhamModel x : lstLoaiSanPham = loaiSanPhamService.findAll()) {
+        for (LoaiSanPhamModel x : new LoaiSanPhamDAO().findAll()) {
             cbx.addItem(x.getTenLoaiSP());
         }
     }
@@ -447,6 +455,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
             EntityMessage.show(this, "Thao tác thất bại");
         }
     }
+
 
     public void update() {
         try {
@@ -482,24 +491,60 @@ public class SanPhamJInternalFrame extends JInternalFrame {
         rdoDangKinhDoanh.setSelected(true);
     }
 
+    List<SanPhamModel> lstSearch = new ArrayList<SanPhamModel>();
     protected void findSanPham(DefaultTableModel model) {
+    	lstSearch.removeAll(lstSearch);
         try {
-            List<SanPhamModel> lstSearch = sanPhamService.findByName(txtTim.getText());
-            sanPhamModel = sanPhamService.findByID(Integer.parseInt(txtTim.getText()));
-            if (sanPhamModel != null) {
-                lstSearch.add(sanPhamModel);
-            }
+        	try {
+        		int id = Integer.parseInt(txtTim.getText());
+        		lstSearch = sanPhamService.searchByID(id);
+			} catch (Exception e) {
+				lstSearch = sanPhamService.findByName(txtTim.getText());
+			}
             model.setRowCount(0);
-            for (SanPhamModel x : lstSearch) {
-                model.addRow(new Object[]{
-                        x.getId(), x.getTenSP(), getTenLoaiSpById(x.getIdLoaiSP()), x.getMoTa(),
-                        x.isStatusKinhDoanh() ? "Đang kinh doanh" : "Ngừng kinh doanh"
-                });
+            if(lstSearch.size() > 0) {
+                for (SanPhamModel x : lstSearch) {
+                    model.addRow(new Object[]{
+                            x.getId(), x.getTenSP(), getTenLoaiSpById(x.getIdLoaiSP()), x.getMoTa(),
+                            x.isStatusKinhDoanh() ? "Đang kinh doanh" : "Ngừng kinh doanh"
+                    });
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            EntityMessage.show(this, "Thao tác thất bại");
         }
     }
-
+    private void updateLoaiSP() { //đây afuk kiem tra lai cho tìm by name sao ko đc
+    	
+    	int i=0;
+		LoaiSanPhamModel loaispModel = new LoaiSanPhamModel();
+		String tenloai = JOptionPane.showInputDialog("Sửa tên loại sản phẩm", cbbLoaiSP.getSelectedItem().toString());
+		for(LoaiSanPhamModel x:lstLoaiSanPham) {
+			if(x.getTenLoaiSP().trim().equalsIgnoreCase(tenloai.trim())) i++;
+		}
+		if(i>0) {
+			JOptionPane.showMessageDialog(null, "Loại sản phẩm đã tồn tại");
+			return;
+		}
+		else {
+			try {
+				if(tenloai.isBlank()) {
+					JOptionPane.showMessageDialog(null, "Chưa nhập loại sản phẩm");
+					return;
+				}
+				else {
+					loaispModel.setTenLoaiSP(tenloai);
+					loaispModel.setId(lstLoaiSanPham.get(cbbLoaiSP.getSelectedIndex()).getId());
+					new LoaiSanPhamDAO().update(loaispModel);
+					JOptionPane.showMessageDialog(null, "Sửa thành công sản phẩm: "+ cbbLoaiSP.getSelectedItem().toString()+" thành: "+tenloai);
+				}
+			} catch (Exception e2) {
+				// TODO: handle exception
+				JOptionPane.showMessageDialog(null, "Thao tác thất bại");
+			}
+		}
+		fillCbxLoaiSp(cbbLoaiSP);
+		loadTable(modelSanPham);
+	}
 }
+

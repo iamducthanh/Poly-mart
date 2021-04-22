@@ -29,7 +29,7 @@ public class SanPhamService implements ISanPhamService {
             SanPhamModel sanPhamModel = null;
         };
         lstSanPham.forEach(e -> {
-            if (e.getId().equals(id)) {
+            if (String.valueOf(e.getId()).contains(String.valueOf(id))) {
                 ref.sanPhamModel = e;
             }
         });
@@ -44,7 +44,7 @@ public class SanPhamService implements ISanPhamService {
 
     @Override
     public List<SanPhamModel> findByName(String nameSanPham) {
-        return lstSanPham.stream().filter(e -> e.getTenSP().toLowerCase().contains(nameSanPham.toLowerCase())).collect(Collectors.toList());
+        return lstSanPham.stream().filter(e -> e.getTenSP().toLowerCase().contains(nameSanPham.toLowerCase())).collect(Collectors.toList()); 
     }
 
     @Override
@@ -68,4 +68,10 @@ public class SanPhamService implements ISanPhamService {
         }
         return false;
     }
+
+	@Override
+	public List<SanPhamModel> searchByID(Integer id) {
+	        return lstSanPham.stream().filter(e -> String.valueOf(e.getId()).toLowerCase().contains(String.valueOf(id))).collect(Collectors.toList());
+	    
+	}
 }

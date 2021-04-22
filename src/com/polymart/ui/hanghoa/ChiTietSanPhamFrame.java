@@ -80,6 +80,7 @@ public class ChiTietSanPhamFrame extends JFrame {
     /**
      * Create the frame.
      */
+    // vãi :)
     public ChiTietSanPhamFrame(ChiTietSanPhamModel chiTietSanPhamModel, HangHoaJInternalFrame hangHoaJInternalFrame) {
         this.hangHoaJInternalFrame = hangHoaJInternalFrame;
         this.chiTietSanPhamModel = chiTietSanPhamModel;

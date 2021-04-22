@@ -74,6 +74,7 @@ public class EntityExcel {
 
     //Nhập file Excel
     public static void importExcel(DefaultTableModel model) throws IOException {
+        Cell cell;
         Sheet sheet = new XSSFWorkbook(ChooseFileOpen()).getSheetAt(0);
         int colCount = sheet.getRow(0).getLastCellNum();
         model.setColumnCount(colCount);
@@ -81,12 +82,12 @@ public class EntityExcel {
         for (int i = 0; i < sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i + 1);
             for (int j = 0; j < colCount; j++) {
-                Cell cell = row.getCell(j);
-                model.setValueAt(cell.getStringCellValue().toString(), i, j);
+                cell = row.getCell(j);
+                model.setValueAt(cell.getStringCellValue(), i, j);
             }
         }
     }
- 
+
     //Đọc tên file
     private static String ChooseFileOpen() {
         String path = null;

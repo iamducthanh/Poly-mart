@@ -246,4 +246,20 @@ public class EntityValidate {
         }
         return true;
     }
+
+    // kiểm tra số nguyên dương
+    public static boolean checkPositiveNumber2(Component component, String number) {
+        String regex = "\\d+";
+        if (number.isBlank()) {
+            return false;
+        }
+        try {
+            if (!number.matches(regex) || Integer.parseInt(number) <= 0) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

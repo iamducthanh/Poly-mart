@@ -317,6 +317,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
 		uiCommon.editButtonTop(btnThemPhieuNhap);
 		uiCommon.editButtonTop(btnExport);
 		uiCommon.editButtonTop(btnXoa);
+		uiCommon.editButtonTop(btnLocTheoNgay);
     }
 
     private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {

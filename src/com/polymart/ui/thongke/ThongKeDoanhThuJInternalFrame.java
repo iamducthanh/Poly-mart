@@ -235,6 +235,9 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 		scrollPaneBang.setViewportView(tableThongKe_1);
 		modelThongKe.addColumn("Tháng");
 		modelThongKe.addColumn("Sản phẩm bán");
+		modelThongKe.addColumn("Tổng giá bán");
+		modelThongKe.addColumn("Tổng giá vốn");
+		modelThongKe.addColumn("Tổng giá đã giảm");
 		modelThongKe.addColumn("Doanh thu");
 		tableThongKe_1.setModel(modelThongKe);
 
@@ -277,11 +280,11 @@ public class ThongKeDoanhThuJInternalFrame extends JInternalFrame {
 
 					if (resultSet.getString(1) == null) {
 						listThongKe.add(new thongke("Tháng " +i, 0, 0));
-						modelThongKe.addRow(new Object[] { "Tháng " + i, 0, 0 });
+						modelThongKe.addRow(new Object[] { "Tháng " + i, 0, 0, 0, 0, 0 });
 					} else {
-						listThongKe.add(new thongke("Tháng " +i, Integer.valueOf(resultSet.getString(2)), resultSet.getDouble(1)));
-						modelThongKe.addRow(new Object[] { "Tháng " + i, resultSet.getString(2),
-								currencyVN.format(resultSet.getDouble(1)) });
+						listThongKe.add(new thongke("Tháng " +i, Integer.valueOf(resultSet.getString(5)), resultSet.getDouble(4)));
+						modelThongKe.addRow(new Object[] { "Tháng " + i, resultSet.getString(5), currencyVN.format(resultSet.getDouble(1)), currencyVN.format(resultSet.getDouble(2)), currencyVN.format(resultSet.getDouble(3)),
+								currencyVN.format(resultSet.getDouble(4)) });
 					}
 				}
 			} catch (SQLException e) {

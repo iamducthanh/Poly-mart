@@ -43,7 +43,7 @@ public class EntityImage {
             if (listLabelImg.get(i).getLblImage() == label) {
                 listLabelImg.get(i).setName(name);
                 ImageIcon imageIcon = new ImageIcon(path);
-                Image image = resize(imageIcon.getImage(), 143, 200);
+                Image image = resize(imageIcon.getImage(), 100, 100);
                 listLabelImg.get(i).getLblImage().setIcon(new ImageIcon(image));
                 if (i + 1 != listLabelImg.size() && !listLabelImg.get(i + 1).getLblImage().isVisible()) {
                     listLabelImg.get(i + 1).getLblImage().setVisible(true);

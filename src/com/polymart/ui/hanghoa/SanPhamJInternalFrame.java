@@ -427,17 +427,6 @@ public class SanPhamJInternalFrame extends JInternalFrame {
     }
 
     public void addSP() {
-        if (acctionProduct()) {
-            if (sanPhamService.saveSanPham(sanPhamModel)) {
-                EntityMessage.show(this, "Thêm sản phẩm thành công");
-                loadTable(modelSanPham);
-            } else {
-                EntityMessage.show(this, "Thêm sản phẩm thất bại");
-            }
-        }
-    }
-
-    private boolean acctionProduct() {
         try {
             String getNameSanPham = txtTenSanPham.getText();
             String getNameLoaiSanPham = cbbLoaiSP.getSelectedItem().toString();
@@ -453,45 +442,45 @@ public class SanPhamJInternalFrame extends JInternalFrame {
                     sanPhamModel.setIdLoaiSP(lstLoaiSanPham.get(cbbLoaiSP.getSelectedIndex()).getId());
                     sanPhamModel.setStatusKinhDoanh(rdoDangKinhDoanh.isSelected());
                     sanPhamModel.setMoTa(txtMoTa.getText());
-                    return true;
+                    if (sanPhamService.saveSanPham(sanPhamModel)) {
+                        EntityMessage.show(this, "Thêm sản phẩm thành công");
+                        loadTable(modelSanPham);
+                    } else {
+                        EntityMessage.show(this, "Thêm sản phẩm thất bại");
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             EntityMessage.show(this, "Thao tác thất bại");
         }
-        return false;
-    }
-    private boolean actionUpdate() {
-    	try {
-            String getNameSanPham = txtTenSanPham.getText();
-            String getNameLoaiSanPham = cbbLoaiSP.getSelectedItem().toString();
-            if (getNameSanPham.isBlank()) {
-                JOptionPane.showMessageDialog(null, "Chưa nhập tên sản phẩm");
-            } else {
-                	sanPhamModel = sanPhamService.findByNameSPAndNameLoai(getNameSanPham, getNameLoaiSanPham);
-                    sanPhamModel.setTenSP(getNameSanPham);
-                    sanPhamModel.setIdLoaiSP(lstLoaiSanPham.get(cbbLoaiSP.getSelectedIndex()).getId());
-                    sanPhamModel.setStatusKinhDoanh(rdoDangKinhDoanh.isSelected());
-                    sanPhamModel.setMoTa(txtMoTa.getText());
-                    return true;
-                }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            EntityMessage.show(this, "Thao tác thất bại");
-        }
-        return false;
     }
 
+
     public void update() {
-        if (actionUpdate()) {
-            if (sanPhamService.updateSanPham(sanPhamModel)) {
-                EntityMessage.show(this, "Sửa sản phẩm thành công");
-                loadTable(modelSanPham);
-            } else {
-                EntityMessage.show(this, "Sửa sản phẩm thất bại");
+        try {
+            int row = tableNguonHang.getSelectedRow();
+            if (row > -1 && row < tableNguonHang.getRowCount()) {
+                sanPhamModel = lstSanPham.get(row);
+                String getNameSanPham = txtTenSanPham.getText();
+                if (getNameSanPham.isBlank()) {
+                    EntityMessage.show(this, "Tên sản phẩm không được để trống");
+                    return;
+                }
+                sanPhamModel.setTenSP(txtTenSanPham.getText());
+                sanPhamModel.setIdLoaiSP(lstLoaiSanPham.get(cbbLoaiSP.getSelectedIndex()).getId());
+                sanPhamModel.setStatusKinhDoanh(rdoDangKinhDoanh.isSelected());
+                sanPhamModel.setMoTa(txtMoTa.getText());
+                if (sanPhamService.updateSanPham(sanPhamModel)) {
+                    EntityMessage.show(this, "Sửa sản phẩm thành công");
+                    loadTable(modelSanPham);
+                } else {
+                    EntityMessage.show(this, "Sửa sản phẩm thất bại");
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            EntityMessage.show(this, "Thao tác thất bại");
         }
     }
 

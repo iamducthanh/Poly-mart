@@ -942,6 +942,22 @@ public class MainFrame extends JFrame {
 				caNhanFrame.setVisible(true);
 			}
 		});
+		lblAvatar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CaNhanFrame caNhanFrame = new CaNhanFrame();
+				caNhanFrame.setLocationRelativeTo(null);
+				caNhanFrame.setVisible(true);
+			}
+		});
+		lblTenUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CaNhanFrame caNhanFrame = new CaNhanFrame();
+				caNhanFrame.setLocationRelativeTo(null);
+				caNhanFrame.setVisible(true);
+			}
+		});
 		lblDoanhSo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

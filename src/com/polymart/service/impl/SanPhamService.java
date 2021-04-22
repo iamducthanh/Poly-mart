@@ -41,4 +41,31 @@ public class SanPhamService implements ISanPhamService {
         List<SanPhamModel> lstTimKiem = sanPhamDAO.findByNameSPAndNameLoai(nameSanPham, nameLoaiSanPham);
         return lstTimKiem.isEmpty() ? null : lstTimKiem.get(0);
     }
+
+    @Override
+    public List<SanPhamModel> findByName(String nameSanPham) {
+        return lstSanPham.stream().filter(e -> e.getTenSP().toLowerCase().contains(nameSanPham.toLowerCase())).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean updateSanPham(SanPhamModel sanPhamModel) {
+        if (sanPhamModel != null) {
+            if (sanPhamDAO.update(sanPhamModel)) {
+                lstSanPham = sanPhamDAO.findAll();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean saveSanPham(SanPhamModel sanPhamModel) {
+        if (sanPhamModel != null) {
+            if (sanPhamDAO.save(sanPhamModel)) {
+                lstSanPham = sanPhamDAO.findAll();
+                return true;
+            }
+        }
+        return false;
+    }
 }

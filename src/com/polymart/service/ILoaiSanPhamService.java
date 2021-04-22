@@ -11,4 +11,8 @@ public interface ILoaiSanPhamService {
 
     List<LoaiSanPhamModel> findById(Integer id);
 
+    boolean saveLoaiSanPham(LoaiSanPhamModel loaiSanPhamModel);
+
+    boolean findByName(String nameLoaiSanPham);
+
 }

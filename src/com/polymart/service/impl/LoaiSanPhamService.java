@@ -6,6 +6,7 @@ import com.polymart.model.LoaiSanPhamModel;
 import com.polymart.service.ILoaiSanPhamService;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class LoaiSanPhamService implements ILoaiSanPhamService {
@@ -34,5 +35,23 @@ public class LoaiSanPhamService implements ILoaiSanPhamService {
     @Override
     public List<LoaiSanPhamModel> findById(Integer id) {
         return lstLoaiSanPham.stream().filter(e -> e.getId().equals(id)).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean saveLoaiSanPham(LoaiSanPhamModel loaiSanPhamModel) {
+        if (loaiSanPhamModel != null) {
+            if (loaiSanPhamDAO.save(loaiSanPhamModel) > -1) {
+                lstLoaiSanPham = loaiSanPhamDAO.findAll();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean findByName(String nameLoaiSanPham) {
+        return !lstLoaiSanPham.stream()
+                .filter(e -> e.getTenLoaiSP().toLowerCase(Locale.ROOT).equalsIgnoreCase(nameLoaiSanPham.toLowerCase(Locale.ROOT)))
+                .collect(Collectors.toList()).isEmpty();
     }
 }

@@ -14,4 +14,10 @@ public interface ISanPhamService {
 
     SanPhamModel findByNameSPAndNameLoai(String nameSanPham, String nameLoaiSanPham);
 
+    List<SanPhamModel> findByName(String nameSanPham);
+
+    boolean updateSanPham(SanPhamModel sanPhamModel);
+
+    boolean saveSanPham(SanPhamModel sanPhamModel);
+
 }

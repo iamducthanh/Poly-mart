@@ -144,7 +144,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     }
 
     public void initTopThanhToan() {
-
         optionKiemKhoFrame.setSize(344, 234);
         optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
         panelOption = new JPanel();

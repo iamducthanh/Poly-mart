@@ -550,6 +550,16 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         btnTm.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		String sdtTim = JOptionPane.showInputDialog("Nhập số điện thoại khách hàng cần tìm!");
+        		int i = 0;
+        		for (;i<lstKhachHang.size(); i++) {
+					if(lstKhachHang.get(i).getSdt().equals(sdtTim)) {
+						
+						break;
+					}
+				}
+        		if(i == lstKhachHang.size()) {
+        			JOptionPane.showMessageDialog(null, "đéo thấy");
+        		}
         	}
         });
         GroupLayout gl_panel_2 = new GroupLayout(panel_2);

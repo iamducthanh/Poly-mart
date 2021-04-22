@@ -383,15 +383,14 @@ public class ChiTietNhanVienFrame extends JFrame {
 					f = new File(img);
 					i = ImageIO.read(f);
 					img = file.getName();
-					if (img.equals("png")) {
+					if (img.contains("png")) {
 						f = new File("images\\" + img);
 						ImageIO.write(i, "png", f);
 					}
-					if (img.equals("jpg")) {
+					if (img.contains("jpg")) {
 						f = new File("images\\" + img);
 						ImageIO.write(i, "jpg", f);
 					}
-
 				} catch (Exception e) {
 				}
 				nhanVienModel.setAnhDaiDien(img);

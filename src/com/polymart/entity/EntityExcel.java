@@ -74,19 +74,8 @@ public class EntityExcel {
 
     //Nhập file Excel
     public static void importExcel(DefaultTableModel model) throws IOException {
-        //InputStream inputStream = new FileInputStream(new File(ChooseFileOpen()));
-        Workbook excel = new XSSFWorkbook(ChooseFileOpen());
-        Sheet sheet = excel.getSheetAt(0);
-        Row fistRow = sheet.getRow(0);
-        Iterator<Cell> cellIterator = fistRow.cellIterator();
-        int colCount = 0;
-        while (cellIterator.hasNext()) {
-            colCount++;
-            cellIterator.next();
-            if (!cellIterator.hasNext()) {
-                break;
-            }
-        }
+        Sheet sheet = new XSSFWorkbook(ChooseFileOpen()).getSheetAt(0);
+        int colCount = sheet.getRow(0).getLastCellNum();
         model.setColumnCount(colCount);
         model.setRowCount(sheet.getLastRowNum());
         for (int i = 0; i < sheet.getLastRowNum(); i++) {

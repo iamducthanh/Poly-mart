@@ -9,13 +9,16 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -23,13 +26,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
 import com.polymart.ui.baocao.BaoCaoSanPhamBanRaTrongNgay;
-import com.polymart.ui.common.RoundedBorder;
 import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
@@ -78,7 +81,6 @@ public class MainFrame extends JFrame {
 	ArrayList<Toolbar> listToolBar = new ArrayList<Toolbar>();
 
 	private JPanel contentPane;
-
 	JLabel lblThongKe = new JLabel("       Thống kê");
 	JLabel lblBanHang = new JLabel("       Bán hàng");
 	JLabel lblCaNhan = new JLabel("       Cá nhân");
@@ -104,10 +106,10 @@ public class MainFrame extends JFrame {
 	JPanel panelGiaoDich = new JPanel();
 	JPanel panelHangHoa = new JPanel();
 	JPanel panelBaoCao1 = new JPanel();
+	JPanel panelLeft = new JPanel();
 	private JLabel lblDanhMuc = new JLabel("");
 
 	public static JDesktopPane pnlMain = new JDesktopPane();
-	private JLabel lblDanhMucOpen = new JLabel("");
 	JPanel panel = new JPanel();
 	private JPanel panelDoanhThu = new JPanel();
 	private JLabel lblDoanhThu = new JLabel("      Thống kê doanh thu");
@@ -917,7 +919,6 @@ public class MainFrame extends JFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panelSanPham.setLayout(gl_panelSanPham);
-		
 		lblDangXuat.setForeground(Color.WHITE);
 		lblDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_panelDangXuat = new GroupLayout(panelDangXuat);
@@ -1050,21 +1051,13 @@ public class MainFrame extends JFrame {
 				loadChild(new KhachHangJInternalFrame());
 			}
 		});
-		lblDanhMucOpen.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				lblDanhMucOpen.setVisible(false);
-				contentPane.add(panel, BorderLayout.WEST);
-				panel.setVisible(true);
-			}
-		});
 		
 		lblDanhMuc.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panel.setVisible(false);
-				contentPane.add(lblDanhMucOpen, BorderLayout.WEST);
-				lblDanhMucOpen.setVisible(true);
+				contentPane.add(panelLeft, BorderLayout.WEST);
+				panelLeft.setVisible(true);
 			}
 		});
 		lblHangHoaCon.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
@@ -1088,7 +1081,6 @@ public class MainFrame extends JFrame {
 		lblKhachHang.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\khachhang.png", 20, 20)));
 		lblThongKe.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\thongke.png", 20, 20)));
 		lblDanhMuc.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmuc.png", 20, 20)));
-		lblDanhMucOpen.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmucopen.png", 30, 30)));
 		lblCaNhan1.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\canhan.png", 20, 20)));
 		lblDangXuat.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\logout1.png", 20, 20)));
 		lblKhachHang1.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\khachhang.png", 20, 20)));
@@ -1117,7 +1109,92 @@ public class MainFrame extends JFrame {
 
 		closeAllPanel();
 		addMouseEnter();
+		initPanelLeft();
 	}
+	
+	public void initPanelLeft() {
+		panelLeft.setLayout(new BoxLayout(panelLeft, BoxLayout.Y_AXIS));
+		panelLeft.setBackground(new Color(75, 0, 130));
+
+		JLabel lbl25 = new JLabel(" ");
+		panelLeft.add(lbl25);
+		JButton lblDanhMucOpen = new JButton("");
+		lblDanhMucOpen.setContentAreaFilled(false);
+		lblDanhMucOpen.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblDanhMucOpen);
+		
+		JButton lblThongKel = new JButton("");
+		lblThongKel.setContentAreaFilled(false);
+		lblThongKel.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblThongKel);
+		
+		JButton lblHangHoal = new JButton("");
+		lblHangHoal.setContentAreaFilled(false);
+		lblHangHoal.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblHangHoal);
+		
+		JButton lblBaoCaol = new JButton("");
+		lblBaoCaol.setContentAreaFilled(false);
+		lblBaoCaol.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblBaoCaol);
+		
+		JButton lblGiaoDichl = new JButton("");
+		lblGiaoDichl.setContentAreaFilled(false);
+		lblGiaoDichl.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblGiaoDichl);
+		
+		JButton lblNhanVienl = new JButton("");
+		lblNhanVienl.setContentAreaFilled(false);
+		lblNhanVienl.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblNhanVienl);
+		
+		JButton lblKhachHangl = new JButton("");
+		lblKhachHangl.setContentAreaFilled(false);
+		lblKhachHangl.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblKhachHangl);
+		
+		JButton lblCaNhanl = new JButton("");
+		lblCaNhanl.setContentAreaFilled(false);
+		lblCaNhanl.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblCaNhanl);
+		
+		JButton lblBanHangl = new JButton("");
+		lblBanHangl.setContentAreaFilled(false);
+		lblBanHangl.setBorder(new LineBorder(new Color(75, 0, 130), 10));
+		panelLeft.add(lblBanHangl);
+		
+		lblDanhMucOpen.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\danhmuc.png", 20, 20)));
+		lblThongKel.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\thongke.png", 20, 20)));
+		lblHangHoal.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\hanghoa.png", 20, 20)));
+		lblBaoCaol.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\baocao.png", 20, 20)));
+		lblGiaoDichl.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\giaodich.png", 20, 20)));
+		lblNhanVienl.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\nhanvien.png", 20, 20)));
+		lblKhachHangl.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\khachhang.png", 20, 20)));
+		lblCaNhanl.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\canhan.png", 20, 20)));
+		lblBanHangl.setIcon(new ImageIcon(EntityImage.resizeTheoUrl("images\\banhang.png", 20, 20)));
+		
+		lblDanhMucOpen.addMouseListener(openDanhMuc);
+		lblThongKel.addMouseListener(openDanhMuc);
+		lblBanHangl.addMouseListener(openDanhMuc);
+		lblBaoCaol.addMouseListener(openDanhMuc);
+		lblCaNhanl.addMouseListener(openDanhMuc);
+		lblGiaoDichl.addMouseListener(openDanhMuc);
+		lblHangHoal.addMouseListener(openDanhMuc);
+		lblKhachHangl.addMouseListener(openDanhMuc);
+		lblNhanVienl.addMouseListener(openDanhMuc);
+	}
+		
+	MouseListener openDanhMuc = new MouseListener() {
+		public void mouseReleased(MouseEvent e) {}
+		public void mousePressed(MouseEvent e) {}
+		public void mouseExited(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {
+			panelLeft.setVisible(false);
+			contentPane.add(panel, BorderLayout.WEST);
+			panel.setVisible(true);
+		}
+		public void mouseClicked(MouseEvent e) {}
+	};
 	
 	public void addMouseEnter() {
 		lblBaoCaoTo.addMouseListener(new MouseAdapter() {

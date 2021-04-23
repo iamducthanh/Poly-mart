@@ -6,7 +6,13 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -20,6 +26,12 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.dao.impl.BaoCaoSanPhamBanRaDao;
+import com.polymart.dao.impl.SanPhamDAO;
+import com.polymart.model.BaoCaoNgayModel;
+import com.polymart.model.SanPhamModel;
+import com.polymart.service.ISanPhamService;
+import com.polymart.service.impl.SanPhamService;
 import com.toedter.calendar.JCalendar;
 
 public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
@@ -33,6 +45,9 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 	private JTable tableBaoCao;
 	JCalendar dateNgayBaoCao;
 	private Calendar calendar;
+	List<BaoCaoNgayModel> list = new ArrayList<BaoCaoNgayModel>();
+	private ISanPhamService sanPhamService = new SanPhamService();
+	BaoCaoSanPhamBanRaDao baoCaoDao= new BaoCaoSanPhamBanRaDao();
 
 	/**
 	 * Launch the application.
@@ -70,6 +85,8 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 
 		initTopChamCong();
 		initCenterChamCong();
+		loadList();
+		loabtable();
 
 		tableBaoCao.setRowHeight(25);
 	}
@@ -122,25 +139,22 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		scrollPane.setViewportView(tableBaoCao);
 		modelBaoCao.addColumn("Mã sản phẩm");
 		modelBaoCao.addColumn("Tên sản phẩm");
-		modelBaoCao.addColumn("Số lượng");
-		modelBaoCao.addColumn("S");
-		modelBaoCao.addColumn("M");
-		modelBaoCao.addColumn("L");
-		modelBaoCao.addColumn("X");
-		modelBaoCao.addColumn("XL");
-		modelBaoCao.addColumn("XXL");
-		modelBaoCao.addColumn("XXXL");
 		modelBaoCao.addColumn("Tổng số lượng bán");
+		modelBaoCao.addColumn("Tổng số Hiện Tại Còn Trong kho");
+		modelBaoCao.addColumn("Số Lượng Bán Ra Trong Tháng");
+		modelBaoCao.addColumn("Số Lượng Trung Bình");
+		
+		
 		tableBaoCao.setModel(modelBaoCao);
 
 
-		tableBaoCao.getColumnModel().getColumn(3).setPreferredWidth(30);
-		tableBaoCao.getColumnModel().getColumn(4).setPreferredWidth(30);
-		tableBaoCao.getColumnModel().getColumn(5).setPreferredWidth(30);
-		tableBaoCao.getColumnModel().getColumn(6).setPreferredWidth(30);
-		tableBaoCao.getColumnModel().getColumn(7).setPreferredWidth(30);
-		tableBaoCao.getColumnModel().getColumn(8).setPreferredWidth(30);
-		tableBaoCao.getColumnModel().getColumn(9).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(3).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(4).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(5).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(6).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(7).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(8).setPreferredWidth(30);
+//		tableBaoCao.getColumnModel().getColumn(9).setPreferredWidth(30);
 
 		JPanel panelLeft = new JPanel();
 		panelLeft.setBackground(Color.WHITE);
@@ -178,6 +192,37 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		panelLeft.setLayout(gl_panelLeft);
 
 	}
-
+	public void loadList() {
+		list.clear();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yy-mm-dd");
+//		Date  now = sdf.parse("2021-4-21");
+		list = baoCaoDao.finAll("2021","4","21");
+		
+	}
+	public void loabtable()  {
+		modelBaoCao.setRowCount(0);
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-mm-dd");
+		Date now=null;
+		try {
+			now = sdf.parse("2021-4-21");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(now);
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		double d = day;
+		System.out.println(day);
+		for (BaoCaoNgayModel baoCaoNgayModel : list) {
+			SanPhamModel sanPhamModel = sanPhamService.findByID(baoCaoNgayModel.getIdSanPham());
+			int soLuongBanRaTrongThang = baoCaoDao.tbSoLuongBanRa("2021","4",baoCaoNgayModel.getIdSanPham());
+			double a = soLuongBanRaTrongThang/d;
+			System.out.println(a);
+			modelBaoCao.addRow(new Object[] {baoCaoNgayModel.getIdSanPham(),sanPhamModel.getTenSP(),baoCaoNgayModel.getSoLuongBanRa(),
+					baoCaoDao.soLuongTrongKho(baoCaoNgayModel.getIdSanPham())
+					,soLuongBanRaTrongThang,a});
+		}
+	}
     
 }

@@ -564,6 +564,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         txtTienKhachDua.setColumns(10);
 
         JButton btnTm = new JButton("Tìm");
+        uiCommon.editButtonCenter(btnTm);
         btnTm.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 evtSearchKhachHang(cbbKhachHang);

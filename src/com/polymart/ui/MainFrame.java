@@ -29,6 +29,7 @@ import com.polymart.entity.EntityImage;
 import com.polymart.entity.EntityMessage;
 import com.polymart.ui.baocao.BaoCaoChiTieuJInternalFrame;
 import com.polymart.ui.baocao.BaoCaoSanPhamBanRaTrongNgay;
+import com.polymart.ui.common.RoundedBorder;
 import com.polymart.ui.common.uiCommon;
 import com.polymart.ui.giaodich.NhapHangJInternalFrame;
 import com.polymart.ui.giaodich.ThanhToanJInternalFrame;
@@ -185,7 +186,7 @@ public class MainFrame extends JFrame {
 		if (EntityAuthorization.USER != null) {
 			String urlAnh = "images\\" + EntityAuthorization.USER.getAnhDaiDien();
 			lblAvatar.setIcon(new ImageIcon(EntityImage.resizeTheoUrl(urlAnh, 50, 50)));
-
+			
 			lblTenUser.setText(EntityAuthorization.USER.getHoTen());
 		}
 		
@@ -786,8 +787,8 @@ public class MainFrame extends JFrame {
 												.addComponent(lblDanhMuc, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(ComponentPlacement.RELATED))
 											.addComponent(panelThongKe, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
-										.addComponent(panelBanHang, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))))
-							.addComponent(panelCaNhan, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(panelBanHang, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE))))
+							.addComponent(panelCaNhan, GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)))
 					.addGap(1))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -843,6 +844,7 @@ public class MainFrame extends JFrame {
 					.addContainerGap()
 					.addComponent(panelSanPham, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE))
 		);
+		lblAvatar.setBackground(new Color(75, 0, 130));
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()

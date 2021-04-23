@@ -199,7 +199,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		panelContent.setLayout(new BorderLayout(0, 0));
 
 		tableThongKe = new JTable();
-		tableThongKe.setBackground(new Color(255, 255, 255));
+		tableThongKe.setBackground(Color.WHITE);
 		scrollPaneBang.setViewportView(tableThongKe);
 
 		ButtonGroup gr = new ButtonGroup();
@@ -208,7 +208,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		rdoTheoBang.setSelected(true);
 
 		tableThongKe_1 = new JTable();
-		tableThongKe_1.setBackground(new Color(240, 255, 255));
+		tableThongKe_1.setBackground(Color.WHITE);
 		scrollPaneBang.setViewportView(tableThongKe_1);
 		modelThongKe.addColumn("Mã sản phẩm");
 		modelThongKe.addColumn("Tên sản phẩm");
@@ -227,7 +227,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		loadTableDoanhThu();
+		loadTableDoanhSo();
 		rdoBieuDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadBieuDoDoanhThu(modelThongKe);
@@ -236,21 +236,21 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		});
 		cbbNam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadTableDoanhThu();
+				loadTableDoanhSo();
 
 			}
 		});
 		
 		cbbThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loadTableDoanhThu();
+				loadTableDoanhSo();
 
 			}
 		});
 		tableThongKe_1.setRowHeight(25);
 	}
 
-	public void loadTableDoanhThu() {
+	public void loadTableDoanhSo() {
 		modelThongKe.setRowCount(0);
 		ThongKeService thongKeService = new ThongKeService();
 		ResultSet tbThongKeDoanhSo = thongKeService.loadTableThongKeDoanhSo((String) cbbNam.getSelectedItem(),
@@ -258,7 +258,7 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		try {
 			while (tbThongKeDoanhSo.next()) {
 				modelThongKe.addRow(new Object[] { tbThongKeDoanhSo.getString(1), tbThongKeDoanhSo.getString(2),
-						tbThongKeDoanhSo.getString(5) });
+						tbThongKeDoanhSo.getString(3) });
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

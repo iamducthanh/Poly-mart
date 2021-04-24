@@ -36,8 +36,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.config.SecurityConfig;
 import com.polymart.dao.impl.LoaiSanPhamDAO;
 import com.polymart.dao.impl.SanPhamDAO;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.service.ILoaiSanPhamService;
 import com.polymart.service.ISanPhamService;
@@ -66,7 +68,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
     private DefaultTableModel modelSanPham;
     private JButton btnCapNhat = new JButton("Cập nhật");
     private JButton btnThem = new JButton("Thêm");
-    private JButton btnMoi = new JButton("Tạo mới");
+    private JButton btnTaoMoi = new JButton("Tạo mới");
 
     private ISanPhamService sanPhamService = new SanPhamService();
     private ILoaiSanPhamService loaiSanPhamService = new LoaiSanPhamService();
@@ -200,7 +202,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
                                 .addContainerGap(11, Short.MAX_VALUE))
                         .addGroup(gl_panel_2.createSequentialGroup()
                                 .addContainerGap(184, Short.MAX_VALUE)
-                                .addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
@@ -217,7 +219,7 @@ public class SanPhamJInternalFrame extends JInternalFrame {
                 update();
             }
         });
-        btnMoi.addActionListener(new ActionListener() {
+        btnTaoMoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 clear();
             }
@@ -230,10 +232,10 @@ public class SanPhamJInternalFrame extends JInternalFrame {
                                 .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(btnCapNhat, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnThem, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnMoi, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnTaoMoi, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(56, Short.MAX_VALUE))
         );
-        btnMoi.setBackground(new Color(255, 255, 255));
+        btnTaoMoi.setBackground(new Color(255, 255, 255));
 
         JLabel lblNewLabel_2 = new JLabel("Tên sản phẩm");
         lblNewLabel_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 16));
@@ -277,9 +279,9 @@ public class SanPhamJInternalFrame extends JInternalFrame {
 
         JButton btnSua = new JButton("Sửa");
         btnSua.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		updateLoaiSP();
-        	}
+            public void actionPerformed(ActionEvent e) {
+                updateLoaiSP();
+            }
         });
         uiCommon.editButtonCenter(btnSua);
         GroupLayout gl_panel_3 = new GroupLayout(panel_3);
@@ -366,7 +368,26 @@ public class SanPhamJInternalFrame extends JInternalFrame {
         uiCommon.editButtonCenter(btnThem);
         uiCommon.editButtonCenter(btnThemLoai);
         uiCommon.editButtonCenter(btnCapNhat);
-        uiCommon.editButtonCenter(btnMoi);
+        uiCommon.editButtonCenter(btnTaoMoi);
+
+        setChucVu(btnThemLoai, btnSua);
+
+    }
+
+    private void setChucVu(JButton btnThemLoai, JButton btnSua) {
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_QUANLY)) {
+            return;
+        }
+        btnThemLoai.setVisible(false);
+        btnSua.setVisible(false);
+        btnThem.setVisible(false);
+        btnCapNhat.setVisible(false);
+        btnTaoMoi.setVisible(false);
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
+            btnThemLoai.setVisible(true);
+            btnThem.setVisible(true);
+            btnTaoMoi.setVisible(true);
+        }
     }
 
     private void saveLoaiSanPham() {
@@ -492,17 +513,18 @@ public class SanPhamJInternalFrame extends JInternalFrame {
     }
 
     List<SanPhamModel> lstSearch = new ArrayList<SanPhamModel>();
+
     protected void findSanPham(DefaultTableModel model) {
-    	lstSearch.removeAll(lstSearch);
+        lstSearch.removeAll(lstSearch);
         try {
-        	try {
-        		int id = Integer.parseInt(txtTim.getText());
-        		lstSearch = sanPhamService.searchByID(id);
-			} catch (Exception e) {
-				lstSearch = sanPhamService.findByName(txtTim.getText());
-			}
+            try {
+                int id = Integer.parseInt(txtTim.getText());
+                lstSearch = sanPhamService.searchByID(id);
+            } catch (Exception e) {
+                lstSearch = sanPhamService.findByName(txtTim.getText());
+            }
             model.setRowCount(0);
-            if(lstSearch.size() > 0) {
+            if (lstSearch.size() > 0) {
                 for (SanPhamModel x : lstSearch) {
                     model.addRow(new Object[]{
                             x.getId(), x.getTenSP(), getTenLoaiSpById(x.getIdLoaiSP()), x.getMoTa(),
@@ -514,37 +536,36 @@ public class SanPhamJInternalFrame extends JInternalFrame {
             e.printStackTrace();
         }
     }
+
     private void updateLoaiSP() { //đây afuk kiem tra lai cho tìm by name sao ko đc
-    	
-    	int i=0;
-		LoaiSanPhamModel loaispModel = new LoaiSanPhamModel();
-		String tenloai = JOptionPane.showInputDialog("Sửa tên loại sản phẩm", cbbLoaiSP.getSelectedItem().toString());
-		for(LoaiSanPhamModel x:lstLoaiSanPham) {
-			if(x.getTenLoaiSP().trim().equalsIgnoreCase(tenloai.trim())) i++;
-		}
-		if(i>0) {
-			JOptionPane.showMessageDialog(null, "Loại sản phẩm đã tồn tại");
-			return;
-		}
-		else {
-			try {
-				if(tenloai.isBlank()) {
-					JOptionPane.showMessageDialog(null, "Chưa nhập loại sản phẩm");
-					return;
-				}
-				else {
-					loaispModel.setTenLoaiSP(tenloai);
-					loaispModel.setId(lstLoaiSanPham.get(cbbLoaiSP.getSelectedIndex()).getId());
-					new LoaiSanPhamDAO().update(loaispModel);
-					JOptionPane.showMessageDialog(null, "Sửa thành công sản phẩm: "+ cbbLoaiSP.getSelectedItem().toString()+" thành: "+tenloai);
-				}
-			} catch (Exception e2) {
-				// TODO: handle exception
-				JOptionPane.showMessageDialog(null, "Thao tác thất bại");
-			}
-		}
-		fillCbxLoaiSp(cbbLoaiSP);
-		loadTable(modelSanPham);
-	}
+
+        int i = 0;
+        LoaiSanPhamModel loaispModel = new LoaiSanPhamModel();
+        String tenloai = JOptionPane.showInputDialog("Sửa tên loại sản phẩm", cbbLoaiSP.getSelectedItem().toString());
+        for (LoaiSanPhamModel x : lstLoaiSanPham) {
+            if (x.getTenLoaiSP().trim().equalsIgnoreCase(tenloai.trim())) i++;
+        }
+        if (i > 0) {
+            JOptionPane.showMessageDialog(null, "Loại sản phẩm đã tồn tại");
+            return;
+        } else {
+            try {
+                if (tenloai.isBlank()) {
+                    JOptionPane.showMessageDialog(null, "Chưa nhập loại sản phẩm");
+                    return;
+                } else {
+                    loaispModel.setTenLoaiSP(tenloai);
+                    loaispModel.setId(lstLoaiSanPham.get(cbbLoaiSP.getSelectedIndex()).getId());
+                    new LoaiSanPhamDAO().update(loaispModel);
+                    JOptionPane.showMessageDialog(null, "Sửa thành công sản phẩm: " + cbbLoaiSP.getSelectedItem().toString() + " thành: " + tenloai);
+                }
+            } catch (Exception e2) {
+                // TODO: handle exception
+                JOptionPane.showMessageDialog(null, "Thao tác thất bại");
+            }
+        }
+        fillCbxLoaiSp(cbbLoaiSP);
+        loadTable(modelSanPham);
+    }
 }
 

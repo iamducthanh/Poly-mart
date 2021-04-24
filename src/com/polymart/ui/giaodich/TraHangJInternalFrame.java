@@ -33,10 +33,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityExcel;
-import com.polymart.entity.EntityFrame;
-import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
+import com.polymart.config.SecurityConfig;
+import com.polymart.entity.*;
 import com.polymart.model.ChiTietHoaDonTraHangModel;
 import com.polymart.model.HoaDonTraHangModel;
 import com.polymart.service.IChiTietHoaDonThanhToanService;
@@ -94,6 +92,10 @@ public class TraHangJInternalFrame extends JInternalFrame {
      * Create the frame.
      */
     public TraHangJInternalFrame() {
+        init();
+    }
+
+    public void init() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelTraHang = new DefaultTableModel() {
 
@@ -118,13 +120,80 @@ public class TraHangJInternalFrame extends JInternalFrame {
         hangHoaJPanel.setBackground(Color.WHITE);
 
         contentPane.add(hangHoaJPanel, BorderLayout.WEST);
-        initTopTraHang();
-        initCenterTraHang();
 
-        
-    }
+        JScrollPane scrollPane = new JScrollPane();
+        contentPane.add(scrollPane, BorderLayout.CENTER);
+        JLabel lblNewLabel_9 = new JLabel("Thời gian");
 
-    public void initTopTraHang() {
+        JDateChooser dateChooser = new JDateChooser(new Date());
+
+        JButton btnLocTheoNgay = new JButton("Lọc");
+        uiCommon.editButtonCenter(btnLocTheoNgay);
+        GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
+        gl_hangHoaJPanel.setHorizontalGroup(
+                gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
+                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        gl_hangHoaJPanel.setVerticalGroup(
+                gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
+                                .addGap(5)
+                                .addComponent(lblNewLabel_9)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(133, Short.MAX_VALUE))
+        );
+
+        hangHoaJPanel.setLayout(gl_hangHoaJPanel);
+        tableTraHang = new JTable();
+        tableTraHang.setBackground(Color.WHITE);
+        scrollPane.setViewportView(tableTraHang);
+        modelTraHang.addColumn("Mã trả hàng");
+        modelTraHang.addColumn("Mã thanh toán");
+        modelTraHang.addColumn("Thời gian");
+        modelTraHang.addColumn("Khách hàng");
+        modelTraHang.addColumn("Tổng tiền hoàn trả");
+        modelTraHang.addColumn("Ghi chú");
+        tableTraHang.setModel(modelTraHang);
+
+        // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
+        tableTraHang.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                int row = tableTraHang.getSelectedRow();
+                if (row > -1 && row < tableTraHang.getRowCount()) {
+                    hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
+                }
+                setOpenThemHoaDonTraHang(mouseEvent);
+            }
+        });
+
+        // hiển thị danh sách hóa đơn trả
+        showTable(lstHoaDonTraHangModels);
+
+        // btn lọc theo ngày
+        btnLocTheoNgay.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evtBtnLoc(dateChooser);
+            }
+        });
+        tableTraHang.setRowHeight(25);
+        tableTraHang.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tableTraHang.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tableTraHang.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
+
+
         optionKiemKhoFrame.setSize(344, 234);
         optionKiemKhoFrame.setLocation(uiCommon.width - 360, uiCommon.height - (uiCommon.height / 100 * 86));
         panelOption = new JPanel();
@@ -230,86 +299,24 @@ public class TraHangJInternalFrame extends JInternalFrame {
         );
         panel_1.setLayout(gl_panel_1);
         panel.setLayout(gl_panel);
-        
-		uiCommon.editButtonTop(btnTimKiem);
-		uiCommon.editButtonTop(btnThemPhieuNhap);
-		uiCommon.editButtonTop(btnExport);
-		uiCommon.editButtonTop(btnXoa);
+
+        uiCommon.editButtonTop(btnTimKiem);
+        uiCommon.editButtonTop(btnThemPhieuNhap);
+        uiCommon.editButtonTop(btnExport);
+        uiCommon.editButtonTop(btnXoa);
+
+        setPhanQuyen(btnExport, btnXoa, btnThemPhieuNhap);
     }
 
-    public void initCenterTraHang() {
-        JScrollPane scrollPane = new JScrollPane();
-        contentPane.add(scrollPane, BorderLayout.CENTER);
-        JLabel lblNewLabel_9 = new JLabel("Thời gian");
-
-        JDateChooser dateChooser = new JDateChooser(new Date());
-
-        JButton btnLocTheoNgay = new JButton("Lọc");
-        uiCommon.editButtonCenter(btnLocTheoNgay);
-        GroupLayout gl_hangHoaJPanel = new GroupLayout(hangHoaJPanel);
-        gl_hangHoaJPanel.setHorizontalGroup(
-                gl_hangHoaJPanel.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(lblNewLabel_9, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        gl_hangHoaJPanel.setVerticalGroup(
-                gl_hangHoaJPanel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_hangHoaJPanel.createSequentialGroup()
-                                .addGap(5)
-                                .addComponent(lblNewLabel_9)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(btnLocTheoNgay, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(133, Short.MAX_VALUE))
-        );
-
-        hangHoaJPanel.setLayout(gl_hangHoaJPanel);
-        tableTraHang = new JTable();
-        tableTraHang.setBackground(Color.WHITE);
-        scrollPane.setViewportView(tableTraHang);
-        modelTraHang.addColumn("Mã trả hàng");
-        modelTraHang.addColumn("Mã thanh toán");
-        modelTraHang.addColumn("Thời gian");
-        modelTraHang.addColumn("Khách hàng");
-        modelTraHang.addColumn("Tổng tiền hoàn trả");
-        modelTraHang.addColumn("Ghi chú");
-        tableTraHang.setModel(modelTraHang);
-
-        // Click đúp vào 1 hóa đơn sẽ show thông tin lên chiTietHoaDonTraHang
-        tableTraHang.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent mouseEvent) {
-                int row = tableTraHang.getSelectedRow();
-                if (row > -1 && row < tableTraHang.getRowCount()) {
-                    hoaDonTraHangModel = hoaDonTraHangService.findById(Integer.parseInt(tableTraHang.getValueAt(row, 0).toString()));
-                }
-                setOpenThemHoaDonTraHang(mouseEvent);
-            }
-        });
-
-        // hiển thị danh sách hóa đơn trả
-        showTable(lstHoaDonTraHangModels);
-
-        // btn lọc theo ngày
-        btnLocTheoNgay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                evtBtnLoc(dateChooser);
-            }
-        });
-        tableTraHang.setRowHeight(25);
-        tableTraHang.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tableTraHang.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tableTraHang.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tableTraHang.getColumnModel().getColumn(3).setPreferredWidth(120);
-        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
-        tableTraHang.getColumnModel().getColumn(4).setPreferredWidth(120);
-
+    private void setPhanQuyen(JButton btnExport, JButton btnXoa, JButton btnThemPhieuNhap) {
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_QUANLY)) return;
+        btnThemPhieuNhap.setVisible(false);
+        btnXoa.setVisible(false);
+        btnExport.setVisible(false);
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
+            btnExport.setVisible(true);
+            btnThemPhieuNhap.setVisible(true);
+        }
     }
 
     private void setOpenThemHoaDonTraHang(MouseEvent mouseEvent) {

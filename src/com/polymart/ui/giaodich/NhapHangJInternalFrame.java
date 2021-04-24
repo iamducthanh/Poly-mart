@@ -31,6 +31,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.config.SecurityConfig;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
@@ -94,6 +96,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
      * Create the frame.
      */
     public NhapHangJInternalFrame() {
+        init();
+    }
+
+    public void init() {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         modelNhapHang = new DefaultTableModel() {
 
@@ -118,12 +124,6 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         hangHoaJPanel.setBackground(Color.WHITE);
 
         contentPane.add(hangHoaJPanel, BorderLayout.WEST);
-
-        initTopNhapHang();
-        initCenterNhapHang();
-    }
-
-    public void initTopNhapHang() {
         setTitle("Hàng hóa - Kiểm kho");
 
         optionKiemKhoFrame.setSize(344, 234);
@@ -149,8 +149,8 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                                 .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                                 .addGap(16))
         );
-        btnExport = new JButton("→ Xuất");
-        btnExport.addActionListener(new ActionListener() {
+        btnXuat = new JButton("→ Xuất");
+        btnXuat.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
@@ -224,7 +224,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnXuat, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
                                 .addGap(6))
         );
         gl_panel_1.setVerticalGroup(
@@ -235,16 +235,14 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                                         .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtTimPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnTimKiem, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnExport, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnXuat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnXoa, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnThemPhieuNhap, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())
         );
         panel_1.setLayout(gl_panel_1);
         panel.setLayout(gl_panel);
-    }
 
-    public void initCenterNhapHang() {
         JScrollPane scrollPane = new JScrollPane();
         contentPane.add(scrollPane, BorderLayout.CENTER);
         JLabel lblNewLabel_9 = new JLabel("Thời gian");
@@ -313,11 +311,22 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         tableNhapHang.getColumnModel().getColumn(2).setPreferredWidth(120);
         tableNhapHang.getColumnModel().getColumn(3).setPreferredWidth(120);
         tableNhapHang.getColumnModel().getColumn(4).setPreferredWidth(120);
-		uiCommon.editButtonTop(btnTimKiem);
-		uiCommon.editButtonTop(btnThemPhieuNhap);
-		uiCommon.editButtonTop(btnExport);
-		uiCommon.editButtonTop(btnXoa);
-		uiCommon.editButtonCenter(btnLocTheoNgay);
+        uiCommon.editButtonTop(btnTimKiem);
+        uiCommon.editButtonTop(btnThemPhieuNhap);
+        uiCommon.editButtonTop(btnXuat);
+        uiCommon.editButtonTop(btnXoa);
+        uiCommon.editButtonCenter(btnLocTheoNgay);
+
+        setChucVu();
+    }
+
+    private void setChucVu() {
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_QUANLY)) return;
+        btnXoa.setVisible(false);
+        btnXuat.setVisible(false);
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
+            btnXuat.setVisible(true);
+        }
     }
 
     private void setOpenChiTietHoaDonNhap(MouseEvent mouseEvent) {
@@ -348,7 +357,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
     private JButton btnTimKiem;
     private JButton btnThemPhieuNhap;
     private JButton btnXoa;
-    private JButton btnExport;
+    private JButton btnXuat;
     private JPanel panel_1;
 
     private void setOpenThemPhieuNhapHang() {

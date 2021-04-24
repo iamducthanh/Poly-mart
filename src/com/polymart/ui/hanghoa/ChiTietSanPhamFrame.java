@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import com.polymart.config.SecurityConfig;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.AnhSanPhamModel;
@@ -61,6 +63,7 @@ public class ChiTietSanPhamFrame extends JFrame {
     private Image newimg;
 
     private HangHoaJInternalFrame hangHoaJInternalFrame;
+
     /**
      * Launch the application.
      */
@@ -232,14 +235,6 @@ public class ChiTietSanPhamFrame extends JFrame {
             panel_1.add(arrImage[i]);
         }
 
-        JButton btnNewButton = new JButton("Thoát");
-        btnNewButton.setBounds(669, 492, 89, 25);
-        contentPane.add(btnNewButton);
-
-        JButton btnLu = new JButton("Lưu");
-        btnLu.setBounds(570, 492, 89, 25);
-        contentPane.add(btnLu);
-
         JButton btnSua = new JButton("Sửa");
         btnSua.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -281,11 +276,20 @@ public class ChiTietSanPhamFrame extends JFrame {
                 updatePrice(txtGiaBan, txtGiaGiam);
             }
         });
-        
-		uiCommon.editButtonCenter(btnLu);
-		uiCommon.editButtonCenter(btnNewButton);
-		uiCommon.editButtonCenter(btnSua);
 
+        uiCommon.editButtonCenter(btnSua);
+
+        setChucVu(btnSua);
+    }
+
+    private void setChucVu(JButton btnSua) {
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_QUANLY)) {
+            return;
+        }
+        btnSua.setVisible(false);
+        if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
+            btnSua.setVisible(true);
+        }
     }
 
     // evt thay đổi giá bán

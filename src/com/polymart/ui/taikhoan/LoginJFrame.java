@@ -25,6 +25,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import com.polymart.config.SecurityConfig;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityFrame;
 import com.polymart.entity.EntityMessage;
@@ -222,6 +223,13 @@ public class LoginJFrame extends JFrame {
         if (EntityValidate.checkUsername(this, username) && EntityValidate.checkPassword(this, password)) {
             EntityAuthorization.USER = nhanVienService.findByIdAndPassword(Integer.valueOf(username), password);
             if (EntityAuthorization.USER != null) {
+                if (EntityAuthorization.USER.getChucVu().equalsIgnoreCase("QUẢN LÝ")) {
+                    EntityAuthorization.USER.setChucVu(SecurityConfig.VAITRO_QUANLY);
+                } else if (EntityAuthorization.USER.getChucVu().equalsIgnoreCase("NHÂN VIÊN THU NGÂN")) {
+                    EntityAuthorization.USER.setChucVu(SecurityConfig.VAITRO_THUNGAN);
+                } else {
+                    EntityAuthorization.USER.setChucVu(SecurityConfig.VAITRO_BANHANG);
+                }
                 setVisible(false);
                 EntityFrame.MAINFRAME = new MainFrame();
                 EntityFrame.MAINFRAME.setVisible(true);

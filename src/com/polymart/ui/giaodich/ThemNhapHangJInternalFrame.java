@@ -674,5 +674,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                 importExcel(lblTongTien);
             }
         });
+
+
     }
 }

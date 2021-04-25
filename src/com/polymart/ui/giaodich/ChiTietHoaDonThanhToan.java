@@ -65,7 +65,6 @@ public class ChiTietHoaDonThanhToan extends JFrame {
                     EntityValidate.dinhDangMonney(e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem())});
         }
         tableChiTietHoaDonThanhToan.setRowHeight(25);
-
     }
 
     private void init() {

@@ -174,6 +174,7 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		JButton btnXacNhan = new JButton("Xác Nhận");
 		btnXacNhan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		btnXacNhan.setEnabled(false);

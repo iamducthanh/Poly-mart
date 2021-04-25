@@ -35,7 +35,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -43,6 +42,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.polymart.entity.EntityExcel;
 import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.model.LoaiSanPhamModel;
 import com.polymart.model.SanPhamModel;
@@ -657,8 +657,8 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		}
 		for (ChiTietSanPhamModel x : lst) {
 			SanPhamModel sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
-			modelHangHoa.addRow(new Object[] { x.getId(), sanPhamModel.getTenSP(), x.getSoLuong(), x.getGiaBan(),
-					x.getGiaVon(), x.getGiaGiam(), x.getSize(), x.getMauSac() });
+			modelHangHoa.addRow(new Object[] { x.getId(), sanPhamModel.getTenSP(), x.getSoLuong(), EntityValidate.dinhDangMonney(x.getGiaBan()),
+					EntityValidate.dinhDangMonney(x.getGiaVon()), EntityValidate.dinhDangMonney(x.getGiaGiam()), x.getSize(), x.getMauSac() });
 		}
 
 	}

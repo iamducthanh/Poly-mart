@@ -364,11 +364,13 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                                 x.getId(),
                                 khachHangService.findOne(x.getIdKhachHang()).getHoTen(),
                                 x.getIdNhanVien() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
-                                EntityFormat.dinhDangMonney(lstChiTietHoaDonThanhToanModels.stream().mapToLong(e -> e.getSoLuong()
-                                        * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
-                                        - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
-                                        - e.getGiamGiaThem()).sum()),
-                                EntityFormat.dinhDangNgay(x.getNgayThanhToan()),
+                                EntityValidate.dinhDangMonney((long)lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
+                                					* (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
+                                					- chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
+                                					- e.getGiamGiaThem()
+//                                					- x.getDiemDaDoi()
+                                					).sum())
+                                , new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()),
                                 x.getGhiChu()});
             }
         }

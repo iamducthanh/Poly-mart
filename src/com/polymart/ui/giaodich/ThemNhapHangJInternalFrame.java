@@ -250,7 +250,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                             chiTietSanPhamModel.getId(),
                             sanPhamModel.getTenSP(),
                             loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
-                            EntityFormat.dinhDangMonney(Long.parseLong(getMoney)),
+                            EntityValidate.dinhDangMonney(Long.parseLong(getMoney)),
                             chiTietSanPhamModel.getSize(),
                             chiTietSanPhamModel.getMauSac(),
                             getSoLuong
@@ -298,8 +298,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     // hiển thị tổng tieen lên label
     private void hienThiTongTien(JLabel lblTongTien) {
         // tính tổng tiền của tất cả sản phẩm có trên table
-        lblTongTien.setText(String.valueOf(
-                lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
+        lblTongTien.setText(
+                EntityValidate.dinhDangMonney(lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
     }
 
     // show nguồn hàng lên combobox

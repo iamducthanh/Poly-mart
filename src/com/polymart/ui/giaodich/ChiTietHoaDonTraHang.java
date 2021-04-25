@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityFormat;
+import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietHoaDonTraHangModel;
 import com.polymart.model.ChiTietSanPhamModel;
@@ -59,9 +59,9 @@ public class ChiTietHoaDonTraHang extends JFrame {
                     chiTietSanPhamModel.getSize(),
                     chiTietSanPhamModel.getMauSac(),
                     x.getSoLuong(),
-                    EntityFormat.dinhDangMonney(chiTietSanPhamModel.getGiaBan()),
-                    EntityFormat.dinhDangMonney(chiTietSanPhamModel.getGiaGiam()),
-                    EntityFormat.dinhDangMonney(x.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()))
+                    EntityValidate.dinhDangMonney(chiTietSanPhamModel.getGiaBan()),
+                    EntityValidate.dinhDangMonney(chiTietSanPhamModel.getGiaGiam()),
+                    EntityValidate.dinhDangMonney(x.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()))
             });
         }
         txtGhiChu.setText(ghiChu);

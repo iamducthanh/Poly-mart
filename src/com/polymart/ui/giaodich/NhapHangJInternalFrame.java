@@ -377,10 +377,9 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             modelNhapHang.addRow(new Object[]{x.getId(),
                     x.getIdNhanVienNhap() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVienNhap()),
                     nguonHangService.getNameById(x.getIdNguonHang()),
-                    EntityFormat.dinhDangNgay(x.getNgayNhap()),
-                    EntityFormat.dinhDangMonney(lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()),
-                    x.getGhiChu()
-            });
+                    new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()),
+                    EntityValidate.dinhDangMonney(lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()),
+                    x.getGhiChu()});
         }
     }
 

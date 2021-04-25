@@ -361,7 +361,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                             result[1],
                             new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(result[2]),
                             result[3],
-                            result[4],
+                            EntityFormat.dinhDangMonney(Long.parseLong(String.valueOf(result[4]))),
                             x.getGhiChu()
                     });
                 }

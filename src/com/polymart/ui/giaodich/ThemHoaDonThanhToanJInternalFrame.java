@@ -1,6 +1,7 @@
 package com.polymart.ui.giaodich;
 
 import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityFormat;
 import com.polymart.entity.EntityMessage;
 import com.polymart.entity.EntityValidate;
 import com.polymart.model.*;
@@ -102,10 +103,12 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             if (Long.parseLong(lblTongTien.getText()) == 0) {
                 return;
             } else {
+                Long tienKhachDua = Long.valueOf(0);
                 if (Long.parseLong(getTienKhachDua) <= Long.parseLong(lblTongTien.getText())) {
-                    lblTienTraLai.setText(String.valueOf(0));
+                    lblTienTraLai.setText(EntityFormat.dinhDangMonney(tienKhachDua));
                 } else {
-                    lblTienTraLai.setText(String.valueOf(Long.parseLong(getTienKhachDua) - Long.parseLong(lblTongTien.getText())));
+                    lblTienTraLai.setText(EntityFormat.dinhDangMonney(Long.parseLong(getTienKhachDua)
+                            - Long.parseLong(lblTongTien.getText())));
                 }
             }
         }
@@ -118,10 +121,10 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         if (chkTichDiem.isSelected()) {
             if (tongTien > Long.parseLong(chkTichDiem.getText())) {
                 setTien = tongTien - Long.parseLong(chkTichDiem.getText());
-                lblTongTien.setText(setTien.toString());
+                lblTongTien.setText(EntityFormat.dinhDangMonney(setTien));
             }
         } else {
-            lblTongTien.setText(tongTien.toString());
+            lblTongTien.setText(EntityFormat.dinhDangMonney(tongTien));
         }
         tienKhachDua();
     }
@@ -230,8 +233,8 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
                 e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
                         * e.getSoLuong()) - e.getGiamGiaThem())).sum();
-        lblTongTien.setText(String.valueOf(tongTien));
-        lblTienTraLai.setText(String.valueOf(0));
+        lblTongTien.setText(EntityFormat.dinhDangMonney(tongTien));
+        lblTienTraLai.setText(EntityFormat.dinhDangMonney(0));
     }
     // hiển thị danh sach khách hàng
 
@@ -334,9 +337,14 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             modelDSSanPham.setRowCount(0);
             for (ChiTietSanPhamModel x : lstTietSanPham) {
                 sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
-                modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamModel.getTenSP(),
-                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()), x.getSize(), x.getMauSac(),
-                        x.getSoLuong()});
+                modelDSSanPham.addRow(new Object[]{
+                        x.getId(),
+                        sanPhamModel.getTenSP(),
+                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
+                        x.getSize(),
+                        x.getMauSac(),
+                        x.getSoLuong()
+                });
             }
         }
     }

@@ -32,10 +32,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.config.SecurityConfig;
-import com.polymart.entity.EntityAuthorization;
-import com.polymart.entity.EntityExcel;
-import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
+import com.polymart.entity.*;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.model.HoaDonNhapHangModel;
 import com.polymart.service.IChiTietHoaDonNhapHangService;
@@ -380,9 +377,10 @@ public class NhapHangJInternalFrame extends JInternalFrame {
             modelNhapHang.addRow(new Object[]{x.getId(),
                     x.getIdNhanVienNhap() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVienNhap()),
                     nguonHangService.getNameById(x.getIdNguonHang()),
-                    new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()),
-                    lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum(),
-                    x.getGhiChu()});
+                    EntityFormat.dinhDangNgay(x.getNgayNhap()),
+                    EntityFormat.dinhDangMonney(lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()),
+                    x.getGhiChu()
+            });
         }
     }
 

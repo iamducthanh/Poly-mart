@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFormat;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.ChiTietSanPhamModel;
 import com.polymart.service.IChiTietSanPhamService;
@@ -58,13 +59,14 @@ public class ChiTietHoaDonThanhToan extends JFrame {
             ChiTietSanPhamModel chiTietSanPhamModel = chiTietSanPhamService.getById(e.getChiTietSanPham());
             modelChiTietHoaDonThanhToan.addRow(new Object[]{e.getChiTietSanPham(),
                     sanPhamService.findByID(chiTietSanPhamService.getIdProductById(e.getChiTietSanPham())).getTenSP(),
-                    e.getSoLuong(), chiTietSanPhamModel.getGiaBan(), chiTietSanPhamModel.getGiaGiam(),
-                    e.getGiamGiaThem(),
+                    e.getSoLuong(),
+                    EntityFormat.dinhDangMonney(chiTietSanPhamModel.getGiaBan()),
+                    EntityFormat.dinhDangMonney(chiTietSanPhamModel.getGiaGiam()),
+                    EntityFormat.dinhDangMonney(e.getGiamGiaThem()),
                     e.getTraHang(),
-                    e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem()});
+                    EntityFormat.dinhDangMonney(e.getSoLuong() * (chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam()) - e.getGiamGiaThem())});
         }
         tableChiTietHoaDonThanhToan.setRowHeight(25);
-
     }
 
     private void init() {

@@ -39,10 +39,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.config.SecurityConfig;
-import com.polymart.entity.EntityAuthorization;
-import com.polymart.entity.EntityExcel;
-import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
+import com.polymart.entity.*;
 import com.polymart.model.ChiTietHoaDonThanhToanModel;
 import com.polymart.model.HoaDonThanhToanModel;
 import com.polymart.service.IChiTietHoaDonThanhToanService;
@@ -363,14 +360,15 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                 List<ChiTietHoaDonThanhToanModel> lstChiTietHoaDonThanhToanModels = chiTietHoaDonThanhToanService
                         .findByIdHoaDonThanhToan(x.getId());
                 modelThanhToan
-                        .addRow(new Object[]{x.getId(), khachHangService.findOne(x.getIdKhachHang()).getHoTen(),
+                        .addRow(new Object[]{
+                                x.getId(),
+                                khachHangService.findOne(x.getIdKhachHang()).getHoTen(),
                                 x.getIdNhanVien() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
-                                lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
-                                                * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
-                                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
-                                                - e.getGiamGiaThem()
-//                                        - x.getDiemDaDoi()
-                                ).sum(), new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()),
+                                EntityFormat.dinhDangMonney(lstChiTietHoaDonThanhToanModels.stream().mapToLong(e -> e.getSoLuong()
+                                        * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
+                                        - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
+                                        - e.getGiamGiaThem()).sum()),
+                                EntityFormat.dinhDangNgay(x.getNgayThanhToan()),
                                 x.getGhiChu()});
             }
         }
@@ -436,17 +434,6 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
     // getdata list
     public List<HoaDonThanhToanModel> getList() {
         return lstHoaDonThanhToanModels = hoaDonThanhToanService.findAll();
-    }
-
-    // xuất file excel
-    private void evtBtnXuatFileExcel() {
-        try {
-            EntityExcel.exportExcel(tableThanhToan);
-            EntityMessage.show(this, "Lưu thành côngg");
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-            EntityMessage.show(this, "Lưu thất bại");
-        }
     }
 
     public void initFrameThem() {

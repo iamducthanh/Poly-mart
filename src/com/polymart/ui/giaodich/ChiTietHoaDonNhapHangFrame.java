@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.polymart.entity.EntityFormat;
 import com.polymart.model.ChiTietHoaDonNhapHangModel;
 import com.polymart.service.IChiTietSanPhamService;
 import com.polymart.service.ISanPhamService;
@@ -125,9 +126,11 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
             txtGhiChu.setText(ghiChu);
             for (ChiTietHoaDonNhapHangModel x : lstChiTietHoaDonNhapHang) {
                 modelChiTietHoaDonNhap.addRow(new Object[]{
-                        x.getIdChiTietSanPham(), sanPhamService
-                        .findByID(chiTietSanPhamService.getIdProductById(x.getIdChiTietSanPham())).getTenSP(),
-                        x.getSoLuong(), x.getGiaNhap(), x.getGiaNhap() * x.getSoLuong()});
+                        x.getIdChiTietSanPham(),
+                        sanPhamService.findByID(chiTietSanPhamService.getIdProductById(x.getIdChiTietSanPham())).getTenSP(),
+                        x.getSoLuong(),
+                        EntityFormat.dinhDangMonney(x.getGiaNhap()),
+                        EntityFormat.dinhDangMonney(x.getGiaNhap() * x.getSoLuong())});
             }
         }
         tableChiTietHoaDonNhap.setRowHeight(25);

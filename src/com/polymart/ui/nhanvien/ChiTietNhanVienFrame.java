@@ -308,7 +308,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	}
 
 	protected void EditNhanVien() {
-		if (validated()) {
+		if (validated()&& validateTrung(nhanVienJInternalFrame.ID)) {
 			check= false;
 			NhanVienModel nhanVien = new NhanVienModel();
 			nhanVien = addThongTinNhanVien();
@@ -411,7 +411,7 @@ public class ChiTietNhanVienFrame extends JFrame {
 	 * Thêm mới nhân viên
 	 */
 	protected void addNhanVien() {
-		if (validated()) {
+		if (validated()&&validateTrung(1)) {
 			check=true;
 			NhanVienModel nhanVienModel = new NhanVienModel();
 			nhanVienModel = addThongTinNhanVien();
@@ -426,7 +426,12 @@ public class ChiTietNhanVienFrame extends JFrame {
 			}
 		}
 	}
-
+	public boolean validateTrung(Integer id) {
+		if(!EntityValidate.checkTrungSDT_Email(this, txtEmail.getText(), txtSDT.getText(), id)) {
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * Kiểm tra nhập thông tin nhân viên
 	 */

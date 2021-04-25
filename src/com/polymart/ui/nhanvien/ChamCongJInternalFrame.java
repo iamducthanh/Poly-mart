@@ -218,7 +218,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
         });
         btnCheckOut.setFont(new Font("Tahoma", Font.PLAIN, 13));
         btnCheckOut.setBackground(new Color(75, 0, 130));
-        btnCheckOut.setEnabled(false);
 
         btnCheckOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -254,7 +253,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
         btnChamCong.setForeground(new Color(255, 255, 255));
         btnChamCong.setFont(new Font("Tahoma", Font.PLAIN, 13));
         btnChamCong.setBackground(new Color(75, 0, 130));
-        btnChamCong.setEnabled(false);
         panelLeft.setLayout(gl_panelLeft);
         modelNhanVienChamCong.addColumn("Mã nhân viên");
         modelNhanVienChamCong.addColumn("Tên nhân viên");
@@ -493,7 +491,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
         modelChamCong.setRowCount(0);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
         for (ChamCongModel chamCongModel : listChamCong) {
-            calendar.setTime(chamCongModel.getGioRa());
             c.setTime(chamCongModel.getNgayChamCong());
             int day = c.get(Calendar.DAY_OF_WEEK);
             int i = 0;

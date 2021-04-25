@@ -90,6 +90,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	private INhanVienService nhanVienService = new NhanVienService();
 	String path;
+	Integer ID;
 
 	/**
 	 * Launch the application.
@@ -350,6 +351,7 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 
 	protected void tblClicked(MouseEvent mouseEvent) {
 		index = tblNhanVien.getSelectedRow();
+		ID = list.get(index).getId();
 		btnXoaNV.setEnabled(true);
 		if (mouseEvent.getClickCount() == 2) {
 			EntityFrame.CHITIETNHANVIEN = new ChiTietNhanVienFrame(this);

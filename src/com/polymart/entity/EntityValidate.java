@@ -2,13 +2,21 @@ package com.polymart.entity;
 
 import java.awt.Component;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.polymart.model.NhanVienModel;
+import com.polymart.service.INhanVienService;
+import com.polymart.service.impl.NhanVienService;
+
 public class EntityValidate {
+    private static List<NhanVienModel> list = new ArrayList<NhanVienModel>();
+    private static INhanVienService nhanVienService = new NhanVienService();
 
     // kiểm tra tài khoản đăng nhập
     public static boolean checkUsername(Component component, String username) {
@@ -138,7 +146,20 @@ public class EntityValidate {
         }
         return true;
     }
-
+    public static boolean checkTrungSDT_Email(Component component,String email, String phoneNumber,Integer id) {
+    	loadListNhanVien();
+    	for (NhanVienModel nhanVienModel : list) {
+			if(nhanVienModel.getSdt().equalsIgnoreCase(phoneNumber)&&!id.equals(nhanVienModel.getId())) {
+				EntityMessage.show(component, "Số Điện Thoại Đã Tồn Tại");
+				return false;
+			}
+			if(nhanVienModel.getEmail().equalsIgnoreCase(email)&&!id.equals(nhanVienModel.getId())) {
+				EntityMessage.show(component, "Email Đã Tồn Tại");
+				return false;
+			}
+		}
+    	return true;
+    }
     // kiểm tra số tiền
     public static boolean checkMoney(Component component, String money) {
         String regex = "^[0-9]+(\\.[0-9]{1,2})?$";
@@ -151,6 +172,10 @@ public class EntityValidate {
             return false;
         }
         return true;
+    }
+    public  static void loadListNhanVien() {
+    	list.clear();
+		list = nhanVienService.findAll();
     }
 
     // check birth of date > 18 years old

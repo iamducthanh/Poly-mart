@@ -7,12 +7,14 @@ import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.ResultSet;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -33,6 +35,11 @@ import com.polymart.model.SanPhamModel;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.toedter.calendar.JCalendar;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 
@@ -45,9 +52,14 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 	private JTable tableBaoCao;
 	JCalendar dateNgayBaoCao;
 	private Calendar calendar;
+	JLabel lblTongThu = new JLabel("0");
+	JLabel lblTongChi = new JLabel("0");
+	JLabel lblTong = new JLabel("0");
 	List<BaoCaoNgayModel> list = new ArrayList<BaoCaoNgayModel>();
 	private ISanPhamService sanPhamService = new SanPhamService();
 	BaoCaoSanPhamBanRaDao baoCaoDao= new BaoCaoSanPhamBanRaDao();
+	static String IDSanPham;
+	static String nameSP;
 
 	/**
 	 * Launch the application.
@@ -87,6 +99,7 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		initCenterChamCong();
 		loadList();
 		loabtable();
+		ThuChi();
 
 		tableBaoCao.setRowHeight(25);
 	}
@@ -135,6 +148,17 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		tableBaoCao = new JTable();
+		tableBaoCao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int select = tableBaoCao.getSelectedRow();
+				IDSanPham = String.valueOf(tableBaoCao.getValueAt(select, 0));
+				nameSP = String.valueOf(tableBaoCao.getValueAt(select, 1));
+				ChiTietBaoCaoFrame chiTietBaoCaoFrame = new ChiTietBaoCaoFrame();
+				chiTietBaoCaoFrame.setVisible(true);
+				chiTietBaoCaoFrame.setLocationRelativeTo(null);
+			}
+		});
 		tableBaoCao.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tableBaoCao);
 		modelBaoCao.addColumn("Mã sản phẩm");
@@ -173,13 +197,51 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 
 			}
 		});
+		
+		JLabel lblNewLabel = new JLabel("Tổng Thu");
+		lblNewLabel.setForeground(Color.GREEN);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		
+		JLabel lblNewLabel_3 = new JLabel("Tổng Chi");
+		
+		lblTongThu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTongThu.setForeground(Color.RED);
+		
+		
+		lblNewLabel_3.setForeground(Color.GREEN);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		
+		lblTongChi.setForeground(Color.RED);
+		
+		JLabel lblNewLabel_7 = new JLabel("Tổng ");
+		lblNewLabel_7.setForeground(Color.GREEN);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+	
+		lblTong.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTong.setForeground(Color.RED);
 
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(dateNgayBaoCao, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelLeft.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(dateNgayBaoCao, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+						.addGroup(gl_panelLeft.createSequentialGroup()
+							.addGap(18)
+							.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblNewLabel_7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+								.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+							.addGap(39)
+							.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblTong, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblTongChi, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblTongThu, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_panelLeft.setVerticalGroup(
@@ -187,42 +249,62 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(dateNgayBaoCao, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(380, Short.MAX_VALUE))
+					.addGap(73)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTongThu, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+					.addGap(34)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblTongChi, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+					.addGap(103)
+					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTong, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(174, Short.MAX_VALUE))
 		);
 		panelLeft.setLayout(gl_panelLeft);
 
 	}
 	public void loadList() {
 		list.clear();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yy-mm-dd");
-//		Date  now = sdf.parse("2021-4-21");
-		list = baoCaoDao.finAll("2021","4","21");
+		Calendar c = Calendar.getInstance();
+		String nam = String.valueOf(c.get(Calendar.YEAR));
+		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
+		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		list = baoCaoDao.finAll(nam,thang,ngay);
 		
 	}
 	public void loabtable()  {
 		modelBaoCao.setRowCount(0);
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-mm-dd");
-		Date now=null;
-		try {
-			now = sdf.parse("2021-4-21");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		Calendar c = Calendar.getInstance();
-		c.setTime(now);
+		String nam = String.valueOf(c.get(Calendar.YEAR));
+		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
 		int day = c.get(Calendar.DAY_OF_MONTH);
-		double d = day;
-		System.out.println(day);
+		float d = day;
 		for (BaoCaoNgayModel baoCaoNgayModel : list) {
 			SanPhamModel sanPhamModel = sanPhamService.findByID(baoCaoNgayModel.getIdSanPham());
-			int soLuongBanRaTrongThang = baoCaoDao.tbSoLuongBanRa("2021","4",baoCaoNgayModel.getIdSanPham());
-			double a = soLuongBanRaTrongThang/d;
-			System.out.println(a);
+			int soLuongBanRaTrongThang = baoCaoDao.tbSoLuongBanRa(nam,thang,baoCaoNgayModel.getIdSanPham());
+			float a =soLuongBanRaTrongThang/d;
+			float tb = Math.round(a*100);
 			modelBaoCao.addRow(new Object[] {baoCaoNgayModel.getIdSanPham(),sanPhamModel.getTenSP(),baoCaoNgayModel.getSoLuongBanRa(),
 					baoCaoDao.soLuongTrongKho(baoCaoNgayModel.getIdSanPham())
-					,soLuongBanRaTrongThang,a});
+					,soLuongBanRaTrongThang,tb/100});
 		}
 	}
-    
+	public void ThuChi() {
+		Calendar c = Calendar.getInstance();
+		String nam = String.valueOf(c.get(Calendar.YEAR));
+		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
+		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		lblTongThu.setText(dinhDangMonney(baoCaoDao.tongThu(nam, thang,ngay)));
+		lblTongChi.setText(dinhDangMonney(baoCaoDao.tongChi(nam, thang,ngay)));
+		lblTong.setText(dinhDangMonney(baoCaoDao.tongThu(nam, thang,ngay)-baoCaoDao.tongChi(nam, thang,ngay)));
+		
+	}
+	public String dinhDangMonney(long l) {
+		Locale locale = new Locale("vi","VN");
+		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+		return format.format(l);
+	}
 }

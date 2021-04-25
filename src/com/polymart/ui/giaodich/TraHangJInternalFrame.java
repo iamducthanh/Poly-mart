@@ -3,7 +3,6 @@ package com.polymart.ui.giaodich;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +20,6 @@ import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -34,7 +32,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.polymart.config.SecurityConfig;
-import com.polymart.entity.*;
+import com.polymart.entity.EntityAuthorization;
+import com.polymart.entity.EntityExcel;
+import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTietHoaDonTraHangModel;
 import com.polymart.model.HoaDonTraHangModel;
 import com.polymart.service.IChiTietHoaDonThanhToanService;
@@ -361,7 +362,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                             result[1],
                             new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(result[2]),
                             result[3],
-                            result[4],
+                            EntityValidate.dinhDangMonney(Long.valueOf(result[4].toString())) ,
                             x.getGhiChu()
                     });
                 }

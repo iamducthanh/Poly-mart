@@ -38,6 +38,7 @@ import com.polymart.config.SecurityConfig;
 import com.polymart.dao.impl.ChiTieuDao;
 import com.polymart.entity.EntityAuthorization;
 import com.polymart.entity.EntityMessage;
+import com.polymart.entity.EntityValidate;
 import com.polymart.model.ChiTieuModel;
 import com.polymart.ui.common.uiCommon;
 import com.toedter.calendar.JCalendar;
@@ -392,7 +393,7 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
         if (list.size() > 0) {
             for (ChiTieuModel x : list) {
                 modelChiTieu.addRow(new Object[]{"PC" + x.getMaCT(), x.getHoTen(), x.getMucDichChiTieu(),
-                        x.getNgayChiTieu(), x.getSoTien(), x.getGhiChu()});
+                        x.getNgayChiTieu(), EntityValidate.dinhDangMonney(x.getSoTien()), x.getGhiChu()});
             }
             btnXoa.setEnabled(false);
         }

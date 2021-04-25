@@ -381,7 +381,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
                     x.getIdNhanVienNhap() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVienNhap()),
                     nguonHangService.getNameById(x.getIdNguonHang()),
                     new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayNhap()),
-                    lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum(),
+                    EntityValidate.dinhDangMonney(lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()),
                     x.getGhiChu()});
         }
     }

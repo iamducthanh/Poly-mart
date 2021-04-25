@@ -1,8 +1,10 @@
 package com.polymart.entity;
 
 import java.awt.Component;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -262,4 +264,10 @@ public class EntityValidate {
         }
         return true;
     }
+    
+    public static String dinhDangMonney(long l) {
+		Locale locale = new Locale("vi","VN");
+		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+		return format.format(l);
+	}
 }

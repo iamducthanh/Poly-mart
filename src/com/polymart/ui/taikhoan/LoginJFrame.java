@@ -53,7 +53,7 @@ public class LoginJFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+                 //   UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
                     LoginJFrame loginJFrame = new LoginJFrame();
                     loginJFrame.setVisible(true);
                     loginJFrame.setTitle("Đăng nhập");

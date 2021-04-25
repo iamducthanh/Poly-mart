@@ -42,6 +42,8 @@ import com.polymart.ui.common.uiCommon;
 
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 public class BangLuongJIternalFrame extends JInternalFrame {
 
@@ -151,82 +153,33 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 		JLabel lblThng = new JLabel("Tháng");
 		lblThng.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		JLabel lblNewLabel_1 = new JLabel("Nghỉ");
-		
-		txtNghi = new JTextField();
-		txtNghi.setEditable(false);
-		txtNghi.setText("200000");
-		txtNghi.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Đi Muộn");
-		
-		txtDiMuon = new JTextField();
-		txtDiMuon.setEditable(false);
-		txtDiMuon.setText("100000");
-		txtDiMuon.setColumns(10);
-		
-		JLabel lblNewLabel_3 = new JLabel("Về Sớm");
-		
-		txtVeSom = new JTextField();
-		txtVeSom.setEditable(false);
-		txtVeSom.setText("100000");
-		txtVeSom.setColumns(10);
-		JButton btnXacNhan = new JButton("Xác Nhận");
-		btnXacNhan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnXacNhan.setEnabled(false);
-		JButton btnThietLap = new JButton("Mở");
-		btnThietLap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtNghi.setEditable(true);
-				txtDiMuon.setEditable(true);
-				txtVeSom.setEditable(true);
-				btnXacNhan.setEnabled(true);
-			}
-		});
-		
-		
-		JLabel lblNewLabel_4 = new JLabel("Thiết Lập Mức Phạt");
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
+		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), "Thi\u1EBFt l\u1EADp m\u1EE9c ph\u1EA1t", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(28, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-							.addComponent(cboNam, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-							.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
-							.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnThietLap)
-					.addGap(18)
-					.addComponent(btnXacNhan)
-					.addContainerGap(23, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-					.addGap(18)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtVeSom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(15)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_panel_1.createSequentialGroup()
+										.addGap(24)
+										.addComponent(cboNam, 0, 159, Short.MAX_VALUE))
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+									.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_panel_1.createSequentialGroup()
+										.addGap(25)
+										.addComponent(cboThang, 0, 158, Short.MAX_VALUE))))
+							.addGap(28))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtDiMuon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txtNghi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(27, Short.MAX_VALUE))
+							.addContainerGap()
+							.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
+					.addGap(15))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -239,26 +192,70 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 					.addComponent(lblThng, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(cboThang, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addGap(69)
-					.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1)
-						.addComponent(txtNghi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(27)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(txtDiMuon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(35)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_3)
-						.addComponent(txtVeSom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(35)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnThietLap)
-						.addComponent(btnXacNhan))
-					.addContainerGap(141, Short.MAX_VALUE))
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(182, Short.MAX_VALUE))
 		);
+		panel_3.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nghỉ");
+		lblNewLabel_1.setBounds(10, 31, 45, 16);
+		panel_3.add(lblNewLabel_1);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		txtNghi = new JTextField();
+		txtNghi.setBounds(90, 28, 116, 25);
+		panel_3.add(txtNghi);
+		txtNghi.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtNghi.setEditable(false);
+		txtNghi.setText("200000");
+		txtNghi.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Đi Muộn");
+		lblNewLabel_2.setBounds(10, 70, 73, 16);
+		panel_3.add(lblNewLabel_2);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		txtDiMuon = new JTextField();
+		txtDiMuon.setBounds(90, 67, 116, 25);
+		panel_3.add(txtDiMuon);
+		txtDiMuon.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtDiMuon.setEditable(false);
+		txtDiMuon.setText("100000");
+		txtDiMuon.setColumns(10);
+		
+		txtVeSom = new JTextField();
+		txtVeSom.setBounds(90, 108, 116, 25);
+		panel_3.add(txtVeSom);
+		txtVeSom.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtVeSom.setEditable(false);
+		txtVeSom.setText("100000");
+		txtVeSom.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Về Sớm");
+		lblNewLabel_3.setBounds(13, 111, 70, 16);
+		panel_3.add(lblNewLabel_3);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		JButton btnThietLap = new JButton("Mở");
+		btnThietLap.setBounds(10, 193, 61, 23);
+		panel_3.add(btnThietLap);
+		JButton btnXacNhan = new JButton("Xác Nhận");
+		btnXacNhan.setBounds(108, 193, 98, 23);
+		panel_3.add(btnXacNhan);
+		btnXacNhan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnXacNhan.setEnabled(false);
+		btnThietLap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtNghi.setEditable(true);
+				txtDiMuon.setEditable(true);
+				txtVeSom.setEditable(true);
+				btnXacNhan.setEnabled(true);
+			}
+		});
 		cboThang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				timKiemLuongTheoThang();

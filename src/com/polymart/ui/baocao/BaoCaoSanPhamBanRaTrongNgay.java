@@ -40,6 +40,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 
@@ -52,9 +54,9 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 	private JTable tableBaoCao;
 	JCalendar dateNgayBaoCao;
 	private Calendar calendar;
-	JLabel lblTongThu = new JLabel("0");
-	JLabel lblTongChi = new JLabel("0");
-	JLabel lblTong = new JLabel("0");
+	JLabel lblTongThu = new JLabel("0", JLabel.RIGHT);
+	JLabel lblTongChi = new JLabel("0", JLabel.RIGHT);
+	JLabel lblTong = new JLabel("0", JLabel.RIGHT);
 	List<BaoCaoNgayModel> list = new ArrayList<BaoCaoNgayModel>();
 	private ISanPhamService sanPhamService = new SanPhamService();
 	BaoCaoSanPhamBanRaDao baoCaoDao= new BaoCaoSanPhamBanRaDao();
@@ -195,30 +197,9 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("Tổng Thu");
-		lblNewLabel.setForeground(Color.GREEN);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		
-		JLabel lblNewLabel_3 = new JLabel("Tổng Chi");
-		
-		lblTongThu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTongThu.setForeground(Color.RED);
-		
-		
-		lblNewLabel_3.setForeground(Color.GREEN);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
-		
-		lblTongChi.setForeground(Color.RED);
-		
-		JLabel lblNewLabel_7 = new JLabel("Tổng ");
-		lblNewLabel_7.setForeground(Color.GREEN);
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-	
-		lblTong.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTong.setForeground(Color.RED);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), new Color(160, 160, 160)), "K\u1EBFt qu\u1EA3", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 
 		GroupLayout gl_panelLeft = new GroupLayout(panelLeft);
 		gl_panelLeft.setHorizontalGroup(
@@ -229,37 +210,84 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 							.addContainerGap()
 							.addComponent(dateNgayBaoCao, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
 						.addGroup(gl_panelLeft.createSequentialGroup()
-							.addGap(18)
-							.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblNewLabel_7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-								.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
-							.addGap(39)
-							.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblTong, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblTongChi, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblTongThu, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))))
-					.addContainerGap())
+							.addContainerGap()
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(10)))
+					.addGap(0))
 		);
 		gl_panelLeft.setVerticalGroup(
 			gl_panelLeft.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLeft.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(dateNgayBaoCao, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)
-					.addGap(73)
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTongThu, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-					.addGap(34)
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblTongChi, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-					.addGap(103)
-					.addGroup(gl_panelLeft.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblTong, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(174, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(217, Short.MAX_VALUE))
 		);
+		
+		
+		JLabel lblNewLabel_3 = new JLabel("Tổng Chi");
+		
+		
+		lblNewLabel_3.setForeground(Color.BLACK);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JLabel lblNewLabel = new JLabel("Tổng Thu");
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTongChi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		
+		lblTongChi.setForeground(Color.BLACK);
+		
+		lblTongThu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTongThu.setForeground(Color.RED);
+		
+		JLabel lblNewLabel_7 = new JLabel("Tổng ");
+		lblNewLabel_7.setForeground(Color.BLACK);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 15));
+		
+	
+		lblTong.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblTong.setForeground(Color.BLACK);
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblTongChi, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblTong, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+								.addComponent(lblTongThu, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))))
+					.addContainerGap())
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTongChi, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTongThu, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTong, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		panel_1.setLayout(gl_panel_1);
 		panelLeft.setLayout(gl_panelLeft);
 
 	}

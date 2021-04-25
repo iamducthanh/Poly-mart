@@ -119,6 +119,7 @@ public class ChiTietHoaDonNhapHangFrame extends JFrame {
 		scrollPane_1.setViewportView(txtGhiChu);
 	}
 
+
 	private void setForm(List<ChiTietHoaDonNhapHangModel> lstChiTietHoaDonNhapHang, String nguonHang, String ghiChu,
 			JLabel lblMaHoaDon, JLabel lblTenNguonHang, JTextArea txtGhiChu) {
 		if (lstChiTietHoaDonNhapHang != null && !lstChiTietHoaDonNhapHang.isEmpty()) {

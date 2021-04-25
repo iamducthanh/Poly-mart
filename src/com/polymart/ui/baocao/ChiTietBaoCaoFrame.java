@@ -99,7 +99,12 @@ public class ChiTietBaoCaoFrame extends JFrame {
 	public void loabTable() {
 		modelBaoCaoSP.setRowCount(0);
 		list.clear();
-		Calendar c = Calendar.getInstance();
+		Calendar c =null ;
+		if (BaoCaoSanPhamBanRaTrongNgay.ngayBaoCao == null) {
+			c=Calendar.getInstance();
+		}else {
+			c=BaoCaoSanPhamBanRaTrongNgay.ngayBaoCao;
+		}
 		String nam = String.valueOf(c.get(Calendar.YEAR));
 		String thang = String.valueOf(c.get(Calendar.MONTH) + 1);
 		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
@@ -110,10 +115,9 @@ public class ChiTietBaoCaoFrame extends JFrame {
 		lblMaSP.setText(BaoCaoSanPhamBanRaTrongNgay.IDSanPham);
 		lblTenSanPham.setText(BaoCaoSanPhamBanRaTrongNgay.nameSP);
 		for (ChiTietSanPhamModel x : list) {
-			int soLuong = baoCaoDao.soLuongBanRaChiTiet(nam, thang, ngay,
-					x.getId());
-			modelBaoCaoSP.addRow(new Object[] { x.getId(), x.getSize(), x.getMauSac(), soLuong,
-					x.getSoLuong(),x.getGiaBan(),x.getGiaGiam() });
+			int soLuong = baoCaoDao.soLuongBanRaChiTiet(nam, thang, ngay, x.getId());
+			modelBaoCaoSP.addRow(new Object[] { x.getId(), x.getSize(), x.getMauSac(), soLuong, x.getSoLuong(),
+					x.getGiaBan(), x.getGiaGiam() });
 		}
 	}
 

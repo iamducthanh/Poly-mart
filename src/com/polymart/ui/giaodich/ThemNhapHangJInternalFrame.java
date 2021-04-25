@@ -35,10 +35,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.polymart.entity.EntityAuthorization;
-import com.polymart.entity.EntityExcel;
-import com.polymart.entity.EntityMessage;
-import com.polymart.entity.EntityValidate;
+import com.polymart.entity.*;
 import com.polymart.model.*;
 import com.polymart.service.*;
 import com.polymart.service.impl.*;
@@ -225,9 +222,14 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         modelDSSanPham.setRowCount(0);
         for (ChiTietSanPhamModel x : lst) {
             sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
-            modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamModel.getTenSP(),
-                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()), x.getSize(), x.getMauSac(),
-                    x.getSoLuong()});
+            modelDSSanPham.addRow(new Object[]{
+                    x.getId(),
+                    sanPhamModel.getTenSP(),
+                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
+                    x.getSize(),
+                    x.getMauSac(),
+                    x.getSoLuong()
+            });
         }
     }
 
@@ -248,7 +250,7 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
                             chiTietSanPhamModel.getId(),
                             sanPhamModel.getTenSP(),
                             loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
-                            getMoney,
+                            EntityValidate.dinhDangMonney(Long.parseLong(getMoney)),
                             chiTietSanPhamModel.getSize(),
                             chiTietSanPhamModel.getMauSac(),
                             getSoLuong
@@ -296,8 +298,8 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
     // hiển thị tổng tieen lên label
     private void hienThiTongTien(JLabel lblTongTien) {
         // tính tổng tiền của tất cả sản phẩm có trên table
-        lblTongTien.setText(String.valueOf(
-                lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
+        lblTongTien.setText(
+                EntityValidate.dinhDangMonney(lstChiTietHoaDonNhap.stream().mapToLong(e -> e.getGiaNhap() * e.getSoLuong()).sum()));
     }
 
     // show nguồn hàng lên combobox

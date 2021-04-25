@@ -130,13 +130,15 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private void tienKhachDua() {
         String getTienKhachDua = txtTienKhachDua.getText();
         if (EntityValidate.checkMoney(this, getTienKhachDua)) {
-            if (Long.parseLong(lblTongTien.getText()) == 0) {
+            if (tongTien == 0) {
                 return;
             } else {
-                if (Long.parseLong(getTienKhachDua) <= Long.parseLong(lblTongTien.getText())) {
-                    lblTienTraLai.setText(String.valueOf(0));
+                Long tienKhachDua = Long.valueOf(0);
+                if (Long.parseLong(getTienKhachDua) <= tongTien) {
+                    lblTienTraLai.setText(EntityValidate.dinhDangMonney(tienKhachDua));
                 } else {
-                    lblTienTraLai.setText(String.valueOf(Long.parseLong(getTienKhachDua) - Long.parseLong(lblTongTien.getText())));
+                    lblTienTraLai.setText(EntityValidate.dinhDangMonney(Long.parseLong(getTienKhachDua)
+                            - tongTien));
                 }
             }
         }
@@ -149,10 +151,10 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         if (chkTichDiem.isSelected()) {
             if (tongTien > Long.parseLong(chkTichDiem.getText())) {
                 setTien = tongTien - Long.parseLong(chkTichDiem.getText());
-                lblTongTien.setText(setTien.toString());
+                lblTongTien.setText(EntityValidate.dinhDangMonney(setTien));
             }
         } else {
-            lblTongTien.setText(tongTien.toString());
+            lblTongTien.setText(EntityValidate.dinhDangMonney(tongTien));
         }
         tienKhachDua();
     }
@@ -365,9 +367,14 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
             modelDSSanPham.setRowCount(0);
             for (ChiTietSanPhamModel x : lstTietSanPham) {
                 sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
-                modelDSSanPham.addRow(new Object[]{x.getId(), sanPhamModel.getTenSP(),
-                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()), x.getSize(), x.getMauSac(),
-                        x.getSoLuong()});
+                modelDSSanPham.addRow(new Object[]{
+                        x.getId(),
+                        sanPhamModel.getTenSP(),
+                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
+                        x.getSize(),
+                        x.getMauSac(),
+                        x.getSoLuong()
+                });
             }
         }
     }
@@ -744,7 +751,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
                     KhachHangModel khachHangModel = lstKhachHang.get(cbbKhachHang.getSelectedIndex());
                     chkTichDiem.setText(khachHangModel.getTichDiem().toString());
                     chkTichDiem.setSelected(false);
-                    lblTongTien.setText(tongTien.toString());
+                    lblTongTien.setText(EntityValidate.dinhDangMonney(tongTien));
                     tienKhachDua();
                 }
             }

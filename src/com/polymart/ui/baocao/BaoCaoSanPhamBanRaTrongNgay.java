@@ -60,6 +60,7 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 	BaoCaoSanPhamBanRaDao baoCaoDao= new BaoCaoSanPhamBanRaDao();
 	static String IDSanPham;
 	static String nameSP;
+	static Calendar ngayBaoCao;
 
 	/**
 	 * Launch the application.
@@ -97,9 +98,7 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 
 		initTopChamCong();
 		initCenterChamCong();
-		loadList();
-		loabtable();
-		ThuChi();
+		 ThuChiHienTai();
 
 		tableBaoCao.setRowHeight(25);
 	}
@@ -189,12 +188,10 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		dateNgayBaoCao.getYearChooser().getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 13));
 		dateNgayBaoCao.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-
-			}
-		});
-		dateNgayBaoCao.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-
+				if (evt.getPropertyName().equals("day")) {
+					timKiemTheoNgay();
+					ngayBaoCao=dateNgayBaoCao.getCalendar();
+				}
 			}
 		});
 		
@@ -266,21 +263,32 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		panelLeft.setLayout(gl_panelLeft);
 
 	}
-	public void loadList() {
-		list.clear();
-		Calendar c = Calendar.getInstance();
+	protected void timKiemTheoNgay() {
+		Calendar c = dateNgayBaoCao.getCalendar();
 		String nam = String.valueOf(c.get(Calendar.YEAR));
 		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
 		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		loadList(nam, thang, ngay);
+		loabtable(nam, thang, Integer.parseInt(ngay));
+		ThuChi(nam, thang, ngay);
+		
+	}
+
+	public void loadList(String nam , String thang, String ngay) {
+		list.clear();
+//		Calendar c = Calendar.getInstance();
+//		String nam = String.valueOf(c.get(Calendar.YEAR));
+//		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
+//		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
 		list = baoCaoDao.finAll(nam,thang,ngay);
 		
 	}
-	public void loabtable()  {
+	public void loabtable(String nam ,String thang, int day)  {
 		modelBaoCao.setRowCount(0);
-		Calendar c = Calendar.getInstance();
-		String nam = String.valueOf(c.get(Calendar.YEAR));
-		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
-		int day = c.get(Calendar.DAY_OF_MONTH);
+//		Calendar c = Calendar.getInstance();
+//		String nam = String.valueOf(c.get(Calendar.YEAR));
+//		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
+//		int day = c.get(Calendar.DAY_OF_MONTH);
 		float d = day;
 		for (BaoCaoNgayModel baoCaoNgayModel : list) {
 			SanPhamModel sanPhamModel = sanPhamService.findByID(baoCaoNgayModel.getIdSanPham());
@@ -292,15 +300,24 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 					,soLuongBanRaTrongThang,tb/100});
 		}
 	}
-	public void ThuChi() {
-		Calendar c = Calendar.getInstance();
-		String nam = String.valueOf(c.get(Calendar.YEAR));
-		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
-		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+	public void ThuChi(String nam , String thang, String ngay) {
+//		Calendar c = Calendar.getInstance();
+//		String nam = String.valueOf(c.get(Calendar.YEAR));
+//		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
+//		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
 		lblTongThu.setText(dinhDangMonney(baoCaoDao.tongThu(nam, thang,ngay)));
 		lblTongChi.setText(dinhDangMonney(baoCaoDao.tongChi(nam, thang,ngay)));
 		lblTong.setText(dinhDangMonney(baoCaoDao.tongThu(nam, thang,ngay)-baoCaoDao.tongChi(nam, thang,ngay)));
 		
+	}
+	public void ThuChiHienTai() {
+		Calendar c = Calendar.getInstance();
+		String nam = String.valueOf(c.get(Calendar.YEAR));
+		String thang = String.valueOf(c.get(Calendar.MONDAY)+1);
+		String ngay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		loadList(nam, thang, ngay);
+		loabtable(nam, thang, Integer.parseInt(ngay));
+		ThuChi(nam, thang, ngay);
 	}
 	public String dinhDangMonney(long l) {
 		Locale locale = new Locale("vi","VN");

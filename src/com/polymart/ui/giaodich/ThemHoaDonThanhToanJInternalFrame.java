@@ -130,15 +130,15 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
     private void tienKhachDua() {
         String getTienKhachDua = txtTienKhachDua.getText();
         if (EntityValidate.checkMoney(this, getTienKhachDua)) {
-            if (Long.parseLong(lblTongTien.getText()) == 0) {
+            if (tongTien == 0) {
                 return;
             } else {
                 Long tienKhachDua = Long.valueOf(0);
-                if (Long.parseLong(getTienKhachDua) <= Long.parseLong(lblTongTien.getText())) {
+                if (Long.parseLong(getTienKhachDua) <= tongTien) {
                     lblTienTraLai.setText(EntityValidate.dinhDangMonney(tienKhachDua));
                 } else {
                     lblTienTraLai.setText(EntityValidate.dinhDangMonney(Long.parseLong(getTienKhachDua)
-                            - Long.parseLong(lblTongTien.getText())));
+                            - tongTien));
                 }
             }
         }

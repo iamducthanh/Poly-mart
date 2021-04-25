@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
@@ -369,7 +371,12 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 				tongLuong = tongLuong - x.getSoNgayVeSom()*100000;
 			}
 			modelBangLuong.addRow(new Object[] { x.getMaNhanVien(), x.getHoTen(), x.getSoNgayDiLam(),
-					x.getSoNgayDiMuon(),x.getSoNgayVeSom(), tongLuong });
+					x.getSoNgayDiMuon(),x.getSoNgayVeSom(), dinhDangMonney(tongLuong )});
 		}
+	}
+	public String dinhDangMonney(long l) {
+		Locale locale = new Locale("vi","VN");
+		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+		return format.format(l);
 	}
 }

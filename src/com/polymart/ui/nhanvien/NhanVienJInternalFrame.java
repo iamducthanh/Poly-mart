@@ -17,9 +17,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -410,10 +412,15 @@ public class NhanVienJInternalFrame extends JInternalFrame {
 	private void reloadTable() {
 		model.setRowCount(0);
 		for (NhanVienModel i : list) {
-			model.addRow(new Object[] { i.getId(), i.getHoTen(), i.getChucVu(), i.getLuong(),
+			model.addRow(new Object[] { i.getId(), i.getHoTen(), i.getChucVu(), dinhDangMonney(i.getLuong()),
 					i.isGioiTinh() ? "Nam" : "Nữ", new SimpleDateFormat("dd/MM/yyyy").format(i.getNgaySinh()),
 					i.getDiaChi(), i.getSdt(), i.getEmail() });
 		}
 		btnXoaNV.setEnabled(false);
+	}
+	public String dinhDangMonney(long l) {
+		Locale locale = new Locale("vi","VN");
+		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+		return format.format(l);
 	}
 }

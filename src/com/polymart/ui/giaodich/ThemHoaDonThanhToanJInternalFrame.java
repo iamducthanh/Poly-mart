@@ -261,7 +261,7 @@ public class ThemHoaDonThanhToanJInternalFrame extends JInternalFrame {
         tongTien = lstChiTietHoaDonThanhToanModels.stream().mapToLong(
                 e -> (((chiTietSanPhamModel.getGiaBan() - chiTietSanPhamModel.getGiaGiam())
                         * e.getSoLuong()) - e.getGiamGiaThem())).sum();
-        lblTongTien.setText(String.valueOf(tongTien));
+        lblTongTien.setText(EntityValidate.dinhDangMonney(tongTien));
         lblTienTraLai.setText(String.valueOf(0));
     }
     // hiển thị danh sach khách hàng

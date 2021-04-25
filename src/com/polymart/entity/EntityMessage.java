@@ -18,6 +18,10 @@ public class EntityMessage {
 		return JOptionPane.showConfirmDialog(component, text, TITLE,
 				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
 	}
+	
+	public static void showWarring() {
+		JOptionPane.showMessageDialog(null, "Bạn không có quyền quy cập mục này!","Cảnh báo",JOptionPane.WARNING_MESSAGE);
+	}
 
 	// hàm hiển cho phép người dùng nhập dữ liệu vào
 	public static String porm(Component component, String text) {

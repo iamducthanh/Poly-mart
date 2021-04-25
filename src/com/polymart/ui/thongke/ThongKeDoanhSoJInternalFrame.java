@@ -32,6 +32,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import com.polymart.config.SecurityConfig;
+import com.polymart.entity.EntityAuthorization;
 import com.polymart.service.impl.ThongKeService;
 import com.polymart.ui.common.uiCommon;
 
@@ -228,6 +230,11 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 			e.printStackTrace();
 		}
 		loadTableDoanhSo();
+		if(EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_BANHANG)) {
+			rdoTheoBang.setVisible(false);
+			scrollPaneBang.setVisible(true);
+			panelContent.removeAll();
+		}
 		rdoBieuDo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadBieuDoDoanhThu(modelThongKe);
@@ -237,7 +244,6 @@ public class ThongKeDoanhSoJInternalFrame extends JInternalFrame {
 		cbbNam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadTableDoanhSo();
-
 			}
 		});
 		

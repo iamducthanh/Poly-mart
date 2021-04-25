@@ -175,7 +175,7 @@ public class MainFrame extends JFrame {
         } else if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
         	quyenThuNgan();
         } else if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_BANHANG)) {
-        	quyenBanHang();
+        	quyenNhanVien();
         }
     }
 
@@ -973,18 +973,6 @@ public class MainFrame extends JFrame {
                 caNhanFrame.setVisible(true);
             }
         });
-        lblDoanhSo.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                loadChild(new ThongKeDoanhSoJInternalFrame());
-            }
-        });
-        lblDoanhThu.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                loadChild(new ThongKeDoanhThuJInternalFrame());
-            }
-        });
         lblBaoCao.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1224,6 +1212,18 @@ public class MainFrame extends JFrame {
             }
 
             public void mouseClicked(MouseEvent e) {
+                select = 0;
+                if (openThongKe == 0) {
+                    openThongKe = 1;
+                    closeAllPanel();
+                    panelDoanhso.setVisible(true);
+                    panelDoanhThu.setVisible(true);
+                } else {
+                    openThongKe = 0;
+                    panelDoanhso.setVisible(false);
+                    panelDoanhThu.setVisible(false);
+                }
+                resetColor();
             }
 
             public void mouseExited(MouseEvent e) {
@@ -1456,6 +1456,18 @@ public class MainFrame extends JFrame {
     }
     
     private void quyenQuanLy() {
+        lblDoanhSo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new ThongKeDoanhSoJInternalFrame());
+            }
+        });
+        lblDoanhThu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new ThongKeDoanhThuJInternalFrame());
+            }
+        });
         lblChiTieu.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 loadChild(new BaoCaoChiTieuJInternalFrame());
@@ -1472,24 +1484,6 @@ public class MainFrame extends JFrame {
                 } else {
                     openBaoCao = 0;
                     panelBaoBao.setVisible(false);
-                }
-                resetColor();
-            }
-            public void mouseExited(MouseEvent e) {}
-        });
-        lblThongKe.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseClicked(MouseEvent e) {
-                select = 0;
-                if (openThongKe == 0) {
-                    openThongKe = 1;
-                    closeAllPanel();
-                    panelDoanhso.setVisible(true);
-                    panelDoanhThu.setVisible(true);
-                } else {
-                    openThongKe = 0;
-                    panelDoanhso.setVisible(false);
-                    panelDoanhThu.setVisible(false);
                 }
                 resetColor();
             }
@@ -1507,6 +1501,18 @@ public class MainFrame extends JFrame {
         });
     }
     private void quyenThuNgan() {
+        lblDoanhSo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new ThongKeDoanhSoJInternalFrame());
+            }
+        });
+        lblDoanhThu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new ThongKeDoanhThuJInternalFrame());
+            }
+        });
         lblChiTieu.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 loadChild(new BaoCaoChiTieuJInternalFrame());
@@ -1528,13 +1534,6 @@ public class MainFrame extends JFrame {
             }
             public void mouseExited(MouseEvent e) {}
         });
-        lblThongKe.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseClicked(MouseEvent e) {
-            	EntityMessage.showWarring();
-            }
-            public void mouseExited(MouseEvent e) {}
-        });
         lblNhanVien1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
             	EntityMessage.showWarring();
@@ -1546,20 +1545,25 @@ public class MainFrame extends JFrame {
             }
         });
     }
-    private void quyenBanHang() {
+    private void quyenNhanVien() {
+        lblDoanhSo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new ThongKeDoanhSoJInternalFrame());
+            }
+        });
+        lblDoanhThu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	EntityMessage.showWarring();
+            }
+        });
         lblChiTieu.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 EntityMessage.showWarring();
             }
         });
         lblBaoCaoTo.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseClicked(MouseEvent e) {
-            	EntityMessage.showWarring();
-            }
-            public void mouseExited(MouseEvent e) {}
-        });
-        lblThongKe.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {}
             public void mouseClicked(MouseEvent e) {
             	EntityMessage.showWarring();

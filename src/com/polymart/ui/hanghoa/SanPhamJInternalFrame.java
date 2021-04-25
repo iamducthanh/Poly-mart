@@ -416,9 +416,9 @@ public class SanPhamJInternalFrame extends JInternalFrame {
     }
 
     public void loadInfo(int row) {
-        cbbLoaiSP.setSelectedItem(tableNguonHang.getValueAt(row, 2).toString());
-        txtTenSanPham.setText(tableNguonHang.getValueAt(row, 1).toString());
-        txtMoTa.setText(tableNguonHang.getValueAt(row, 3).toString());
+        cbbLoaiSP.setSelectedItem(String.valueOf( tableNguonHang.getValueAt(row, 2)));
+        txtTenSanPham.setText(String.valueOf( tableNguonHang.getValueAt(row, 1)));
+        txtMoTa.setText(String.valueOf( tableNguonHang.getValueAt(row, 3)));
         if (tableNguonHang.getValueAt(row, 4).toString().equals("Đang kinh doanh")) rdoDangKinhDoanh.setSelected(true);
         else rdoNgungKinhDoanh.setSelected(true);
     }

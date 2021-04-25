@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import com.polymart.dao.impl.BaoCaoSanPhamBanRaDao;
 import com.polymart.dao.impl.ChiTietSanPhamDAO;
 import com.polymart.model.ChiTietSanPhamModel;
+import java.awt.Color;
 
 public class ChiTietBaoCaoFrame extends JFrame {
 
@@ -67,6 +68,7 @@ public class ChiTietBaoCaoFrame extends JFrame {
 		lblMSnPhm.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMSnPhm.setBounds(10, 44, 129, 25);
 		contentPane.add(lblMSnPhm);
+		lblMaSP.setForeground(Color.RED);
 
 		lblMaSP.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblMaSP.setBounds(133, 46, 243, 25);
@@ -88,10 +90,12 @@ public class ChiTietBaoCaoFrame extends JFrame {
 		table.setModel(modelBaoCaoSP);
 
 		JLabel lblNewLabel_1 = new JLabel("Tên Sản Phẩm");
-		lblNewLabel_1.setBounds(447, 52, 45, 13);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(396, 52, 96, 25);
 		contentPane.add(lblNewLabel_1);
+		lblTenSanPham.setForeground(Color.RED);
 
-		lblTenSanPham.setBounds(609, 52, 45, 13);
+		lblTenSanPham.setBounds(504, 44, 184, 35);
 		contentPane.add(lblTenSanPham);
 		loabTable();
 	}

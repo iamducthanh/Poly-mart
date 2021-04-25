@@ -295,12 +295,6 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 				locSanPham();
 			}
 		});
-		JCheckBox chkbHangHoa = new JCheckBox("Hàng hóa");
-		chkbHangHoa.setBackground(Color.WHITE);
-		chkbHangHoa.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		JCheckBox chkbCombo = new JCheckBox("Combo - đóng gói");
-		chkbCombo.setBackground(Color.WHITE);
-		chkbCombo.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
 		JPanel pnlTonKho = new JPanel();
 		pnlTonKho.setBackground(Color.WHITE);
@@ -454,41 +448,30 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 		buttonGroup5.add(rdoHangDangKinhDoanh);
 		buttonGroup5.add(rdoHangNgungKinhDoanh);
 		GroupLayout gl_pnlNavibar = new GroupLayout(pnlNavibar);
-		gl_pnlNavibar.setHorizontalGroup(gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+		gl_pnlNavibar.setHorizontalGroup(
+			gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlNavibar.createSequentialGroup()
-						.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE).addGap(5))
-				.addGroup(Alignment.TRAILING,
-						gl_pnlNavibar.createSequentialGroup()
-								.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE).addGap(5))
+					.addGroup(gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
+						.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, 202, Short.MAX_VALUE)
+						.addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+						.addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+						.addComponent(pnlNgayDuKienHetHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+						.addComponent(pnlBanTrucTiep, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+					.addGap(5))
+		);
+		gl_pnlNavibar.setVerticalGroup(
+			gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlNavibar.createSequentialGroup()
-						.addComponent(pnlLienKetBanHang, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addGap(5))
-				.addGroup(gl_pnlNavibar.createSequentialGroup()
-						.addComponent(pnlLuaChonHienThi, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE).addGap(5))
-				.addGroup(Alignment.TRAILING,
-						gl_pnlNavibar.createSequentialGroup()
-								.addGroup(gl_pnlNavibar.createParallelGroup(Alignment.TRAILING)
-										.addComponent(pnlNgayDuKienHetHang, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-												202, Short.MAX_VALUE)
-										.addComponent(pnlBanTrucTiep, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
-								.addGap(5)));
-		gl_pnlNavibar
-				.setVerticalGroup(
-						gl_pnlNavibar.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_pnlNavibar.createSequentialGroup()
-										.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
+					.addComponent(pnlLoaiHang, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addComponent(pnlTonKho, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(pnlBanTrucTiep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(pnlNgayDuKienHetHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(pnlLienKetBanHang, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(pnlLuaChonHienThi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		);
 
 		JLabel lblNewLabel = new JLabel("Định mức tồn");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -532,25 +515,16 @@ public class HangHoaJInternalFrame extends JInternalFrame {
 						.addComponent(rdoHetHangTrongKho)));
 		pnlTonKho.setLayout(gl_pnlTonKho);
 		GroupLayout gl_pnlLoaiHang = new GroupLayout(pnlLoaiHang);
-		gl_pnlLoaiHang
-				.setHorizontalGroup(
-						gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
-								.addComponent(cboLoaiSanPham, 0, 190, Short.MAX_VALUE)
-								.addGroup(gl_pnlLoaiHang.createSequentialGroup().addContainerGap()
-										.addComponent(chkbHangHoa, GroupLayout.PREFERRED_SIZE, 85,
-												GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(99, Short.MAX_VALUE))
-								.addGroup(gl_pnlLoaiHang
-										.createSequentialGroup().addContainerGap().addComponent(chkbCombo,
-												GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(49, Short.MAX_VALUE)));
-		gl_pnlLoaiHang.setVerticalGroup(gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+		gl_pnlLoaiHang.setHorizontalGroup(
+			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
+				.addComponent(cboLoaiSanPham, 0, 190, Short.MAX_VALUE)
+		);
+		gl_pnlLoaiHang.setVerticalGroup(
+			gl_pnlLoaiHang.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlLoaiHang.createSequentialGroup()
-						.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(chkbHangHoa)
-						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(chkbCombo)));
+					.addComponent(cboLoaiSanPham, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(56, Short.MAX_VALUE))
+		);
 		pnlLoaiHang.setLayout(gl_pnlLoaiHang);
 		pnlNavibar.setLayout(gl_pnlNavibar);
 

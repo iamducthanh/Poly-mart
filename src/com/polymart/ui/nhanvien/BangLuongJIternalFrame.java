@@ -299,7 +299,19 @@ public class BangLuongJIternalFrame extends JInternalFrame {
 			ChiTieuModel chiTieu = new ChiTieuModel();
 			chiTieu.setMucDichChiTieu("Thanh Toán Lương ");
 			chiTieu.setIdNhanVien(EntityAuthorization.USER.getId());
-			chiTieu.setSoTien(Long.parseLong(String.valueOf(tableBangLuong.getValueAt(i, 5))));
+			Long tongLuong;
+			if (listBangLuong.get(i).getSoNgayDiLam() >= 28) {
+				tongLuong = listBangLuong.get(i).getLuong();
+			} else {
+				tongLuong = listBangLuong.get(i).getLuong() - ((28 - listBangLuong.get(i).getSoNgayDiLam()) * 200000);
+			}
+			if (listBangLuong.get(i).getSoNgayDiMuon() > 0) {
+				tongLuong = tongLuong - listBangLuong.get(i).getSoNgayDiMuon() * 100000;
+			}
+			if(listBangLuong.get(i).getSoNgayVeSom()>0) {
+				tongLuong = tongLuong - listBangLuong.get(i).getSoNgayVeSom()*100000;
+			}
+			chiTieu.setSoTien(tongLuong);
 			chiTieu.setGhiChu("Thanh Toán Lương Cho Nhân Viên " + String.valueOf(tableBangLuong.getValueAt(i, 1)));
 			listChiTieuModel.add(chiTieu);
 		}

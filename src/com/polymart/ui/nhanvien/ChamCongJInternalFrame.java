@@ -190,7 +190,6 @@ public class ChamCongJInternalFrame extends JInternalFrame {
             public void propertyChange(PropertyChangeEvent evt) {
                 if (evt.getPropertyName().equals("day")) {
                     loadListChamCongNgay();
-                    ;
                     loadTableChamCong();
                     txtTimKiem.setEnabled(false);
                 }

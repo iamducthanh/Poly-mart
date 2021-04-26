@@ -985,12 +985,6 @@ public class MainFrame extends JFrame {
                 loadChild(new ChamCongJInternalFrame());
             }
         });
-        lblSanPham.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                loadChild(new SanPhamJInternalFrame());
-            }
-        });
         lblTraHang.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1007,12 +1001,6 @@ public class MainFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 loadChild(new NhapHangJInternalFrame());
-            }
-        });
-        lblNguonHang.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                loadChild(new NguonHangJInternalFrame());
             }
         });
         lblHangHoaCon.addMouseListener(new MouseAdapter() {
@@ -1288,37 +1276,6 @@ public class MainFrame extends JFrame {
             }
         });
 
-        lblGiaoDich.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                resetColor();
-                panelSelectGiaoDich.setBackground(Color.BLACK);
-                panelGiaoDich.setBackground(new Color(153, 51, 255));
-            }
-
-            public void mouseClicked(MouseEvent e) {
-                select = 3;
-                if (openGiaoDich == 0) {
-                    openGiaoDich = 1;
-                    closeAllPanel();
-                    panelBanHangCon.setVisible(true);
-                    panelNhapHang.setVisible(true);
-                    panelChiTieu.setVisible(true);
-                    panelTraHang.setVisible(true);
-                } else {
-                    openGiaoDich = 0;
-                    panelBanHangCon.setVisible(false);
-                    panelNhapHang.setVisible(false);
-                    panelChiTieu.setVisible(false);
-                    panelTraHang.setVisible(false);
-                }
-                resetColor();
-
-            }
-
-            public void mouseExited(MouseEvent e) {
-                resetColor();
-            }
-        });
 
         lblHangHoa.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
@@ -1456,6 +1413,49 @@ public class MainFrame extends JFrame {
     }
     
     private void quyenQuanLy() {
+        lblSanPham.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new SanPhamJInternalFrame());
+            }
+        });
+        lblNguonHang.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new NguonHangJInternalFrame());
+            }
+        });
+        lblGiaoDich.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                resetColor();
+                panelSelectGiaoDich.setBackground(Color.BLACK);
+                panelGiaoDich.setBackground(new Color(153, 51, 255));
+            }
+
+            public void mouseClicked(MouseEvent e) {
+                select = 3;
+                if (openGiaoDich == 0) {
+                    openGiaoDich = 1;
+                    closeAllPanel();
+                    panelBanHangCon.setVisible(true);
+                    panelNhapHang.setVisible(true);
+                    panelChiTieu.setVisible(true);
+                    panelTraHang.setVisible(true);
+                } else {
+                    openGiaoDich = 0;
+                    panelBanHangCon.setVisible(false);
+                    panelNhapHang.setVisible(false);
+                    panelChiTieu.setVisible(false);
+                    panelTraHang.setVisible(false);
+                }
+                resetColor();
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                resetColor();
+            }
+        });
         lblDoanhSo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1501,6 +1501,49 @@ public class MainFrame extends JFrame {
         });
     }
     private void quyenThuNgan() {
+        lblSanPham.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new SanPhamJInternalFrame());
+            }
+        });
+        lblNguonHang.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loadChild(new NguonHangJInternalFrame());
+            }
+        });
+        lblGiaoDich.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                resetColor();
+                panelSelectGiaoDich.setBackground(Color.BLACK);
+                panelGiaoDich.setBackground(new Color(153, 51, 255));
+            }
+
+            public void mouseClicked(MouseEvent e) {
+                select = 3;
+                if (openGiaoDich == 0) {
+                    openGiaoDich = 1;
+                    closeAllPanel();
+                    panelBanHangCon.setVisible(true);
+                    panelNhapHang.setVisible(true);
+                    panelChiTieu.setVisible(true);
+                    panelTraHang.setVisible(true);
+                } else {
+                    openGiaoDich = 0;
+                    panelBanHangCon.setVisible(false);
+                    panelNhapHang.setVisible(false);
+                    panelChiTieu.setVisible(false);
+                    panelTraHang.setVisible(false);
+                }
+                resetColor();
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+                resetColor();
+            }
+        });
         lblDoanhSo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1546,6 +1589,33 @@ public class MainFrame extends JFrame {
         });
     }
     private void quyenNhanVien() {
+        lblSanPham.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	EntityMessage.showWarring();
+            }
+        });
+        lblNguonHang.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	EntityMessage.showWarring();
+            }
+        });
+        lblGiaoDich.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                resetColor();
+                panelSelectGiaoDich.setBackground(Color.BLACK);
+                panelGiaoDich.setBackground(new Color(153, 51, 255));
+            }
+
+            public void mouseClicked(MouseEvent e) {
+            	EntityMessage.showWarring();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                resetColor();
+            }
+        });
         lblDoanhSo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

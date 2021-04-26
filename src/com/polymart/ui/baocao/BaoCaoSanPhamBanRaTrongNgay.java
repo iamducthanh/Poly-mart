@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -22,11 +25,18 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.polymart.dao.impl.BaoCaoSanPhamBanRaDao;
 import com.polymart.dao.impl.SanPhamDAO;
@@ -35,6 +45,7 @@ import com.polymart.model.SanPhamModel;
 import com.polymart.service.ISanPhamService;
 import com.polymart.service.impl.SanPhamService;
 import com.toedter.calendar.JCalendar;
+
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
@@ -42,7 +53,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
-
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import com.polymart.entity.EntityExcel;
 public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 
 	private static final long serialVersionUID = 1619911861884761168L;
@@ -63,7 +79,6 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 	static String IDSanPham;
 	static String nameSP;
 	static Calendar ngayBaoCao;
-
 	/**
 	 * Launch the application.
 	 */
@@ -122,20 +137,34 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		JLabel lblNhanVien = new JLabel("Báo cáo sản phẩm bán ra trong ngày");
 		lblNhanVien.setForeground(new Color(255, 255, 255));
 		lblNhanVien.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		
+		JButton btnExport = new JButton("Xuất File");
+		btnExport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				export(dateNgayBaoCao, tableBaoCao, lblTongChi, lblTongThu, lblTong);
+			}
+		});
+		btnExport.setIcon(null);
+		btnExport.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnExport.setForeground(Color.BLACK);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(839, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 719, Short.MAX_VALUE)
+					.addComponent(btnExport)
+					.addGap(33))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(14, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNhanVien, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnExport))
+					.addContainerGap(15, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
@@ -352,4 +381,75 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
 		return format.format(l);
 	}
+	public void export(JCalendar carlendar,JTable table,JLabel chi,JLabel thu,JLabel tong ) {
+		if(tableBaoCao.getRowCount()==0) {
+			JOptionPane.showMessageDialog(this, "Không có dữ liệu");
+			return;
+		}
+		else {
+			Workbook newExcel = new XSSFWorkbook();
+	        Sheet sheet = newExcel.createSheet();
+	        Row rowHeader = sheet.createRow(0);
+	        for (int i = 0; i < table.getColumnCount(); i++) {
+	            Cell cellHeader = rowHeader.createCell(i);
+	            cellHeader.setCellValue(table.getColumnName(i));
+	        } 
+	        for (int i = 0; i < table.getRowCount(); i++) {
+	            Row row = sheet.createRow(i + 1);
+	            for (int j = 0; j < table.getColumnCount(); j++) {
+	                Cell cell = row.createCell(j);
+	                cell.setCellValue(table.getValueAt(i, j).toString());
+	            }
+	        }
+	        Row rowChi = sheet.createRow(table.getRowCount()+2);
+	        rowChi.createCell(0).setCellValue("Tổng chi");
+	        rowChi.createCell(1).setCellValue(chi.getText());
+	        
+	        Row rowThu = sheet.createRow(table.getRowCount()+3);
+	        rowThu.createCell(0).setCellValue("Tổng thu");
+	        rowThu.createCell(1).setCellValue(thu.getText());
+	        
+	        Row rowTong = sheet.createRow(table.getRowCount()+4);
+	        rowTong.createCell(0).setCellValue("Tổng");
+	        rowTong.createCell(1).setCellValue(tong.getText());
+	        
+	        Row rowDate = sheet.createRow(table.getRowCount()+5);
+	        rowDate.createCell(0).setCellValue(calendar.getTime().toString());
+	        for (int columnIndex = 0; columnIndex < table.getColumnCount(); columnIndex++) {
+	            sheet.autoSizeColumn(columnIndex);
+	        }
+	       try {
+	    	   OutputStream os = new FileOutputStream(ChooseFileSave());
+	           newExcel.write(os);
+	           newExcel.close();
+	           os.close();
+	           JOptionPane.showMessageDialog(null, "Đã xuất báo cáo");
+		} catch (Exception e) {
+			// TODO: handle exception
+				JOptionPane.showMessageDialog(null, "Xuất file thất bại");
+			}
+		}
+	}
+	private String ChooseFileSave() {
+        String path = null;
+        JFileChooser chooser = new JFileChooser();
+        int rVal = chooser.showSaveDialog(null);
+        if (rVal == JFileChooser.APPROVE_OPTION) {
+            String filename = chooser.getSelectedFile().getName();
+            String dir = chooser.getCurrentDirectory().toString();
+            if (filename.endsWith(".xlsx")) {
+                path = dir + "\\" + filename;
+            } else {
+                path = dir + "\\" + filename + getCurrenDate() + ".xlsx";
+            }
+            return path;
+        } else {
+            return null;
+        }
+    }
+	private String getCurrenDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("_dd_MM_yyyy");
+        Date date = new Date();
+        return formatter.format(date);
+    }
 }

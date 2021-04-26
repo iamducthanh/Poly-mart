@@ -322,6 +322,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         btnXoa.setVisible(false);
         btnXuat.setVisible(false);
         if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
+            btnXoa.setVisible(true);
             btnXuat.setVisible(true);
         }
     }

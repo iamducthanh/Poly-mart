@@ -287,10 +287,11 @@ public class BaoCaoChiTieuJInternalFrame extends JInternalFrame {
         btnThem.setVisible(false);
         btnXoa.setVisible(false);
         if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_QUANLY)) {
+            btnXemLaiLichSu.setVisible(true);
             btnThem.setVisible(true);
+            btnXoa.setVisible(true);
         }
     }
-
 
     // Xóa Phiếu Chi Tiêu
     protected void xoaPhieuChi() {

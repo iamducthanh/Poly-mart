@@ -324,8 +324,9 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
         btnXoa.setVisible(false);
         btnExport.setVisible(false);
         if (EntityAuthorization.USER.getChucVu().equals(SecurityConfig.VAITRO_THUNGAN)) {
-            btnExport.setVisible(true);
             btnThemPhieuNhap.setVisible(true);
+            btnXoa.setVisible(true);
+            btnExport.setVisible(true);
         }
     }
 

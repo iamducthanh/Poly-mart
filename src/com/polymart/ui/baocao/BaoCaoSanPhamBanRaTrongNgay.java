@@ -141,7 +141,7 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		JButton btnExport = new JButton("Xuất File");
 		btnExport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				export(dateNgayBaoCao, tableBaoCao, lblTongChi, lblTongThu, lblTong);
+				export(ngayBaoCao, tableBaoCao, lblTongChi, lblTongThu, lblTong);
 			}
 		});
 		btnExport.setIcon(null);
@@ -381,7 +381,7 @@ public class BaoCaoSanPhamBanRaTrongNgay extends JInternalFrame {
 		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
 		return format.format(l);
 	}
-	public void export(JCalendar carlendar,JTable table,JLabel chi,JLabel thu,JLabel tong ) {
+	public void export(Calendar calendar,JTable table,JLabel chi,JLabel thu,JLabel tong ) {
 		if(tableBaoCao.getRowCount()==0) {
 			JOptionPane.showMessageDialog(this, "Không có dữ liệu");
 			return;

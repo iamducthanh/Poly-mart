@@ -347,10 +347,11 @@ public class ChamCongJInternalFrame extends JInternalFrame {
                             break;
                         }
                     }
+   
                     if (i == 1 && j == -1 && check == true) {
                         btnChamCong.setEnabled(true);
                     } else {
-                        setEnabled(false);
+                    	btnChamCong.setEnabled(false);
                     }
                     if (j == 1) {
                         return;

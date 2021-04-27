@@ -233,6 +233,18 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                         .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         JButton btnExport = new JButton("→ Xuất");
+        btnExport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    EntityExcel.exportExcel(tableThanhToan);
+                    EntityMessage.show(null, "Lưu thành côngg");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                    EntityMessage.show(null, "Lưu thất bại");
+                }
+            }
+        });
         JButton btnXoa = new JButton("- Xoá ");
 
         // xóa
@@ -365,12 +377,12 @@ public class ThanhToanJInternalFrame extends JInternalFrame {
                                 x.getId(),
                                 khachHangService.findOne(x.getIdKhachHang()).getHoTen(),
                                 x.getIdNhanVien() + " - " + nhanVienService.getNameNhanVien().get(x.getIdNhanVien()),
-                                EntityValidate.dinhDangMonney((long)lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
-                                					* (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
-                                					- chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
-                                					- e.getGiamGiaThem()
+                                EntityValidate.dinhDangMonney((long) lstChiTietHoaDonThanhToanModels.stream().mapToDouble(e -> e.getSoLuong()
+                                                * (chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaBan()
+                                                - chiTietSanPhamService.getById(e.getChiTietSanPham()).getGiaGiam())
+                                                - e.getGiamGiaThem()
 //                                					- x.getDiemDaDoi()
-                                					).sum())
+                                ).sum())
                                 , new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(x.getNgayThanhToan()),
                                 x.getGhiChu()});
             }

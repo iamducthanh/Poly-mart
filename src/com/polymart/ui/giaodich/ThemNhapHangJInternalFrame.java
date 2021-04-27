@@ -222,14 +222,16 @@ public class ThemNhapHangJInternalFrame extends JInternalFrame {
         modelDSSanPham.setRowCount(0);
         for (ChiTietSanPhamModel x : lst) {
             sanPhamModel = sanPhamService.findByID(x.getIdSanPham());
-            modelDSSanPham.addRow(new Object[]{
-                    x.getId(),
-                    sanPhamModel.getTenSP(),
-                    loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
-                    x.getSize(),
-                    x.getMauSac(),
-                    x.getSoLuong()
-            });
+            if (sanPhamModel.isStatusKinhDoanh()) {
+                modelDSSanPham.addRow(new Object[]{
+                        x.getId(),
+                        sanPhamModel.getTenSP(),
+                        loaiSanPhamService.findNameById(sanPhamModel.getIdLoaiSP()),
+                        x.getSize(),
+                        x.getMauSac(),
+                        x.getSoLuong()
+                });
+            }
         }
     }
 

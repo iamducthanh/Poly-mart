@@ -363,7 +363,7 @@ public class TraHangJInternalFrame extends JInternalFrame {
                             result[1],
                             new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(result[2]),
                             result[3],
-                            EntityValidate.dinhDangMonney(Long.valueOf(result[4].toString())) ,
+                            EntityValidate.dinhDangMonney(Long.valueOf(result[4].toString())),
                             x.getGhiChu()
                     });
                 }

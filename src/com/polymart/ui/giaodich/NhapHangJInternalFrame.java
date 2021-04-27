@@ -149,6 +149,7 @@ public class NhapHangJInternalFrame extends JInternalFrame {
         btnXuat = new JButton("→ Xuất");
         btnXuat.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                evtBtnXuatFileExcel();
             }
         });
         btnXoa = new JButton("- Xoá ");
